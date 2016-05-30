@@ -1,4 +1,4 @@
-# FresherNote
+# Faceplace
 
 [Heroku link][heroku] **NB:** This should be a link to your production site
 
@@ -6,29 +6,39 @@
 
 ## Minimum Viable Product
 
-FresherNote is a web application inspired by Evernote that will be build using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
+Faceplace is a web application inspired by Facebook that will be build using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
 
 - [ ] New account creation, login, and guest/demo login
 - [ ] Smooth, bug-free navigation
 - [ ] Adequate seed data to demonstrate the site's features
-- [ ] The minimally necessary features for an Evernote-inspired site: note creation and saving, note editing, and notes organized into notebooks
+- [ ] The minimally necessary features for a Facebook-inspired site: an (instant) search bar for finding people, a status update box, a scrolling side-bar friends list, a profile page (cover photo, timeline, personal info, abbreviated friends list), an (infininte) feed, a friends page, friend requests, private messages, and notifications.
+- [ ] Given enough time, the website will have event invitations, a photos page, sharing, and will be jazzed up with hover pop-ups! Maybe more!
 - [ ] Hosting on Heroku
 - [ ] CSS styling that is satisfactorily visually appealing
 - [ ] A production README, replacing this README (**NB**: check out the [sample production README](https://github.com/appacademy/sample-project-proposal/blob/master/docs/production_readme.md) -- you'll write this later)
 
 ## Product Goals and Priorities
 
-FresherNote will allow users to do the following:
+Faceplace will allow users to do the following:
 
 <!-- This is a Markdown checklist. Use it to keep track of your
 progress. Put an x between the brackets for a checkmark: [x] -->
 
 - [ ] Create an account (MVP)
 - [ ] Log in / Log out, including as a Guest/Demo User (MVP)
-- [ ] Create, read, edit, and delete notes (MVP)
-- [ ] Organize notes within Notebooks (MVP)
-- [ ] Tag notes with multiple tags (expected feature, but not MVP)
-- [ ] Apply complex styling to notes while editing (expected feature, but not MVP)
+- [ ] User search (MVP)
+- [ ] Friending and unfriending (MVP)
+- [ ] Friends page (MVP)
+- [ ] Profile page (MVP)
+- [ ] Status updates (with or without photos) (MVP)
+- [ ] (Infinite) feed (MVP)
+- [ ] Reactions (MVP)
+- [ ] Who's-online sidebar (MVP)
+- [ ] Notifications (MVP)
+- [ ] Private messages (MVP)
+- [ ] Profile editing (non-MVP)
+- [ ] Event creation and invitations (non-MVP)
+- [ ] Photo albums (non-MVP)
 
 ## Design Docs
 * [View Wireframes][views]
@@ -45,87 +55,199 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 
 ## Implementation Timeline
 
-### Phase 1: Backend setup and User Authentication (0.5 days)
+
+
+### Phase 1: Authentication (0.5 days)
 
 **Objective:** Functioning rails project with Authentication
 
-- [ ] create new project
-- [ ] create `User` model
+- [ ] new project
+- [ ] `User` model
 - [ ] authentication
 - [ ] user signup/signin pages
 - [ ] blank landing page after signin
 
-### Phase 2: Notes Model, API, and basic APIUtil (1.5 days)
 
-**Objective:** Notes can be created, read, edited and destroyed through
-the API.
 
-- [ ] create `Note` model
-- [ ] seed the database with a small amount of test data
-- [ ] CRUD API for notes (`NotesController`)
-- [ ] jBuilder views for notes
-- [ ] setup Webpack & Flux scaffold
-- [ ] setup `APIUtil` to interact with the API
-- [ ] test out API interaction in the console.
+### Style Sign in/up page (0.5 days)
 
-### Phase 3: Flux Architecture and Router (1.5 days)
+**Objective:** Make it match Facebook. To completion. No react.
 
-**Objective:** Notes can be created, read, edited and destroyed with the
-user interface.
+- [ ] style to completion
 
-- [ ] setup the flux loop with skeleton files
-- [ ] setup React Router
-- implement each note component, building out the flux loop as needed.
-  - [ ] `NotesIndex`
-  - [ ] `NoteIndexItem`
-  - [ ] `NoteForm`
-- [ ] save Notes to the DB when the form loses focus or is left idle
-  after editing.
 
-### Phase 4: Start Styling (0.5 days)
 
-**Objective:** Existing pages (including singup/signin) will look good.
+### Phase 2: Bare-bones navbar (for logged-in users) (0.25 days)
 
-- [ ] create a basic style guide
-- [ ] position elements on the page
-- [ ] add basic colors & styles
+**Objective:** Make some space for the navbar.
 
-### Phase 5: Notebooks (1 day)
+- [ ] navbar header.
+- [ ] color it, float it, clear-fix it.
+- [ ] add to App. Render if signed in.
 
-**Objective:** Notes belong to Notebooks, and can be viewed by notebook.
 
-- [ ] create `Notebook` model
-- build out API, Flux loop, and components for:
-  - [ ] Notebook CRUD
-  - [ ] adding notes requires a notebook
-  - [ ] moving notes to a different notebook
-  - [ ] viewing notes by notebook
-- Use CSS to style new views
 
-Phase 3 adds organization to the Notes. Notes belong to a Notebook,
-which has its own `Index` view.
+### Phase 3: Profile (1 day)
 
-### Phase 6: Tags (1.5 days)
+**Objective:** Profile can be read and edited through the API.
 
-**Objective:** Notes can be tagged with multiple tags, and tags are searchable.
+- [ ] `Profile` model
+- [ ] seed
+- [ ] CRUD API (`ProfilesController`)
+- [ ] jBuilder views
+- [ ] Webpack & Flux scaffold
+- [ ] `APIUtil`
+- [ ] test API in console
+- [ ] flux loop
+- [ ] React Router (profile timeline page)
+- components
+  - [ ] `CoverPhoto`
+  - [ ] `ProfilePic`
+  - [ ] `NameLink`
+  - [ ] `Request` (later)
+  - [ ] `IntroIndex`
+    - [ ] `IntroIndexItem`
+    - [ ] `IntroIndexItemForm` (one for each item)
 
-- [ ] create `Tag` model and join table
-- build out API, Flux loop, and components for:
-  - [ ] fetching tags for notebook
-  - [ ] adding tags to notebook
-  - [ ] creating tags while adding to notebooks
-  - [ ] searching notebooks by tag
-- [ ] Style new elements
 
-### Phase 7: Allow Complex Styling in Notes (0.5 days)
 
-**objective:** Enable complex styling of notes.
+### Style Profile (0.5 days)
 
-- [ ] Integrate `react-quill` (based on Quill.js).
-- [ ] Use Rails helpers to sanitize HTML before rendering.
-- [ ] Style the new Quill elements.
+**Objective:** Profile matches Facebook.
 
-### Phase 8: Styling Cleanup and Seeding (1 day)
+- [ ] style to completion
+
+
+
+### Phase 4: Update (0.75 days)
+
+**Objective:** Updates can be created, read, updated, and destroyed through the API.
+
+- [ ] create `Update` model
+- [ ] seed
+- [ ] CRUD API (`UpdatesController`)
+- [ ] jBuilder views
+- [ ] `APIUtil`
+- [ ] test API in console
+- [ ] flux loop
+- components (on profile timeline page)
+  - [ ] `UpdateForm`
+  - [ ] `UpdateIndex`
+  - [ ] `UpdateIndexItem`
+
+
+
+### Style Update (0.5 days)
+
+**Objective:** Update matches Facebook.
+
+- [ ] style to completion
+
+
+
+### Phase 5: Comment (0.75 days)
+
+**Objective:** Comments can be created, read, updated, and destroyed through the API.
+
+- [ ] `Comment` model
+- [ ] seed
+- [ ] CRUD API (`CommentsController`)
+- [ ] jBuilder views
+- [ ] `APIUtil`
+- [ ] test API in console
+- [ ] flux loop
+- [ ] React Router (nest under update)
+- components
+  - [ ] `CommentsIndex`
+    - [ ] `CommentsIndexItem`
+    - [ ] `CommentsForm`
+
+
+
+### Style Comment (0.5 days)
+
+**Objective:** Comment matches Facebook.
+
+- [ ] style to completion
+
+
+
+### Phase 6: SearchBar (0.5 days)
+
+**Objective:** Instant search bar yields links to users.
+
+- [ ] Ajax to return users
+- [ ] Render based on returned users
+- [ ] Inject into navbar
+- components
+  - [ ] `SearchBar`
+    - [ ] `ResultsIndex`
+      - [ ] `ResultsIndexItem`
+
+
+
+### Style SearchBar (0.5 days)
+
+**Objective:** SearchBar matches Facebook.
+
+- [ ] style to completion
+
+
+
+### Phase 7: Request (1 day)
+
+**Objective:** Requests can be created, read, updated, and destroyed through the API.
+
+- [ ] `Request` model
+- [ ] seed
+- [ ] CRUD API (`RequestsController`)
+- [ ] jBuilder views
+- [ ] `APIUtil`
+- [ ] test API in console
+- [ ] flux loop
+- [ ] React Router (nest button under profile)
+- components
+  - [ ] `RequestButton`
+  - [ ] `RequestsIndex`
+    - [ ] `RequestsIndexItem`
+
+
+
+### Style Request (0.5 days)
+
+**Objective:** Request matches Facebook.
+
+- [ ] style to completion
+
+
+
+### Phase 8: Notification (0.75 days)
+
+**Objective:** Notifications can be read, updated, and destroyed through the API. Creation is triggered on update creation.
+
+- [ ] `Notification` model
+- [ ] seed
+- [ ] CRUD API (`NotificationsController`, `UpdatesController`)
+- [ ] jBuilder views
+- [ ] `APIUtil`
+- [ ] test API in console
+- [ ] flux loop
+- [ ] Inject into navbar
+- components
+  - [ ] `NotificationsIndex`
+    - [ ] `NotificationsIndexItem`
+
+
+
+### Style Notification (0.5 days)
+
+**Objective:** Notification matches Facebook.
+
+- [ ] style to completion
+
+
+
+### Phase 9: Styling Cleanup and Seeding (1 day)
 
 **objective:** Make the site feel more cohesive and awesome.
 
@@ -133,15 +255,57 @@ which has its own `Index` view.
 - [ ] Refactor HTML classes & CSS rules
 - [ ] Add modals, transitions, and other styling flourishes.
 
+
+
 ### Bonus Features (TBD)
-- [ ] Search through notes for blocks of text
-- [ ] Pagination / infinite scroll for Notes Index
-- [ ] Set reminders on notes
-- [ ] Changelogs for Notes
-- [ ] Multiple sessions
+- [ ] Reactions (like, laugh, love...)
+- [ ] Tags (on updates)
+- [ ] Infinite scroll for newsfeed
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md
 [phase-three]: ./docs/phases/phase3.md
 [phase-four]: ./docs/phases/phase4.md
 [phase-five]: ./docs/phases/phase5.md
+[phase-six]: ./docs/phases/phase6.md
+[phase-seven]: ./docs/phases/phase7.md
+[phase-eight]: ./docs/phases/phase8.md
+[phase-nine]: ./docs/phases/phase9.md
+
+<!-- ### Reaction
+
+**Objective:** Reactions can be created, read, updated, and destroyed through the API.
+
+- [ ] create `Reaction` model
+- [ ] seed
+- [ ] CRUD API (`ReactionsController`)
+- [ ] jBuilder views
+- [ ] `APIUtil`
+- [ ] test API in console
+- [ ] flux loop
+- [ ] React Router
+- components
+-->
+
+
+<!--
+### Tag
+
+**Objective:** Tags can be created, read, updated, and destroyed through the API.
+
+- [ ] create `Tag` model
+- [ ] seed
+- [ ] CRUD API (`TagsController`)
+- [ ] jBuilder views
+- [ ] `APIUtil`
+- [ ] test API in console
+- [ ] flux loop
+- [ ] React Router
+- components
+  - [ ] `CoverPhoto`
+  - [ ] `ProfilePic`
+  - [ ] `NameLink`
+  - [ ] `IntroIndex`
+    - [ ] `IntroIndexItem`
+    - [ ] `IntroIndexItemForm` (one for each item)
+-->
