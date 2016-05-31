@@ -1,3 +1,5 @@
+var SessionActions = require('../actions/session_actions');
+
 var UserApiUtil = {
   signUp: function (user) {
     $.ajax({
@@ -6,10 +8,12 @@ var UserApiUtil = {
       dataType: 'json',
       data: {user: user},
       success: function (user) {
-        debugger
+        SessionActions.removeCurrentUser(user);
       },
-      error: function (error) {
-        console.log('UserApiUtil#signUp error: ' + error);
+      error: function (errors) {
+        debugger
+        ErrorActions.clearErrors();
+        ErrorActions.setErrors(error);
       }
     });
   }

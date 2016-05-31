@@ -1,5 +1,5 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
-    userConstants = require('../constants/userConstants');
+    userConstants = require('../constants/user_constants');
 
 var SessionActions = {
   receiveCurrentUser: function (user) {

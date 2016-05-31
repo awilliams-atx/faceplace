@@ -1,3 +1,5 @@
+var ErrorActions = require('../actions/error_actions');
+
 SessionApiUtil = {
   login: function (credentials) {
     $.ajax({
@@ -8,8 +10,9 @@ SessionApiUtil = {
       success: function (user) {
         debugger
       },
-      error: function (error) {
-        console.log(error);
+      error: function (errors) {
+        ErrorActions.clearErrors();
+        ErrorActions.setErrors(error);
       }
     });
   },
@@ -21,8 +24,9 @@ SessionApiUtil = {
       success: function () {
         debugger
       },
-      error: function (error) {
-        console.log(error);
+      error: function (errors) {
+        ErrorActions.clearErrors();
+        ErrorActions.setErrors(error);
       }
     });
   },
@@ -34,12 +38,12 @@ SessionApiUtil = {
       success: function (user) {
         debugger
       },
-      error: function (error) {
-        console.log(error);
+      error: function (errors) {
+        ErrorActions.clearErrors();
+        ErrorActions.setErrors(error);
       }
     });
   }
 };
 
-window.SessionApiUtil = SessionApiUtil;
 module.exports = SessionApiUtil;
