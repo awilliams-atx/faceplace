@@ -1,5 +1,5 @@
 var React = require('react'),
-    UserApiUtil = require('../util/UserApiUtil');
+    UserApiUtil = require('../util/user_api_util');
 
 var SignUpForm = React.createClass({
   getInitialState: function () {
