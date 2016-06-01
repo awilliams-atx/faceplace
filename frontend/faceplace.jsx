@@ -5,8 +5,7 @@ var React = require('react'),
     IndexRoute = require('react-router').IndexRoute,
     hashHistory = require('react-router').hashHistory,
 
-    LogInForm = require('./components/LogInForm'),
-    SignUpForm = require('./components/SignUpForm');
+    LogInForm = require('./components/LogInForm');
 
 var App = React.createClass({
   render: function () {
@@ -21,9 +20,7 @@ var App = React.createClass({
 
 var routes = (
   <Route path='/' component={ App }>
-    <IndexRoute component={ SignUpForm } />
-    <Route path='sign_up' component={ SignUpForm } />
-    <Route path='log_in' component={ LogInForm } />
+    <IndexRoute component={ LogInForm } />
   </Route>
 );
 

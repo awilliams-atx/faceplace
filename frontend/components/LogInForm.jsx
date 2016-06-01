@@ -1,19 +1,20 @@
 var React = require('react'),
-    SessionApiUtil = require('../util/session_api_util');
+    SessionApiUtil = require('../util/session_api_util'),
+    SignUpForm = require('./SignUpForm');
 
 var LogInForm = React.createClass({
   getInitialState: function () {
-    return ({username: "", password: ""});
+    return ({email: "", password: ""});
   },
   render: function () {
     return (
       <div>
         <form onSubmit={this._handleSubmit}>
 
-          <label for="username">Username</label>
-          <input onChange={this._usernameChange}
-                 value={this.state.username}
-                 id="username"
+          <label for="email">Email</label>
+          <input onChange={this._emailChange}
+                 value={this.state.email}
+                 id="email"
           />
 
           <label for="password">Password</label>
@@ -25,11 +26,12 @@ var LogInForm = React.createClass({
 
           <button>Submit</button>
         </form>
+        <SignUpForm />
       </div>
     );
   },
-  _usernameChange: function (e) {
-    this.setState({username: e.target.value});
+  _emailChange: function (e) {
+    this.setState({email: e.target.value});
   },
   _passwordChange: function (e) {
     this.setState({password: e.target.value});
@@ -37,9 +39,9 @@ var LogInForm = React.createClass({
   _handleSubmit: function (e) {
     e.preventDefault();
     var credentials = {};
-    credentials.username = this.state.username;
+    credentials.email = this.state.email;
     credentials.password = this.state.password;
-    
+
     SessionApiUtil.login(credentials);
   }
 });
