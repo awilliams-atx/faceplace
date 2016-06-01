@@ -8,24 +8,38 @@ var LogInForm = React.createClass({
   },
   render: function () {
     return (
-      <div>
-        <form onSubmit={this._handleSubmit}>
+      <div className='content'>
+        <header>
+          <nav className='header-nav group'>
+            <a href="/"><img src={window.logoUrl} className='header-logo' /></a>
+            <form onSubmit={this._handleSubmit}
+                  className='log-in-form'>
+              <table>
+                <thead>
+                  <tr>
+                    <td><label htmlFor="email">Email</label></td>
+                    <td><label htmlFor="password">Password</label></td>
+                  </tr>
+                </thead>
 
-          <label for="email">Email</label>
-          <input onChange={this._emailChange}
-                 value={this.state.email}
-                 id="email"
-          />
-
-          <label for="password">Password</label>
-          <input type="password"
-                 onChange={this._passwordChange}
-                 value={this.state.password}
-                 id="password"
-          />
-
-          <button>Submit</button>
-        </form>
+                <tbody>
+                  <tr>
+                    <td><input onChange={this._emailChange}
+                    value={this.state.email}
+                    id="email"
+                    /></td>
+                    <td><input type="password"
+                           onChange={this._passwordChange}
+                           value={this.state.password}
+                           id="password"
+                    /></td>
+                    <td><button>Log In</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+          </nav>
+        </header>
         <SignUpForm />
       </div>
     );

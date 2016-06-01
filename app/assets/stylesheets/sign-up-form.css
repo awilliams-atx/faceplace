@@ -1,0 +1,50 @@
+section#sign-up {
+  display: block;
+  float: right;
+}
+
+#sign-up > h1 {
+  font-size: 36px;
+  font-family: 'Merriweather', sans-serif;
+  margin-bottom: 5px;
+}
+
+#consolation {
+  font-size: 19px;
+  margin-bottom: 20px;
+}
+
+#sign-up input {
+  border: 1px solid #bdc7d8;
+  padding: 8px 10px;
+  font-size: 18px;
+  width: 377px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+#sign-up-form button {
+  position: absolute;
+  border: 1px outset #3b6e22;
+  width: 192px;
+  height: 37px;
+  font-family: 'Merriweather Sans', sans-serif;
+  font-size: 19px;
+  border-radius: 5px;
+  color: white;
+  background: linear-gradient(180deg, #65a952, #578843);
+}
+
+#sign-up-form {
+  position: relative;
+}
+
+#sign-up-form button:hover {
+  cursor: pointer;
+  background: linear-gradient(180deg, #76b861, #578843);
+}
+
+#sign-up-form button:active {
+  bottom: -50px;
+}

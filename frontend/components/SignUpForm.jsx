@@ -12,35 +12,67 @@ var SignUpForm = React.createClass({
   },
   render: function () {
     return (
-      <form onSubmit={this._handleSubmit}>
+      <div id='sign-up-content' className='group'>
+        <section id='propaganda'>
+          <h1>Face it. You pretty much have to use this website.</h1>
+            <div className='propaganda-line group'>
+              <div className='propaganda-image'>
+                <img src={window.feedUrl}/>
+              </div>
+              <div className='propaganda-text'>
+                <span className='bold-text'>Faces </span> to feed on.
+              </div>
+            </div>
+            <div className='propaganda-line group'>
+              <div className='propaganda-image'>
+                <img src={window.timelineUrl}/>
+              </div>
+              <div className='propaganda-text'>
+                <span className='bold-text'>Face</span> the sands of time.
+              </div>
+            </div>
+            <div className='propaganda-line group'>
+              <div className='propaganda-image'>
+                <img src={window.searchUrl}/>
+              </div>
+              <div className='propaganda-text'>
+                <span className='bold-text'>The perfect face </span> is one search away.
+              </div>
+            </div>
+        </section>
 
-        <label for="firstName">First Name</label>
-        <input onChange={this._firstNameChange}
-               value={this.state.firstName}
-               id="firstName"
-        />
+        <section id='sign-up'>
+          <h1>Sign Up</h1>
+          <div id="consolation">It's free and you pretty much have no choice.</div>
+          <form id="sign-up-form" onSubmit={this._handleSubmit}>
 
-        <label for="lastName">Last Name</label>
-        <input onChange={this._lastNameChange}
-               value={this.state.lastName}
-               id="lastName"
-        />
+            <input onChange={this._firstNameChange}
+                   value={this.state.firstName}
+                   placeholder='First name'
+            />
 
-        <label for="email">Email</label>
-        <input onChange={this._emailChange}
-               value={this.state.email}
-               id="email"
-        />
+            <input onChange={this._lastNameChange}
+                   value={this.state.lastName}
+                   placeholder='Last name'
 
-        <label for="password">New Password</label>
-        <input type="password"
-               onChange={this._passwordChange}
-               value={this.state.password}
-               id="password"
-        />
+            />
 
-        <button>Submit</button>
-      </form>
+            <input onChange={this._emailChange}
+                   value={this.state.email}
+                   id='email'
+                   placeholder='Email'
+            />
+
+            <input type='password'
+                   onChange={this._passwordChange}
+                   value={this.state.password}
+                   placeholder='Password'
+            />
+
+            <button>Sign Up</button>
+          </form>
+        </section>
+      </div>
     );
   },
   _firstNameChange: function (e) {

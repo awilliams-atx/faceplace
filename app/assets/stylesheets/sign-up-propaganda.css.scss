@@ -1,0 +1,42 @@
+#sign-up-content {
+  width: 980px;
+  height: 100%;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+section#propaganda {
+  display: block;
+  float: left;
+  width: 500px;
+}
+
+#propaganda h1 {
+  display: block;
+  margin-top: 45px;
+  font-size: 28px;
+}
+
+.propaganda-line:first-of-type {
+    margin-top: 44px;
+}
+.propaganda-line {
+  margin-bottom: 30px;
+  .propaganda-image {
+    float: left;
+    width: 55px;
+    text-align: center;
+  }
+  .propaganda-text {
+    height: 47px;
+    line-height: 47px;
+    float: left;
+    margin-left: 15px;
+    font-family: helvetica;
+    font-size: 15px;
+  }
+  .bold-text {
+    font-size: 17px;
+  }
+}
