@@ -11,7 +11,6 @@ var App = React.createClass({
   render: function () {
     return (
       <div>
-        <h1>Faceplace</h1>
         {this.props.children}
       </div>
     );
@@ -25,7 +24,7 @@ var routes = (
 );
 
 document.addEventListener("DOMContentLoaded", function () {
-  var root = document.getElementById('content');
+  var root = document.getElementById('root');
   var router = <Router history={hashHistory} routes={routes} />;
   ReactDOM.render(router, root);
 });

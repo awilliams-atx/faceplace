@@ -1,0 +1,62 @@
+.content {
+  width: 100;
+  header {
+    background: #4d68a2;
+    height: 83px;
+    border-bottom: 1px solid black;
+    position: relative;
+  }
+}
+
+.header-nav {
+  width: 980px;
+  margin: auto;
+  position: relative;
+  label {
+    color: white;
+    font-family: helvetica;
+    font-size: 12px;
+  }
+}
+
+label:after {
+  content:"\a";
+  white-space: pre;
+}
+
+.header-logo {
+  display: block;
+  position: absolute;
+  margin-top: 25px;
+}
+
+.log-in-form {
+  font-family: helvetica;
+  font-size: 12px;
+  position: absolute;
+  display: block;
+  float: right;
+  margin-top: 25px;
+  right: -16px;
+  table {
+    border-spacing: 16px 0px;
+  }
+  input {
+    border: 1px solid black;
+    padding: 3px 3px 4px 3px;
+    width: 142px;
+  }
+  button {
+    border-radius: 0;
+    background-color: #5a74a8;
+    color: white;
+    font-family: tahoma;
+    font-weight: bold;
+    box-shadow: 0 0 1px black;
+    height: 20px;
+    width: 48px;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+}
