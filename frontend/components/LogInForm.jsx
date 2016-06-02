@@ -64,7 +64,7 @@ var LogInForm = React.createClass({
     this.setState({password: e.target.value});
   },
   _handleSubmit: function (e, options) {
-    var credentials;
+    var credentials = {};
     console.log('LogInForm#_handleSubmit');
     e.preventDefault();
 
@@ -85,7 +85,7 @@ var LogInForm = React.createClass({
     this._handleSubmit(e, {credentials: credentials});
   },
   _redirectToMain: function () {
-    this.context.router.push('/main');
+    this.context.router.push('/');
   }
 });
 

@@ -1,9 +1,52 @@
 .main-header {
+  height: 42px;
   background: green;
 }
 
 #faceplace-icon {
   float: left;
+}
+
+.nav-left {
+  height: 100%;
+  float: left;
+}
+
+.nav-search {
+  float: left;
+  margin-top: 8px;
+  border-radius: 3px;
+  border: 1px solid black;
+  font-size: 14px;
+  input {
+    border-radius: 3px;
+    width: 400px;
+    display: block;
+    padding: 4px 5px 4px 4px;
+  }
+}
+
+.nav-right {
+  background: green;
+  height: 100%;
+  float: right;
+  div {
+    margin-top: 8px;
+    float: left;
+  }
+  button {
+    border-radius: 0;
+    background-color: #5a74a8;
+    color: white;
+    font-family: tahoma;
+    font-weight: bold;
+    box-shadow: 0 0 1px black;
+    height: 20px;
+    width: 52px;
+    margin-top: 8px;
+    display: block;
+    float: left;
+  }
 }
 
 .fa-facebook-official {
@@ -17,19 +60,6 @@
 
 .main-header-nav {
   width: 980px;
+  height: 100%;
   margin: auto;
-  background: orange;
-  height: 42px;
-}
-
-.nav-search {
-  float: left;
-  background: yellow;
-  margin-top: 8px;
-  border-radius: 3px;
-  border: 1px solid black;
-  font-size: 14px;
-  input {
-    padding: 4px 5px 4px 4px;
-  }
 }

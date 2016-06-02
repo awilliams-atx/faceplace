@@ -1,5 +1,6 @@
 var SessionActions = require('../actions/session_actions'),
-    ErrorActions = require('../actions/error_actions');
+    ErrorActions = require('../actions/error_actions'),
+    SessionApiUtil = require('./session_api_util');
 
 var UserApiUtil = {
   signUp: function (user, redirectCB) {
@@ -10,12 +11,10 @@ var UserApiUtil = {
       dataType: 'json',
       data: {user: user},
       success: function (user) {
-        console.log('UserApiUtil#signUp success');
         SessionActions.receiveCurrentUser(user);
         redirectCB();
       },
       error: function (errors) {
-        console.log("UserApiUtil#signUp error");
         ErrorActions.clearErrors();
         ErrorActions.setErrors(errors.responseJSON);
       }

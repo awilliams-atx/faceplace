@@ -99,7 +99,7 @@ var SignUpForm = React.createClass({
       email: this.state.email,
       password: this.state.password
     }, function () {
-      this.context.router.push('/main');
+      this.context.router.push('/');
     }.bind(this));
 
   }
