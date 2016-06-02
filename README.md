@@ -8,7 +8,7 @@
 
 Faceplace is a web application inspired by Facebook that will be build using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
 
-- [ ] New account creation, login, and guest/demo login
+- [x] New account creation, login, and guest/demo login
 - [ ] Smooth, bug-free navigation
 - [ ] Adequate seed data to demonstrate the site's features
 - [ ] The minimally necessary features for a Facebook-inspired site: an (instant) search bar for finding people, a status update box, a scrolling side-bar friends list, a profile page (cover photo, timeline, personal info, abbreviated friends list), an (infininte) feed, a friends page, friend requests, private messages, and notifications.
@@ -24,8 +24,8 @@ Faceplace will allow users to do the following:
 <!-- This is a Markdown checklist. Use it to keep track of your
 progress. Put an x between the brackets for a checkmark: [x] -->
 
-- [ ] Create an account (MVP)
-- [ ] Log in / Log out, including as a Guest/Demo User (MVP)
+- [x] Create an account (MVP)
+- [x] Log in / Log out, including as a Guest/Demo User (MVP)
 - [ ] User search (MVP)
 - [ ] Friending and unfriending (MVP)
 - [ ] Friends page (MVP)
@@ -61,11 +61,11 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 
 **Objective:** Functioning rails project with Authentication
 
-- [ ] new project
-- [ ] `User` model
-- [ ] authentication
-- [ ] user signup/signin pages
-- [ ] blank landing page after signin
+- [x] new project
+- [x] `User` model
+- [x] authentication
+- [x] user signup/signin pages
+- [x] blank landing page after signin
 
 
 
@@ -73,7 +73,7 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 
 **Objective:** Make it match Facebook. To completion. No react.
 
-- [ ] style to completion
+- [x] style to completion
 
 
 
@@ -81,9 +81,9 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 
 **Objective:** Make some space for the navbar.
 
-- [ ] navbar header.
-- [ ] color it, float it, clear-fix it.
-- [ ] add to App. Render if signed in.
+- [x] navbar header.
+- [x] color it, float it, clear-fix it.
+- [x] add to App. Render if signed in.
 
 
 

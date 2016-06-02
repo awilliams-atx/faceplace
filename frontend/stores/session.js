@@ -30,7 +30,7 @@ SessionStore.__onDispatch = function (payload) {
   }
 };
 
-SessionStore.current_user = function () {
+SessionStore.currentUser = function () {
   return $.extend({}, _currentUser);
 };
 
@@ -42,4 +42,5 @@ SessionStore.isUserLoggedIn = function () {
   return !!_currentUser.id;
 };
 
+window.SessionStore = SessionStore;
 module.exports = SessionStore;

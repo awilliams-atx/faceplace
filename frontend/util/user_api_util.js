@@ -2,7 +2,7 @@ var SessionActions = require('../actions/session_actions'),
     ErrorActions = require('../actions/error_actions');
 
 var UserApiUtil = {
-  signUp: function (user) {
+  signUp: function (user, redirectCB) {
     console.log('UserApiUtil#signUp');
     $.ajax({
       url: 'api/user',
@@ -12,6 +12,7 @@ var UserApiUtil = {
       success: function (user) {
         console.log('UserApiUtil#signUp success');
         SessionActions.receiveCurrentUser(user);
+        redirectCB();
       },
       error: function (errors) {
         console.log("UserApiUtil#signUp error");

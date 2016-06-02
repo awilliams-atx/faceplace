@@ -2,6 +2,9 @@ var React = require('react'),
     UserApiUtil = require('../util/user_api_util');
 
 var SignUpForm = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function () {
     return({
       firstName: "",
@@ -95,7 +98,10 @@ var SignUpForm = React.createClass({
       last_name: this.state.lastName,
       email: this.state.email,
       password: this.state.password
-    });
+    }, function () {
+      this.context.router.push('/main');
+    }.bind(this));
+
   }
 });
 
