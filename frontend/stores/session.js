@@ -1,39 +1,46 @@
 var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher.js'),
-    userConstants = require('../constants/userConstants');
+    sessionConstants = require('../constants/session_constants');
 
 var _currentUser = {};
-var _userHasBeenFetched = false;
+var _currentUserHasBeenFetched = false;
 
 var SessionStore = new Store(AppDispatcher);
 
-SessionStore.isUserLoggedIn = function () {
-  if (_currentUser.id) {
-    return true;
-  } else {
-    return false;
+function _login(currentUser) {
+  _currentUser = currentUser;
+  _currentUserHasBeenFetched = true;
+}
+
+function _logout() {
+  _currentUser = {};
+  _currentUserHasBeenFetched = false;
+}
+
+SessionStore.__onDispatch = function (payload) {
+  switch (payload.actionType) {
+    case sessionConstants.LOGIN:
+      console.log('SessionStore, LOGIN');
+      _login(payload.user);
+      SessionStore.__emitChange();
+      break;
+    case sessionConstants.LOGOUT:
+      _logout();
+      SessionStore.__emitChange();
+      break;
   }
 };
 
 SessionStore.current_user = function () {
-  if (_currentUser) {
-    return _currentUser;
-  }
-
-  return null;
+  return $.extend({}, _currentUser);
 };
 
-SessionStore.__onDispatch = function (payload) {
-  switch (payload.actionType) {
-    case userConstants.CURRENT_USER_RECEIVED:
-      _currentUser = payload.user;
-      SessionStore.__emitChange();
-      break;
-    case userConstants.CURRENT_USER_REMOVED:
-      _currentUser = {};
-      SessionStore.__emitChange();
-      break;
-  }
+SessionStore.currentUserHasBeenFetched = function () {
+  return _currentUserHasBeenFetched;
+};
+
+SessionStore.isUserLoggedIn = function () {
+  return !!_currentUser.id;
 };
 
 module.exports = SessionStore;

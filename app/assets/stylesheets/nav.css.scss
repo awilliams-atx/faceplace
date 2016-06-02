@@ -1,0 +1,35 @@
+.main-header {
+  background: green;
+}
+
+#faceplace-icon {
+  float: left;
+}
+
+.fa-facebook-official {
+  color: white;
+  display: block;
+  float: left;
+  height: 60px;
+  margin-top: 6px;
+  margin-right: 7px;
+}
+
+.main-header-nav {
+  width: 980px;
+  margin: auto;
+  background: orange;
+  height: 42px;
+}
+
+.nav-search {
+  float: left;
+  background: yellow;
+  margin-top: 8px;
+  border-radius: 3px;
+  border: 1px solid black;
+  font-size: 14px;
+  input {
+    padding: 4px 5px 4px 4px;
+  }
+}
