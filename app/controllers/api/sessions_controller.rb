@@ -23,7 +23,7 @@ class Api::SessionsController < ApplicationController
     if current_user
       render 'api/users/show'
     else
-      render json: {}, status: 404
+      render json: {}
     end
   end
 

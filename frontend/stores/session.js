@@ -14,13 +14,12 @@ function _login(currentUser) {
 
 function _logout() {
   _currentUser = {};
-  _currentUserHasBeenFetched = false;
 }
 
 SessionStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case sessionConstants.LOGIN:
-      console.log('SessionStore, LOGIN');
+    case sessionConstants.RECEIVE_CURRENT_USER:
+      console.log('SessionStore, RECEIVE_CURRENT_USER');
       _login(payload.user);
       SessionStore.__emitChange();
       break;

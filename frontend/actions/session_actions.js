@@ -3,9 +3,9 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 
 var SessionActions = {
   receiveCurrentUser: function (user) {
-    console.log('SessionActions#receiveCurrentUser ' + user.email);
+    console.log('SessionActions#receiveCurrentUser ' + user.first_name);
     Dispatcher.dispatch({
-      actionType: sessionConstants.LOGIN,
+      actionType: sessionConstants.RECEIVE_CURRENT_USER,
       user: user
     });
   },

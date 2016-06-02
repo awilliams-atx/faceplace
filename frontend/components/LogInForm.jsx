@@ -1,6 +1,7 @@
 var React = require('react'),
     SessionApiUtil = require('../util/session_api_util'),
-    SignUpForm = require('./SignUpForm');
+    SignUpForm = require('./SignUpForm'),
+    ErrorStore = require('../stores/error');
 
 var LogInForm = React.createClass({
   contextTypes: {
@@ -10,6 +11,7 @@ var LogInForm = React.createClass({
     return ({email: "", password: ""});
   },
   render: function () {
+    console.log("LogInForm#render");
     return (
       <div className='content'>
         <header className='welcome-header'>
@@ -47,6 +49,9 @@ var LogInForm = React.createClass({
       </div>
     );
   },
+  componentDidMount: function () {
+    this.setState({errors: ErrorStore.all()});
+  },
   _emailChange: function (e) {
     this.setState({email: e.target.value});
   },
@@ -61,7 +66,8 @@ var LogInForm = React.createClass({
     credentials.password = this.state.password;
 
     SessionApiUtil.login(credentials, function () {
-      this.context.router.push('main');
+      // absolute path
+      this.context.router.push('/main');
     }.bind(this));
   }
 });
