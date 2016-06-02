@@ -15,9 +15,10 @@ SessionApiUtil = {
         cb();
       },
       error: function (errors) {
+        debugger
         console.log("SessionApiUtil#login ERROR");
         ErrorActions.clearErrors();
-        ErrorActions.setErrors(error);
+        ErrorActions.setErrors(errors.responseJSON);
       }
     });
   },
@@ -32,11 +33,12 @@ SessionApiUtil = {
       },
       error: function (errors) {
         ErrorActions.clearErrors();
-        ErrorActions.setErrors(error);
+        ErrorActions.setErrors(errors.responseJSON);
       }
     });
   },
   fetchCurrentUser: function (cb) {
+    console.log('SessionApiUtil#fetchCurrentUser');
     $.ajax({
       url: 'api/session',
       method: 'GET',
@@ -46,8 +48,7 @@ SessionApiUtil = {
         SessionActions.receiveCurrentUser(user);
       },
       error: function (errors) {
-        ErrorActions.clearErrors();
-        ErrorActions.setErrors(error);
+        console.log('SessionApiUtil#fetchCurrentUser ERROR');
       },
       complete: function () {
         cb();
@@ -56,4 +57,5 @@ SessionApiUtil = {
   }
 };
 
+window.SessionApiUtil = SessionApiUtil;
 module.exports = SessionApiUtil;

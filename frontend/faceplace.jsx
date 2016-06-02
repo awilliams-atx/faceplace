@@ -33,6 +33,7 @@ var routes = (
 );
 
 function _ensureLoggedIn(nextState, replace, asyncDoneCallback) {
+  console.log("ensureLoggedIn");
   if (SessionStore.currentUserHasBeenFetched()) {
     redirectIfNotLoggedIn();
   } else {
@@ -49,6 +50,7 @@ function _ensureLoggedIn(nextState, replace, asyncDoneCallback) {
 }
 
 function _ensureNotLoggedIn(nextState, replace, asyncDoneCallback) {
+  console.log("ensureNotLoggedIn");
   if (SessionStore.currentUserHasBeenFetched()) {
     redirectIfLoggedIn();
   } else {

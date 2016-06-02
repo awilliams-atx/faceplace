@@ -11,7 +11,7 @@ var UserApiUtil = {
       data: {user: user},
       success: function (user) {
         console.log('UserApiUtil#signUp success');
-        SessionActions.removeCurrentUser(user);
+        SessionActions.receiveCurrentUser(user);
       },
       error: function (errors) {
         console.log("UserApiUtil#signUp error");
