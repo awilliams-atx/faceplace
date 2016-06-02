@@ -1,15 +1,12 @@
-var Dispatcher = require('../dispatcher/dispatcher')
+var Dispatcher = require('../dispatcher/dispatcher'),
     errorConstants = require('../constants/error_constants');
-
-function _extractErrors (errors) {
-  debugger
-}
 
 var ErrorActions = {
   setErrors: function (errors) {
+    console.log('ErrorActions#setErrors, actionType: ' + errorConstants.ERRORS_RECEIVED);
     Dispatcher.dispatch({
       actionType: errorConstants.ERRORS_RECEIVED,
-      errors: _extractErrors(errors)
+      errors: errors
     });
   },
   clearErrors: function () {

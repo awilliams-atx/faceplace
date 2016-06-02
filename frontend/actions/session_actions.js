@@ -1,16 +1,17 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
-    userConstants = require('../constants/user_constants');
+    sessionConstants = require('../constants/session_constants');
 
 var SessionActions = {
   receiveCurrentUser: function (user) {
+    console.log('SessionActions#receiveCurrentUser ' + user.email);
     Dispatcher.dispatch({
-      actionType: userConstants.CURRENT_USER_RECEIVED,
+      actionType: sessionConstants.LOGIN,
       user: user
     });
   },
   removeCurrentUser: function () {
     Dispatcher.dispatch({
-      actionType: userConstants.CURRENT_USER_REMOVED
+      actionType: sessionConstants.LOGOUT
     });
   }
 };

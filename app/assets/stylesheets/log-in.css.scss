@@ -1,14 +1,17 @@
 .content {
-  width: 100;
   header {
     background: #4d68a2;
-    height: 83px;
     border-bottom: 1px solid black;
     position: relative;
+    width: 100%;
   }
 }
 
-.header-nav {
+.welcome-header {
+  height: 83px;
+}
+
+.welcome-header-nav {
   width: 980px;
   margin: auto;
   position: relative;

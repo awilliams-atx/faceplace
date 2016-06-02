@@ -3,14 +3,17 @@ var React = require('react'),
     SignUpForm = require('./SignUpForm');
 
 var LogInForm = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function () {
     return ({email: "", password: ""});
   },
   render: function () {
     return (
       <div className='content'>
-        <header>
-          <nav className='header-nav group'>
+        <header className='welcome-header'>
+          <nav className='welcome-header-nav group'>
             <a href="/"><img src={window.logoUrl} className='header-logo' /></a>
             <form onSubmit={this._handleSubmit}
                   className='log-in-form'>
@@ -51,12 +54,15 @@ var LogInForm = React.createClass({
     this.setState({password: e.target.value});
   },
   _handleSubmit: function (e) {
+    console.log('LogInForm#_handleSubmit');
     e.preventDefault();
     var credentials = {};
     credentials.email = this.state.email;
     credentials.password = this.state.password;
 
-    SessionApiUtil.login(credentials);
+    SessionApiUtil.login(credentials, function () {
+      this.context.router.push('main');
+    }.bind(this));
   }
 });
 
