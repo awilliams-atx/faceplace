@@ -1,7 +1,8 @@
 var React = require('react'),
     SessionApiUtil = require('../util/session_api_util'),
     SignUpForm = require('./SignUpForm'),
-    ErrorStore = require('../stores/error');
+    ErrorStore = require('../stores/error'),
+    SessionStore = require('../stores/session');
 
 var LogInForm = React.createClass({
   contextTypes: {
@@ -11,6 +12,10 @@ var LogInForm = React.createClass({
     return ({email: "", password: ""});
   },
   render: function () {
+    var logInButton = <button>Log In</button>;
+    if (this.state.email === "" && this.state.password === "") {
+      logInButton = <button onClick={this._guestLogin}>Guest</button>;
+    }
     console.log("LogInForm#render");
     return (
       <div className='content'>
@@ -38,7 +43,7 @@ var LogInForm = React.createClass({
                            value={this.state.password}
                            id="password"
                     /></td>
-                    <td><button>Log In</button></td>
+                  <td>{logInButton}</td>
                   </tr>
                 </tbody>
               </table>
@@ -58,17 +63,29 @@ var LogInForm = React.createClass({
   _passwordChange: function (e) {
     this.setState({password: e.target.value});
   },
-  _handleSubmit: function (e) {
+  _handleSubmit: function (e, options) {
+    var credentials;
     console.log('LogInForm#_handleSubmit');
     e.preventDefault();
-    var credentials = {};
-    credentials.email = this.state.email;
-    credentials.password = this.state.password;
 
-    SessionApiUtil.login(credentials, function () {
-      // absolute path
-      this.context.router.push('/main');
-    }.bind(this));
+    if (options) {
+      credentials = options.credentials;
+    } else {
+      credentials.email = this.state.email;
+      credentials.password = this.state.password;
+    }
+
+    SessionApiUtil.login(credentials, this._redirectToMain);
+  },
+  _guestLogin: function (e) {
+    console.log('LogInForm#_guestLogin');
+    var credentials = {};
+    credentials.email = "thedude@lebowskimail.com";
+    credentials.password = "starwars";
+    this._handleSubmit(e, {credentials: credentials});
+  },
+  _redirectToMain: function () {
+    this.context.router.push('/main');
   }
 });
 

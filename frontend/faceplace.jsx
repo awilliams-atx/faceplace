@@ -28,7 +28,7 @@ var routes = (
 
     <IndexRoute component={ LogInForm } onEnter={ _ensureNotLoggedIn } />
     <Route path='login' component={ LogInForm } onEnter={ _ensureNotLoggedIn } />
-    <Route path='main' component={ Main } onEnter={_ensureLoggedIn } />
+    <Route path='main' component={ Main } onEnter={ _ensureLoggedIn } />
   </Route>
 );
 

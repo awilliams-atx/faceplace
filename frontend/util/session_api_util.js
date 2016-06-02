@@ -15,7 +15,6 @@ SessionApiUtil = {
         cb();
       },
       error: function (errors) {
-        debugger
         console.log("SessionApiUtil#login ERROR");
         ErrorActions.clearErrors();
         ErrorActions.setErrors(errors.responseJSON);
