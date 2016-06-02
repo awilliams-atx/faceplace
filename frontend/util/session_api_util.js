@@ -21,7 +21,8 @@ SessionApiUtil = {
       }
     });
   },
-  logout: function () {
+  logout: function (cb) {
+    console.log("SessionApiUtil#logout");
     $.ajax({
       url: 'api/session',
       method: 'DELETE',
@@ -29,6 +30,7 @@ SessionApiUtil = {
       success: function () {
         console.log('SessionApiUtil#logout SUCCESS');
         SessionActions.removeCurrentUser();
+        cb();
       },
       error: function (errors) {
         ErrorActions.clearErrors();

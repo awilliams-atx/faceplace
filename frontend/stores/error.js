@@ -23,9 +23,6 @@ ErrorStore._clearErrors = function () {
   _errors = {};
 };
 
-ErrorStore._setErrors = function (errors) {
-  errors.forEach(function (error) {
-  });
-};
+ErrorStore._setErrors = function (errors) {};
 
 module.exports = ErrorStore;

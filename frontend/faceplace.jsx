@@ -9,65 +9,41 @@ var Router = ReactRouter.Router,
 
     LogInForm = require('./components/LogInForm'),
     Main = require('./components/Main'),
+    IntroForm = require('./components/IntroForm'),
 
     SessionStore = require('./stores/session'),
     SessionApiUtil = require('./util/session_api_util');
 
 var App = React.createClass({
   render: function () {
+    var content = SessionStore.isUserLoggedIn() ? this.props.children : <LogInForm />;
     return (
       <div>
-        {this.props.children}
+        {content}
       </div>
     );
   }
 });
 
 var routes = (
-  <Route path='/' component={ App }>
-
-    <IndexRoute component={ LogInForm } onEnter={ _ensureNotLoggedIn } />
-    <Route path='login' component={ LogInForm } onEnter={ _ensureNotLoggedIn } />
-    <Route path='main' component={ Main } onEnter={ _ensureLoggedIn } />
+  <Route path='/' component={ App } >
+    <IndexRoute component={ Main } onEnter={ _ensureLoggedIn } />
+    <Route path='profile' component={ IntroForm }></Route>
   </Route>
 );
 
-function _ensureLoggedIn(nextState, replace, asyncDoneCallback) {
-  console.log("ensureLoggedIn");
-  if (SessionStore.currentUserHasBeenFetched()) {
-    redirectIfNotLoggedIn();
-  } else {
+function _ensureLoggedIn (nextState, replace, asyncDoneCallback) {
+  if (!SessionStore.currentUserHasBeenFetched()) {
     SessionApiUtil.fetchCurrentUser(redirectIfNotLoggedIn);
+  } else {
+    redirectIfNotLoggedIn();
   }
 
-  function redirectIfNotLoggedIn() {
+  function redirectIfNotLoggedIn () {
     if (!SessionStore.isUserLoggedIn()) {
       replace('/login');
     }
-
     asyncDoneCallback();
-  }
-}
-
-function _ensureNotLoggedIn(nextState, replace, asyncDoneCallback) {
-  console.log("ensureNotLoggedIn");
-  if (SessionStore.currentUserHasBeenFetched()) {
-    redirectIfLoggedIn();
-  } else {
-    SessionApiUtil.fetchCurrentUser(redirectIfLoggedIn);
-  }
-
-  function redirectIfLoggedIn() {
-    if (SessionStore.isUserLoggedIn()) {
-      replace('/main');
-    }
-
-    asyncDoneCallback();
-  }
-}
-function _redirectIfNotLoggedIn () {
-  if (!SessionStore.isUserLoggedIn()) {
-    replace('/');
   }
 }
 

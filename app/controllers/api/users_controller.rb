@@ -10,6 +10,8 @@ class Api::UsersController < ApplicationController
   end
 
   def show
+    @intro = true
+    render 'api/users/show'
   end
 
   private
