@@ -1,6 +1,6 @@
 /* RESET */
 
-body, html, header, section, nav, h1, h2, label, input {
+body, html, header, section, nav, h1, h2, label, input, a {
   margin: 0;
   border: 0;
   padding: 0;
@@ -9,6 +9,13 @@ body, html, header, section, nav, h1, h2, label, input {
   color: inherit;
   text-align: inherit;
   text-decoration: inherit;
+  font-weight: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  decoration: inherit;
   font-weight: inherit;
 }
 

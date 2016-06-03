@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
     @user = User.find_by_credentials(user_params)
     if @user
       log_in(@user)
-      render 'api/users/show'
+      render 'api/users/current_user'
     else
       render json: {
         base: "Incorrect email or password"
@@ -15,13 +15,14 @@ class Api::SessionsController < ApplicationController
   end
 
   def destroy
+    log_out
     render json: {}
   end
 
   def show
     @user = current_user
     if current_user
-      render 'api/users/show'
+      render 'api/users/current_user'
     else
       render json: {}
     end

@@ -1,6 +1,5 @@
 .main-header {
   height: 42px;
-  background: green;
 }
 
 #faceplace-icon {
@@ -27,25 +26,29 @@
 }
 
 .nav-right {
-  background: green;
   height: 100%;
   float: right;
+  color: white;
+  font-family: tahoma;
+  font-weight: bold;
+  font-size: 12px;
   div {
+    cursor: pointer;
+    line-height: 27px;
+    height: 27px;
     margin-top: 8px;
     float: left;
   }
   button {
-    border-radius: 0;
+    cursor: pointer;
     background-color: #5a74a8;
-    color: white;
-    font-family: tahoma;
-    font-weight: bold;
     box-shadow: 0 0 1px black;
-    height: 20px;
-    width: 52px;
+    height: 27px;
     margin-top: 8px;
     display: block;
     float: left;
+    border-radius: 2px;
+    margin-left: 10px;
   }
 }
 

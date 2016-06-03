@@ -1,0 +1,23 @@
+.sub-content {
+  width: 980px;
+  margin: auto;
+  h2 {
+    font-family: helvetica;
+    font-size: 16px;
+    margin: 3px 0 20px 35px;
+  }
+  .icon {
+    width: 25px;
+    height: 25px;
+    display: block;
+    float: left;
+  }
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+  }
+}
