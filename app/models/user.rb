@@ -5,6 +5,19 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
   attr_reader :password
 
+  def friends
+    current_user_id = self.id
+    # User.find_by_sql([<<-SQL, {id: current_user_id}])
+    #   SELECT id
+    #   FROM friendings
+    #   WHERE lady_id = :id OR gentleman_id = :id
+    # SQL
+
+    Friending
+      .select(:id)
+      .where("lady_id = :id OR gentleman_id = :id", {id: current_user_id})
+  end
+
   def self.find_by_credentials(params)
     user = User.find_by(email: params[:email])
     return nil if user.nil?
