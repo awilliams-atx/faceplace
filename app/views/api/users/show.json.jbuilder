@@ -5,4 +5,6 @@ json.extract! @user,
 :company,
 :position,
 :location,
-:hometown
+:hometown,
+:school,
+:major

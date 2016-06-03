@@ -24,18 +24,18 @@ var IntroItemSchool = React.createClass({
       return (
         <form onSubmit={this.handleSubmit} >
 
-          <input value={this.state.major}
+          <input value={this.state.major || ''}
             ref='autoFocus'
             placeholder='What is your area of study?'
             onChange={this.onMajorChange} />
 
-          <input value={this.state.school}
+          <input value={this.state.school || ''}
             placeholder='What school did you attend?'
             onChange={this.onSchoolChange} />
 
           <div className='buttons'>
             <button>Submit</button>
-            <button onClick={this.toggleEdit}>Cancel</button>
+            <button onClick={this.cancel}>Cancel</button>
           </div>
         </form>
       );
@@ -48,13 +48,12 @@ var IntroItemSchool = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.IntroListener = IntroStore.addListener(this.onStoreChange);
+    this.IntroListener = IntroStore.addListener(this.onIntroStoreChange);
+    this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
     this.IntroListener.remove();
-  },
-  _handleSubmit: function (e) {
-    e.preventDefault();
+    this.FormListener.remove();
   },
   clickHandler: function (e) {
     e.preventDefault();
@@ -64,17 +63,23 @@ var IntroItemSchool = React.createClass({
       this.refs.autoFocus.focus();
     });
   },
-  toggleEdit: function (e) {
+  cancel: function (e) {
     e.preventDefault();
+    this.setState({
+      school: this.IntroStore.school(),
+      major: this.IntroStore.major()
+    }, function () {
+      this.toggleEdit();
+    });
+  },
+  toggleEdit: function () {
     this.setState({
       editing: !this.state.editing
     });
   },
   handleSubmit: function (e) {
     e.preventDefault();
-    this.setState({
-      editing: false
-    });
+    this.toggleEdit();
     IntroApiUtil.setIntro({
       major: this.state.major,
       school: this.state.school
@@ -86,11 +91,18 @@ var IntroItemSchool = React.createClass({
   onMajorChange: function (e) {
     this.setState({major: e.target.value});
   },
-  onStoreChange: function (e) {
+  onIntroStoreChange: function (e) {
     this.setState({
       school: IntroStore.school(),
       major: IntroStore.major()
     });
+  },
+  onFormStoreChange: function (e) {
+    if (FormStore.isOpen('INTRO_SCHOOL') && !this.state.editing) {
+      this.setState({editing: true});
+    } else if (!FormStore.isOpen('INTRO_SCHOOL') && this.state.editing) {
+      this.setState({editing: false});
+    }
   }
 });
 

@@ -19,7 +19,7 @@ var IntroApiUtil = {
       }
     });
   },
-  setIntro: function (intro) {
+  setIntro: function (intro, cb) {
     $.ajax({
       url: 'api/user',
       method: 'PATCH',
@@ -28,6 +28,7 @@ var IntroApiUtil = {
       success: function (intro) {
         console.log('IntroApiUtil#setIntro SUCCESS');
         IntroActions.receiveIntro(intro);
+        if (cb) { cb(); }
       },
       error: function (errors) {
         console.log('IntroApiUtil#setIntro ERROR');
