@@ -10,18 +10,17 @@ var IntroItemLocation = React.createClass({
     });
   },
   render: function () {
-    if (this.state.editing)
-    {
+    if (this.state.editing) {
       return (
         <form onSubmit={this.handleSubmit}>
-          <input value={this.state.location}
+          <input value={this.state.location || ''}
             ref='autoFocus'
             placeholder={'Where do you live?'}
             onChange={this.onFormChange} />
 
           <div className='buttons'>
             <button>Submit</button>
-            <button onClick={this.toggleEdit}>Cancel</button>
+            <button onClick={this.cancel}>Cancel</button>
           </div>
         </form>
       );
@@ -34,10 +33,12 @@ var IntroItemLocation = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.IntroListener = IntroStore.addListener(this.onStoreChange);
+    this.IntroListener = IntroStore.addListener(this.onIntroStoreChange);
+    this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
     this.IntroListener.remove();
+    this.FormListener.remove();
   },
   clickHandler: function (e) {
     e.preventDefault();
@@ -47,14 +48,20 @@ var IntroItemLocation = React.createClass({
       this.refs.autoFocus.focus();
     });
   },
-  toggleEdit: function (e) {
+  cancel: function (e) {
     e.preventDefault();
+    this.setState({
+      location: IntroStore.location()
+    }, this.toggleEdit);
+  },
+  toggleEdit: function () {
     this.setState({
       editing: !this.state.editing
     });
   },
   handleSubmit: function (e) {
     e.preventDefault();
+    this.toggleEdit();
     IntroApiUtil.setIntro({
       location: this.state.location
     });
@@ -63,8 +70,15 @@ var IntroItemLocation = React.createClass({
     e.preventDefault();
     this.setState({location: e.target.value});
   },
-  onStoreChange: function () {
+  onIntroStoreChange: function () {
     this.setState({location: IntroStore.location()});
+  },
+  onFormStoreChange: function (e) {
+    if (FormStore.isOpen('INTRO_LOCATION') && !this.state.editing) {
+      this.setState({editing: true});
+    } else if (!FormStore.isOpen('INTRO_LOCATION') && this.state.editing) {
+      this.setState({editing: false});
+    }
   }
 });
 

@@ -14,14 +14,14 @@ var IntroItemHometown = React.createClass({
     {
       return (
         <form onSubmit={this.handleSubmit}>
-          <input value={this.state.hometown}
+          <input value={this.state.hometown || ''}
             ref='autoFocus'
             placeholder={'Where are you from?'}
             onChange={this.onFormChange} />
 
           <div className='buttons'>
             <button>Submit</button>
-            <button onClick={this.toggleEdit}>Cancel</button>
+            <button onClick={this.cancel}>Cancel</button>
           </div>
         </form>
       );
@@ -34,10 +34,12 @@ var IntroItemHometown = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.IntroListener = IntroStore.addListener(this.onStoreChange);
+    this.IntroListener = IntroStore.addListener(this.onIntroStoreChange);
+    this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
     this.IntroListener.remove();
+    this.FormListener.remove();
   },
   clickHandler: function (e) {
     e.preventDefault();
@@ -47,17 +49,22 @@ var IntroItemHometown = React.createClass({
       this.refs.autoFocus.focus();
     });
   },
-  toggleEdit: function (e) {
+  cancel: function (e) {
     e.preventDefault();
+    this.setState({
+      hometown: IntroStore.hometown()
+    }, function () {
+      this.toggleEdit();
+    });
+  },
+  toggleEdit: function () {
     this.setState({
       editing: !this.state.editing
     });
   },
   handleSubmit: function (e) {
     e.preventDefault();
-    this.setState({
-      editing: false
-    });
+    this.toggleEdit();
     IntroApiUtil.setIntro({
       hometown: this.state.hometown
     });
@@ -65,8 +72,15 @@ var IntroItemHometown = React.createClass({
   onFormChange: function (e) {
     this.setState({hometown: e.target.value});
   },
-  onStoreChange: function (e) {
+  onIntroStoreChange: function (e) {
     this.setState({hometown: IntroStore.hometown()});
+  },
+  onFormStoreChange: function (e) {
+    if (FormStore.isOpen('INTRO_HOMETOWN') && !this.state.editing) {
+      this.setState({editing: true});
+    } else if (!FormStore.isOpen('INTRO_HOMETOWN') && this.state.editing) {
+      this.setState({editing: false});
+    }
   }
 });
 

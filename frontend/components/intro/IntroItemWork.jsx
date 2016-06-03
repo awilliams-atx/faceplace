@@ -23,18 +23,18 @@ var IntroItemWork = React.createClass({
       return (
         <form onSubmit={this.handleSubmit}
               onBlur={this.onBlur}>
-          <input value={this.state.position}
+          <input value={this.state.position || ''}
             placeholder='What do you do?'
             onChange={this.onPositionChange}
             ref='autoFocus' />
 
-          <input value={this.state.company}
+          <input value={this.state.company || ''}
             placeholder='Where do you work?'
             onChange={this.onCompanyChange} />
 
           <div className='buttons'>
             <button>Submit</button>
-            <button onClick={this.toggleEdit}>Cancel</button>
+            <button onClick={this.cancel}>Cancel</button>
           </div>
         </form>
       );
@@ -50,10 +50,12 @@ var IntroItemWork = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.IntroListener = IntroStore.addListener(this.onStoreChange);
+    this.IntroListener = IntroStore.addListener(this.onIntroStoreChange);
+    this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
     this.IntroListener.remove();
+    this.FormListener.remove();
   },
   clickHandler: function (e) {
     e.preventDefault();
@@ -63,11 +65,15 @@ var IntroItemWork = React.createClass({
       this.refs.autoFocus.focus();
     });
   },
-  toggleEdit: function (e) {
+  cancel: function (e) {
     e.preventDefault();
     this.setState({
-      editing: !this.state.editing
-    });
+      position: IntroStore.position(),
+      company: IntroStore.company()
+    }, this.toggleEdit);
+  },
+  toggleEdit: function () {
+    this.setState({editing: !this.state.editing});
   },
   handleSubmit: function (e) {
     e.preventDefault();
@@ -85,11 +91,18 @@ var IntroItemWork = React.createClass({
   onCompanyChange: function (e) {
     this.setState({company: e.target.value});
   },
-  onStoreChange: function (e) {
+  onIntroStoreChange: function (e) {
     this.setState({
       position: IntroStore.position(),
       company: IntroStore.company()
     });
+  },
+  onFormStoreChange: function (e) {
+    if (FormStore.isOpen('INTRO_WORK') && !this.state.editing) {
+      this.setState({editing: true});
+    } else if (!FormStore.isOpen('INTRO_WORK') && this.state.editing) {
+      this.setState({editing: false});
+    }
   }
 });
 

@@ -1,6 +1,7 @@
 var React = require('react'),
     IntroApiUtil = require('../../util/intro_api_util'),
-    IntroStore = require('../../stores/intro');
+    IntroStore = require('../../stores/intro'),
+    FormStore = require('../../stores/form');
 
 var IntroItemDescription = React.createClass({
   getInitialState: function () {
@@ -15,13 +16,17 @@ var IntroItemDescription = React.createClass({
       return (
         <div id='description-form'>
           <form onSubmit={this.handleSubmit}>
-            <textarea value={this.state.description}
+            <textarea value={this.state.description || ''}
               cols='46'
               rows='5'
               ref='autoFocus'
               placeholder='Tell everyone about yourself.'
-              onBlur={this.toggleEdit}
               onChange={this.onFormChange} />
+
+            <div className='buttons' >
+              <button>Submit</button>
+              <button onClick={this.cancel}>Cancel</button>
+            </div>
           </form>
         </div>
       );
@@ -34,24 +39,32 @@ var IntroItemDescription = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.IntroListener = IntroStore.addListener(this.onStoreChange);
+    this.IntroListener = IntroStore.addListener(this.onIntroStoreChange);
+    this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
     this.IntroListener.remove();
+    this.FormListener.remove();
   },
   clickHandler: function (e) {
     e.preventDefault();
+    this.unchangedDescription = this.state.description;
     this.setState({
       editing: true
     }, function () {
       this.refs.autoFocus.focus();
     });
   },
-  toggleEdit: function (e) {
-    e.preventDefault();
+  toggleEdit: function () {
     this.setState({
       editing: !this.state.editing
     });
+  },
+  cancel: function (e) {
+    e.preventDefault();
+    this.setState({
+      description: this.unchangedDescription
+    }, this.toggleEdit);
   },
   handleSubmit: function (e) {
     e.preventDefault();
@@ -65,8 +78,15 @@ var IntroItemDescription = React.createClass({
   onFormChange: function (e) {
     this.setState({description: e.target.value});
   },
-  onStoreChange: function (e) {
+  onIntroStoreChange: function (e) {
     this.setState({description: IntroStore.description()});
+  },
+  onFormStoreChange: function (e) {
+    if (FormStore.isOpen('INTRO_DESCRIPTION') && !this.state.editing) {
+      this.setState({editing: true});
+    } else if (!FormStore.isOpen('INTRO_DESCRIPTION') && this.state.editing) {
+      this.setState({editing: false});
+    }
   }
 });
 
