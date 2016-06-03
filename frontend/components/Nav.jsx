@@ -12,24 +12,28 @@ var Nav = React.createClass({
   },
   render: function () {
     return (
-      <nav className='main-header-nav group'>
-        <div className='nav-left group'>
-          <div id='faceplace-icon'><a href="/">
-            <i className="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
-          </a></div>
-          <Search />
-        </div>
-        <div className='nav-right group'>
-          <div id='user-icon'>{this.state.first_name}!</div>
-          <button onClick={this._logout}>Log Out</button>
-        </div>
-      </nav>
+      <header className='main-header'>
+        <nav className='main-header-nav group'>
+          <div className='nav-left group'>
+            <div id='faceplace-icon'><a href="#/main">
+              <i className="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
+            </a></div>
+            <Search />
+          </div>
+          <div className='nav-right group'>
+            <div id='user-icon'>
+              <a href='#/profile'>{this.state.first_name}!</a>
+            </div>
+            <button onClick={this._logout}>Log Out</button>
+          </div>
+        </nav>
+      </header>
     );
   },
   _logout: function (e) {
     e.preventDefault();
     SessionApiUtil.logout(function () {
-      this.context.router.push('/');
+      this.context.router.push('/login');
     }.bind(this));
   }
 });

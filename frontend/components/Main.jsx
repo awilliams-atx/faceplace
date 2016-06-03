@@ -8,9 +8,7 @@ var Main = React.createClass({
   render: function () {
     return (
       <div className='content'>
-        <header className='main-header'>
-          <Nav />
-        </header>
+        <Nav />
       </div>
     );
   }
