@@ -1,6 +1,6 @@
 var React = require('react'),
     Nav = require('./Nav'),
-    IntroIndex = require('./IntroIndex');
+    IntroIndex = require('./intro/IntroIndex');
 
 var Profile = React.createClass({
   render: function () {

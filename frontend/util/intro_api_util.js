@@ -18,6 +18,21 @@ var IntroApiUtil = {
         console.log('IntroApiUtil#fetchIntro ERROR');
       }
     });
+  },
+  setIntro: function (intro) {
+    $.ajax({
+      url: 'api/user',
+      method: 'PATCH',
+      dataType: 'json',
+      data: {intro: intro},
+      success: function (intro) {
+        console.log('IntroApiUtil#setIntro SUCCESS');
+        IntroActions.receiveIntro(intro);
+      },
+      error: function (errors) {
+        console.log('IntroApiUtil#setIntro ERROR');
+      }
+    });
   }
 };
 

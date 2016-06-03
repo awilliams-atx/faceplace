@@ -11,6 +11,52 @@
   width: 301px;
   margin: 20px 20px 20px 0;
   padding: 10px;
+  font-family: helvetica;
+  font-size: 12px;
+  line-height: 16px;
+  form {
+    display: block;
+    float: left;
+  }
+  input {
+    display: block;
+    border: 1px solid #bdc7d8;
+    border-radius: 3px;
+    padding: 4px 5px;
+    font-size: 12px;
+    width: 248px;
+    margin-bottom: 5px;
+  }
+  button {
+    display: block;
+    float: left;
+    border-radius: 3px;
+    box-shadow: 0 0 1px black;
+    margin-left: 5px;
+  }
+  textarea {
+  padding: 4px 5px;
+  border: 1px solid #bdc7d8;
+  border-radius: 3px;
+  font-size: 12px;
+  resize: none;
+  display: block;
+  margin: auto;
+  }
+  .buttons {
+    float: right;
+  }
+}
+
+.intro-line {
+  display: block;
+  height: 16px;
+  padding: 4px 0;
+  width: 295px;
+}
+
+.intro-line:first-of-type {
+  text-align: center;
 }
 
 .intro-img {
@@ -19,4 +65,10 @@
   background-size: cover;
   float: left;
   margin-right: 10px;
+}
+
+.intro-item-text {
+  display: block;
+  float: left;
+  width: 260px;
 }

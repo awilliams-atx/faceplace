@@ -14,9 +14,27 @@ class Api::UsersController < ApplicationController
     render 'api/users/show'
   end
 
+  def update
+    @user = current_user
+    current_user.update(intro_params)
+    render 'api/users/show'
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :password, :email,)
+  end
+
+  def intro_params
+    params.require(:intro)
+      .permit(:description,
+        :company,
+        :position,
+        :school,
+        :major,
+        :hometown,
+        :location
+        )
   end
 end
