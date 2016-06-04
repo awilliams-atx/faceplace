@@ -1,1 +1,1 @@
-json.array! @users, :id, :first_name, :last_name, :location
+json.array! @users, partial: 'api/users/search_result', as: :user

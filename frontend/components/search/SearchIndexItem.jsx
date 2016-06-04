@@ -1,19 +1,31 @@
 var React = require('react');
 
 var SearchIndexItem = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   render: function () {
     var user = this.props.user;
 
+    console.log("user: " + user.id + ", profilePicUrl: " + user.profilePicUrl);
     return (
-      <a href={'#/users/' + user.id}><div className='search-index-item group' id={user.id}>
-        <div className='search-icon'></div>
+      <div className='search-index-item group'
+        id={user.id}
+        onClick={this.clickHandler} >
+        <div className='search-icon'><img src={user.profilePicUrl} /></div>
         <div className='search-text'>
-          <strong>{user.first_name + ' ' + user.last_name}</strong>
+          <strong>{user.firstName + ' ' + user.lastName}</strong>
           <br/>
           <small>{user.location}</small>
         </div>
-      </div></a>
+      </div>
     );
+  },
+  clickHandler: function (e) {
+    console.log("SearchIndexItem#clickHandler");
+    e.preventDefault();
+    this.props.clickHandler();
+    this.context.router.push('/users/' + this.props.user.id);
   }
 });
 

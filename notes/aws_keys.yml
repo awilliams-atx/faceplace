@@ -1,0 +1,9 @@
+development:
+  s3_bucket: 'DEVELOPMENT-BUCKET-NAME'
+
+production:
+  s3_bucket: 'PRODUCTION-BUCKET-NAME'
+
+s3_region: 'us-east-1'
+s3_access_key_id: 'XXXX'
+s3_secret_access_key: 'XXXX'

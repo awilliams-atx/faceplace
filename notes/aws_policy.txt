@@ -1,0 +1,18 @@
+{
+  "Version": "2016-06-04",
+  "Statement": [
+    {
+      "Sid": "Stmt7549815739999",
+      "Effect": "Allow",
+      "Action": [
+          "s3:*"
+      ],
+      "Resource": [
+          "arn:aws:s3:::BUCKET-NAME-dev",
+          "arn:aws:s3:::BUCKET-NAME-dev/*",
+          "arn:aws:s3:::BUCKET-NAME-pro",
+          "arn:aws:s3:::BUCKET-NAME-pro/*"
+      ]
+    }
+  ]
+}
