@@ -1,7 +1,9 @@
 var React = require('react'),
     SessionApiUtil = require('../util/session_api_util'),
     SignUpForm = require('./SignUpForm'),
-    SearchIndex = require('./search/SearchIndex');
+    SearchIndex = require('./search/SearchIndex'),
+    SessionStore = require('../stores/session'),
+    FormActions = require('../actions/form_actions');
 
 var Nav = React.createClass({
   getInitialState: function () {
@@ -22,13 +24,18 @@ var Nav = React.createClass({
           </div>
           <div className='nav-right group'>
             <div id='user-icon'>
-              <a href='#/profile'>{this.state.first_name}!</a>
+              <a onClick={this.closeForms} href={'#/users/' + SessionStore.currentUser().id}>
+                {this.state.first_name}!
+              </a>
             </div>
             <button onClick={this._logout}>Log Out</button>
           </div>
         </nav>
       </header>
     );
+  },
+  onClick: function (e) {
+    FormActions.closeAll();
   },
   _logout: function (e) {
     e.preventDefault();

@@ -8,7 +8,7 @@ var Profile = React.createClass({
   render: function () {
     IntroApiUtil.fetchIntro(this.props.params.userId);
     var userIsProfileOwner =
-      SessionStore.currentUser().id === this.props.params.userId;
+      SessionStore.currentUser().id === parseInt(this.props.params.userId);
 
     return (
       <div className='content'>
