@@ -32,7 +32,7 @@ var IntroItemDescription = React.createClass({
       );
     } else {
       return (
-        <div className='intro-item-text-empty' onClick={this.clickHandler}>
+        <div className='intro-item-text-empty' onClick={this.showEdit}>
           {this.state.description ? this.state.description : 'Tell everyone about yourself.'}
         </div>
       );
@@ -46,8 +46,9 @@ var IntroItemDescription = React.createClass({
     this.IntroListener.remove();
     this.FormListener.remove();
   },
-  clickHandler: function (e) {
+  showEdit: function (e) {
     e.preventDefault();
+    if (!this.props.currentUserIsProfileOwner) { return; }
     this.unchangedDescription = this.state.description;
     this.setState({
       editing: true
