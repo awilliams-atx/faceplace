@@ -15,7 +15,8 @@ var IntroIndex = React.createClass({
         <h2>Intro</h2>
 
         <div className='intro-line'>
-          <IntroItemDescription itemType='description' />
+          <IntroItemDescription itemType='description'
+            currentUserIsProfileOwner={this.props.userIsProfileOwner} />
         </div>
 
         <hr />
@@ -24,19 +25,34 @@ var IntroIndex = React.createClass({
           <tbody>
             <tr>
               <td className='intro-img' id='intro-work-img'></td>
-              <td><IntroItemWork /></td>
+              <td>
+                <IntroItemWork
+                  currentUserIsProfileOwner={this.props.userIsProfileOwner} />
+              </td>
             </tr>
+
             <tr>
               <td className='intro-img' id='intro-school-img'></td>
-              <td><IntroItemSchool /></td>
+              <td>
+                <IntroItemSchool
+                  currentUserIsProfileOwner={this.props.userIsProfileOwner} />
+              </td>
             </tr>
+
             <tr>
               <td className='intro-img' id='intro-location-img'></td>
-              <td><IntroItemLocation /></td>
+              <td>
+                <IntroItemLocation
+                  currentUserIsProfileOwner={this.props.userIsProfileOwner} />
+              </td>
             </tr>
+
             <tr>
               <td className='intro-img' id='intro-hometown-img'></td>
-              <td><IntroItemHometown /></td>
+              <td>
+                <IntroItemHometown
+                  currentUserIsProfileOwner={this.props.userIsProfileOwner} />
+              </td>
             </tr>
           </tbody>
         </table>

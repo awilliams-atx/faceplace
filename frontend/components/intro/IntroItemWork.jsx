@@ -59,6 +59,7 @@ var IntroItemWork = React.createClass({
   },
   clickHandler: function (e) {
     e.preventDefault();
+    if (!this.props.currentUserIsProfileOwner) { return; }
     this.setState({
       editing: true
     }, function () {
