@@ -50,4 +50,5 @@ end
 group :production do
   gem 'rails_12factor'
   gem 'font-awesome-sass', '~> 4.6.2'
+  gem 'paperclip', '5.0.0.beta1'
 end
