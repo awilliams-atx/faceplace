@@ -66,11 +66,11 @@ var IntroItemSchool = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      school: this.IntroStore.school(),
-      major: this.IntroStore.major()
+      school: IntroStore.school(),
+      major: IntroStore.major()
     }, function () {
-      this.toggleEdit();
-    });
+    this.toggleEdit();
+  });
   },
   toggleEdit: function () {
     this.setState({
