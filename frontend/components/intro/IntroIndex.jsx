@@ -44,9 +44,6 @@ var IntroIndex = React.createClass({
 
     );
   },
-  componentDidMount: function () {
-    IntroApiUtil.fetchIntro();
-  },
   _onChange: function () {
     var emptyState = {
       position: '',

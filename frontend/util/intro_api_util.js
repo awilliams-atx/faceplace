@@ -6,7 +6,7 @@ var IntroApiUtil = {
   fetchIntro: function (id) {
     console.log('IntroApiUtil#fetchIntro');
     $.ajax({
-      url: 'api/users/' + SessionStore.currentUser().id,
+      url: 'api/users/' + id,
       method: 'GET',
       dataType: 'json',
       data: id,

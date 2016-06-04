@@ -1,7 +1,7 @@
 var React = require('react'),
     SessionApiUtil = require('../util/session_api_util'),
     SignUpForm = require('./SignUpForm'),
-    Search = require('./Search');
+    SearchIndex = require('./search/SearchIndex');
 
 var Nav = React.createClass({
   getInitialState: function () {
@@ -18,7 +18,7 @@ var Nav = React.createClass({
             <div id='faceplace-icon'><a href="#/main">
               <i className="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
             </a></div>
-            <Search />
+          <SearchIndex />
           </div>
           <div className='nav-right group'>
             <div id='user-icon'>
