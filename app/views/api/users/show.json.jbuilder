@@ -1,10 +1,9 @@
-json.extract! @user,
-:first_name,
-:last_name,
-:description,
-:company,
-:position,
-:location,
-:hometown,
-:school,
-:major
+json.firstName @user.first_name
+json.lastName @user.last_name
+json.description @user.description
+json.company @user.company
+json.positoin @user.position
+json.location @user.location
+json.hometown @user.hometown
+json.school @user.school
+json.major @user.major
