@@ -28,14 +28,17 @@
   height: 315px;
 }
 
-.add-friend-container {
+.friendship-button-container {
+  font-family: helvetica;
+  font-size: 12px;
+  font-weight: bold;
+  color: #4b4f56;
+
   position: absolute;
   right: 16px;
   bottom: 16px;
-  font-family: helvetica;
-  font-size: 12px;
   line-height: 15px;
-  font-weight: bold;
+
   overflow: hidden;
   img {
     display: block;
@@ -45,15 +48,29 @@
   button {
     background-color: #F6F7F9;
     height: 28px;
+    border: 1px solid #CED0D4;
+    border-radius: 3px;
+    margin-left: 5px;
   }
   button:hover {
     background-color: #e9ebee;
     cursor: pointer;
   }
-  color: #4b4f56;
-  border: 1px solid black;
-  border-radius: 3px;
-  strong::before {
-    content: url(https://s3.amazonaws.com/faceplace-dev/assets/add_friend_icon.png);
+  .accept-button {
+    color: white;
+    background-color: #4267b2;
+    border: none;
+  }
+  .accept-button:hover {
+    background-color: #365899;
+  }
+  .request-sent-button {
+    background-color: #e9ebee;
+  }
+  .request-sent-button:hover {
+    cursor: default;
+  }
+  .cancel-button {
+
   }
 }

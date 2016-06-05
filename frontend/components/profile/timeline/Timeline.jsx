@@ -9,13 +9,13 @@ var React = require('react'),
         return({profileFetched: false});
       },
       render: function () {
-        console.log('Timeline#render');
+        var userId = parseInt(this.props.params.userId);
 
         var timelineContent;
         var authorizedToEdit =
-          parseInt(this.props.params.userId) === SessionStore.currentUser().id;
-        
-        if (ProfileStore.profileIsFetched()) {
+          userId === SessionStore.currentUser().id;
+
+        if (ProfileStore.profileIsFetched(userId)) {
           timelineContent = (
               <aside>
                 <IntroIndex userId={this.props.params.userId}

@@ -5,7 +5,6 @@ var SessionActions = require('../actions/session_actions'),
 
 var UserApiUtil = {
   signUp: function (user, redirectCB) {
-    console.log('UserApiUtil#signUp');
     $.ajax({
       url: 'api/user',
       method: 'POST',
@@ -27,11 +26,9 @@ var UserApiUtil = {
       method: 'GET',
       dataType: 'json',
       success: function (users) {
-        console.log('UserApiUtil#fetchUsers SUCCESS');
         ServerActions.receiveUsers(users);
       },
       error: function (errors) {
-        console.log('UserApiUtil#fetchUsers ERROR');
       }
     });
   },
@@ -41,11 +38,9 @@ var UserApiUtil = {
       method: 'GET',
       dataType: 'json',
       success: function (user) {
-        console.log('UserApiUtil#fetchUser SUCCESS');
         ServerActions.receiveUser(user);
       },
       error: function (errors) {
-        console.log('UserApiUtil#fetchUser ERROR');
       }
     });
   }

@@ -19,10 +19,24 @@ class User < ActiveRecord::Base
     #   WHERE lady_id = :id OR gentleman_id = :id
     # SQL
 
-    Friending
+    Friendship
       .select(:id)
       .where("lady_id = :id OR gentleman_id = :id", {id: current_user_id})
   end
+
+  def friends_with?(id)
+    Friendship.exists?(user_id: self.id, friend_id: id)
+  end
+
+  def has_pending_request_for?(id)
+    FriendRequest.exists?(maker_id: self.id, receiver_id: id)
+  end
+
+  def has_pending_request_from?(id)
+    FriendRequest.exists?(maker_id: id, receiver_id: self.id)
+  end
+
+  # -------------------------AUTHENTICATION---------------------------- #
 
   def self.find_by_credentials(params)
     user = User.find_by(email: params[:email])

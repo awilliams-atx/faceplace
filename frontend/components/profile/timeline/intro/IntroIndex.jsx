@@ -8,7 +8,6 @@ var React = require('react'),
 
 var IntroIndex = React.createClass({
   render: function () {
-    console.log('IntroIndex#render');
     return (
       <div id='intro-index'>
         <img src={window.intro_icon} className='icon'/>

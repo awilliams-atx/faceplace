@@ -32,13 +32,6 @@ var Profile = React.createClass({
 
     return (profile);
   },
-  componentDidMount: function () {
-    this.UserListener = UserStore.addListener(this.onUserStoreChange);
-    ClientActions.fetchUser(this.props.params.userId);
-  },
-  componentWillUnmount: function () {
-    this.UserListener.remove();
-  },
    componentWillReceiveProps: function (newProps) {
      ClientActions.fetchUser(newProps.params.userId);
    },

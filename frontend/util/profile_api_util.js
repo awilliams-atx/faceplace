@@ -4,18 +4,15 @@ var SessionActions = require('../actions/session_actions'),
 
 var ProfileApiUtil = {
   fetchProfile: function (id) {
-    console.log('ProfileApiUtil#fetchProfile');
     $.ajax({
       url: 'api/users/' + id,
       method: 'GET',
       dataType: 'json',
       data: id,
       success: function (profile) {
-        console.log('ProfileApiUtil#fetchProfile SUCCESS');
         ProfileActions.receiveProfile(profile);
       },
       error: function (errors) {
-        console.log('ProfileApiUtil#fetchProfile ERROR');
       }
     });
   },
@@ -26,12 +23,10 @@ var ProfileApiUtil = {
       dataType: 'json',
       data: {profile: profile},
       success: function (profile) {
-        console.log('ProfileApiUtil#setProfile SUCCESS');
         ProfileActions.receiveProfile(profile);
         if (cb) { cb(); }
       },
       error: function (errors) {
-        console.log('ProfileApiUtil#setProfile ERROR');
       }
     });
   }

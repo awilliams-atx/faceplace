@@ -20,7 +20,6 @@ function _logout() {
 SessionStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case sessionConstants.RECEIVE_CURRENT_USER:
-      console.log('SessionStore, RECEIVE_CURRENT_USER');
       _login(payload.user);
       SessionStore.__emitChange();
       break;
