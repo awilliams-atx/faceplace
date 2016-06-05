@@ -7,7 +7,6 @@ var SearchIndexItem = React.createClass({
   render: function () {
     var user = this.props.user;
 
-    console.log("user: " + user.id + ", profilePicUrl: " + user.profilePicUrl);
     return (
       <div className='search-index-item group'
         id={user.id}
@@ -22,7 +21,6 @@ var SearchIndexItem = React.createClass({
     );
   },
   clickHandler: function (e) {
-    console.log("SearchIndexItem#clickHandler");
     e.preventDefault();
     this.props.clickHandler();
     this.context.router.push('/users/' + this.props.user.id);

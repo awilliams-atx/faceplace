@@ -1,12 +1,12 @@
 var React = require('react'),
-    IntroApiUtil = require('../../util/intro_api_util'),
-    IntroStore = require('../../stores/intro');
+    ProfileApiUtil = require('../../../../util/profile_api_util'),
+    ProfileStore = require('../../../../stores/profile');
 
 var IntroItemLocation = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      location: IntroStore.location()
+      location: ProfileStore.location()
     });
   },
   render: function () {
@@ -26,23 +26,23 @@ var IntroItemLocation = React.createClass({
       );
     } else {
       return (
-        <div className='intro-item-text' onClick={this.clickHandler}>
+        <div className='intro-item-text' onClick={this.showEdit}>
           {this.state.location ? this.state.location : 'Where do you live?'}
         </div>
       );
     }
   },
   componentDidMount: function () {
-    this.IntroListener = IntroStore.addListener(this.onIntroStoreChange);
+    this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
     this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
-    this.IntroListener.remove();
+    this.ProfileListener.remove();
     this.FormListener.remove();
   },
-  clickHandler: function (e) {
+  showEdit: function (e) {
     e.preventDefault();
-    if (!this.props.currentUserIsProfileOwner) { return; }
+    if (!this.props.authorizedToEdit) { return; }
     this.setState({
       editing: true
     }, function () {
@@ -52,7 +52,7 @@ var IntroItemLocation = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      location: IntroStore.location()
+      location: ProfileStore.location()
     }, this.toggleEdit);
   },
   toggleEdit: function () {
@@ -63,7 +63,7 @@ var IntroItemLocation = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    IntroApiUtil.setIntro({
+    ProfileApiUtil.setProfile({
       location: this.state.location
     });
   },
@@ -71,8 +71,8 @@ var IntroItemLocation = React.createClass({
     e.preventDefault();
     this.setState({location: e.target.value});
   },
-  onIntroStoreChange: function () {
-    this.setState({location: IntroStore.location()});
+  onProfileStoreChange: function () {
+    this.setState({location: ProfileStore.location()});
   },
   onFormStoreChange: function (e) {
     if (FormStore.isOpen('INTRO_LOCATION') && !this.state.editing) {

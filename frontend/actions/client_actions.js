@@ -4,6 +4,9 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 var ClientActions = {
   fetchUsers: function () {
     UserApiUtil.fetchUsers();
+  },
+  fetchUser: function (id) {
+    UserApiUtil.fetchUser(id);
   }
 };
 

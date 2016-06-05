@@ -16,7 +16,6 @@ var LogInForm = React.createClass({
     if (this.state.email === "" && this.state.password === "") {
       logInButton = <button onClick={this._guestLogin}>Guest</button>;
     }
-    console.log("LogInForm#render");
     return (
       <div className='content'>
         <header className='welcome-header'>
@@ -65,7 +64,6 @@ var LogInForm = React.createClass({
   },
   _handleSubmit: function (e, options) {
     var credentials = {};
-    console.log('LogInForm#_handleSubmit');
     e.preventDefault();
 
     if (options) {
@@ -78,7 +76,6 @@ var LogInForm = React.createClass({
     SessionApiUtil.login(credentials, this._redirectToMain);
   },
   _guestLogin: function (e) {
-    console.log('LogInForm#_guestLogin');
     var credentials = {};
     credentials.email = "thedude@lebowskimail.com";
     credentials.password = "starwars";

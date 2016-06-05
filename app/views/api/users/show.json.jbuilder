@@ -2,8 +2,9 @@ json.firstName @user.first_name
 json.lastName @user.last_name
 json.description @user.description
 json.company @user.company
-json.positoin @user.position
+json.position @user.position
 json.location @user.location
 json.hometown @user.hometown
 json.school @user.school
 json.major @user.major
+json.coverPhotoUrl asset_path(@user.cover_photo.url(:cover))

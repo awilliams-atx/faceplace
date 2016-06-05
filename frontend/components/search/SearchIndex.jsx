@@ -23,9 +23,6 @@ var SearchIndex = React.createClass({
         return name.match(this.state.searchString.toLowerCase());
       }.bind(this));
 
-      console.log('searchString: ' + this.state.searchString);
-      console.log('filteredUsers: ' + filteredUsers);
-
       searchIndexItems = filteredUsers.map(function (user) {
           return <SearchIndexItem
             user={user}
@@ -69,7 +66,6 @@ var SearchIndex = React.createClass({
   },
   showIndexItems: function (e) {
     if (this.state.searching) { return; }
-    console.log("SearchIndex#showIndexItems");
     if (!this.state.areUsersFetched) {
       ClientActions.fetchUsers();
     }
@@ -90,7 +86,6 @@ var SearchIndex = React.createClass({
     });
   },
   hideIndexItems: function (e) {
-    console.log("SearchIndex#hideIndexItems");
     document.getElementsByTagName('body')[0]
       .removeEventListener('click', this.clickListener);
     this.setState({searching: false});

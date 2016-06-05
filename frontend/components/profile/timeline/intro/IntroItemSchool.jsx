@@ -1,13 +1,13 @@
 var React = require('react'),
-    IntroApiUtil = require('../../util/intro_api_util'),
-    IntroStore = require('../../stores/intro');
+    ProfileApiUtil = require('../../../../util/profile_api_util'),
+    ProfileStore = require('../../../../stores/profile');
 
 var IntroItemSchool = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      major: IntroStore.major(),
-      school: IntroStore.school()
+      major: ProfileStore.major(),
+      school: ProfileStore.school()
     });
   },
   render: function () {
@@ -41,23 +41,23 @@ var IntroItemSchool = React.createClass({
       );
     } else {
       return (
-        <div className='intro-item-text' onClick={this.clickHandler}>
+        <div className='intro-item-text' onClick={this.showEdit}>
           {studyString}
         </div>
       );
     }
   },
   componentDidMount: function () {
-    this.IntroListener = IntroStore.addListener(this.onIntroStoreChange);
+    this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
     this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
-    this.IntroListener.remove();
+    this.ProfileListener.remove();
     this.FormListener.remove();
   },
-  clickHandler: function (e) {
+  showEdit: function (e) {
     e.preventDefault();
-    if (!this.props.currentUserIsProfileOwner) { return; }
+    if (!this.props.authorizedToEdit) { return; }
     this.setState({
       editing: true
     }, function () {
@@ -67,8 +67,8 @@ var IntroItemSchool = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      school: IntroStore.school(),
-      major: IntroStore.major()
+      school: ProfileStore.school(),
+      major: ProfileStore.major()
     }, function () {
     this.toggleEdit();
   });
@@ -81,7 +81,7 @@ var IntroItemSchool = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    IntroApiUtil.setIntro({
+    ProfileApiUtil.setProfile({
       major: this.state.major,
       school: this.state.school
     });
@@ -92,10 +92,10 @@ var IntroItemSchool = React.createClass({
   onMajorChange: function (e) {
     this.setState({major: e.target.value});
   },
-  onIntroStoreChange: function (e) {
+  onProfileStoreChange: function (e) {
     this.setState({
-      school: IntroStore.school(),
-      major: IntroStore.major()
+      school: ProfileStore.school(),
+      major: ProfileStore.major()
     });
   },
   onFormStoreChange: function (e) {

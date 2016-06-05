@@ -1,12 +1,12 @@
 var React = require('react'),
-    IntroApiUtil = require('../../util/intro_api_util'),
-    IntroStore = require('../../stores/intro');
+    ProfileApiUtil = require('../../../../util/profile_api_util'),
+    ProfileStore = require('../../../../stores/profile');
 
 var IntroItemHometown = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      hometown: IntroStore.hometown()
+      hometown: ProfileStore.hometown()
     });
   },
   render: function () {
@@ -27,23 +27,23 @@ var IntroItemHometown = React.createClass({
       );
     } else {
       return (
-        <div className='intro-item-text' onClick={this.clickHandler}>
+        <div className='intro-item-text' onClick={this.showEdit}>
           {this.state.hometown ? this.state.hometown : 'Where are you from?'}
         </div>
       );
     }
   },
   componentDidMount: function () {
-    this.IntroListener = IntroStore.addListener(this.onIntroStoreChange);
+    this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
     this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
-    this.IntroListener.remove();
+    this.ProfileListener.remove();
     this.FormListener.remove();
   },
-  clickHandler: function (e) {
+  showEdit: function (e) {
     e.preventDefault();
-    if (!this.props.currentUserIsProfileOwner) { return; }
+    if (!this.props.authorizedToEdit) { return; }
     this.setState({
       editing: true
     }, function () {
@@ -53,7 +53,7 @@ var IntroItemHometown = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      hometown: IntroStore.hometown()
+      hometown: ProfileStore.hometown()
     }, function () {
       this.toggleEdit();
     });
@@ -66,15 +66,15 @@ var IntroItemHometown = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    IntroApiUtil.setIntro({
+    ProfileApiUtil.setProfile({
       hometown: this.state.hometown
     });
   },
   onFormChange: function (e) {
     this.setState({hometown: e.target.value});
   },
-  onIntroStoreChange: function (e) {
-    this.setState({hometown: IntroStore.hometown()});
+  onProfileStoreChange: function (e) {
+    this.setState({hometown: ProfileStore.hometown()});
   },
   onFormStoreChange: function (e) {
     if (FormStore.isOpen('INTRO_HOMETOWN') && !this.state.editing) {

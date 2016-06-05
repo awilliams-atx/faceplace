@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   has_attached_file :profile_pic, styles: { search_result: '36x36#' }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
+  has_attached_file :cover_photo, styles: { cover: '851x315#' }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :cover_photo, content_type: /\Aimage\/.*\Z/
+
   after_initialize :ensure_session_token
   attr_reader :password
 
