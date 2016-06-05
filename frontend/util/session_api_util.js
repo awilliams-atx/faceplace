@@ -10,25 +10,21 @@ SessionApiUtil = {
       dataType: 'json',
       data: {user: credentials},
       success: function (user) {
-        console.log("SessionApiUtil#login SUCCESS");
         SessionActions.receiveCurrentUser(user);
         cb();
       },
       error: function (errors) {
-        console.log("SessionApiUtil#login ERROR");
         ErrorActions.clearErrors();
         ErrorActions.setErrors(errors.responseJSON);
       }
     });
   },
   logout: function (cb) {
-    console.log("SessionApiUtil#logout");
     $.ajax({
       url: 'api/session',
       method: 'DELETE',
       dataType: 'json',
       success: function () {
-        console.log('SessionApiUtil#logout SUCCESS');
         SessionActions.removeCurrentUser();
         cb();
       },
@@ -39,17 +35,14 @@ SessionApiUtil = {
     });
   },
   fetchCurrentUser: function (cb) {
-    console.log('SessionApiUtil#fetchCurrentUser');
     $.ajax({
       url: 'api/session',
       method: 'GET',
       dataType: 'json',
       success: function (user) {
-        console.log('SessionApiUtil#fetchCurrentUser SUCCESS');
         SessionActions.receiveCurrentUser(user);
       },
       error: function (errors) {
-        console.log('SessionApiUtil#fetchCurrentUser ERROR');
       },
       complete: function () {
         cb();

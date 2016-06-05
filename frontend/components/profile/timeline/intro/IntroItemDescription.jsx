@@ -7,7 +7,7 @@ var IntroItemDescription = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      decription: ProfileStore.description()
+      description: ProfileStore.description()
     });
   },
   render: function () {

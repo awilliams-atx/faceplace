@@ -9,12 +9,10 @@ var UserStore = new Store(AppDispatcher);
 UserStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case userConstants.USERS_RECEIVED:
-    console.log('UserStore, USERS_RECEIVED');
       _users = payload.users;
       UserStore.__emitChange();
       break;
     case userConstants.USER_RECEIVED:
-      console.log('UserStore, USER_RECEIVED');
       _users[payload.user.id] = payload.user;
       UserStore.__emitChange();
       break;
