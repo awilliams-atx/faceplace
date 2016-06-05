@@ -11,9 +11,9 @@ var Profile = React.createClass({
     return({user: UserStore.find(this.props.params.userId)});
   },
   render: function () {
-    console.log("Profile#render");
-    var authorizedToEdit =
-      parseInt(this.props.params.userId) === SessionStore.currentUser().id;
+    var userId = parseInt(this.props.params.userId);
+
+    var authorizedToEdit = userId === SessionStore.currentUser().id;
 
     var user = this.state.user;
     var coverPhotoUrl = user ? user.coverPhotoUrl : null;
@@ -23,7 +23,8 @@ var Profile = React.createClass({
         <Nav />
         <div className='sub-content'>
           <CoverPhoto imageUrl={coverPhotoUrl}
-            authorizedToEdit={authorizedToEdit} />
+            authorizedToEdit={authorizedToEdit}
+            userId={userId} />
           {this.props.children}
         </div>
       </div>

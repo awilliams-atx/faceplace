@@ -2,7 +2,8 @@ var React = require('react'),
     SearchIndex = require('./SearchIndex'),
     ClientActions = require('../../actions/client_actions'),
     UserStore = require('../../stores/user'),
-    SearchIndexItem = require('./SearchIndexItem');
+    SearchIndexItem = require('./SearchIndexItem'),
+    SessionStore = require('../../stores/session');
 
 var SearchIndex = React.createClass({
   getInitialState: function () {
@@ -13,6 +14,7 @@ var SearchIndex = React.createClass({
     });
   },
   render: function () {
+    var currentUserId = SessionStore.currentUser().id;
     var searchIndexItems;
 
     if (this.state.searching) {
@@ -24,6 +26,7 @@ var SearchIndex = React.createClass({
       }.bind(this));
 
       searchIndexItems = filteredUsers.map(function (user) {
+        if (user.id === currentUserId) { return; }
           return <SearchIndexItem
             user={user}
             key={user.id}

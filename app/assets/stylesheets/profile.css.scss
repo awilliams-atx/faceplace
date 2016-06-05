@@ -23,6 +23,37 @@
 }
 
 .cover-photo-container {
+  position: relative;
   width: 851px;
   height: 315px;
+}
+
+.add-friend-container {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  font-family: helvetica;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: bold;
+  overflow: hidden;
+  img {
+    display: block;
+    margin-right: 5px;
+    float: left;
+  }
+  button {
+    background-color: #F6F7F9;
+    height: 28px;
+  }
+  button:hover {
+    background-color: #e9ebee;
+    cursor: pointer;
+  }
+  color: #4b4f56;
+  border: 1px solid black;
+  border-radius: 3px;
+  strong::before {
+    content: url(https://s3.amazonaws.com/faceplace-dev/assets/add_friend_icon.png);
+  }
 }
