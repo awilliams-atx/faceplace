@@ -4,6 +4,7 @@ var Store = require('flux/utils').Store,
 
 var _currentUser = {};
 var _currentUserHasBeenFetched = false;
+var _authorizedToEdit = false;
 
 var SessionStore = new Store(AppDispatcher);
 
@@ -40,6 +41,10 @@ SessionStore.currentUserHasBeenFetched = function () {
 
 SessionStore.isUserLoggedIn = function () {
   return !!_currentUser.id;
+};
+
+SessionStore.authorizedToEdit = function () {
+  return _authorizedToEdit;
 };
 
 window.SessionStore = SessionStore;

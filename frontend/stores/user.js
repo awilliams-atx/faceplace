@@ -13,7 +13,7 @@ UserStore.__onDispatch = function (payload) {
       _users = payload.users;
       UserStore.__emitChange();
       break;
-    case userConstants.USER_RECIEVED:
+    case userConstants.USER_RECEIVED:
       console.log('UserStore, USER_RECEIVED');
       _users[payload.user.id] = payload.user;
       UserStore.__emitChange();
@@ -27,7 +27,9 @@ UserStore.all = function () {
   });
 };
 
-
+UserStore.find = function (id) {
+  return _users[id];
+};
 
 window.UserStore = UserStore;
 module.exports = UserStore;

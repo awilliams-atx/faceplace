@@ -20,7 +20,7 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = current_user
-    @user.update(intro_params)
+    @user.update(profile_params)
     render 'api/users/show'
   end
 
@@ -30,8 +30,8 @@ class Api::UsersController < ApplicationController
     params.require(:user).permit(:first_name, :last_name, :password, :email,)
   end
 
-  def intro_params
-    params.require(:intro)
+  def profile_params
+    params.require(:profile)
       .permit(:description,
         :company,
         :position,

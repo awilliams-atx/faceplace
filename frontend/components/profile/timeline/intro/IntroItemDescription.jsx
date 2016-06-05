@@ -1,13 +1,13 @@
 var React = require('react'),
-    IntroApiUtil = require('../../util/intro_api_util'),
-    IntroStore = require('../../stores/intro'),
-    FormStore = require('../../stores/form');
+    ProfileApiUtil = require('../../../../util/profile_api_util'),
+    ProfileStore = require('../../../../stores/profile'),
+    FormStore = require('../../../../stores/form');
 
 var IntroItemDescription = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      decription: IntroStore.description()
+      decription: ProfileStore.description()
     });
   },
   render: function () {
@@ -39,16 +39,16 @@ var IntroItemDescription = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.IntroListener = IntroStore.addListener(this.onIntroStoreChange);
+    this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
     this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
-    this.IntroListener.remove();
+    this.ProfileListener.remove();
     this.FormListener.remove();
   },
   showEdit: function (e) {
     e.preventDefault();
-    if (!this.props.currentUserIsProfileOwner) { return; }
+    if (!this.props.authorizedToEdit) { return; }
     this.unchangedDescription = this.state.description;
     this.setState({
       editing: true
@@ -64,23 +64,21 @@ var IntroItemDescription = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      description: this.unchangedDescription
+      description: ProfileStore.description()
     }, this.toggleEdit);
   },
   handleSubmit: function (e) {
     e.preventDefault();
-    this.setState({
-      editing: false
-    });
-    IntroApiUtil.setIntro({
+    this.toggleEdit();
+    ProfileApiUtil.setProfile({
       description: this.state.description
     });
   },
   onFormChange: function (e) {
     this.setState({description: e.target.value});
   },
-  onIntroStoreChange: function (e) {
-    this.setState({description: IntroStore.description()});
+  onProfileStoreChange: function (e) {
+    this.setState({description: ProfileStore.description()});
   },
   onFormStoreChange: function (e) {
     if (FormStore.isOpen('INTRO_DESCRIPTION') && !this.state.editing) {

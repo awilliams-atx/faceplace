@@ -1,13 +1,13 @@
 var React = require('react'),
-    IntroApiUtil = require('../../util/intro_api_util'),
-    IntroStore = require('../../stores/intro');
+    ProfileApiUtil = require('../../../../util/profile_api_util'),
+    ProfileStore = require('../../../../stores/profile');
 
 var IntroItemWork = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      company: IntroStore.company(),
-      position: IntroStore.position()
+      company: ProfileStore.company(),
+      position: ProfileStore.position()
     });
   },
   render: function () {
@@ -40,7 +40,7 @@ var IntroItemWork = React.createClass({
       );
     } else {
       return (
-        <div className='intro-item-text' onClick={this.clickHandler}>
+        <div className='intro-item-text' onClick={this.showEdit}>
           <div>
             {workString}
           </div>
@@ -50,16 +50,16 @@ var IntroItemWork = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.IntroListener = IntroStore.addListener(this.onIntroStoreChange);
+    this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
     this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
-    this.IntroListener.remove();
+    this.ProfileListener.remove();
     this.FormListener.remove();
   },
-  clickHandler: function (e) {
+  showEdit: function (e) {
     e.preventDefault();
-    if (!this.props.currentUserIsProfileOwner) { return; }
+    if (!this.props.authorizedToEdit) { return; }
     this.setState({
       editing: true
     }, function () {
@@ -69,8 +69,8 @@ var IntroItemWork = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      position: IntroStore.position(),
-      company: IntroStore.company()
+      position: ProfileStore.position(),
+      company: ProfileStore.company()
     }, this.toggleEdit);
   },
   toggleEdit: function () {
@@ -81,7 +81,7 @@ var IntroItemWork = React.createClass({
     this.setState({
       editing: false
     });
-    IntroApiUtil.setIntro({
+    ProfileApiUtil.setProfile({
       company: this.state.company,
       position: this.state.position
     });
@@ -92,10 +92,10 @@ var IntroItemWork = React.createClass({
   onCompanyChange: function (e) {
     this.setState({company: e.target.value});
   },
-  onIntroStoreChange: function (e) {
+  onProfileStoreChange: function (e) {
     this.setState({
-      position: IntroStore.position(),
-      company: IntroStore.company()
+      position: ProfileStore.position(),
+      company: ProfileStore.company()
     });
   },
   onFormStoreChange: function (e) {

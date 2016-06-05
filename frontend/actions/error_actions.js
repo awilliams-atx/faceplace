@@ -3,7 +3,6 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 
 var ErrorActions = {
   setErrors: function (errors) {
-    console.log('ErrorActions#setErrors, actionType: ' + errorConstants.ERRORS_RECEIVED);
     Dispatcher.dispatch({
       actionType: errorConstants.ERRORS_RECEIVED,
       errors: errors

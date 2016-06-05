@@ -9,7 +9,8 @@ var Router = ReactRouter.Router,
 
     LogInForm = require('./components/LogInForm'),
     Main = require('./components/Main'),
-    Profile = require('./components/Profile'),
+    Profile = require('./components/profile/Profile'),
+    Timeline = require('./components/profile/timeline/Timeline'),
 
     SessionStore = require('./stores/session'),
     SessionApiUtil = require('./util/session_api_util');
@@ -29,7 +30,10 @@ var routes = (
     <IndexRoute component={ Main } onEnter={ _ensureLoggedIn } />
     <Route path='login' component={ LogInForm } onEnter={ _ensureNotLoggedIn }/>
     <Route path='main' component={ Main } onEnter={ _ensureLoggedIn } />
-    <Route path='users/:userId' component={ Profile } onEnter={ _ensureLoggedIn } />
+    <Route path='users/:userId' component={ Profile } onEnter={ _ensureLoggedIn } >
+      <IndexRoute component= { Timeline } />
+      <Route path='timeline' component= { Timeline } />
+    </Route>
   </Route>
 );
 
