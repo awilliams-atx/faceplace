@@ -9,7 +9,7 @@ var React = require('react'),
 var IntroIndex = React.createClass({
   render: function () {
     return (
-      <div id='intro-index'>
+      <section id='intro-index' className='profile-aside-item'>
         <img src={window.intro_icon} className='icon'/>
         <h2>Intro</h2>
 
@@ -55,7 +55,7 @@ var IntroIndex = React.createClass({
             </tr>
           </tbody>
         </table>
-      </div>
+      </section>
 
     );
   }

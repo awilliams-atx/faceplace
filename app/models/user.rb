@@ -2,27 +2,31 @@ class User < ActiveRecord::Base
   validates :email, :session_token, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  has_attached_file :profile_pic, styles: { search_result: '36x36#' }, default_url: "/images/:style/missing.png"
+  has_attached_file :profile_pic, styles:
+    { search_result: '36x36#', notifications: '48x48#', thumb: '100x100#' },
+    default_url: "/images/:style/missing.png"
   validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
   has_attached_file :cover_photo, styles: { cover: '851x315#' }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :cover_photo, content_type: /\Aimage\/.*\Z/
 
+  has_many :posts
+
+  has_many :friendships
+
+  has_many :friends,
+    class_name: "User",
+    through: :friendships,
+    source: :friend
+
   after_initialize :ensure_session_token
   attr_reader :password
 
-  def friends
-    current_user_id = self.id
-    # User.find_by_sql([<<-SQL, {id: current_user_id}])
-    #   SELECT id
-    #   FROM friendings
-    #   WHERE lady_id = :id OR gentleman_id = :id
-    # SQL
-
-    Friendship
-      .select(:id)
-      .where("lady_id = :id OR gentleman_id = :id", {id: current_user_id})
-  end
+  # def friends
+  #   Friendship
+  #     .select(:id)
+  #     .where("lady_id = :id OR gentleman_id = :id", {id: current_user_id})
+  # end
 
   def friends_with?(id)
     Friendship.exists?(user_id: self.id, friend_id: id)

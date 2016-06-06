@@ -2,8 +2,23 @@
   height: 42px;
 }
 
+.main-header-nav {
+  width: 980px;
+  height: 100%;
+  margin: auto;
+}
+
 #faceplace-icon {
   float: left;
+}
+
+.fa-facebook-official {
+  color: white;
+  display: block;
+  float: left;
+  height: 60px;
+  margin-top: 6px;
+  margin-right: 7px;
 }
 
 .nav-left {
@@ -18,13 +33,6 @@
   font-family: tahoma;
   font-weight: bold;
   font-size: 12px;
-  div {
-    cursor: pointer;
-    line-height: 27px;
-    height: 27px;
-    margin-top: 8px;
-    float: left;
-  }
   button {
     cursor: pointer;
     background-color: #5a74a8;
@@ -38,17 +46,47 @@
   }
 }
 
-.fa-facebook-official {
-  color: white;
-  display: block;
+.nav-right > div {
+  cursor: pointer;
+  line-height: 27px;
+  height: 27px;
+  margin: 8px 7px 0 7px;
   float: left;
-  height: 60px;
-  margin-top: 6px;
-  margin-right: 7px;
 }
 
-.main-header-nav {
-  width: 980px;
-  height: 100%;
-  margin: auto;
+.nav-friends { background-image: url(nav_friends_inactive.png); }
+.nav-messages { background-image: url(nav_messages_inactive.png); }
+.nav-notifications { background-image: url(nav_notifications_inactive.png); }
+.nav-friends:hover { background-image: url(nav_friends_hover.png); }
+.nav-messages:hover { background-image: url(nav_messages_hover.png); }
+.nav-notifications:hover { background-image: url(nav_notifications_hover.png); }
+.nav-friends-toggled { background-image: url(nav_friends_active.png); }
+.nav-messages-toggled { background-image: url(nav_messages_active.png); }
+.nav-notifications-toggled { background-image: url(nav_notifications_active.png); }
+
+.nav-big-three {
+  position: relative;
+  height: 25px;
+  width: 25px;
+  margin: 0 7px;
+  background-size: cover;
+}
+
+.big-three-overlay {
+  border: 1px solid rgba(100, 100, 100, 0.4);
+  position: absolute;
+  top: 20px;
+  display: block;
+  width: 430px;
+  height: 50px;
+}
+
+.big-three-overlay-item {
+  width: 100%
+}
+
+#friends-overlay {
+  position: absolute;
+  top: 27px;
+  right: -85px;
 }
