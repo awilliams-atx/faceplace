@@ -46,7 +46,7 @@ var SearchIndex = React.createClass({
             className='search-bar' />
         </form>
 
-        <div className='search-index-items'>
+        <div className='search-index-items overlay'>
           {searchIndexItems}
         </div>
       </div>

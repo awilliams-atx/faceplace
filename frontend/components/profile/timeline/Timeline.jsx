@@ -2,7 +2,8 @@ var React = require('react'),
     ProfileApiUtil = require('../../../util/profile_api_util'),
     IntroIndex = require('./intro/IntroIndex'),
     ProfileActions = require('../../../actions/profile_actions'),
-    SessionActions = require('../../../actions/session_actions');
+    SessionActions = require('../../../actions/session_actions'),
+    FriendIndex = require('./friends/FriendIndex');
 
     var Timeline = React.createClass({
       getInitialState: function () {
@@ -20,6 +21,8 @@ var React = require('react'),
               <aside>
                 <IntroIndex userId={this.props.params.userId}
                   authorizedToEdit={authorizedToEdit} />
+
+                <FriendIndex />
               </aside>
           );
         } else {

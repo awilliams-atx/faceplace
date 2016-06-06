@@ -12,8 +12,6 @@ var AddFriend = React.createClass({
     });
   },
   render: function () {
-    console.log('AddFriend#render request made: ' + this.state.requestMade);
-    console.log('AddFriend#render alreadyFriends: ' + this.state.alreadyFriends);
     var emptyAddFriendContainer = <div className='empty-add-friend-button'></div>,
         friendshipButtonContainer;
 
