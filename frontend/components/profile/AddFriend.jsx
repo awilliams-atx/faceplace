@@ -15,7 +15,7 @@ var AddFriend = React.createClass({
     var emptyAddFriendContainer = <div className='empty-add-friend-button'></div>,
         friendshipButtonContainer;
 
-    if (!ProfileStore.profileIsFetched(this.props.userId)) {
+    if (!ProfileStore.profileFetched(this.props.userId)) {
       return emptyAddFriendContainer;
     }
 

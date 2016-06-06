@@ -7,10 +7,10 @@ var Store = require('flux/utils').Store,
 var _profile = {
   id: '',
   description: '',
-  company: '',
   position: '',
-  school: '',
+  company: '',
   major: '',
+  school: '',
   location: '',
   hometown: '',
   coverPhotoUrl: '',
@@ -18,14 +18,13 @@ var _profile = {
   requestPending: null,
   alreadyFriends: null
 };
-_profileIsFetched = false;
 
 var ProfileStore = new Store(AppDispatcher);
 
 ProfileStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case profileConstants.PROFILE_RECEIVED:
-      _profileIsFetched = true;
+      _profileFetched = true;
       _profile = payload.profile;
       ProfileStore.__emitChange();
       break;
@@ -82,9 +81,8 @@ ProfileStore.coverPhotoUrl = function () { return _profile.coverPhotoUrl; };
 
 ProfileStore.profilePicUrl = function () { return _profile.profilePicUrl; };
 
-ProfileStore.profileIsFetched = function (id) {
+ProfileStore.profileFetched = function (id) {
   return _profile.userId === id;
 };
 
-window.ProfileStore = ProfileStore;
 module.exports = ProfileStore;

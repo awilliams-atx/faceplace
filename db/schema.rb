@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160606010843) do
+ActiveRecord::Schema.define(version: 20160606173651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,13 +26,17 @@ ActiveRecord::Schema.define(version: 20160606010843) do
   add_index "friend_requests", ["maker_id", "receiver_id"], name: "index_friend_requests_on_maker_id_and_receiver_id", unique: true, using: :btree
 
   create_table "friendships", force: :cascade do |t|
-    t.integer "user_id",   null: false
-    t.integer "friend_id", null: false
+    t.integer  "user_id",    null: false
+    t.integer  "friend_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.text    "content"
+    t.integer  "user_id",    null: false
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: :cascade do |t|
@@ -56,6 +60,8 @@ ActiveRecord::Schema.define(version: 20160606010843) do
     t.string   "cover_photo_content_type"
     t.integer  "cover_photo_file_size"
     t.datetime "cover_photo_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

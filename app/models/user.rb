@@ -22,12 +22,6 @@ class User < ActiveRecord::Base
   after_initialize :ensure_session_token
   attr_reader :password
 
-  # def friends
-  #   Friendship
-  #     .select(:id)
-  #     .where("lady_id = :id OR gentleman_id = :id", {id: current_user_id})
-  # end
-
   def friends_with?(id)
     Friendship.exists?(user_id: self.id, friend_id: id)
   end
@@ -38,6 +32,12 @@ class User < ActiveRecord::Base
 
   def has_pending_request_from?(id)
     FriendRequest.exists?(maker_id: id, receiver_id: self.id)
+  end
+
+  def most_recently_added
+    @users = friends
+      .order("friendships.created_at DESC")
+      .limit(9)
   end
 
   # -------------------------AUTHENTICATION---------------------------- #
