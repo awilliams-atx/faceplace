@@ -23,7 +23,7 @@ var SearchIndexItem = React.createClass({
   clickHandler: function (e) {
     e.preventDefault();
     this.props.clickHandler();
-    this.context.router.push('/users/' + this.props.user.id);
+    this.context.router.push('/users/' + this.props.user.userId);
   }
 });
 

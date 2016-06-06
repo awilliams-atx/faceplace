@@ -8,7 +8,7 @@ var React = require('react'),
 
 var Profile = React.createClass({
   getInitialState: function () {
-    return({user: UserStore.find(this.props.params.userId)});
+    return({user: UserStore.find(parseInt(this.props.params.userId))});
   },
   render: function () {
     var userId = parseInt(this.props.params.userId);
@@ -32,11 +32,18 @@ var Profile = React.createClass({
 
     return (profile);
   },
+  componentDidMount: function () {
+    this.UserListener = UserStore.addListener(this.onUserStoreChange);
+    ClientActions.fetchUser(parseInt(this.props.params.userId));
+  },
+  componentWillUnmount: function () {
+    this.UserListener.remove();
+  },
    componentWillReceiveProps: function (newProps) {
      ClientActions.fetchUser(newProps.params.userId);
    },
   onUserStoreChange: function () {
-    this.setState({user: UserStore.find(this.props.params.id)});
+    this.setState({user: UserStore.find(parseInt(this.props.params.userId))});
   }
 });
 

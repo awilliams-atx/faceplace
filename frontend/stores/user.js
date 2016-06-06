@@ -13,20 +13,20 @@ UserStore.__onDispatch = function (payload) {
       UserStore.__emitChange();
       break;
     case userConstants.USER_RECEIVED:
-      _users[payload.user.id] = payload.user;
+      _users[payload.user.userId] = payload.user;
       UserStore.__emitChange();
       break;
   }
 };
 
 UserStore.all = function () {
-  return Object.keys(_users).map(function (id) {
-    return _users[id];
+  return Object.keys(_users).map(function (userId) {
+    return _users[userId];
   });
 };
 
-UserStore.find = function (id) {
-  return _users[id];
+UserStore.find = function (userId) {
+  return _users[userId];
 };
 
 window.UserStore = UserStore;

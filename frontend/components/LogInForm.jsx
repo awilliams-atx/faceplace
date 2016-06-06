@@ -76,9 +76,7 @@ var LogInForm = React.createClass({
     SessionApiUtil.login(credentials, this._redirectToMain);
   },
   _guestLogin: function (e) {
-    var credentials = {};
-    credentials.email = "thedude@lebowskimail.com";
-    credentials.password = "starwars";
+    var credentials = {email: 'jeff', password: 'starwars'};
     this._handleSubmit(e, {credentials: credentials});
   },
   _redirectToMain: function () {

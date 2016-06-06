@@ -1,6 +1,14 @@
 class Api::UsersController < ApplicationController
   def index
     @users = User.all
+    if params[:search]
+      @users = @users.reject do |user|
+        user.id == current_user.id
+      end
+      render 'api/users/search'
+    else
+      render 'api/users/index'
+    end
   end
 
   def show
@@ -22,6 +30,12 @@ class Api::UsersController < ApplicationController
     @user = current_user
     @user.update(profile_params)
     render 'api/users/show'
+  end
+
+  def most_recently_added
+    @profile_owner_id = params[:id]
+    @users = User.find(params[:id]).most_recently_added
+    render 'api/users/most_recently_added'
   end
 
   private

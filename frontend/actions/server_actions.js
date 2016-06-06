@@ -1,7 +1,9 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
     userConstants = require('../constants/user_constants'),
     friendRequestConstants = require('../constants/friend_request_constants'),
-    friendshipConstants = require('../constants/friendship_constants');
+    friendshipConstants = require('../constants/friendship_constants'),
+    searchConstants = require('../constants/search_constants'),
+    friendConstants = require('../constants/friend_constants');
 
 var ServerActions = {
   receiveUsers: function (users) {
@@ -43,6 +45,19 @@ var ServerActions = {
   receiveDestroyedFriendship: function (friendship) {
     Dispatcher.dispatch({
       actionType: friendshipConstants.FRIENDSHIP_DESTROYED
+    });
+  },
+  receiveSearchResults: function (searchResults) {
+    Dispatcher.dispatch({
+      actionType: searchConstants.SEARCH_RESULTS_RECEIVED,
+      searchResults: searchResults
+    });
+  },
+  receiveMostRecentlyAddedFriends: function (friendsData) {
+    Dispatcher.dispatch({
+      actionType: friendConstants.MOST_RECENTLY_ADDED_FRIENDS_RECEIVED,
+      friends: friendsData.friends,
+      profileOwnerId: friendsData.profileOwnerId
     });
   }
 };

@@ -1,2 +1,50 @@
+section#friends-index > img {
+  margin-top: 6px;
+  margin-left: 6px;
+}
+
+section#friends-index > h2 {
+  margin-left: 41px;
+  margin-top: 10px;
+}
+
 section.profile-friends-container {
+  float: left;
+}
+
+#friends-index {
+  width: 313px;
+  padding: 4px;
+}
+
+#friend-thumbs-container {
+  width: 318px;
+}
+
+.friend-thumb {
+  display: block;
+  position: relative;
+  width: 100px;
+  float: left;
+}
+
+.friend-thumb:nth-child(3n+2) {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.friend-thumb:nth-child(3n+1) {
+  margin-left: 1px;
+}
+
+.friend-thumb-name {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: 1000;
+  margin: 5px;
+
+  font-family: helvetica;
+  font-size: 12px;
+  color: white;
 }

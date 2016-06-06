@@ -1,7 +1,7 @@
 var React = require('react'),
     SearchIndex = require('./SearchIndex'),
     ClientActions = require('../../actions/client_actions'),
-    UserStore = require('../../stores/user'),
+    SearchStore = require('../../stores/search'),
     SearchIndexItem = require('./SearchIndexItem'),
     SessionStore = require('../../stores/session');
 
@@ -10,12 +10,13 @@ var SearchIndex = React.createClass({
     return({
       searching: false,
       searchString: "",
-      users: UserStore.all()
+      users: SearchStore.all(),
+      usersAreFetched: false
     });
   },
   render: function () {
     var currentUserId = SessionStore.currentUser().id;
-    var searchIndexItems;
+    var searchIndexItems = <div className='empty-search-index-items'></div>;
 
     if (this.state.searching) {
       var users;
@@ -26,17 +27,13 @@ var SearchIndex = React.createClass({
       }.bind(this));
 
       searchIndexItems = filteredUsers.map(function (user) {
-        if (user.id === currentUserId) { return; }
-          return <SearchIndexItem
-            user={user}
-            key={user.id}
-            clickHandler={this.hideIndexItems} />;
-        }.bind(this));
-    } else {
-      searchIndexItems = <div className='notSearching'></div>;
+        return <SearchIndexItem
+          user={user}
+          key={user.userId}
+          clickHandler={this.hideIndexItems} />;
+      }.bind(this));
     }
 
-    // value={this.state.searchString}
     return (
       <div className='nav-search' id='search-bar'>
         <form _onSubmit={this.handleSubmit} >
@@ -53,16 +50,16 @@ var SearchIndex = React.createClass({
     );
   },
   componentDidMount: function () {
-    this.UserListener = UserStore.addListener(this.onUserStoreChange);
+    this.SearchListener = SearchStore.addListener(this.onSearchStoreChange);
     $(document).keydown(function (event) {
       if (event.which === 27) { this.setState({searching: false}); }
     }.bind(this));
   },
   componentWillUnmount: function () {
-    this.UserListener.remove();
+    this.SearchListener.remove();
   },
-  onUserStoreChange: function (e) {
-    this.setState({users: UserStore.all()});
+  onSearchStoreChange: function (e) {
+    this.setState({users: SearchStore.all()});
   },
   onSearchStringChange: function (e) {
     this.setState({searchString: e.target.value});
@@ -70,7 +67,7 @@ var SearchIndex = React.createClass({
   showIndexItems: function (e) {
     if (this.state.searching) { return; }
     if (!this.state.areUsersFetched) {
-      ClientActions.fetchUsers();
+      ClientActions.fetchSearchResults();
     }
     this.setState({
       searching: true,

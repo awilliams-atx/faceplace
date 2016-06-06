@@ -1,7 +1,10 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
     UserApiUtil = require('../util/user_api_util'),
     FriendRequestApiUtil = require('../util/friend_request_api_util'),
-    FriendshipApiUtil = require('../util/friendship_api_util');
+    FriendshipApiUtil = require('../util/friendship_api_util'),
+    FriendApiUtil = require('../util/friend_api_util'),
+    SearchApiUtil = require('../util/search_api_util'),
+    ProfileApiUtil = require('../util/profile_api_util');
 
 var ClientActions = {
   fetchUsers: function () {
@@ -22,6 +25,15 @@ var ClientActions = {
   },
   unfriend: function (userId) {
     FriendshipApiUtil.destroyFriendship(userId);
+  },
+  fetchSearchResults: function () {
+    SearchApiUtil.fetchSearchResults();
+  },
+  fetchMostRecentlyAddedFriends: function (userId) {
+    FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
+  },
+  fetchProfile: function (userId) {
+    ProfileApiUtil.fetchProfile(userId);
   }
 };
 
