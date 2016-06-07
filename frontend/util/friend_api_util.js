@@ -10,7 +10,7 @@ var FriendApiUtil = {
         ServerActions.receiveMostRecentlyAddedFriends(friendsData);
       },
       error: function (errors) {
-        console.log('FriendApiUtil#receiveMostRecentlyAddedFriends ERROR');
+        console.log('FriendApiUtil#fetchMostRecentlyAddedFriends ERROR');
       }
     });
   }

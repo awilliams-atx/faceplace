@@ -1,9 +1,10 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
-    userConstants = require('../constants/user_constants'),
+    friendConstants = require('../constants/friend_constants'),
     friendRequestConstants = require('../constants/friend_request_constants'),
     friendshipConstants = require('../constants/friendship_constants'),
+    postConstants = require('../constants/post_constants'),
     searchConstants = require('../constants/search_constants'),
-    friendConstants = require('../constants/friend_constants');
+    userConstants = require('../constants/user_constants');
 
 var ServerActions = {
   receiveUsers: function (users) {
@@ -60,6 +61,12 @@ var ServerActions = {
       actionType: friendConstants.MOST_RECENTLY_ADDED_FRIENDS_RECEIVED,
       friends: friendsData.friends,
       profileOwnerId: friendsData.profileOwnerId
+    });
+  },
+  receivePost: function (post) {
+    Dispatcher.dispatch({
+      actionType: postConstants.POST_RECEIVED,
+      post: post
     });
   }
 };
