@@ -1,8 +1,12 @@
 #post-form-section {
   float: left;
-  width: 100%;
+  width: 500px;
   padding: 0;
   overflow: hidden;
+}
+
+.profile-post {
+  width: 510px;
 }
 
 .post-types-background {
@@ -41,9 +45,33 @@
 
 .post-pic {
   border: 1px solid rgba(0, 0, 0, 0.0980392);
+  display: block;
+  float: left;
+}
+
+.post-textarea {
+  padding: 11px 0 13px 12px;
+  border: none;
+  outline: none;
+  resize: none;
+  width: 423px;
+
+  font-family: helvetica;
+  font-size: 14px;
 }
 
 .post-footer-background {
   border-top: 1px solid #e5e5e5;
-  padding: 8px;
+  height: 40px;
+}
+
+.post-footer-buttons {
+  margin: 8px;
+  float: right;
+  button {
+    height: 22px;
+  }
+}
+
+.post-form-section {
 }

@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
       .limit(9)
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   # -------------------------AUTHENTICATION---------------------------- #
 
   def self.find_by_credentials(params)
