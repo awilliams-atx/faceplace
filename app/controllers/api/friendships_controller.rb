@@ -11,7 +11,7 @@ class Api::FriendshipsController < ApplicationController
     ).delete
 
     @user_id = params[:id]
-    @response = 'unfriended'
+    @response = 'unfriend'
 
     render 'api/friendships/show'
   end

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
 
   has_attached_file :profile_pic, styles:
-    { search_result: '36x36#', notifications: '48x48#', thumb: '100x100#' },
+    { search_result: '36x36#', post: '38x38#', notifications: '48x48#', thumb: '100x100#' },
     default_url: "/images/:style/missing.png"
   validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 

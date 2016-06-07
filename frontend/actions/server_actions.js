@@ -34,7 +34,8 @@ var ServerActions = {
     }
 
     Dispatcher.dispatch({
-      actionType: actionType
+      actionType: actionType,
+      userId: friendRequestResponse.userId
     });
   },
   receiveFriendRequestCancelation: function () {
@@ -44,7 +45,8 @@ var ServerActions = {
   },
   receiveDestroyedFriendship: function (friendship) {
     Dispatcher.dispatch({
-      actionType: friendshipConstants.FRIENDSHIP_DESTROYED
+      actionType: friendshipConstants.FRIENDSHIP_DESTROYED,
+      profileOwnerId: parseInt(friendship.userId)
     });
   },
   receiveSearchResults: function (searchResults) {

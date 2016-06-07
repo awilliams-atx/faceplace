@@ -22,7 +22,6 @@ var FriendRequestApiUtil = {
       dataType: 'json',
       data: {friend_request: {maker_id: userId, response: response}},
       success: function (friendRequestResponse) {
-        console.log('FriendRequestApiUtil response: ' + response);
         ServerActions.receiveFriendRequestResponse(friendRequestResponse);
       },
       error: function (errors) {

@@ -1,13 +1,12 @@
 var React = require('react'),
+    ClientActions = require('../../../actions/client_actions'),
     FriendApiUtil = require('../../../util/friend_api_util'),
     ProfileApiUtil = require('../../../util/profile_api_util'),
-    IntroIndex = require('./intro/IntroIndex'),
-    ProfileActions = require('../../../actions/profile_actions'),
-    SessionActions = require('../../../actions/session_actions'),
-    FriendIndex = require('./friends/FriendIndex'),
-    ProfileStore = require('../../../stores/profile'),
     FriendStore = require('../../../stores/friend'),
-    ClientActions = require('../../../actions/client_actions');
+    ProfileStore = require('../../../stores/profile'),
+    FriendIndex = require('./friends/FriendIndex'),
+    IntroIndex = require('./intro/IntroIndex'),
+    PostIndex = require('../../posts/PostIndex');
 
     var Timeline = React.createClass({
       getInitialState: function () {
@@ -23,7 +22,8 @@ var React = require('react'),
 
         var timelineContent,
             introContent,
-            friendsContent;
+            friendsContent,
+            postsContent;
 
         var authorizedToEdit =
           userId === SessionStore.currentUser().id;
@@ -47,11 +47,14 @@ var React = require('react'),
         }
 
         return (
-          <div className='timeline-content'>
+          <div className='timeline-content group'>
             <aside className='timeline-sidebar'>
               {introContent}
               {friendsContent}
             </aside>
+            <section className='timeline-main-content'>
+              <PostIndex />
+            </section>
           </div>
         );
       },
@@ -69,7 +72,7 @@ var React = require('react'),
         this.friendListener.remove();
       },
        componentWillReceiveProps: function (newProps) {
-         FriendApiUtil.fetchFriends(newProps.params.userId);
+         FriendApiUtil.fetchMostRecentlyAddedFriends(newProps.params.userId);
          ProfileApiUtil.fetchProfile(newProps.params.userId);
        },
       onProfileStoreChange: function () {

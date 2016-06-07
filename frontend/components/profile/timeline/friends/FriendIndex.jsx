@@ -12,7 +12,8 @@ var FriendIndex = React.createClass({
     });
 
     return (
-      <section id='friends-index' className='profile-aside-item'>
+      <section id='friends-index'
+        className='profile-aside-item subcontent-container'>
         <img src={window.profile_friends_icon} className='icon'/>
         <h2>Friends</h2>
         <div id='friend-thumbs-container' className='group'>

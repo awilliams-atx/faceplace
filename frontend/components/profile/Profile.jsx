@@ -21,7 +21,7 @@ var Profile = React.createClass({
     var profile = (
       <div className='content'>
         <Nav />
-        <div className='sub-content'>
+        <div className='profile-sub-content'>
           <CoverPhoto imageUrl={coverPhotoUrl}
             authorizedToEdit={authorizedToEdit}
             userId={userId} />
