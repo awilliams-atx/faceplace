@@ -1,10 +1,11 @@
-.content {
-  header {
-    background: #3b5998;
-    border-bottom: 1px solid black;
-    position: relative;
-    width: 100%;
-  }
+.main-header {
+  background-color: #3b5998;
+  border-bottom: 1px solid black;
+}
+
+.main-header-nav {
+  position: relative;
+  width: 100%;
 }
 
 .welcome-header {

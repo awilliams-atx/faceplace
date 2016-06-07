@@ -3,7 +3,11 @@ var React = require('react'),
     PostIndexItem = require('./PostIndexItem');
 
 var PostIndex = React.createClass({
-
+  render: function () {
+    return (
+      <PostForm />
+    );
+  }
 });
 
 module.exports = PostIndex;

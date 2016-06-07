@@ -7,6 +7,7 @@
   font-family: helvetica;
   font-size: 12px;
   line-height: 16px;
+  width: 301px;
   form {
     display: block;
     float: left;
@@ -28,14 +29,14 @@
     margin-left: 5px;
   }
   textarea {
-  padding: 4px 5px;
-  border: 1px solid #bdc7d8;
-  border-radius: 3px;
-  font-size: 12px;
-  resize: none;
-  display: block;
-  margin: auto;
-  margin-bottom: 5px;
+    padding: 4px 5px;
+    border: 1px solid #bdc7d8;
+    border-radius: 3px;
+    font-size: 12px;
+    resize: none;
+    display: block;
+    margin: auto;
+    margin-bottom: 5px;
   }
   .buttons {
     float: right;

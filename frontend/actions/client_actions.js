@@ -17,7 +17,6 @@ var ClientActions = {
     FriendRequestApiUtil.makeFriendRequest(userId);
   },
   respondToFriendRequest: function (userId, response) {
-    console.log('ClientActions response: ' + response);
     FriendRequestApiUtil.respondToFriendRequest(userId, response);
   },
   cancelFriendRequest: function (userId) {

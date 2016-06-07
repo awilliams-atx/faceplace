@@ -1,6 +1,10 @@
 var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher.js'),
-    friendConstants = require('../constants/friend_constants');
+    friendConstants = require('../constants/friend_constants'),
+    friendRequestConstants = require('../constants/friend_request_constants'),
+    friendshipConstants = require('../constants/friendship_constants'),
+    ClientActions = require('../actions/client_actions'),
+    SessionStore = require('../stores/session');
 
 var _friends = {};
 
@@ -15,6 +19,23 @@ FriendStore.__onDispatch = function (payload) {
       });
       FriendStore.__emitChange();
       break;
+    case friendRequestConstants.FRIEND_REQUEST_ACCEPTED:
+      this.setOrFindFriend({profileOwnerId: payload.userId});
+      break;
+    case friendshipConstants.FRIENDSHIP_DESTROYED:
+      this.removeFriend(payload.profileOwnerId);
+  }
+};
+
+FriendStore.removeFriend = function (profileOwnerId) {
+  var currentUserId = SessionStore.currentUser().id;
+  delete _friends[profileOwnerId][currentUserId];
+  ClientActions.fetchMostRecentlyAddedFriends(profileOwnerId);
+};
+
+FriendStore.setOrFindFriend = function (opts) {
+  if (!_friends[opts.profileOwnerId].hasOwnProperty(opts.profileOwnerId)) {
+    ClientActions.fetchMostRecentlyAddedFriends(opts.profileOwnerId);
   }
 };
 

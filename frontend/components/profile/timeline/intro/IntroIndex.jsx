@@ -9,7 +9,8 @@ var React = require('react'),
 var IntroIndex = React.createClass({
   render: function () {
     return (
-      <section id='intro-index' className='profile-aside-item'>
+      <section id='intro-index'
+        className='profile-aside-item subcontent-container'>
         <img src={window.intro_icon} className='icon'/>
         <h2>Intro</h2>
 
