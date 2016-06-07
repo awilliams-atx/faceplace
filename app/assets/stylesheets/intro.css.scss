@@ -1,7 +1,9 @@
-#intro-work-img { background-image: url(intro_work.png); }
-#intro-school-img { background-image: url(intro_school.png); }
-#intro-location-img { background-image: url(intro_location.png); }
-#intro-hometown-img { background-image: url(intro_hometown.png); }
+// use asset urls
+
+#intro-work-img { background-image: url(asset_path('intro_work.png')); }
+#intro-school-img { background-image: url(asset_path('intro_school.png')); }
+#intro-location-img { background-image: url(asset_path('intro_location.png')); }
+#intro-hometown-img { background-image: url(asset_path('intro_hometown.png')); }
 
 #intro-index {
   font-family: helvetica;
