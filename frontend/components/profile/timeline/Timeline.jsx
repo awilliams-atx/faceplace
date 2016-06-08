@@ -53,7 +53,7 @@ var React = require('react'),
               {introContent}
               {friendsContent}
             </aside>
-            <section className='timeline-post-index'>
+            <section className='timeline-main-content'>
               <PostIndex userId={userId}/>
             </section>
           </div>

@@ -1,4 +1,5 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
+    tagConstants = require('../constants/tag_constants'),
     FriendApiUtil = require('../util/friend_api_util'),
     FriendshipApiUtil = require('../util/friendship_api_util'),
     FriendRequestApiUtil = require('../util/friend_request_api_util'),
@@ -8,23 +9,23 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     UserApiUtil = require('../util/user_api_util');
 
 var ClientActions = {
-  makeFriendRequest: function (userId) {
-    FriendRequestApiUtil.makeFriendRequest(userId);
-  },
-  respondToFriendRequest: function (userId, response) {
-    FriendRequestApiUtil.respondToFriendRequest(userId, response);
+  addTaggedFriend: function (userId) {
+    Dispatcher.dispatch({
+      actionType: tagConstants.FRIEND_TAGGED,
+      userId: userId
+    });
   },
   cancelFriendRequest: function (userId) {
     FriendRequestApiUtil.cancelRequest(userId, 'cancel');
-  },
-  unfriend: function (userId) {
-    FriendshipApiUtil.destroyFriendship(userId);
   },
   fetchMostRecentlyAddedFriends: function (userId) {
     FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
   },
   fetchProfile: function (userId) {
     ProfileApiUtil.fetchProfile(userId);
+  },
+  fetchProfilePosts: function (profileOwnerId) {
+    UserApiUtil.fetchProfilePosts(profileOwnerId);
   },
   fetchSearchResults: function () {
     SearchApiUtil.fetchSearchResults();
@@ -35,11 +36,23 @@ var ClientActions = {
   fetchUsers: function () {
     UserApiUtil.fetchUsers();
   },
-  fetchProfilePosts: function (profileOwnerId) {
-    UserApiUtil.fetchProfilePosts(profileOwnerId);
+  makeFriendRequest: function (userId) {
+    FriendRequestApiUtil.makeFriendRequest(userId);
+  },
+  removeTaggedFriend: function (userId) {
+    Dispatcher.dispatch({
+      actionType: tagConstants.FRIEND_UNTAGGED,
+      userid: userId
+    });
+  },
+  respondToFriendRequest: function (userId, response) {
+    FriendRequestApiUtil.respondToFriendRequest(userId, response);
   },
   submitPost: function (post) {
     PostApiUtil.submitPost(post);
+  },
+  unfriend: function (userId) {
+    FriendshipApiUtil.destroyFriendship(userId);
   }
 };
 

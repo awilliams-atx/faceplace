@@ -12,8 +12,7 @@ PostStore.__onDispatch = function (payload) {
       this.setPosts(payload);
       PostStore.__emitChange();
       break;
-    case postConstants.POST_RECEIVED:
-      console.log('PostStore#POST_RECEIVED');
+    case postConstants.OWN_POST_RECEIVED:
       this.addPost(payload.post);
       PostStore.__emitChange();
       break;
@@ -21,7 +20,7 @@ PostStore.__onDispatch = function (payload) {
 };
 
 PostStore.addPost = function (post) {
-  _posts[post.authorId].push(post);
+  _posts[post.authorId].unshift(post);
 };
 
 PostStore.all = function (userId) {

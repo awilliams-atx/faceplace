@@ -1,8 +1,10 @@
 var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher.js'),
+    postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants');
 
 var _friends = {};
+var _taggedFriendIds = {};
 
 var TagStore = new Store(AppDispatcher);
 
@@ -13,15 +15,32 @@ TagStore.__onDispatch = function (payload) {
       _friendsFetched = true;
       TagStore.__emitChange();
       break;
+    case tagConstants.FRIEND_TAGGED:
+      _taggedFriendIds[payload.userId] = true;
+      break;
+    case tagConstants.FRIEND_UNTAGGED:
+      delete _taggedFriendIds[payload.userId];
+      break;
+    case postConstants.OWN_POST_RECEIVED:
+      _taggedFriendIds = {};
+      TagStore.__emitChange();
+      break;
   }
 };
 
-TagStore.all = function () {
+TagStore.allFriends = function () {
   return $.extend({}, _friends);
 };
 
+TagStore.allTaggedFriendIds = function (opts) {
+  if (opts && opts.keysOnly) {
+    return Object.keys(_taggedFriendIds);
+  } else {
+    return $.extend({}, _taggedFriendIds);
+  }
+};
+
 TagStore.find = function (id) {
-  console.log(_friends);
   return $.extend({}, _friends[id]);
 };
 

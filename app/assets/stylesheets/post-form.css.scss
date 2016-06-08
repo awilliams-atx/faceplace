@@ -2,7 +2,6 @@
   float: left;
   width: 510px;
   padding: 0;
-  overflow: hidden;
 }
 
 .profile-post {
@@ -12,7 +11,6 @@
 .post-types-background {
   background-color: #f6f7f9;
   height: 100%;
-  width: 100%;
   padding: 10px 0 10px 10px;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -40,7 +38,7 @@
 }
 
 .post-form {
-  padding: 12px 12px 23px 12px;
+  padding: 12px 12px 0 12px;
 }
 
 .post-pic {

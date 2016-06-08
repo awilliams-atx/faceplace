@@ -2,13 +2,15 @@ var React = require('react'),
     TagSearch = require('./TagSearch'),
     ClientActions = require('../../actions/client_actions'),
     FriendApiUtil = require('../../util/friend_api_util'),
-    SessionStore = require('../../stores/session');
+    TagApiUtil = require('../../util/tag_api_util'),
+    SessionStore = require('../../stores/session'),
+    TagStore = require('../../stores/tag');
 
 var PostForm = React.createClass({
   getInitialState: function () {
     return({
       postBody: '',
-      tagging: true,
+      tagging: false,
       friendsFetched: false,
       tagQuery: ''
     });
@@ -75,11 +77,13 @@ var PostForm = React.createClass({
     e.preventDefault();
     if (this.state.postBody.length < 1) { return; }
     var post = {
-      body: this.state.postBody
+      body: this.state.postBody,
+      taggedFriendIds: TagStore.allTaggedFriendIds({keysOnly: true})
     };
 
     this.setState({
-      postBody: ''
+      postBody: '',
+      tagging: false
     }, function () {
       ClientActions.submitPost(post);
     });
@@ -90,7 +94,7 @@ var PostForm = React.createClass({
   toggleTag: function (e) {
     e.preventDefault();
     this.setState({tagging: !this.state.tagging}, function () {
-      FriendApiUtil.fetchFriends(SessionStore.currentUser().id);
+      TagApiUtil.fetchFriendsForTagging(SessionStore.currentUser().id);
     });
   }
 });

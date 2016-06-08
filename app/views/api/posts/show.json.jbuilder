@@ -1,4 +1,5 @@
-json.postBody @post.body
+json.postId @post.id
+json.body @post.body
 json.authorId current_user.id
 json.postPicUrl current_user.profile_pic.url(:post)
 json.fullName current_user.full_name

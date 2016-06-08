@@ -1,5 +1,6 @@
 class Api::PostsController < ApplicationController
   def index
+
     if params[:profilePosts]
       @author = User.find(params[:user_id])
       @posts = @author.posts
