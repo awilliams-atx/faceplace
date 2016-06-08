@@ -8,4 +8,6 @@ class Post < ActiveRecord::Base
   has_many :tagged_friends,
     through: :taggings,
     source: :tagged
+
+  has_one :timeline_posting
 end

@@ -6,15 +6,15 @@ var React = require('react'),
 
 var PostIndex = React.createClass({
   getInitialState: function () {
-    var userId = this.props.userId;
+    var profileOwnerId = this.props.profileOwnerId;
 
-    return ({posts: PostStore.all(userId)});
+    return ({posts: PostStore.all(profileOwnerId)});
   },
   render: function () {
-
-    var postIndexItems;
-
-    var posts = this.state.posts;
+    debugger
+    var profileOwnerId = this.props.profileOwnerId,
+        posts = this.state.posts,
+        postIndexItems;
 
     postIndexItems = posts.map(function (post) {
       return <PostIndexItem post={post} key={post.postId} />;
@@ -22,7 +22,7 @@ var PostIndex = React.createClass({
 
     return (
       <section className='post-index'>
-        <PostForm />
+        <PostForm profileOwnerId={profileOwnerId}/>
         {postIndexItems}
       </section>
     );
@@ -32,15 +32,15 @@ var PostIndex = React.createClass({
 
     this.postListener =
       PostStore.addListener(this.onPostStoreChange);
-    ClientActions.fetchProfilePosts(profileOwnerId);
+    ClientActions.fetchTimelinePosts(profileOwnerId);
   },
   componentWillUnmount: function () {
     this.postListener.remove();
   },
   onPostStoreChange: function () {
-    var userId = this.props.userId;
+    var profileOwnerId = this.props.profileOwnerId;
 
-    this.setState({posts: PostStore.all(userId)});
+    this.setState({posts: PostStore.all(profileOwnerId)});
   }
 });
 

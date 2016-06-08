@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
     through: :taggings,
     source: :post
 
+  has_many :timeline_postings
+
   after_initialize :ensure_session_token
   attr_reader :password
 
@@ -48,7 +50,7 @@ class User < ActiveRecord::Base
       .limit(9)
   end
 
-  def profile_feed_posts
+  def timeline_posts
     Post.all
       .joins('LEFT OUTER JOIN taggings ON taggings.post_id = posts.id')
       .where('taggings.tagged_id = :user_id OR posts.author_id = :user_id', {user_id: self.id})

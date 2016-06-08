@@ -4,7 +4,8 @@ var React = require('react'),
     FriendApiUtil = require('../../util/friend_api_util'),
     TagApiUtil = require('../../util/tag_api_util'),
     SessionStore = require('../../stores/session'),
-    TagStore = require('../../stores/tag');
+    TagStore = require('../../stores/tag'),
+    UserStore = require('../../stores/user');
 
 var PostForm = React.createClass({
   getInitialState: function () {
@@ -17,6 +18,8 @@ var PostForm = React.createClass({
   },
   render: function () {
     var currentUser = SessionStore.currentUser(),
+        profileOwner = UserStore.find(this.props.profileOwnerId),
+        placeholderText,
         tagContents,
         tagUrl =
           'https://s3.amazonaws.com/faceplace-dev/assets/add_friend_icon+original.png';
@@ -25,6 +28,12 @@ var PostForm = React.createClass({
     tagContents = <TagSearch />;
   } else {
     tagContents = <div className='empty-tagging-contents' />;
+  }
+
+  if (SessionStore.currentUser().id === this.props.profileOwnerId) {
+    placeholderText = 'What\'s on your mind, ' + currentUser.first_name;
+  } else {
+    placeholderText = 'Say something to ' + profileOwner.firstName + '.';
   }
 
     return (
@@ -47,7 +56,7 @@ var PostForm = React.createClass({
             <textarea className='post-textarea'
               onChange={this.onPostBodyChange}
               value={this.state.postBody}
-              placeholder={'What\'s on your mind, ' + SessionStore.currentUser().first_name + '?'} >
+              placeholder={placeholderText} >
 
             </textarea>
           </div>
@@ -76,7 +85,9 @@ var PostForm = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     if (this.state.postBody.length < 1) { return; }
+    
     var post = {
+      profileOwnerId: this.props.profileOwnerId,
       body: this.state.postBody,
       taggedFriendIds: TagStore.allTaggedFriendIds({keysOnly: true})
     };

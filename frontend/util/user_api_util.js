@@ -17,6 +17,7 @@ var UserApiUtil = {
     });
   },
   fetchUser: function (id) {
+    // NOPE
     $.ajax({
       url: 'api/users/' + id,
       method: 'GET',
