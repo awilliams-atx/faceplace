@@ -1,6 +1,23 @@
 var ServerActions = require('../actions/server_actions');
 
 var PostApiUtil = {
+  fetchProfilePosts: function (userId) {
+    $.ajax({
+      url: 'api/users/' + userId + '/posts',
+      method: 'GET',
+      dataType: 'json',
+      data: {profilePosts: true},
+      success: function (posts) {
+        ServerActions.receiveProfilePosts({
+          userId: userId,
+          posts: posts
+        });
+      },
+      error: function (errors) {
+        console.log('UserApiUtil#fetchProfilePosts ERROR');
+      }
+    });
+  },
   submitPost: function (post) {
     $.ajax({
       url: 'api/posts',
@@ -8,7 +25,6 @@ var PostApiUtil = {
       dataType: 'json',
       data: {post: post},
       success: function (post) {
-        debugger
         ServerActions.receiveOwnPost(post);
       },
       error: function (errors) {

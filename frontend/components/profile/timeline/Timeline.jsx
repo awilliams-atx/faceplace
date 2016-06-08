@@ -4,8 +4,8 @@ var React = require('react'),
     PostIndex = require('../../posts/PostIndex'),
     ClientActions = require('../../../actions/client_actions'),
     FriendApiUtil = require('../../../util/friend_api_util'),
+    PostApiUtil = require('../../../util/post_api_util'),
     ProfileApiUtil = require('../../../util/profile_api_util'),
-    UserApiUtil = require('../../../util/user_api_util'),
     FriendStore = require('../../../stores/friend'),
     PostStore = require('../../../stores/post'),
     ProfileStore = require('../../../stores/profile'),
@@ -75,8 +75,11 @@ var React = require('react'),
         this.friendListener.remove();
       },
        componentWillReceiveProps: function (newProps) {
-         FriendApiUtil.fetchMostRecentlyAddedFriends(newProps.params.userId);
-         ProfileApiUtil.fetchProfile(newProps.params.userId);
+         var newUserId = newProps.params.userId;
+
+         FriendApiUtil.fetchMostRecentlyAddedFriends(newUserId);
+         ProfileApiUtil.fetchProfile(newUserId);
+         PostApiUtil.fetchProfilePosts(newUserId);
        },
        onPostStoreChange: function () {
          var userId = parseInt(this.props.params.userId);

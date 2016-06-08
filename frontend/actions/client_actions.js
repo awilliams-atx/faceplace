@@ -25,7 +25,7 @@ var ClientActions = {
     ProfileApiUtil.fetchProfile(userId);
   },
   fetchProfilePosts: function (profileOwnerId) {
-    UserApiUtil.fetchProfilePosts(profileOwnerId);
+    PostApiUtil.fetchProfilePosts(profileOwnerId);
   },
   fetchSearchResults: function () {
     SearchApiUtil.fetchSearchResults();
