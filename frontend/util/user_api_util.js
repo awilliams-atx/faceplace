@@ -4,23 +4,6 @@ var SessionActions = require('../actions/session_actions'),
     ServerActions = require('../actions/server_actions');
 
 var UserApiUtil = {
-  fetchProfilePosts: function (userId) {
-    $.ajax({
-      url: 'api/users/' + userId + '/posts',
-      method: 'GET',
-      dataType: 'json',
-      data: {profilePosts: true},
-      success: function (posts) {
-        ServerActions.receiveProfilePosts({
-          userId: userId,
-          posts: posts
-        });
-      },
-      error: function (errors) {
-        console.log('UserApiUtil#fetchProfilePosts ERROR');
-      }
-    });
-  },
   fetchUsers: function () {
     $.ajax({
       url: 'api/users',
