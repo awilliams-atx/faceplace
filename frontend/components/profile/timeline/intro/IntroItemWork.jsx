@@ -51,11 +51,9 @@ var IntroItemWork = React.createClass({
   },
   componentDidMount: function () {
     this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
-    this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
     this.ProfileListener.remove();
-    this.FormListener.remove();
   },
   showEdit: function (e) {
     e.preventDefault();
@@ -97,13 +95,6 @@ var IntroItemWork = React.createClass({
       position: ProfileStore.position(),
       company: ProfileStore.company()
     });
-  },
-  onFormStoreChange: function (e) {
-    if (FormStore.isOpen('INTRO_WORK') && !this.state.editing) {
-      this.setState({editing: true});
-    } else if (!FormStore.isOpen('INTRO_WORK') && this.state.editing) {
-      this.setState({editing: false});
-    }
   }
 });
 

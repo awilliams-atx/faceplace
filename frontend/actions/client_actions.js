@@ -8,12 +8,6 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     UserApiUtil = require('../util/user_api_util');
 
 var ClientActions = {
-  fetchUsers: function () {
-    UserApiUtil.fetchUsers();
-  },
-  fetchUser: function (id) {
-    UserApiUtil.fetchUser(id);
-  },
   makeFriendRequest: function (userId) {
     FriendRequestApiUtil.makeFriendRequest(userId);
   },
@@ -26,14 +20,23 @@ var ClientActions = {
   unfriend: function (userId) {
     FriendshipApiUtil.destroyFriendship(userId);
   },
-  fetchSearchResults: function () {
-    SearchApiUtil.fetchSearchResults();
-  },
   fetchMostRecentlyAddedFriends: function (userId) {
     FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
   },
   fetchProfile: function (userId) {
     ProfileApiUtil.fetchProfile(userId);
+  },
+  fetchSearchResults: function () {
+    SearchApiUtil.fetchSearchResults();
+  },
+  fetchUser: function (id) {
+    UserApiUtil.fetchUser(id);
+  },
+  fetchUsers: function () {
+    UserApiUtil.fetchUsers();
+  },
+  fetchProfilePosts: function (profileOwnerId) {
+    UserApiUtil.fetchProfilePosts(profileOwnerId);
   },
   submitPost: function (post) {
     PostApiUtil.submitPost(post);

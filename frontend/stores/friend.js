@@ -57,5 +57,4 @@ FriendStore.friendsFetched = function (profileOwnerId) {
   return _friends.hasOwnProperty(profileOwnerId);
 };
 
-window.FriendStore = FriendStore;
 module.exports = FriendStore;

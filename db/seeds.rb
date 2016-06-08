@@ -36,9 +36,8 @@ donny.profile_pic = File.open("#{Rails.root}/app/assets/images/donald_kerabatsos
 donny.cover_photo = File.open("#{Rails.root}/app/assets/images/donald_kerabatsos_cover_photo.jpg")
 donny.save!
 
-# friends = [andrew, sam, david, jeffrey, walter, donny]
-#
-# friends.permutation(2).each do |user_1, user_2|
-#   Friendship.create(user_id: user_1.id, friend_id: user_2.id)
-#   Friendship.create(user_id: user_2.id, friend_id: user_1.id)
-# end
+friends = [andrew, sam, david, jeffrey, walter, donny]
+
+friends.permutation(2).each do |user_1, user_2|
+  Friendship.create(user_id: user_1.id, friend_id: user_2.id)
+end

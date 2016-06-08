@@ -1,20 +1,22 @@
 var React = require('react'),
+    FriendIndex = require('./friends/FriendIndex'),
+    IntroIndex = require('./intro/IntroIndex'),
+    PostIndex = require('../../posts/PostIndex'),
     ClientActions = require('../../../actions/client_actions'),
     FriendApiUtil = require('../../../util/friend_api_util'),
     ProfileApiUtil = require('../../../util/profile_api_util'),
+    UserApiUtil = require('../../../util/user_api_util'),
     FriendStore = require('../../../stores/friend'),
+    PostStore = require('../../../stores/post'),
     ProfileStore = require('../../../stores/profile'),
-    FriendIndex = require('./friends/FriendIndex'),
-    IntroIndex = require('./intro/IntroIndex'),
-    PostIndex = require('../../posts/PostIndex');
+    SessionStore = require('../../../stores/session');
 
     var Timeline = React.createClass({
       getInitialState: function () {
+        var userId = parseInt(this.props.params.userId);
         return({
-          profileFetched:
-            ProfileStore.profileFetched(parseInt(this.props.params.userId)),
-          friendsFetched:
-            FriendStore.friendsFetched(parseInt(this.props.params.userId))
+          profileFetched: ProfileStore.profileFetched(userId),
+          friendsFetched: FriendStore.friendsFetched(userId)
         });
       },
       render: function () {
@@ -22,8 +24,7 @@ var React = require('react'),
 
         var timelineContent,
             introContent,
-            friendsContent,
-            postsContent;
+            friendsContent;
 
         var authorizedToEdit =
           userId === SessionStore.currentUser().id;
@@ -52,20 +53,22 @@ var React = require('react'),
               {introContent}
               {friendsContent}
             </aside>
-            <section className='timeline-main-content'>
-              <PostIndex />
+            <section className='timeline-post-index'>
+              <PostIndex userId={userId}/>
             </section>
           </div>
         );
       },
       componentDidMount: function () {
+        var userId = this.props.params.userId;
+
         this.profileListener =
           ProfileStore.addListener(this.onProfileStoreChange);
-        ClientActions.fetchProfile(this.props.params.userId);
+        ClientActions.fetchProfile(userId);
 
         this.friendListener =
           FriendStore.addListener(this.onFriendStoreChange);
-        ClientActions.fetchMostRecentlyAddedFriends(this.props.params.userId);
+        ClientActions.fetchMostRecentlyAddedFriends(userId);
       },
       componentWillUnmount: function () {
         this.profileListener.remove();
@@ -75,16 +78,23 @@ var React = require('react'),
          FriendApiUtil.fetchMostRecentlyAddedFriends(newProps.params.userId);
          ProfileApiUtil.fetchProfile(newProps.params.userId);
        },
+       onPostStoreChange: function () {
+         var userId = parseInt(this.props.params.userId);
+
+         this.setState({posts: PostStore.all(userId)});
+       },
       onProfileStoreChange: function () {
+        var userId = parseInt(this.props.params.userId);
+
         this.setState({
-          profileFetched:
-            ProfileStore.profileFetched(parseInt(this.props.params.userId))
+          profileFetched: ProfileStore.profileFetched(userId)
         });
       },
       onFriendStoreChange: function () {
+        var userId = parseInt(this.props.params.userId);
+
         this.setState({
-          friendsFetched:
-            FriendStore.friendsFetched(parseInt(this.props.params.userId))
+          friendsFetched: FriendStore.friendsFetched(userId)
         });
       }
     });

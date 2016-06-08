@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
   has_attached_file :cover_photo, styles: { cover: '851x315#' }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :cover_photo, content_type: /\Aimage\/.*\Z/
 
-  has_many :posts
+  has_many :posts,
+    foreign_key: 'author_id'
 
   has_many :friendships
 
@@ -44,7 +45,13 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  # -------------------------AUTHENTICATION---------------------------- #
+  # --------------------------------DEBUGGING------------------------------- #
+
+  def inspect
+    "ID: #{id}, Full name: #{full_name} \n"
+  end
+
+  # -----------------------------AUTHENTICATION----------------------------- #
 
   def self.find_by_credentials(params)
     user = User.find_by(email: params[:email])

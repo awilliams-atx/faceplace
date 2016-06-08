@@ -29,5 +29,4 @@ UserStore.find = function (userId) {
   return _users[userId];
 };
 
-window.UserStore = UserStore;
 module.exports = UserStore;

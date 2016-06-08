@@ -34,11 +34,9 @@ var IntroItemLocation = React.createClass({
   },
   componentDidMount: function () {
     this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
-    this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
     this.ProfileListener.remove();
-    this.FormListener.remove();
   },
   showEdit: function (e) {
     e.preventDefault();
@@ -73,13 +71,6 @@ var IntroItemLocation = React.createClass({
   },
   onProfileStoreChange: function () {
     this.setState({location: ProfileStore.location()});
-  },
-  onFormStoreChange: function (e) {
-    if (FormStore.isOpen('INTRO_LOCATION') && !this.state.editing) {
-      this.setState({editing: true});
-    } else if (!FormStore.isOpen('INTRO_LOCATION') && this.state.editing) {
-      this.setState({editing: false});
-    }
   }
 });
 

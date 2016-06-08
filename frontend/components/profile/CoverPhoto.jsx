@@ -1,6 +1,5 @@
 var React = require('react'),
-    UserStore = require('../../stores/user'),
-    AddFriend = require('./AddFriend');
+    UserStore = require('../../stores/user');
 
 var CoverPhoto = React.createClass({
   render: function () {
@@ -9,13 +8,10 @@ var CoverPhoto = React.createClass({
       imageUrl ? <img src={this.props.imageUrl} /> :
         <div className='empty-cover-photo'></div>
     );
-
-    return (
-      <div className='cover-photo-container'>
-        {coverPhoto}
-        <AddFriend userId={this.props.userId} />
-      </div>
-    );
+    return coverPhoto;
+  },
+  componentWillReceiveProps: function (newProps) {
+    this.forceUpdate();
   }
 });
 

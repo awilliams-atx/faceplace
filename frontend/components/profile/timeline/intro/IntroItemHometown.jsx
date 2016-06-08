@@ -35,11 +35,9 @@ var IntroItemHometown = React.createClass({
   },
   componentDidMount: function () {
     this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
-    this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
     this.ProfileListener.remove();
-    this.FormListener.remove();
   },
   showEdit: function (e) {
     e.preventDefault();
@@ -75,13 +73,6 @@ var IntroItemHometown = React.createClass({
   },
   onProfileStoreChange: function (e) {
     this.setState({hometown: ProfileStore.hometown()});
-  },
-  onFormStoreChange: function (e) {
-    if (FormStore.isOpen('INTRO_HOMETOWN') && !this.state.editing) {
-      this.setState({editing: true});
-    } else if (!FormStore.isOpen('INTRO_HOMETOWN') && this.state.editing) {
-      this.setState({editing: false});
-    }
   }
 });
 

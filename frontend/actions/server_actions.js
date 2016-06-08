@@ -4,25 +4,25 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     friendshipConstants = require('../constants/friendship_constants'),
     postConstants = require('../constants/post_constants'),
     searchConstants = require('../constants/search_constants'),
+    tagConstants = require('../constants/tag_constants'),
     userConstants = require('../constants/user_constants');
 
 var ServerActions = {
-  receiveUsers: function (users) {
+  receiveDestroyedFriendship: function (friendship) {
     Dispatcher.dispatch({
-      actionType: userConstants.USERS_RECEIVED,
-      users: users
-    });
-  },
-  receiveUser: function (user, cb) {
-    Dispatcher.dispatch({
-      actionType: userConstants.USER_RECEIVED,
-      user: user
+      actionType: friendshipConstants.FRIENDSHIP_DESTROYED,
+      profileOwnerId: parseInt(friendship.userId)
     });
   },
   receiveFriendRequest: function (response) {
     Dispatcher.dispatch({
       actionType: friendRequestConstants.MADE_FRIEND_REQUEST_RECEIVED,
       response: response
+    });
+  },
+  receiveFriendRequestCancelation: function () {
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.FRIEND_REQUEST_CANCELED
     });
   },
   receiveFriendRequestResponse: function (friendRequestResponse) {
@@ -39,21 +39,10 @@ var ServerActions = {
       userId: friendRequestResponse.userId
     });
   },
-  receiveFriendRequestCancelation: function () {
+  receiveFriendsForTagging: function (friends) {
     Dispatcher.dispatch({
-      actionType: friendRequestConstants.FRIEND_REQUEST_CANCELED
-    });
-  },
-  receiveDestroyedFriendship: function (friendship) {
-    Dispatcher.dispatch({
-      actionType: friendshipConstants.FRIENDSHIP_DESTROYED,
-      profileOwnerId: parseInt(friendship.userId)
-    });
-  },
-  receiveSearchResults: function (searchResults) {
-    Dispatcher.dispatch({
-      actionType: searchConstants.SEARCH_RESULTS_RECEIVED,
-      searchResults: searchResults
+      actionType: tagConstants.FRIENDS_RECEIVED_FOR_TAGGING,
+      friends: friends
     });
   },
   receiveMostRecentlyAddedFriends: function (friendsData) {
@@ -67,6 +56,31 @@ var ServerActions = {
     Dispatcher.dispatch({
       actionType: postConstants.POST_RECEIVED,
       post: post
+    });
+  },
+  receiveProfilePosts: function (opts) {
+    Dispatcher.dispatch({
+      actionType: postConstants.POSTS_RECEIVED,
+      posts: opts.posts,
+      userId: opts.userId
+    });
+  },
+  receiveSearchResults: function (searchResults) {
+    Dispatcher.dispatch({
+      actionType: searchConstants.SEARCH_RESULTS_RECEIVED,
+      searchResults: searchResults
+    });
+  },
+  receiveUsers: function (users) {
+    Dispatcher.dispatch({
+      actionType: userConstants.USERS_RECEIVED,
+      users: users
+    });
+  },
+  receiveUser: function (user, cb) {
+    Dispatcher.dispatch({
+      actionType: userConstants.USER_RECEIVED,
+      user: user
     });
   }
 };
