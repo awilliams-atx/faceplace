@@ -54,15 +54,24 @@
   float: left;
 }
 
-.nav-friends { background-image: url(nav_friends_inactive.png); }
-.nav-messages { background-image: url(nav_messages_inactive.png); }
-.nav-notifications { background-image: url(nav_notifications_inactive.png); }
-.nav-friends:hover { background-image: url(nav_friends_hover.png); }
-.nav-messages:hover { background-image: url(nav_messages_hover.png); }
-.nav-notifications:hover { background-image: url(nav_notifications_hover.png); }
-.nav-friends-toggled { background-image: url(nav_friends_active.png); }
-.nav-messages-toggled { background-image: url(nav_messages_active.png); }
-.nav-notifications-toggled { background-image: url(nav_notifications_active.png); }
+.nav-friends
+{ background-image: url(asset_path('nav_friends_inactive.png')); }
+.nav-messages
+{ background-image: url(asset_path('nav_messages_inactive.png')); }
+.nav-notifications
+{ background-image: url(asset_path('nav_notifications_inactive.png')); }
+.nav-friends:hover
+{ background-image: url(asset_path('nav_friends_hover.png')); }
+.nav-messages:hover
+{ background-image: url(asset_path('nav_messages_hover.png')); }
+.nav-notifications:hover
+{ background-image: url(asset_path('nav_notifications_hover.png')); }
+.nav-friends-toggled
+{ background-image: url(asset_path('nav_friends_active.png')); }
+.nav-messages-toggled
+{ background-image: url(asset_path('nav_messages_active.png')); }
+.nav-notifications-toggled
+{ background-image: url(asset_path('nav_notifications_active.png')); }
 
 .nav-big-three {
   position: relative;
