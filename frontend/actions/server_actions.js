@@ -58,7 +58,7 @@ var ServerActions = {
       post: post
     });
   },
-  receiveProfilePosts: function (opts) {
+  receiveTimelinePosts: function (opts) {
     Dispatcher.dispatch({
       actionType: postConstants.POSTS_RECEIVED,
       posts: opts.posts,

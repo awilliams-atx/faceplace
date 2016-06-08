@@ -20,7 +20,13 @@ PostStore.__onDispatch = function (payload) {
 };
 
 PostStore.addPost = function (post) {
-  _posts[post.authorId].unshift(post);
+  var authorId = post.authorId;
+
+  if (_posts[post.authorId]) {
+    _posts[post.authorId].unshift(post);
+  } else {
+    _posts[post.authorId] = [post];
+  }
 };
 
 PostStore.all = function (userId) {
@@ -35,4 +41,5 @@ PostStore.setPosts = function (payload) {
   _posts[payload.userId] = payload.posts;
 };
 
+window.PostStore = PostStore;
 module.exports = PostStore;

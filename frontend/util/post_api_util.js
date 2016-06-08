@@ -1,21 +1,20 @@
 var ServerActions = require('../actions/server_actions');
 
 var PostApiUtil = {
-  fetchProfilePosts: function (userId) {
-    console.log('PostApiUtil#fetchProfilePosts');
+  fetchTimelinePosts: function (userId) {
     $.ajax({
       url: 'api/users/' + userId + '/posts',
       method: 'GET',
       dataType: 'json',
       data: {profilePosts: true},
       success: function (posts) {
-        ServerActions.receiveProfilePosts({
+        ServerActions.receiveTimelinePosts({
           userId: userId,
           posts: posts
         });
       },
       error: function (errors) {
-        console.log('PostApiUtil#fetchProfilePosts ERROR');
+        console.log('PostApiUtil#fetchTimelinePosts ERROR');
       }
     });
   },

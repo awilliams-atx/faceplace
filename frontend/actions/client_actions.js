@@ -24,11 +24,11 @@ var ClientActions = {
   fetchProfile: function (userId) {
     ProfileApiUtil.fetchProfile(userId);
   },
-  fetchProfilePosts: function (profileOwnerId) {
-    PostApiUtil.fetchProfilePosts(profileOwnerId);
-  },
   fetchSearchResults: function () {
     SearchApiUtil.fetchSearchResults();
+  },
+  fetchTimelinePosts: function (profileOwnerId) {
+    PostApiUtil.fetchTimelinePosts(profileOwnerId);
   },
   fetchUser: function (id) {
     UserApiUtil.fetchUser(id);
@@ -51,7 +51,9 @@ var ClientActions = {
   submitPost: function (post) {
     submissionPost = {};
     submissionPost.body = post.body;
+    submissionPost.profile_owner_id = post.profileOwnerId;
     submissionPost.tagged_ids = post.taggedFriendIds;
+
     PostApiUtil.submitPost(submissionPost);
   },
   unfriend: function (userId) {

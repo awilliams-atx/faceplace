@@ -26,6 +26,11 @@ UserStore.all = function () {
 };
 
 UserStore.find = function (userId) {
+  if (!_users[userId]) {
+    return {
+      firstName: ''
+    };
+  }
   return _users[userId];
 };
 
