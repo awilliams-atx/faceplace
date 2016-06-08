@@ -49,11 +49,9 @@ var IntroItemSchool = React.createClass({
   },
   componentDidMount: function () {
     this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
-    this.FormListener = FormStore.addListener(this.onFormStoreChange);
   },
   componentWillUnmount: function () {
     this.ProfileListener.remove();
-    this.FormListener.remove();
   },
   showEdit: function (e) {
     e.preventDefault();
@@ -97,13 +95,6 @@ var IntroItemSchool = React.createClass({
       school: ProfileStore.school(),
       major: ProfileStore.major()
     });
-  },
-  onFormStoreChange: function (e) {
-    if (FormStore.isOpen('INTRO_SCHOOL') && !this.state.editing) {
-      this.setState({editing: true});
-    } else if (!FormStore.isOpen('INTRO_SCHOOL') && this.state.editing) {
-      this.setState({editing: false});
-    }
   }
 });
 

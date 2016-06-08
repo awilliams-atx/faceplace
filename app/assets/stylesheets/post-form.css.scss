@@ -1,6 +1,6 @@
 #post-form-section {
   float: left;
-  width: 500px;
+  width: 510px;
   padding: 0;
   overflow: hidden;
 }
@@ -65,7 +65,12 @@
   height: 40px;
 }
 
-.post-footer-buttons {
+.post-footer-left-buttons {
+  float: left;
+  cursor: pointer;
+}
+
+.post-footer-right-buttons {
   margin: 8px;
   float: right;
   button {

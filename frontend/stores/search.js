@@ -33,5 +33,4 @@ SearchStore.searchResultsFetched = function () {
   return _searchResultsFetched;
 };
 
-window.SearchStore = SearchStore;
 module.exports = SearchStore;

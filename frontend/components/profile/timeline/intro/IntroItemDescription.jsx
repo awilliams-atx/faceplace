@@ -14,7 +14,7 @@ var IntroItemDescription = React.createClass({
     if (this.state.editing)
     {
       return (
-        <div id='description-form'>
+        <div id='description-form group'>
           <form onSubmit={this.handleSubmit}>
             <textarea value={this.state.description || ''}
               cols='46'

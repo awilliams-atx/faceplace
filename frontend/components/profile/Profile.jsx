@@ -1,14 +1,16 @@
 var React = require('react'),
-    Nav = require('../Nav'),
-    SessionStore = require('../../stores/session'),
-    SessionActions = require('../../actions/session_actions'),
-    ClientActions = require('../../actions/client_actions'),
+    AddFriend = require('./AddFriend'),
     CoverPhoto = require('./CoverPhoto'),
+    Nav = require('../Nav'),
+    ClientActions = require('../../actions/client_actions'),
+    SessionActions = require('../../actions/session_actions'),
+    SessionStore = require('../../stores/session'),
     UserStore = require('../../stores/user');
 
 var Profile = React.createClass({
   getInitialState: function () {
-    return({user: UserStore.find(parseInt(this.props.params.userId))});
+    var userId = parseInt(this.props.params.userId);
+    return ({user: UserStore.find(userId)});
   },
   render: function () {
     var userId = parseInt(this.props.params.userId);
@@ -22,9 +24,12 @@ var Profile = React.createClass({
       <div className='content'>
         <Nav />
         <div className='profile-sub-content'>
-          <CoverPhoto imageUrl={coverPhotoUrl}
-            authorizedToEdit={authorizedToEdit}
-            userId={userId} />
+          <div className='cover-photo-container'>
+            <CoverPhoto imageUrl={coverPhotoUrl}
+              authorizedToEdit={authorizedToEdit}
+              userId={userId} />
+            <AddFriend userId={userId} />
+          </div>
           {this.props.children}
         </div>
       </div>
@@ -33,17 +38,24 @@ var Profile = React.createClass({
     return (profile);
   },
   componentDidMount: function () {
-    this.UserListener = UserStore.addListener(this.onUserStoreChange);
-    ClientActions.fetchUser(parseInt(this.props.params.userId));
+    var userId = parseInt(this.props.params.userId);
+
+    this.userListener =
+      UserStore.addListener(this.onUserStoreChange);
+    ClientActions.fetchUser(userId);
   },
   componentWillUnmount: function () {
-    this.UserListener.remove();
+    this.userListener.remove();
   },
-   componentWillReceiveProps: function (newProps) {
-     ClientActions.fetchUser(newProps.params.userId);
-   },
+  componentWillReceiveProps: function (newProps) {
+    var userId = newProps.params.userId;
+
+    ClientActions.fetchUser(userId);
+  },
   onUserStoreChange: function () {
-    this.setState({user: UserStore.find(parseInt(this.props.params.userId))});
+    var userId = parseInt(this.props.params.userId);
+
+    this.setState({user: UserStore.find(userId)});
   }
 });
 

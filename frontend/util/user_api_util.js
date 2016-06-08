@@ -4,19 +4,20 @@ var SessionActions = require('../actions/session_actions'),
     ServerActions = require('../actions/server_actions');
 
 var UserApiUtil = {
-  signUp: function (user, redirectCB) {
+  fetchProfilePosts: function (userId) {
     $.ajax({
-      url: 'api/user',
-      method: 'POST',
+      url: 'api/users/' + userId + '/posts',
+      method: 'GET',
       dataType: 'json',
-      data: {user: user},
-      success: function (user) {
-        SessionActions.receiveCurrentUser(user);
-        redirectCB();
+      data: {profilePosts: true},
+      success: function (posts) {
+        ServerActions.receiveProfilePosts({
+          userId: userId,
+          posts: posts
+        });
       },
       error: function (errors) {
-        ErrorActions.clearErrors();
-        ErrorActions.setErrors(errors.responseJSON);
+        console.log('UserApiUtil#fetchProfilePosts ERROR');
       }
     });
   },
@@ -41,6 +42,22 @@ var UserApiUtil = {
         ServerActions.receiveUser(user);
       },
       error: function (errors) {
+      }
+    });
+  },
+  signUp: function (user, redirectCB) {
+    $.ajax({
+      url: 'api/user',
+      method: 'POST',
+      dataType: 'json',
+      data: {user: user},
+      success: function (user) {
+        SessionActions.receiveCurrentUser(user);
+        redirectCB();
+      },
+      error: function (errors) {
+        ErrorActions.clearErrors();
+        ErrorActions.setErrors(errors.responseJSON);
       }
     });
   }

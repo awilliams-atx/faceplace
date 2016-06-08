@@ -9,7 +9,6 @@ var PostApiUtil = {
       dataType: 'json',
       data: {post: post},
       success: function (post) {
-        debugger
         ServerActions.receivePost(post);
       },
       error: function (errors) {

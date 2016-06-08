@@ -38,6 +38,11 @@ class Api::UsersController < ApplicationController
     render 'api/users/most_recently_added'
   end
 
+  def friends_for_tagging
+    @friends = current_user.friends
+    render 'api/friends/tagging_search_results'
+  end
+
   private
 
   def user_params

@@ -60,5 +60,4 @@ FormStore.isOpen = function (form) {
   return _openForms[form];
 };
 
-window.FormStore = FormStore;
 module.exports = FormStore;

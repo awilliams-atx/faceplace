@@ -1,0 +1,33 @@
+.post-breakdown {
+  img {
+    display: block;
+    float: left;
+    margin-right: 8px;
+  }
+}
+
+.post-breakdown-details {
+  float: left;
+  position: relative;
+  top: 2px;
+}
+
+.post-author-name {
+  font-family: helvetica;
+  font-size: 14px;
+  font-weight: bold;
+  color: #365899;
+}
+
+.post-datetime {
+  font-family: helvetica;
+  font-size: 12px;
+  color: #90949c;
+}
+
+.post-body {
+  font-family: helvetica;
+  font-size: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e5e5e5;
+}

@@ -46,5 +46,4 @@ SessionStore.authorizedToEdit = function () {
   return _authorizedToEdit;
 };
 
-window.SessionStore = SessionStore;
 module.exports = SessionStore;
