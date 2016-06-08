@@ -50,4 +50,5 @@ TagStore.setFriends = function (friends) {
   });
 };
 
+window.TagStore = TagStore;
 module.exports = TagStore;

@@ -42,14 +42,17 @@ var ClientActions = {
   removeTaggedFriend: function (userId) {
     Dispatcher.dispatch({
       actionType: tagConstants.FRIEND_UNTAGGED,
-      userid: userId
+      userId: userId
     });
   },
   respondToFriendRequest: function (userId, response) {
     FriendRequestApiUtil.respondToFriendRequest(userId, response);
   },
   submitPost: function (post) {
-    PostApiUtil.submitPost(post);
+    submissionPost = {};
+    submissionPost.body = post.body;
+    submissionPost.tagged_ids = post.taggedFriendIds;
+    PostApiUtil.submitPost(submissionPost);
   },
   unfriend: function (userId) {
     FriendshipApiUtil.destroyFriendship(userId);

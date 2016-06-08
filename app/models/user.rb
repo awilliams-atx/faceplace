@@ -20,6 +20,13 @@ class User < ActiveRecord::Base
     through: :friendships,
     source: :friend
 
+  has_many :taggings,
+    foreign_key: :tagged_id
+
+  has_many :tagged_posts,
+    through: :taggings,
+    source: :post
+
   after_initialize :ensure_session_token
   attr_reader :password
 

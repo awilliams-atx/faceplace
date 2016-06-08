@@ -11,6 +11,7 @@ var PostIndex = React.createClass({
     return ({posts: PostStore.all(userId)});
   },
   render: function () {
+    console.log('PostStore.all: ' + this.state.posts);
 
     var postIndexItems;
 

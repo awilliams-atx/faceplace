@@ -1,6 +1,5 @@
 var React = require('react'),
     ClientActions = require('../../actions/client_actions'),
-    TagSearchItem = require('./TagSearchItem'),
     TagApiUtil = require('../../util/tag_api_util'),
     TagStore = require('../../stores/tag');
 
@@ -151,6 +150,8 @@ var TagSearch = React.createClass({
       tagging: false,
       taggedFriendIds: taggedFriendIds,
       friends: friends
+    }, function () {
+      ClientActions.removeTaggedFriend(friendId);
     });
   }
 });
