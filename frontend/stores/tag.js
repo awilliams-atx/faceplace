@@ -3,8 +3,9 @@ var Store = require('flux/utils').Store,
     postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants');
 
-var _friends = {};
-var _taggedFriendIds = {};
+var _friends = {},
+    _taggedFriendIds = {},
+    _friendsFetched = false;
 
 var TagStore = new Store(AppDispatcher);
 
@@ -42,6 +43,10 @@ TagStore.allTaggedFriendIds = function (opts) {
 
 TagStore.find = function (id) {
   return $.extend({}, _friends[id]);
+};
+
+TagStore.friendsFetched = function () {
+  return _friendsFetched;
 };
 
 TagStore.setFriends = function (friends) {

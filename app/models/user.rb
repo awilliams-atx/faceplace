@@ -48,6 +48,15 @@ class User < ActiveRecord::Base
       .limit(9)
   end
 
+  def profile_feed_posts
+    Post.all
+      .joins('LEFT OUTER JOIN taggings ON taggings.post_id = posts.id')
+      .where('taggings.tagged_id = :user_id OR posts.author_id = :user_id', {user_id: self.id})
+      .group('posts.id')
+  end
+
+  # -----------------------------QUALITY OF LIFE---------------------------- #
+
   def full_name
     "#{first_name} #{last_name}"
   end

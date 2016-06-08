@@ -2,6 +2,7 @@ var ServerActions = require('../actions/server_actions');
 
 var PostApiUtil = {
   fetchProfilePosts: function (userId) {
+    console.log('PostApiUtil#fetchProfilePosts');
     $.ajax({
       url: 'api/users/' + userId + '/posts',
       method: 'GET',
@@ -14,7 +15,7 @@ var PostApiUtil = {
         });
       },
       error: function (errors) {
-        console.log('UserApiUtil#fetchProfilePosts ERROR');
+        console.log('PostApiUtil#fetchProfilePosts ERROR');
       }
     });
   },

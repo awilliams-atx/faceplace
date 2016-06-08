@@ -8,7 +8,6 @@ var ProfileApiUtil = {
       url: 'api/users/' + id,
       method: 'GET',
       dataType: 'json',
-      data: id,
       success: function (profile) {
         ProfileActions.receiveProfile(profile);
       },

@@ -77,7 +77,7 @@ var ServerActions = {
       users: users
     });
   },
-  receiveUser: function (user, cb) {
+  receiveUser: function (user) {
     Dispatcher.dispatch({
       actionType: userConstants.USER_RECEIVED,
       user: user
