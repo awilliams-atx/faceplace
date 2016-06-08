@@ -1,4 +1,5 @@
 var React = require('react'),
+    ClientActions = require('../../actions/client_actions'),
     TagSearchItem = require('./TagSearchItem'),
     TagApiUtil = require('../../util/tag_api_util'),
     TagStore = require('../../stores/tag');
@@ -7,13 +8,40 @@ var TagSearch = React.createClass({
   getInitialState: function () {
     return ({
       searchString: '',
-      friends: TagStore.all(),
-      taggedFriendIds: {}
+      friends: TagStore.allFriends(),
+      taggedFriendIds: TagStore.allTaggedFriendIds()
     });
   },
   render: function () {
-    console.log(this.state.friends);
-    console.log(this.state.taggedFriendIds);
+
+    var taggedFriends;
+
+    var ids = Object.keys(this.state.taggedFriendIds);
+
+    if (ids.length > 0) {
+
+      taggedFriends = (
+        <div className='tagged-friends-list group'>
+          <div className='tagged-friends-with'>{'-- with '}</div>
+          {
+            ids.map(function (id) {
+              var friend = TagStore.find(id);
+
+              return (
+                <div className='tagged-friends-list-item'
+                  data-userid={id}
+                  key={id}
+                  onClick={this.untagFriend}>
+                  {friend.fullName}
+                </div>
+              );
+            }.bind(this))
+          }
+        </div>
+      );
+    } else {
+      taggedFriends = <div className='empty-tagged-friends' />;
+    }
 
     var filteredFriends,
         friends = this.state.friends;
@@ -33,66 +61,41 @@ var TagSearch = React.createClass({
 
     if (filteredFriends.length > 0) {
       tagSearchItems = (
-        <div className='tagged-friends-search-results overlay group'>
-          {
-            filteredFriends.map(function (friend) {
-              return (
-                <div
-                  className='tagged-friends-search-result group'
-                  onClick={this.onTagFriend}
-                  key={friend.userId}
-                  data-userid={friend.userId} >
-                  <img src={friend.postPicUrl} />
-                  <strong>{friend.fullName}</strong>
-                </div>
-              );
-            }.bind(this))
-          }
+        <div className='tag-search-anchor-point'>
+          <div className='tagging-friends-search-results overlay group'>
+            {
+              filteredFriends.map(function (friend) {
+                return (
+                  <div
+                    className='tagging-friends-search-result group'
+                    onClick={this.onTagFriend}
+                    key={friend.userId}
+                    data-userid={friend.userId} >
+                    <img src={friend.postPicUrl} />
+                    <strong>{friend.fullName}</strong>
+                  </div>
+                );
+              }.bind(this))
+            }
+          </div>
         </div>
       );
     } else {
       tagSearchItems = <div className='empty-tagged-friends-search-results'/>;
     }
 
-
-    var taggedFriends;
-
-    var ids = Object.keys(this.state.taggedFriendIds);
-
-    if (ids.length > 0) {
-
-      taggedFriends = (
-        <div className='tagged-friends-list'>
-          {
-            ids.map(function (id) {
-              var friend = TagStore.find(id);
-
-              return (
-                <div className='tagged-friend-list-item'
-                  data-userid={id}
-                  key={id}
-                  onClick={this.untagFriend}>
-                  {friend.fullName}
-                </div>
-              );
-            }.bind(this))
-          }
-        </div>
-      );
-    } else {
-      taggedFriends = <div className='empty-tagged-friends' />;
-    }
-
     return (
       <div className='tagging-container group'>
         {taggedFriends}
-        <div className='tag-with'>With:</div>
-        <div className='tagging-field'>
-          <input className='tagged-friends-input'
-            placeholder='Who are you with?'
-            onChange={this.onSearchStringChange}
-            value={this.state.searchString}
-            ref='autoFocus' />
+        <div className='tagging-field-container'>
+          <div className='tagging-field-with'>With:</div>
+          <div className='tagging-field'>
+            <input className='tagged-friends-input'
+              placeholder='Who are you with?'
+              onChange={this.onSearchStringChange}
+              value={this.state.searchString}
+              ref='autoFocus' />
+          </div>
         </div>
         {tagSearchItems}
       </div>
@@ -103,11 +106,17 @@ var TagSearch = React.createClass({
     this.tagListener = TagStore.addListener(this.onTagStorechange);
     TagApiUtil.fetchFriendsForTagging();
   },
+  componentWillUnmount: function () {
+    this.tagListener.remove();
+  },
   onSearchStringChange: function (e) {
     this.setState({searchString: e.target.value});
   },
   onTagStorechange: function () {
-    this.setState({friends: TagStore.all()});
+    this.setState({
+      friends: TagStore.allFriends(),
+      taggedFriendIds: TagStore.allTaggedFriendIds()
+    });
   },
   onTagFriend: function (e) {
     e.preventDefault();
@@ -126,7 +135,7 @@ var TagSearch = React.createClass({
       friends: friends,
       taggedFriendIds: taggedFriendIds
     }, function () {
-      console.log(this.state);
+      ClientActions.addTaggedFriend(friendId);
     });
   },
   untagFriend: function (e) {

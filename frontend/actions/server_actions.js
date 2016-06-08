@@ -52,9 +52,9 @@ var ServerActions = {
       profileOwnerId: friendsData.profileOwnerId
     });
   },
-  receivePost: function (post) {
+  receiveOwnPost: function (post) {
     Dispatcher.dispatch({
-      actionType: postConstants.POST_RECEIVED,
+      actionType: postConstants.OWN_POST_RECEIVED,
       post: post
     });
   },

@@ -36,7 +36,33 @@ donny.profile_pic = File.open("#{Rails.root}/app/assets/images/donald_kerabatsos
 donny.cover_photo = File.open("#{Rails.root}/app/assets/images/donald_kerabatsos_cover_photo.jpg")
 donny.save!
 
-friends = [andrew, sam, david, jeffrey, walter, donny]
+jeff_sr = User.create(first_name: "Jeffrey", last_name: "Lebowski", email: "jeff_sr", password: "starwars")
+
+jeff_sr.profile_pic = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_sr_profile_pic.jpg")
+jeff_sr.cover_photo = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_sr_cover_photo.jpg")
+jeff_sr.save!
+
+maude = User.create(first_name: "Maude", last_name: "Lebowski", email: "maude", password: "starwars")
+
+maude.profile_pic = File.open("#{Rails.root}/app/assets/images/maude_lebowski_profile_pic.jpg")
+maude.cover_photo = File.open("#{Rails.root}/app/assets/images/maude_lebowski_cover_photo.jpg")
+maude.save!
+
+jesus = User.create(first_name: "Jesus", last_name: "Quintana", email: "jesus", password: "starwars")
+
+jesus.profile_pic = File.open("#{Rails.root}/app/assets/images/jesus_quintana_profile_pic.png")
+jesus.cover_photo = File.open("#{Rails.root}/app/assets/images/jesus_quintana_cover_photo.jpg")
+jesus.save!
+
+brandt = User.create(first_name: "Brandt", last_name: "Bjergsen", email: "brandt", password: "starwars")
+
+brandt.profile_pic = File.open("#{Rails.root}/app/assets/images/brandt_bjergsen_profile_pic.jpg")
+brandt.cover_photo = File.open("#{Rails.root}/app/assets/images/brandt_bjergsen_cover_photo.jpg")
+brandt.save!
+
+
+
+friends = [andrew, sam, david, jeffrey, walter, donny, jeff_sr, maude, jesus, brandt]
 
 friends.permutation(2).each do |user_1, user_2|
   Friendship.create(user_id: user_1.id, friend_id: user_2.id)

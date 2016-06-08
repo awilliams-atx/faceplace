@@ -1,9 +1,6 @@
 .tagging-container {
-  background-color: red;
-  border-top: 1px solid #e5e5e5;
   input {
     padding-left: 5px;
-    background-color: orange;
     display: block;
     float: left;
     width: 462px;
@@ -23,8 +20,44 @@
   background-color: #f2f2f2;
 }
 
+.tagged-friends-with {
+  display: block;
+  float: left;
+  margin: 6px;
 
-.tag-with {
+  font-family: helvetica;
+  font-size: 12px;
+}
+
+.tagged-friends-list-item {
+  display: block;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+  border: 1px solid #9cb4d8 ;
+  border-radius: 3px;
+  background-color: #e9ebee;
+
+  font-family: helvetica;
+  font-size: 12px;
+}
+
+.tagged-friends-list-item:hover {
+  cursor: pointer;
+}
+
+.tagging-field-container {
+  border-top: 1px solid #e5e5e5;
+}
+
+.tagging-field {
+  input {
+    font-family: helvetica;
+    font-size: 14px;
+  }
+}
+
+.tagging-field-with {
   float: left;
   background-color: #e2e8f6;
   font-family: helvetica;
@@ -34,29 +67,20 @@
   padding: 8px 6px 6px 8px;
 }
 
-.tagged-friends {
-  display: block;
-  float: left;
-  width: 467px;
-  input {
-    padding: 7px;
-    font-family: helvetica;
-    font-size: 12px;
-    outline: none;
-  }
+.tag-search-anchor-point {
+  position: relative;
 }
 
-
-.tagged-friends-search-results {
-  top: 40px;
-  left: 40px;
+.tagging-friends-search-results {
+  top: 29px;
+  left: 44px;
   border-radius: 3px;
   width: 240px;
   overflow: hidden;
   padding: 9px 0;
 }
 
-.tagged-friends-search-result {
+.tagging-friends-search-result {
   background-color: white;
   width: 100%;
   cursor: pointer;
@@ -72,7 +96,7 @@
   }
 }
 
-.tagged-friends-search-result:hover {
+.tagging-friends-search-result:hover {
   background-color: #3b5998;
   color: white;
 }
