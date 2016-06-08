@@ -11,7 +11,6 @@ var PostIndex = React.createClass({
     return ({posts: PostStore.all(userId)});
   },
   render: function () {
-    console.log('PostStore.all: ' + this.state.posts);
 
     var postIndexItems;
 
@@ -29,11 +28,11 @@ var PostIndex = React.createClass({
     );
   },
   componentDidMount: function () {
-    var userId = this.props.userId;
+    var profileOwnerId = this.props.profileOwnerId;
 
     this.postListener =
       PostStore.addListener(this.onPostStoreChange);
-    ClientActions.fetchProfilePosts(userId);
+    ClientActions.fetchProfilePosts(profileOwnerId);
   },
   componentWillUnmount: function () {
     this.postListener.remove();

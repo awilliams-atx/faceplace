@@ -13,25 +13,25 @@ var React = require('react'),
 
     var Timeline = React.createClass({
       getInitialState: function () {
-        var userId = parseInt(this.props.params.userId);
+        var profileOwnerId = parseInt(this.props.params.userId);
         return({
-          profileFetched: ProfileStore.profileFetched(userId),
-          friendsFetched: FriendStore.friendsFetched(userId)
+          profileFetched: ProfileStore.profileFetched(profileOwnerId),
+          friendsFetched: FriendStore.friendsFetched(profileOwnerId)
         });
       },
       render: function () {
-        var userId = parseInt(this.props.params.userId);
+        var profileOwnerId = parseInt(this.props.params.userId);
 
         var timelineContent,
             introContent,
             friendsContent;
 
         var authorizedToEdit =
-          userId === SessionStore.currentUser().id;
+          profileOwnerId === SessionStore.currentUser().id;
 
         if (this.state.profileFetched) {
           introContent = (
-                <IntroIndex userId={userId}
+                <IntroIndex userId={profileOwnerId}
                   authorizedToEdit={authorizedToEdit} />
           );
         } else {
@@ -41,7 +41,7 @@ var React = require('react'),
 
         if (this.state.friendsFetched) {
           friendsContent = (
-            <FriendIndex profileOwnerId={parseInt(this.props.params.userId)}/>
+            <FriendIndex profileOwnerId={profileOwnerId}/>
           );
         } else {
           friendsContent = <div className='empty-friends-content' />;
@@ -54,50 +54,50 @@ var React = require('react'),
               {friendsContent}
             </aside>
             <section className='timeline-main-content'>
-              <PostIndex userId={userId}/>
+              <PostIndex profileOwnerId={profileOwnerId}/>
             </section>
           </div>
         );
       },
       componentDidMount: function () {
-        var userId = this.props.params.userId;
+        var profileOwnerId = this.props.params.userId;
 
         this.profileListener =
           ProfileStore.addListener(this.onProfileStoreChange);
-        ClientActions.fetchProfile(userId);
+        ClientActions.fetchProfile(profileOwnerId);
 
         this.friendListener =
           FriendStore.addListener(this.onFriendStoreChange);
-        ClientActions.fetchMostRecentlyAddedFriends(userId);
+        ClientActions.fetchMostRecentlyAddedFriends(profileOwnerId);
       },
       componentWillUnmount: function () {
         this.profileListener.remove();
         this.friendListener.remove();
       },
        componentWillReceiveProps: function (newProps) {
-         var newUserId = newProps.params.userId;
+         var newProfileOwnerId = newProps.params.userId;
 
-         FriendApiUtil.fetchMostRecentlyAddedFriends(newUserId);
-         ProfileApiUtil.fetchProfile(newUserId);
-         PostApiUtil.fetchProfilePosts(newUserId);
+         FriendApiUtil.fetchMostRecentlyAddedFriends(newProfileOwnerId);
+         ProfileApiUtil.fetchProfile(newProfileOwnerId);
+         PostApiUtil.fetchProfilePosts(newProfileOwnerId);
        },
        onPostStoreChange: function () {
-         var userId = parseInt(this.props.params.userId);
+         var profileOwnerId = parseInt(this.props.params.userId);
 
-         this.setState({posts: PostStore.all(userId)});
+         this.setState({posts: PostStore.all(profileOwnerId)});
        },
       onProfileStoreChange: function () {
-        var userId = parseInt(this.props.params.userId);
+        var profileOwnerId = parseInt(this.props.params.userId);
 
         this.setState({
-          profileFetched: ProfileStore.profileFetched(userId)
+          profileFetched: ProfileStore.profileFetched(profileOwnerId)
         });
       },
       onFriendStoreChange: function () {
-        var userId = parseInt(this.props.params.userId);
+        var profileOwnerId = parseInt(this.props.params.userId);
 
         this.setState({
-          friendsFetched: FriendStore.friendsFetched(userId)
+          friendsFetched: FriendStore.friendsFetched(profileOwnerId)
         });
       }
     });

@@ -103,7 +103,6 @@ var TagSearch = React.createClass({
   componentDidMount: function () {
     this.refs.autoFocus.focus();
     this.tagListener = TagStore.addListener(this.onTagStorechange);
-    TagApiUtil.fetchFriendsForTagging();
   },
   componentWillUnmount: function () {
     this.tagListener.remove();
