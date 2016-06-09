@@ -31,9 +31,9 @@ var PostForm = React.createClass({
   }
 
   if (SessionStore.currentUser().id === this.props.profileOwnerId) {
-    placeholderText = 'What\'s on your mind, ' + currentUser.first_name;
+    placeholderText = 'What\'s on your mind, ' + currentUser.first_name + '?';
   } else {
-    placeholderText = 'Say something to ' + profileOwner.firstName + '.';
+    placeholderText = 'Say something to ' + profileOwner.firstName + '...';
   }
 
     return (
@@ -85,7 +85,7 @@ var PostForm = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     if (this.state.postBody.length < 1) { return; }
-    
+
     var post = {
       profileOwnerId: this.props.profileOwnerId,
       body: this.state.postBody,

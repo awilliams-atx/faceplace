@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   validates :email, :session_token, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
+  # ---------------------------------PAPERCLIP-------------------------------- #
+
   has_attached_file :profile_pic, styles:
     { search_result: '36x36#', post: '38x38#', notifications: '48x48#', thumb: '100x100#' },
     default_url: "/images/:style/missing.png"
@@ -10,13 +12,15 @@ class User < ActiveRecord::Base
   has_attached_file :cover_photo, styles: { cover: '851x315#' }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :cover_photo, content_type: /\Aimage\/.*\Z/
 
+  # --------------------------------VALIDATIONS------------------------------- #
+
   has_many :posts,
-    foreign_key: 'author_id'
+    foreign_key: :author_id
 
   has_many :friendships
 
   has_many :friends,
-    class_name: "User",
+    class_name: 'User',
     through: :friendships,
     source: :friend
 
@@ -27,9 +31,17 @@ class User < ActiveRecord::Base
     through: :taggings,
     source: :post
 
-  has_many :timeline_postings
+  has_many :timeline_postings,
+    foreign_key: :profile_owner_id
+
+  has_many :received_timeline_posts,
+    through: :timeline_postings,
+    source: :post
 
   after_initialize :ensure_session_token
+
+  # ----------------------------------METHODS--------------------------------- #
+
   attr_reader :password
 
   def friends_with?(id)
@@ -53,7 +65,8 @@ class User < ActiveRecord::Base
   def timeline_posts
     Post.all
       .joins('LEFT OUTER JOIN taggings ON taggings.post_id = posts.id')
-      .where('taggings.tagged_id = :user_id OR posts.author_id = :user_id', {user_id: self.id})
+      .joins('LEFT OUTER JOIN timeline_postings ON timeline_postings.post_id = posts.id')
+      .where('posts.author_id = :user_id OR taggings.tagged_id = :user_id OR timeline_postings.profile_owner_id = :user_id', {user_id: self.id})
       .group('posts.id')
   end
 

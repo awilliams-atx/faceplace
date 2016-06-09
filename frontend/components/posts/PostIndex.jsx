@@ -11,7 +11,6 @@ var PostIndex = React.createClass({
     return ({posts: PostStore.all(profileOwnerId)});
   },
   render: function () {
-    debugger
     var profileOwnerId = this.props.profileOwnerId,
         posts = this.state.posts,
         postIndexItems;
@@ -41,6 +40,9 @@ var PostIndex = React.createClass({
     var profileOwnerId = this.props.profileOwnerId;
 
     this.setState({posts: PostStore.all(profileOwnerId)});
+  },
+  componentWillReceiveProps: function (newProps) {
+    this.setState({posts: PostStore.all(newProps.profileOwnerId)});
   }
 });
 
