@@ -53,7 +53,6 @@ var ServerActions = {
     });
   },
   receiveOwnPost: function (post) {
-    debugger
     Dispatcher.dispatch({
       actionType: postConstants.OWN_POST_RECEIVED,
       post: post

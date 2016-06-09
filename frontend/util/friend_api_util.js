@@ -7,7 +7,6 @@ var FriendApiUtil = {
       method: 'GET',
       dataType: 'json',
       success: function (friendsData) {
-        // debugger
         ServerActions.receiveMostRecentlyAddedFriends(friendsData);
       },
       error: function (errors) {

@@ -5,13 +5,12 @@ class User < ActiveRecord::Base
   # ---------------------------------PAPERCLIP-------------------------------- #
 
   has_attached_file :profile_pic, styles:
-    { search_result: '36x36#', post: '38x38#', notifications: '48x48#', thumb: '100x100#' },
-    default_url: "/images/:style/missing.png"
+    { search_result: '36x36#', post: '38x38#', notifications: '48x48#', thumb: '100x100#' }, default_url: "/images/default_:style_profile_pic.png"
   validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
   has_attached_file :cover_photo, styles: { cover: '851x315#' }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :cover_photo, content_type: /\Aimage\/.*\Z/
-
+  
   # --------------------------------VALIDATIONS------------------------------- #
 
   has_many :posts,

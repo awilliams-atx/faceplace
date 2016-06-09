@@ -12,7 +12,7 @@ var LogInForm = React.createClass({
     return ({email: "", password: ""});
   },
   render: function () {
-    var logInButton = <button>Log In</button>;
+    var logInButton = <button className='login-button'>Log In</button>;
     if (this.state.email === "" && this.state.password === "") {
       logInButton = (
         <button onClick={this._guestLogin} className='login-button'>
