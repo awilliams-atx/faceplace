@@ -14,8 +14,17 @@ var LogInForm = React.createClass({
   render: function () {
     var logInButton = <button>Log In</button>;
     if (this.state.email === "" && this.state.password === "") {
-      logInButton = <button onClick={this._guestLogin}>Guest</button>;
+      logInButton = (
+        <button onClick={this._guestLogin} className='login-button'>
+          Guest
+        </button>
+      );
     }
+    var omniauthButton = (
+      <a href='/auth/facebook' className='login-button'>
+        Log In with Facebook
+      </a>
+    );
     return (
       <div className='content'>
         <header className='welcome-header'>
@@ -26,7 +35,9 @@ var LogInForm = React.createClass({
               <table>
                 <thead>
                   <tr>
-                    <td><label htmlFor="email">Email</label></td>
+                    <td>
+                      <label htmlFor="email" ref='autoFocus'>Email</label>
+                      </td>
                     <td><label htmlFor="password">Password</label></td>
                   </tr>
                 </thead>
@@ -43,6 +54,7 @@ var LogInForm = React.createClass({
                            id="password"
                     /></td>
                   <td>{logInButton}</td>
+                  <td>{omniauthButton}</td>
                   </tr>
                 </tbody>
               </table>
@@ -55,6 +67,7 @@ var LogInForm = React.createClass({
   },
   componentDidMount: function () {
     this.setState({errors: ErrorStore.all()});
+    this.refs.autoFocus.focus();
   },
   _emailChange: function (e) {
     this.setState({email: e.target.value});
