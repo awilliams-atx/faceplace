@@ -32,15 +32,22 @@ class Api::UsersController < ApplicationController
     render 'api/users/show'
   end
 
+  def friends_for_tagging
+    @friends = current_user.friends
+    render 'api/friends/tagging_search_results'
+  end
+
   def most_recently_added
     @profile_owner_id = params[:id]
     @users = User.find(params[:id]).most_recently_added
     render 'api/users/most_recently_added'
   end
 
-  def friends_for_tagging
-    @friends = current_user.friends
-    render 'api/friends/tagging_search_results'
+  def search
+    search_string = params[:search_string]
+    @users = User.search(search_string)
+
+    render 'api/users/search_index'
   end
 
   private

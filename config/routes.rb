@@ -8,9 +8,12 @@ Rails.application.routes.draw do
     resource :session, only: [:new, :create, :destroy, :show]
 
 
+    get '/users/search', to: 'users#search'
+    
     resources :users, only: [:show, :index] do
       resources :posts, only: [:index]
     end
+
 
     resource :user, only: [:update, :create]
     get '/users/:id/most_recently_added',

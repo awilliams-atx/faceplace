@@ -5,18 +5,18 @@ class User < ActiveRecord::Base
   # ---------------------------------PAPERCLIP-------------------------------- #
 
   has_attached_file :profile_pic, styles:
-    { search_result: '36x36#', post: '38x38#', notifications: '48x48#', thumb: '100x100#' }, default_url: "/images/default_:style_profile_pic.png"
+    { search_result: '36x36#', post: '38x38#', notifications: '48x48#', thumb: '100x100#' }, default_url: "default_:style_profile_pic.png"
   validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
-  has_attached_file :cover_photo, styles: { cover: '851x315#' }, default_url: "/images/:style/missing.png"
+  has_attached_file :cover_photo, styles: { cover: '851x315#' }, default_url: "default_:style_cover_photo.png"
   validates_attachment_content_type :cover_photo, content_type: /\Aimage\/.*\Z/
-  
+
   # --------------------------------VALIDATIONS------------------------------- #
 
   has_many :posts,
     foreign_key: :author_id
 
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
 
   has_many :friends,
     class_name: 'User',
@@ -24,7 +24,8 @@ class User < ActiveRecord::Base
     source: :friend
 
   has_many :taggings,
-    foreign_key: :tagged_id
+    foreign_key: :tagged_id,
+    dependent: :destroy
 
   has_many :tagged_posts,
     through: :taggings,
@@ -59,6 +60,13 @@ class User < ActiveRecord::Base
     @users = friends
       .order("friendships.created_at DESC")
       .limit(9)
+  end
+
+  def self.search(search_string)
+    User.all
+      .where('LOWER(first_name) LIKE :string
+      OR LOWER(last_name) LIKE :string',
+        {string: search_string.downcase + '%'})
   end
 
   def timeline_posts

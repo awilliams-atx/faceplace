@@ -9,9 +9,8 @@ var SearchIndex = React.createClass({
   getInitialState: function () {
     return({
       searching: false,
-      searchString: "",
-      users: SearchStore.all(),
-      usersAreFetched: false
+      searchString: '',
+      users: SearchStore.all()
     });
   },
   render: function () {
@@ -36,10 +35,10 @@ var SearchIndex = React.createClass({
 
     return (
       <div className='nav-search' id='search-bar'>
-        <form _onSubmit={this.handleSubmit} >
+        <form onSubmit={this.handleSubmit} >
           <input placeholder='Search Faceplace'
             onChange={this.onSearchStringChange}
-            onClick={this.showIndexItems}
+            onFocus={this.showIndexItems}
             className='search-bar' />
         </form>
 
@@ -58,41 +57,40 @@ var SearchIndex = React.createClass({
   componentWillUnmount: function () {
     this.SearchListener.remove();
   },
-  onSearchStoreChange: function (e) {
-    this.setState({users: SearchStore.all()});
-  },
-  onSearchStringChange: function (e) {
-    this.setState({searchString: e.target.value});
-  },
-  showIndexItems: function (e) {
-    if (this.state.searching) { return; }
-    if (!this.state.areUsersFetched) {
-      ClientActions.fetchSearchResults();
-    }
-    this.setState({
-      searching: true,
-      areUsersFetched: true
-    }, function () {
-         this.clickListener = function (e) {
-           var searchBar = document.getElementById('search-bar');
-
-           if (!searchBar.contains(e.target)) {
-            this.hideIndexItems();
-           }
-         }.bind(this);
-
-       document.getElementsByTagName('body')[0]
-        .addEventListener('click', this.clickListener);
-    });
+  handleSubmit: function (e) {
+    e.preventDefault();
   },
   hideIndexItems: function (e) {
     document.getElementsByTagName('body')[0]
       .removeEventListener('click', this.clickListener);
     this.setState({searching: false});
   },
-  handleSubmit: function (e) {
-    e.preventDefault();
+  onSearchStoreChange: function (e) {
+    this.setState({users: SearchStore.all()});
+  },
+  onSearchStringChange: function (e) {
+    this.setState({searchString: e.target.value}, function () {
+      ClientActions.fetchSearchResults(this.state.searchString);
+    });
+  },
+  showIndexItems: function (e) {
+    if (this.state.searching) { return; }
+    ClientActions.fetchSearchResults(this.state.searchString);
 
+    this.setState({
+      searching: true
+    }, function () {
+      this.clickListener = function (e) {
+        var searchBar = document.getElementById('search-bar');
+
+        if (!searchBar.contains(e.target)) {
+          this.hideIndexItems();
+        }
+      }.bind(this);
+
+      document.getElementsByTagName('body')[0]
+      .addEventListener('click', this.clickListener);
+    });
   }
 });
 
