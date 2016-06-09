@@ -84,7 +84,6 @@ var Nav = React.createClass({
   },
   friendsClickListener: function (e) {
     var navFriendsToggled = document.getElementById('nav-friends-toggled');
-    console.log('navFriendsToggled' + navFriendsToggled);
 
     if (!navFriendsToggled.contains(e.target)) {
      this.toggleFriends();
