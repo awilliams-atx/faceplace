@@ -18,7 +18,7 @@ var PostForm = React.createClass({
   },
   render: function () {
     var currentUser = SessionStore.currentUser(),
-        profileOwner = UserStore.find(this.props.profileOwnerId),
+        profileOwner = UserStore.user(),
         placeholderText,
         tagContents,
         tagUrl =

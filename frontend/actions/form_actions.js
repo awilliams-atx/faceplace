@@ -3,7 +3,6 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 
 var FormActions = {
   open: function (form) {
-    console.log('FormActions#openForm ' + form);
     var action = form + '_OPEN';
     Dispatcher.dispatch({
       actionType: formConstants[action]

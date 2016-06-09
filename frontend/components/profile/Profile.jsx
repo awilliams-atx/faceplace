@@ -10,7 +10,7 @@ var React = require('react'),
 var Profile = React.createClass({
   getInitialState: function () {
     var userId = parseInt(this.props.params.userId);
-    return ({user: UserStore.find(userId)});
+    return ({user: UserStore.user()});
   },
   render: function () {
     var userId = parseInt(this.props.params.userId);
@@ -55,7 +55,7 @@ var Profile = React.createClass({
   onUserStoreChange: function () {
     var userId = parseInt(this.props.params.userId);
 
-    this.setState({user: UserStore.find(userId)});
+    this.setState({user: UserStore.user()});
   }
 });
 
