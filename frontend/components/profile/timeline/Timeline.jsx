@@ -79,7 +79,7 @@ var React = require('react'),
 
          FriendApiUtil.fetchMostRecentlyAddedFriends(newProfileOwnerId);
          ProfileApiUtil.fetchProfile(newProfileOwnerId);
-         PostApiUtil.fetchProfilePosts(newProfileOwnerId);
+         PostApiUtil.fetchTimelinePosts(newProfileOwnerId);
        },
        onPostStoreChange: function () {
          var profileOwnerId = parseInt(this.props.params.userId);

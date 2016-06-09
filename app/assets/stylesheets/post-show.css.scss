@@ -8,15 +8,30 @@
 
 .post-breakdown-details {
   float: left;
+  width: 440px;
   position: relative;
+  margin-bottom: 5px;
   top: 2px;
-}
 
-.post-author-name {
   font-family: helvetica;
   font-size: 14px;
   font-weight: bold;
   color: #365899;
+  div {
+    float: left;
+  }
+  img {
+    float: left;
+    width: 15px;
+    margin: 0 5px;
+  }
+}
+
+.post-datetime-container {
+  float: left;
+}
+.post-datetime {
+  float: left;
 }
 
 .post-datetime {
@@ -28,6 +43,25 @@
 .post-body {
   font-family: helvetica;
   font-size: 14px;
-  padding: 14px 0;
+  padding: 14px 0 3px 0;
+}
+
+.post-tagged-friends {
+  padding: 0 0 14px 0;
   border-bottom: 1px solid #e5e5e5;
+  a {
+    cursor: pointer;
+    color: #365899;
+  }
+  a:hover  {
+    text-decoration: underline;
+  }
+}
+
+.post-tagged-friends-with {
+  color: rgb(75, 79, 86);
+}
+
+.post-options {
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
 }
