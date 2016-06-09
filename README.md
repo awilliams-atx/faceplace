@@ -2,19 +2,19 @@
 
 [Heroku link][heroku] **NB:** This should be a link to your production site
 
-[heroku]: http://www.herokuapp.com
+[heroku]: http://www.faceplace.herokuapp.com
 
 ## Minimum Viable Product
 
-Faceplace is a web application inspired by Facebook that will be build using Ruby on Rails and React.js.  By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
+Faceplace is a web application inspired by Facebook that will be build using Ruby on Rails and React.js. By the end of Week 9, this app will, at a minimum, satisfy the following criteria:
 
 - [x] New account creation, login, and guest/demo login
-- [ ] Smooth, bug-free navigation
+- [x] Smooth, bug-free navigation
 - [ ] Adequate seed data to demonstrate the site's features
-- [ ] The minimally necessary features for a Facebook-inspired site: an (instant) search bar for finding people, a status update box, a scrolling side-bar friends list, a profile page (cover photo, timeline, personal info, abbreviated friends list), an (infininte) feed, a friends page, friend requests, private messages, and notifications.
+- [ ] The minimally necessary features for a Facebook-inspired site: an (instant) search bar for finding people, a status update box, a scrolling side-bar friends list, a profile page (cover photo, timeline, personal info, abbreviated friends list), an (infinite) feed, a friends page, friend requests, private messages, and notifications.
 - [ ] Given enough time, the website will have event invitations, a photos page, sharing, and will be jazzed up with hover pop-ups! Maybe more!
-- [ ] Hosting on Heroku
-- [ ] CSS styling that is satisfactorily visually appealing
+- [x] Hosting on Heroku
+- [x] CSS styling that is satisfactorily visually appealing
 - [ ] A production README, replacing this README (**NB**: check out the [sample production README](https://github.com/appacademy/sample-project-proposal/blob/master/docs/production_readme.md) -- you'll write this later)
 
 ## Product Goals and Priorities
@@ -27,16 +27,16 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 - [x] Create an account (MVP)
 - [x] Log in / Log out, including as a Guest/Demo User (MVP)
 - [ ] User search (MVP)
-- [ ] Friending and unfriending (MVP)
+- [x] Friending and unfriending (MVP)
 - [ ] Friends page (MVP)
-- [ ] Profile page (MVP)
-- [ ] Status updates (with or without photos) (MVP)
+- [x] Profile page (MVP)
+- [x] Status updates (with or without photos) (MVP)
 - [ ] (Infinite) feed (MVP)
 - [ ] Reactions (MVP)
 - [ ] Who's-online sidebar (MVP)
 - [ ] Notifications (MVP)
 - [ ] Private messages (MVP)
-- [ ] Profile editing (non-MVP)
+- [x] Profile editing (non-MVP)
 - [ ] Event creation and invitations (non-MVP)
 - [ ] Photo albums (non-MVP)
 
