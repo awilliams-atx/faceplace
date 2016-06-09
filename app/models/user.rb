@@ -84,6 +84,23 @@ class User < ActiveRecord::Base
 
   # -----------------------------AUTHENTICATION----------------------------- #
 
+  def self.find_or_create_by_auth_hash(auth_hash)
+    user = User.find_by(facebook_uid: auth_hash[:uid])
+
+    if user.nil?
+      first_name, last_name = auth_hash[:info][:name].split(' ')
+      user = User.create!(
+        facebook_uid: auth_hash[:uid],
+        email: auth_hash[:info][:email],
+        first_name: first_name,
+        last_name: last_name,
+        password: SecureRandom::urlsafe_base64(16)
+      )
+    end
+
+    user
+  end
+
   def self.find_by_credentials(params)
     user = User.find_by(email: params[:email])
     return nil if user.nil?

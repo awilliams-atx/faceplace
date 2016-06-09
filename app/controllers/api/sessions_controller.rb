@@ -14,6 +14,15 @@ class Api::SessionsController < ApplicationController
     end
   end
 
+  def omniauth_create
+    debugger
+    @user = User.find_or_create_by_auth_hash(auth_hash)
+
+    log_in(@user)
+
+    redirect_to root_url + '#/'
+  end
+
   def destroy
     log_out
     render json: {}
@@ -32,5 +41,9 @@ class Api::SessionsController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password)
+  end
+
+  def auth_hash
+    request.env['omniauth.auth']
   end
 end

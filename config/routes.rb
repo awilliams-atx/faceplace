@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
   root to: 'static_pages#root'
+
+  get '/auth/facebook/callback', to: 'api/sessions#omniauth_create'
+
   namespace :api, defaults: { format: :json } do
 
     resource :session, only: [:new, :create, :destroy, :show]
 
+
     resources :users, only: [:show, :index] do
       resources :posts, only: [:index]
     end
+
     resource :user, only: [:update, :create]
     get '/users/:id/most_recently_added',
       to: 'users#most_recently_added'

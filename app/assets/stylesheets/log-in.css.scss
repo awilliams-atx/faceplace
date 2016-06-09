@@ -51,17 +51,29 @@ label:after {
     padding: 3px 3px 4px 3px;
     width: 142px;
   }
-  button {
-    border-radius: 0;
-    background-color: #5a74a8;
-    color: white;
-    font-family: tahoma;
-    font-weight: bold;
-    box-shadow: 0 0 1px black;
-    height: 20px;
-    width: 52px;
-  }
-  button:hover {
-    cursor: pointer;
-  }
+}
+
+.login-button {
+  display: block;
+  padding: 2px 6px 3px;
+  background-color: #5a74a8;
+  color: white;
+  font-family: tahoma;
+  font-weight: bold;
+  box-shadow: 0 0 1px black;
+}
+
+.login-button:hover {
+  cursor: pointer;
+}
+
+a.login-button:active {
+  outline-color: -webkit-focus-ring-color;
+  outline-style: auto;
+  outline-width: 5px;
+}
+
+.login-button:active {
+  position: relative;
+  top: 2px;
 }
