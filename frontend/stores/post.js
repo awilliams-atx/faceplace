@@ -2,7 +2,7 @@ var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher.js'),
     postConstants = require('../constants/post_constants');
 
-var _posts = {};
+var _posts = [];
 
 var PostStore = new Store(AppDispatcher);
 
@@ -20,25 +20,15 @@ PostStore.__onDispatch = function (payload) {
 };
 
 PostStore.addPost = function (post) {
-  var authorId = post.authorId;
-
-  if (_posts[post.authorId]) {
-    _posts[post.authorId].unshift(post);
-  } else {
-    _posts[post.authorId] = [post];
-  }
+  _posts.push(post);
 };
 
-PostStore.all = function (userId) {
-  if (_posts.hasOwnProperty(userId)) {
-    return _posts[userId].slice();
-  } else {
-    return [];
-  }
+PostStore.all = function () {
+  return _posts.slice();
 };
 
 PostStore.setPosts = function (payload) {
-  _posts[payload.userId] = payload.posts;
+  _posts = payload.posts;
 };
 
 window.PostStore = PostStore;

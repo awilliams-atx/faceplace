@@ -27,9 +27,6 @@ var PostIndexItem = React.createClass({
           separator = '';
         }
 
-        finalTag = taggedFriends.slice(-1);
-        finalTag = finalTag.slice(0, finalTag.length - 2);
-
         return (
           <span>
             <a href={'#/users/' + friend.taggedId}
@@ -53,8 +50,6 @@ var PostIndexItem = React.createClass({
         friendPostBreakdownImg =
       <div className='empty-friend-post-breakdown-img' />;
 
-
-      debugger
     if (friendProfileOwner) {
       friendPostBreakdownImg = <img src={friendTimelinePostIconUrl} />;
       friendPostBreakdown = (
@@ -65,6 +60,7 @@ var PostIndexItem = React.createClass({
         </div>
       );
     }
+
     return (
       <article className='timeline-feed-item'>
         <header className='post-breakdown group'>
@@ -97,12 +93,3 @@ var PostIndexItem = React.createClass({
 });
 
 module.exports = PostIndexItem;
-
-// json.postId post.id
-// json.body post.body
-// json.authorId @author.id
-// json.postPicUrl @author.profile_pic.url(:post)
-// json.fullName @author.full_name
-//
-// time = post.created_at.localtime
-// json.createdAt "#{time.strftime('%B%e')} at #{time.strftime('%l')}:#{time.strftime('%M')}"

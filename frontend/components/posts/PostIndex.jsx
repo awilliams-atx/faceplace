@@ -6,15 +6,14 @@ var React = require('react'),
 
 var PostIndex = React.createClass({
   getInitialState: function () {
-    var profileOwnerId = this.props.profileOwnerId;
-
-    return ({posts: PostStore.all(profileOwnerId)});
+    return ({posts: PostStore.all()});
   },
   render: function () {
     var profileOwnerId = this.props.profileOwnerId,
         posts = this.state.posts,
         postIndexItems;
 
+        console.log(posts);
     postIndexItems = posts.map(function (post) {
       return <PostIndexItem post={post} key={post.postId} />;
     });
@@ -37,12 +36,10 @@ var PostIndex = React.createClass({
     this.postListener.remove();
   },
   onPostStoreChange: function () {
-    var profileOwnerId = this.props.profileOwnerId;
-
-    this.setState({posts: PostStore.all(profileOwnerId)});
+    this.setState({posts: PostStore.all()});
   },
   componentWillReceiveProps: function (newProps) {
-    this.setState({posts: PostStore.all(newProps.profileOwnerId)});
+    this.setState({posts: PostStore.all()});
   }
 });
 
