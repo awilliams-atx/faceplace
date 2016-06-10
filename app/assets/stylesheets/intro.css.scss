@@ -10,6 +10,14 @@
   font-size: 12px;
   line-height: 16px;
   width: 301px;
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+  }
   form {
     display: block;
     float: left;

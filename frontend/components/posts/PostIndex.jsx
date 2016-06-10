@@ -3,20 +3,30 @@ var React = require('react'),
     PostIndexItem = require('./PostIndexItem'),
     ClientActions = require('../../actions/client_actions'),
     PostStore = require('../../stores/post'),
+    SessionStore = require('../../stores/session'),
     UserStore = require('../../stores/user');
 
 var PostIndex = React.createClass({
   getInitialState: function () {
     var profileOwnerId = this.props.profileOwnerId;
-
     return ({
-      posts: PostStore.all(),
-      authorizedToPost: UserStore.user().isFriendsWithCurrentUser
+      isFriendOfProfileOwner: UserStore.user().isFriendOfCurrentUser,
+      posts: PostStore.all()
     });
   },
   render: function () {
     var profileOwnerId = this.props.profileOwnerId,
-        posts = this.state.posts,
+        authorizedToPost = false;
+
+    console.log('state#isFriendOfProfileOwner: ' +
+      this.state.isFriendOfProfileOwner);
+    if (profileOwnerId === SessionStore.currentUser().id) {
+      authorizedToPost = true;
+    } else if (this.state.isFriendOfProfileOwner) {
+      authorizedToPost = true;
+    }
+
+    var posts = this.state.posts,
         postIndexItems,
         postForm;
 
@@ -26,7 +36,7 @@ var PostIndex = React.createClass({
 
     postForm = <div className='empty-post-form' />;
 
-  if (this.state.authorizedToPost) {
+  if (authorizedToPost) {
     postForm = <PostForm profileOwnerId={profileOwnerId}/>;
   }
 
@@ -57,8 +67,8 @@ var PostIndex = React.createClass({
   onUserStoreChange: function () {
     var profileOwnerId = this.props.profileOwnerId;
 
-    this.setState({authorizedToPost:
-      UserStore.user().isFriendsWithCurrentUser});
+    this.setState({isFriendOfProfileOwner:
+      UserStore.user().isFriendOfCurrentUser});
   },
   componentWillReceiveProps: function (newProps) {
     this.setState({posts: PostStore.all()});

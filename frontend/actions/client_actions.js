@@ -1,4 +1,5 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
+    confirmationConstants = require('../constants/confirmation_constants'),
     tagConstants = require('../constants/tag_constants'),
     FriendApiUtil = require('../util/friend_api_util'),
     FriendshipApiUtil = require('../util/friendship_api_util'),
@@ -17,6 +18,9 @@ var ClientActions = {
   },
   cancelFriendRequest: function (userId) {
     FriendRequestApiUtil.cancelRequest(userId, 'cancel');
+  },
+  deletePost: function (postId) {
+    PostApiUtil.deletePost(postId);
   },
   fetchMostRecentlyAddedFriends: function (userId) {
     FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
@@ -49,12 +53,19 @@ var ClientActions = {
     FriendRequestApiUtil.respondToFriendRequest(userId, response);
   },
   submitPost: function (post) {
-    submissionPost = {};
-    submissionPost.body = post.body;
-    submissionPost.profile_owner_id = post.profileOwnerId;
-    submissionPost.tagged_ids = post.taggedFriendIds;
+    submissionPost = {
+      body: post.body,
+      profile_owner_id: post.profileOwnerId,
+      tagged_ids: post.taggedFriendIds
+    };
 
     PostApiUtil.submitPost(submissionPost);
+  },
+  triggerConfirmation: function (opts) {
+    Dispatcher.dispatch({
+      actionType: confirmationConstants.CONFIRMATION_REQUESTED,
+      confirmation: confirmation
+    });
   },
   unfriend: function (userId) {
     FriendshipApiUtil.destroyFriendship(userId);

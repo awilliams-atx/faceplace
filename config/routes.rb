@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
 
     get '/users/search', to: 'users#search'
-    
+
     resources :users, only: [:show, :index] do
       resources :posts, only: [:index]
     end

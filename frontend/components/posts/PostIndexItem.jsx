@@ -1,9 +1,14 @@
-var React = require('react');
+var React = require('react'),
+    ClientActions = require('../../actions/client_actions');
 
 var PostIndexItem = React.createClass({
+  getInitialState: function () {
+    return ({selectingOptions: false});
+  },
   render: function () {
-    var post = this.props.post,
-        authorUrl = '#/users/' + post.authorId,
+    var post = this.props.post;
+
+    var authorUrl = '#/users/' + post.authorId,
         taggedFriends = post.taggedFriends,
         withText = '';
 
@@ -41,8 +46,8 @@ var PostIndexItem = React.createClass({
       taggedFriends = <span className='empty-post-tagged-friends'></span>;
     }
 
-    var postOptionsIconUrl = 'https://s3.amazonaws.com/faceplace-dev/assets/post_options_icon.png',
-        friendTimelinePostIconUrl = 'https://s3.amazonaws.com/faceplace-dev/assets/friend_timeline_post_icon.png';
+
+    var friendTimelinePostIconUrl = 'https://s3.amazonaws.com/faceplace-dev/assets/friend_timeline_post_icon.png';
 
     var friendPostBreakdown =
       <div className='empty-friend-post-breakdown'/>,
@@ -51,7 +56,10 @@ var PostIndexItem = React.createClass({
       <div className='empty-friend-post-breakdown-img' />;
 
     if (friendProfileOwner) {
-      friendPostBreakdownImg = <img src={friendTimelinePostIconUrl} />;
+      friendPostBreakdownImg = (
+        <img src={friendTimelinePostIconUrl}
+          className='friend-post-img' />
+      );
       friendPostBreakdown = (
         <div className='friend-post-breakdown'>
           <a href={'#/users/' + friendProfileOwner.userId}>
@@ -60,7 +68,32 @@ var PostIndexItem = React.createClass({
         </div>
       );
     }
+    var postOptionsIconUrl =
+      'https://s3.amazonaws.com/faceplace-dev/assets/post_options_icon.png';
+    var postOptionsIcon = (
+      <i className="fa fa-chevron-down"
+        aria-hidden="true"
+        onClick={this.toggleOptions}>
+      </i>
+    );
 
+    var postOptions = <div className='empty-post-options' />;
+
+    if (this.state.selectingOptions) {
+      postOptions = (
+        <ul className='post-options group'>
+          <li className='post-option'>
+            Update Post
+          </li>
+          <br />
+          <hr />
+          <li className='post-option'
+            onClick={this.deletePost}>
+            Delete Post
+          </li>
+        </ul>
+      );
+    }
     return (
       <article className='timeline-feed-item'>
         <header className='post-breakdown group'>
@@ -78,6 +111,10 @@ var PostIndexItem = React.createClass({
           <div className='post-datetime-container group'>
             <div className='post-datetime'>{post.createdAt}</div>
           </div>
+          <aside className='post-options-container'>
+            {postOptionsIcon}
+            {postOptions}
+          </aside>
         </header>
         <section className='post-body'>
           {post.body}
@@ -88,8 +125,34 @@ var PostIndexItem = React.createClass({
         </div>
       </article>
     );
-  }
+  },
+  deletePost: function () {
+    var postId = this.props.post.postId;
 
+    // var confirmCallback = function () {
+    //   Clientactions.deletePost(postId);
+    // };
+    //
+    // var cancelCallback = function () {};
+
+    confirmation = {
+      title: 'Delete Post',
+      message: 'Really delete this post?',
+      confirmText: 'Delete Post',
+      cancelText: 'Cancel',
+      confirmCallback: function () {
+        ClientActions.deletePost(postId);
+      },
+      cancelCallback: function () {}
+    };
+
+    this.setState({selectingOptions: false}, function () {
+      ClientActions.triggerConfirmation(confirmation);
+    });
+  },
+  toggleOptions: function () {
+    this.setState({selectingOptions: !this.state.selectingOptions});
+  }
 });
 
 module.exports = PostIndexItem;

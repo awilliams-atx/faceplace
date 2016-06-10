@@ -8,10 +8,16 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     userConstants = require('../constants/user_constants');
 
 var ServerActions = {
-  receiveDestroyedFriendship: function (friendship) {
+  receiveDeletedFriendship: function (friendship) {
     Dispatcher.dispatch({
       actionType: friendshipConstants.FRIENDSHIP_DESTROYED,
       profileOwnerId: parseInt(friendship.userId)
+    });
+  },
+  receiveDeletedPost: function (post) {
+    Dispatcher.dispatch({
+      actionType: postConstants.DELETED_POST_RECEIVED,
+      post: post
     });
   },
   receiveFriendRequest: function (response) {

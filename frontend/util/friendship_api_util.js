@@ -7,7 +7,7 @@ var FriendRequestApiUtil = {
       method: 'DELETE',
       dataType: 'json',
       success: function (friendship) {
-        ServerActions.receiveDestroyedFriendship(friendship);
+        ServerActions.receiveDeletedFriendship(friendship);
       },
       error: function (errors) {
         console.log('FriendRequestApiUtil#destroyFriendship ERROR');

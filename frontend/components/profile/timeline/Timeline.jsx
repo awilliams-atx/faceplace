@@ -28,7 +28,7 @@ var React = require('react'),
 
         var authorizedToEdit =
           profileOwnerId === SessionStore.currentUser().id;
-
+        
         if (this.state.profileFetched) {
           introContent = (
                 <IntroIndex userId={profileOwnerId}
