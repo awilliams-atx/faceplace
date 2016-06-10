@@ -67,6 +67,7 @@ class User < ActiveRecord::Base
       .where('LOWER(first_name) LIKE :string
       OR LOWER(last_name) LIKE :string',
         {string: search_string.downcase + '%'})
+      .limit(8)
   end
 
   def timeline_posts
