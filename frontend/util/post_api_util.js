@@ -1,6 +1,16 @@
 var ServerActions = require('../actions/server_actions');
 
 var PostApiUtil = {
+  deletePost: function (postId) {
+    $.ajax({
+      url: 'api/posts/' + postId,
+      method: 'DELETE',
+      dataType: 'json',
+      success: function (post) {
+        ServerActions.receiveDeletedPost(post);
+      }
+    });
+  },
   fetchTimelinePosts: function (userId) {
     $.ajax({
       url: 'api/users/' + userId + '/posts',
@@ -12,9 +22,6 @@ var PostApiUtil = {
           userId: userId,
           posts: posts
         });
-      },
-      error: function (errors) {
-        console.log('PostApiUtil#fetchTimelinePosts ERROR');
       }
     });
   },
@@ -26,9 +33,6 @@ var PostApiUtil = {
       data: {post: post},
       success: function (post) {
         ServerActions.receiveOwnPost(post);
-      },
-      error: function (errors) {
-        console.log('PostApiUtil#submitPost ERROR');
       }
     });
   }

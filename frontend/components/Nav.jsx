@@ -37,7 +37,7 @@ var Nav = React.createClass({
         <nav className='main-header-nav group'>
           <div className='nav-left group'>
             <div id='faceplace-icon'><a href="#/main">
-              <i className="fa fa-facebook-official fa-2x" aria-hidden="true"></i>
+              <i className="fa fa-facebook-official" aria-hidden="true"></i>
             </a></div>
           <SearchIndex />
           </div>

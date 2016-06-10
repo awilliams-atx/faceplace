@@ -15,11 +15,11 @@ UserStore.__onDispatch = function (payload) {
       UserStore.__emitChange();
       break;
     case friendshipConstants.FRIENDSHIP_DESTROYED:
-      _user.isFriendsWithCurrentUser = false;
+      _user.isFriendOfCurrentUser = false;
       UserStore.__emitChange();
       break;
     case friendRequestConstants.FRIEND_REQUEST_ACCEPTED:
-      _user.isFriendsWithCurrentUser = true;
+      _user.isFriendOfCurrentUser = true;
       UserStore.__emitChange();
       break;
   }
@@ -27,6 +27,10 @@ UserStore.__onDispatch = function (payload) {
 
 UserStore.user = function () {
   return $.extend({}, _user);
+};
+
+UserStore.authorizedToPost = function () {
+
 };
 
 module.exports = UserStore;

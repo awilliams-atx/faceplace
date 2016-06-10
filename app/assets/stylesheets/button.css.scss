@@ -1,0 +1,35 @@
+.button {
+  cursor: pointer;
+  font-family: helvetica;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 3px;
+  line-height: 22px;
+}
+
+.button-blue {
+  background-color: #4267b2;
+  color: white;
+  border: 1px solid rgb(41, 72, 125);
+}
+
+.button-blue:hover {
+  background-color: #365899;
+}
+
+.button-blue:active {
+  background-color: #29487d;
+}
+
+.button-post {
+  padding: 0 16px;
+}
+
+.button-gray {
+  background-color: #f6f7f9;
+  border: 1px solid #ced0d4;
+}
+
+.button-gray:hover {
+  background-color: #e9ebee;
+}
