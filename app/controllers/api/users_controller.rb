@@ -50,6 +50,12 @@ class Api::UsersController < ApplicationController
     render 'api/users/search_index'
   end
 
+  def update_cover_photo
+    current_user.cover_photo = params[:user][:cover_photo]
+    current_user.save
+    render 'api/users/cover_photo'
+  end
+
   private
 
   def user_params

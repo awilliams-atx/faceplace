@@ -44,6 +44,19 @@ var UserApiUtil = {
         ErrorActions.setErrors(errors.responseJSON);
       }
     });
+  },
+  submitCoverPhoto: function (formData) {
+    $.ajax({
+      url: 'api/user/cover_photo',
+      method: 'POST',
+      dataType: 'json',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (coverPhotoData) {
+        ServerActions.receiveUpdatedCoverPhotoUrl(coverPhotoData.coverPhotoUrl);
+      }
+    });
   }
 };
 

@@ -1,0 +1,31 @@
+.profile-nav {
+  display: block;
+  float: left;
+  height: 43px;
+  width: 851px;
+  margin: 0 auto 20px;
+
+  box-shadow: 0 0 1px #ccc;
+
+  background-color: white;
+  border-radius: 0 0 3px 3px;
+
+  font-family: helvetica;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgb(75, 79, 86);
+  line-height: 44px;
+}
+
+.profile-nav-links ul {
+  margin: 0 0 0 201px;
+  padding: 0;
+  display: block;
+  float: right;
+  width: calc(100% - 201px);
+}
+
+.profile-nav-links li {
+  display: block;
+  float: left;
+}

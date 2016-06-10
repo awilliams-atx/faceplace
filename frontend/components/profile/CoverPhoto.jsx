@@ -1,8 +1,12 @@
 var React = require('react'),
     SessionStore = require('../../stores/session'),
+    UserApiUtil = require('../../util/user_api_util'),
     UserStore = require('../../stores/user');
 
 var CoverPhoto = React.createClass({
+  getInitialState: function () {
+    return ({coverPhotoUrl: this.props.coverPhotoUrl});
+  },
   render: function () {
     var profileOwnerId = this.props.profileOwnerId,
         currentUserId = SessionStore.currentUser().id;
@@ -25,27 +29,47 @@ var CoverPhoto = React.createClass({
 
             <input type='file'
               className='cover-photo-input'
-              id='cover-photo-input'>
+              id='cover-photo-input'
+              onChange={this.updateCoverPhotoFile}>
             </input>
           </div>
         </form>
       );
     }
-    var imageUrl = this.props.imageUrl;
+
+    if (this.state.coverPhotoUrl) {
+      coverPhotoUrl = this.state.coverPhotoUrl;
+    } else {
+      coverPhotoUrl = this.props.coverPhotoUrl;
+    }
+
     var coverPhoto = (
       <div className='cover-photo'>
-        <img src={this.props.imageUrl} />
+        <img src={coverPhotoUrl} />
         {editCoverPhotoButton}
       </div>
     );
 
     //   (
-    //   imageUrl ? <img src={this.props.imageUrl} />;
+    //   coverPhotoUrl ? <img src={this.props.coverPhotoUrl} />;
     // );
     return coverPhoto;
   },
   componentWillReceiveProps: function (newProps) {
     this.forceUpdate();
+  },
+  updateCoverPhotoFile: function (e) {
+    var coverPhotoFile = e.currentTarget.files[0];
+    var fileReader = new FileReader();
+    fileReader.onloadend = function() {
+      var formData = new FormData();
+      formData.append('user[cover_photo]', coverPhotoFile);
+      UserApiUtil.submitCoverPhoto(formData);
+    };
+
+    if (coverPhotoFile) {
+      fileReader.readAsDataURL(coverPhotoFile);
+    }
   }
 });
 

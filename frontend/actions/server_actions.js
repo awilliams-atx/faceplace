@@ -77,6 +77,12 @@ var ServerActions = {
       searchResults: searchResults
     });
   },
+  receiveUpdatedCoverPhotoUrl: function (coverPhotoUrl) {
+    Dispatcher.dispatch({
+      actionType: userConstants.UPDATED_COVER_PHOTO_URL_RECEIVED,
+      coverPhotoUrl: coverPhotoUrl
+    });
+  },
   receiveUsers: function (users) {
     Dispatcher.dispatch({
       actionType: userConstants.USERS_RECEIVED,

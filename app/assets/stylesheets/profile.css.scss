@@ -18,7 +18,6 @@
   position: relative;
   width: 851px;
   height: 315px;
-  margin-bottom: 20px;
 }
 
 .friendship-button-container {
@@ -63,6 +62,17 @@
   .request-sent-button:hover {
     cursor: default;
   }
+}
+
+.profile-pic {
+  position: absolute;
+  padding: 4px;
+  top: 217px;
+  left: 393px;
+
+  border: 1px solid rgba(0, 0, 0, .3);
+  border-radius: 3px;
+  background-color: white;
 }
 
 .profile-aside-item {
