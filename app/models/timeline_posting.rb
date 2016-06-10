@@ -1,10 +1,7 @@
 class TimelinePosting < ActiveRecord::Base
-  validates :post_id, :author_id, :profile_owner_id, presence: true
+  validates :post_id, :profile_owner_id, presence: true
 
   belongs_to :post
-
-  belongs_to :poster,
-    class_name: 'User'
 
   belongs_to :profile_owner,
     class_name: 'User',
