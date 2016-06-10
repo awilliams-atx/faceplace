@@ -10,6 +10,10 @@ var UserStore = new Store(AppDispatcher);
 
 UserStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
+    case userConstants.UPDATED_COVER_PHOTO_URL_RECEIVED:
+      _user.coverPhotoUrl = payload.coverPhotoUrl;
+      UserStore.__emitChange();
+      break;
     case userConstants.USER_RECEIVED:
       _user = payload.user;
       UserStore.__emitChange();

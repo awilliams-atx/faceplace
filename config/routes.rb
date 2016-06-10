@@ -7,7 +7,6 @@ Rails.application.routes.draw do
 
     resource :session, only: [:new, :create, :destroy, :show]
 
-
     get '/users/search', to: 'users#search'
 
     resources :users, only: [:show, :index] do
@@ -16,6 +15,9 @@ Rails.application.routes.draw do
 
 
     resource :user, only: [:update, :create]
+    
+    post 'user/cover_photo', to: 'users#update_cover_photo'
+
     get '/users/:id/most_recently_added',
       to: 'users#most_recently_added'
 

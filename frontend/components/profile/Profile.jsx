@@ -17,19 +17,37 @@ var Profile = React.createClass({
 
     var authorizedToEdit = profileOwnerId === SessionStore.currentUser().id;
 
-    var user = this.state.user;
-    var coverPhotoUrl = user ? user.coverPhotoUrl : null;
+    var user = this.state.user,
+        coverPhotoUrl = user ? user.coverPhotoUrl : null;
+
+    var profilePic;
+
+    if (user.profilePicUrl) {
+      profilePic = <img className='profile-pic' src={user.profilePicUrl} />;
+    } else {
+      profilePic = <div className='empty-profile-pic'/>;
+    }
 
     var profile = (
       <div className='content'>
         <Nav />
         <div className='profile-sub-content'>
           <div className='cover-photo-container'>
-            <CoverPhoto imageUrl={coverPhotoUrl}
+            <CoverPhoto coverPhotoUrl={coverPhotoUrl}
               authorizedToEdit={authorizedToEdit}
               profileOwnerId={profileOwnerId} />
             <AddFriend profileOwnerId={profileOwnerId} />
           </div>
+          {profilePic}
+          <nav className='profile-nav'>
+            <div className='profile-nav-links'>
+              <ul>
+                <li>
+                  Timeline
+                </li>
+              </ul>
+            </div>
+          </nav>
           {this.props.children}
         </div>
       </div>
