@@ -18,6 +18,12 @@ The core feature, friendships, are stored in a 'friendships' join table which co
 
 Via Ajax requests which send and receive data to the server asynchronously, friending and unfriending provide meaningful feedback to the user almost instantly: every interaction that depends on friendships have a listener on the 'Friend Store' and update independently any time new data about friendships is received. For example, accepting a friend request from a user named Alex while on Alex's profile page triggers adding a form to post on Alex's timeline.
 
+#### User Search
+
+Thanks to the user search bar, finding new friends is as simple as typing the first couple letters of either their first or last name. Results of the search are fetched on change with each character addition and deletion on the input field.
+
+SQL injection is cleaned up by sanitized parameters on the back-end!
+
 #### Tagging
 
 There is a searchable drop-down on the post component which allows a user to tag his or her friends on the post. Friends tagged are displayed on the component below the body of the post and are available both on the author's timeline and on each tagged user's timeline.
@@ -36,12 +42,24 @@ The intro stores basic personal information input by a user on his or her own pr
 
 ## To-Do for this project:
 
-In addition to the features already implemented, I plan to continue work on this project. The next steps for FresherNote are outlined below.
+I am very happy with the results achieved thus far on faceplace, but am nonetheless excited and driven to continue working on its development. Some craved features include...
 
-Search
+#### Commenting
 
-Searching notes is a standard feature of Evernote. I plan to utilize the Fuse.js library to create a fuzzy search of notes and notebooks. This search will look go through tags, note titles, notebook titles, and note content.
+In the future, users will be able to comment on each other's posts. Comment authors **and** the author of the original post will be able to delete comments. Comment authors will be able to edit their comments.
 
-Direct Messaging
+#### Photo status updates and photo albums
 
-Although this is less essential functionality, I also plan to implement messaging between FresherNote users. To do this, I will use WebRTC so that notifications of messages happens seamlessly.
+In the future, users will be able to upload a photo instead of providing a body of text for their posts. Photos will all be stored on the back-end in a photos table and a join table 'photo albums' will store data relating photos to their owners and their containing albums.
+
+#### Notifications
+
+In the future, notifications will appear at the top of the screen to show a user when he or she has been friended, tagged, or his or her timeline has been posted on.
+
+#### Private messages
+
+In the future, users will be able to send simple messages back and forth to each other. The messages table will be quite similar to the (future) posts table in that it will allow for either text or a photo for the body content.
+
+#### Live updates via web sockets
+
+In the future, after implementing notifications and messages, users will be updated live via web sockets on receipt of a notification, message, or friend request.
