@@ -10,7 +10,7 @@ faceplace is a full-stack web application inspired by Facebook. Notable technolo
 
 #### Single-Page App
 
-faceplace is implemented fully in one single page,the effect of navigating to separate pages being achieved via React Router. Deep authentication via password- and session-token-comparison is implemented on the back-end, while shallow authentication works on the front-end via a Flux 'Session Store' which keeps the current user's ID in a private variable.
+faceplace is implemented fully in one single page, the effect of navigating to separate pages being achieved via React Router. Deep authentication via password- and session-token-comparison is implemented on the back-end, while shallow authentication works on the front-end via a Flux 'Session Store' which keeps the current user's ID in a private variable.
 
 #### Friending
 

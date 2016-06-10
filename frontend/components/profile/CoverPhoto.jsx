@@ -5,16 +5,26 @@ var React = require('react'),
 
 var CoverPhoto = React.createClass({
   getInitialState: function () {
-    return ({coverPhotoUrl: this.props.coverPhotoUrl});
+    return ({
+      coverPhotoUrl: this.props.coverPhotoUrl,
+      isEditButtonExpanded: false
+    });
   },
   render: function () {
     var profileOwnerId = this.props.profileOwnerId,
         currentUserId = SessionStore.currentUser().id;
 
-    var authorizedToEdit = (profileOwnerId === currentUserId);
+    var authorizedToEdit = (profileOwnerId === currentUserId),
+        isEditButtonExpanded = this.state.isEditButtonExpanded;
 
     var editCoverPhotoButton =
       <div className='empty-edit-cover-photo-button' />;
+
+    var editButtonExpandedClass = '';
+
+    if (isEditButtonExpanded) {
+      editButtonExpandedClass = 'edit-button-expanded'
+    }
 
     if (authorizedToEdit) {
       editCoverPhotoButton = (
@@ -30,7 +40,9 @@ var CoverPhoto = React.createClass({
             <input type='file'
               className='cover-photo-input'
               id='cover-photo-input'
-              onChange={this.updateCoverPhotoFile}>
+              onChange={this.updateCoverPhotoFile}
+              onMouseEnter={this.toggleExpandEdit}
+              onMouseLeave={this.toggleExpandEdit}>
             </input>
           </div>
         </form>
@@ -44,7 +56,9 @@ var CoverPhoto = React.createClass({
     }
 
     var coverPhoto = (
-      <div className='cover-photo'>
+      <div className='cover-photo'
+        onMouseEnter={this.toggleExpandEdit}
+        onMouseLeave={this.toggleExpandEdit}>
         <img src={coverPhotoUrl} />
         {editCoverPhotoButton}
       </div>
@@ -57,6 +71,9 @@ var CoverPhoto = React.createClass({
   },
   componentWillReceiveProps: function (newProps) {
     this.forceUpdate();
+  },
+  toggleExpandEdit: function () {
+    this.setState({isEditButtonExpanded: !this.state.isEditButtonExpanded});
   },
   updateCoverPhotoFile: function (e) {
     var coverPhotoFile = e.currentTarget.files[0];

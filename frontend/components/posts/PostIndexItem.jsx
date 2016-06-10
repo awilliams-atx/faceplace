@@ -34,9 +34,8 @@ var PostIndexItem = React.createClass({
         }
 
         return (
-          <span>
-            <a href={'#/users/' + friend.taggedId}
-              key={idx}>
+          <span key={idx}>
+            <a href={'#/users/' + friend.taggedId}>
               {friend.fullName}
             </a>
             {separator}

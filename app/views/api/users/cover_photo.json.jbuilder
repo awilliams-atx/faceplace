@@ -1,1 +1,1 @@
-json.coverPhotoUrl current_user.cover_photo.url(:cover)
+json.coverPhotoUrl asset_path(current_user.cover_photo.url(:cover))
