@@ -32,22 +32,24 @@ var Profile = React.createClass({
       <div className='content'>
         <Nav />
         <div className='profile-sub-content'>
-          <div className='cover-photo-container'>
-            <CoverPhoto coverPhotoUrl={coverPhotoUrl}
-              authorizedToEdit={authorizedToEdit}
-              profileOwnerId={profileOwnerId} />
-            <AddFriend profileOwnerId={profileOwnerId} />
-          </div>
-          {profilePic}
-          <nav className='profile-nav'>
-            <div className='profile-nav-links'>
-              <ul>
-                <li>
-                  Timeline
-                </li>
-              </ul>
+          <div className='profile-top-content'>
+            <div className='cover-photo-container'>
+              <CoverPhoto coverPhotoUrl={coverPhotoUrl}
+                authorizedToEdit={authorizedToEdit}
+                profileOwnerId={profileOwnerId} />
+              <AddFriend profileOwnerId={profileOwnerId} />
             </div>
-          </nav>
+            {profilePic}
+            <nav className='profile-nav'>
+              <div className='profile-nav-links'>
+                <ul>
+                  <li>
+                    Timeline
+                  </li>
+                </ul>
+              </div>
+            </nav>            
+          </div>
           {this.props.children}
         </div>
       </div>
