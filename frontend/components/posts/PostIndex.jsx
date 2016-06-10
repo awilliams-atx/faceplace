@@ -11,15 +11,14 @@ var PostIndex = React.createClass({
     var profileOwnerId = this.props.profileOwnerId;
     return ({
       isFriendOfProfileOwner: UserStore.user().isFriendOfCurrentUser,
-      posts: PostStore.all()
+      posts: PostStore.all(),
+      editingPosts: {}
     });
   },
   render: function () {
     var profileOwnerId = this.props.profileOwnerId,
         authorizedToPost = false;
 
-    console.log('state#isFriendOfProfileOwner: ' +
-      this.state.isFriendOfProfileOwner);
     if (profileOwnerId === SessionStore.currentUser().id) {
       authorizedToPost = true;
     } else if (this.state.isFriendOfProfileOwner) {
