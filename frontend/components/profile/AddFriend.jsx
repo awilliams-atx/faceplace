@@ -15,11 +15,11 @@ var AddFriend = React.createClass({
     var emptyAddFriendContainer = <div className='empty-add-friend-button'></div>,
         friendshipButtonContainer;
 
-    if (!ProfileStore.profileFetched(this.props.userId)) {
+    if (!ProfileStore.profileFetched(this.props.profileOwnerId)) {
       return emptyAddFriendContainer;
     }
 
-    if (this.props.userId === SessionStore.currentUser().id) {
+    if (this.props.profileOwnerId === SessionStore.currentUser().id) {
       return emptyAddFriendContainer;
     }
 
@@ -69,7 +69,7 @@ var AddFriend = React.createClass({
   },
   componentDidMount: function () {
     this.userListener = ProfileStore.addListener(this.onProfileStoreChange);
-    ClientActions.fetchUser(this.props.userId);
+    ClientActions.fetchUser(this.props.profileOwnerId);
   },
   componentWillUnmount: function () {
     this.userListener.remove();
@@ -86,23 +86,23 @@ var AddFriend = React.createClass({
   },
   addFriendHandler: function (e) {
     e.preventDefault();
-    ClientActions.makeFriendRequest(this.props.userId);
+    ClientActions.makeFriendRequest(this.props.profileOwnerId);
   },
   unfriendHandler: function (e) {
     e.preventDefault();
-    ClientActions.unfriend(this.props.userId);
+    ClientActions.unfriend(this.props.profileOwnerId);
   },
   confirmHandler: function (e) {
     e.preventDefault();
-    ClientActions.respondToFriendRequest(this.props.userId, 'accept');
+    ClientActions.respondToFriendRequest(this.props.profileOwnerId, 'accept');
   },
   rejectHandler: function (e) {
     e.preventDefault();
-    ClientActions.respondToFriendRequest(this.props.userId, 'reject');
+    ClientActions.respondToFriendRequest(this.props.profileOwnerId, 'reject');
   },
   cancelHandler: function (e) {
     e.preventDefault();
-    ClientActions.cancelFriendRequest(this.props.userId);
+    ClientActions.cancelFriendRequest(this.props.profileOwnerId);
   },
   preventDefault: function (e) {
     e.preventDefault();
