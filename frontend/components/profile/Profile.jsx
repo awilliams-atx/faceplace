@@ -13,9 +13,9 @@ var Profile = React.createClass({
     return ({user: UserStore.user()});
   },
   render: function () {
-    var userId = parseInt(this.props.params.userId);
+    var profileOwnerId = parseInt(this.props.params.userId);
 
-    var authorizedToEdit = userId === SessionStore.currentUser().id;
+    var authorizedToEdit = profileOwnerId === SessionStore.currentUser().id;
 
     var user = this.state.user;
     var coverPhotoUrl = user ? user.coverPhotoUrl : null;
@@ -27,8 +27,8 @@ var Profile = React.createClass({
           <div className='cover-photo-container'>
             <CoverPhoto imageUrl={coverPhotoUrl}
               authorizedToEdit={authorizedToEdit}
-              userId={userId} />
-            <AddFriend userId={userId} />
+              profileOwnerId={profileOwnerId} />
+            <AddFriend profileOwnerId={profileOwnerId} />
           </div>
           {this.props.children}
         </div>
@@ -38,23 +38,21 @@ var Profile = React.createClass({
     return (profile);
   },
   componentDidMount: function () {
-    var userId = parseInt(this.props.params.userId);
+    var profileOwnerId = parseInt(this.props.params.userId);
 
     this.userListener =
       UserStore.addListener(this.onUserStoreChange);
-    ClientActions.fetchUser(userId);
+    ClientActions.fetchUser(profileOwnerId);
   },
   componentWillUnmount: function () {
     this.userListener.remove();
   },
   componentWillReceiveProps: function (newProps) {
-    var userId = newProps.params.userId;
+    var profileOwnerId = newProps.params.userId;
 
-    ClientActions.fetchUser(userId);
+    ClientActions.fetchUser(profileOwnerId);
   },
   onUserStoreChange: function () {
-    var userId = parseInt(this.props.params.userId);
-
     this.setState({user: UserStore.user()});
   }
 });

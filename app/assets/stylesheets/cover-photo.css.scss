@@ -1,0 +1,53 @@
+.cover-photo {
+  input {
+    position: absolute;
+    cursor: pointer;
+    top: 2px;
+    left: -91px;
+    z-index: 2;
+    outline: none;
+    width: 280px;
+    opacity: 0;
+  }
+  input:hover {
+    cursor: pointer;
+  }
+  i {
+    margin-right: 5px;
+    display: block;
+    float: left;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 26px;
+    width: 28px;
+    height: 28px;
+  }
+  i:hover {
+    cursor: pointer;
+  }
+  strong {
+    font-family: helvetica;
+    display: block;
+    float: left;
+    line-height: 27px;
+    z-index: 1;
+  }
+  strong:hover {
+    cursor: pointer;
+  }
+}
+
+.cover-photo-input-container {
+  position: absolute;
+  top:15px;
+  left: 21px;
+}
+
+.cover-photo-input-cover {
+  opacity: 0;
+  z-index: 5;
+  position: relative;
+  background-color: orange;
+  height: 25px;
+  width: 90px;
+  left: -93px;
+}
