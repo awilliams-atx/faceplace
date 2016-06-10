@@ -126,7 +126,7 @@ oh_brother_friends << tommy
 pappy = User.create(first_name: "Pappy", last_name: "O'Daniel", email: "pappy", password: "starwars")
 
 pappy.profile_pic = File.open("#{Rails.root}/app/assets/images/pappy_odaniel_profile_pic.jpg")
-pappy.cover_photo = File.open("#{Rails.root}/app/assets/images/pappy_odaniel_cover_photo.png")
+pappy.cover_photo = File.open("#{Rails.root}/app/assets/images/pappy_odaniel_cover_photo.jpg")
 pappy.save!
 
 oh_brother_friends << pappy
