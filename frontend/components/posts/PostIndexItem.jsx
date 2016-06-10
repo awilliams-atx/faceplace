@@ -1,5 +1,6 @@
 var React = require('react'),
-    ClientActions = require('../../actions/client_actions');
+    ClientActions = require('../../actions/client_actions'),
+    SessionStore = require('../../stores/session');
 
 var PostIndexItem = React.createClass({
   getInitialState: function () {
@@ -60,6 +61,7 @@ var PostIndexItem = React.createClass({
         <img src={friendTimelinePostIconUrl}
           className='friend-post-img' />
       );
+
       friendPostBreakdown = (
         <div className='friend-post-breakdown'>
           <a href={'#/users/' + friendProfileOwner.userId}>
@@ -70,30 +72,39 @@ var PostIndexItem = React.createClass({
     }
     var postOptionsIconUrl =
       'https://s3.amazonaws.com/faceplace-dev/assets/post_options_icon.png';
-    var postOptionsIcon = (
-      <i className="fa fa-chevron-down"
-        aria-hidden="true"
-        onClick={this.toggleOptions}>
-      </i>
-    );
-
+    var postOptionsIcon = <div className='empty-post-options-icon' />;
     var postOptions = <div className='empty-post-options' />;
 
-    if (this.state.selectingOptions) {
-      postOptions = (
-        <ul className='post-options group'>
-          <li className='post-option'>
-            Update Post
-          </li>
-          <br />
-          <hr />
-          <li className='post-option'
-            onClick={this.deletePost}>
-            Delete Post
-          </li>
-        </ul>
+    var authorId = this.props.post.authorId,
+        currentUserId = SessionStore.currentUser().id;
+
+    var authorizedToEdit = (authorId === currentUserId);
+
+    if (authorizedToEdit) {
+      postOptionsIcon = (
+        <i className="fa fa-chevron-down"
+          aria-hidden="true"
+          onClick={this.toggleOptions}>
+        </i>
       );
+
+      if (this.state.selectingOptions) {
+        postOptions = (
+          <ul className='post-options group'>
+            <li className='post-option'>
+              Update Post
+            </li>
+            <br />
+            <hr />
+            <li className='post-option'
+              onClick={this.deletePost}>
+              Delete Post
+            </li>
+          </ul>
+        );
+      }
     }
+
     return (
       <article className='timeline-feed-item'>
         <header className='post-breakdown group'>
