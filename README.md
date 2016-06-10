@@ -1,8 +1,6 @@
 # faceplace
 
-[Heroku link][heroku]
-
-[heroku]: http://www.faceplace.herokuapp.com: This should be a link to your production site
+[faceplace on Heroku](http://www.faceplace.herokuapp.com)
 
 faceplace is a full-stack web application inspired by Facebook. Notable technologies include Ruby on Rails and a PostgreSQL database on the back-end laying the foundation for a React.js front-end built in the Flux architectural style.
 
@@ -10,7 +8,7 @@ faceplace is a full-stack web application inspired by Facebook. Notable technolo
 
 #### Single-Page App
 
-faceplace is implemented fully in one single page, the effect of navigating to separate pages being achieved via React Router. Deep authentication via password- and session-token-comparison is implemented on the back-end, while shallow authentication works on the front-end via a Flux 'Session Store' which keeps the current user's ID in a private variable.
+faceplace is implemented fully in one single page, the effect of navigating to separate pages having been achieved via React Router. Deep authentication via password- and session-token-comparison is implemented on the back-end, while shallow authentication works on the front-end via a Flux 'Session Store' which keeps the current user's ID in a private variable.
 
 #### Friending
 
