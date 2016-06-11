@@ -53,7 +53,7 @@ var ClientActions = {
     FriendRequestApiUtil.respondToFriendRequest(userId, response);
   },
   submitPost: function (post) {
-    submissionPost = {
+    var submissionPost = {
       body: post.body,
       profile_owner_id: post.profileOwnerId,
       tagged_ids: post.taggedFriendIds
@@ -64,7 +64,7 @@ var ClientActions = {
   triggerConfirmation: function (opts) {
     Dispatcher.dispatch({
       actionType: confirmationConstants.CONFIRMATION_REQUESTED,
-      confirmation: confirmation
+      confirmation: opts
     });
   },
   unfriend: function (userId) {

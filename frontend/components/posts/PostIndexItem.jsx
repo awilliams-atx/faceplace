@@ -137,13 +137,8 @@ var PostIndexItem = React.createClass({
     );
   },
   deletePost: function () {
+    $('body').addClass('no-scroll-body');
     var postId = this.props.post.postId;
-
-    // var confirmCallback = function () {
-    //   Clientactions.deletePost(postId);
-    // };
-    //
-    // var cancelCallback = function () {};
 
     confirmation = {
       title: 'Delete Post',
@@ -151,9 +146,12 @@ var PostIndexItem = React.createClass({
       confirmText: 'Delete Post',
       cancelText: 'Cancel',
       confirmCallback: function () {
+        $('body').removeClass('no-scroll-body');
         ClientActions.deletePost(postId);
       },
-      cancelCallback: function () {}
+      cancelCallback: function () {
+        $('body').removeClass('no-scroll-body');
+      }
     };
 
     this.setState({selectingOptions: false}, function () {
