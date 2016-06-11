@@ -4,7 +4,7 @@
 
 .modal-background {
   background-color: rgba(0, 0, 0, .5);
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
@@ -17,7 +17,7 @@
   background-color: white;
   border: 1px solid #bdc7d8;
   border-radius: 3px;
-  position: absolute;
+  position: fixed;
   height: 147px;
   width: 436px;
   right: 0;
