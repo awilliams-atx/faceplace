@@ -24,7 +24,7 @@ PostStore.__onDispatch = function (payload) {
 };
 
 PostStore.addPost = function (post) {
-  _posts.push(post);
+  _posts.unshift(post);
 };
 
 PostStore.all = function () {
