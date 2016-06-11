@@ -76,6 +76,7 @@ class User < ActiveRecord::Base
       .joins('LEFT OUTER JOIN timeline_postings ON timeline_postings.post_id = posts.id')
       .where('posts.author_id = :user_id OR taggings.tagged_id = :user_id OR timeline_postings.profile_owner_id = :user_id', {user_id: self.id})
       .group('posts.id')
+      .order('posts.updated_at DESC')
   end
 
   # -----------------------------QUALITY OF LIFE---------------------------- #
