@@ -68,7 +68,7 @@ var ClientActions = {
   triggerConfirmation: function (opts) {
     Dispatcher.dispatch({
       actionType: confirmationConstants.CONFIRMATION_REQUESTED,
-      confirmation: confirmation
+      confirmation: opts
     });
   },
   unfriend: function (userId) {
