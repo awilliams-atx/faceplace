@@ -1,3 +1,8 @@
+window.ClientActions = require('./actions/client_actions');
+window.CommentStore = require('./stores/comment');
+
+// FILES REQUIRED ABOVE ARE FOR TESTING PURPOSES ONLY AND SHOULD BE REMOVED FROM PRODUCTION.
+
 var React = require('react'),
     ReactDOM = require('react-dom');
 

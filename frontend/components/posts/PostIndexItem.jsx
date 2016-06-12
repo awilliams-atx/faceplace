@@ -1,5 +1,7 @@
 var React = require('react'),
     ClientActions = require('../../actions/client_actions'),
+    PostCommentIndex = require('../comments/PostCommentIndex'),
+    CommentStore = require('../../stores/comment'),
     SessionStore = require('../../stores/session');
 
 var PostIndexItem = React.createClass({
@@ -133,6 +135,7 @@ var PostIndexItem = React.createClass({
           <span className='post-tagged-friends-with'>{withText}</span>
           {taggedFriends}
         </div>
+        <PostCommentIndex postId={post.postId} />
       </article>
     );
   },

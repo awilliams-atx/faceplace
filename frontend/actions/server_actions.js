@@ -1,4 +1,5 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
+    commentConstants = require('../constants/comment_constants'),
     friendConstants = require('../constants/friend_constants'),
     friendRequestConstants = require('../constants/friend_request_constants'),
     friendshipConstants = require('../constants/friendship_constants'),
@@ -8,6 +9,18 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     userConstants = require('../constants/user_constants');
 
 var ServerActions = {
+  receiveComment: function (comment) {
+    Dispatcher.dispatch({
+      actionType: commentConstants.COMMENT_RECEIVED,
+      comment: comment
+    });
+  },
+  receiveComments: function (comments) {
+    Dispatcher.dispatch({
+      actionType: commentConstants.COMMENTS_RECEIVED,
+      comments: comments
+    });
+  },
   receiveDeletedFriendship: function (friendship) {
     Dispatcher.dispatch({
       actionType: friendshipConstants.FRIENDSHIP_DESTROYED,

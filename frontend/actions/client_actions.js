@@ -1,5 +1,6 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
     confirmationConstants = require('../constants/confirmation_constants'),
+    CommentApiUtil = require('../util/comment_api_util'),
     tagConstants = require('../constants/tag_constants'),
     FriendApiUtil = require('../util/friend_api_util'),
     FriendshipApiUtil = require('../util/friendship_api_util'),
@@ -52,8 +53,11 @@ var ClientActions = {
   respondToFriendRequest: function (userId, response) {
     FriendRequestApiUtil.respondToFriendRequest(userId, response);
   },
+  submitComment: function (comment) {
+    CommentApiUtil.submitComment(comment);
+  },
   submitPost: function (post) {
-    submissionPost = {
+    var submissionPost = {
       body: post.body,
       profile_owner_id: post.profileOwnerId,
       tagged_ids: post.taggedFriendIds
