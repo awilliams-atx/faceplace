@@ -18,4 +18,6 @@ class Post < ActiveRecord::Base
     source: :profile_owner
 
   has_one :timeline_posting, dependent: :destroy
+
+  has_many :comments, as: :commentable
 end

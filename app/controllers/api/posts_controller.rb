@@ -1,6 +1,5 @@
 class Api::PostsController < ApplicationController
   def index
-
     if params[:profilePosts]
       user = User.find(params[:user_id])
       @posts = user.timeline_posts.includes(:author, :profile_owner, :tagged_friends)
