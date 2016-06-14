@@ -8,9 +8,6 @@ var FriendApiUtil = {
       dataType: 'json',
       success: function (friendsData) {
         ServerActions.receiveMostRecentlyAddedFriends(friendsData);
-      },
-      error: function (errors) {
-        console.log('FriendApiUtil#fetchMostRecentlyAddedFriends ERROR');
       }
     });
   }

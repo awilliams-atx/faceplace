@@ -47,9 +47,6 @@ var CommentApiUtil = {
       data: {comment: submissionComment},
       success: function (comment) {
         ServerActions.receiveComment(comment);
-      },
-      error: function (errors) {
-        console.log('CommentApiUtil#submitComment ERROR');
       }
     });
   }

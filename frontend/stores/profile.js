@@ -38,7 +38,6 @@ ProfileStore.__onDispatch = function (payload) {
       ProfileStore.__emitChange();
       break;
     case friendRequestConstants.FRIEND_REQUEST_REJECTED:
-      console.log('ProfileStore#FRIEND_REQUEST_REJECTED');
       _profile.requestMade = false;
       ProfileStore.__emitChange();
       break;

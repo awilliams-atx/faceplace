@@ -8,9 +8,6 @@ var TagApiUtil = {
       dataType: 'json',
       success: function (friends) {
         ServerActions.receiveFriendsForTagging(friends);
-      },
-      error: function (errors) {
-        console.log('TagApiUtil#fetchFriendsForTagging ERROR');
       }
     });
   }

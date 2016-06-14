@@ -9,9 +9,6 @@ var SearchApiUtil = {
       data: { search_string: searchString },
       success: function (searchResults) {
         ServerActions.receiveSearchResults(searchResults);
-      },
-      error: function (errors) {
-        console.log("SearchApiUtil#fetchSearchResults ERROR");
       }
     });
   }

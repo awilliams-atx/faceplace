@@ -9,9 +9,6 @@ var FriendRequestApiUtil = {
       data: {request_receiver_id: userId},
       success: function (friendRequest) {
         ServerActions.receiveFriendRequest(friendRequest);
-      },
-      error: function (errors) {
-        console.log('FriendRequestApiUtil#makeFriendRequest ERROR');
       }
     });
   },
@@ -23,9 +20,6 @@ var FriendRequestApiUtil = {
       data: {friend_request: {maker_id: userId, response: response}},
       success: function (friendRequestResponse) {
         ServerActions.receiveFriendRequestResponse(friendRequestResponse);
-      },
-      error: function (errors) {
-        console.log('FriendRequestApiUtil#respondToFriendRequest ERROR');
       }
     });
   },
@@ -37,9 +31,6 @@ var FriendRequestApiUtil = {
       data: {friend_request: {receiver_id: userId, response: response}},
       success: function () {
         ServerActions.receiveFriendRequestCancelation();
-      },
-      error: function (errors) {
-        console.log('FriendRequestApiUtil#respondToFriendRequest ERROR');
       }
     });
   }
