@@ -13,7 +13,7 @@ class Api::CommentsController < ApplicationController
           id: params[:post_id] || params[:comment_id]
         }
     )
-    .order('comments.created_at DESC')
+    .order('comments.created_at ASC')
     .includes(:author)
 
     render 'api/comments/index'
