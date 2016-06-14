@@ -47,13 +47,6 @@ var Nav = React.createClass({
                 {this.state.user.first_name}!
               </a>
             </div>
-            {friends}
-            <div className='nav-messages nav-big-three'
-              onClick={this.toggleMessages}>
-            </div>
-            <div className='nav-notifications nav-big-three'
-              onClick={this.toggleNotifications}>
-            </div>
             <button onClick={this._logout}>Log Out</button>
           </div>
         </nav>
