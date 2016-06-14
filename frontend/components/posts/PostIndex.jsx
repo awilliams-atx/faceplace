@@ -59,6 +59,7 @@ var PostIndex = React.createClass({
   },
   componentWillUnmount: function () {
     this.postListener.remove();
+    this.userListener.remove();
   },
   onPostStoreChange: function () {
     this.setState({posts: PostStore.all()});

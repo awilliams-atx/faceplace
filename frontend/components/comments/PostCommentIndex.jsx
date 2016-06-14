@@ -36,9 +36,6 @@ var PostCommentIndex = React.createClass({
   componentWillUnmount: function () {
     this.commentListener.remove();
   },
-  handleSubmit: function (e) {
-
-  },
   onCommentBodyChange: function (e) {
     this.setState({commentBody: e.target.value});
   },
