@@ -11,6 +11,7 @@ var Router = ReactRouter.Router,
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
     hashHistory = ReactRouter.hashHistory,
+    Redirect = ReactRouter.Redirect
 
     LogInForm = require('./components/LogInForm'),
     Main = require('./components/Main'),
@@ -115,17 +116,17 @@ var App = React.createClass({
 
 var routes = (
   <Route path='/' component={ App } >
-    <IndexRoute component={ Main } onEnter={ _ensureLoggedIn } />
-    <Route path='login' component={ LogInForm } onEnter={ _ensureNotLoggedIn }/>
-    <Route path='main' component={ Main } onEnter={ _ensureLoggedIn } />
-    <Route path='users/:userId' component={ Profile } onEnter={ _ensureLoggedIn } >
+    <IndexRoute component={ Main } onEnter={ redirectToTimeline } />
+    <Route path='login' component={ LogInForm } onEnter={ ensureNotLoggedIn }/>
+    <Route path='main' component={ Main } onEnter={ redirectToTimeline } />
+    <Route path='users/:userId' component={ Profile } onEnter={ ensureLoggedIn } >
       <IndexRoute component= { Timeline } />
       <Route path='timeline' component= { Timeline } />
     </Route>
   </Route>
 );
 
-function _ensureLoggedIn (nextState, replace, asyncDoneCallback) {
+function ensureLoggedIn (nextState, replace, asyncDoneCallback) {
   if (SessionStore.currentUserHasBeenFetched()) {
     redirectIfNotLoggedIn();
   } else {
@@ -141,7 +142,7 @@ function _ensureLoggedIn (nextState, replace, asyncDoneCallback) {
   }
 }
 
-function _ensureNotLoggedIn (nextState, replace, asyncDoneCallback) {
+function ensureNotLoggedIn (nextState, replace, asyncDoneCallback) {
   if (SessionStore.currentUserHasBeenFetched()) {
     redirectIfLoggedIn();
   } else {
@@ -151,6 +152,22 @@ function _ensureNotLoggedIn (nextState, replace, asyncDoneCallback) {
   function redirectIfLoggedIn () {
     if (SessionStore.isUserLoggedIn()) {
       replace('/');
+    }
+
+    asyncDoneCallback();
+  }
+}
+
+function redirectToTimeline (nextState, replace, asyncDoneCallback) {
+  if (SessionStore.currentUserHasBeenFetched()) {
+    redirectIfNotLoggedIn();
+  } else {
+    SessionApiUtil.fetchCurrentUser(redirectIfNotLoggedIn);
+  }
+
+  function redirectIfNotLoggedIn () {
+    if (SessionStore.isUserLoggedIn()) {
+      replace('/users/' + SessionStore.currentUser().id);
     }
 
     asyncDoneCallback();
