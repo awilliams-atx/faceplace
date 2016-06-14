@@ -16,6 +16,7 @@ var PostCommentIndex = React.createClass({
     commentIndexItems = this.state.comments.map(function (comment) {
       return <PostCommentIndexItem comment={comment} key={comment.id} />;
     });
+    // return <div className='nothing-here' />;
 
     return (
       <section className='comment-section'>
