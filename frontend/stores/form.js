@@ -9,7 +9,6 @@ var FormStore = new Store(AppDispatcher);
 FormStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case formConstants.CLOSE_ALL:
-    console.log('FormStore, CLOSE_ALL');
       _openForms = {};
       FormStore.__emitChange();
       break;

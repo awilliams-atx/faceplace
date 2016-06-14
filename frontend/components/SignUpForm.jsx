@@ -91,7 +91,6 @@ var SignUpForm = React.createClass({
     this.setState({password: e.target.value});
   },
   _handleSubmit: function (e) {
-    console.log("signUpForm#_handleSubmit");
     e.preventDefault();
     UserApiUtil.signUp({
       first_name: this.state.firstName,

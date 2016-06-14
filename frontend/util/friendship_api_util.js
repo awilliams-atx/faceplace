@@ -8,9 +8,6 @@ var FriendRequestApiUtil = {
       dataType: 'json',
       success: function (friendship) {
         ServerActions.receiveDeletedFriendship(friendship);
-      },
-      error: function (errors) {
-        console.log('FriendRequestApiUtil#destroyFriendship ERROR');
       }
     });
   }

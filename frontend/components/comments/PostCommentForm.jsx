@@ -44,7 +44,6 @@ var PostCommentForm = React.createClass({
     e.preventDefault();
   },
   onCommentBodyChange: function (e) {
-    console.log('change');
     this.setState({body: e.target.value});
   },
 
