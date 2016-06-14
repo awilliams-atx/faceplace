@@ -35,11 +35,11 @@ CommentStore.allCommentComments = function (commentId) {
   return _commentComments[commentId];
 }
 CommentStore.allPostComments = function (postId) {
-  if (!_postComments[postId]) {
+  if (_postComments[postId]) {
+    return _postComments[postId];
+  } else {
     return [];
   }
-
-  return _postComments[postId];
 }
 
 CommentStore.setComment = function (comment) {
@@ -63,9 +63,11 @@ CommentStore.setComment = function (comment) {
 }
 
 CommentStore.setComments = function (comments) {
-  comments.forEach(function (comment) {
-    CommentStore.setComment(comment);
-  });
+  if (comments[0].commentableType === 'Comment') {
+    _commentComments[comments[0].commentableId] = comments;
+  } else if (comments[0].commentableType === 'Post') {
+    _postComments[comments[0].commentableId] = comments;
+  }
 }
 
 module.exports = CommentStore;

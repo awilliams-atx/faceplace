@@ -16,6 +16,7 @@ var ServerActions = {
     });
   },
   receiveComments: function (comments) {
+    if (comments.length < 1) { return; }
     Dispatcher.dispatch({
       actionType: commentConstants.COMMENTS_RECEIVED,
       comments: comments
