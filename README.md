@@ -1,6 +1,6 @@
 # faceplace
 
-[faceplace on Heroku](http://www.faceplace.herokuapp.com)
+[faceplace on Heroku](http://www.faceplace.io)
 
 faceplace is a full-stack web application inspired by Facebook. Notable technologies include Ruby on Rails and a PostgreSQL database on the back-end laying the foundation for a React.js front-end built in the Flux architectural style.
 
