@@ -9,7 +9,6 @@ var React = require('react'),
 
 var Profile = React.createClass({
   getInitialState: function () {
-    var userId = parseInt(this.props.params.userId);
     return ({user: UserStore.user()});
   },
   render: function () {
@@ -48,7 +47,7 @@ var Profile = React.createClass({
                   </li>
                 </ul>
               </div>
-            </nav>            
+            </nav>
           </div>
           {this.props.children}
         </div>
