@@ -111,9 +111,9 @@ var App = React.createClass({
 
 var routes = (
   <Route path='/' component={ App } >
-    <IndexRoute component={ Timeline } onEnter={ ensureLoggedIn } />
+    <IndexRoute component={ Main } onEnter={ redirectToProfile } />
     <Route path='login' component={ LogInForm } onEnter={ ensureNotLoggedIn }/>
-    <Route path='main' component={ Main } onEnter={ redirectToTimeline } />
+    <Route path='main' component={ Main } onEnter={ redirectToProfile } />
     <Route path='users/:userId' component={ Profile } onEnter={ ensureLoggedIn } >
       <IndexRoute component= { Timeline } />
       <Route path='timeline' component= { Timeline } />
@@ -153,7 +153,7 @@ function ensureNotLoggedIn (nextState, replace, asyncDoneCallback) {
   }
 }
 
-function redirectToTimeline (nextState, replace, asyncDoneCallback) {
+function redirectToProfile (nextState, replace, asyncDoneCallback) {
   if (SessionStore.currentUserHasBeenFetched()) {
     redirectIfNotLoggedIn();
   } else {
@@ -163,6 +163,8 @@ function redirectToTimeline (nextState, replace, asyncDoneCallback) {
   function redirectIfNotLoggedIn () {
     if (SessionStore.isUserLoggedIn()) {
       replace('/users/' + SessionStore.currentUser().id);
+    } else {
+      replace('/login')
     }
 
     asyncDoneCallback();

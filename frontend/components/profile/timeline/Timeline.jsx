@@ -13,14 +13,17 @@ var React = require('react'),
 
     var Timeline = React.createClass({
       getInitialState: function () {
-        var profileOwnerId = parseInt(this.props.params.userId);
+        this.profileOwnerId = function () {
+          return parseInt(this.props.params.userId) || SessionStore.currentUser().id
+        }.bind(this)
+        var profileOwnerId = this.profileOwnerId();
         return({
           profileFetched: ProfileStore.profileFetched(profileOwnerId),
           friendsFetched: FriendStore.friendsFetched(profileOwnerId)
         });
       },
       render: function () {
-        var profileOwnerId = parseInt(this.props.params.userId);
+        var profileOwnerId = this.profileOwnerId();
 
         var timelineContent,
             introContent,
@@ -28,7 +31,7 @@ var React = require('react'),
 
         var authorizedToEdit =
           profileOwnerId === SessionStore.currentUser().id;
-        
+
         if (this.state.profileFetched) {
           introContent = (
                 <IntroIndex userId={profileOwnerId}
@@ -71,6 +74,9 @@ var React = require('react'),
         ClientActions.fetchMostRecentlyAddedFriends(profileOwnerId);
       },
       componentWillUnmount: function () {
+        this.profileOwnerId = function () {
+          return this.props.params.userId || SessionStore.currentUser().id
+        }
         this.profileListener.remove();
         this.friendListener.remove();
       },
@@ -82,19 +88,19 @@ var React = require('react'),
          PostApiUtil.fetchTimelinePosts(newProfileOwnerId);
        },
        onPostStoreChange: function () {
-         var profileOwnerId = parseInt(this.props.params.userId);
+         var profileOwnerId = this.profileOwnerId();
 
          this.setState({posts: PostStore.all(profileOwnerId)});
        },
       onProfileStoreChange: function () {
-        var profileOwnerId = parseInt(this.props.params.userId);
+        var profileOwnerId = this.profileOwnerId();
 
         this.setState({
           profileFetched: ProfileStore.profileFetched(profileOwnerId)
         });
       },
       onFriendStoreChange: function () {
-        var profileOwnerId = parseInt(this.props.params.userId);
+        var profileOwnerId = this.profileOwnerId();
 
         this.setState({
           friendsFetched: FriendStore.friendsFetched(profileOwnerId)

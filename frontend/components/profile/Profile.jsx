@@ -9,20 +9,24 @@ var React = require('react'),
 
 var Profile = React.createClass({
   getInitialState: function () {
-    return ({user: UserStore.user()});
+    this.profileOwnerId = function () {
+      return parseInt(this.props.params.userId) || SessionStore.currentUser().id
+    }.bind(this)
+    return ({profileOwner: UserStore.user()});
   },
   render: function () {
-    var profileOwnerId = parseInt(this.props.params.userId);
+    var profileOwnerId = this.profileOwnerId();
 
     var authorizedToEdit = profileOwnerId === SessionStore.currentUser().id;
 
-    var user = this.state.user,
-        coverPhotoUrl = user ? user.coverPhotoUrl : null;
+    var profileOwner = this.state.profileOwner,
+        coverPhotoUrl = profileOwner ? profileOwner.coverPhotoUrl : null;
 
     var profilePic;
 
-    if (user.profilePicUrl) {
-      profilePic = <img className='profile-pic' src={user.profilePicUrl} />;
+    if (profileOwner.profilePicUrl) {
+      profilePic =
+        <img className='profile-pic' src={profileOwner.profilePicUrl} />;
     } else {
       profilePic = <div className='empty-profile-pic'/>;
     }
@@ -53,11 +57,10 @@ var Profile = React.createClass({
         </div>
       </div>
     );
-
-    return (profile);
+    return profile;
   },
   componentDidMount: function () {
-    var profileOwnerId = parseInt(this.props.params.userId);
+    var profileOwnerId = this.profileOwnerId();
 
     this.userListener =
       UserStore.addListener(this.onUserStoreChange);
@@ -72,7 +75,7 @@ var Profile = React.createClass({
     ClientActions.fetchUser(profileOwnerId);
   },
   onUserStoreChange: function () {
-    this.setState({user: UserStore.user()});
+    this.setState({profileOwner: UserStore.user()});
   }
 });
 
