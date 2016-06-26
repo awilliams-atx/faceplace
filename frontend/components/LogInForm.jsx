@@ -86,14 +86,14 @@ var LogInForm = React.createClass({
       credentials.password = this.state.password;
     }
 
-    SessionApiUtil.login(credentials, this._redirectToMain);
+    SessionApiUtil.login(credentials, this._redirectToTimeline);
   },
   _guestLogin: function (e) {
     var credentials = {email: 'jeff', password: 'starwars'};
     this._handleSubmit(e, {credentials: credentials});
   },
-  _redirectToMain: function () {
-    this.context.router.push('/');
+  _redirectToTimeline: function () {
+    this.context.router.push('/users/' + SessionStore.currentUser().id);
   }
 });
 

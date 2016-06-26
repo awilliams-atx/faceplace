@@ -1,8 +1,3 @@
-window.ClientActions = require('./actions/client_actions');
-window.CommentStore = require('./stores/comment');
-
-// FILES REQUIRED ABOVE ARE FOR TESTING PURPOSES ONLY AND SHOULD BE REMOVED FROM PRODUCTION.
-
 var React = require('react'),
     ReactDOM = require('react-dom');
 
@@ -116,7 +111,7 @@ var App = React.createClass({
 
 var routes = (
   <Route path='/' component={ App } >
-    <IndexRoute component={ Main } onEnter={ redirectToTimeline } />
+    <IndexRoute component={ Timeline } onEnter={ ensureLoggedIn } />
     <Route path='login' component={ LogInForm } onEnter={ ensureNotLoggedIn }/>
     <Route path='main' component={ Main } onEnter={ redirectToTimeline } />
     <Route path='users/:userId' component={ Profile } onEnter={ ensureLoggedIn } >
