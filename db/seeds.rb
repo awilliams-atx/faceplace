@@ -557,6 +557,10 @@
 # post.body = 'I invented moral fibre!'
 # post.save!
 
-u = User.find_by(last_name: 'Kerabatsos')
-u.cover_photo = File.open("#{Rails.root}/app/assets/images/donald_kerabatsos_cover_photo.jpg")
+# u = User.find_by(last_name: 'Kerabatsos')
+# u.cover_photo = File.open("#{Rails.root}/app/assets/images/donald_kerabatsos_cover_photo.jpg")
+# u.save!
+
+u = User.find 4
+u.cover_photo = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_sr_cover_photo.jpg")
 u.save!
