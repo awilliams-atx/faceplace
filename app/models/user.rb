@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  validates :email, :session_token, presence: true
+  validates :first_name, :last_name, :email, :session_token, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
   # ---------------------------------PAPERCLIP-------------------------------- #
@@ -87,9 +87,9 @@ class User < ActiveRecord::Base
 
   # --------------------------------DEBUGGING------------------------------- #
 
-  def inspect
-    "ID: #{id}, Full name: #{full_name} \n"
-  end
+  # def inspect
+  #   "ID: #{id}, Full name: #{full_name} \n"
+  # end
 
   # -----------------------------AUTHENTICATION----------------------------- #
 
