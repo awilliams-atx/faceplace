@@ -20,7 +20,7 @@ var SearchIndex = React.createClass({
     if (this.state.searching) {
       var users;
 
-      filteredUsers = this.state.users.filter(function (user) {
+      var filteredUsers = this.state.users.filter(function (user) {
         var name = (user.firstName + ' ' + user.lastName).toLowerCase();
         return name.match(this.state.searchString.toLowerCase());
       }.bind(this));
