@@ -70,7 +70,7 @@ var CoverPhoto = React.createClass({
     return coverPhoto;
   },
   componentWillReceiveProps: function (newProps) {
-    this.forceUpdate();
+    this.setState({coverPhotoUrl: newProps.coverPhotoUrl});
   },
   toggleExpandEdit: function () {
     this.setState({isEditButtonExpanded: !this.state.isEditButtonExpanded});

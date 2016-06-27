@@ -98,7 +98,7 @@ var SignUpForm = React.createClass({
       email: this.state.email,
       password: this.state.password
     }, function () {
-      this.context.router.push('/');
+      this.context.router.push('/users/' + SessionStore.currentUser().id);
     }.bind(this));
 
   }
