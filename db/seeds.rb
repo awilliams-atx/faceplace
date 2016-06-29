@@ -349,18 +349,6 @@ timeline_posting.save!
 
 
 post = Post.new
-post.author = jeffrey
-post.body = 'Do you have any Kahlua?'
-post.save!
-
-timeline_posting = TimelinePosting.new
-timeline_posting.post = post
-timeline_posting.profile_owner = maude
-timeline_posting.save!
-
-
-
-post = Post.new
 post.author = tommy
 post.body = 'I had to be up at that there crossroads last midnight, to sell my soul to the devil.'
 post.save!
