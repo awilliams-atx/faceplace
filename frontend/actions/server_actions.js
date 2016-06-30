@@ -97,6 +97,12 @@ var ServerActions = {
       coverPhotoUrl: coverPhotoUrl
     });
   },
+  receiveUpdatedPost: function (post) {
+    Dispatcher.dispatch({
+      actionType: postConstants.UPDATED_POST_RECEIVED,
+      post: post
+    });
+  },
   receiveUpdatedProfilePicUrl: function (profilePicUrl) {
     Dispatcher.dispatch({
       actionType: userConstants.UPDATED_PROFILE_PIC_URL_RECEIVED,
