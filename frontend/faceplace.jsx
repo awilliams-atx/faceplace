@@ -91,11 +91,11 @@ var App = React.createClass({
     );
   },
   componentDidMount: function () {
-    this.confirmationListener =
+    this.modalListener =
       ModalStore.addListener(this.onModalStoreChange);
   },
   componentWillUnmount: function () {
-    this.confirmationListener.remove();
+    this.modalListener.remove();
   },
   onModalStoreChange: function () {
     var isModalDisplayed = !!ModalStore.confirmation();
