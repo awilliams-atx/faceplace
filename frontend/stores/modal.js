@@ -2,7 +2,7 @@ var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher.js'),
     modalConstants = require('../constants/modal_constants');
 
-var _modalContent = {};
+var _modalContent = null;
 
 var ModalStore = new Store(AppDispatcher);
 
