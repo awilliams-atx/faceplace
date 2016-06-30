@@ -9,7 +9,7 @@ var ModalStore = new Store(AppDispatcher);
 ModalStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case modalConstants.MODAL_TRIGGERED:
-      this.setConfirmation(payload.confirmation);
+      this.setModal(payload.confirmation);
       ModalStore.__emitChange();
       break;
   }
@@ -25,7 +25,7 @@ ModalStore.confirmation = function () {
   return false;
 };
 
-ModalStore.setConfirmation = function (confirmation) {
+ModalStore.setModal = function (confirmation) {
   _confirmation = confirmation;
 };
 
