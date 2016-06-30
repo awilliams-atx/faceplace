@@ -50,13 +50,6 @@
   border-top: 1px solid #e5e5e5;
 }
 
-.tagging-field {
-  input {
-    font-family: helvetica;
-    font-size: 14px;
-  }
-}
-
 .tagging-field-with {
   float: left;
   background-color: #e2e8f6;
@@ -65,6 +58,14 @@
   width: 29px;
   height: calc(100% - 14px);
   padding: 8px 6px 6px 8px;
+}
+
+.tagging-field {
+  input {
+    font-family: helvetica;
+    font-size: 14px;
+    outline: none;
+  }
 }
 
 .tag-search-anchor-point {
