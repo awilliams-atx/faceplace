@@ -1,5 +1,5 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
-    modalConstants = require('../constants/modal_constants'),
+    confirmationConstants = require('../constants/confirmation_constants'),
     CommentApiUtil = require('../util/comment_api_util'),
     tagConstants = require('../constants/tag_constants'),
     FriendApiUtil = require('../util/friend_api_util'),
@@ -19,11 +19,6 @@ var ClientActions = {
   },
   cancelFriendRequest: function (userId) {
     FriendRequestApiUtil.cancelRequest(userId, 'cancel');
-  },
-  cancelModal: function () {
-    Dispatcher.dispatch({
-      actionType: modalConstants.MODAL_CANCELED
-    });
   },
   deletePost: function (postId) {
     PostApiUtil.deletePost(postId);
@@ -70,10 +65,10 @@ var ClientActions = {
 
     PostApiUtil.submitPost(submissionPost);
   },
-  triggerModal: function (modalContent) {
+  triggerConfirmation: function (opts) {
     Dispatcher.dispatch({
-      actionType: modalConstants.MODAL_TRIGGERED,
-      modalContent: modalContent
+      actionType: confirmationConstants.CONFIRMATION_REQUESTED,
+      confirmation: opts
     });
   },
   unfriend: function (userId) {

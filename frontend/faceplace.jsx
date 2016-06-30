@@ -1,7 +1,3 @@
-ModalStore = require('./stores/modal');
-
-// DEBUGGING
-
 var React = require('react'),
     ReactDOM = require('react-dom');
 
@@ -17,48 +13,99 @@ var Router = ReactRouter.Router,
     Profile = require('./components/profile/Profile'),
     Timeline = require('./components/profile/timeline/Timeline'),
 
-    ModalStore = require('./stores/modal'),
+    ConfirmationStore = require('./stores/confirmation'),
     SessionStore = require('./stores/session'),
     SessionApiUtil = require('./util/session_api_util');
 
 var App = React.createClass({
   getInitialState: function () {
     return ({
-      modalContent: ModalStore.modalContent(),
-      isModalDisplayed: false
+      confirmation: ConfirmationStore.confirmation(),
+      confirming: false
     });
   },
   render: function () {
-    var modal;
+    var confirmation =
+      <div id='modal-background' className='modal-transparent' />;
 
-    if (this.state.isModalDisplayed) {
-      modal = (
+    if (this.state.confirming) {
+      var opts = this.state.confirmation;
+
+      var cancelText = opts.cancelText,
+          cancelCallback = opts.cancelCallback,
+          confirmText = opts.confirmText,
+          confirmCallback = opts.confirmCallback,
+          message = opts.message,
+          title = opts.title;
+
+      var wrapUp = function (response) {
+
+        this.setState({confirming: false}, function () {
+          if (response.confirm) {
+            confirmCallback();
+          } else if (response.cancel) {
+            cancelCallback();
+          }
+        });
+      }.bind(this);
+
+      var clickConfirm = function () {
+        wrapUp({confirm: true});
+      };
+
+      var clickCancel = function () {
+        wrapUp({cancel: true});
+      };
+
+      confirmation = (
         <div id='modal-background' className='modal-opaque'>
-          {this.state.modalContent}
+          <aside className='modal-container group'>
+            <header className='modal-header'>
+              <strong>{title}</strong>
+            </header>
+            <div className='modal-message-container'>
+              <mark>{message}</mark>
+            </div>
+            <br />
+            <hr />
+            <footer className='modal-footer'>
+              <div className='modal-button-container group'>
+                <button className='button button-blue modal-confirm-button'
+                  onClick={clickConfirm}>{confirmText}
+                </button>
+                <button className='button button-gray modal-cancel-button'
+                  onClick={clickCancel}>{cancelText}
+                </button>
+              </div>
+            </footer>
+          </aside>
         </div>
       );
-    } else {
-      modal = <div id='modal-background' className='modal-transparent' />;
     }
 
     return (
       <div id='app'>
-        {modal}
+        {confirmation}
         {this.props.children}
       </div>
     );
   },
   componentDidMount: function () {
-    this.modalListener =
-      ModalStore.addListener(this.onModalStoreChange);
+    this.confirmationListener =
+      ConfirmationStore.addListener(this.onConfirmationStoreChange);
   },
   componentWillUnmount: function () {
-    this.modalListener.remove();
+    this.confirmationListener.remove();
   },
-  onModalStoreChange: function () {
+  toggleModal: function (e) {
+    e.preventDefault();
+    this.setState({confirming: false});
+  },
+  onConfirmationStoreChange: function () {
+    var confirming = !!ConfirmationStore.confirmation();
     this.setState({
-      modalContent: ModalStore.modalContent(),
-      isModalDisplayed: ModalStore.isModalDisplayed()
+      confirmation: ConfirmationStore.confirmation(),
+      confirming: true
     });
   }
 });

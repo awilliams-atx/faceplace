@@ -92,9 +92,8 @@ var PostIndexItem = React.createClass({
       if (this.state.selectingOptions) {
         postOptions = (
           <ul className='post-options group'>
-            <li className='post-option'
-              onClick={this.editPost}>
-              Edit Post
+            <li className='post-option'>
+              Update Post
             </li>
             <br />
             <hr />
@@ -143,51 +142,24 @@ var PostIndexItem = React.createClass({
   deletePost: function () {
     $('body').addClass('no-scroll-body');
     var postId = this.props.post.postId;
-    var confirmCallback = function () {
-      $('body').removeClass('no-scroll-body');
-      ClientActions.deletePost(postId);
-    };
-    var cancelCallback = function () {
-      $('body').removeClass('no-scroll-body');
-      ClientActions.cancelModal();
-    };
-
-    var modalContent = (
-      <aside className='modal-container group'>
-        <header className='modal-header'>
-          <strong>Delete Post</strong>
-        </header>
-        <div className='modal-message-container'>
-          <mark>Really delete this post?</mark>
-        </div>
-        <br />
-        <hr />
-        <footer className='modal-footer'>
-          <div className='modal-button-container group'>
-            <button className='button button-blue modal-confirm-button'
-              onClick={confirmCallback}>
-              Delete post
-            </button>
-            <button className='button button-gray modal-cancel-button'
-              onClick={cancelCallback}>
-              Cancel
-            </button>
-          </div>
-        </footer>
-      </aside>
-    );
-    this.setState({selectingOptions: false}, function () {
-      ClientActions.triggerModal(modalContent);
-    });
-  },
-  editPost: function () {
-    $('body').addClass('no-scroll-body');
-    var postId = this.props.post.postId;
 
     confirmation = {
-      title: 'Edit Post',
-      message
-    }
+      title: 'Delete Post',
+      message: 'Really delete this post?',
+      confirmText: 'Delete Post',
+      cancelText: 'Cancel',
+      confirmCallback: function () {
+        $('body').removeClass('no-scroll-body');
+        ClientActions.deletePost(postId);
+      },
+      cancelCallback: function () {
+        $('body').removeClass('no-scroll-body');
+      }
+    };
+
+    this.setState({selectingOptions: false}, function () {
+      ClientActions.triggerConfirmation(confirmation);
+    });
   },
   toggleOptions: function () {
     this.setState({selectingOptions: !this.state.selectingOptions});
