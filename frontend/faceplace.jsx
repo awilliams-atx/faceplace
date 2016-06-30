@@ -52,7 +52,7 @@ var App = React.createClass({
     this.modalListener.remove();
   },
   onModalStoreChange: function () {
-    var isModalDisplayed = !!ModalStore.confirmation();
+    var isModalDisplayed = ModalStore.isModalDisplayed();
   onConfirmationStoreChange: function () {
     this.setState({
       modal: ModalStore.confirmation(),
