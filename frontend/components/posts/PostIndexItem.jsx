@@ -180,7 +180,6 @@ var PostIndexItem = React.createClass({
     });
   },
   editPost: function () {
-    debugger
     $('body').addClass('no-scroll-body');
     var completionCallback = function () {
       $('body').removeClass('no-scroll-body');
@@ -189,7 +188,9 @@ var PostIndexItem = React.createClass({
 
     var modalContent =
     <aside className='modal-container'>
-        <PostForm editingPost={true} modalCallback={completionCallback} post={this.props.post}/>;
+        <PostForm editingPost={true}
+                  modalCallback={completionCallback}
+                  post={this.props.post}/>;
       </aside>
 
     this.setState({selectingOptions: false}, function () {

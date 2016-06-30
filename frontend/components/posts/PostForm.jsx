@@ -9,6 +9,7 @@ var React = require('react'),
 
 var PostForm = React.createClass({
   getInitialState: function () {
+    var post = this.props.post;
     return({
       postBody: '',
       tagging: false,
@@ -77,6 +78,12 @@ var PostForm = React.createClass({
         </form>
       </section>
     );
+  },
+  componentDidMount: function () {
+    var post = this.props.post;
+    if (post) {
+      this.setState({postBody: post.body});
+    }
   },
   handleSubmit: function (e) {
     e.preventDefault();
