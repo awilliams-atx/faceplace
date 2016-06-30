@@ -19,10 +19,7 @@ var Router = ReactRouter.Router,
 
 var App = React.createClass({
   getInitialState: function () {
-    return ({
-      modal: ModalStore.confirmation(),
-      isModalDisplayed: ModalStore.isModalDisplayed()
-    });
+    return ({isModalDisplayed: ModalStore.isModalDisplayed()});
   },
   render: function () {
     var modal;
