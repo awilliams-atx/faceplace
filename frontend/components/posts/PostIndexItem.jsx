@@ -1,4 +1,5 @@
 var React = require('react'),
+    PostForm = require('./PostForm'),
     ClientActions = require('../../actions/client_actions'),
     PostCommentIndex = require('../comments/PostCommentIndex'),
     CommentStore = require('../../stores/comment'),
@@ -179,15 +180,17 @@ var PostIndexItem = React.createClass({
     });
   },
   editPost: function () {
+    debugger
     $('body').addClass('no-scroll-body');
     var completionCallback = function () {
       $('body').removeClass('no-scroll-body');
       ClientActions.cancelModal();
     };
 
-    var modalContent = (
-      <PostForm />
-    );
+    var modalContent =
+    <aside className='modal-container'>
+        <PostForm editingPost={true} modalCallback={completionCallback} post={this.props.post}/>;
+      </aside>
 
     this.setState({selectingOptions: false}, function () {
       ClientActions.triggerModal(modalContent);
