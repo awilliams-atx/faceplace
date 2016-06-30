@@ -20,7 +20,7 @@ var Router = ReactRouter.Router,
 var App = React.createClass({
   getInitialState: function () {
     return ({
-      confirmation: ModalStore.confirmation(),
+      modal: ModalStore.confirmation(),
       isModalDisplayed: false
     });
   },
@@ -29,7 +29,7 @@ var App = React.createClass({
       <div id='modal-background' className='modal-transparent' />;
 
     if (this.state.isModalDisplayed) {
-      var opts = this.state.confirmation;
+      var opts = this.state.modal;
 
       var cancelText = opts.cancelText,
           cancelCallback = opts.cancelCallback,
@@ -102,7 +102,7 @@ var App = React.createClass({
   onConfirmationStoreChange: function () {
     var confirming = !!ConfirmationStore.confirmation();
     this.setState({
-      confirmation: ModalStore.confirmation(),
+      modal: ModalStore.confirmation(),
       isModalDisplayed: true
     });
   }
