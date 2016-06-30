@@ -186,12 +186,13 @@ var PostIndexItem = React.createClass({
       ClientActions.cancelModal();
     };
 
-    var modalContent =
-    <aside className='modal-container'>
-        <PostForm editingPost={true}
-                  modalCallback={completionCallback}
-                  post={this.props.post}/>;
+    var modalContent = (
+      <aside className='modal-container'>
+          <PostForm editingPost={true}
+                    modalCallback={completionCallback}
+                    post={this.props.post}/>;
       </aside>
+    );
 
     this.setState({selectingOptions: false}, function () {
       ClientActions.triggerModal(modalContent);
