@@ -78,6 +78,9 @@ var ClientActions = {
   },
   unfriend: function (userId) {
     FriendshipApiUtil.destroyFriendship(userId);
+  },
+  updatePost: function (post) {
+    PostApiUtil.updatePost(post);
   }
 };
 
