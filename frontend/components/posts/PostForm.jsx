@@ -24,11 +24,7 @@ var PostForm = React.createClass({
         tagUrl =
           'https://s3.amazonaws.com/faceplace-dev/assets/add_friend_icon+original.png';
 
-  if (this.state.tagging) {
-    tagContents = <TagSearch />;
-  } else {
-    tagContents = <div className='empty-tagging-contents' />;
-  }
+  tagContents = <TagSearch tagging={this.state.tagging}/>;
 
   if (SessionStore.currentUser().id === this.props.profileOwnerId) {
     placeholderText = 'What\'s on your mind, ' + currentUser.first_name + '?';

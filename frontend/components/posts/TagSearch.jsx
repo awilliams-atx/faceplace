@@ -8,7 +8,8 @@ var TagSearch = React.createClass({
     return ({
       searchString: '',
       friends: TagStore.allFriends(),
-      taggedFriendIds: TagStore.allTaggedFriendIds()
+      taggedFriendIds: TagStore.allTaggedFriendIds(),
+      tagging: this.props.tagging
     });
   },
   render: function () {
@@ -40,6 +41,25 @@ var TagSearch = React.createClass({
       );
     } else {
       taggedFriends = <div className='empty-tagged-friends' />;
+    }
+
+    var taggingField;
+
+    if (this.state.tagging) {
+      taggingField = (
+        <div className='tagging-field-container'>
+          <div className='tagging-field-with'>With:</div>
+          <div className='tagging-field'>
+            <input className='tagged-friends-input'
+              placeholder='Who are you with?'
+              onChange={this.onSearchStringChange}
+              value={this.state.searchString}
+              ref='autoFocus' />
+          </div>
+        </div>
+      );
+    } else {
+      taggingField = <div className='emptyTaggingField' />;
     }
 
     var filteredFriends,
@@ -86,23 +106,19 @@ var TagSearch = React.createClass({
     return (
       <div className='tagging-container group'>
         {taggedFriends}
-        <div className='tagging-field-container'>
-          <div className='tagging-field-with'>With:</div>
-          <div className='tagging-field'>
-            <input className='tagged-friends-input'
-              placeholder='Who are you with?'
-              onChange={this.onSearchStringChange}
-              value={this.state.searchString}
-              ref='autoFocus' />
-          </div>
-        </div>
+        {taggingField}
         {tagSearchItems}
       </div>
     );
   },
   componentDidMount: function () {
-    this.refs.autoFocus.focus();
+    if (this.state.tagging) {
+      this.refs.autoFocus.focus();
+    }
     this.tagListener = TagStore.addListener(this.onTagStorechange);
+  },
+  componentWillReceiveProps: function (props) {
+    this.setState({tagging: props.tagging});
   },
   componentWillUnmount: function () {
     this.tagListener.remove();
@@ -128,7 +144,6 @@ var TagSearch = React.createClass({
     delete friends[friendId];
 
     this.setState({
-      tagging: false,
       searchString: '',
       friends: friends,
       taggedFriendIds: taggedFriendIds
