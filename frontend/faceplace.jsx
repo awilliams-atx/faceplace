@@ -25,7 +25,7 @@ var App = React.createClass({
     });
   },
   render: function () {
-    var confirmation =
+    var modal =
       <div id='modal-background' className='modal-transparent' />;
 
     if (this.state.isModalDisplayed) {
@@ -57,7 +57,7 @@ var App = React.createClass({
         wrapUp({cancel: true});
       };
 
-      confirmation = (
+      modal = (
         <div id='modal-background' className='modal-opaque'>
           <aside className='modal-container group'>
             <header className='modal-header'>
@@ -85,7 +85,7 @@ var App = React.createClass({
 
     return (
       <div id='app'>
-        {confirmation}
+        {modal}
         {this.props.children}
       </div>
     );
