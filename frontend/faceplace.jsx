@@ -38,25 +38,6 @@ var App = React.createClass({
           message = opts.message,
           title = opts.title;
 
-      var wrapUp = function (response) {
-
-        this.setState({isModalDisplayed: false}, function () {
-          if (response.confirm) {
-            confirmCallback();
-          } else if (response.cancel) {
-            cancelCallback();
-          }
-        });
-      }.bind(this);
-
-      var clickConfirm = function () {
-        wrapUp({confirm: true});
-      };
-
-      var clickCancel = function () {
-        wrapUp({cancel: true});
-      };
-
       modal = (
         <div id='modal-background' className='modal-opaque'>
           <aside className='modal-container group'>
