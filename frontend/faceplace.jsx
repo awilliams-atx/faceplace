@@ -53,11 +53,6 @@ var App = React.createClass({
   },
   onModalStoreChange: function () {
     var isModalDisplayed = ModalStore.isModalDisplayed();
-  onConfirmationStoreChange: function () {
-    this.setState({
-      modal: ModalStore.confirmation(),
-      isModalDisplayed: ModalStore.isModalDisplayed()
-    });
   }
 });
 
