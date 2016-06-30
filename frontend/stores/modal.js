@@ -1,6 +1,6 @@
 var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher.js'),
-    confirmationConstants = require('../constants/confirmation_constants');
+    modalConstants = require('../constants/modal_constants');
 
 var _confirmation = {};
 
@@ -8,7 +8,7 @@ var ConfirmationStore = new Store(AppDispatcher);
 
 ConfirmationStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case confirmationConstants.CONFIRMATION_REQUESTED:
+    case modalConstants.CONFIRMATION_REQUESTED:
       this.setConfirmation(payload.confirmation);
       ConfirmationStore.__emitChange();
       break;

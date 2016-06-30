@@ -1,5 +1,5 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
-    confirmationConstants = require('../constants/confirmation_constants'),
+    modalConstants = require('../constants/modal_constants'),
     CommentApiUtil = require('../util/comment_api_util'),
     tagConstants = require('../constants/tag_constants'),
     FriendApiUtil = require('../util/friend_api_util'),
@@ -67,7 +67,7 @@ var ClientActions = {
   },
   triggerConfirmation: function (opts) {
     Dispatcher.dispatch({
-      actionType: confirmationConstants.CONFIRMATION_REQUESTED,
+      actionType: modalConstants.CONFIRMATION_REQUESTED,
       confirmation: opts
     });
   },
