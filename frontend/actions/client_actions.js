@@ -20,6 +20,11 @@ var ClientActions = {
   cancelFriendRequest: function (userId) {
     FriendRequestApiUtil.cancelRequest(userId, 'cancel');
   },
+  cancelModal: function () {
+    Dispatcher.dispatch({
+      actionType: modalConstants.MODAL_CANCELED
+    });
+  },
   deletePost: function (postId) {
     PostApiUtil.deletePost(postId);
   },
