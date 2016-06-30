@@ -4,18 +4,18 @@ var Store = require('flux/utils').Store,
 
 var _modalContent = {};
 
-var ConfirmationStore = new Store(AppDispatcher);
+var ModalStore = new Store(AppDispatcher);
 
-ConfirmationStore.__onDispatch = function (payload) {
+ModalStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case modalConstants.MODAL_TRIGGERED:
       this.setConfirmation(payload.confirmation);
-      ConfirmationStore.__emitChange();
+      ModalStore.__emitChange();
       break;
   }
 };
 
-ConfirmationStore.confirmation = function () {
+ModalStore.confirmation = function () {
   for (var key in _confirmation) {
     if (_confirmation.hasOwnProperty(key)) {
       return $.extend({}, _confirmation);
@@ -25,9 +25,9 @@ ConfirmationStore.confirmation = function () {
   return false;
 };
 
-ConfirmationStore.setConfirmation = function (confirmation) {
+ModalStore.setConfirmation = function (confirmation) {
   _confirmation = confirmation;
 };
 
 
-module.exports = ConfirmationStore;
+module.exports = ModalStore;
