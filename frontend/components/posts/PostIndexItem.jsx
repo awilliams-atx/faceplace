@@ -92,8 +92,9 @@ var PostIndexItem = React.createClass({
       if (this.state.selectingOptions) {
         postOptions = (
           <ul className='post-options group'>
-            <li className='post-option'>
-              Update Post
+            <li className='post-option'
+              onClick={this.editPost}>
+              Edit Post
             </li>
             <br />
             <hr />
@@ -172,6 +173,21 @@ var PostIndexItem = React.createClass({
           </footer>
         </aside>
       );
+
+    this.setState({selectingOptions: false}, function () {
+      ClientActions.triggerModal(modalContent);
+    });
+  },
+  editPost: function () {
+    $('body').addClass('no-scroll-body');
+    var completionCallback = function () {
+      $('body').removeClass('no-scroll-body');
+      ClientActions.cancelModal();
+    };
+
+    var modalContent = (
+      <PostForm />
+    );
 
     this.setState({selectingOptions: false}, function () {
       ClientActions.triggerModal(modalContent);
