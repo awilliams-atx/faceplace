@@ -65,7 +65,7 @@ var ClientActions = {
 
     PostApiUtil.submitPost(submissionPost);
   },
-  triggerConfirmation: function (opts) {
+  triggerModal: function (opts) {
     Dispatcher.dispatch({
       actionType: modalConstants.MODAL_TRIGGERED,
       confirmation: opts

@@ -180,7 +180,7 @@ var PostIndexItem = React.createClass({
     };
 
     this.setState({selectingOptions: false}, function () {
-      ClientActions.triggerConfirmation(confirmation);
+      ClientActions.triggerModal(confirmation);
     });
   },
   toggleOptions: function () {
