@@ -71,7 +71,7 @@ var PostForm = React.createClass({
               </div>
               <div className='post-footer-right-buttons'>
                 <button className='button button-blue button-post'>
-                  Post
+                  {this.state.isEditing ? 'Update' : 'Post'}
                 </button>
               </div>
             </div>
@@ -83,7 +83,6 @@ var PostForm = React.createClass({
   componentDidMount: function () {
     var post = this.props.post;
     if (post) {
-      debugger
       this.setState({
         isEditing: true,
         postBody: post.body
