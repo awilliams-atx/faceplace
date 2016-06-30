@@ -105,6 +105,8 @@ var PostForm = React.createClass({
         postBody: '',
         tagging: false
       }, function () {
+        $('body').removeClass('no-scroll-body');
+        ClientActions.cancelModal();
         ClientActions.updatePost(post);
       })
     } else {
