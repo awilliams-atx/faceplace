@@ -149,6 +149,7 @@ var PostIndexItem = React.createClass({
     };
     var cancelCallback = function () {
       $('body').removeClass('no-scroll-body');
+      ClientActions.cancelModal();
     };
 
     var modalContent = (
