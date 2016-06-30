@@ -25,14 +25,12 @@ var App = React.createClass({
     var modal;
 
     if (this.state.isModalDisplayed) {
-      console.log('modal is displayed');
       modal = (
         <div id='modal-background' className='modal-opaque'>
           {ModalStore.modalContent()}
         </div>
       );
     } else {
-      console.log('modal is not displayed');
       modal = <div id='modal-background' className='modal-transparent' />;
     }
 
@@ -53,7 +51,7 @@ var App = React.createClass({
   onModalStoreChange: function () {
     this.setState({
       isModalDisplayed: ModalStore.isModalDisplayed()
-    )};
+    });
   }
 });
 
