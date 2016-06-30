@@ -112,13 +112,14 @@ var TagSearch = React.createClass({
     );
   },
   componentDidMount: function () {
-    if (this.state.tagging) {
-      this.refs.autoFocus.focus();
-    }
     this.tagListener = TagStore.addListener(this.onTagStorechange);
   },
   componentWillReceiveProps: function (props) {
-    this.setState({tagging: props.tagging});
+    this.setState({tagging: props.tagging}, function () {
+      if (this.state.tagging) {
+        this.refs.autoFocus.focus();
+      }
+    }.bind(this));
   },
   componentWillUnmount: function () {
     this.tagListener.remove();
