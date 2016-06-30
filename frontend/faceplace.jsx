@@ -29,14 +29,7 @@ var App = React.createClass({
       <div id='modal-background' className='modal-transparent' />;
 
     if (this.state.isModalDisplayed) {
-      var opts = this.state.modal;
-
-      var cancelText = opts.cancelText,
-          cancelCallback = opts.cancelCallback,
-          confirmText = opts.confirmText,
-          confirmCallback = opts.confirmCallback,
-          message = opts.message,
-          title = opts.title;
+      var modalContent = this.state.modalContent;
 
       modal = (
         <div id='modal-background' className='modal-opaque'>
