@@ -15,14 +15,8 @@ ModalStore.__onDispatch = function (payload) {
   }
 };
 
-ModalStore.confirmation = function () {
-  for (var key in _confirmation) {
-    if (_confirmation.hasOwnProperty(key)) {
-      return $.extend({}, _confirmation);
-    }
-  }
-
-  return false;
+ModalStore.modalContent = function () {
+  return _modalContent;
 };
 
 ModalStore.setModal = function (confirmation) {
