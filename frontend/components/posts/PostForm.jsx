@@ -95,19 +95,28 @@ var PostForm = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     if (this.state.postBody.length < 1) { return; }
-
     var post = {
-      profileOwnerId: this.props.profileOwnerId,
       body: this.state.postBody,
       taggedFriendIds: TagStore.allTaggedFriendIds({keysOnly: true})
     };
+    if (this.state.isEditing) {
+      post.id = this.props.post.postId;
+      this.setState({
+        postBody: '',
+        tagging: false
+      }, function () {
+        ClientActions.updatePost(post);
+      })
+    } else {
+      post.profileOwnerId = this.props.profileOwnerId;
+      this.setState({
+        postBody: '',
+        tagging: false
+      }, function () {
+        ClientActions.submitPost(post);
+      });
+    }
 
-    this.setState({
-      postBody: '',
-      tagging: false
-    }, function () {
-      ClientActions.submitPost(post);
-    });
   },
   onPostBodyChange: function (e) {
     this.setState({postBody: e.target.value});
