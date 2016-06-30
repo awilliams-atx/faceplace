@@ -25,17 +25,16 @@ var App = React.createClass({
     });
   },
   render: function () {
-    var modal =
-      <div id='modal-background' className='modal-transparent' />;
+    var modal;
 
     if (this.state.isModalDisplayed) {
-      var modalContent = this.state.modalContent;
-
       modal = (
         <div id='modal-background' className='modal-opaque'>
           {this.state.modalContent}
         </div>
       );
+    } else {
+      modal = <div id='modal-background' className='modal-transparent' />;
     }
 
     return (
