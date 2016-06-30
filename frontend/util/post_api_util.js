@@ -35,6 +35,17 @@ var PostApiUtil = {
         ServerActions.receiveOwnPost(post);
       }
     });
+  },
+  updatePost: function (post) {
+    $.ajax({
+      url: 'api/posts/' + post.id,
+      method: 'PUT',
+      dataType: 'json',
+      data: {post: post},
+      success: function (post) {
+        ServerActions.receiveUpdatedPost(post);
+      }
+    })
   }
 };
 
