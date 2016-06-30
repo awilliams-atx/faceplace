@@ -33,26 +33,7 @@ var App = React.createClass({
 
       modal = (
         <div id='modal-background' className='modal-opaque'>
-          <aside className='modal-container group'>
-            <header className='modal-header'>
-              <strong>{title}</strong>
-            </header>
-            <div className='modal-message-container'>
-              <mark>{message}</mark>
-            </div>
-            <br />
-            <hr />
-            <footer className='modal-footer'>
-              <div className='modal-button-container group'>
-                <button className='button button-blue modal-confirm-button'
-                  onClick={clickConfirm}>{confirmText}
-                </button>
-                <button className='button button-gray modal-cancel-button'
-                  onClick={clickCancel}>{cancelText}
-                </button>
-              </div>
-            </footer>
-          </aside>
+          {this.state.modalContent}
         </div>
       );
     }
