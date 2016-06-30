@@ -3,6 +3,7 @@ var Store = require('flux/utils').Store,
     modalConstants = require('../constants/modal_constants');
 
 var _modalContent = null;
+var _isModalDisplayed = false;
 
 var ModalStore = new Store(AppDispatcher);
 
@@ -13,6 +14,10 @@ ModalStore.__onDispatch = function (payload) {
       ModalStore.__emitChange();
       break;
   }
+};
+
+ModalStore.isModalDisplayed = function () {
+  return !!_isModalDisplayed;
 };
 
 ModalStore.modalContent = function () {
