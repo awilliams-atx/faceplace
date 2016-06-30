@@ -92,7 +92,7 @@ var App = React.createClass({
   },
   componentDidMount: function () {
     this.confirmationListener =
-      ModalStore.addListener(this.onConfirmationStoreChange);
+      ModalStore.addListener(this.onModalStoreChange);
   },
   componentWillUnmount: function () {
     this.confirmationListener.remove();
@@ -101,7 +101,7 @@ var App = React.createClass({
     e.preventDefault();
     this.setState({isModalDisplayed: false});
   },
-  onConfirmationStoreChange: function () {
+  onModalStoreChange: function () {
     var isModalDisplayed = !!ModalStore.confirmation();
     this.setState({
       confirmation: ModalStore.confirmation(),
