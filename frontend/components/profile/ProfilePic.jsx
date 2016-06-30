@@ -20,18 +20,18 @@ var ProfilePic = React.createClass({
       editProfilePicButton = (
         <form>
           <div className='profile-pic-input-container'>
-            <div className='profile-pic-input-replacement'>
+            <div className='profile-pic-input-replacement group'>
               <i className="fa fa-camera" aria-hidden="true"></i>
               <strong>Change photo</strong>
             </div>
-
-            <div className='profile-pic-input-cover' />
 
             <input type='file'
               className='profile-pic-input'
               id='profile-pic-input'
               onChange={this.updateProfilePicFile}>
             </input>
+
+            <div className='profile-pic-input-cover' />
           </div>
         </form>
       );
