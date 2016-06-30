@@ -42,6 +42,7 @@ Rails.application.routes.draw do
     resource :user, only: [:update, :create]
 
     post 'user/cover_photo', to: 'users#update_cover_photo'
+    post 'user/profile_pic', to: 'users#update_profile_pic'
 
     get '/users/:id/most_recently_added',
     to: 'users#most_recently_added'

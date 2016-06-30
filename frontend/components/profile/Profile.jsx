@@ -2,6 +2,7 @@ var React = require('react'),
     AddFriend = require('./AddFriend'),
     CoverPhoto = require('./CoverPhoto'),
     Nav = require('../Nav'),
+    ProfilePic = require('./ProfilePic'),
     ClientActions = require('../../actions/client_actions'),
     SessionActions = require('../../actions/session_actions'),
     SessionStore = require('../../stores/session'),
@@ -20,13 +21,16 @@ var Profile = React.createClass({
     var authorizedToEdit = profileOwnerId === SessionStore.currentUser().id;
 
     var profileOwner = this.state.profileOwner,
-        coverPhotoUrl = profileOwner ? profileOwner.coverPhotoUrl : null;
+        coverPhotoUrl = profileOwner ? profileOwner.coverPhotoUrl : null,
+        profilePicUrl = profileOwner ? profileOwner.profilePicUrl : null;
 
     var profilePic;
 
     if (profileOwner.profilePicUrl) {
-      profilePic =
-        <img className='profile-pic' src={profileOwner.profilePicUrl} />;
+      profilePic = (
+        <ProfilePic profileOwnerId={profileOwnerId}
+          profilePicUrl={profilePicUrl}/>
+      );
     } else {
       profilePic = <div className='empty-profile-pic'/>;
     }

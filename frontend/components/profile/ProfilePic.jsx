@@ -22,7 +22,7 @@ var ProfilePic = React.createClass({
           <div className='profile-pic-input-container'>
             <div className='profile-pic-input-replacement'>
               <i className="fa fa-camera" aria-hidden="true"></i>
-              <strong>Change cover photo</strong>
+              <strong>Change photo</strong>
             </div>
 
             <div className='profile-pic-input-cover' />
@@ -53,7 +53,10 @@ var ProfilePic = React.createClass({
     return profilePic;
   },
   componentWillReceiveProps: function (newProps) {
-    this.forceUpdate();
+    this.setState({
+      profileOwnerId: newProps.profileOwnerId,
+      profilePicUrl: newProps.profilePicUrl
+    });
   },
   updateProfilePicFile: function (e) {
     var profilePicFile = e.currentTarget.files[0];

@@ -17,7 +17,6 @@ var UserApiUtil = {
     });
   },
   fetchUser: function (id) {
-    // NOPE
     $.ajax({
       url: 'api/users/' + id,
       method: 'GET',
@@ -54,7 +53,22 @@ var UserApiUtil = {
       contentType: false,
       processData: false,
       success: function (coverPhotoData) {
-        ServerActions.receiveUpdatedCoverPhotoUrl(coverPhotoData.coverPhotoUrl);
+        ServerActions
+          .receiveUpdatedCoverPhotoUrl(coverPhotoData.coverPhotoUrl);
+      }
+    });
+  },
+  submitProfilePic: function (formData) {
+    $.ajax({
+      url: 'api/user/profile_pic',
+      method: 'POST',
+      dataType: 'json',
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (profilePicData) {
+        ServerActions
+          .receiveUpdatedProfilePicUrl(profilePicData.profilePicUrl);
       }
     });
   }

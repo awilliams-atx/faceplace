@@ -14,6 +14,10 @@ UserStore.__onDispatch = function (payload) {
       _user.coverPhotoUrl = payload.coverPhotoUrl;
       UserStore.__emitChange();
       break;
+    case userConstants.UPDATED_PROFILE_PIC_URL_RECEIVED:
+      _user.profilePicUrl = payload.profilePicUrl;
+      UserStore.__emitChange();
+      break;
     case userConstants.USER_RECEIVED:
       _user = payload.user;
       UserStore.__emitChange();

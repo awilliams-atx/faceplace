@@ -1,0 +1,39 @@
+.profile-pic-input-container {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+}
+
+.profile-pic {
+  img {
+    display: block;
+  }
+  input {
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: -93px;
+    width: 240px;
+    height: 27px;
+  }
+  input:hover {
+    cursor: pointer;
+  }
+}
+
+.profile-pic-input-replacement {
+  color: rgba(255, 255, 255, 0.5);
+  i {
+    font-size: 26px;
+    display: block;
+    float: left;
+    margin-right: 5px;
+  }
+  strong {
+    font-family: helvetica;
+    font-size: 16px;
+    display: block;
+    float: left;
+    line-height: 27px;
+  }
+}
