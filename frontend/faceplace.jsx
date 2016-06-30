@@ -21,7 +21,7 @@ var App = React.createClass({
   getInitialState: function () {
     return ({
       modal: ModalStore.confirmation(),
-      isModalDisplayed: false
+      isModalDisplayed: ModalStore.isModalDisplayed()
     });
   },
   render: function () {
