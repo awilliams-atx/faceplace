@@ -21,14 +21,14 @@ var App = React.createClass({
   getInitialState: function () {
     return ({
       confirmation: ConfirmationStore.confirmation(),
-      confirming: false
+      isModalDisplayed: false
     });
   },
   render: function () {
     var confirmation =
       <div id='modal-background' className='modal-transparent' />;
 
-    if (this.state.confirming) {
+    if (this.state.isModalDisplayed) {
       var opts = this.state.confirmation;
 
       var cancelText = opts.cancelText,
@@ -40,7 +40,7 @@ var App = React.createClass({
 
       var wrapUp = function (response) {
 
-        this.setState({confirming: false}, function () {
+        this.setState({isModalDisplayed: false}, function () {
           if (response.confirm) {
             confirmCallback();
           } else if (response.cancel) {
@@ -99,13 +99,13 @@ var App = React.createClass({
   },
   toggleModal: function (e) {
     e.preventDefault();
-    this.setState({confirming: false});
+    this.setState({isModalDisplayed: false});
   },
   onConfirmationStoreChange: function () {
-    var confirming = !!ConfirmationStore.confirmation();
+    var isModalDisplayed = !!ConfirmationStore.confirmation();
     this.setState({
       confirmation: ConfirmationStore.confirmation(),
-      confirming: true
+      isModalDisplayed: true
     });
   }
 });
