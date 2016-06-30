@@ -5,7 +5,7 @@ json.postPicUrl asset_path(post.author.profile_pic.url(:post))
 json.fullName post.author.full_name
 
 time = post.created_at.localtime
-json.createdAt "#{time.strftime('%B')} #{time.strftime('%e')} at#{time.strftime('%l')}:#{time.strftime('%M')}"
+json.createdAt "#{time.strftime('%B')} #{time.strftime('%e')} at #{time.strftime('%l')}:#{time.strftime('%M')}"
 
 json.taggedFriends do
   json.array! post.tagged_friends, partial: 'api/tags/tagged', as: :tagged
