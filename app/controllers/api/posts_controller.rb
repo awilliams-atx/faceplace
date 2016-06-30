@@ -32,6 +32,12 @@ class Api::PostsController < ApplicationController
     render 'api/posts/show'
   end
 
+  def update
+    @post = Post.find(post_params[:id])
+    @post.update(post_params)
+    render 'api/posts/show'
+  end
+
   def destroy
     @post = Post.destroy(params[:id])
     render 'api/posts/show'
