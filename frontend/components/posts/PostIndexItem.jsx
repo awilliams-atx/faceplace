@@ -144,6 +144,7 @@ var PostIndexItem = React.createClass({
 
     var confirmCallback = function () {
       $('body').removeClass('no-scroll-body');
+      ClientActions.cancelModal();
       ClientActions.deletePost(this.props.post.postId);
     }.bind(this);
     var cancelCallback = function () {
