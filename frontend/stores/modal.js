@@ -9,6 +9,10 @@ var ModalStore = new Store(AppDispatcher);
 
 ModalStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
+    case modalConstants.MODAL_CANCELED:
+      _isModalDisplayed = false;
+      ModalStore.__emitChange();
+      break;
     case modalConstants.MODAL_TRIGGERED:
       this.setModalContent(payload.modalContent);
       ModalStore.__emitChange();
