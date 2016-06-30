@@ -13,14 +13,14 @@ var Router = ReactRouter.Router,
     Profile = require('./components/profile/Profile'),
     Timeline = require('./components/profile/timeline/Timeline'),
 
-    ConfirmationStore = require('./stores/modal'),
+    ModalStore = require('./stores/modal'),
     SessionStore = require('./stores/session'),
     SessionApiUtil = require('./util/session_api_util');
 
 var App = React.createClass({
   getInitialState: function () {
     return ({
-      confirmation: ConfirmationStore.confirmation(),
+      confirmation: ModalStore.confirmation(),
       isModalDisplayed: false
     });
   },
@@ -92,7 +92,7 @@ var App = React.createClass({
   },
   componentDidMount: function () {
     this.confirmationListener =
-      ConfirmationStore.addListener(this.onConfirmationStoreChange);
+      ModalStore.addListener(this.onConfirmationStoreChange);
   },
   componentWillUnmount: function () {
     this.confirmationListener.remove();
@@ -102,9 +102,9 @@ var App = React.createClass({
     this.setState({isModalDisplayed: false});
   },
   onConfirmationStoreChange: function () {
-    var isModalDisplayed = !!ConfirmationStore.confirmation();
+    var isModalDisplayed = !!ModalStore.confirmation();
     this.setState({
-      confirmation: ConfirmationStore.confirmation(),
+      confirmation: ModalStore.confirmation(),
       isModalDisplayed: true
     });
   }
