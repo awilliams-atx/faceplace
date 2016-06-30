@@ -25,6 +25,7 @@ ModalStore.modalContent = function () {
 };
 
 ModalStore.setModalContent = function (modalContent) {
+  _isModalDisplayed = true;
   _modalContent = modalContent;
 };
 
