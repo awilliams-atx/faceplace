@@ -20,6 +20,10 @@ PostStore.__onDispatch = function (payload) {
       this.setPosts(payload);
       PostStore.__emitChange();
       break;
+    case postConstants.UPDATED_POST_RECEIVED:
+      PostStore.__emitChange();
+      this.updatePost(payload.post);
+      break;
   }
 };
 
@@ -44,6 +48,16 @@ PostStore.removePost = function (post) {
 
 PostStore.setPosts = function (payload) {
   _posts = payload.posts;
+};
+
+PostStore.updatePost = function (post) {
+  for (var i = 0; i < _posts.length; i++) {
+    debugger
+    if (_posts[i].postId === post.postId) {
+      _posts[i] = post;
+      return;
+    }
+  }
 };
 
 window.PostStore = PostStore;
