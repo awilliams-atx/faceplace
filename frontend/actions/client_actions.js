@@ -65,10 +65,10 @@ var ClientActions = {
 
     PostApiUtil.submitPost(submissionPost);
   },
-  triggerModal: function (opts) {
+  triggerModal: function (modalContent) {
     Dispatcher.dispatch({
       actionType: modalConstants.MODAL_TRIGGERED,
-      confirmation: opts
+      modalContent: modalContent
     });
   },
   unfriend: function (userId) {
