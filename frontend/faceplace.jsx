@@ -97,10 +97,6 @@ var App = React.createClass({
   componentWillUnmount: function () {
     this.confirmationListener.remove();
   },
-  toggleModal: function (e) {
-    e.preventDefault();
-    this.setState({confirming: false});
-  },
   onConfirmationStoreChange: function () {
     var confirming = !!ConfirmationStore.confirmation();
     this.setState({
