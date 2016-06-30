@@ -152,26 +152,24 @@ var PostIndexItem = React.createClass({
     };
 
     var modalContent = (
-        <div id='modal-background' className='modal-opaque'>
-          <aside className='modal-container group'>
-            <header className='modal-header'>
-              <strong>Delete Post</strong>
-            </header>
-            <div className='modal-message-container'>
-              <mark>Really delete this post?</mark>
+        <aside className='modal-container group'>
+          <header className='modal-header'>
+            <strong>Delete Post</strong>
+          </header>
+          <div className='modal-message-container'>
+            <mark>Really delete this post?</mark>
+          </div>
+          <br />
+          <hr />
+          <footer className='modal-footer'>
+            <div className='modal-button-container group'>
+              <button className='button button-blue modal-confirm-button'
+                onClick={confirmCallback}>Delete Post</button>
+              <button className='button button-gray modal-cancel-button'
+                onClick={cancelCallback}>Cancel</button>
             </div>
-            <br />
-            <hr />
-            <footer className='modal-footer'>
-              <div className='modal-button-container group'>
-                <button className='button button-blue modal-confirm-button'
-                  onClick={confirmCallback}>Delete Post</button>
-                <button className='button button-gray modal-cancel-button'
-                  onClick={cancelCallback}>Cancel</button>
-              </div>
-            </footer>
-          </aside>
-        </div>
+          </footer>
+        </aside>
       );
     };
 
