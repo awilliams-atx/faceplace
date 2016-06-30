@@ -20,7 +20,7 @@ ModalStore.modalContent = function () {
 };
 
 ModalStore.setModal = function (confirmation) {
-  _confirmation = confirmation;
+  _modalContent = modalContent;
 };
 
 
