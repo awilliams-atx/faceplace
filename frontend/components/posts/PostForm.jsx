@@ -54,7 +54,8 @@ var PostForm = React.createClass({
             <textarea className='post-textarea'
               onChange={this.onPostBodyChange}
               value={this.state.postBody}
-              placeholder={placeholderText} >
+              placeholder={placeholderText}
+              ref='autoFocus' >
 
             </textarea>
           </div>
@@ -86,7 +87,9 @@ var PostForm = React.createClass({
       this.setState({
         isEditing: true,
         postBody: post.body
-      });
+      }, function () {
+        this.refs.autoFocus.focus();
+      }.bind(this));
     }
   },
   handleSubmit: function (e) {
