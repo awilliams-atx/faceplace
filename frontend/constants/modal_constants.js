@@ -1,5 +1,5 @@
 var modalConstants = {
-  CONFIRMATION_REQUESTED: "CONFIRMATION_REQUESTED"
+  MODAL_TRIGGERED: "MODAL_TRIGGERED"
 };
 
 module.exports = modalConstants;

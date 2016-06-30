@@ -67,7 +67,7 @@ var ClientActions = {
   },
   triggerConfirmation: function (opts) {
     Dispatcher.dispatch({
-      actionType: modalConstants.CONFIRMATION_REQUESTED,
+      actionType: modalConstants.MODAL_TRIGGERED,
       confirmation: opts
     });
   },

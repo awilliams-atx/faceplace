@@ -8,7 +8,7 @@ var ConfirmationStore = new Store(AppDispatcher);
 
 ConfirmationStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case modalConstants.CONFIRMATION_REQUESTED:
+    case modalConstants.MODAL_TRIGGERED:
       this.setConfirmation(payload.confirmation);
       ConfirmationStore.__emitChange();
       break;
