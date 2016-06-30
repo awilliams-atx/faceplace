@@ -172,7 +172,6 @@ var PostIndexItem = React.createClass({
           </footer>
         </aside>
       );
-    };
 
     this.setState({selectingOptions: false}, function () {
       ClientActions.triggerModal(modalContent);
