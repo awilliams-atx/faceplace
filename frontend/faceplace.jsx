@@ -25,7 +25,8 @@ var App = React.createClass({
     });
   },
   render: function () {
-    var confirmation = <div className='empty-confirmation-container' />;
+    var confirmation =
+      <div id='modal-background' className='modal-transparent' />;
 
     if (this.state.confirming) {
       var opts = this.state.confirmation;
@@ -57,7 +58,7 @@ var App = React.createClass({
       };
 
       confirmation = (
-        <div className='modal-background'>
+        <div id='modal-background' className='modal-opaque'>
           <aside className='modal-container group'>
             <header className='modal-header'>
               <strong>{title}</strong>
