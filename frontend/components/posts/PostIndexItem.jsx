@@ -141,11 +141,10 @@ var PostIndexItem = React.createClass({
   },
   deletePost: function () {
     $('body').addClass('no-scroll-body');
-    var postId = this.props.post.postId;
 
     var confirmCallback = function () {
       $('body').removeClass('no-scroll-body');
-      ClientActions.deletePost(postId);
+      ClientActions.deletePost(this.props.post.postId);
     };
     var cancelCallback = function () {
       $('body').removeClass('no-scroll-body');
