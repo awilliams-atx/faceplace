@@ -13,7 +13,7 @@ var Router = ReactRouter.Router,
     Profile = require('./components/profile/Profile'),
     Timeline = require('./components/profile/timeline/Timeline'),
 
-    ConfirmationStore = require('./stores/confirmation'),
+    ConfirmationStore = require('./stores/modal'),
     SessionStore = require('./stores/session'),
     SessionApiUtil = require('./util/session_api_util');
 
