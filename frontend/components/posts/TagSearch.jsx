@@ -134,7 +134,8 @@ var TagSearch = React.createClass({
       taggedFriendIds: taggedFriendIds
     }, function () {
       ClientActions.addTaggedFriend(friendId);
-    });
+      this.refs.autoFocus.focus();
+    }.bind(this));
   },
   untagFriend: function (e) {
     var friendId = parseInt(e.target.dataset.userid);
