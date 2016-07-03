@@ -34,6 +34,29 @@ var PostForm = React.createClass({
     placeholderText = 'Say something to ' + profileOwner.firstName + '...';
   }
 
+  var footerRightButtons;
+  console.log(this.state);
+  if (this.state.isEditing) {
+    footerRightButtons = (
+      <div className='post-footer-right-buttons'>
+        <button className='button button-blue button-cancel'>
+          Cancel
+        </button>
+        <button className='button button-blue button-post'>
+          {this.state.isEditing ? 'Update' : 'Post'}
+        </button>
+      </div>
+    );
+  } else {
+    footerRightButtons = (
+      <div className='post-footer-right-buttons'>
+        <button className='button button-blue button-post'>
+          {this.state.isEditing ? 'Update' : 'Post'}
+        </button>
+      </div>
+    );
+  }
+
     return (
       // CSS is complicated because of header.
       <section id='post-form-section'
@@ -70,11 +93,7 @@ var PostForm = React.createClass({
                   </div>
                 </div>
               </div>
-              <div className='post-footer-right-buttons'>
-                <button className='button button-blue button-post'>
-                  {this.state.isEditing ? 'Update' : 'Post'}
-                </button>
-              </div>
+              {footerRightButtons}
             </div>
           </footer>
         </form>
