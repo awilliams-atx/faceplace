@@ -41,16 +41,16 @@ var PostForm = React.createClass({
         <button className='button button-gray button-cancel'>
           Cancel
         </button>
-        <button className='button button-blue button-post'>
-          {this.state.isEditing ? 'Update' : 'Post'}
+        <button className='button button-blue'>
+          Update
         </button>
       </div>
     );
   } else {
     footerRightButtons = (
       <div className='post-footer-right-buttons'>
-        <button className='button button-blue button-post'>
-          {this.state.isEditing ? 'Update' : 'Post'}
+        <button className='button button-blue'>
+          Post
         </button>
       </div>
     );
