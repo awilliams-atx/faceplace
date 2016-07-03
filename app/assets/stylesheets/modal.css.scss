@@ -19,19 +19,21 @@
   transition: opacity 0.2s;
 }
 
-.modal-container {
+.modal-outer {
+  position: relative;
+  float: left;
+  top: 30%;
+  left: 50%;
+}
+
+.modal-inner {
+  position: relative;
+  float: left;
+  left: -50%;
   box-shadow: 0px 5px 47px 0px rgba(0,0,0,0.75);
   background-color: white;
   border: 1px solid #bdc7d8;
   border-radius: 3px;
-  position: fixed;
-  height: 147px;
-  width: 436px;
-  right: 0;
-  left: 0;
-  top: 30%;
-  margin: auto;
-
   font-family: helvetica;
   hr {
     border-top: 1px solid #dddfe2;

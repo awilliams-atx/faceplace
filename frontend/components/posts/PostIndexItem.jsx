@@ -187,11 +187,13 @@ var PostIndexItem = React.createClass({
     };
 
     var modalContent = (
-      <aside className='modal-container'>
-          <PostForm editingPost={true}
-                    modalCallback={completionCallback}
-                    post={this.props.post}/>
-      </aside>
+      <div className='modal-outer group'>
+        <aside className='modal-inner'>
+            <PostForm editingPost={true}
+                      modalCallback={completionCallback}
+                      post={this.props.post}/>
+        </aside>
+      </div>
     );
 
     this.setState({selectingOptions: false}, function () {
