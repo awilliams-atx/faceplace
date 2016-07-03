@@ -56,16 +56,19 @@ var PostForm = React.createClass({
     );
   }
 
+  var elTypeClass =
+    this.props.isModalElement ? 'modal-element' : 'subcontent-container';
+
     return (
       // CSS is complicated because of header.
       <section id='post-form-section'
-        className='subcontent-container profile-post'>
+        className={elTypeClass + ' profile-post'}>
         <div className='post-types-background'>
           <header className='post-types'>
-              <img src='https://s3.amazonaws.com/faceplace-dev/assets/post_status.png' className='post-type-img' />
-              <div className='post-type-text'>
-                Status
-              </div>
+            <img src='https://s3.amazonaws.com/faceplace-dev/assets/post_status.png' className='post-type-img' />
+            <div className='post-type-text'>
+              Status
+            </div>
           </header>
         </div>
         <form onSubmit={this.handleSubmit}>
@@ -78,7 +81,6 @@ var PostForm = React.createClass({
               value={this.state.postBody}
               placeholder={placeholderText}
               ref='autoFocus' >
-
             </textarea>
           </div>
           {tagContents}
