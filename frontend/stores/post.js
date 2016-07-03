@@ -52,7 +52,6 @@ PostStore.setPosts = function (payload) {
 
 PostStore.updatePost = function (post) {
   for (var i = 0; i < _posts.length; i++) {
-    debugger
     if (_posts[i].postId === post.postId) {
       _posts[i] = post;
       return;
