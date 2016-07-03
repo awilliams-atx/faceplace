@@ -190,7 +190,7 @@ var PostIndexItem = React.createClass({
       <aside className='modal-container'>
           <PostForm editingPost={true}
                     modalCallback={completionCallback}
-                    post={this.props.post}/>;
+                    post={this.props.post}/>
       </aside>
     );
 
