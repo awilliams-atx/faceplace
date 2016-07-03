@@ -35,7 +35,6 @@ var PostForm = React.createClass({
   }
 
   var footerRightButtons;
-  console.log(this.state);
   if (this.state.isEditing) {
     footerRightButtons = (
       <div className='post-footer-right-buttons'>
@@ -98,7 +97,7 @@ var PostForm = React.createClass({
           </footer>
         </form>
       </section>
-    );
+    )
   },
   componentDidMount: function () {
     var post = this.props.post;
