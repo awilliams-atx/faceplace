@@ -87,11 +87,8 @@ var PostForm = React.createClass({
           <footer>
             <div className='post-footer-background'>
               <div className='post-footer-left-buttons'>
-                <div className='tag-container'>
-                  <div className='tag-icon'>
-                    <img src={tagUrl}
-                      onClick={this.toggleTag}/>
-                  </div>
+                <div className='tag-icon' onClick={this.toggleTag}>
+                  <i className="fa fa-user-plus" aria-hidden="true"></i>
                 </div>
               </div>
               {footerRightButtons}
