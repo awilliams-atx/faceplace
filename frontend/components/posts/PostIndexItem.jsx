@@ -168,10 +168,10 @@ var PostIndexItem = React.createClass({
               <hr />
               <footer className='modal-footer group'>
                 <div className='modal-button-container group'>
-                  <button className='button button-blue modal-confirm-button'
-                    onClick={confirmCallback}>Delete Post</button>
                   <button className='button button-gray modal-cancel-button'
                     onClick={cancelCallback}>Cancel</button>
+                  <button className='button button-blue modal-confirm-button'
+                    onClick={confirmCallback}>Delete Post</button>
                 </div>
               </footer>
             </aside>
