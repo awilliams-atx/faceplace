@@ -26,12 +26,13 @@ var App = React.createClass({
 
     if (this.state.isModalDisplayed) {
       modal = (
-        <div id='modal-background' className='modal-opaque'>
+        <div id='modal-background' className='modal-background-opaque'>
           {ModalStore.modalContent()}
         </div>
       );
     } else {
-      modal = <div id='modal-background' className='modal-transparent' />;
+      modal =
+        <div id='modal-background' className='modal-background-transparent' />;
     }
 
     return (
