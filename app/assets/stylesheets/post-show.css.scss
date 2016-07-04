@@ -104,6 +104,7 @@ div.friend-post-icon {
 }
 
 .post-tagged-friends {
+  color: #888888;
   padding: 5px 12px 3px;
   a {
     cursor: pointer;
@@ -112,8 +113,4 @@ div.friend-post-icon {
   a:hover  {
     text-decoration: underline;
   }
-}
-
-.post-tagged-friends-with {
-  color: rgb(75, 79, 86);
 }
