@@ -111,7 +111,7 @@ var TagSearch = React.createClass({
     );
   },
   componentDidMount: function () {
-    this.tagListener = TagStore.addListener(this.onTagStorechange);
+    this.tagListener = TagStore.addListener(this.onTagStoreChange);
   },
   componentWillUnmount: function () {
     this.tagListener.remove();
@@ -133,7 +133,7 @@ var TagSearch = React.createClass({
       ClientActions.fetchTagSearchResults(this.state.searchString);
     });
   },
-  onTagStorechange: function () {
+  onTagStoreChange: function () {
     this.setState({
       taggedFriends: TagStore.taggedFriends(),
       untaggedFriends: TagStore.untaggedFriends()
