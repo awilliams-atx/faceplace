@@ -169,7 +169,6 @@ var TagSearch = React.createClass({
     friends[friendId] = TagStore.find(friendId);
 
     this.setState({
-      tagging: false,
       taggedFriendIds: taggedFriendIds,
       friends: friends
     }, function () {
