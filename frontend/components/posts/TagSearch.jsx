@@ -173,7 +173,9 @@ var TagSearch = React.createClass({
       friends: friends
     }, function () {
       ClientActions.removeTaggedFriend(friendId);
-      this.refs.autoFocus.focus();
+      if (this.state.tagging) {
+        this.refs.autoFocus.focus();
+      }
     }.bind(this));
   }
 });
