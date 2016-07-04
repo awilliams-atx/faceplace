@@ -23,7 +23,7 @@ var TagSearch = React.createClass({
 
       taggedFriends = (
         <div className='tagged-friends-list group'>
-          <div className='tagged-friends-with'>{'-- with '}</div>
+          <div className='tagged-friends-with'>{'— with '}</div>
           {
             ids.map(function (id) {
               var friend = TagStore.find(id);
