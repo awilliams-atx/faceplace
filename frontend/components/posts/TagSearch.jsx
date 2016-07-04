@@ -7,9 +7,9 @@ var TagSearch = React.createClass({
   getInitialState: function () {
     return ({
       searchString: '',
-      friends: TagStore.allFriends(),
-      taggedFriendIds: TagStore.allTaggedFriendIds(),
+      taggedFriends: TagStore.taggedFriends(),
       tagging: this.props.tagging,
+      untaggedFriends: TagStore.untaggedFriends(),
       wasJustTagging: false
     });
   },
@@ -17,16 +17,16 @@ var TagSearch = React.createClass({
 
     var taggedFriends;
 
-    var ids = Object.keys(this.state.taggedFriendIds);
+    var taggedIds = Object.keys(this.state.taggedFriends);
 
-    if (ids.length > 0) {
+    if (taggedIds.length > 0) {
 
       taggedFriends = (
         <div className='tagged-friends-list group'>
           <div className='tagged-friends-with'>{'— with '}</div>
           {
-            ids.map(function (id) {
-              var friend = TagStore.find(id);
+            taggedIds.map(function (id) {
+              var friend = this.state.taggedFriends[id];
 
               return (
                 <div className='tagged-friends-list-item'
@@ -65,17 +65,18 @@ var TagSearch = React.createClass({
 
     var filteredFriends;
 
-    if (this.state.tagging) {
-      debugger
-      friends = Object.keys(this.state.friends).map(function (id) {
-        return this.state.friends[id];
+    if (this.state.tagging &&
+        Object.keys(this.state.untaggedFriends).length > 0) {
+      var untaggedFriends =
+        Object.keys(this.state.untaggedFriends).map(function (id) {
+        return this.state.untaggedFriends[id];
       }.bind(this));
 
       tagSearchItems = (
         <div className='tag-search-anchor-point'>
           <div className='tagging-friends-search-results overlay group'>
           {
-            friends.map(function (friend) {
+            untaggedFriends.map(function (friend) {
               return (
                 <div
                   className='tagging-friends-search-result group'
@@ -128,28 +129,29 @@ var TagSearch = React.createClass({
   },
   onTagStorechange: function () {
     this.setState({
-      friends: TagStore.allFriends(),
-      taggedFriendIds: TagStore.allTaggedFriendIds()
+      taggedFriends: TagStore.taggedFriends(),
+      untaggedFriends: TagStore.untaggedFriends()
     }, function () {
-      this.refs.autoFocus.focus();
-      debugger
+      if (this.state.tagging) {
+        this.refs.autoFocus.focus();
+      }
     }.bind(this));
   },
   onTagFriend: function (e) {
     e.preventDefault();
     var friendId = parseInt(e.currentTarget.dataset.userid);
 
-    var taggedFriendIds = {};
-    taggedFriendIds[friendId] = true;
-    taggedFriendIds = $.extend(taggedFriendIds, this.state.taggedFriendIds);
+    // var taggedFriendIds = {};
+    // taggedFriendIds[friendId] = true;
+    // taggedFriendIds = $.extend(taggedFriendIds, this.state.taggedFriendIds);
 
-    var friends = $.extend({}, this.state.friends);
-    delete friends[friendId];
+    // var friends = $.extend({}, this.state.friends);
+    // delete friends[friendId];
 
     this.setState({
       searchString: '',
-      friends: friends,
-      taggedFriendIds: taggedFriendIds
+      // friends: friends,
+      // taggedFriendIds: taggedFriendIds
     }, function () {
       ClientActions.addTaggedFriend(friendId);
       this.refs.autoFocus.focus();
@@ -158,21 +160,21 @@ var TagSearch = React.createClass({
   untagFriend: function (e) {
     var friendId = parseInt(e.target.dataset.userid);
 
-    var taggedFriendIds = $.extend({}, this.state.taggedFriendIds);
-    delete taggedFriendIds[friendId];
+    // var taggedFriendIds = $.extend({}, this.state.taggedFriendIds);
+    // delete taggedFriendIds[friendId];
+    //
+    // var friends = $.extend({}, this.state.friends);
+    // friends[friendId] = TagStore.find(friendId);
 
-    var friends = $.extend({}, this.state.friends);
-    friends[friendId] = TagStore.find(friendId);
-
-    this.setState({
-      taggedFriendIds: taggedFriendIds,
-      friends: friends
-    }, function () {
+    // this.setState({
+      // taggedFriendIds: taggedFriendIds,
+      // friends: friends
+    // }, function () {
       ClientActions.removeTaggedFriend(friendId);
       if (this.state.tagging) {
         this.refs.autoFocus.focus();
       }
-    }.bind(this));
+    // }.bind(this));
   }
 });
 

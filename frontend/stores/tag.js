@@ -4,8 +4,9 @@ var Store = require('flux/utils').Store,
     tagConstants = require('../constants/tag_constants');
 
 var _friends = {},
-    _taggedFriendIds = {},
-    _friendsFetched = false;
+    _friendsFetched = false,
+    _taggedFriends = {},
+    _untaggedFriends = {};
 
 var TagStore = new Store(AppDispatcher);
 
@@ -17,13 +18,15 @@ TagStore.__onDispatch = function (payload) {
       TagStore.__emitChange();
       break;
     case tagConstants.FRIEND_TAGGED:
-      _taggedFriendIds[payload.userId] = true;
+      this.tagFriend(payload.userId);
+      TagStore.__emitChange();
       break;
     case tagConstants.FRIEND_UNTAGGED:
-      delete _taggedFriendIds[payload.userId];
+      this.untagFriend(payload.userId);
+      TagStore.__emitChange();
       break;
     case postConstants.OWN_POST_RECEIVED:
-      _taggedFriendIds = {};
+      this.resetFriends();
       TagStore.__emitChange();
       break;
     case tagConstants.TAG_SEARCH_RESULTS_RECEIVED:
@@ -34,34 +37,47 @@ TagStore.__onDispatch = function (payload) {
   }
 };
 
-TagStore.allFriends = function () {
-  return $.extend({}, _friends);
-};
-
-TagStore.allTaggedFriendIds = function (opts) {
-  if (opts && opts.keysOnly) {
-    return Object.keys(_taggedFriendIds);
-  } else {
-    return $.extend({}, _taggedFriendIds);
-  }
-};
-
-TagStore.find = function (id) {
-  return $.extend({}, _friends[id]);
-};
-
 TagStore.friendsFetched = function () {
   return _friendsFetched;
 };
 
-TagStore.setFriends = function (friends) {
-  Object.keys(_friends).forEach(function (userId) {
-    delete _friends[userId];
+TagStore.resetFriends = function () {
+  Object.keys(_taggedFriends).forEach(function (userId) {
+    delete _taggedFriends[userId];
   });
-  friends.forEach(function (friend) {
-    _friends[friend.userId] = friend;
+  Object.keys(_untaggedFriends).forEach(function (userId) {
+    delete _untaggedFriends[userId];
   });
 };
 
-window.TagStore = TagStore;
+TagStore.setFriends = function (friends) {
+  Object.keys(_untaggedFriends).forEach(function (userId) {
+    delete _untaggedFriends[userId];
+  });
+
+  friends.forEach(function (friend) {
+    if (!_taggedFriends[friend.userId]) {
+      _untaggedFriends[friend.userId] = friend;
+    }
+  });
+};
+
+TagStore.tagFriend = function (userId) {
+  _taggedFriends[userId] = _untaggedFriends[userId];
+  delete _untaggedFriends[userId];
+};
+
+TagStore.taggedFriends = function () {
+  return $.extend({}, _taggedFriends);
+};
+
+TagStore.untagFriend = function (userId) {
+  _untaggedFriends[userId] = _taggedFriends[userId];
+  delete _taggedFriends[userId];
+};
+
+TagStore.untaggedFriends = function () {
+  return $.extend({}, _untaggedFriends);
+};
+
 module.exports = TagStore;
