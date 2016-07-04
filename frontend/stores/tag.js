@@ -72,7 +72,6 @@ TagStore.taggedFriends = function () {
 };
 
 TagStore.untagFriend = function (userId) {
-  _untaggedFriends[userId] = _taggedFriends[userId];
   delete _taggedFriends[userId];
 };
 

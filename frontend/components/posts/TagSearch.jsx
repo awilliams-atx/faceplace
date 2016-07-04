@@ -141,40 +141,21 @@ var TagSearch = React.createClass({
     e.preventDefault();
     var friendId = parseInt(e.currentTarget.dataset.userid);
 
-    // var taggedFriendIds = {};
-    // taggedFriendIds[friendId] = true;
-    // taggedFriendIds = $.extend(taggedFriendIds, this.state.taggedFriendIds);
-
-    // var friends = $.extend({}, this.state.friends);
-    // delete friends[friendId];
-
     this.setState({
       searchString: '',
-      // friends: friends,
-      // taggedFriendIds: taggedFriendIds
     }, function () {
       ClientActions.addTaggedFriend(friendId);
+      ClientActions.fetchTagSearchResults(this.state.searchString);
       this.refs.autoFocus.focus();
     }.bind(this));
   },
   untagFriend: function (e) {
     var friendId = parseInt(e.target.dataset.userid);
-
-    // var taggedFriendIds = $.extend({}, this.state.taggedFriendIds);
-    // delete taggedFriendIds[friendId];
-    //
-    // var friends = $.extend({}, this.state.friends);
-    // friends[friendId] = TagStore.find(friendId);
-
-    // this.setState({
-      // taggedFriendIds: taggedFriendIds,
-      // friends: friends
-    // }, function () {
-      ClientActions.removeTaggedFriend(friendId);
-      if (this.state.tagging) {
-        this.refs.autoFocus.focus();
-      }
-    // }.bind(this));
+    ClientActions.removeTaggedFriend(friendId);
+    ClientActions.fetchTagSearchResults(this.state.searchString);
+    if (this.state.tagging) {
+      this.refs.autoFocus.focus();
+    }
   }
 });
 
