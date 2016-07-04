@@ -13,9 +13,7 @@ var PostForm = React.createClass({
       isEditing: false,
       isTaggingForTheFirstTime: true,
       postBody: '',
-      tagging: false,
-      friendsFetched: false,
-      tagQuery: ''
+      tagging: false
     });
   },
   render: function () {
