@@ -9,7 +9,8 @@ var TagSearch = React.createClass({
       searchString: '',
       friends: TagStore.allFriends(),
       taggedFriendIds: TagStore.allTaggedFriendIds(),
-      tagging: this.props.tagging
+      tagging: this.props.tagging,
+      wasJustTagging: false
     });
   },
   render: function () {
@@ -115,7 +116,16 @@ var TagSearch = React.createClass({
     this.tagListener = TagStore.addListener(this.onTagStorechange);
   },
   componentWillReceiveProps: function (props) {
-    this.setState({tagging: props.tagging});
+    var wasJustTagging = this.state.tagging ? true : false;
+
+    this.setState({
+      tagging: props.tagging,
+      wasJustTagging: wasJustTagging
+    }, function () {
+      if (!this.state.wasJustTagging && this.state.tagging) {
+        this.refs.autoFocus.focus();
+      }
+    }.bind(this));
   },
   componentWillUnmount: function () {
     this.tagListener.remove();
