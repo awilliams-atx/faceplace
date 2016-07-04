@@ -23,10 +23,12 @@
   }
 }
 
-img.friend-post-img {
-  float: left;
-  width: 15px;
+div.friend-post-icon {
   margin: 0 5px;
+  i {
+    font-size: 14px;
+    color: rgb(150, 150, 150);
+  }
 }
 
 .post-datetime-container {

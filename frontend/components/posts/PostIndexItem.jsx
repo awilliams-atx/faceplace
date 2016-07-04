@@ -65,8 +65,9 @@ var PostIndexItem = React.createClass({
 
     if (friendProfileOwner) {
       friendPostBreakdownImg = (
-        <img src={friendTimelinePostIconUrl}
-          className='friend-post-img' />
+        <div className='friend-post-icon'>
+          <i className='fa fa-caret-right' aria-hidden='true'></i>
+        </div>
       );
 
       friendPostBreakdown = (
