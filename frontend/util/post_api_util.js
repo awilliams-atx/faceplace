@@ -11,6 +11,16 @@ var PostApiUtil = {
       }
     });
   },
+  fetchTaggedFriends: function (postId) {
+    $.ajax({
+      url: 'api/posts/' + postId + '/tagged_friends',
+      method: 'GET',
+      dataType: 'json',
+      success: function (friends) {
+        ServerActions.receiveTaggedFriends(friends);
+      }
+    });
+  },
   fetchTimelinePosts: function (userId) {
     $.ajax({
       url: 'api/users/' + userId + '/posts',

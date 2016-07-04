@@ -29,6 +29,10 @@ TagStore.__onDispatch = function (payload) {
       this.resetFriends();
       TagStore.__emitChange();
       break;
+    case postConstants.TAGGED_FRIENDS_RECEIVED:
+      this.setTaggedFriends(payload.friends);
+      TagStore.__emitChange();
+      break;
     case tagConstants.TAG_SEARCH_RESULTS_RECEIVED:
       this.setFriends(payload.searchResults);
       _friendsFetched = true;
@@ -59,6 +63,12 @@ TagStore.setFriends = function (friends) {
     if (!_taggedFriends[friend.userId]) {
       _untaggedFriends[friend.userId] = friend;
     }
+  });
+};
+
+TagStore.setTaggedFriends = function (friends) {
+  friends.forEach(function (friend) {
+    _taggedFriends[friend.userId] = friend;
   });
 };
 

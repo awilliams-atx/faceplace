@@ -43,6 +43,11 @@ class Api::PostsController < ApplicationController
     render 'api/posts/show'
   end
 
+  def tagged_friends
+    @friends = Post.find(params[:id]).tagged_friends
+    render 'api/tags/tagging_search_results'
+  end
+
   private
 
   def post_params

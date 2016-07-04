@@ -38,6 +38,9 @@ var ClientActions = {
   fetchSearchResults: function (searchString) {
     SearchApiUtil.fetchSearchResults(searchString);
   },
+  fetchTaggedFriends: function (postId) {
+    PostApiUtil.fetchTaggedFriends(postId);
+  },
   fetchTagSearchResults: function (searchString) {
     TagApiUtil.fetchSearchResults(searchString);
   },

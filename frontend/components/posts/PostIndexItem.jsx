@@ -206,6 +206,7 @@ var PostIndexItem = React.createClass({
 
     this.setState({selectingOptions: false}, function () {
       ClientActions.triggerModal(modalContent);
+      ClientActions.fetchTaggedFriends(this.props.post.postId);
     });
   },
   toggleOptions: function () {

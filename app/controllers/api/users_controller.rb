@@ -34,7 +34,7 @@ class Api::UsersController < ApplicationController
 
   def friends_for_tagging
     @friends = current_user.friends
-    render 'api/friends/tagging_search_results'
+    render 'api/tags/tagging_search_results'
   end
 
   def most_recently_added
@@ -50,7 +50,7 @@ class Api::UsersController < ApplicationController
         friends_only: true,
         user: current_user)
 
-      render 'api/friends/tagging_search_results'
+      render 'api/tags/tagging_search_results'
     else
       @users = User.search(params[:search_string])
       render 'api/users/search_index'

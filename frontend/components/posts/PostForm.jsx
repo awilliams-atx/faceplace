@@ -107,6 +107,7 @@ var PostForm = React.createClass({
         isEditing: true,
         postBody: post.body
       }, function () {
+        ClientActions.fetchTaggedFriends(post.postId);
         this.refs.autoFocus.focus();
       }.bind(this));
     }
@@ -137,7 +138,6 @@ var PostForm = React.createClass({
         ClientActions.submitPost(post);
       });
     }
-
   },
   onPostBodyChange: function (e) {
     this.setState({postBody: e.target.value});

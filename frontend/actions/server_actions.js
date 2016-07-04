@@ -91,6 +91,12 @@ var ServerActions = {
       searchResults: searchResults
     });
   },
+  receiveTaggedFriends: function (friends) {
+    Dispatcher.dispatch({
+      actionType: postConstants.TAGGED_FRIENDS_RECEIVED,
+      friends: friends
+    });
+  },
   receiveTagSearchResults: function (searchResults) {
     Dispatcher.dispatch({
       actionType: tagConstants.TAG_SEARCH_RESULTS_RECEIVED,
