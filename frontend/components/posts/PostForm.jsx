@@ -9,9 +9,9 @@ var React = require('react'),
 
 var PostForm = React.createClass({
   getInitialState: function () {
-    var post = this.props.post;
     return({
       isEditing: false,
+      isTaggingForTheFirstTime: true,
       postBody: '',
       tagging: false,
       friendsFetched: false,
@@ -118,7 +118,7 @@ var PostForm = React.createClass({
     if (this.state.postBody.length < 1) { return; }
     var post = {
       body: this.state.postBody,
-      taggedFriendIds: TagStore.allTaggedFriendIds({keysOnly: true})
+      taggedFriendIds: Object.keys(TagStore.taggedFriends())
     };
     if (this.state.isEditing) {
       post.id = this.props.post.postId;
@@ -146,7 +146,16 @@ var PostForm = React.createClass({
   },
   toggleTag: function (e) {
     e.preventDefault();
-    this.setState({tagging: !this.state.tagging});
+    var willTagForTheFirstTime = !!this.state.isTaggingForTheFirstTime;
+
+    this.setState({
+      tagging: !this.state.tagging,
+      isTaggingForTheFirstTime: false
+    }, function () {
+      if (this.state.tagging && willTagForTheFirstTime) {
+        ClientActions.fetchTagSearchResults('');
+      }
+    });
   }
 });
 

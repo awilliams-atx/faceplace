@@ -70,38 +70,27 @@ var TagSearch = React.createClass({
       friends = Object.keys(this.state.friends).map(function (id) {
         return this.state.friends[id];
       }.bind(this));
-    //
-    //   if (this.state.searchString === '') {
-    //     filteredFriends = [];
-    //   } else {
-    //     filteredFriends = friends.filter(function (friend) {
-    //       var name = (friend.fullName).toLowerCase();
-    //       return name.match(this.state.searchString.toLowerCase());
-    //     }.bind(this));
-    //   }
 
-      if (friends.length > 0) {
-        tagSearchItems = (
-          <div className='tag-search-anchor-point'>
-            <div className='tagging-friends-search-results overlay group'>
-            {
-              friends.map(function (friend) {
-                return (
-                  <div
-                    className='tagging-friends-search-result group'
-                    onClick={this.onTagFriend}
-                    key={friend.userId}
-                    data-userid={friend.userId} >
-                    <img src={friend.postPicUrl} />
-                    <strong>{friend.fullName}</strong>
-                  </div>
-                );
-              }.bind(this))
-            }
-            </div>
+      tagSearchItems = (
+        <div className='tag-search-anchor-point'>
+          <div className='tagging-friends-search-results overlay group'>
+          {
+            friends.map(function (friend) {
+              return (
+                <div
+                  className='tagging-friends-search-result group'
+                  onClick={this.onTagFriend}
+                  key={friend.userId}
+                  data-userid={friend.userId} >
+                  <img src={friend.postPicUrl} />
+                  <strong>{friend.fullName}</strong>
+                </div>
+              );
+            }.bind(this))
+          }
           </div>
-        );
-      }
+        </div>
+      );
     } else {
       tagSearchItems = <div className='empty-tagged-friends-search-results'/>;
     }
@@ -141,7 +130,10 @@ var TagSearch = React.createClass({
     this.setState({
       friends: TagStore.allFriends(),
       taggedFriendIds: TagStore.allTaggedFriendIds()
-    });
+    }, function () {
+      this.refs.autoFocus.focus();
+      debugger
+    }.bind(this));
   },
   onTagFriend: function (e) {
     e.preventDefault();
