@@ -8,6 +8,7 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     PostApiUtil = require('../util/post_api_util'),
     ProfileApiUtil = require('../util/profile_api_util'),
     SearchApiUtil = require('../util/search_api_util'),
+    TagApiUtil = require('../util/tag_api_util'),
     UserApiUtil = require('../util/user_api_util');
 
 var ClientActions = {
@@ -36,6 +37,9 @@ var ClientActions = {
   },
   fetchSearchResults: function (searchString) {
     SearchApiUtil.fetchSearchResults(searchString);
+  },
+  fetchTagSearchResults: function (searchString) {
+    TagApiUtil.fetchSearchResults(searchString);
   },
   fetchTimelinePosts: function (profileOwnerId) {
     PostApiUtil.fetchTimelinePosts(profileOwnerId);

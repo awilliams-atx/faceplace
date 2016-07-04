@@ -146,15 +146,7 @@ var PostForm = React.createClass({
   },
   toggleTag: function (e) {
     e.preventDefault();
-    this.setState({tagging: !this.state.tagging}, function () {
-      ensureFriendsFetched();
-    });
-
-    function ensureFriendsFetched () {
-      if (!TagStore.friendsFetched()) {
-        TagApiUtil.fetchFriendsForTagging(SessionStore.currentUser().id);
-      }
-    }
+    this.setState({tagging: !this.state.tagging});
   }
 });
 

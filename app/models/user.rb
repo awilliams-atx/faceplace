@@ -62,12 +62,20 @@ class User < ActiveRecord::Base
       .limit(9)
   end
 
-  def self.search(search_string)
-    User.all
-      .where('LOWER(first_name) LIKE :string
-      OR LOWER(last_name) LIKE :string',
+  def self.search(search_string, opts = {})
+    if opts[:friends_only]
+      opts[:user].friends
+        .where('LOWER(first_name) LIKE :string
+        OR LOWER(last_name) LIKE :string',
         {string: search_string.downcase + '%'})
-      .limit(8)
+        .limit(8)
+    else
+      User.all
+        .where('LOWER(first_name) LIKE :string
+        OR LOWER(last_name) LIKE :string',
+        {string: search_string.downcase + '%'})
+        .limit(8)
+    end
   end
 
   def timeline_posts

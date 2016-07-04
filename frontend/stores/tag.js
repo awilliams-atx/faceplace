@@ -26,6 +26,11 @@ TagStore.__onDispatch = function (payload) {
       _taggedFriendIds = {};
       TagStore.__emitChange();
       break;
+    case tagConstants.TAG_SEARCH_RESULTS_RECEIVED:
+      this.setFriends(payload.searchResults);
+      _friendsFetched = true;
+      TagStore.__emitChange();
+      break;
   }
 };
 
@@ -50,6 +55,9 @@ TagStore.friendsFetched = function () {
 };
 
 TagStore.setFriends = function (friends) {
+  Object.keys(_friends).forEach(function (userId) {
+    delete _friends[userId];
+  });
   friends.forEach(function (friend) {
     _friends[friend.userId] = friend;
   });

@@ -63,28 +63,29 @@ var TagSearch = React.createClass({
       taggingField = <div className='emptyTaggingField' />;
     }
 
-    var filteredFriends,
-        friends = this.state.friends;
+    var filteredFriends;
 
-    friends = Object.keys(friends).map(function (id) {
-      return friends[id];
-    });
-
-    if (this.state.searchString === '') {
-      filteredFriends = [];
-    } else {
-      filteredFriends = friends.filter(function (friend) {
-        var name = (friend.fullName).toLowerCase();
-        return name.match(this.state.searchString.toLowerCase());
+    if (this.state.tagging) {
+      debugger
+      friends = Object.keys(this.state.friends).map(function (id) {
+        return this.state.friends[id];
       }.bind(this));
-    }
+    //
+    //   if (this.state.searchString === '') {
+    //     filteredFriends = [];
+    //   } else {
+    //     filteredFriends = friends.filter(function (friend) {
+    //       var name = (friend.fullName).toLowerCase();
+    //       return name.match(this.state.searchString.toLowerCase());
+    //     }.bind(this));
+    //   }
 
-    if (filteredFriends.length > 0) {
-      tagSearchItems = (
-        <div className='tag-search-anchor-point'>
-          <div className='tagging-friends-search-results overlay group'>
+      if (friends.length > 0) {
+        tagSearchItems = (
+          <div className='tag-search-anchor-point'>
+            <div className='tagging-friends-search-results overlay group'>
             {
-              filteredFriends.map(function (friend) {
+              friends.map(function (friend) {
                 return (
                   <div
                     className='tagging-friends-search-result group'
@@ -97,9 +98,10 @@ var TagSearch = React.createClass({
                 );
               }.bind(this))
             }
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
     } else {
       tagSearchItems = <div className='empty-tagged-friends-search-results'/>;
     }
@@ -115,6 +117,9 @@ var TagSearch = React.createClass({
   componentDidMount: function () {
     this.tagListener = TagStore.addListener(this.onTagStorechange);
   },
+  componentWillUnmount: function () {
+    this.tagListener.remove();
+  },
   componentWillReceiveProps: function (props) {
     var wasJustTagging = this.state.tagging ? true : false;
 
@@ -127,11 +132,10 @@ var TagSearch = React.createClass({
       }
     }.bind(this));
   },
-  componentWillUnmount: function () {
-    this.tagListener.remove();
-  },
   onSearchStringChange: function (e) {
-    this.setState({searchString: e.target.value});
+    this.setState({searchString: e.target.value}, function () {
+      ClientActions.fetchTagSearchResults(this.state.searchString);
+    });
   },
   onTagStorechange: function () {
     this.setState({

@@ -91,6 +91,12 @@ var ServerActions = {
       searchResults: searchResults
     });
   },
+  receiveTagSearchResults: function (searchResults) {
+    Dispatcher.dispatch({
+      actionType: tagConstants.TAG_SEARCH_RESULTS_RECEIVED,
+      searchResults: searchResults
+    });
+  },
   receiveUpdatedCoverPhotoUrl: function (coverPhotoUrl) {
     Dispatcher.dispatch({
       actionType: userConstants.UPDATED_COVER_PHOTO_URL_RECEIVED,

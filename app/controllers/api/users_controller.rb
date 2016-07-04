@@ -44,10 +44,17 @@ class Api::UsersController < ApplicationController
   end
 
   def search
-    search_string = params[:search_string]
-    @users = User.search(search_string)
+    if (params[:friends_only])
+      @friends = User.search(
+        params[:search_string],
+        friends_only: true,
+        user: current_user)
 
-    render 'api/users/search_index'
+      render 'api/friends/tagging_search_results'
+    else
+      @users = User.search(params[:search_string])
+      render 'api/users/search_index'
+    end
   end
 
   def update_cover_photo

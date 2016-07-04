@@ -46,8 +46,5 @@ Rails.application.routes.draw do
 
     get '/users/:id/most_recently_added',
     to: 'users#most_recently_added'
-
-    get '/users/:id/friends_for_tagging',
-    to: 'users#friends_for_tagging'
   end
 end

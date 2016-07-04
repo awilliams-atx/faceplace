@@ -10,6 +10,20 @@ var TagApiUtil = {
         ServerActions.receiveFriendsForTagging(friends);
       }
     });
+  },
+  fetchSearchResults: function (searchString) {
+    $.ajax({
+      url: 'api/users/search',
+      method: 'GET',
+      dataType: 'json',
+      data: {
+        search_string: searchString,
+        friends_only: 'true'
+      },
+      success: function (searchResults) {
+        ServerActions.receiveTagSearchResults(searchResults);
+      }
+    });
   }
 };
 
