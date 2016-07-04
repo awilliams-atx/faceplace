@@ -79,12 +79,18 @@ var TagSearch = React.createClass({
             untaggedFriends.map(function (friend) {
               return (
                 <div
-                  className='tagging-friends-search-result group'
+                  className='search-index-item group'
                   onClick={this.onTagFriend}
                   key={friend.userId}
                   data-userid={friend.userId} >
-                  <img src={friend.postPicUrl} />
-                  <strong>{friend.fullName}</strong>
+                  <div className='search-icon'>
+                    <img src={friend.postPicUrl} />
+                  </div>
+                  <div className='search-text'>
+                    <strong>{friend.fullName}</strong>
+                    <br />
+                    <small>{friend.location}</small>
+                  </div>
                 </div>
               );
             }.bind(this))
