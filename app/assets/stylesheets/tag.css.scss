@@ -22,6 +22,17 @@
   background-color: #f2f2f2;
 }
 
+.tag-icon-active {
+  float: left;
+  padding: 0 14px;
+  background-color: #e2e2e2;
+  i {
+    line-height: 40px;
+    font-size: 19px;
+    color: rgb(89, 89, 89);
+  }
+}
+
 .tagged-friends-with {
   display: block;
   float: left;

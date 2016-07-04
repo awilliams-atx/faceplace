@@ -34,6 +34,9 @@ var PostForm = React.createClass({
     placeholderText = 'Say something to ' + profileOwner.firstName + '...';
   }
 
+  var taggingClass =
+    this.state.tagging ? ' tag-icon-active' : 'tag-icon';
+
   var footerRightButtons;
   if (this.state.isEditing) {
     footerRightButtons = (
@@ -87,7 +90,8 @@ var PostForm = React.createClass({
           <footer>
             <div className='post-footer-background'>
               <div className='post-footer-left-buttons'>
-                <div className='tag-icon' onClick={this.toggleTag}>
+                <div className={taggingClass}
+                  onClick={this.toggleTag}>
                   <i className="fa fa-user-plus" aria-hidden="true"></i>
                 </div>
               </div>
