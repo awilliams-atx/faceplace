@@ -1,6 +1,7 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
     modalConstants = require('../constants/modal_constants'),
     CommentApiUtil = require('../util/comment_api_util'),
+    postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants'),
     FriendApiUtil = require('../util/friend_api_util'),
     FriendshipApiUtil = require('../util/friendship_api_util'),
@@ -29,6 +30,11 @@ var ClientActions = {
   deletePost: function (postId) {
     PostApiUtil.deletePost(postId);
   },
+  editPost: function () {
+    Dispatcher.dispatch({
+      actionType: postConstants.EDITING_POST
+    })
+  },
   fetchMostRecentlyAddedFriends: function (userId) {
     FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
   },
@@ -52,6 +58,11 @@ var ClientActions = {
   },
   fetchUsers: function () {
     UserApiUtil.fetchUsers();
+  },
+  finishEditingPost: function () {
+    Dispatcher.dispatch({
+      actionType: postConstants.EDITING_FINISHED
+    });
   },
   makeFriendRequest: function (userId) {
     FriendRequestApiUtil.makeFriendRequest(userId);
@@ -87,7 +98,12 @@ var ClientActions = {
     FriendshipApiUtil.destroyFriendship(userId);
   },
   updatePost: function (post) {
-    PostApiUtil.updatePost(post);
+    var submissionPost = {
+      id: post.id,
+      body: post.body,
+      tagged_ids: post.taggedFriendIds
+    };
+    PostApiUtil.updatePost(submissionPost);
   }
 };
 

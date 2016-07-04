@@ -191,6 +191,7 @@ var PostIndexItem = React.createClass({
     var completionCallback = function () {
       $('body').removeClass('no-scroll-body');
       ClientActions.cancelModal();
+      ClientActions.finishEditingPost();
     };
 
     var modalContent = (
@@ -207,6 +208,7 @@ var PostIndexItem = React.createClass({
     this.setState({selectingOptions: false}, function () {
       ClientActions.triggerModal(modalContent);
       ClientActions.fetchTaggedFriends(this.props.post.postId);
+      ClientActions.editPost();
     });
   },
   toggleOptions: function () {

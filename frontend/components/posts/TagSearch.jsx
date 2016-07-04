@@ -111,10 +111,12 @@ var TagSearch = React.createClass({
     );
   },
   componentDidMount: function () {
-    this.tagListener = TagStore.addListener(this.onTagStorechange);
+    this.tagListener = TagStore.addListener(this.onTagStoreChange);
+    this.postListener = PostStore.addListener(this.onPostStoreChange)
   },
   componentWillUnmount: function () {
     this.tagListener.remove();
+    this.postListener.remove();
   },
   componentWillReceiveProps: function (props) {
     var wasJustTagging = this.state.tagging ? true : false;
@@ -128,12 +130,21 @@ var TagSearch = React.createClass({
       }
     }.bind(this));
   },
+  onPostStoreChange: function () {
+    if (PostStore.isEditing() && !this.props.isEditing) {
+      this.tagListener.remove();
+    } else if (!PostStore.isEditing() && !this.props.isEditing) {
+      if (!this.tagListener) {
+        this.tagListener = TagStore.addListener(this.onTagStoreChange);
+      }
+    }
+  },
   onSearchStringChange: function (e) {
     this.setState({searchString: e.target.value}, function () {
       ClientActions.fetchTagSearchResults(this.state.searchString);
     });
   },
-  onTagStorechange: function () {
+  onTagStoreChange: function () {
     this.setState({
       taggedFriends: TagStore.taggedFriends(),
       untaggedFriends: TagStore.untaggedFriends()

@@ -34,7 +34,18 @@ class Api::PostsController < ApplicationController
 
   def update
     @post = Post.find(post_params[:id])
-    @post.update(post_params)
+
+    @post.update(body: post_params[:body])
+
+    taggings = []
+
+    post_params[:tagged_ids] && post_params[:tagged_ids].each do |user_id|
+      tagging = Tagging.new(tagged_id: user_id)
+      taggings << tagging
+    end
+
+    @post.taggings = taggings
+
     render 'api/posts/show'
   end
 
