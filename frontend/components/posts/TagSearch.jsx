@@ -123,6 +123,7 @@ var TagSearch = React.createClass({
       wasJustTagging: wasJustTagging
     }, function () {
       if (!this.state.wasJustTagging && this.props.tagging) {
+        ClientActions.fetchTagSearchResults(this.state.searchString);
         this.refs.autoFocus.focus();
       }
     }.bind(this));
