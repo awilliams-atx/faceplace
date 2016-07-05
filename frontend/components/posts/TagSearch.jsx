@@ -158,9 +158,9 @@ var TagSearch = React.createClass({
   untagFriend: function (e) {
     var friendId = parseInt(e.target.dataset.userid);
     ClientActions.removeTaggedFriend(friendId);
-    ClientActions.fetchTagSearchResults(this.state.searchString);
     if (this.props.tagging) {
       this.refs.autoFocus.focus();
+      ClientActions.fetchTagSearchResults(this.state.searchString);
     }
   }
 });
