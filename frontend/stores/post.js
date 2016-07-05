@@ -2,7 +2,8 @@ var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher.js'),
     postConstants = require('../constants/post_constants');
 
-var _posts = [];
+var _posts = [],
+    _isEditing = false;
 
 var PostStore = new Store(AppDispatcher);
 
@@ -21,8 +22,8 @@ PostStore.__onDispatch = function (payload) {
       PostStore.__emitChange();
       break;
     case postConstants.UPDATED_POST_RECEIVED:
-      PostStore.__emitChange();
       this.updatePost(payload.post);
+      PostStore.__emitChange();
       break;
   }
 };

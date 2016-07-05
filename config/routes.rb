@@ -22,7 +22,8 @@ Rails.application.routes.draw do
 
     # ----------------------------------POST---------------------------------- #
 
-
+    get 'posts/:id/tagged_friends', to: 'posts#tagged_friends'
+    
     resources :posts, only: [:index, :show, :create, :destroy, :update] do
       resources :comments, only: [:create, :index]
     end

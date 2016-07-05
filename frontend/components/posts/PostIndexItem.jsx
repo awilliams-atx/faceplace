@@ -188,21 +188,29 @@ var PostIndexItem = React.createClass({
   },
   editPost: function () {
     $('body').addClass('no-scroll-body');
+    ClientActions.freezeTags();
+
     var completionCallback = function () {
       $('body').removeClass('no-scroll-body');
       ClientActions.cancelModal();
+      console.log('cancelModal');
+      console.log(TagStore.taggedFriends());
+      ClientActions.unfreezeTags();
+      console.log('ModalCompletionCallback');
+      console.log(TagStore.taggedFriends());
     };
 
     var modalContent = (
       <div className='modal-outer group'>
         <aside className='modal-inner'>
-            <PostForm editingPost={true}
+            <PostForm isEditing={true}
                       modalCallback={completionCallback}
                       post={this.props.post}
                       isModalElement={true}/>
         </aside>
       </div>
     );
+
 
     this.setState({selectingOptions: false}, function () {
       ClientActions.triggerModal(modalContent);

@@ -1,6 +1,7 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
     modalConstants = require('../constants/modal_constants'),
     CommentApiUtil = require('../util/comment_api_util'),
+    postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants'),
     FriendApiUtil = require('../util/friend_api_util'),
     FriendshipApiUtil = require('../util/friendship_api_util'),
@@ -13,6 +14,7 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 
 var ClientActions = {
   addTaggedFriend: function (userId) {
+    console.log('ClientActions#addTaggedFriend');
     Dispatcher.dispatch({
       actionType: tagConstants.FRIEND_TAGGED,
       userId: userId
@@ -22,6 +24,7 @@ var ClientActions = {
     FriendRequestApiUtil.cancelRequest(userId, 'cancel');
   },
   cancelModal: function () {
+    console.log('ClientActions#cancelModal');
     Dispatcher.dispatch({
       actionType: modalConstants.MODAL_CANCELED
     });
@@ -38,7 +41,12 @@ var ClientActions = {
   fetchSearchResults: function (searchString) {
     SearchApiUtil.fetchSearchResults(searchString);
   },
+  fetchTaggedFriends: function (postId) {
+    console.log('ClientActions#fetchTaggedFriends');
+    PostApiUtil.fetchTaggedFriends(postId);
+  },
   fetchTagSearchResults: function (searchString) {
+    console.log('ClientActions#fetchTagSearchResults');
     TagApiUtil.fetchSearchResults(searchString);
   },
   fetchTimelinePosts: function (profileOwnerId) {
@@ -50,10 +58,16 @@ var ClientActions = {
   fetchUsers: function () {
     UserApiUtil.fetchUsers();
   },
+  freezeTags: function () {
+    Dispatcher.dispatch({
+      actionType: tagConstants.FREEZE_TAGS
+    });
+  },
   makeFriendRequest: function (userId) {
     FriendRequestApiUtil.makeFriendRequest(userId);
   },
   removeTaggedFriend: function (userId) {
+    console.log('ClientActions#removeTaggedFriend');
     Dispatcher.dispatch({
       actionType: tagConstants.FRIEND_UNTAGGED,
       userId: userId
@@ -80,11 +94,21 @@ var ClientActions = {
       modalContent: modalContent
     });
   },
+  unfreezeTags: function () {
+    Dispatcher.dispatch({
+      actionType: tagConstants.UNFREEZE_TAGS
+    });
+  },
   unfriend: function (userId) {
     FriendshipApiUtil.destroyFriendship(userId);
   },
   updatePost: function (post) {
-    PostApiUtil.updatePost(post);
+    var submissionPost = {
+      id: post.id,
+      body: post.body,
+      tagged_ids: post.taggedFriendIds
+    };
+    PostApiUtil.updatePost(submissionPost);
   }
 };
 

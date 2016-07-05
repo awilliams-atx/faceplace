@@ -36,7 +36,7 @@ var PostIndex = React.createClass({
     postForm = <div className='empty-post-form' />;
 
   if (authorizedToPost) {
-    postForm = <PostForm profileOwnerId={profileOwnerId}/>;
+    postForm = <PostForm isEditing={false} profileOwnerId={profileOwnerId}/>;
   }
 
     return (
