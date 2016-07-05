@@ -1,3 +1,6 @@
+TagStore = require('./stores/tag.js')
+// TESTING CODE ABOVE
+
 var React = require('react'),
     ReactDOM = require('react-dom');
 

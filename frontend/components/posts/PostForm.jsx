@@ -10,7 +10,6 @@ var React = require('react'),
 var PostForm = React.createClass({
   getInitialState: function () {
     return({
-      isEditing: false,
       isTaggingForTheFirstTime: true,
       postBody: '',
       tagging: false
@@ -25,7 +24,8 @@ var PostForm = React.createClass({
           'https://s3.amazonaws.com/faceplace-dev/assets/add_friend_icon+original.png';
 
   tagContents =
-    <TagSearch tagging={this.state.tagging} isEditing={this.state.isEditing}/>;
+    <TagSearch tagging={this.state.tagging}
+      isEditingPost={this.props.isEditing} />;
 
   if (SessionStore.currentUser().id === this.props.profileOwnerId) {
     placeholderText = 'What\'s on your mind, ' + currentUser.first_name + '?';
@@ -37,7 +37,7 @@ var PostForm = React.createClass({
     this.state.tagging ? ' tag-icon-active' : 'tag-icon';
 
   var footerRightButtons;
-  if (this.state.isEditing) {
+  if (this.props.isEditing) {
     footerRightButtons = (
       <div className='post-footer-right-buttons'>
         <button className='button button-gray button-cancel'
@@ -107,10 +107,8 @@ var PostForm = React.createClass({
   componentDidMount: function () {
     var post = this.props.post;
     if (post) {
-      this.setState({
-        isEditing: true,
-        postBody: post.body
-      }, function () {
+      this.setState({postBody: post.body}, function () {
+        console.log('PostForm#componentDidMount, #fetchTaggedFriends');
         ClientActions.fetchTaggedFriends(post.postId);
         this.refs.autoFocus.focus();
       }.bind(this));
@@ -127,23 +125,15 @@ var PostForm = React.createClass({
       body: this.state.postBody,
       taggedFriendIds: Object.keys(TagStore.taggedFriends())
     };
-    if (this.state.isEditing) {
+    if (this.props.isEditing) {
       post.id = this.props.post.postId;
-      this.setState({
-        postBody: '',
-        tagging: false
-      }, function () {
-        $('body').removeClass('no-scroll-body');
-        ClientActions.cancelModal();
-        ClientActions.updatePost(post);
-        this.props.modalCallback();
-      }.bind(this))
+      $('body').removeClass('no-scroll-body');
+      ClientActions.cancelModal();
+      ClientActions.updatePost(post);
+      this.props.modalCallback();
     } else {
       post.profileOwnerId = this.props.profileOwnerId;
-      this.setState({
-        postBody: '',
-        tagging: false
-      }, function () {
+      this.setState({postBody: '', tagging: false}, function () {
         ClientActions.submitPost(post);
       });
     }

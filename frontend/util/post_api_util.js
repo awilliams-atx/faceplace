@@ -17,6 +17,7 @@ var PostApiUtil = {
       method: 'GET',
       dataType: 'json',
       success: function (friends) {
+        console.log('PostApiUtil#fetchTaggedFriends');
         ServerActions.receiveTaggedFriends(friends);
       }
     });

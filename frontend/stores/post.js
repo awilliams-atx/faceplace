@@ -3,8 +3,7 @@ var Store = require('flux/utils').Store,
     postConstants = require('../constants/post_constants');
 
 var _posts = [],
-    _isEditing = false,
-    _reactivateForm = false;
+    _isEditing = false;
 
 var PostStore = new Store(AppDispatcher);
 
@@ -12,14 +11,6 @@ PostStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case postConstants.DELETED_POST_RECEIVED:
       this.removePost(payload.post);
-      PostStore.__emitChange();
-      break;
-    case postConstants.EDITING_FINISHED:
-      _isEditing = false;
-      PostStore.__emitChange();
-      break;
-    case postConstants.EDITING_POST:
-      _isEditing = true;
       PostStore.__emitChange();
       break;
     case postConstants.OWN_POST_RECEIVED:
@@ -43,14 +34,6 @@ PostStore.addPost = function (post) {
 
 PostStore.all = function () {
   return _posts.slice();
-};
-
-PostStore.isEditing = function () {
-  return !!_isEditing;
-}
-
-PostStore.reactivateForm = function () {
-  return !!_reactivateForm;
 };
 
 PostStore.removePost = function (post) {
