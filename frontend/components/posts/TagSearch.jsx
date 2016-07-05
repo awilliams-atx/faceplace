@@ -8,7 +8,6 @@ var TagSearch = React.createClass({
     return ({
       searchString: '',
       taggedFriends: TagStore.taggedFriends(),
-      tagging: this.props.tagging,
       untaggedFriends: TagStore.untaggedFriends(),
       wasJustTagging: false
     });
@@ -46,7 +45,7 @@ var TagSearch = React.createClass({
 
     var taggingField;
 
-    if (this.state.tagging) {
+    if (this.props.tagging) {
       taggingField = (
         <div className='tagging-field-container'>
           <div className='tagging-field-with'>With:</div>
@@ -65,7 +64,7 @@ var TagSearch = React.createClass({
 
     var filteredFriends;
 
-    if (this.state.tagging &&
+    if (this.props.tagging &&
         Object.keys(this.state.untaggedFriends).length > 0) {
       var untaggedFriends =
         Object.keys(this.state.untaggedFriends).map(function (id) {
@@ -117,13 +116,13 @@ var TagSearch = React.createClass({
     this.tagListener.remove();
   },
   componentWillReceiveProps: function (props) {
-    var wasJustTagging = this.state.tagging ? true : false;
+    var wasJustTagging = this.props.tagging ? true : false;
 
     this.setState({
       tagging: props.tagging,
       wasJustTagging: wasJustTagging
     }, function () {
-      if (!this.state.wasJustTagging && this.state.tagging) {
+      if (!this.state.wasJustTagging && this.props.tagging) {
         this.refs.autoFocus.focus();
       }
     }.bind(this));
@@ -141,7 +140,7 @@ var TagSearch = React.createClass({
       taggedFriends: TagStore.taggedFriends(),
       untaggedFriends: TagStore.untaggedFriends()
     }, function () {
-      if (this.state.tagging) {
+      if (this.props.tagging) {
         this.refs.autoFocus.focus();
       }
     }.bind(this));
@@ -164,7 +163,7 @@ var TagSearch = React.createClass({
     var friendId = parseInt(e.target.dataset.userid);
     ClientActions.removeTaggedFriend(friendId);
     ClientActions.fetchTagSearchResults(this.state.searchString);
-    if (this.state.tagging) {
+    if (this.props.tagging) {
       this.refs.autoFocus.focus();
     }
   }
