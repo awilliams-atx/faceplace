@@ -83,6 +83,7 @@ var PostForm = React.createClass({
               className='post-pic'/>
             <textarea className='post-textarea'
               onChange={this.onPostBodyChange}
+              onFocus={this.untoggleTag}
               value={this.state.postBody}
               placeholder={placeholderText}
               ref='autoFocus' >
@@ -152,6 +153,9 @@ var PostForm = React.createClass({
         ClientActions.fetchTagSearchResults('');
       }
     });
+  },
+  untoggleTag: function () {
+    this.setState({tagging: false});
   }
 });
 
