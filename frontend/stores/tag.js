@@ -58,11 +58,6 @@ TagStore.__onDispatch = function (payload) {
       _isEditingPost = false;
       this.unfreezeTags();
       break;
-    case postConstants.UPDATED_POST_RECEIVED:
-      console.log('UPDATED_POST_RECEIVED');
-      this.resetFriends();
-      TagStore.__emitChange();
-      break;
   }
 };
 
