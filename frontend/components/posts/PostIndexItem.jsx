@@ -193,11 +193,7 @@ var PostIndexItem = React.createClass({
     var completionCallback = function () {
       $('body').removeClass('no-scroll-body');
       ClientActions.cancelModal();
-      console.log('cancelModal');
-      console.log(TagStore.taggedFriends());
       ClientActions.unfreezeTags();
-      console.log('ModalCompletionCallback');
-      console.log(TagStore.taggedFriends());
     };
 
     var modalContent = (
@@ -213,7 +209,9 @@ var PostIndexItem = React.createClass({
 
 
     this.setState({selectingOptions: false}, function () {
-      ClientActions.triggerModal(modalContent);
+      ClientActions.triggerModal(modalContent, function () {
+        this.refs.autoFocus.focus();
+      }.bind(this));
     });
   },
   toggleOptions: function () {

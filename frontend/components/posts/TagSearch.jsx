@@ -133,12 +133,6 @@ var TagSearch = React.createClass({
     });
   },
   onTagStoreChange: function () {
-<<<<<<< HEAD
-=======
-    if (TagStore.isEditingPost() && !this.props.isEditingPost) { return; }
-    console.log('TagSearch#onTagStoreChange');
-    console.log(TagStore.taggedFriends());
->>>>>>> postEdit
     this.setState({
       taggedFriends: TagStore.taggedFriends(),
       untaggedFriends: TagStore.untaggedFriends()
@@ -149,8 +143,6 @@ var TagSearch = React.createClass({
     }.bind(this));
   },
   onTagFriend: function (e) {
-    console.log('TagSearch#onTagFriend');
-    console.log(TagStore.taggedFriends());
     e.preventDefault();
     var friendId = parseInt(e.currentTarget.dataset.userid);
 

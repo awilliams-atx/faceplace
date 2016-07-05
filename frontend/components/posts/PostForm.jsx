@@ -108,7 +108,6 @@ var PostForm = React.createClass({
     var post = this.props.post;
     if (post) {
       this.setState({postBody: post.body}, function () {
-        console.log('PostForm#componentDidMount, #fetchTaggedFriends');
         ClientActions.fetchTaggedFriends(post.postId);
         this.refs.autoFocus.focus();
       }.bind(this));

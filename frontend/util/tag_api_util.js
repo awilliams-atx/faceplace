@@ -2,7 +2,6 @@ var ServerActions = require('../actions/server_actions');
 
 var TagApiUtil = {
   fetchFriendsForTagging: function (userId) {
-    console.log('TagApiUtil#fetchFriendsForTagging');
     $.ajax({
       url: 'api/users/' + userId + '/friends_for_tagging',
       method: 'GET',
@@ -13,7 +12,6 @@ var TagApiUtil = {
     });
   },
   fetchSearchResults: function (searchString) {
-    console.log('TagApiUtil#fetchSearchResults');
     $.ajax({
       url: 'api/users/search',
       method: 'GET',

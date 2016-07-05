@@ -14,7 +14,6 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 
 var ClientActions = {
   addTaggedFriend: function (userId) {
-    console.log('ClientActions#addTaggedFriend');
     Dispatcher.dispatch({
       actionType: tagConstants.FRIEND_TAGGED,
       userId: userId
@@ -24,7 +23,6 @@ var ClientActions = {
     FriendRequestApiUtil.cancelRequest(userId, 'cancel');
   },
   cancelModal: function () {
-    console.log('ClientActions#cancelModal');
     Dispatcher.dispatch({
       actionType: modalConstants.MODAL_CANCELED
     });
@@ -42,11 +40,9 @@ var ClientActions = {
     SearchApiUtil.fetchSearchResults(searchString);
   },
   fetchTaggedFriends: function (postId) {
-    console.log('ClientActions#fetchTaggedFriends');
     PostApiUtil.fetchTaggedFriends(postId);
   },
   fetchTagSearchResults: function (searchString) {
-    console.log('ClientActions#fetchTagSearchResults');
     TagApiUtil.fetchSearchResults(searchString);
   },
   fetchTimelinePosts: function (profileOwnerId) {
@@ -67,7 +63,6 @@ var ClientActions = {
     FriendRequestApiUtil.makeFriendRequest(userId);
   },
   removeTaggedFriend: function (userId) {
-    console.log('ClientActions#removeTaggedFriend');
     Dispatcher.dispatch({
       actionType: tagConstants.FRIEND_UNTAGGED,
       userId: userId

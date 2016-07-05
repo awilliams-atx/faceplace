@@ -92,7 +92,6 @@ var ServerActions = {
     });
   },
   receiveTaggedFriends: function (friends) {
-    console.log('ServerActions#receiveTaggedFriends');
     Dispatcher.dispatch({
       actionType: postConstants.TAGGED_FRIENDS_RECEIVED,
       friends: friends
