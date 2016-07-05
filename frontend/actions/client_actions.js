@@ -83,7 +83,7 @@ var ClientActions = {
 
     PostApiUtil.submitPost(submissionPost);
   },
-  triggerModal: function (modalContent) {
+  triggerModal: function (modalContent, cb) {
     Dispatcher.dispatch({
       actionType: modalConstants.MODAL_TRIGGERED,
       modalContent: modalContent

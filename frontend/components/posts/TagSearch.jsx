@@ -133,6 +133,7 @@ var TagSearch = React.createClass({
     });
   },
   onTagStoreChange: function () {
+    if (TagStore.isEditingPost() && !this.props.isEditingPost) { return; }
     this.setState({
       taggedFriends: TagStore.taggedFriends(),
       untaggedFriends: TagStore.untaggedFriends()

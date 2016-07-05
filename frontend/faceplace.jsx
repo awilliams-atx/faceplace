@@ -30,7 +30,7 @@ var App = React.createClass({
     if (this.state.isModalDisplayed) {
       modal = (
         <div id='modal-background' className='modal-background-opaque'>
-          {ModalStore.modalContent()}
+          {ModalStore.modalContent()()}
         </div>
       );
     } else {
@@ -55,6 +55,8 @@ var App = React.createClass({
   onModalStoreChange: function () {
     this.setState({
       isModalDisplayed: ModalStore.isModalDisplayed()
+    }, function () {
+      if (this.refs.autoFocus) { this.refs.autoFocus.focus(); }
     });
   }
 });

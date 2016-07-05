@@ -157,7 +157,8 @@ var PostIndexItem = React.createClass({
       ClientActions.cancelModal();
     };
 
-    var modalContent = (
+    var modalContent = function () {
+      return (
         <div className='modal-outer group'>
           <div className='modal-inner group'>
             <aside className='modal-delete-post modal-element group'>
@@ -174,13 +175,15 @@ var PostIndexItem = React.createClass({
                   <button className='button button-gray modal-cancel-button'
                     onClick={cancelCallback}>Cancel</button>
                   <button className='button button-blue modal-confirm-button'
-                    onClick={confirmCallback}>Delete Post</button>
+                    onClick={confirmCallback}
+                    ref='autoFocus'>Delete Post</button>
                 </div>
               </footer>
             </aside>
           </div>
         </div>
       );
+    };
 
     this.setState({selectingOptions: false}, function () {
       ClientActions.triggerModal(modalContent);
@@ -188,30 +191,33 @@ var PostIndexItem = React.createClass({
   },
   editPost: function () {
     $('body').addClass('no-scroll-body');
+    console.log('freezeTags');
     ClientActions.freezeTags();
 
     var completionCallback = function () {
       $('body').removeClass('no-scroll-body');
       ClientActions.cancelModal();
+      console.log('unfreezeTags');
       ClientActions.unfreezeTags();
     };
 
-    var modalContent = (
-      <div className='modal-outer group'>
-        <aside className='modal-inner'>
-            <PostForm isEditing={true}
-                      modalCallback={completionCallback}
-                      post={this.props.post}
-                      isModalElement={true}/>
-        </aside>
-      </div>
-    );
+    var post = this.props.post;
+    var modalContent = function () {
+      return (
+        <div className='modal-outer group'>
+          <aside className='modal-inner'>
+          <PostForm isEditing={true}
+            modalCallback={completionCallback}
+            post={post}
+            isModalElement={true}/>
+          </aside>
+        </div>
+      );
+    };
 
 
     this.setState({selectingOptions: false}, function () {
-      ClientActions.triggerModal(modalContent, function () {
-        this.refs.autoFocus.focus();
-      }.bind(this));
+      ClientActions.triggerModal(modalContent);
     });
   },
   toggleOptions: function () {
