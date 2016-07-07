@@ -4,6 +4,11 @@ lebowski_friends = [];
 
 andrew = User.create(first_name: "Andrew", last_name: "Williams", email: "andrew", password: "starwars")
 
+andrew.desription = 'New York City software developer with experience in Rails, JavaScript, and React.js'
+andrew.location = 'Manhattan'
+andrew.hometown = 'New Braunfels, Texas'
+andrew.school = 'The University of Texas at Austin'
+andrew.major = 'French'
 andrew.profile_pic = File.open("#{Rails.root}/app/assets/images/andrew_williams_profile_pic.jpg")
 andrew.cover_photo = File.open("#{Rails.root}/app/assets/images/andrew_williams_cover_photo.jpg")
 andrew.save!
@@ -12,6 +17,8 @@ lebowski_friends << andrew
 
 jeffrey = User.create(first_name: "Jeffrey", last_name: "Lebowski", email: "jeff", password: "starwars")
 
+jeffrey.description = 'I\'m just a man, man'
+jeffrey.location = 'Los Angeles'
 jeffrey.profile_pic = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_profile_pic.jpg")
 jeffrey.cover_photo = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_cover_photo.jpg")
 jeffrey.save!
@@ -21,6 +28,8 @@ lebowski_friends << jeffrey
 
 walter = User.create(first_name: "Walter", last_name: "Sobchak", email: "walter", password: "starwars")
 
+walter.description = 'US veteran and avid bowler'
+walter.location = 'Los Angeles'
 walter.profile_pic = File.open("#{Rails.root}/app/assets/images/walter_sobchak_profile_pic.jpg")
 walter.cover_photo = File.open("#{Rails.root}/app/assets/images/walter_sobchak_cover_photo.jpg")
 walter.save!
@@ -29,6 +38,8 @@ lebowski_friends << walter
 
 donny = User.create(first_name: "Donny", last_name: "Kerabatsos", email: "donny", password: "starwars")
 
+donny.description = 'Bowler and all-around lovable guy'
+donny.location = 'Los Angeles'
 donny.profile_pic = File.open("#{Rails.root}/app/assets/images/donald_kerabatsos_profile_pic.png")
 donny.cover_photo = File.open("#{Rails.root}/app/assets/images/donald_kerabatsos_cover_photo.jpg")
 donny.save!
@@ -37,6 +48,10 @@ lebowski_friends << donny
 
 jeff_sr = User.create(first_name: "Jeffrey", last_name: "Lebowski", email: "jeff_sr", password: "starwars")
 
+jeff_sr.description = 'Enterpreneur and US veteran'
+jeff_sr.location = 'Los Angeles'
+jeff_sr.company = 'Lebowski Corp.'
+jeff_sr.position = 'CEO'
 jeff_sr.profile_pic = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_sr_profile_pic.jpg")
 jeff_sr.cover_photo = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_sr_cover_photo.jpg")
 jeff_sr.save!
@@ -45,6 +60,9 @@ lebowski_friends << jeff_sr
 
 maude = User.create(first_name: "Maude", last_name: "Lebowski", email: "maude", password: "starwars")
 
+maude.description = 'Artist and norm-challenger'
+maude.location = 'Los Angeles'
+maude.position = 'Painter'
 maude.profile_pic = File.open("#{Rails.root}/app/assets/images/maude_lebowski_profile_pic.jpg")
 maude.cover_photo = File.open("#{Rails.root}/app/assets/images/maude_lebowski_cover_photo.jpg")
 maude.save!
@@ -53,12 +71,18 @@ lebowski_friends << maude
 
 jesus = User.create(first_name: "Jesus", last_name: "Quintana", email: "jesus", password: "starwars")
 
+jesus.description = 'Bowler'
+jesus.location = 'Los Angeles'
 jesus.profile_pic = File.open("#{Rails.root}/app/assets/images/jesus_quintana_profile_pic.png")
 jesus.cover_photo = File.open("#{Rails.root}/app/assets/images/jesus_quintana_cover_photo.jpg")
 jesus.save!
 
 brandt = User.create(first_name: "Brandt", last_name: "Bjergsen", email: "brandt", password: "starwars")
 
+brandt.description = 'Personal assistant and faithful employee'
+brandt.location = 'Los Angeles'
+brandt.position = 'Personal assistant'
+brandt.company = 'Lebowski Corp.'
 brandt.profile_pic = File.open("#{Rails.root}/app/assets/images/brandt_bjergsen_profile_pic.jpg")
 brandt.cover_photo = File.open("#{Rails.root}/app/assets/images/brandt_bjergsen_cover_photo.jpg")
 brandt.save!
@@ -69,6 +93,8 @@ oh_brother_friends = []
 
 daniel = User.create(first_name: "Daniel", last_name: "Teague", email: "daniel", password: "starwars")
 
+daniel.location = 'Mississippi'
+daniel.position = 'Bible salesman'
 daniel.profile_pic = File.open("#{Rails.root}/app/assets/images/daniel_teague_profile_pic.jpg")
 daniel.cover_photo = File.open("#{Rails.root}/app/assets/images/daniel_teague_cover_photo.png")
 daniel.save!
@@ -78,6 +104,8 @@ oh_brother_friends << daniel
 
 ulysses = User.create(first_name: "Ulysses", last_name: "McGill", email: "ulysses", password: "starwars")
 
+ulysses.location = 'Mississippi'
+ulysses.position = 'Lawyer'
 ulysses.profile_pic = File.open("#{Rails.root}/app/assets/images/ulysses_everett_mcgill_profile_pic.jpg")
 ulysses.cover_photo = File.open("#{Rails.root}/app/assets/images/ulysses_everett_mcgill_cover_photo.jpg")
 ulysses.save!
@@ -86,6 +114,10 @@ oh_brother_friends << ulysses
 
 pete = User.create(first_name: "Pete", last_name: "Hogwallop", email: "pete", password: "starwars")
 
+pete.description = 'Loyal to my kin and friends'
+pete.location = 'Mississippi'
+pete.position = '(Future) maitre d\''
+pete.company = 'The Hogwallop Inn'
 pete.profile_pic = File.open("#{Rails.root}/app/assets/images/pete_hogwallop_profile_pic.jpg")
 pete.cover_photo = File.open("#{Rails.root}/app/assets/images/pete_hogwallop_cover_photo.png")
 pete.save!
@@ -94,6 +126,8 @@ oh_brother_friends << pete
 
 delmar = User.create(first_name: "Delmar", last_name: "Odonnell", email: "delmar", password: "starwars")
 
+delmar.description = 'Small-time crook'
+delmar.location = 'Mississippi'
 delmar.profile_pic = File.open("#{Rails.root}/app/assets/images/delmar_odonnell_profile_pic.jpeg")
 delmar.cover_photo = File.open("#{Rails.root}/app/assets/images/delmar_odonnell_cover_photo.jpg")
 delmar.save!
@@ -102,6 +136,9 @@ oh_brother_friends << delmar
 
 tommy = User.create(first_name: "Tommy", last_name: "Johnson", email: "tommy", password: "starwars")
 
+tommy.location = 'Mississippi'
+tommy.description = 'Simple man, musician, guitarist'
+tommy.position = 'Guitarist'
 tommy.profile_pic = File.open("#{Rails.root}/app/assets/images/tommy_johnson_profile_pic.jpg")
 tommy.cover_photo = File.open("#{Rails.root}/app/assets/images/tommy_johnson_cover_photo.png")
 tommy.save!
@@ -110,6 +147,9 @@ oh_brother_friends << tommy
 
 pappy = User.create(first_name: "Pappy", last_name: "O'Daniel", email: "pappy", password: "starwars")
 
+pappy.location = 'Mississippi'
+pappy.description = 'Upstanding statesman'
+pappy.position = 'Governor of Mississippi'
 pappy.profile_pic = File.open("#{Rails.root}/app/assets/images/pappy_odaniel_profile_pic.jpg")
 pappy.cover_photo = File.open("#{Rails.root}/app/assets/images/pappy_odaniel_cover_photo.jpg")
 pappy.save!
