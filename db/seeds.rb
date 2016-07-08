@@ -17,7 +17,7 @@ lebowski_friends << andrew
 
 jeffrey = User.create(first_name: "Jeffrey", last_name: "Lebowski", email: "jeff", password: "starwars")
 
-jeffrey.description = 'I\'m just a man, man'
+jeffrey.description = 'I\'m just the dude, man'
 jeffrey.location = 'Los Angeles'
 jeffrey.profile_pic = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_profile_pic.jpg")
 jeffrey.cover_photo = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_cover_photo.jpg")
