@@ -14,7 +14,6 @@ ModalStore.__onDispatch = function (payload) {
       ModalStore.__emitChange();
       break;
     case modalConstants.MODAL_TRIGGERED:
-      console.log(payload.modalContent);
       this.setModalContent(payload.modalContent);
       ModalStore.__emitChange();
       break;

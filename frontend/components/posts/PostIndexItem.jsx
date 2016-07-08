@@ -191,13 +191,11 @@ var PostIndexItem = React.createClass({
   },
   editPost: function () {
     $('body').addClass('no-scroll-body');
-    console.log('freezeTags');
     ClientActions.freezeTags();
 
     var completionCallback = function () {
       $('body').removeClass('no-scroll-body');
       ClientActions.cancelModal();
-      console.log('unfreezeTags');
       ClientActions.unfreezeTags();
     };
 
