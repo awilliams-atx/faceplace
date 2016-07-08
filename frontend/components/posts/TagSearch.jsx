@@ -54,7 +54,11 @@ var TagSearch = React.createClass({
               placeholder='Who are you with?'
               onChange={this.onSearchStringChange}
               value={this.state.searchString}
-              ref='autoFocus' />
+              ref={function (input) {
+                if (input != null) {
+                  input.focus();
+                }
+              }} />
           </div>
         </div>
       );
@@ -124,7 +128,6 @@ var TagSearch = React.createClass({
     }, function () {
       if (!this.state.wasJustTagging && this.props.tagging) {
         ClientActions.fetchTagSearchResults(this.state.searchString);
-        this.refs.autoFocus.focus();
       }
     }.bind(this));
   },
@@ -138,11 +141,7 @@ var TagSearch = React.createClass({
     this.setState({
       taggedFriends: TagStore.taggedFriends(),
       untaggedFriends: TagStore.untaggedFriends()
-    }, function () {
-      if (this.props.tagging) {
-        this.refs.autoFocus.focus();
-      }
-    }.bind(this));
+    });
   },
   onTagFriend: function (e) {
     e.preventDefault();
@@ -153,14 +152,12 @@ var TagSearch = React.createClass({
     }, function () {
       ClientActions.addTaggedFriend(friendId);
       ClientActions.fetchTagSearchResults(this.state.searchString);
-      this.refs.autoFocus.focus();
     }.bind(this));
   },
   untagFriend: function (e) {
     var friendId = parseInt(e.target.dataset.userid);
     ClientActions.removeTaggedFriend(friendId);
     if (this.props.tagging) {
-      this.refs.autoFocus.focus();
       ClientActions.fetchTagSearchResults(this.state.searchString);
     }
   }
