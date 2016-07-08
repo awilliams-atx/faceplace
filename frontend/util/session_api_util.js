@@ -14,7 +14,6 @@ SessionApiUtil = {
         cb();
       },
       error: function (errors) {
-        ErrorActions.clearErrors();
         ErrorActions.setErrors(errors.responseJSON);
       }
     });

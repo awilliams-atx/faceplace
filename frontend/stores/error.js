@@ -9,24 +9,44 @@ var ErrorStore = new Store(AppDispatcher);
 ErrorStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case errorConstants.ERRORS_CLEARED:
-      this._clearErrors();
+      this.clearErrors();
       ErrorStore.__emitChange();
       break;
     case errorConstants.ERRORS_RECEIVED:
-      this._setErrors(payload.errors);
+      this.setErrors(payload.errors);
       ErrorStore.__emitChange();
       break;
   }
 };
 
-ErrorStore._clearErrors = function () {
-  _errors = {};
+ErrorStore.clearErrors = function () {
+  Object.keys(_errors).forEach(function (key) {
+    delete _errors[key];
+  });
 };
 
-ErrorStore._setErrors = function (errors) {};
+ErrorStore.dupedErrors = function () {
+  var dupedErrors = {};
+  Object.keys(_errors).forEach(function (key) {
+    dupedErrors[key] = _errors[key];
+  });
 
-ErrorStore.all = function () {
+  return dupedErrors;
+};
 
+ErrorStore.errors = function () {
+  if (Object.keys(_errors).length === 0) {
+    return false;
+  } else {
+    return this.dupedErrors();
+  }
+};
+
+ErrorStore.setErrors = function (errors) {
+  this.clearErrors();
+  Object.keys(errors).forEach(function (key) {
+    _errors[key] = errors[key];
+  });
 };
 
 module.exports = ErrorStore;
