@@ -106,6 +106,24 @@ var PostForm = React.createClass({
     )
   },
   componentDidMount: function () {
+    this.taggingBlurListener = function taggingListener (e) {
+      var node = e.target;
+      var noBlurClassNames =
+        ['search-index-item group', 'tagged-friends-list-item'];
+      for (var i = 0; i < 3; i++) {
+        if (!node) {
+          document.removeEventListener('click', this.taggingBlurListener);
+          this.setState({tagging: false});
+          return;
+        } else if (noBlurClassNames.includes(node.className)) {
+          return;
+        }
+        node = node.parentNode;
+      }
+      document.removeEventListener('click', this.taggingBlurListener);
+      this.setState({tagging: false});
+    }.bind(this);
+
     var post = this.props.post;
     if (post) {
       this.setState({postBody: post.body}, function () {
@@ -149,8 +167,11 @@ var PostForm = React.createClass({
       tagging: !this.state.tagging,
       isTaggingForTheFirstTime: false
     }, function () {
-      if (this.state.tagging && willTagForTheFirstTime) {
-        ClientActions.fetchTagSearchResults('');
+      if (this.state.tagging) {
+        if (willTagForTheFirstTime) {
+          ClientActions.fetchTagSearchResults('');
+        }
+        document.addEventListener('click', this.taggingBlurListener);
       }
     });
   },
