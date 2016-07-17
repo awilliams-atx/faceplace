@@ -39,8 +39,8 @@ var UserApiUtil = {
         redirectCB();
       },
       error: function (errors) {
-        ErrorActions.clearErrors();
-        ErrorActions.setErrors(errors.responseJSON);
+        ErrorActions.clearErrors('signUp');
+        ErrorActions.setErrors(errors.responseJSON, 'signUp');
       }
     });
   },

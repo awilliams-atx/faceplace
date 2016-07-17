@@ -3,6 +3,7 @@ var Store = require('flux/utils').Store,
     errorConstants = require('../constants/error_constants');
 
 var _loginErrors = {};
+var _signUpErrors = {};
 
 var ErrorStore = new Store(AppDispatcher);
 
@@ -14,7 +15,9 @@ ErrorStore.__onDispatch = function (payload) {
       break;
     case errorConstants.ERRORS_RECEIVED:
       if (payload.errorType === 'login') {
-        container = _loginErrors
+        container = _loginErrors;
+      } else if (payload.errorType = 'signUp') {
+        container = _signUpErrors;
       }
       this.setErrors(payload.errors, container);
       ErrorStore.__emitChange();
