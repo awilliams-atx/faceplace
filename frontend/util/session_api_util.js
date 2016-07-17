@@ -19,6 +19,7 @@ SessionApiUtil = {
     });
   },
   logout: function (cb) {
+    console.log('logging out lol');
     $.ajax({
       url: 'api/session',
       method: 'DELETE',
@@ -26,10 +27,6 @@ SessionApiUtil = {
       success: function () {
         SessionActions.removeCurrentUser();
         cb();
-      },
-      error: function (errors) {
-        ErrorActions.clearErrors();
-        ErrorActions.setErrors(errors.responseJSON);
       }
     });
   },
