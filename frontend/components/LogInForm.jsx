@@ -38,7 +38,7 @@ var LogInForm = React.createClass({
     if (this.state.errors) {
       errorsContent = (
         <aside id='login-errors-container'>
-          {this.state.errors.base}
+          {this.state.errors.login}
         </aside>
       );
     } else {
