@@ -7,10 +7,11 @@ var ErrorActions = {
       actionType: errorConstants.ERRORS_CLEARED
     })
   },
-  setErrors: function (errors) {
+  setErrors: function (errors, errorType) {
     Dispatcher.dispatch({
       actionType: errorConstants.ERRORS_RECEIVED,
-      errors: errors
+      errors: errors,
+      errorType: errorType
     });
   }
 };
