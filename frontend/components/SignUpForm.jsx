@@ -80,6 +80,12 @@ var SignUpForm = React.createClass({
       </div>
     );
   },
+  componentDidMount: function () {
+    this.errorListener = ErrorStore.addListener(this.onErrorStoreChange);
+  },
+  componentWillUnmount: function () {
+    this.errorListener.remove();
+  },
   _firstNameChange: function (e) {
     this.setState({firstName: e.target.value});
   },
@@ -88,6 +94,9 @@ var SignUpForm = React.createClass({
   },
   _emailChange: function (e) {
     this.setState({email: e.target.value});
+  },
+  onErrorStoreChange: function () {
+    this.setState({errors: ErrorStore.errors('signUp')});
   },
   _passwordChange: function (e) {
     this.setState({password: e.target.value});
