@@ -45,5 +45,4 @@ SessionApiUtil = {
   }
 };
 
-window.SessionApiUtil = SessionApiUtil;
 module.exports = SessionApiUtil;
