@@ -4,18 +4,6 @@ var SessionActions = require('../actions/session_actions'),
     ServerActions = require('../actions/server_actions');
 
 var UserApiUtil = {
-  fetchUsers: function () {
-    $.ajax({
-      url: 'api/users',
-      method: 'GET',
-      dataType: 'json',
-      success: function (users) {
-        ServerActions.receiveUsers(users);
-      },
-      error: function (errors) {
-      }
-    });
-  },
   fetchUser: function (id) {
     $.ajax({
       url: 'api/users/' + id,
@@ -23,8 +11,16 @@ var UserApiUtil = {
       dataType: 'json',
       success: function (user) {
         ServerActions.receiveUser(user);
-      },
-      error: function (errors) {
+      }
+    });
+  },
+  fetchUsers: function () {
+    $.ajax({
+      url: 'api/users',
+      method: 'GET',
+      dataType: 'json',
+      success: function (users) {
+        ServerActions.receiveUsers(users);
       }
     });
   },
