@@ -8,8 +8,8 @@ var ErrorStore = new Store(AppDispatcher);
 
 ErrorStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case errorConstants.ERRORS_CLEARED:
-      this.clearErrors();
+    case errorConstants.LOGIN_ERRORS_CLEARED:
+      this.clearErrors(_loginErrors);
       ErrorStore.__emitChange();
       break;
     case errorConstants.ERRORS_RECEIVED:
