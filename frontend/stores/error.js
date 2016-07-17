@@ -13,7 +13,10 @@ ErrorStore.__onDispatch = function (payload) {
       ErrorStore.__emitChange();
       break;
     case errorConstants.ERRORS_RECEIVED:
-      this.setErrors(payload.errors);
+      if (payload.errorType === 'login') {
+        errorsContainer = _loginErrors
+      }
+      this.setErrors(payload.errors, errorsContainer);
       ErrorStore.__emitChange();
       break;
   }
