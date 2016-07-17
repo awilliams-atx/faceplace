@@ -45,10 +45,10 @@ ErrorStore.errors = function () {
   }
 };
 
-ErrorStore.setErrors = function (errors) {
+ErrorStore.setErrors = function (errors, container) {
   this.clearErrors();
   Object.keys(errors).forEach(function (key) {
-    _loginErrors[key] = errors[key];
+    container[key] = errors[key];
   });
 };
 
