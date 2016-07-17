@@ -60,5 +60,4 @@ PostStore.updatePost = function (post) {
   }
 };
 
-window.PostStore = PostStore;
 module.exports = PostStore;
