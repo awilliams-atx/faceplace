@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_attached_file :cover_photo, styles: { cover: '851x315#' }, default_url: "default_:style_cover_photo.png"
   validates_attachment_content_type :cover_photo, content_type: /\Aimage\/.*\Z/
 
-  # --------------------------------VALIDATIONS------------------------------- #
+  # -------------------------------ASSOCIATIONS------------------------------ #
 
   has_many :posts,
     foreign_key: :author_id
