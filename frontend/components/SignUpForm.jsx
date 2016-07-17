@@ -23,10 +23,10 @@ var SignUpForm = React.createClass({
 
     if (this.state.errors) {
       var errors = this.state.errors;
-      if (errors.firstName) {
+      if (errors.first_name) {
         firstNameError = (
           <aside className='error' id='first-name-error-container'>
-            {this.state.errors.firstName}
+            {this.state.errors.first_name}
           </aside>
         );
       } else {
@@ -34,10 +34,10 @@ var SignUpForm = React.createClass({
       }
 
 
-      if (errors.lastName) {
+      if (errors.last_name) {
         lastNameError = (
           <aside className='error' id='last-name-error-container'>
-            {this.state.errors.lastName}
+            {this.state.errors.last_name}
           </aside>
         );
       } else {
