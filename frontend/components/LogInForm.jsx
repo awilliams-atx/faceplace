@@ -99,8 +99,9 @@ var LogInForm = React.createClass({
     this.setState({email: e.target.value}, function () {
       if (this.state.loginInputClass === 'login-input-error') {
         this.setState({
-          loginInputClass: 'login-input',
-          errors: false
+          loginInputClass: 'login-input'
+        }, function () {
+          ErrorActions.clearErrors();
         });
       }
     });
@@ -109,8 +110,9 @@ var LogInForm = React.createClass({
     this.setState({password: e.target.value}, function () {
       if (this.state.loginInputClass === 'login-input-error') {
         this.setState({
-          loginInputClass: 'login-input',
-          errors: false
+          loginInputClass: 'login-input'
+        }, function () {
+          ErrorActions.clearErrors();
         });
       }
     });
@@ -129,7 +131,6 @@ var LogInForm = React.createClass({
       email: '',
       password: ''
     }, function () {
-      ErrorActions.clearErrors();
       SessionApiUtil.login(credentials, this._redirectToTimeline);
     }.bind(this))
   },
