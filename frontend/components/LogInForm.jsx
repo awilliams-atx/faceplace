@@ -101,7 +101,7 @@ var LogInForm = React.createClass({
         this.setState({
           loginInputClass: 'login-input'
         }, function () {
-          ErrorActions.clearErrors();
+          ErrorActions.clearErrors('login');
         });
       }
     });
@@ -112,7 +112,7 @@ var LogInForm = React.createClass({
         this.setState({
           loginInputClass: 'login-input'
         }, function () {
-          ErrorActions.clearErrors();
+          ErrorActions.clearErrors('login');
         });
       }
     });
