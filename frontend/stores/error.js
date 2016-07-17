@@ -54,7 +54,11 @@ ErrorStore.errors = function (errorType) {
 ErrorStore.setErrors = function (errors, container) {
   this.clearErrors(container);
   Object.keys(errors).forEach(function (key) {
-    container[key] = errors[key];
+    if (errors[key] instanceof Array) {
+      container[key] = errors[key][0];
+    } else {
+      container[key] = errors[key];
+    }
   });
 };
 
