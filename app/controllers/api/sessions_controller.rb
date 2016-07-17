@@ -9,7 +9,7 @@ class Api::SessionsController < ApplicationController
       render 'api/users/current_user'
     else
       render json: {
-        base: "Incorrect email or password"
+        login: "Incorrect email or password"
       }, status: 401
     end
   end
