@@ -7,7 +7,7 @@ var ErrorActions = {
     if (errorType === 'login') {
       actionType = errorConstants.LOGIN_ERRORS_CLEARED;
     } else if (errorType === 'signUp') {
-      actionType = errorconstants.SIGN_UP_ERRORS_CLEARED;
+      actionType = errorConstants.SIGN_UP_ERRORS_CLEARED;
     }
     Dispatcher.dispatch({
       actionType: actionType
