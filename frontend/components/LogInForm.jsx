@@ -132,6 +132,7 @@ var LogInForm = React.createClass({
       password: ''
     }, function () {
       SessionApiUtil.login(credentials, this._redirectToTimeline);
+      ErrorActions.clearErrors();
     }.bind(this))
   },
   guestLogin: function (e) {
