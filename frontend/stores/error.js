@@ -22,9 +22,9 @@ ErrorStore.__onDispatch = function (payload) {
   }
 };
 
-ErrorStore.clearErrors = function () {
-  Object.keys(_loginErrors).forEach(function (key) {
-    delete _loginErrors[key];
+ErrorStore.clearErrors = function (container) {
+  Object.keys(container).forEach(function (key) {
+    delete container[key];
   });
 };
 
@@ -46,7 +46,7 @@ ErrorStore.errors = function () {
 };
 
 ErrorStore.setErrors = function (errors, container) {
-  this.clearErrors();
+  this.clearErrors(container);
   Object.keys(errors).forEach(function (key) {
     container[key] = errors[key];
   });
