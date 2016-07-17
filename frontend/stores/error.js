@@ -47,7 +47,7 @@ ErrorStore.errors = function (errorType) {
   if (errorType === 'login') {
     return this.dupedErrors(_loginErrors);
   } else if (errorType === 'signUp') {
-    return this.dupedErrors(_signUp);
+    return this.dupedErrors(_signUpErrors);
   }
 };
 

@@ -9,9 +9,7 @@ var ErrorActions = {
     } else if (errorType === 'signUp') {
       actionType = errorConstants.SIGN_UP_ERRORS_CLEARED;
     }
-    Dispatcher.dispatch({
-      actionType: actionType
-    });
+    Dispatcher.dispatch({ actionType: actionType });
   },
   setErrors: function (errors, errorType) {
     Dispatcher.dispatch({
