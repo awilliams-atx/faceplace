@@ -37,7 +37,8 @@ var LogInForm = React.createClass({
 
     if (this.state.errors) {
       errorsContent = (
-        <aside id='login-errors-container'>
+        <aside className='error-container'
+          id='login-errors-container'>
           {this.state.errors.login}
         </aside>
       );
@@ -57,7 +58,7 @@ var LogInForm = React.createClass({
                   <tr>
                     <td>
                       <label htmlFor="email" ref='autoFocus'>Email</label>
-                      </td>
+                    </td>
                     <td><label htmlFor="password">Password</label></td>
                   </tr>
                 </thead>
