@@ -2,7 +2,7 @@ var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher'),
     errorConstants = require('../constants/error_constants');
 
-var _errors = {};
+var _loginErrors = {};
 
 var ErrorStore = new Store(AppDispatcher);
 
@@ -20,22 +20,22 @@ ErrorStore.__onDispatch = function (payload) {
 };
 
 ErrorStore.clearErrors = function () {
-  Object.keys(_errors).forEach(function (key) {
-    delete _errors[key];
+  Object.keys(_loginErrors).forEach(function (key) {
+    delete _loginErrors[key];
   });
 };
 
 ErrorStore.dupedErrors = function () {
   var dupedErrors = {};
-  Object.keys(_errors).forEach(function (key) {
-    dupedErrors[key] = _errors[key];
+  Object.keys(_loginErrors).forEach(function (key) {
+    dupedErrors[key] = _loginErrors[key];
   });
 
   return dupedErrors;
 };
 
 ErrorStore.errors = function () {
-  if (Object.keys(_errors).length === 0) {
+  if (Object.keys(_loginErrors).length === 0) {
     return false;
   } else {
     return this.dupedErrors();
@@ -45,7 +45,7 @@ ErrorStore.errors = function () {
 ErrorStore.setErrors = function (errors) {
   this.clearErrors();
   Object.keys(errors).forEach(function (key) {
-    _errors[key] = errors[key];
+    _loginErrors[key] = errors[key];
   });
 };
 
