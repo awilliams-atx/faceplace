@@ -38,8 +38,6 @@ SessionApiUtil = {
       success: function (user) {
         SessionActions.receiveCurrentUser(user);
       },
-      error: function (errors) {
-      },
       complete: function () {
         cb();
       }
