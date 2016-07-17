@@ -1,7 +1,15 @@
 class User < ActiveRecord::Base
-  validates :first_name, :last_name, :email, :session_token, presence: true
-  validates :email, uniqueness: true
-  validates :password, length: { minimum: 6, allow_nil: true }
+  validates :email, presence: { message: 'Email required' }
+  validates :email, uniqueness: { message: 'Email already taken' }
+  validates :first_name, presence: { message: 'First name required' }
+  validates :last_name, presence: { message: 'Last name required' }
+  validates :password,
+    length: {
+      minimum: 6,
+      allow_nil: true,
+      message: 'Password must be at least six characters long'
+    }
+  validates :session_token, presence: true
 
   # ---------------------------------PAPERCLIP-------------------------------- #
 
