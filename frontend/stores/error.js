@@ -13,7 +13,7 @@ ErrorStore.__onDispatch = function (payload) {
       ErrorStore.__emitChange();
       break;
     case errorConstants.ERRORS_RECEIVED:
-      this.setErrors(payload.errors);
+      this.setErrors(payload.errors, payload.errorType);
       ErrorStore.__emitChange();
       break;
   }
