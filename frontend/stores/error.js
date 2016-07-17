@@ -28,20 +28,23 @@ ErrorStore.clearErrors = function (container) {
   });
 };
 
-ErrorStore.dupedErrors = function () {
+ErrorStore.dupedErrors = function (container) {
+  if (Object.keys(container).length === 0) {
+    return false;
+  }
   var dupedErrors = {};
-  Object.keys(_loginErrors).forEach(function (key) {
-    dupedErrors[key] = _loginErrors[key];
+  Object.keys(container).forEach(function (key) {
+    dupedErrors[key] = container[key];
   });
 
   return dupedErrors;
 };
 
-ErrorStore.errors = function () {
-  if (Object.keys(_loginErrors).length === 0) {
-    return false;
-  } else {
-    return this.dupedErrors();
+ErrorStore.errors = function (errorType) {
+  if (errorType === 'login') {
+    return this.dupedErrors(_loginErrors);
+  } else if (errorType === 'signUp') {
+    return this.dupedErrors(_signUp);
   }
 };
 
