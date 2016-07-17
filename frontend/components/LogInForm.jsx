@@ -13,7 +13,7 @@ var LogInForm = React.createClass({
     return {
       email: "",
       password: "",
-      errors: ErrorStore.errors(),
+      errors: ErrorStore.errors('login'),
       loginInputClass: 'login-input'
     };
   },
@@ -140,7 +140,7 @@ var LogInForm = React.createClass({
     this.handleSubmit(e, {credentials: credentials});
   },
   onErrorStoreChange: function () {
-    var errors = ErrorStore.errors();
+    var errors = ErrorStore.errors('login');
     var loginInputClass = errors ? 'login-input-error' : 'login-input';
     this.setState({
       errors: errors,
