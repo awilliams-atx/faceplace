@@ -25,7 +25,8 @@ var SignUpForm = React.createClass({
       var errors = this.state.errors;
       if (errors.first_name) {
         firstNameError = (
-          <aside className='error' id='first-name-error-container'>
+          <aside className='error-container'
+            id='first-name-error-container'>
             {this.state.errors.first_name}
           </aside>
         );
@@ -36,7 +37,8 @@ var SignUpForm = React.createClass({
 
       if (errors.last_name) {
         lastNameError = (
-          <aside className='error' id='last-name-error-container'>
+          <aside className='error-container'
+            id='last-name-error-container'>
             {this.state.errors.last_name}
           </aside>
         );
@@ -46,7 +48,8 @@ var SignUpForm = React.createClass({
 
       if (errors.email) {
         emailError = (
-          <aside className='error' id='email-error-container'>
+          <aside className='error-container'
+            id='email-error-container'>
             {this.state.errors.email}
           </aside>
         );
@@ -56,7 +59,8 @@ var SignUpForm = React.createClass({
 
       if (errors.password) {
         passwordError = (
-          <aside className='error' id='password-error-container'>
+          <aside className='error-container'
+            id='password-error-container'>
             {this.state.errors.password}
           </aside>
         );
