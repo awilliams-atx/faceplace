@@ -19,7 +19,6 @@ SessionApiUtil = {
     });
   },
   logout: function (cb) {
-    console.log('logging out lol');
     $.ajax({
       url: 'api/session',
       method: 'DELETE',
