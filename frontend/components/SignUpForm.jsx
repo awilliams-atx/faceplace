@@ -16,6 +16,55 @@ var SignUpForm = React.createClass({
     });
   },
   render: function () {
+    var firstNameError;
+    var lastNameError;
+    var emailError;
+    var passwordError;
+
+    if (this.state.errors) {
+      var errors = this.state.errors;
+      if (errors.firstName) {
+        firstNameError = (
+          <aside className='error' id='first-name-error-container'>
+            {this.state.errors.firstName}
+          </aside>
+        );
+      } else {
+        firstNameError = <div id='empty-first-name-error' />;
+      }
+
+
+      if (errors.lastName) {
+        lastNameError = (
+          <aside className='error' id='last-name-error-container'>
+            {this.state.errors.lastName}
+          </aside>
+        );
+      } else {
+        lastNameError = <div id='empty-last-name-error' />;
+      }
+
+      if (errors.email) {
+        emailError = (
+          <aside className='error' id='email-error-container'>
+            {this.state.errors.email}
+          </aside>
+        );
+      } else {
+        emailError = <div id='empty-email-error' />;
+      }
+
+      if (errors.password) {
+        passwordError = (
+          <aside className='error' id='password-error-container'>
+            {this.state.errors.password}
+          </aside>
+        );
+      } else {
+        passwordError = <div id='empty-password-error' />;
+      }
+    }
+
     return (
       <div id='sign-up-content' className='group'>
         <section id='propaganda'>
@@ -51,28 +100,39 @@ var SignUpForm = React.createClass({
           <div id="consolation">It's free and you pretty much have no choice.</div>
           <form id="sign-up-form" onSubmit={this._handleSubmit}>
 
-            <input onChange={this._firstNameChange}
-                   value={this.state.firstName}
-                   placeholder='First name'
-            />
+            <div id='first-name-input-container'>
+              <input onChange={this._firstNameChange}
+                     value={this.state.firstName}
+                     placeholder='First name'
+              />
+              {firstNameError}
+            </div>
 
-            <input onChange={this._lastNameChange}
-                   value={this.state.lastName}
-                   placeholder='Last name'
+            <div id='last-name-input-container'>
+              <input onChange={this._lastNameChange}
+                     value={this.state.lastName}
+                     placeholder='Last name'
+              />
+              {lastNameError}
+            </div>
 
-            />
+            <div id='email-input-container'>
+              <input onChange={this._emailChange}
+                     value={this.state.email}
+                     id='email'
+                     placeholder='Email'
+              />
+              {emailError}
+            </div>
 
-            <input onChange={this._emailChange}
-                   value={this.state.email}
-                   id='email'
-                   placeholder='Email'
-            />
-
-            <input type='password'
-                   onChange={this._passwordChange}
-                   value={this.state.password}
-                   placeholder='Password'
-            />
+            <div id='password-input-container'>
+              <input type='password'
+                     onChange={this._passwordChange}
+                     value={this.state.password}
+                     placeholder='Password'
+              />
+              {passwordError}
+            </div>
 
             <button>Give In</button>
           </form>
