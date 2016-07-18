@@ -115,7 +115,7 @@ var SignUpForm = React.createClass({
                      value={this.state.firstName}
                      placeholder='First name'
                      ref='autoFocus'
-                     onBlur={() => ErrorActions.clearSignUpError('first_name')}
+                     onBlur={this.onFirstNameBlur}
               />
               {firstNameError}
             </div>
@@ -126,7 +126,7 @@ var SignUpForm = React.createClass({
                      onChange={this._lastNameChange}
                      value={this.state.lastName}
                      placeholder='Last name'
-                     onBlur={() => ErrorActions.clearSignUpError('last_name')}
+                     onBlur={this.onLastNameBlur}
               />
               {lastNameError}
             </div>
@@ -138,7 +138,7 @@ var SignUpForm = React.createClass({
                      value={this.state.email}
                      id='email'
                      placeholder='Email'
-                     onBlur={() => ErrorActions.clearSignUpError('email')}
+                     onBlur={this.onEmailBlur}
               />
               {emailError}
             </div>
@@ -150,7 +150,7 @@ var SignUpForm = React.createClass({
                      onChange={this._passwordChange}
                      value={this.state.password}
                      placeholder='Password'
-                     onBlur={() => ErrorActions.clearSignUpError('password')}
+                     onBlur={this.onPasswordBlur}
               />
               {passwordError}
             </div>
@@ -191,6 +191,18 @@ var SignUpForm = React.createClass({
         this.refs.autoFocus.focus();
       }
     }.bind(this));
+  },
+  onEmailBlur: function () {
+    ErrorActions.clearSignUpError('email');
+  },
+  onFirstNameBlur: function () {
+    ErrorActions.clearSignUpError('first_name');
+  },
+  onLastNameBlur: function () {
+    ErrorActions.clearSignUpError('last_name');
+  },
+  onPasswordBlur: function () {
+    ErrorActions.clearSignUpError('password');
   },
   _passwordChange: function (e) {
     this.setState({password: e.target.value});
