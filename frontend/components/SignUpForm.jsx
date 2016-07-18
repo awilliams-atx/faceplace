@@ -110,7 +110,8 @@ var SignUpForm = React.createClass({
 
             <div className='sign-up-input-container group'
               id='first-name-input-container'>
-              <input onChange={this._firstNameChange}
+              <input className='sign-up-input'
+                     onChange={this._firstNameChange}
                      value={this.state.firstName}
                      placeholder='First name'
                      ref='autoFocus'
@@ -120,7 +121,8 @@ var SignUpForm = React.createClass({
 
             <div className='sign-up-input-container group'
               id='last-name-input-container'>
-              <input onChange={this._lastNameChange}
+              <input className='sign-up-input'
+                     onChange={this._lastNameChange}
                      value={this.state.lastName}
                      placeholder='Last name'
               />
@@ -129,7 +131,8 @@ var SignUpForm = React.createClass({
 
             <div className='sign-up-input-container group'
               id='email-input-container'>
-              <input onChange={this._emailChange}
+              <input className='sign-up-input'
+                     onChange={this._emailChange}
                      value={this.state.email}
                      id='email'
                      placeholder='Email'
@@ -139,7 +142,8 @@ var SignUpForm = React.createClass({
 
             <div className='sign-up-input-container group'
               id='password-input-container'>
-              <input type='password'
+              <input className='sign-up-input'
+                     type='password'
                      onChange={this._passwordChange}
                      value={this.state.password}
                      placeholder='Password'
