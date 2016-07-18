@@ -20,6 +20,7 @@ ErrorStore.__onDispatch = function (payload) {
       }
       this.setErrors(payload.errors, container);
       ErrorStore.__emitChange();
+      break;
     case errorConstants.LOGIN_ERRORS_CLEARED:
       _lastAction = errorConstants.LOGIN_ERRORS_CLEARED;
       this.clearErrors(_loginErrors);
