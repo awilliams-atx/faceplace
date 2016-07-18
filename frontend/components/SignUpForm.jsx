@@ -100,8 +100,10 @@ var SignUpForm = React.createClass({
         </section>
 
         <section id='sign-up'>
-          <h1>Sign Up</h1>
-          <div id="consolation">It's free and you pretty much have no choice.</div>
+          <div id='sign-up-header'>
+            <h1>Sign Up</h1>
+            <div id="consolation">It's free and you pretty much have no choice.</div>
+          </div>
           <form id="sign-up-form" onSubmit={this._handleSubmit}>
 
             <div className='sign-up-input-container group'
