@@ -1,20 +1,28 @@
 section#sign-up {
   display: block;
-  float: right;
+  position: absolute;
+  right: 20px;
 }
 
-#sign-up > h1 {
+#sign-up-header {
+    float: right;
+    width: 400px;
+}
+#sign-up-header > h1 {
   font-size: 36px;
   font-family: 'Merriweather', sans-serif;
   margin-bottom: 5px;
 }
 
 #consolation {
+  /*position: relative;
+  right: 207px;*/
   font-size: 19px;
   margin-bottom: 20px;
 }
 
 #sign-up input {
+  float: right;
   border: 1px solid #bdc7d8;
   padding: 8px 10px;
   font-size: 18px;
@@ -26,6 +34,7 @@ section#sign-up {
 
 #sign-up-form button {
   position: absolute;
+  right: 207px;
   border: 1px outset #3b6e22;
   width: 192px;
   height: 37px;
@@ -47,4 +56,23 @@ section#sign-up {
 
 #sign-up-form button:active {
   bottom: -50px;
+}
+
+.sign-up-error {
+  float: right;
+  height: 33px;
+  line-height: 33px;
+  margin-right: 10px;
+}
+
+#first-name-error-container {
+}
+
+#last-name-error-container {
+}
+
+#email-error-container {
+}
+
+#password-error-container {
 }

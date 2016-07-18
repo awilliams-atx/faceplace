@@ -91,7 +91,8 @@ button.login-button {
 }
 
 aside#login-errors-container {
-  top: 7px;
+  position: absolute;
+  top: 47px;
   left: 355px;
   width: 175px;
 }
