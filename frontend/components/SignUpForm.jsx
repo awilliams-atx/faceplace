@@ -112,6 +112,7 @@ var SignUpForm = React.createClass({
               <input onChange={this._firstNameChange}
                      value={this.state.firstName}
                      placeholder='First name'
+                     ref='autoFocus'
               />
               {firstNameError}
             </div>
@@ -167,7 +168,11 @@ var SignUpForm = React.createClass({
     this.setState({email: e.target.value});
   },
   onErrorStoreChange: function () {
-    this.setState({errors: ErrorStore.errors('signUp')});
+    this.setState({errors: ErrorStore.errors('signUp')}, function () {
+      if (ErrorStore.lastAction('SIGN_UP_ERRORS_RECEIVED')) {
+        this.refs.autoFocus.focus();
+      }
+    }.bind(this));
   },
   _passwordChange: function (e) {
     this.setState({password: e.target.value});
