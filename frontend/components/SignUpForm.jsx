@@ -1,5 +1,6 @@
 var React = require('react'),
     ErrorStore = require('../stores/error'),
+    ErrorActions = require('../actions/error_actions'),
     UserApiUtil = require('../util/user_api_util');
 
 var SignUpForm = React.createClass({
