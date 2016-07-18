@@ -104,7 +104,8 @@ var SignUpForm = React.createClass({
           <div id="consolation">It's free and you pretty much have no choice.</div>
           <form id="sign-up-form" onSubmit={this._handleSubmit}>
 
-            <div id='first-name-input-container'>
+            <div className='sign-up-input-container group'
+              id='first-name-input-container'>
               <input onChange={this._firstNameChange}
                      value={this.state.firstName}
                      placeholder='First name'
@@ -112,7 +113,8 @@ var SignUpForm = React.createClass({
               {firstNameError}
             </div>
 
-            <div id='last-name-input-container'>
+            <div className='sign-up-input-container group'
+              id='last-name-input-container'>
               <input onChange={this._lastNameChange}
                      value={this.state.lastName}
                      placeholder='Last name'
@@ -120,7 +122,8 @@ var SignUpForm = React.createClass({
               {lastNameError}
             </div>
 
-            <div id='email-input-container'>
+            <div className='sign-up-input-container group'
+              id='email-input-container'>
               <input onChange={this._emailChange}
                      value={this.state.email}
                      id='email'
@@ -129,7 +132,8 @@ var SignUpForm = React.createClass({
               {emailError}
             </div>
 
-            <div id='password-input-container'>
+            <div className='sign-up-input-container group'
+              id='password-input-container'>
               <input type='password'
                      onChange={this._passwordChange}
                      value={this.state.password}
