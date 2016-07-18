@@ -35,7 +35,6 @@ var SignUpForm = React.createClass({
         firstNameError = <div id='empty-first-name-error' />;
       }
 
-
       if (errors.last_name) {
         lastNameError = (
           <aside className='error-container sign-up-error'

@@ -13,7 +13,6 @@ ErrorStore.__onDispatch = function (payload) {
     case errorConstants.LOGIN_ERRORS_CLEARED:
       _lastAction = errorConstants.LOGIN_ERRORS_CLEARED;
       this.clearErrors(_loginErrors);
-      ErrorStore.__emitChange();
       break;
     case errorConstants.ERRORS_RECEIVED:
       if (payload.errorType === 'login') {
@@ -30,9 +29,12 @@ ErrorStore.__onDispatch = function (payload) {
 };
 
 ErrorStore.clearErrors = function (container) {
+  areErrorsCleared = false;
   Object.keys(container).forEach(function (key) {
+    areErrorsCleared = true;
     delete container[key];
   });
+  if (areErrorsCleared) { ErrorStore.__emitChange(); }
 };
 
 ErrorStore.dupedErrors = function (container) {
