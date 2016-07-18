@@ -10,10 +10,6 @@ var ErrorStore = new Store(AppDispatcher);
 
 ErrorStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case errorConstants.LOGIN_ERRORS_CLEARED:
-      _lastAction = errorConstants.LOGIN_ERRORS_CLEARED;
-      this.clearErrors(_loginErrors);
-      break;
     case errorConstants.ERRORS_RECEIVED:
       if (payload.errorType === 'login') {
         _lastAction = 'LOGIN_ERRORS_RECEIVED';
@@ -24,6 +20,13 @@ ErrorStore.__onDispatch = function (payload) {
       }
       this.setErrors(payload.errors, container);
       ErrorStore.__emitChange();
+    case errorConstants.LOGIN_ERRORS_CLEARED:
+      _lastAction = errorConstants.LOGIN_ERRORS_CLEARED;
+      this.clearErrors(_loginErrors);
+      break;
+    case errorConstants.SIGN_UP_ERRORS_CLEARED:
+      _lastAction = errorConstants.SIGN_UP_ERRORS_CLEARED;
+      this.clearErrors(_signUpErrors);
       break;
   }
 };
