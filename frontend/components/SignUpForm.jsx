@@ -115,6 +115,7 @@ var SignUpForm = React.createClass({
                      value={this.state.firstName}
                      placeholder='First name'
                      ref='autoFocus'
+                     onBlur{() => ErrorActions.clearSignUpError('first_name')}
               />
               {firstNameError}
             </div>
@@ -125,6 +126,7 @@ var SignUpForm = React.createClass({
                      onChange={this._lastNameChange}
                      value={this.state.lastName}
                      placeholder='Last name'
+                     onBlur{() => ErrorActions.clearSignUpError('last_name')}
               />
               {lastNameError}
             </div>
@@ -136,6 +138,7 @@ var SignUpForm = React.createClass({
                      value={this.state.email}
                      id='email'
                      placeholder='Email'
+                     onBlur{() => ErrorActions.clearSignUpError('email')}
               />
               {emailError}
             </div>
@@ -147,6 +150,7 @@ var SignUpForm = React.createClass({
                      onChange={this._passwordChange}
                      value={this.state.password}
                      placeholder='Password'
+                     onBlur{() => ErrorActions.clearSignUpError('password')}
               />
               {passwordError}
             </div>
