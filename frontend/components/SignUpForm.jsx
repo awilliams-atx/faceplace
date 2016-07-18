@@ -155,6 +155,14 @@ var SignUpForm = React.createClass({
   },
   componentDidMount: function () {
     this.errorListener = ErrorStore.addListener(this.onErrorStoreChange);
+    this.blurListener = this.blurListener || function blurListener (e) {
+      var noBlurClassNames =
+        ['sign-up-input', 'error-container sign-up-error'];
+      if (!noBlurClassNames.includes(e.target.className)) {
+        ErrorActions.clearErrors('signUp');
+        document.removeEventListener('click', this.blurListener);
+      }
+    }.bind(this);
   },
   componentWillUnmount: function () {
     this.errorListener.remove();
@@ -171,6 +179,7 @@ var SignUpForm = React.createClass({
   onErrorStoreChange: function () {
     this.setState({errors: ErrorStore.errors('signUp')}, function () {
       if (ErrorStore.lastAction('SIGN_UP_ERRORS_RECEIVED')) {
+        document.addEventListener('click', this.blurListener);
         this.refs.autoFocus.focus();
       }
     }.bind(this));
