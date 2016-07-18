@@ -11,6 +11,12 @@ var ErrorActions = {
     }
     Dispatcher.dispatch({ actionType: actionType });
   },
+  clearSignUpError: function (errorType) {
+    Dispatcher.dispatch({
+      actionType: errorConstants.SIGN_UP_ERROR_CLEARED,
+      errorType: errorType
+    });
+  },
   setErrors: function (errors, errorType) {
     Dispatcher.dispatch({
       actionType: errorConstants.ERRORS_RECEIVED,
