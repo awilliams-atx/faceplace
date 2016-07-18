@@ -92,6 +92,14 @@ var LogInForm = React.createClass({
   componentDidMount: function () {
     this.errorListener = ErrorStore.addListener(this.onErrorStoreChange);
     this.refs.autoFocus.focus();
+    this.blurListener = this.blurListener || function blurListener (e) {
+      var noBlurClassNames =
+        ['login-input-error', 'error-container'];
+      if (!noBlurClassNames.includes(e.target.className)) {
+        ErrorActions.clearErrors('login');
+        document.removeEventListener('click', this.blurListener);
+      }
+    }.bind(this);
   },
   componentWillUnmount: function () {
     this.errorListener.remove();
@@ -148,6 +156,7 @@ var LogInForm = React.createClass({
       loginInputClass: loginInputClass
     }, function () {
       if (ErrorStore.lastAction('LOGIN_ERRORS_RECEIVED')) {
+        document.addEventListener('click', this.blurListener);
         this.refs.autoFocus.focus();
       }
     }.bind(this));
