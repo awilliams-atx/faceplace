@@ -25,6 +25,10 @@ ErrorStore.__onDispatch = function (payload) {
       _lastAction = errorConstants.LOGIN_ERRORS_CLEARED;
       this.clearErrors(_loginErrors);
       break;
+    case errorConstants.SIGN_UP_ERROR_CLEARED:
+      _lastAction = errorConstants.SIGN_UP_ERROR_CLEARED;
+      this.clearSignUpError(payload.errorType);
+      break;
     case errorConstants.SIGN_UP_ERRORS_CLEARED:
       _lastAction = errorConstants.SIGN_UP_ERRORS_CLEARED;
       this.clearErrors(_signUpErrors);
@@ -39,6 +43,12 @@ ErrorStore.clearErrors = function (container) {
     delete container[key];
   });
   if (areErrorsCleared) { ErrorStore.__emitChange(); }
+};
+
+ErrorStore.clearSignUpError = function (errorType) {
+  if (!_signUpErrors[errorType]) { return false; }
+  delete _signUpErrors[errorType];
+  ErrorStore.__emitChange();
 };
 
 ErrorStore.dupedErrors = function (container) {
