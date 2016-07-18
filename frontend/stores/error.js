@@ -4,19 +4,23 @@ var Store = require('flux/utils').Store,
 
 var _loginErrors = {};
 var _signUpErrors = {};
+var _lastAction = null;
 
 var ErrorStore = new Store(AppDispatcher);
 
 ErrorStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case errorConstants.LOGIN_ERRORS_CLEARED:
+      _lastAction = errorConstants.LOGIN_ERRORS_CLEARED;
       this.clearErrors(_loginErrors);
       ErrorStore.__emitChange();
       break;
     case errorConstants.ERRORS_RECEIVED:
       if (payload.errorType === 'login') {
+        _lastAction = 'LOGIN_ERRORS_RECEIVED';
         container = _loginErrors;
       } else if (payload.errorType = 'signUp') {
+        _lastAction = 'SIGN_UP_ERRORS_RECEIVED';
         container = _signUpErrors;
       }
       this.setErrors(payload.errors, container);
@@ -49,6 +53,10 @@ ErrorStore.errors = function (errorType) {
   } else if (errorType === 'signUp') {
     return this.dupedErrors(_signUpErrors);
   }
+};
+
+ErrorStore.lastAction = function (lastAction) {
+  return _lastAction === lastAction;
 };
 
 ErrorStore.setErrors = function (errors, container) {

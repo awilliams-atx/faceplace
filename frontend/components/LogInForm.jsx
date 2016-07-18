@@ -147,7 +147,9 @@ var LogInForm = React.createClass({
       errors: errors,
       loginInputClass: loginInputClass
     }, function () {
-      this.refs.autoFocus.focus();
+      if (ErrorStore.lastAction('LOGIN_ERRORS_RECEIVED')) {
+        this.refs.autoFocus.focus();
+      }
     }.bind(this));
   },
   _redirectToTimeline: function () {
