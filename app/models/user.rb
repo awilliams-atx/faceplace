@@ -102,12 +102,6 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  # --------------------------------DEBUGGING------------------------------- #
-
-  # def inspect
-  #   "ID: #{id}, Full name: #{full_name} \n"
-  # end
-
   # -----------------------------AUTHENTICATION----------------------------- #
 
   def self.find_or_create_by_auth_hash(auth_hash)
