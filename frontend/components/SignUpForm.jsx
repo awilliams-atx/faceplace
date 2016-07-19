@@ -114,7 +114,6 @@ var SignUpForm = React.createClass({
                      onChange={this._firstNameChange}
                      value={this.state.firstName}
                      placeholder='First name'
-                     ref='autoFocus'
                      onBlur={this.onFirstNameBlur}
               />
               {firstNameError}
