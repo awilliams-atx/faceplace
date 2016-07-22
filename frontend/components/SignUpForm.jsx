@@ -187,7 +187,6 @@ var SignUpForm = React.createClass({
     this.setState({errors: ErrorStore.errors('signUp')}, function () {
       if (ErrorStore.lastAction('SIGN_UP_ERRORS_RECEIVED')) {
         document.addEventListener('click', this.blurListener);
-        this.refs.autoFocus.focus();
       }
     }.bind(this));
   },
