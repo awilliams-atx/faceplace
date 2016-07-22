@@ -181,6 +181,15 @@ var SignUpForm = React.createClass({
   _firstNameChange: function (e) {
     this.setState({firstName: e.target.value});
   },
+  focusErrorInputField: function () {
+    var fields = ['first_name', 'last_name', 'email', 'password'];
+    for (var i = 0; i < fields.length; i++) {
+      if (this.state.errors[fields[i]]) {
+        this.refs[fields[i]].focus();
+        return;
+      }
+    }
+  },
   _lastNameChange: function (e) {
     this.setState({lastName: e.target.value});
   },
@@ -191,6 +200,7 @@ var SignUpForm = React.createClass({
     this.setState({errors: ErrorStore.errors('signUp')}, function () {
       if (ErrorStore.lastAction('SIGN_UP_ERRORS_RECEIVED')) {
         document.addEventListener('click', this.blurListener);
+        this.focusErrorInputField();
       }
     }.bind(this));
   },
