@@ -115,6 +115,7 @@ var SignUpForm = React.createClass({
                      value={this.state.firstName}
                      placeholder='First name'
                      onBlur={this.onFirstNameBlur}
+                     ref='first_name'
               />
               {firstNameError}
             </div>
@@ -126,6 +127,7 @@ var SignUpForm = React.createClass({
                      value={this.state.lastName}
                      placeholder='Last name'
                      onBlur={this.onLastNameBlur}
+                     ref='last_name'
               />
               {lastNameError}
             </div>
@@ -138,6 +140,7 @@ var SignUpForm = React.createClass({
                      id='email'
                      placeholder='Email'
                      onBlur={this.onEmailBlur}
+                     ref='email'
               />
               {emailError}
             </div>
@@ -150,6 +153,7 @@ var SignUpForm = React.createClass({
                      value={this.state.password}
                      placeholder='Password'
                      onBlur={this.onPasswordBlur}
+                     ref='password'
               />
               {passwordError}
             </div>
