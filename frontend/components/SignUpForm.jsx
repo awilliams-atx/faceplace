@@ -111,7 +111,7 @@ var SignUpForm = React.createClass({
             <div className='sign-up-input-container group'
               id='first-name-input-container'>
               <input className='sign-up-input'
-                     onChange={this._firstNameChange}
+                     onChange={this.onFirstNameChange}
                      value={this.state.firstName}
                      placeholder='First name'
                      onBlur={this.onFirstNameBlur}
@@ -123,7 +123,7 @@ var SignUpForm = React.createClass({
             <div className='sign-up-input-container group'
               id='last-name-input-container'>
               <input className='sign-up-input'
-                     onChange={this._lastNameChange}
+                     onChange={this.onLastNameChange}
                      value={this.state.lastName}
                      placeholder='Last name'
                      onBlur={this.onLastNameBlur}
@@ -135,7 +135,7 @@ var SignUpForm = React.createClass({
             <div className='sign-up-input-container group'
               id='email-input-container'>
               <input className='sign-up-input'
-                     onChange={this._emailChange}
+                     onChange={this.onEmailChange}
                      value={this.state.email}
                      id='email'
                      placeholder='Email'
@@ -149,7 +149,7 @@ var SignUpForm = React.createClass({
               id='password-input-container'>
               <input className='sign-up-input'
                      type='password'
-                     onChange={this._passwordChange}
+                     onChange={this.onPasswordChange}
                      value={this.state.password}
                      placeholder='Password'
                      onBlur={this.onPasswordBlur}
@@ -178,9 +178,6 @@ var SignUpForm = React.createClass({
   componentWillUnmount: function () {
     this.errorListener.remove();
   },
-  _firstNameChange: function (e) {
-    this.setState({firstName: e.target.value});
-  },
   focusErrorInputField: function () {
     var fields = ['first_name', 'last_name', 'email', 'password'];
     for (var i = 0; i < fields.length; i++) {
@@ -189,12 +186,6 @@ var SignUpForm = React.createClass({
         return;
       }
     }
-  },
-  _lastNameChange: function (e) {
-    this.setState({lastName: e.target.value});
-  },
-  _emailChange: function (e) {
-    this.setState({email: e.target.value});
   },
   onErrorStoreChange: function () {
     this.setState({errors: ErrorStore.errors('signUp')}, function () {
@@ -207,16 +198,25 @@ var SignUpForm = React.createClass({
   onEmailBlur: function () {
     ErrorActions.clearSignUpError('email');
   },
+  onEmailChange: function (e) {
+    this.setState({email: e.target.value});
+  },
   onFirstNameBlur: function () {
     ErrorActions.clearSignUpError('first_name');
+  },
+  onFirstNameChange: function (e) {
+    this.setState({firstName: e.target.value});
   },
   onLastNameBlur: function () {
     ErrorActions.clearSignUpError('last_name');
   },
+  onLastNameChange: function (e) {
+    this.setState({lastName: e.target.value});
+  },
   onPasswordBlur: function () {
     ErrorActions.clearSignUpError('password');
   },
-  _passwordChange: function (e) {
+  onPasswordChange: function (e) {
     this.setState({password: e.target.value});
   },
   _handleSubmit: function (e) {
