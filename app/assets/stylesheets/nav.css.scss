@@ -55,48 +55,45 @@
   float: left;
 }
 
-.nav-friends
-{ background-image: url(asset_path('nav_friends_inactive.png')); }
-.nav-messages
-{ background-image: url(asset_path('nav_messages_inactive.png')); }
-.nav-notifications
-{ background-image: url(asset_path('nav_notifications_inactive.png')); }
-.nav-friends:hover
-{ background-image: url(asset_path('nav_friends_hover.png')); }
-.nav-messages:hover
-{ background-image: url(asset_path('nav_messages_hover.png')); }
-.nav-notifications:hover
-{ background-image: url(asset_path('nav_notifications_hover.png')); }
-.nav-friends-toggled
-{ background-image: url(asset_path('nav_friends_active.png')); }
-.nav-messages-toggled
-{ background-image: url(asset_path('nav_messages_active.png')); }
-.nav-notifications-toggled
-{ background-image: url(asset_path('nav_notifications_active.png')); }
-
-.nav-big-three {
-  position: relative;
-  height: 25px;
-  width: 25px;
-  margin: 0 7px;
-  background-size: cover;
+.nav-drops {
+  font-size: 20px;
+  div {
+    float: right;
+    margin-left: 5px;
+  }
+  div.nav-drop-inactive {
+    color: #17233d;
+  }
+  div.nav-drop-inactive:hover {
+    color: #0b121e;
+  }
 }
 
-.big-three-overlay {
-  border: 1px solid rgba(100, 100, 100, 0.4);
-  position: absolute;
-  top: 20px;
-  display: block;
-  width: 430px;
-  height: 50px;
-}
 
-.big-three-overlay-item {
-  width: 100%
-}
 
-#friends-overlay {
-  position: absolute;
-  top: 27px;
-  right: -85px;
-}
+// .nav-big-three {
+//   position: relative;
+//   height: 25px;
+//   width: 25px;
+//   margin: 0 7px;
+//   background-size: cover;
+// }
+
+// .big-three-overlay {
+//   border: 1px solid rgba(100, 100, 100, 0.4);
+//   position: absolute;
+//   top: 20px;
+//   display: block;
+//   width: 430px;
+//   height: 50px;
+// }
+
+// .big-three-overlay-item {
+//   width: 100%
+// }
+
+// #friends-overlay {
+//   position: absolute;
+//   top: 27px;
+//   right: -85px;
+// }

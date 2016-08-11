@@ -1,5 +1,5 @@
 var React = require('react'),
-    Nav = require('./Nav');
+    Nav = require('./nav/Nav');
 
 var Main = React.createClass({
   getInitialState: function () {

@@ -1,7 +1,7 @@
 var React = require('react'),
     AddFriend = require('./AddFriend'),
     CoverPhoto = require('./CoverPhoto'),
-    Nav = require('../Nav'),
+    Nav = require('../nav/Nav'),
     ProfilePic = require('./ProfilePic'),
     ClientActions = require('../../actions/client_actions'),
     SessionActions = require('../../actions/session_actions'),
