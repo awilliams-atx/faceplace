@@ -3,30 +3,28 @@ class Api::PostsController < ApplicationController
     if params[:profilePosts]
       user = User.find(params[:user_id])
       @posts = user.timeline_posts.includes(:author, :profile_owner, :tagged_friends)
-    else
     end
     render 'api/posts/index'
   end
 
   def create
     @post = Post.new(author_id: current_user.id, body: post_params[:body])
+    @post.save!
 
-    taggings = []
-    post_params[:tagged_ids] && post_params[:tagged_ids].each do |user_id|
-      tagging = Tagging.new(tagged_id: user_id)
-      taggings << tagging
+    if post_params[:tagged_ids]
+      post_params[:tagged_ids].each do |user_id|
+        tagging = Tagging.new(tagged_id: user_id, post_id: @post.id)
+        tagging.save!
+      end
     end
 
     profile_owner_id = post_params[:profile_owner_id]
     if profile_owner_id.to_i != current_user.id
-      timeline_posting = TimelinePosting.new(
-      profile_owner_id: profile_owner_id
-      )
+      timeline_posting =
+        TimelinePosting.new(profile_owner_id: profile_owner_id,
+          post_id: @post.id)
+      timeline_posting.save!
     end
-
-    @post.save!
-    @post.taggings = taggings
-    @post.timeline_posting = timeline_posting if timeline_posting
 
     @time = @post.created_at.localtime
     render 'api/posts/show'
