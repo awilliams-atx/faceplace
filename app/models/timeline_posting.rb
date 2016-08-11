@@ -1,4 +1,5 @@
 class TimelinePosting < ActiveRecord::Base
+  include Notifiable
   validates :post_id, :profile_owner_id, presence: true
 
   belongs_to :post
@@ -10,6 +11,4 @@ class TimelinePosting < ActiveRecord::Base
   has_one :author,
     through: :post,
     source: :author
-
-  has_one :notification, as: :notifiable
 end
