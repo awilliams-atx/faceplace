@@ -10,4 +10,6 @@ class TimelinePosting < ActiveRecord::Base
   has_one :author,
     through: :post,
     source: :author
+
+  has_one :notification, as: :notifiable
 end
