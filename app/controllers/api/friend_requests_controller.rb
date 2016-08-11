@@ -5,6 +5,7 @@ class Api::FriendRequestsController < ApplicationController
       receiver_id: params[:request_receiver_id])
 
     @request.save!
+    @request.make_notification(params[:request_receiver_id])
 
     render json: @request
   end
