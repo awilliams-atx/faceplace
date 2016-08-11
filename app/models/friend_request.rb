@@ -3,4 +3,5 @@ class FriendRequest < ActiveRecord::Base
   validates :maker_id, :receiver_id, presence: true
   belongs_to :maker
   belongs_to :receiver
+  has_one :notification, as: :notifiable
 end
