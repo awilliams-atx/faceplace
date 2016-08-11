@@ -7,6 +7,5 @@ class Tagging < ActiveRecord::Base
 
   belongs_to :post
 
-  # --------------------------------DEBUGGING------------------------------- #
-
+  has_one :notification, as: :notifiable
 end
