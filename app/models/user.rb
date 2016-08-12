@@ -32,6 +32,11 @@ class User < ActiveRecord::Base
     through: :friendships,
     source: :friend
 
+  has_many :notifications,
+    class_name: 'Notification',
+    foreign_key: 'notified_user_id',
+    dependent: :destroy
+
   has_many :taggings,
     foreign_key: :tagged_id,
     dependent: :destroy
