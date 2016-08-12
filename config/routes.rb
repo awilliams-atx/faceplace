@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
     # -----------------------------FRIEND REQUEST----------------------------- #
 
-    resources :friend_requests, only: [:create]
+    resources :friend_requests, only: [:create, :index]
     resource :friend_request, only: [:destroy]
 
     # -------------------------------FRIENDSHIP------------------------------- #
