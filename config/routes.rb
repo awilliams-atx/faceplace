@@ -20,10 +20,14 @@ Rails.application.routes.draw do
 
     resources :friendships, only: [:destroy]
 
+    # -----------------------------NOTIFICATIONS----------------------------- #
+
+    resources :notifications, only: [:index]
+
     # ----------------------------------POST---------------------------------- #
 
     get 'posts/:id/tagged_friends', to: 'posts#tagged_friends'
-    
+
     resources :posts, only: [:index, :show, :create, :destroy, :update] do
       resources :comments, only: [:create, :index]
     end
