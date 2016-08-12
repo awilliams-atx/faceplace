@@ -1,7 +1,8 @@
 class FriendRequest < ActiveRecord::Base
-  include Notifiable
   validates :maker_id, uniqueness: { scope: :receiver_id }
   validates :maker_id, :receiver_id, presence: true
-  belongs_to :maker
-  belongs_to :receiver
+  belongs_to :maker,
+    class_name: 'User'
+  belongs_to :receiver,
+    class_name: 'User'
 end

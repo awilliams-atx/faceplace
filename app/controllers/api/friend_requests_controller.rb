@@ -1,13 +1,16 @@
 class Api::FriendRequestsController < ApplicationController
+  def index
+    @requests = current_user.received_friend_requests.includes(:maker)
+    render 'api/friend_requests/index'
+  end
+
   def create
     return if !logged_in?
     @request = FriendRequest.new(maker_id: current_user.id,
       receiver_id: params[:request_receiver_id])
 
     @request.save!
-    @request.make_notification(notifiying_user_id: current_user.id,
-      notified_user_id: params[:request_receiver_id])
-
+    Pusher.trigger('friend_requests_' + params[:request_receiver_id], 'friend_request_received', {})
     render json: @request
   end
 
