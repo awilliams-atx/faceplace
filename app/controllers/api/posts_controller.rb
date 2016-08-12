@@ -15,7 +15,8 @@ class Api::PostsController < ApplicationController
       post_params[:tagged_ids].each do |user_id|
         tagging = Tagging.new(tagged_id: user_id, post_id: @post.id)
         tagging.save!
-        tagging.make_notification(user_id)
+        tagging.make_notification(notifying_user_id: current_user.id,
+          notified_user_id: user_id)
       end
     end
 
@@ -25,7 +26,9 @@ class Api::PostsController < ApplicationController
         TimelinePosting.new(profile_owner_id: profile_owner_id,
           post_id: @post.id)
       timeline_posting.save!
-      timeline_posting.make_notification(profile_owner_id)
+      timeline_posting.make_notification(notifying_user_id: current_user.id,
+        notified_user_id: profile_owner_id)
+      Pusher.trigger('notifications_' + profile_owner_id, 'notification', {})
     end
 
     @time = @post.created_at.localtime
