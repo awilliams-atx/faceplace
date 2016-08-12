@@ -32,6 +32,10 @@ class User < ActiveRecord::Base
     through: :friendships,
     source: :friend
 
+  has_many :received_friend_requests,
+    class_name: 'FriendRequest',
+    foreign_key: :receiver_id
+
   has_many :notifications,
     class_name: 'Notification',
     foreign_key: 'notified_user_id',
