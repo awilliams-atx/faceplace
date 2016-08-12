@@ -49,18 +49,16 @@
 
 .nav-right > div {
   cursor: pointer;
-  line-height: 27px;
-  height: 27px;
   margin: 8px 7px 0 7px;
   float: left;
 }
 
+.nav-right div#user-icon {
+  line-height: 27px;
+}
+
 .nav-drops {
   font-size: 20px;
-  div {
-    float: right;
-    margin-left: 5px;
-  }
   div.nav-drop-inactive {
     color: #17233d;
   }
@@ -69,31 +67,11 @@
   }
 }
 
+.nav-drops > div {
+  float: right;
+  margin-left: 5px;
+}
 
-
-// .nav-big-three {
-//   position: relative;
-//   height: 25px;
-//   width: 25px;
-//   margin: 0 7px;
-//   background-size: cover;
-// }
-
-// .big-three-overlay {
-//   border: 1px solid rgba(100, 100, 100, 0.4);
-//   position: absolute;
-//   top: 20px;
-//   display: block;
-//   width: 430px;
-//   height: 50px;
-// }
-
-// .big-three-overlay-item {
-//   width: 100%
-// }
-
-// #friends-overlay {
-//   position: absolute;
-//   top: 27px;
-//   right: -85px;
-// }
+.nav-drop-active {
+  position: relative;
+}
