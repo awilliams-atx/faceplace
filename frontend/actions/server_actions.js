@@ -72,6 +72,10 @@ var ServerActions = {
       profileOwnerId: friendsData.profileOwnerId
     });
   },
+  receiveNotifications: function (data) {
+    console.log('ServerActions#receiveNotifications');
+    console.log(data);
+  },
   receiveOwnPost: function (post) {
     Dispatcher.dispatch({
       actionType: postConstants.OWN_POST_RECEIVED,

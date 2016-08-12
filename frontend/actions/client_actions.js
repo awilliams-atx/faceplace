@@ -1,11 +1,12 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
     modalConstants = require('../constants/modal_constants'),
-    CommentApiUtil = require('../util/comment_api_util'),
     postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants'),
+    CommentApiUtil = require('../util/comment_api_util'),
     FriendApiUtil = require('../util/friend_api_util'),
     FriendshipApiUtil = require('../util/friendship_api_util'),
     FriendRequestApiUtil = require('../util/friend_request_api_util'),
+    NotificationApiUtil = require('../util/notification_api_util'),
     PostApiUtil = require('../util/post_api_util'),
     ProfileApiUtil = require('../util/profile_api_util'),
     SearchApiUtil = require('../util/search_api_util'),
@@ -32,6 +33,9 @@ var ClientActions = {
   },
   fetchMostRecentlyAddedFriends: function (userId) {
     FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
+  },
+  fetchNotifications: function () {
+    NotificationApiUtil.fetchNotifications();
   },
   fetchProfile: function (userId) {
     ProfileApiUtil.fetchProfile(userId);

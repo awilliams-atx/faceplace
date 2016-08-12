@@ -1,6 +1,17 @@
 var ServerActions = require('../actions/server_actions');
 
 var FriendRequestApiUtil = {
+  cancelRequest: function (userId, response) {
+    $.ajax({
+      url: 'api/friend_request',
+      method: 'DELETE',
+      dataType: 'json',
+      data: {friend_request: {receiver_id: userId, response: response}},
+      success: function () {
+        ServerActions.receiveFriendRequestCancelation();
+      }
+    });
+  },
   makeFriendRequest: function (userId) {
     $.ajax({
       url: 'api/friend_requests',
@@ -20,17 +31,6 @@ var FriendRequestApiUtil = {
       data: {friend_request: {maker_id: userId, response: response}},
       success: function (friendRequestResponse) {
         ServerActions.receiveFriendRequestResponse(friendRequestResponse);
-      }
-    });
-  },
-  cancelRequest: function (userId, response) {
-    $.ajax({
-      url: 'api/friend_request',
-      method: 'DELETE',
-      dataType: 'json',
-      data: {friend_request: {receiver_id: userId, response: response}},
-      success: function () {
-        ServerActions.receiveFriendRequestCancelation();
       }
     });
   }

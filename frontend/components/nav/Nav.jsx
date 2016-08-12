@@ -1,10 +1,11 @@
 var React = require('react'),
-    SessionApiUtil = require('../../util/session_api_util'),
     NavDrops = require('./NavDrops'),
     SignUpForm = require('../SignUpForm'),
     SearchIndex = require('../search/SearchIndex'),
-    SessionStore = require('../../stores/session'),
-    FormActions = require('../../actions/form_actions');
+
+    ClientActions = require('../../actions/client_actions'),
+    SessionApiUtil = require('../../util/session_api_util'),
+    SessionStore = require('../../stores/session');
 
 var Nav = React.createClass({
   getInitialState: function () {
@@ -34,7 +35,7 @@ var Nav = React.createClass({
               </a>
             </div>
             {NavDrops({
-              toggleDrop: this.toggleDrop,
+              toggleNavDrop: this.toggleNavDrop,
               dropToggles: this.state.dropToggles
             })}
             <button onClick={this.logout}>Log Out</button>
@@ -43,13 +44,26 @@ var Nav = React.createClass({
       </header>
     );
   },
+  componentDidMount: function () {
+    this.pusherSubscribe();
+  },
+  componentWillUnmount: function () {
+    this.pusher.unsubscribe('notifications_' + SessionStore.currentUser().id);
+  },
   logout: function (e) {
     e.preventDefault();
     SessionApiUtil.logout(function () {
       this.context.router.push('/login');
     }.bind(this));
   },
-  toggleDrop: function (drop) {
+  pusherSubscribe: function () {
+    this.pusher = new Pusher('3d702a0663f5bd8c69dd', {
+      encrypted: true
+    });
+    var channel = this.pusher.subscribe('notifications_' + SessionStore.currentUser().id);
+    channel.bind('notification', ClientActions.fetchNotifications);
+  },
+  toggleNavDrop: function (drop) {
     var dropToggles = { notifications: false, friendRequests: false };
     dropToggles[drop] = true;
     this.setState({dropToggles: dropToggles});

@@ -6,9 +6,9 @@ var NavDrops = function (props) {
   return (
     <div className='nav-drops group'>
       <Notifications dropToggles={props.dropToggles}
-        toggleDrop={props.toggleDrop} />
+        toggleNavDrop={props.toggleNavDrop} />
       <FriendRequests dropToggles={props.dropToggles}
-        toggleDrop={props.toggleDrop} />
+        toggleNavDrop={props.toggleNavDrop} />
     </div>
   );
 };
