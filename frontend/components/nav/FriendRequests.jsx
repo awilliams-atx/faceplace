@@ -1,4 +1,5 @@
 var React = require('react'),
+    friendRequestItem = require('./friendRequestItem'),
     ClientActions = require('../../actions/client_actions'),
     FriendRequestStore = require('../../stores/friend_request.js'),
     SessionStore = require('../../stores/session.js');
@@ -10,8 +11,17 @@ var FriendRequests = React.createClass({
   render: function () {
     var dropDown = function () {
       if (this.props.dropToggles['friendRequests']) {
-        return(
-          <div>FRIEND REQUESTS {this.state.requests.length}</div>
+        return (
+          <div id='friend-request-overlay'>
+            <div id='friend-request-overlay-title'>
+              <strong>Friend Requests</strong>
+            </div>
+            {
+              this.state.requests.map(function (req, idx) {
+                return friendRequestItem(req, idx);
+              })
+            }
+          </div>
         );
       }
     }.bind(this);
@@ -20,11 +30,12 @@ var FriendRequests = React.createClass({
         id='friends-drop'
         onClick={this.toggleNavDrop}>
         <i className="fa fa-user-plus" aria-hidden="true"></i>
-        {dropDown()}
+        {dropDown(this.state.requests)}
       </div>
     );
   },
   componentDidMount: function () {
+    ClientActions.fetchFriendRequests();
     this.friendRequestListener =
       FriendRequestStore.addListener(this.onFriendRequestStoreChange);
     this.pusherSubscribe();
