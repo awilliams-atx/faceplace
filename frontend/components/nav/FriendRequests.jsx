@@ -1,15 +1,17 @@
 var React = require('react'),
-    FriendRequestStore = require('../../stores/friend_request.js');
+    ClientActions = require('../../actions/client_actions'),
+    FriendRequestStore = require('../../stores/friend_request.js'),
+    SessionStore = require('../../stores/session.js');
 
 var FriendRequests = React.createClass({
   getInitialState: function () {
-    return { friendRequests: [] };
+    return { requests: [] };
   },
   render: function () {
     var dropDown = function () {
       if (this.props.dropToggles['friendRequests']) {
         return(
-          <div>FRIEND REQUESTS</div>
+          <div>FRIEND REQUESTS {this.state.requests.length}</div>
         );
       }
     }.bind(this);
@@ -25,9 +27,11 @@ var FriendRequests = React.createClass({
   componentDidMount: function () {
     this.friendRequestListener =
       FriendRequestStore.addListener(this.onFriendRequestStoreChange);
+    this.pusherSubscribe();
   },
   componentWillUnmount: function () {
     this.friendRequestListener.remove();
+    this.pusher.unsubscribe('friend_requests_' + SessionStore.currentUser().id);
   },
   componentWillReceiveProps: function (props) {
     this.setState({ dropped: props.dropped });
@@ -40,7 +44,14 @@ var FriendRequests = React.createClass({
     }
   },
   onFriendRequestStoreChange: function () {
-    this.setState({ friendRequests: FriendRequestStore.all() });
+    this.setState({ requests: FriendRequestStore.all() });
+  },
+  pusherSubscribe: function () {
+    this.pusher = new Pusher('3d702a0663f5bd8c69dd', {
+      encrypted: true
+    });
+    var channel = this.pusher.subscribe('friend_requests_' + SessionStore.currentUser().id);
+    channel.bind('friend_request_received', ClientActions.fetchFriendRequests);
   },
   toggleNavDrop: function () {
     this.props.toggleNavDrop('friendRequests');

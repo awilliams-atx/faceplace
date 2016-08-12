@@ -12,6 +12,16 @@ var FriendRequestApiUtil = {
       }
     });
   },
+  fetchFriendRequests: function () {
+    $.ajax({
+      url: 'api/friend_requests',
+      method: 'GET',
+      dataType: 'json',
+      success: function (friendRequests) {
+        ServerActions.receiveFriendRequests(friendRequests);
+      }
+    });
+  },
   makeFriendRequest: function (userId) {
     $.ajax({
       url: 'api/friend_requests',

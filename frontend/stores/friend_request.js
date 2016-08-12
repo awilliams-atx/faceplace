@@ -4,16 +4,27 @@ var Store = require('flux/utils').Store,
 
 var FriendRequestStore = new Store(AppDispatcher);
 
-var _friendRequests = [];
+_requests = [];
 
 FriendRequestStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-
+  case friendRequestConstants.FRIEND_REQUESTS_RECEIVED:
+    this.setRequests(payload.requests);
+    FriendRequestStore.__emitChange();
   }
 };
 
 FriendRequestStore.all = function () {
-  return _notifications.slice();
+  return _requests.slice();
+};
+
+FriendRequestStore.setRequests = function (requests) {
+  while (_requests.length > 0) {
+    _requests.pop();
+  }
+  for (var i = 0; i < requests.length; i++) {
+    _requests.push(requests[i]);
+  }
 };
 
 module.exports = FriendRequestStore;

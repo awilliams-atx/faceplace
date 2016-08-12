@@ -3,6 +3,7 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     friendConstants = require('../constants/friend_constants'),
     friendRequestConstants = require('../constants/friend_request_constants'),
     friendshipConstants = require('../constants/friendship_constants'),
+    notificationConstants = require('../constants/notification_constants'),
     postConstants = require('../constants/post_constants'),
     searchConstants = require('../constants/search_constants'),
     tagConstants = require('../constants/tag_constants'),
@@ -40,6 +41,12 @@ var ServerActions = {
       response: response
     });
   },
+  receiveFriendRequests: function (requests) {
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.FRIEND_REQUESTS_RECEIVED,
+      requests: requests
+    });
+  },
   receiveFriendRequestCancelation: function () {
     Dispatcher.dispatch({
       actionType: friendRequestConstants.FRIEND_REQUEST_CANCELED
@@ -72,9 +79,11 @@ var ServerActions = {
       profileOwnerId: friendsData.profileOwnerId
     });
   },
-  receiveNotifications: function (data) {
-    console.log('ServerActions#receiveNotifications');
-    console.log(data);
+  receiveNotifications: function (notifications) {
+    Dispatcher.dispatch({
+      actionType: notificationConstants.NOTIFICATIONS_RECEIVED,
+      notifications: notifications
+    });
   },
   receiveOwnPost: function (post) {
     Dispatcher.dispatch({

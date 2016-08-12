@@ -7,7 +7,6 @@ var NotificationApiUtil = {
       method: 'GET',
       dataType: 'json',
       success: function (notifications) {
-        console.log('NotificationApiUtil#fetchNotifications');
         ServerActions.receiveNotifications(notifications);
       }
     });

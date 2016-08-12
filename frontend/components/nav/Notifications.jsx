@@ -1,5 +1,7 @@
 var React = require('react'),
-    NotificationStore = require('../../stores/notification.js');
+    NotificationStore = require('../../stores/notification.js'),
+    ClientActions = require('../../actions/client_actions'),
+    SessionStore = require('../../stores/session.js');
 
 var Notifications = React.createClass({
   getInitialState: function () {
@@ -9,7 +11,7 @@ var Notifications = React.createClass({
     var dropDown = function () {
       if (this.props.dropToggles['notifications']) {
         return(
-          <div>NOTIFICATIONS</div>
+          <div>NOTIFICATIONS {this.state.notifications.length}</div>
         );
       }
     }.bind(this);
@@ -25,9 +27,11 @@ var Notifications = React.createClass({
   componentDidMount: function () {
     this.notificationListener =
       NotificationStore.addListener(this.onNotificationStoreChange);
+    this.pusherSubscribe();
   },
   componentWillUnmount: function () {
     this.notificationListener.remove();
+    this.pusher.unsubscribe('notifications_' + SessionStore.currentUser().id);
   },
   componentWillReceiveProps: function (props) {
     this.setState({ dropped: props.dropped });
@@ -41,6 +45,13 @@ var Notifications = React.createClass({
   },
   onNotificationStoreChange: function () {
     this.setState({ notifications: NotificationStore.all() });
+  },
+  pusherSubscribe: function () {
+    this.pusher = new Pusher('3d702a0663f5bd8c69dd', {
+      encrypted: true
+    });
+    var channel = this.pusher.subscribe('notifications_' + SessionStore.currentUser().id);
+    channel.bind('notification_received', ClientActions.fetchNotifications);
   },
   toggleNavDrop: function () {
     this.props.toggleNavDrop('notifications');

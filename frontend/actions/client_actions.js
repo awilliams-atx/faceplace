@@ -31,6 +31,9 @@ var ClientActions = {
   deletePost: function (postId) {
     PostApiUtil.deletePost(postId);
   },
+  fetchFriendRequests: function () {
+    FriendRequestApiUtil.fetchFriendRequests();
+  },
   fetchMostRecentlyAddedFriends: function (userId) {
     FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
   },

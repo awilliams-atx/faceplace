@@ -44,24 +44,11 @@ var Nav = React.createClass({
       </header>
     );
   },
-  componentDidMount: function () {
-    this.pusherSubscribe();
-  },
-  componentWillUnmount: function () {
-    this.pusher.unsubscribe('notifications_' + SessionStore.currentUser().id);
-  },
   logout: function (e) {
     e.preventDefault();
     SessionApiUtil.logout(function () {
       this.context.router.push('/login');
     }.bind(this));
-  },
-  pusherSubscribe: function () {
-    this.pusher = new Pusher('3d702a0663f5bd8c69dd', {
-      encrypted: true
-    });
-    var channel = this.pusher.subscribe('notifications_' + SessionStore.currentUser().id);
-    channel.bind('notification', ClientActions.fetchNotifications);
   },
   toggleNavDrop: function (drop) {
     var dropToggles = { notifications: false, friendRequests: false };
