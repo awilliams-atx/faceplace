@@ -16,10 +16,12 @@ var Notifications = React.createClass({
       }
     }.bind(this);
     return (
-      <div className={this.className()}
+      <div className={this.className() + ' nav-drop-icon'}
         id='notifications-drop'
         onClick={this.toggleNavDrop}>
-        <i className="fa fa-globe" aria-hidden="true"></i>
+        <div className='fa-hover-box-25x25'>
+          <i className="fa fa-globe" aria-hidden="true"></i>
+        </div>
         {dropDown()}
       </div>
     );

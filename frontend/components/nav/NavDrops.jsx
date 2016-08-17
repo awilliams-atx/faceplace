@@ -5,9 +5,9 @@ var React = require('react'),
 var NavDrops = function (props) {
   return (
     <div className='nav-drops group'>
-      <Notifications dropToggles={props.dropToggles}
-        toggleNavDrop={props.toggleNavDrop} />
       <FriendRequests dropToggles={props.dropToggles}
+        toggleNavDrop={props.toggleNavDrop} />
+      <Notifications dropToggles={props.dropToggles}
         toggleNavDrop={props.toggleNavDrop} />
     </div>
   );

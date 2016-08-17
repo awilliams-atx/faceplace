@@ -22,7 +22,7 @@ var FriendRequests = React.createClass({
         });
       }
     }.bind(this);
-    
+
     var dropDown = function () {
       if (this.props.dropToggles['friendRequests']) {
         return (
@@ -36,10 +36,12 @@ var FriendRequests = React.createClass({
       }
     }.bind(this);
     return (
-      <div className={this.className()}
+      <div className={this.className() + ' nav-drop-icon'}
         id='friends-drop'
         onClick={this.toggleNavDrop}>
-        <i className="fa fa-user-plus" aria-hidden="true"></i>
+        <div className='fa-hover-box-25x25'>
+          <i className="fa fa-user-plus" aria-hidden="true"></i>
+        </div>
         {dropDown(this.state.requests)}
       </div>
     );
