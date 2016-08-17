@@ -9,6 +9,20 @@ var FriendRequests = React.createClass({
     return { requests: [] };
   },
   render: function () {
+    var renderRequests = function () {
+      if (this.state.requests.length === 0) {
+        return (
+          <div id='empty-friend-requests'>
+            <aside>No friend requests</aside>
+          </div>
+        );
+      } else {
+        return this.state.reqests.map(function (req, idx) {
+          return friendRequestItem(req, idx);
+        });
+      }
+    }.bind(this);
+    
     var dropDown = function () {
       if (this.props.dropToggles['friendRequests']) {
         return (
@@ -16,11 +30,7 @@ var FriendRequests = React.createClass({
             <div id='friend-request-overlay-title'>
               <strong>Friend Requests</strong>
             </div>
-            {
-              this.state.requests.map(function (req, idx) {
-                return friendRequestItem(req, idx);
-              })
-            }
+            {renderRequests()}
           </div>
         );
       }

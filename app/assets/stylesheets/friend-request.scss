@@ -97,3 +97,9 @@
 
 .nav-drop-block {
   float: left; }
+
+div#empty-friend-requests {
+  @include freeSmallDetail;
+  padding: 8px;
+  text-align: center;
+  font-style: italic; }
