@@ -17,7 +17,7 @@ class Api::PostsController < ApplicationController
         tagging.save!
         tagging.make_notification(notifying_user_id: current_user.id,
           notified_user_id: user_id)
-        Pusher.trigger('notifications_' + profile_owner_id, 'notification_received', {})
+        Pusher.trigger('notifications_' + user_id, 'notification_received', {})
       end
     end
 
