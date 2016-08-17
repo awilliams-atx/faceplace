@@ -1,3 +1,5 @@
+@import 'free-type-size';
+
 #sign-up-content {
   position: relative;
   width: 980px;
@@ -30,12 +32,11 @@ section#propaganda {
     text-align: center;
   }
   .propaganda-text {
+    @include freeStandard15;
     height: 47px;
     line-height: 47px;
     float: left;
     margin-left: 15px;
-    font-family: helvetica;
-    font-size: 15px;
   }
   .bold-text {
     font-size: 17px;

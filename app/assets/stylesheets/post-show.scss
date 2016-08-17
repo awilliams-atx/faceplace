@@ -6,9 +6,7 @@
   img {
     display: block;
     float: left;
-    margin-right: 8px;
-  }
-}
+    margin-right: 8px; }}
 
 .post-breakdown-details {
   @include freeInteractiveLinkMedium;
@@ -58,28 +56,26 @@ div.friend-post-icon {
     right: -5px;
 
     background-color: white;
-    border: 1px solid rgba(0, 0, 0, .15);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, .3);
+    border: 1px solid rgba(#000000, 0.15);
+    box-shadow: 0 3px 8px rgba(#000000, 0.3);
   }
   li {
+    @include freeStandard12;
     float: left;
     margin: 6px 0;
     padding: 3px 12px;
     width: 86px;
     cursor: pointer;
-
-    font-family: helvetica;
-    font-size: 12px;
   }
   li:hover {
-    background-color: rgb(61, 78, 167);
+    background-color: #3d4ea7;
     color: white;
   }
   li::selection {
-    background: rgba(0, 0, 0, 0);
+    background: rgba(#000000, 0);
   }
   li::-moz-selection {
-    background: rgba(0, 0, 0, 0);
+    background: rgba(#000000, 0);
   }
   hr {
     margin: 0 auto;
@@ -89,8 +85,7 @@ div.friend-post-icon {
 
 
 .post-body {
-  font-family: helvetica;
-  font-size: 14px;
+  @include freeStandard14;
   padding: 14px 12px 3px;
 }
 

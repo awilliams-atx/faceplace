@@ -1,12 +1,11 @@
+@import 'free-type-size';
+
 .timeline-feed-item {
+  @include freeStandard14;
   display: block;
   float: left;
   width: 510px;
   padding: 12px 0 0;
   border-radius: 3px;
   background-color: white;
-  margin-bottom: 20px;
-
-  font-family: helvetica;
-  font-size: 14px;
-}
+  margin-bottom: 20px; }

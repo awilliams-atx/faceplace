@@ -1,9 +1,11 @@
+@import 'free-type-size';
+
 .no-scroll-body {
   overflow: hidden;
 }
 
 .modal-background-opaque {
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(#000000, 0.5);
   position: fixed;
   height: 100%;
   width: 100%;
@@ -40,7 +42,7 @@
   background-color: white;
   border-radius: 3px;
   box-shadow: 0px 5px 47px 0px rgba(0,0,0,0.75);
-  font-family: helvetica;
+  font-family: $freeStandardFontFamily;
   hr {
     border-top: 1px solid #dddfe2;
     margin: 0 auto;

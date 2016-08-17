@@ -39,20 +39,18 @@ header#post-types {
 }
 
 .post-pic {
-  border: 1px solid rgba(0, 0, 0, 0.0980392);
+  border: 1px solid rgba(#000000, 0.1);
   display: block;
   float: left;
 }
 
 .post-textarea {
+  @include freeStandard14;
   padding: 11px 0 13px 12px;
   border: none;
   outline: none;
   resize: none;
   width: 423px;
-
-  font-family: helvetica;
-  font-size: 14px;
 }
 
 .post-footer-background {

@@ -1,3 +1,5 @@
+@import 'free-type-size';
+
 .main-header {
   background-color: #3b5998;
   border-bottom: 1px solid black;
@@ -18,9 +20,8 @@
   margin: auto;
   position: relative;
   label {
+    @include freeStandard12;
     color: white;
-    font-family: helvetica;
-    font-size: 12px;
   }
 }
 
@@ -36,8 +37,7 @@ label:after {
 }
 
 .log-in-form {
-  font-family: helvetica;
-  font-size: 12px;
+  @include freeStandard12;
   position: absolute;
   display: block;
   float: right;

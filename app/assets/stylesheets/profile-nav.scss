@@ -1,4 +1,7 @@
+@import 'free-type-size';
+
 .profile-nav {
+  @include freeStandard14;
   display: block;
   float: left;
   height: 43px;
@@ -10,10 +13,8 @@
   background-color: white;
   border-radius: 0 0 3px 3px;
 
-  font-family: helvetica;
-  font-size: 14px;
   font-weight: bold;
-  color: rgb(75, 79, 86);
+  color: #4a4e55;
   line-height: 44px;
 }
 

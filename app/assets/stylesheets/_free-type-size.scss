@@ -21,6 +21,22 @@ $freeSmallDetailGrayFontWeight: normal;
   font-weight: normal; }
 
 @mixin freeSmallDetail {
-  @include freeSmallDetailGrayType;
+  @include freeSmallDetailType;
   font-size: $freeSmallDetailGrayFontSize;
   font-weight: $freeSmallDetailGrayFontWeight; }
+
+@mixin freeStandard12 {
+  @include freeStandardType;
+  font-size: 12px; }
+
+@mixin freeStandard14 {
+  @include freeStandardType;
+  font-size: 14px; }
+
+@mixin freeStandard15 {
+  @include freeStandardType;
+  font-size: 15px; }
+
+@mixin freeStandard16 {
+  @include freeStandardType;
+  font-size: 16px; }

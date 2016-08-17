@@ -1,3 +1,5 @@
+@import 'free-type-size';
+
 .cover-photo {
   input {
     position: absolute;
@@ -16,7 +18,7 @@
     margin-right: 5px;
     display: block;
     float: left;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(#ffffff, 0.5);
     font-size: 26px;
     width: 28px;
     height: 28px;
@@ -25,12 +27,12 @@
     cursor: pointer;
   }
   strong {
-    font-family: helvetica;
+    font-family: $freeStandardFontFamily;
     display: block;
     float: left;
     line-height: 27px;
     z-index: 1;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(#ffffff, 0.5);
   }
   strong:hover {
     cursor: pointer;

@@ -1,3 +1,5 @@
+@import 'free-type-size';
+
 .tagging-container {
   input {
     padding-left: 5px;
@@ -14,13 +16,10 @@
   i {
     line-height: 40px;
     font-size: 14px;
-    color: #888888;
-  }
-}
+    color: #888888; }}
 
 .tag-icon:hover {
-  background-color: #f2f2f2;
-}
+  background-color: #f2f2f2; }
 
 .tag-icon-active {
   float: left;
@@ -29,50 +28,38 @@
   i {
     line-height: 40px;
     font-size: 14px;
-    color: #888888;
-  }
-}
+    color: #888888; }}
 
 .tagged-friends-list {
-  margin: 5px 12px 3px;
-}
+  margin: 5px 12px 3px; }
 
 .tagged-friends-with {
+  @include freeStandard12;
   display: block;
   float: left;
   margin: 7px 6px 5px 0;
-
-  font-family: helvetica;
-  font-size: 12px;
-  color: #888888;
-}
+  color: #888888; }
 
 .tagged-friends-list-item {
+  @include freeStandard12;
   display: block;
   float: left;
   margin: 3px;
   padding: 3px;
   border: 1px solid #9cb4d8 ;
   border-radius: 3px;
-  background-color: #e9ebee;
-
-  font-family: helvetica;
-  font-size: 12px;
-}
+  background-color: #e9ebee;}
 
 .tagged-friends-list-item:hover {
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 .tagging-field-container {
-  border-top: 1px solid #e5e5e5;
-}
+  border-top: 1px solid #e5e5e5; }
 
 .tagging-field-with {
+  @include freeStandard12;
   float: left;
   background-color: #e2e8f6;
-  font-family: helvetica;
-  font-size: 12px;
   width: 29px;
   height: calc(100% - 14px);
   padding: 8px 6px 6px 8px;
@@ -80,15 +67,11 @@
 
 .tagging-field {
   input {
-    font-family: helvetica;
-    font-size: 14px;
-    outline: none;
-  }
-}
+    @include freeStandard14;
+    outline: none; }}
 
 .tag-search-anchor-point {
-  position: relative;
-}
+  position: relative; }
 
 .tagging-friends-search-results {
   top: 29px;
@@ -97,8 +80,7 @@
   border-radius: 3px;
   overflow: hidden;
   padding: 9px 0;
-  font-family: helvetica;
-}
+  font-family: $freeStandardFontFamily; }
 
 .tagging-friends-search-result {
   background-color: white;
@@ -112,11 +94,8 @@
   strong {
     display: block;
     float: left;
-    width: 182px;
-  }
-}
+    width: 182px; }}
 
 .tagging-friends-search-result:hover {
   background-color: #3b5998;
-  color: white;
-}
+  color: white; }

@@ -1,4 +1,4 @@
-// use asset urls
+@import 'free-type-size';
 
 #intro-work-img { background-image: url(asset_path('intro_work.png')); }
 #intro-school-img { background-image: url(asset_path('intro_school.png')); }
@@ -6,8 +6,7 @@
 #intro-hometown-img { background-image: url(asset_path('intro_hometown.png')); }
 
 #intro-index {
-  font-family: helvetica;
-  font-size: 12px;
+  @include freeStandard12;
   line-height: 16px;
   width: 301px;
   hr {

@@ -1,3 +1,5 @@
+@import 'free-type-size';
+
 .nav-search {
   float: left;
   margin-top: 8px;
@@ -6,26 +8,25 @@
 }
 
 .search-bar {
+  @include freeStandard14;
   border-radius: 3px;
   width: 400px;
   display: block;
   padding: 4px 5px 4px 4px;
   margin-bottom: 1px;
-  font-family: helvetica;
-  font-size: 14px;
 }
 
 .nav-search input:focus {
   outline: none;
 }
 .search-index-items {
-  font-family: helvetica;
+  font-family: $freeStandardFontFamily;
   width: 410px;
 }
 
 .search-index-item:hover {
   cursor: pointer;
-  background-color: #ECF0F7;
+  background-color: #ecf0f7;
 }
 
 .search-icon {

@@ -1,9 +1,10 @@
+@import 'free-type-size';
+
 .profile-sub-content {
   width: 980px;
   margin: auto;
   h2 {
-    font-family: helvetica;
-    font-size: 16px;
+    @include freeStandard16;
     margin: 3px 0 20px 35px;
   }
   .icon {
@@ -25,8 +26,7 @@
 }
 
 .friendship-button-container {
-  font-family: helvetica;
-  font-size: 12px;
+  @include freeStandard12;
   font-weight: bold;
   color: #4b4f56;
 
@@ -42,9 +42,9 @@
     float: left;
   }
   button {
-    background-color: #F6F7F9;
+    background-color: #f6f7f9;
     height: 28px;
-    border: 1px solid #CED0D4;
+    border: 1px solid #cdcfd4;
     border-radius: 3px;
     margin-left: 5px;
   }
@@ -74,7 +74,7 @@
   bottom: -31px;
   left: 11px;
 
-  border: 1px solid rgba(0, 0, 0, .3);
+  border: 1px solid rgba(#000000, 0.3);
   border-radius: 3px;
   background-color: white;
 }
