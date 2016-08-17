@@ -4,8 +4,8 @@
 @import 'profile-pic-size';
 
 @mixin bottomBorder {
-  border-bottom: 1px solid $miscThinSeparatorGray; }
-
+  border-bottom: 1px solid $miscThinSeparatorGray;
+}
 #friend-request-overlay {
   position: absolute;
   width: 406px;
@@ -13,10 +13,9 @@
   top: 35px;
   left: -370px;
   z-index: 1000;
-
   background-color: white;
-  box-shadow: 0 3px 8px rgba(#000000, 0.25); }
-
+  box-shadow: 0 3px 8px rgba(#000000, 0.25);
+}
 #friend-request-overlay:after,
 #friend-request-overlay:before {
   content: '';
@@ -25,40 +24,42 @@
   bottom: 100%;
   width: 0;
   height: 0;
-  border-style: solid; }
-
+  border-style: solid;
+}
 #friend-request-overlay:after {
   right: 18px;
   border-color: transparent transparent white transparent;
-  border-width: 10px; }
-
+  border-width: 10px;
+}
 #friend-request-overlay:before {
   right: 17px;
   border-color: transparent transparent rgba(#000000, 0.25) transparent;
-  border-width: 11px; }
-
+  border-width: 11px;
+}
 #friend-request-overlay-title {
   @include bottomBorder;
   strong {
     line-height: 30px;
     margin-left: 12px;
     font-size: 12px;
-    color: #333338; }}
-
+    color: #333338;
+  }
+}
 .friend-request-item {
   @include bottomBorder;
   display: block;
-  padding: 5px 0 2px; }
-
+  padding: 5px 0 2px;
+}
 .friend-request-item:last-child {
-  border-bottom: none; }
-
+  border-bottom: none;
+}
 .friend-request-item-pic {
   margin-left: 12px;
   margin-right: 10px;
   img {
-    @include profilePic48x48; }}
-
+    @include profilePic48x48;
+  }
+}
 .friend-request-details {
   a {
     @include freeInteractiveLinkSmall;
@@ -71,35 +72,45 @@
     @include freeSmallDetail;
     display: block;
     height: 15px;
-    line-height: 15px; }}
-
+    line-height: 15px;
+  }
+}
 .friend-request-response {
   float: right;
   margin-right: 12px;
   margin-top: 8px;
   button {
-    @include slimButtonSizes; }
+    @include slimButtonSizes;
+  }
   button:focus {
-    @include buttonFocusBoxShadow; }
+    @include buttonFocusBoxShadow;
+  }
   button.nav-drop-request-confirm {
-    @include blueButtonColors; }
+    @include blueButtonColors;
+  }
   button.nav-drop-request-confirm:hover {
-    @include blueButtonHoverColors; }
+    @include blueButtonHoverColors;
+  }
   button.nav-drop-request-confirm:active {
-    @include blueButtonActiveColors; }
+    @include blueButtonActiveColors;
+  }
   button.nav-drop-request-delete {
     @include grayButtonColors;
-    @include grayButtonBorder; }
+    @include grayButtonBorder;
+  }
   button.nav-drop-request-delete:hover {
-    @include grayButtonHoverColors; }
+    @include grayButtonHoverColors;
+  }
   button.nav-drop-request-delete:active {
-    @include grayButtonActiveColors; }}
-
+    @include grayButtonActiveColors;
+  }
+}
 .nav-drop-block {
-  float: left; }
-
+  float: left;
+}
 div#empty-friend-requests {
   @include freeSmallDetail;
   padding: 8px;
   text-align: center;
-  font-style: italic; }
+  font-style: italic;
+}

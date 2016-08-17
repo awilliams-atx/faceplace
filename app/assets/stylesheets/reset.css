@@ -11,18 +11,15 @@ body, html, header, section, nav, h1, h2, label, input, a {
   text-decoration: inherit;
   font-weight: inherit;
 }
-
 button {
   font: inherit;
   color: inherit;
   decoration: inherit;
   font-weight: inherit;
 }
-
 li {
   list-style: none;
 }
-
 button {
   border: medium none;
   border-spacing: 0;

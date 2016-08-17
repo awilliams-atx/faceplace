@@ -4,15 +4,16 @@ $freeStandardFontFamily: helvetica, arial, sans-serif;
 
 @mixin freeFloatingTextType {
   @include freeFloatingTextWhite;
-  font-family: $freeStandardFontFamily; }
-
+  font-family: $freeStandardFontFamily;
+}
 @mixin freeInteractiveLinkType {
   @include freeInteractiveLinkBlue;
-  font-family: $freeStandardFontFamily; }
-
+  font-family: $freeStandardFontFamily;
+}
 @mixin freeSmallDetailType {
   @include freeSmallDetailGray;
-  font-family: $freeStandardFontFamily; }
-
+  font-family: $freeStandardFontFamily;
+}
 @mixin freeStandardType {
-   font-family: $freeStandardFontFamily; }
+   font-family: $freeStandardFontFamily;
+ }

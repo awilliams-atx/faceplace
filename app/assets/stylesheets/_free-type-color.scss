@@ -2,10 +2,11 @@ $mariner: #365899;
 $freeSmallDetailGray: #9e9b9e;
 
 @mixin freeInteractiveLinkBlue {
-  color: $mariner; }
-
+  color: $mariner;
+}
 @mixin freeFloatingTextWhite {
-  color: white; }
-
+  color: white;
+}
 @mixin freeSmallDetailGray {
-  color: $freeSmallDetailGray; }
+  color: $freeSmallDetailGray;
+}

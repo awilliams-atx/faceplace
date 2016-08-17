@@ -1,39 +1,35 @@
 @import 'free-type-size';
 
 .profile-sub-content {
-  width: 980px;
   margin: auto;
+  width: 980px;
   h2 {
     @include freeStandard16;
     margin: 3px 0 20px 35px;
   }
   .icon {
-    width: 25px;
-    height: 25px;
     display: block;
     float: left;
+    height: 25px;
+    width: 25px;
   }
 }
-
 .profile-top-content {
   position: relative;
 }
-
 .cover-photo-container {
+  height: 315px;
   position: relative;
   width: 851px;
-  height: 315px;
 }
-
 .friendship-button-container {
   @include freeStandard12;
-  font-weight: bold;
+  bottom: 16px;
   color: #4b4f56;
-
+  font-weight: bold;
+  line-height: 15px;
   position: absolute;
   right: 16px;
-  bottom: 16px;
-  line-height: 15px;
 
   overflow: hidden;
   img {
@@ -67,18 +63,15 @@
     cursor: default;
   }
 }
-
 .profile-pic {
   position: absolute;
   padding: 4px;
   bottom: -31px;
   left: 11px;
-
   border: 1px solid rgba(#000000, 0.3);
   border-radius: 3px;
   background-color: white;
 }
-
 .profile-aside-item {
   margin: 20px 20px 20px 0;
 }

@@ -6,7 +6,6 @@
   border-radius: 3px;
   font-size: 14px;
 }
-
 .search-bar {
   @include freeStandard14;
   border-radius: 3px;
@@ -15,7 +14,6 @@
   padding: 4px 5px 4px 4px;
   margin-bottom: 1px;
 }
-
 .nav-search input:focus {
   outline: none;
 }
@@ -23,19 +21,16 @@
   font-family: $freeStandardFontFamily;
   width: 410px;
 }
-
 .search-index-item:hover {
   cursor: pointer;
   background-color: #ecf0f7;
 }
-
 .search-icon {
   height: 36px;
   background-color: red;
   float: left;
   margin: 4px 8px 4px 6px;
 }
-
 .search-text {
   float: left;
   height: 33px;

@@ -6,24 +6,22 @@
   width: 510px;
   padding: 0;
 }
-
 .profile-post {
   width: 510px;
 }
-
 .post-types-background {
   background-color: #f6f7f9;
   height: 100%;
   padding: 10px 0 10px 10px;
   border-bottom: 1px solid #e5e5e5;
 }
-
 header#post-types {
   div.post-type-text {
     @include freeInteractiveLinkSmall;
     height: 16px;
-    line-height: 16px; }}
-
+    line-height: 16px;
+  }
+}
 .post-type-img {
   position: relative;
   top: -1px;
@@ -33,17 +31,14 @@ header#post-types {
   width: 16px;
   margin-right: 5px;
 }
-
 .post-form {
   padding: 12px 12px 0 12px;
 }
-
 .post-pic {
   border: 1px solid rgba(#000000, 0.1);
   display: block;
   float: left;
 }
-
 .post-textarea {
   @include freeStandard14;
   padding: 11px 0 13px 12px;
@@ -52,21 +47,20 @@ header#post-types {
   resize: none;
   width: 423px;
 }
-
 .post-footer-background {
   border-top: 1px solid #e5e5e5;
   height: 40px;
 }
-
 .post-footer-left-buttons {
   float: left;
   cursor: pointer;
 }
-
 .post-footer-right-buttons {
-  button { @include slimButtonSizes;
-           @include blueButtonColors;
-           @include blueButtonType; }
+  button {
+    @include slimButtonSizes;
+    @include blueButtonColors;
+    @include blueButtonType;
+  }
   button:hover { @include blueButtonHoverColors; }
   button:active { @include blueButtonActiveColors; }
   button:focus { @include buttonFocusBoxShadow; }

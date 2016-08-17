@@ -3,24 +3,19 @@ section#sign-up {
   position: absolute;
   right: 20px;
 }
-
 #sign-up-header {
-    float: right;
-    width: 400px;
+  float: right;
+  width: 400px;
 }
 #sign-up-header > h1 {
   font-size: 36px;
   font-family: 'Merriweather', sans-serif;
   margin-bottom: 5px;
 }
-
 #consolation {
-  /*position: relative;
-  right: 207px;*/
   font-size: 19px;
   margin-bottom: 20px;
 }
-
 #sign-up input {
   float: right;
   border: 1px solid #bdc7d8;
@@ -31,7 +26,6 @@ section#sign-up {
   margin-bottom: 10px;
   display: block;
 }
-
 #sign-up-form button {
   position: absolute;
   right: 207px;
@@ -44,35 +38,19 @@ section#sign-up {
   color: white;
   background: linear-gradient(180deg, #65a952, #578843);
 }
-
 #sign-up-form {
   position: relative;
 }
-
 #sign-up-form button:hover {
   cursor: pointer;
   background: linear-gradient(180deg, #76b861, #578843);
 }
-
 #sign-up-form button:active {
   bottom: -50px;
 }
-
 .sign-up-error {
   float: right;
   height: 33px;
   line-height: 33px;
   margin-right: 10px;
-}
-
-#first-name-error-container {
-}
-
-#last-name-error-container {
-}
-
-#email-error-container {
-}
-
-#password-error-container {
 }

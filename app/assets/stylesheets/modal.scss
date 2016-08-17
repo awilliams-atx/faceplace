@@ -2,8 +2,8 @@
 @import 'misc-color';
 
 .no-scroll-body {
-  overflow: hidden; }
-
+  overflow: hidden;
+}
 .modal-background-opaque {
   background-color: rgba(#000000, 0.5);
   position: fixed;
@@ -11,26 +11,26 @@
   width: 100%;
   opacity: 1;
   z-index: 2000;
-  transition: opacity 0.2s; }
-
+  transition: opacity 0.2s;
+}
 .modal-background-transparent {
   opacity: 0;
-  transition: opacity 0.2s; }
-
+  transition: opacity 0.2s;
+}
 .modal-outer {
   position: relative;
   float: left;
   top: 30%;
-  left: 50%; }
-
+  left: 50%;
+}
 .modal-inner {
   position: relative;
   float: left;
-  left: -50%; }
-
+  left: -50%;
+}
 .modal-delete-post {
-  width: 436px; }
-
+  width: 436px;
+}
 .modal-element {
   margin: 0;
   top: 30%;
@@ -41,8 +41,9 @@
   hr {
     border-top: 1px solid $hawkesBlueGray;
     margin: 0 auto;
-    width: calc(100% - 30px); }}
-
+    width: calc(100% - 30px);
+  }
+}
 .modal-header {
   display: block;
   background-color: #f6f7f9;
@@ -52,23 +53,25 @@
     display: block;
     padding: 10px 12px;
     font-size: 14px;
-    font-weight: bold; }}
-
+    font-weight: bold;
+  }
+}
 .modal-message-container {
   display: block;
   padding: 12px;
   mark {
     background-color: white;
-    font-size: 14px; }}
-
+    font-size: 14px;
+  }
+}
 .modal-footer {
-  display: block; }
-
+  display: block;
+}
 .modal-button-container {
   float: right;
   display: block;
-  margin: 7px; }
-
+  margin: 7px;
+}
 .modal-container button {
   display: block;
   float: left;
@@ -76,7 +79,8 @@
   margin-left: 5px;
   line-height: 22px;
   font-size: 12px;
-  font-weight: bold; }
-
+  font-weight: bold;
+}
 .modal-confirm-button {
-  border: 0; }
+  border: 0;
+}

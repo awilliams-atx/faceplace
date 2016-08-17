@@ -1,42 +1,39 @@
 @import 'free-type-size';
 
 .profile-pic-input-container {
+  left: 12px;
   position: absolute;
   top: 10px;
-  left: 12px;
 }
-
 .profile-pic {
   img {
     display: block;
   }
   input {
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    left: -93px;
-    width: 240px;
     height: 27px;
+    left: -93px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 240px;
   }
   input:hover {
     cursor: pointer;
   }
 }
-
 .profile-pic-input-cover {
+  height: 27px;
+  left: -93px;
   position: absolute;
   top: 0;
-  left: -93px;
-  height: 27px;
   width: 89px;
 }
-
 .profile-pic-input-replacement {
   color: rgba(#ffffff, 0.5);
   i {
-    font-size: 26px;
     display: block;
     float: left;
+    font-size: 26px;
     margin-right: 5px;
   }
   strong {

@@ -9,32 +9,26 @@
   font-weight: bold;
   margin-left: 7px;
 }
-
 .button-blue {
   line-height: 24px;
   background-color: $blueButtonBackgroundColor;
   color: white;
 }
-
 .button-blue:hover {
   background-color: $blueButtonHoverBackgroundColor;
 }
-
 .button-blue:active {
   background-color: $blueButtonActiveBackgroundColor;
 }
-
 .button-gray {
   color: $grayButtonColor;
   line-height: 22px;
   background-color: $grayButtonBackgroundColor;
   border: 1px solid #ced0d4;
 }
-
 .button-gray:hover {
   background-color: $grayButtonHoverBackgroundColor;
 }
-
 .button-gray:active {
   background-color: $grayButtonActiveBackgroundColor;
 }

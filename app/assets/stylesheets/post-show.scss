@@ -6,8 +6,9 @@
   img {
     display: block;
     float: left;
-    margin-right: 8px; }}
-
+    margin-right: 8px;
+  }
+}
 .post-breakdown-details {
   @include freeInteractiveLinkMedium;
   float: left;
@@ -16,23 +17,25 @@
   margin-bottom: 5px;
   top: 2px;
   div {
-    float: left; }}
-
+    float: left;
+  }
+}
 div.friend-post-icon {
   margin: 0 5px;
   i {
     font-size: 14px;
-    color: #969696; }}
-
+    color: #969696;
+  }
+}
 .post-datetime-container {
-  float: left; }
-
+  float: left;
+}
 .post-datetime {
-  float: left; }
-
+  float: left;
+}
 .post-datetime {
-  @include freeSmallDetail; }
-
+  @include freeSmallDetail;
+}
 .post-options-container {
   position: relative;
   i {
@@ -82,13 +85,10 @@ div.friend-post-icon {
     width: 92px;
   }
 }
-
-
 .post-body {
   @include freeStandard14;
   padding: 14px 12px 3px;
 }
-
 .post-tagged-friends {
   color: #888888;
   padding: 5px 12px 3px;
