@@ -38,7 +38,7 @@ var Nav = React.createClass({
               toggleNavDrop: this.toggleNavDrop,
               dropToggles: this.state.dropToggles
             })}
-            <button onClick={this.logout}>Log Out</button>
+            <button id='logout' onClick={this.logout}>Log Out</button>
           </div>
         </nav>
       </header>
