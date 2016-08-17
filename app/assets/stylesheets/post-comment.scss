@@ -1,4 +1,5 @@
 @import 'free-type-size';
+@import 'misc-color';
 
 .post-comment {
   padding: 8px 12px;
@@ -13,7 +14,7 @@
 
     width: 434px;
     height: 14px;
-    border: 1px solid #dddfe2;
+    border: 1px solid $hawkesBlueGray;
 
     resize: none;
     outline: none;

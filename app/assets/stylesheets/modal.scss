@@ -1,4 +1,5 @@
 @import 'free-type-size';
+@import 'misc-color';
 
 .no-scroll-body {
   overflow: hidden;
@@ -44,7 +45,7 @@
   box-shadow: 0px 5px 47px 0px rgba(0,0,0,0.75);
   font-family: $freeStandardFontFamily;
   hr {
-    border-top: 1px solid #dddfe2;
+    border-top: 1px solid $hawkesBlueGray;
     margin: 0 auto;
     width: calc(100% - 30px);
   }
