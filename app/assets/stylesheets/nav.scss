@@ -34,19 +34,19 @@
   font-family: tahoma;
   font-weight: bold;
   font-size: 12px;
-  button {
-    cursor: pointer;
-    background-color: #5a74a8;
-    box-shadow: 0 0 1px black;
-    height: 27px;
-    margin-top: 8px;
-    display: block;
-    float: left;
-    border-radius: 2px;
-    margin-left: 10px;
-  }
 }
 
+.nav-right > button {
+  cursor: pointer;
+  background-color: #5a74a8;
+  box-shadow: 0 0 1px black;
+  height: 27px;
+  margin-top: 8px;
+  display: block;
+  float: left;
+  border-radius: 2px;
+  margin-left: 10px;
+}
 .nav-right > div {
   cursor: pointer;
   margin: 8px 7px 0 7px;

@@ -67,8 +67,8 @@ var routes = (
     <Route path='login' component={ LogInForm } onEnter={ ensureNotLoggedIn }/>
     <Route path='main' component={ Main } onEnter={ redirectToProfile } />
     <Route path='users/:userId' component={ Profile } onEnter={ ensureLoggedIn } >
-      <IndexRoute component= { Timeline } />
-      <Route path='timeline' component= { Timeline } />
+      <IndexRoute component={ Timeline } />
+      <Route path='timeline' component={ Timeline } />
     </Route>
   </Route>
 );

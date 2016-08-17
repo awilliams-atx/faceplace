@@ -1,0 +1,5 @@
+$blueButtonFontFamily: helvetica;
+
+@mixin blueButtonType {
+  font-family: $blueButtonFontFamily;
+}

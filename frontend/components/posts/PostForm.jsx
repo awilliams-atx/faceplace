@@ -53,10 +53,7 @@ var PostForm = React.createClass({
   } else {
     footerRightButtons = (
       <div className='post-footer-right-buttons'>
-        <button className='button button-blue'
-                onClick={this.handleSubmit}>
-          Post
-        </button>
+        <button onClick={this.handleSubmit}>Post</button>
       </div>
     );
   }

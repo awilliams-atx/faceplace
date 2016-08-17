@@ -1,17 +1,20 @@
-@mixin bottomborder {
-  border-bottom: 1px solid rgba(100, 100, 100, 0.4);
+@import 'misc-color';
+@import 'button-style';
+
+@mixin bottomBorder {
+  border-bottom: 1px solid $thinSeparatorGray;
 }
 
 #friend-request-overlay {
   position: absolute;
   width: 406px;
-  border: 1px solid rgba(100, 100, 100, 0.4);
+  border: 1px solid rgba(#636363, 0.4);
   top: 35px;
   left: -370px;
   z-index: 1000;
 
   background-color: white;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
+  box-shadow: 0 3px 8px rgba(#000000, 0.25);
 }
 
 #friend-request-overlay:after,
@@ -33,12 +36,12 @@
 
 #friend-request-overlay:before {
   right: 17px;
-  border-color: transparent transparent rgba(0, 0, 0, .25) transparent;
+  border-color: transparent transparent rgba(#000000, 0.25) transparent;
   border-width: 11px;
 }
 
 #friend-request-overlay-title {
-  @include bottomborder;
+  @include bottomBorder;
   strong {
     line-height: 30px;
     margin-left: 12px;
@@ -48,7 +51,7 @@
 }
 
 .friend-request-item {
-  @include bottomborder;
+  @include bottomBorder;
   display: block;
   padding: 5px 0 2px;
 }
@@ -75,16 +78,39 @@
     line-height: 15px;
 
     font-weight: bold;
-    color: #3a5999;
+    color: $interactiveLinkBlue;
   }
   aside {
     display: block;
     height: 15px;
     line-height: 15px;
-    
-    color: #9e9b9e;
+
+    color: $smallDetailGray;
     font-weight: 100;
   }
+}
+
+.friend-request-response {
+  float: right;
+  margin-right: 12px;
+  margin-top: 8px;
+  button {
+    @include slimButtonSizes; }
+  button:focus {
+    @include buttonFocusBoxShadow; }
+  button.nav-drop-request-confirm {
+    @include blueButtonColors; }
+  button.nav-drop-request-confirm:hover {
+    @include blueButtonHoverColors; }
+  button.nav-drop-request-confirm:active {
+    @include blueButtonActiveColors; }
+  button.nav-drop-request-delete {
+    @include grayButtonColors;
+    @include grayButtonBorder; }
+  button.nav-drop-request-delete:hover {
+    @include grayButtonHoverColors; }
+  button.nav-drop-request-delete:active {
+    @include grayButtonActiveColors; }
 }
 
 .nav-drop-block {

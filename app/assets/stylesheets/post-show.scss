@@ -1,3 +1,5 @@
+@import 'misc-color';
+
 .post-breakdown {
   margin: 0 12px;
   img {
@@ -17,7 +19,7 @@
   font-family: helvetica;
   font-size: 14px;
   font-weight: bold;
-  color: #365899;
+  color: $interactiveLinkBlue;
   div {
     float: left;
   }

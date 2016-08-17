@@ -10,8 +10,9 @@ var friendRequestItem = function (req, idx) {
         <a href={'#/users/' + req.user_id}>{req.name}</a>
         <aside>a million friends</aside>
       </div>
-      <div className='friend-request-response nav-drop-block'>
-        <button className='button button-blue'>Confirm</button>
+      <div className='friend-request-response'>
+        <button className='nav-drop-request-confirm'>Confirm</button>
+        <button className='nav-drop-request-delete'>Delete Request</button>
       </div>
     </div>
   );
