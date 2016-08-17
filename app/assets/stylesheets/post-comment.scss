@@ -2,8 +2,7 @@
 @import 'misc-color';
 
 .post-comment {
-  padding: 8px 12px;
-}
+  padding: 8px 12px; }
 
 .post-comment-form {
   padding: 8px 12px 8px;
@@ -11,29 +10,22 @@
     @include freeStandard12;
     display: block;
     float: left;
-
     width: 434px;
     height: 14px;
     border: 1px solid $hawkesBlueGray;
-
     resize: none;
     outline: none;
-
-    padding: 7px 5px;
-  }
-}
+    padding: 7px 5px; }}
 
 .post-comment-profile-pic {
   display: block;
   float: left;
   border: 1px solid rgba(#000000, 0.1);
-  margin-right: 8px;
-}
+  margin-right: 8px; }
 
 .post-comment-image {
   display: block;
-  float: left;
-}
+  float: left; }
 
 .post-comment-body {
   @include freeStandard12;
@@ -41,29 +33,20 @@
   float: left;
   position: relative;
   width: 446px;
-
-  a {
-    color: #365899;
-    font-weight: bold;
+  a { @include freeInteractiveLinkSmall;
   }
-  a:hover {
-    text-decoration: underline;
+  a:hover { text-decoration: underline;
   }
   i {
     position: absolute;
     top: 0;
     right: 0;
-
     color: #d6d8db;
   }
   i:hover {
     cursor: pointer;
-    color: #a0a4ae;
-  }
-}
+    color: #a0a4ae; }}
 
 .post-comment-created-at {
   margin-top: 2px;
-
-  color: #90949c;
-}
+  color: #90949c; }

@@ -1,17 +1,14 @@
 .main-header {
-  height: 42px;
-}
+  height: 42px; }
 
 .main-header-nav {
   width: 980px;
   height: 100%;
-  margin: auto;
-}
+  margin: auto; }
 
 #faceplace-icon {
   float: left;
-  font-size: 28px;
-}
+  font-size: 28px; }
 
 .fa-facebook-official {
   color: white;
@@ -19,13 +16,11 @@
   float: left;
   height: 60px;
   margin-top: 6px;
-  margin-right: 7px;
-}
+  margin-right: 7px; }
 
 .nav-left {
   height: 100%;
-  float: left;
-}
+  float: left; }
 
 .nav-right {
   height: 100%;
@@ -33,8 +28,7 @@
   color: white;
   font-family: tahoma;
   font-weight: bold;
-  font-size: 12px;
-}
+  font-size: 12px; }
 
 .nav-right > button {
   cursor: pointer;
@@ -45,17 +39,15 @@
   display: block;
   float: left;
   border-radius: 2px;
-  margin-left: 10px;
-}
+  margin-left: 10px; }
+
 .nav-right > div {
   cursor: pointer;
   margin: 8px 7px 0 7px;
-  float: left;
-}
+  float: left; }
 
 .nav-right div#user-icon {
-  line-height: 27px;
-}
+  line-height: 27px; }
 
 .nav-drops {
   font-size: 20px;
@@ -63,15 +55,11 @@
     color: #17233d;
   }
   div.nav-drop-inactive:hover {
-    color: #0b121e;
-  }
-}
+    color: #0b121e; }}
 
 .nav-drops > div {
   float: right;
-  margin-left: 5px;
-}
+  margin-left: 5px; }
 
 .nav-drop-active {
-  position: relative;
-}
+  position: relative; }
