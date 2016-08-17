@@ -1,0 +1,24 @@
+@import 'button-colors';
+
+$grayButtonBorder: 1px solid #cdcfd4;
+
+$slimButtonBorderRadius: 2px;
+$slimButtonFontSize: 12px;
+$slimButtonFontWeight: normal;
+$slimButtonLineHeight: 22px;
+$slimButtonMarginLeft: 4px;
+$slimButtonPadding: 0 8px;
+
+@mixin slimButtonSizes {
+  box-sizing: border-box;
+  border-radius: $slimButtonBorderRadius;
+  padding: $slimButtonPadding;
+  font-size: $slimButtonFontSize;
+  font-weight: $slimButtonFontWeight;
+  line-height: $slimButtonLineHeight;
+  margin-left: $slimButtonMarginLeft;
+}
+
+@mixin grayButtonBorder {
+  border: $grayButtonBorder;
+}

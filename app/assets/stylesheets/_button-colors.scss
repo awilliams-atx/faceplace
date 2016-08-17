@@ -1,3 +1,40 @@
-$blue-button: #4267b2;
-$blue-button-hover: #365899;
-$blue-button-active: #29487d;
+$buttonFocusBoxShadow: 0 0 3px 2px rgba(#5890ff, 0.75);
+
+$blueButtonColor: white;
+$blueButtonBackgroundColor: #4267b2;
+$blueButtonHoverBackgroundColor: #365899;
+$blueButtonActiveBackgroundColor: #29487d;
+
+$grayButtonColor: #4a4e55;
+$grayButtonBorderColor: #4267b3;
+$grayButtonBackgroundColor: #f6f7f9;
+$grayButtonHoverBackgroundColor: #e9ebee;
+$grayButtonActiveBackgroundColor: #dddfe2;
+
+@mixin buttonFocusBoxShadow {
+  outline: none;
+  box-shadow: $buttonFocusBoxShadow;
+}
+@mixin blueButtonColors {
+  color: $blueButtonColor;
+  background-color: $blueButtonBackgroundColor;
+}
+@mixin blueButtonHoverColors {
+  cursor: pointer;
+  background-color: $blueButtonHoverBackgroundColor;
+}
+@mixin blueButtonActiveColors {
+  background-color: $blueButtonActiveBackgroundColor;
+}
+@mixin grayButtonColors {
+  color: $grayButtonColor;
+  background-color: $grayButtonBackgroundColor;
+  border-color: $grayButtonBorderColor;
+}
+@mixin grayButtonHoverColors {
+  cursor: pointer;
+  background-color: $grayButtonHoverBackgroundColor;
+}
+@mixin grayButtonActiveColors {
+  background-color: $grayButtonActiveBackgroundColor;
+}

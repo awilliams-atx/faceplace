@@ -1,5 +1,7 @@
+$comment-background-blue: #f6f7f9;
+
 .comment-section {
   margin-top: 11px;
   border-top: 1px solid #e5e5e5;
-  background-color: #f6f7f9;
+  background-color: $comment-background-blue;
 }

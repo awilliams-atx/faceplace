@@ -1,4 +1,4 @@
-@import 'button-colors';
+@import 'button-styles';
 
 .button {
   padding: 0 16px;
@@ -12,24 +12,29 @@
 
 .button-blue {
   line-height: 24px;
-  background-color: #4267b2;
+  background-color: $blueButtonBackgroundColor;
   color: white;
 }
 
 .button-blue:hover {
-  background-color: #365899;
+  background-color: $blueButtonHoverBackgroundColor;
 }
 
 .button-blue:active {
-  background-color: #29487d;
+  background-color: $blueButtonActiveBackgroundColor;
 }
 
 .button-gray {
+  color: $grayButtonColor;
   line-height: 22px;
-  background-color: #f6f7f9;
+  background-color: $grayButtonBackgroundColor;
   border: 1px solid #ced0d4;
 }
 
 .button-gray:hover {
-  background-color: #e9ebee;
+  background-color: $grayButtonHoverBackgroundColor;
+}
+
+.button-gray:active {
+  background-color: $grayButtonActiveBackgroundColor;
 }
