@@ -4,7 +4,7 @@ lebowski_friends = [];
 
 andrew = User.create(first_name: "Andrew", last_name: "Williams", email: "andrew", password: "starwars")
 
-andrew.desription = 'New York City software developer with experience in Rails, JavaScript, and React.js'
+andrew.description = 'New York City software developer with experience in Rails, JavaScript, and React.js'
 andrew.location = 'Manhattan'
 andrew.hometown = 'New Braunfels, Texas'
 andrew.school = 'The University of Texas at Austin'
