@@ -2,7 +2,6 @@ var React = require('react'),
     PostForm = require('./PostForm'),
     ClientActions = require('../../actions/client_actions'),
     PostCommentIndex = require('../comments/PostCommentIndex'),
-    CommentStore = require('../../stores/comment'),
     SessionStore = require('../../stores/session');
 
 var PostIndexItem = React.createClass({

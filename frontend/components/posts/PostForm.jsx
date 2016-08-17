@@ -66,7 +66,7 @@ var PostForm = React.createClass({
       <section id='post-form-section'
         className={elTypeClass + ' profile-post'}>
         <div className='post-types-background'>
-          <header className='post-types'>
+          <header id='post-types'>
             <img src='https://s3.amazonaws.com/faceplace-dev/assets/post_status.png' className='post-type-img' />
             <div className='post-type-text'>
               Status

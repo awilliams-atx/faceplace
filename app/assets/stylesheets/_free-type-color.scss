@@ -1,0 +1,10 @@
+$freeInteractiveLinkBlue: #365899;
+$freeSmallDetailGray: #9e9b9e;
+
+@mixin freeInteractiveLinkBlue {
+  color: $freeInteractiveLinkBlue;
+}
+
+@mixin freeSmallDetailGray {
+  color: $freeSmallDetailGray;
+}

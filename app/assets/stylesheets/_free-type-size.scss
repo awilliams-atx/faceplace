@@ -1,0 +1,24 @@
+@import 'free-type-type';
+$freeInteractiveLinkFontWeight: bold;
+$freeInteractiveLinkSmallFontSize: 12px;
+$freeInteractiveLinkMediumFontSize: 14px;
+$freeSmallDetailGrayFontSize: 12px;
+$freeSmallDetailGrayFontWeight: normal;
+
+@mixin freeInteractiveLinkSmall {
+  @include freeInteractiveLinkType;
+  font-size: $freeInteractiveLinkSmallFontSize;
+  font-weight: $freeInteractiveLinkFontWeight;
+}
+
+@mixin freeInteractiveLinkMedium {
+  @include freeInteractiveLinkType;
+  font-size: $freeInteractiveLinkMediumFontSize;
+  font-weight: $freeInteractiveLinkFontWeight;
+}
+
+@mixin freeSmallDetail {
+  @include freeSmallDetailGrayType;
+  font-size: $freeSmallDetailGrayFontSize;
+  font-weight: $freeSmallDetailGrayFontWeight;
+}

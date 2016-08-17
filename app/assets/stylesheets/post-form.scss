@@ -1,4 +1,5 @@
 @import 'button-style';
+@import 'free-type-size';
 
 #post-form-section {
   float: left;
@@ -17,14 +18,11 @@
   border-bottom: 1px solid #e5e5e5;
 }
 
-.post-type-text {
-  height: 16px;
-  font-family: helvetica;
-  font-size: 12px;
-  font-weight: bold;
-  color: #365899;
-  line-height: 16px;
-}
+header#post-types {
+  div.post-type-text {
+    @include freeInteractiveLinkSmall;
+    height: 16px;
+    line-height: 16px; }}
 
 .post-type-img {
   position: relative;
