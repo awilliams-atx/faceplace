@@ -10,7 +10,7 @@ class Api::FriendRequestsController < ApplicationController
       receiver_id: params[:request_receiver_id])
 
     @request.save!
-    Pusher.trigger('friend_requests_' + params[:request_receiver_id], 'friend_request_received', {})
+    Pusher.trigger('friend_requests_' + params[:request_receiver_id], 'friend_request', {})
     render json: @request
   end
 
@@ -55,6 +55,7 @@ class Api::FriendRequestsController < ApplicationController
       @user_id = friend_request_params[:maker_id]
       @response = friend_request_params[:response]
     end
+    Pusher.trigger('friend_requests_' + friend_request_params[:receiver_id], 'friend_request', {})
 
     render 'api/friendships/show'
   end

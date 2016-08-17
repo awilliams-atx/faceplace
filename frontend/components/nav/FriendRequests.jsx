@@ -17,7 +17,7 @@ var FriendRequests = React.createClass({
           </div>
         );
       } else {
-        return this.state.reqests.map(function (req, idx) {
+        return this.state.requests.map(function (req, idx) {
           return friendRequestItem(req, idx);
         });
       }
@@ -74,7 +74,7 @@ var FriendRequests = React.createClass({
       encrypted: true
     });
     var channel = this.pusher.subscribe('friend_requests_' + SessionStore.currentUser().id);
-    channel.bind('friend_request_received', ClientActions.fetchFriendRequests);
+    channel.bind('friend_request', ClientActions.fetchFriendRequests);
   },
   toggleNavDrop: function () {
     this.props.toggleNavDrop('friendRequests');
