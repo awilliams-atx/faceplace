@@ -1,19 +1,17 @@
 @import 'free-type-size';
+@import 'misc-color';
 
 .main-header {
-  background-color: #3b5998;
-  border-bottom: 1px solid black;
-}
+  background-color: $facebookBlue;
+  border-bottom: 1px solid black; }
 
 .main-header-nav {
   position: relative;
-  width: 100%;
-}
+  width: 100%; }
 
 .welcome-header {
   background: #4d68a2;
-  height: 83px;
-}
+  height: 83px; }
 
 .welcome-header-nav {
   width: 980px;
@@ -21,20 +19,16 @@
   position: relative;
   label {
     @include freeStandard12;
-    color: white;
-  }
-}
+    color: white; }}
 
 label:after {
   content:"\a";
-  white-space: pre;
-}
+  white-space: pre; }
 
 .header-logo {
   display: block;
   position: absolute;
-  margin-top: 25px;
-}
+  margin-top: 25px; }
 
 .log-in-form {
   @include freeStandard12;
@@ -49,17 +43,13 @@ label:after {
   input {
     outline: none;
     padding: 3px 3px 4px 4px;
-    width: 142px;
-  }
-}
+    width: 142px; }}
 
 .login-input-error {
-  border: 1px solid red;
-}
+  border: 1px solid red; }
 
 .login-input {
-  border: 1px solid black;
-}
+  border: 1px solid black; }
 
 .login-button {
   display: block;
@@ -68,31 +58,25 @@ label:after {
   color: white;
   font-family: tahoma;
   font-weight: bold;
-  box-shadow: 0 0 1px black;
-}
+  box-shadow: 0 0 1px black; }
 
 .login-button:hover {
-  cursor: pointer;
-}
+  cursor: pointer; }
 
 a.login-button:active {
   outline-color: -webkit-focus-ring-color;
   outline-style: auto;
-  outline-width: 5px;
-}
+  outline-width: 5px; }
 
 .login-button:active {
   position: relative;
-  top: 2px;
-}
+  top: 2px; }
 
 button.login-button {
-  width: 51px;
-}
+  width: 51px; }
 
 aside#login-errors-container {
   position: absolute;
   top: 47px;
   left: 355px;
-  width: 175px;
-}
+  width: 175px; }

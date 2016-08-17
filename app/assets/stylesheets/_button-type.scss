@@ -1,5 +1,4 @@
-$blueButtonFontFamily: helvetica;
+@import 'free-type-type';
 
 @mixin blueButtonType {
-  font-family: $blueButtonFontFamily;
-}
+  font-family: $freeStandardFontFamily; }
