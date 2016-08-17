@@ -8,17 +8,19 @@ $freeSmallDetailGrayFontWeight: normal;
 @mixin freeInteractiveLinkSmall {
   @include freeInteractiveLinkType;
   font-size: $freeInteractiveLinkSmallFontSize;
-  font-weight: $freeInteractiveLinkFontWeight;
-}
+  font-weight: $freeInteractiveLinkFontWeight; }
 
 @mixin freeInteractiveLinkMedium {
   @include freeInteractiveLinkType;
   font-size: $freeInteractiveLinkMediumFontSize;
-  font-weight: $freeInteractiveLinkFontWeight;
-}
+  font-weight: $freeInteractiveLinkFontWeight; }
+
+@mixin freeFloatingTextMedium {
+  @include freeFloatingTextType;
+  font-size: 12px;
+  font-weight: normal; }
 
 @mixin freeSmallDetail {
   @include freeSmallDetailGrayType;
   font-size: $freeSmallDetailGrayFontSize;
-  font-weight: $freeSmallDetailGrayFontWeight;
-}
+  font-weight: $freeSmallDetailGrayFontWeight; }

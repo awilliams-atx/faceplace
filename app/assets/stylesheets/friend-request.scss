@@ -1,10 +1,10 @@
 @import 'free-type-size';
 @import 'misc-color';
 @import 'button-style';
+@import 'profile-pic-size';
 
 @mixin bottomBorder {
-  border-bottom: 1px solid $miscThinSeparatorGray;
-}
+  border-bottom: 1px solid $miscThinSeparatorGray; }
 
 #friend-request-overlay {
   position: absolute;
@@ -15,8 +15,7 @@
   z-index: 1000;
 
   background-color: white;
-  box-shadow: 0 3px 8px rgba(#000000, 0.25);
-}
+  box-shadow: 0 3px 8px rgba(#000000, 0.25); }
 
 #friend-request-overlay:after,
 #friend-request-overlay:before {
@@ -26,20 +25,17 @@
   bottom: 100%;
   width: 0;
   height: 0;
-  border-style: solid;
-}
+  border-style: solid; }
 
 #friend-request-overlay:after {
   right: 18px;
   border-color: transparent transparent white transparent;
-  border-width: 10px;
-}
+  border-width: 10px; }
 
 #friend-request-overlay:before {
   right: 17px;
   border-color: transparent transparent rgba(#000000, 0.25) transparent;
-  border-width: 11px;
-}
+  border-width: 11px; }
 
 #friend-request-overlay-title {
   @include bottomBorder;
@@ -47,28 +43,21 @@
     line-height: 30px;
     margin-left: 12px;
     font-size: 12px;
-    color: #333338;
-  }
-}
+    color: #333338; }}
 
 .friend-request-item {
   @include bottomBorder;
   display: block;
-  padding: 5px 0 2px;
-}
+  padding: 5px 0 2px; }
 
 .friend-request-item:last-child {
-  border-bottom: none;
-}
+  border-bottom: none; }
 
 .friend-request-item-pic {
   margin-left: 12px;
   margin-right: 10px;
   img {
-    height: 48px;
-    width: 48px;
-  }
-}
+    @include profilePic48x48; }}
 
 .friend-request-details {
   a {
@@ -104,9 +93,7 @@
   button.nav-drop-request-delete:hover {
     @include grayButtonHoverColors; }
   button.nav-drop-request-delete:active {
-    @include grayButtonActiveColors; }
-}
+    @include grayButtonActiveColors; }}
 
 .nav-drop-block {
-  float: left;
-}
+  float: left; }

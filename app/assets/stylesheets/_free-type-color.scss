@@ -2,9 +2,10 @@ $freeInteractiveLinkBlue: #365899;
 $freeSmallDetailGray: #9e9b9e;
 
 @mixin freeInteractiveLinkBlue {
-  color: $freeInteractiveLinkBlue;
-}
+  color: $freeInteractiveLinkBlue; }
+
+@mixin freeFloatingTextWhite {
+  color: white; }
 
 @mixin freeSmallDetailGray {
-  color: $freeSmallDetailGray;
-}
+  color: $freeSmallDetailGray; }

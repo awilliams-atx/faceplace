@@ -1,14 +1,15 @@
 @import 'free-type-color';
 
-$freeInteractiveLinkFontFamily: helvetica, arial, sans-serif;
-$freeSmallDetailGrayFontFamily: helvetica, arial, sans-serif;
+$freeMainFontFamily: helvetica, arial, sans-serif;
 
 @mixin freeInteractiveLinkType {
   @include freeInteractiveLinkBlue;
-  font-family: $freeInteractiveLinkFontFamily;
-}
+  font-family: $freeMainFontFamily; }
+
+@mixin freeFloatingTextType {
+  @include freeFloatingTextWhite;
+  font-family: $freeMainFontFamily; }
 
 @mixin freeSmallDetailGrayType {
   @include freeSmallDetailGray;
-  font-family: $freeSmallDetailGrayFontFamily;
-}
+  font-family: $freeMainFontFamily; }
