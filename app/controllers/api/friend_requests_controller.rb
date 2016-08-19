@@ -23,74 +23,46 @@ class Api::FriendRequestsController < ApplicationController
   end
 
   def destroy
-    if friend_request_params[:cancel]
-      return cancel
-    end
-    pusher_params = {}
-    if friend_request_params[:response] == 'cancel'
-      friend_request = FriendRequest.find_by({
-        maker_id: current_user.id,
-        receiver_id: friend_request_params[:receiver_id]
-        }).destroy
+    return cancel if request_params[:cancel]
 
-        @user_id = friend_request_params[:receiver_id]
-        @response = 'canceled'
-        pusher_channel = "requests_#{current_user.id}"
-        pusher_event = 'canceled'
+    @maker_id = request_params[:maker_id]
+    base_params = { receiver_id: current_user.id, maker_id: @maker_id }
+
+    request = FriendRequest.find_by(maker_id: @maker_id, receiver_id:
+      current_user.id)
+
+    if request
+      accept_response = 'accept'
+      request.destroy
     else
-      if friend_request_params[:response] == 'accept'
-        maker_id = friend_request_params[:maker_id]
-
-        Friendship.create({
-          user_id: current_user.id,
-          friend_id: maker_id
-        })
-
-        Friendship.create({
-          user_id: maker_id,
-          friend_id: current_user.id
-        })
-
-        pusher_channel = "friendships_#{maker_id}"
-        pusher_alert = 'friended'
-        pusher_params[:receiver_id] = current_user.id
-        pusher_params[:maker_id] = friend_request_params[:maker_id].to_i
-        pusher_params[:response] = 'accept'
-      end
-
-      friend_request = FriendRequest.find_by({
-        maker_id: friend_request_params[:maker_id],
-        receiver_id: current_user.id
-      })
-
-      unless friend_request
-        friend_request = FriendRequest.find_by({
-          maker_id: current_user.id,
-          receiver_id: friend_request_params[:maker_id]
-        })
-      end
-
-      friend_request.destroy
-
-      @user_id = friend_request_params[:maker_id]
-      @response = friend_request_params[:response]
+      accept_response = 'reject'
     end
 
-    if pusher_alert
-      Pusher.trigger(pusher_channel, pusher_alert, pusher_params)
+    if request_params[:response] == 'accept'
+      make_friendships
+      acceptance = base_params.merge(response: accept_response)
+      render json: acceptance
+      Pusher.trigger("friendships_#{@maker_id}", 'accept', acceptance)
+    elsif request_params[:response] == 'reject'
+      render json: base_params.merge(response: 'reject')
     end
-    render 'api/friendships/show'
   end
 
   private
 
+  def make_friendships
+    Friendship.create(user_id: current_user.id, friend_id: @maker_id)
+    Friendship.create(user_id: @maker_id, friend_id: current_user.id)
+  end
+
   def cancel
-    cancellation = { maker_id: current_user.id, receiver_id: friend_request_params[:receiver_id] }
-    FriendRequest.find_by(cancellation).destroy
+    cancellation = { maker_id: current_user.id, receiver_id: request_params[:receiver_id] }
+    request = FriendRequest.find_by(cancellation)
+    request.destroy if request
     render json: cancellation
   end
 
-  def friend_request_params
+  def request_params
     params.require(:friend_request)
       .permit(:maker_id, :receiver_id, :response, :cancel)
   end
