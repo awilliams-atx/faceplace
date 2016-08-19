@@ -21,8 +21,8 @@ var ClientActions = {
       userId: userId
     });
   },
-  cancelFriendRequest: function (userId) {
-    FriendRequestApiUtil.cancelRequest(userId, 'cancel');
+  cancelFriendRequest: function (user_id) {
+    FriendRequestApiUtil.cancelRequest(user_id);
   },
   cancelModal: function () {
     Dispatcher.dispatch({

@@ -1,12 +1,12 @@
 var ServerActions = require('../actions/server_actions');
 
 var FriendRequestApiUtil = {
-  cancelRequest: function (userId, response) {
+  cancelRequest: function (user_id) {
     $.ajax({
       url: 'api/friend_request',
       method: 'DELETE',
       dataType: 'json',
-      data: {friend_request: {receiver_id: userId, response: response}},
+      data: { friend_request: { receiver_id: user_id, cancel: true } },
       success: function () {
         ServerActions.receiveFriendRequestCancelation();
       }

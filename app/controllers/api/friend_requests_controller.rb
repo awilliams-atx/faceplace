@@ -23,20 +23,20 @@ class Api::FriendRequestsController < ApplicationController
   end
 
   def destroy
+    if friend_request_params[:cancel]
+      return cancel
+    end
     pusher_params = {}
     if friend_request_params[:response] == 'cancel'
       friend_request = FriendRequest.find_by({
         maker_id: current_user.id,
         receiver_id: friend_request_params[:receiver_id]
-      })
+        }).destroy
 
-
-      friend_request.destroy
-
-      @user_id = friend_request_params[:receiver_id]
-      @response = 'canceled'
-      pusher_channel = "requests_#{current_user.id}"
-      pusher_event = 'canceled'
+        @user_id = friend_request_params[:receiver_id]
+        @response = 'canceled'
+        pusher_channel = "requests_#{current_user.id}"
+        pusher_event = 'canceled'
     else
       if friend_request_params[:response] == 'accept'
         maker_id = friend_request_params[:maker_id]
@@ -50,7 +50,7 @@ class Api::FriendRequestsController < ApplicationController
           user_id: maker_id,
           friend_id: current_user.id
         })
-        puts "ACCEPTING AND PUSHING TO friendships_#{maker_id}"
+
         pusher_channel = "friendships_#{maker_id}"
         pusher_alert = 'friended'
         pusher_params[:receiver_id] = current_user.id
@@ -84,7 +84,14 @@ class Api::FriendRequestsController < ApplicationController
 
   private
 
+  def cancel
+    cancellation = { maker_id: current_user.id, receiver_id: friend_request_params[:receiver_id] }
+    FriendRequest.find_by(cancellation).destroy
+    render json: cancellation
+  end
+
   def friend_request_params
-    params.require(:friend_request).permit(:maker_id, :receiver_id, :response)
+    params.require(:friend_request)
+      .permit(:maker_id, :receiver_id, :response, :cancel)
   end
 end
