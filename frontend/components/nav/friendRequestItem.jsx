@@ -1,21 +1,37 @@
 var React = require('react');
 
-var friendRequestItem = function (req, idx) {
-  return (
-    <div className='friend-request-item group' key={idx}>
-      <div className='friend-request-item-pic nav-drop-block'>
-        <img src={req.profile_pic_url} />
+var FriendRequestItem = React.createClass({
+  render: function () {
+    return (
+      <div className='friend-request-item group'>
+        <div className='friend-request-item-pic nav-drop-block'>
+          <img src={this.props.req.profile_pic_url} />
+        </div>
+        <div className='friend-request-details nav-drop-block'>
+          <a href={'#/users/' + this.props.req.user_id}>{this.props.req.name}</a>
+          <aside>a million friends</aside>
+        </div>
+        <div className='friend-request-response'>
+          <button className='nav-drop-request-confirm'
+            onClick={this.onAccept}>
+            Confirm
+          </button>
+          <button className='nav-drop-request-delete'
+            onClick={this.onReject}>
+            Delete Request
+          </button>
+        </div>
       </div>
-      <div className='friend-request-details nav-drop-block'>
-        <a href={'#/users/' + req.user_id}>{req.name}</a>
-        <aside>a million friends</aside>
-      </div>
-      <div className='friend-request-response'>
-        <button className='nav-drop-request-confirm'>Confirm</button>
-        <button className='nav-drop-request-delete'>Delete Request</button>
-      </div>
-    </div>
-  );
-};
+    );
+  },
+  onAccept: function (e) {
+    e.preventDefault();
+    this.props.onAccept(this.props.req.user_id);
+  },
+  onReject: function (e) {
+    e.preventDefault();
+    this.props.onReject(this.props.req.user_id);
+  }
+});
 
-module.exports = friendRequestItem;
+module.exports = FriendRequestItem;

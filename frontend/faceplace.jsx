@@ -1,4 +1,4 @@
-TagStore = require('./stores/tag.js')
+FreqStore = require('./stores/friend_request.js')
 // TESTING CODE ABOVE
 
 var React = require('react'),
@@ -19,6 +19,8 @@ var Router = ReactRouter.Router,
     ModalStore = require('./stores/modal'),
     SessionStore = require('./stores/session'),
     SessionApiUtil = require('./util/session_api_util');
+
+var Socket = require('./vendor/socket');
 
 var App = React.createClass({
   getInitialState: function () {
@@ -48,9 +50,13 @@ var App = React.createClass({
   componentDidMount: function () {
     this.modalListener =
       ModalStore.addListener(this.onModalStoreChange);
+    this.friendshipSocket = new Socket('friendships');
+    this.friendRequestSocket = new Socket('friend_requests');
   },
   componentWillUnmount: function () {
     this.modalListener.remove();
+    this.friendshipSocket.unsubscribe();
+    this.friendRequestSocket.unsubscribe();
   },
   onModalStoreChange: function () {
     this.setState({

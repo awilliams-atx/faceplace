@@ -1,5 +1,6 @@
-var profileConstants = {
-  FRIENDSHIP_DESTROYED: 'FRIENDSHIP_DESTROYED'
+var friendshipConstants = {
+  FRIENDSHIP_DESTROYED: 'FRIENDSHIP_DESTROYED',
+  GET_UNFRIENDED: 'GET_UNFRIENDED'
 };
 
-module.exports = profileConstants;
+module.exports = friendshipConstants;

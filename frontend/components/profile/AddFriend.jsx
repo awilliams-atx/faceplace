@@ -31,7 +31,7 @@ var AddFriend = React.createClass({
           </button>
         </div>
       );
-    } else if (ProfileStore.requestMade()) {
+    } else if (ProfileStore.requestReceived()) {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
           <button className='accept-button' onClick={this.confirmHandler}>
@@ -42,7 +42,7 @@ var AddFriend = React.createClass({
           </button>
         </div>
       );
-    } else if (ProfileStore.requestReceived()) {
+    } else if (ProfileStore.requestMade()) {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
           <button className='request-sent-button' onClick={this.preventDefault}>
@@ -75,13 +75,15 @@ var AddFriend = React.createClass({
     this.userListener.remove();
   },
   componentWillReceiveProps: function (newProps) {
+    var oldProfileOwnerId = this.props.profileOwnerId;
     this.setState({reRender: true});
   },
   onProfileStoreChange: function () {
+    var profile = ProfileStore.profile();
     this.setState({
-      alreadyFriends: ProfileStore.alreadyFriends(),
-      requestMade: ProfileStore.requestMade(),
-      requestReceived: ProfileStore.requestReceived()
+      alreadyFriends: profile.alreadyFriends,
+      requestMade: profile.requestMade,
+      requestReceived: profile.requestReceived
     });
   },
   addFriendHandler: function (e) {

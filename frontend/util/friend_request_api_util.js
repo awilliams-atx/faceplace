@@ -29,7 +29,7 @@ var FriendRequestApiUtil = {
       dataType: 'json',
       data: {request_receiver_id: userId},
       success: function (friendRequest) {
-        ServerActions.receiveFriendRequest(friendRequest);
+        ServerActions.receiveMadeFriendRequest(friendRequest);
       }
     });
   },

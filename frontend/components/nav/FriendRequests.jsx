@@ -1,5 +1,5 @@
 var React = require('react'),
-    friendRequestItem = require('./friendRequestItem'),
+    FriendRequestItem = require('./FriendRequestItem'),
     ClientActions = require('../../actions/client_actions'),
     FriendRequestStore = require('../../stores/friend_request.js'),
     SessionStore = require('../../stores/session.js');
@@ -18,8 +18,14 @@ var FriendRequests = React.createClass({
         );
       } else {
         return this.state.requests.map(function (req, idx) {
-          return friendRequestItem(req, idx);
-        });
+          return (
+            <FriendRequestItem
+              req={req}
+              key={idx}
+              onAccept={this.onAccept}
+              onReject={this.onReject} />
+          );
+        }.bind(this));
       }
     }.bind(this);
 
@@ -50,11 +56,9 @@ var FriendRequests = React.createClass({
     ClientActions.fetchFriendRequests();
     this.friendRequestListener =
       FriendRequestStore.addListener(this.onFriendRequestStoreChange);
-    this.pusherSubscribe();
   },
   componentWillUnmount: function () {
     this.friendRequestListener.remove();
-    this.pusher.unsubscribe('friend_requests_' + SessionStore.currentUser().id);
   },
   componentWillReceiveProps: function (props) {
     this.setState({ dropped: props.dropped });
@@ -66,15 +70,14 @@ var FriendRequests = React.createClass({
       return 'nav-drop-inactive';
     }
   },
+  onAccept: function (userId) {
+    ClientActions.respondToFriendRequest(userId, 'accept');
+  },
   onFriendRequestStoreChange: function () {
     this.setState({ requests: FriendRequestStore.all() });
   },
-  pusherSubscribe: function () {
-    this.pusher = new Pusher('3d702a0663f5bd8c69dd', {
-      encrypted: true
-    });
-    var channel = this.pusher.subscribe('friend_requests_' + SessionStore.currentUser().id);
-    channel.bind('friend_request', ClientActions.fetchFriendRequests);
+  onReject: function (userId) {
+    ClientActions.respondToFriendRequest(userId, 'reject');
   },
   toggleNavDrop: function () {
     this.props.toggleNavDrop('friendRequests');

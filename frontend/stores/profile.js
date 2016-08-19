@@ -5,7 +5,7 @@ var Store = require('flux/utils').Store,
     friendshipConstants = require('../constants/friendship_constants');
 
 var _profile = {
-  id: '',
+  userId: '',
   description: '',
   position: '',
   company: '',
@@ -15,7 +15,8 @@ var _profile = {
   hometown: '',
   coverPhotoUrl: '',
   profilePicUrl: '',
-  requestPending: null,
+  requestMade: null,
+  requestReceived: null,
   alreadyFriends: null
 };
 
@@ -23,65 +24,90 @@ var ProfileStore = new Store(AppDispatcher);
 
 ProfileStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case profileConstants.PROFILE_RECEIVED:
-      _profileFetched = true;
-      _profile = payload.profile;
+  case friendshipConstants.FRIENDSHIP_DESTROYED:
+    _profile.alreadyFriends = false;
+    ProfileStore.__emitChange();
+    break;
+  case friendshipConstants.GET_UNFRIENDED:
+    _profile.alreadyFriends = false;
+    ProfileStore.__emitChange();
+    break;
+  case friendRequestConstants.MADE_FRIEND_REQUEST_ACCEPTED:
+    if (_profile.userId === payload.userId) {
+      ProfileStore.getFriended();
       ProfileStore.__emitChange();
-      break;
-    case friendRequestConstants.MADE_FRIEND_REQUEST_RECEIVED:
-      _profile.requestReceived = true;
-      ProfileStore.__emitChange();
-      break;
-    case friendRequestConstants.FRIEND_REQUEST_ACCEPTED:
-      _profile.requestMade = false;
-      _profile.alreadyFriends = true;
-      ProfileStore.__emitChange();
-      break;
-    case friendRequestConstants.FRIEND_REQUEST_REJECTED:
-      _profile.requestMade = false;
-      ProfileStore.__emitChange();
-      break;
-    case friendRequestConstants.FRIEND_REQUEST_CANCELED:
-      _profile.requestReceived = false;
-      ProfileStore.__emitChange();
-      break;
-    case friendshipConstants.FRIENDSHIP_DESTROYED:
-      _profile.alreadyFriends = false;
-      ProfileStore.__emitChange();
-      break;
+    }
+    break;
+  case friendRequestConstants.MADE_FRIEND_REQUEST_CANCELED:
+    _profile.requestMade = false;
+    ProfileStore.__emitChange();
+    break;
+  case friendRequestConstants.MADE_FRIEND_REQUEST_RECEIVED:
+    _profile.requestMade = true;
+    ProfileStore.__emitChange();
+    break;
+  case profileConstants.PROFILE_RECEIVED:
+    _profileFetched = true;
+    _profile = payload.profile;
+    ProfileStore.__emitChange();
+    break;
+  case friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED:
+    ProfileStore.getFriended();
+    ProfileStore.__emitChange();
+    break;
+  case friendRequestConstants.RECEIVED_FRIEND_REQUEST_RECEIVED:
+    ProfileStore.receiveReceivedFriendRequest();
+    ProfileStore.__emitChange();
+    break;
+  case friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED:
+    _profile.requestReceived = false;
+    ProfileStore.__emitChange();
+    break;
   }
 };
 
 ProfileStore.profile = function () {
-  return $.extend({}, _profile);
+  return Object.assign({}, _profile);
 };
 
-ProfileStore.description = function () { return _profile.description; };
+ProfileStore.alreadyFriends = function () { return _profile.alreadyFriends; };
 
 ProfileStore.company = function () { return _profile.company; };
 
-ProfileStore.position = function () { return _profile.position; };
+ProfileStore.coverPhotoUrl = function () { return _profile.coverPhotoUrl; };
 
-ProfileStore.school = function () { return _profile.school; };
+ProfileStore.description = function () { return _profile.description; };
 
-ProfileStore.major = function () { return _profile.major; };
-
-ProfileStore.location = function () { return _profile.location; };
+ProfileStore.getFriended = function () {
+  _profile.alreadyFriends = true;
+  _profile.requestMade = false;
+  _profile.requestReceived = false;
+}
 
 ProfileStore.hometown = function () { return _profile.hometown; };
 
-ProfileStore.alreadyFriends = function () { return _profile.alreadyFriends; };
+ProfileStore.location = function () { return _profile.location; };
+
+ProfileStore.major = function () { return _profile.major; };
+
+ProfileStore.position = function () { return _profile.position; };
+
+ProfileStore.profileFetched = function (id) {
+  return _profile.userId === id;
+};
+
+ProfileStore.profilePicUrl = function () { return _profile.profilePicUrl; };
+
+ProfileStore.receiveReceivedFriendRequest = function () {
+  _profile.alreadyFriends = false;
+  _profile.requestReceived = true;
+  _profile.requestMade = false;
+};
 
 ProfileStore.requestMade = function () { return _profile.requestMade; };
 
 ProfileStore.requestReceived = function () { return _profile.requestReceived; };
 
-ProfileStore.coverPhotoUrl = function () { return _profile.coverPhotoUrl; };
-
-ProfileStore.profilePicUrl = function () { return _profile.profilePicUrl; };
-
-ProfileStore.profileFetched = function (id) {
-  return _profile.userId === id;
-};
+ProfileStore.school = function () { return _profile.school; };
 
 module.exports = ProfileStore;

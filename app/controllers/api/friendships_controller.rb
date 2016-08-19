@@ -12,8 +12,9 @@ class Api::FriendshipsController < ApplicationController
 
     @user_id = params[:id]
     @response = 'unfriend'
-
+    puts "PUSHING TO friendships_#{current_user.id.to_s}"
+    Pusher.trigger('friendships_' + current_user.id.to_s,
+      'unfriended', { user_id: current_user.id })
     render 'api/friendships/show'
   end
-
 end

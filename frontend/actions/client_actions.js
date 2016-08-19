@@ -1,4 +1,5 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
+    friendshipConstants = require('../constants/friendship_constants'),
     modalConstants = require('../constants/modal_constants'),
     postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants'),
@@ -64,6 +65,16 @@ var ClientActions = {
   freezeTags: function () {
     Dispatcher.dispatch({
       actionType: tagConstants.FREEZE_TAGS
+    });
+  },
+  getFriended: function () {
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED
+    });
+  },
+  getUnfriended: function () {
+    Dispatcher.dispatch({
+      actionType: friendshipConstants.GET_UNFRIENDED
     });
   },
   makeFriendRequest: function (userId) {

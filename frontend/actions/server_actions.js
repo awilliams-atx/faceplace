@@ -10,6 +10,12 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     userConstants = require('../constants/user_constants');
 
 var ServerActions = {
+  receiveAcceptedMadeFriendRequest: function (request) {
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.MADE_FRIEND_REQUEST_ACCEPTED,
+      userId: request.receiver_id
+    });
+  },
   receiveComment: function (comment) {
     Dispatcher.dispatch({
       actionType: commentConstants.COMMENT_RECEIVED,
@@ -26,19 +32,13 @@ var ServerActions = {
   receiveDeletedFriendship: function (friendship) {
     Dispatcher.dispatch({
       actionType: friendshipConstants.FRIENDSHIP_DESTROYED,
-      profileOwnerId: parseInt(friendship.userId)
+      profileOwnerId: parseInt(friendship.user_id)
     });
   },
   receiveDeletedPost: function (post) {
     Dispatcher.dispatch({
       actionType: postConstants.DELETED_POST_RECEIVED,
       post: post
-    });
-  },
-  receiveFriendRequest: function (response) {
-    Dispatcher.dispatch({
-      actionType: friendRequestConstants.MADE_FRIEND_REQUEST_RECEIVED,
-      response: response
     });
   },
   receiveFriendRequests: function (requests) {
@@ -49,27 +49,31 @@ var ServerActions = {
   },
   receiveFriendRequestCancelation: function () {
     Dispatcher.dispatch({
-      actionType: friendRequestConstants.FRIEND_REQUEST_CANCELED
+      actionType: friendRequestConstants.MADE_FRIEND_REQUEST_CANCELED
     });
   },
-  receiveFriendRequestResponse: function (friendRequestResponse) {
-    var actionType;
-
-    if (friendRequestResponse.response === 'accept') {
-      actionType = friendRequestConstants.FRIEND_REQUEST_ACCEPTED;
-    } else if (friendRequestResponse.response === 'reject') {
-      actionType = friendRequestConstants.FRIEND_REQUEST_REJECTED;
+  receiveFriendRequestResponse: function (response) {
+    if (response.response === 'accept') {
+      actionType = friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED;
+    } else if (response.response === 'reject') {
+      actionType = friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED;
     }
 
     Dispatcher.dispatch({
       actionType: actionType,
-      userId: friendRequestResponse.userId
+      userId: response.user_id
     });
   },
   receiveFriendsForTagging: function (friends) {
     Dispatcher.dispatch({
       actionType: tagConstants.FRIENDS_RECEIVED_FOR_TAGGING,
       friends: friends
+    });
+  },
+  receiveMadeFriendRequest: function (response) {
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.MADE_FRIEND_REQUEST_RECEIVED,
+      response: response
     });
   },
   receiveMostRecentlyAddedFriends: function (friendsData) {
@@ -89,6 +93,12 @@ var ServerActions = {
     Dispatcher.dispatch({
       actionType: postConstants.OWN_POST_RECEIVED,
       post: post
+    });
+  },
+  receiveReceivedFriendRequest: function (request) {
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.RECEIVED_FRIEND_REQUEST_RECEIVED,
+      request: request
     });
   },
   receiveTimelinePosts: function (opts) {
