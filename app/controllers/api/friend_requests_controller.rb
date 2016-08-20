@@ -6,14 +6,20 @@ class Api::FriendRequestsController < ApplicationController
 
   def create
     return unless logged_in?
-    @request = FriendRequest.find_or_create_by(maker_id: current_user.id,
-      receiver_id: params[:receiver_id])
 
-    down_params = {name: current_user.full_name, maker_id: current_user.id, receiver_id: params[:received_id].to_i}
+    down_params = { name: current_user.full_name, maker_id: current_user.id, receiver_id: params[:received_id].to_i }
 
+    unless Friendship.exists?(user_id: current_user.id, friend_id:
+      params[:receiver_id])
+
+      @request = FriendRequest.find_or_create_by(maker_id: current_user.id,
+        receiver_id: params[:receiver_id])
+
+      Pusher.trigger("friend_requests_#{params[:receiver_id]}", 'received',
+        down_params.merge(profile_pic_url: current_user.profile_pic.url))
+    end
+    
     render json: down_params
-    Pusher.trigger("friend_requests_#{params[:receiver_id]}", 'received',
-      down_params.merge(profile_pic_url: current_user.profile_pic.url))
   end
 
   def destroy
