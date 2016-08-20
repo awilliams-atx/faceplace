@@ -3,13 +3,18 @@ var React = require('react'),
     FriendStore = require('../../../../stores/friend');
 
 var FriendIndex = React.createClass({
+  getInitialState: function () {
+    return { friends: [] };
+  },
   render: function () {
-    var profileOwnerId = this.props.profileOwnerId,
-        friends = FriendStore.all(profileOwnerId);
+    var profileOwnerId = this.props.profileOwnerId;
 
-    var friendIndexItems = friends.map(function (friend) {
-      return <FriendIndexItem friend={friend} key={friend.userId}/>;
-    });
+    var friendIndexItems = function () {
+      return this.state.friends.map(function (friend) {
+        return <FriendIndexItem friend={friend} key={friend.user_id}/>;
+      });
+    }.bind(this)
+
 
     return (
       <section id='friends-index'
@@ -17,7 +22,7 @@ var FriendIndex = React.createClass({
         <img src={window.profile_friends_icon} className='icon'/>
         <h2>Friends</h2>
         <div id='friend-thumbs-container' className='group'>
-          {friendIndexItems}
+          {friendIndexItems()}
         </div>
       </section>
     );
@@ -32,7 +37,7 @@ var FriendIndex = React.createClass({
     this.forceUpdate();
   },
   onFriendStoreChange: function () {
-    this.forceUpdate();
+    this.setState({ friends: FriendStore.all() });
   }
 });
 

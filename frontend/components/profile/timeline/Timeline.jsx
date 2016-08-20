@@ -42,19 +42,11 @@ var React = require('react'),
           introContent = <div className='empty-intro-content' />;
         }
 
-        if (this.state.friendsFetched) {
-          friendsContent = (
-            <FriendIndex profileOwnerId={profileOwnerId}/>
-          );
-        } else {
-          friendsContent = <div className='empty-friends-content' />;
-        }
-
         return (
           <div className='timeline-content group'>
             <aside className='timeline-sidebar'>
               {introContent}
-              {friendsContent}
+              <FriendIndex profileOwnerId={profileOwnerId} />
             </aside>
             <section className='timeline-main-content'>
               <PostIndex profileOwnerId={profileOwnerId}/>

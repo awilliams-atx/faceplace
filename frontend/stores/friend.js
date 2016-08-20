@@ -6,51 +6,49 @@ var Store = require('flux/utils').Store,
     ClientActions = require('../actions/client_actions'),
     SessionStore = require('../stores/session');
 
-var _friends = {};
+var _friends = [];
 
 var FriendStore = new Store(AppDispatcher);
 
 FriendStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case friendConstants.MOST_RECENTLY_ADDED_FRIENDS_RECEIVED:
-      this.setFriends({
-        profileOwnerId: payload.profileOwnerId,
-        friends: payload.friends
-      });
+      FriendStore.setFriends(payload.friends);
       FriendStore.__emitChange();
       break;
     case friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED:
       this.setOrFindFriend(payload.user_id);
       break;
     case friendshipConstants.FRIENDSHIP_DESTROYED:
-      this.removeFriend(payload.profileOwnerId);
+      this.removeFriend();
+      FriendStore.__emitChange();
   }
 };
 
-FriendStore.removeFriend = function (profileOwnerId) {
-  var currentUserId = SessionStore.currentUser().id;
-  delete _friends[profileOwnerId][currentUserId];
-  ClientActions.fetchMostRecentlyAddedFriends(profileOwnerId);
+FriendStore.removeFriend = function () {
+  currentUserId = SessionStore.currentUser().id;
+  for (var i = 0; i < _friends.length; i++) {
+    if (_friends[user_id] === currentUserId) {
+      return _friends.spice(i, 1);
+    }
+  }
 };
 
 FriendStore.setOrFindFriend = function (profileOwnerId) {
-  console.log('FriendStore::setOrFindFriend');
-  console.log(profileOwnerId);
   ClientActions.fetchMostRecentlyAddedFriends(profileOwnerId);
 };
 
-FriendStore.setFriends = function (opts) {
-  _friends[opts.profileOwnerId] = _friends[opts.profileOwnerId] || {};
-  opts.friends.forEach(function (friend) {
-    _friends[opts.profileOwnerId][friend.userId] = friend;
+FriendStore.setFriends = function (friends) {
+  while (_friends.length > 0) {
+    _friends.pop();
+  }
+  friends.forEach(function (friend) {
+    _friends.push(friend);
   });
 };
 
 FriendStore.all = function (profileOwnerId) {
-  if (!_friends.hasOwnProperty(profileOwnerId)) { return []; }
-  return Object.keys(_friends[profileOwnerId]).map(function (userId) {
-    return _friends[profileOwnerId][userId];
-  });
+  return _friends.slice();
 };
 
 FriendStore.friendsFetched = function (profileOwnerId) {
