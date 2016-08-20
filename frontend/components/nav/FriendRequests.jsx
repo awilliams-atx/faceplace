@@ -74,7 +74,9 @@ var FriendRequests = React.createClass({
     this.setState({ dropped: props.dropped });
   },
   className: function () {
-    if (this.props.dropToggles['friendRequests']) {
+    if (this.state.requests.length > 0) {
+      return 'nav-drop-active';
+    } else if (this.props.dropToggles['friendRequests']) {
       return 'nav-drop-active';
     } else {
       return 'nav-drop-inactive';
