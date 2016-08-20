@@ -26,7 +26,7 @@ var AddFriend = React.createClass({
     if (ProfileStore.alreadyFriends()) {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
-          <button className='unfriend-button' onClick={this.unfriendHandler}>
+          <button className='unfriend-button' onClick={this.onUnfriend}>
             <strong>Unfriend</strong>
           </button>
         </div>
@@ -34,10 +34,10 @@ var AddFriend = React.createClass({
     } else if (ProfileStore.requestReceived()) {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
-          <button className='accept-button' onClick={this.confirmHandler}>
+          <button className='accept-button' onClick={this.onAccept}>
             <strong>Confirm</strong>
           </button>
-          <button className='reject-request-button' onClick={this.rejectHandler}>
+          <button className='reject-request-button' onClick={this.onReject}>
             <strong>Delete Request</strong>
           </button>
         </div>
@@ -49,7 +49,7 @@ var AddFriend = React.createClass({
             <img src={window.add_friend_icon} />
             <strong>Request Sent!</strong>
           </button>
-          <button className='cancel-button' onClick={this.cancelHandler}>
+          <button className='cancel-button' onClick={this.onCancel}>
             <strong>Cancel Request</strong>
           </button>
         </div>
@@ -57,7 +57,7 @@ var AddFriend = React.createClass({
     } else {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
-          <button className='add-friend-button' onClick={this.addFriendHandler}>
+          <button className='add-friend-button' onClick={this.onAddFriend}>
             <img src={window.add_friend_icon} />
             <strong>Add Friend</strong>
           </button>
@@ -86,11 +86,15 @@ var AddFriend = React.createClass({
       requestReceived: profile.requestReceived
     });
   },
-  addFriendHandler: function (e) {
+  onAccept: function (e) {
+    e.preventDefault();
+    ClientActions.respondToFriendRequest(this.response('accept'));
+  },
+  onAddFriend: function (e) {
     e.preventDefault();
     ClientActions.makeFriendRequest(this.props.profileOwnerId);
   },
-  cancelHandler: function (e) {
+  onCancel: function (e) {
     e.preventDefault();
     ClientActions.cancelFriendRequest({
       maker_id: SessionStore.currentUser().id,
@@ -98,16 +102,16 @@ var AddFriend = React.createClass({
       cancel: true
     });
   },
-  confirmHandler: function (e) {
+  onReject: function (e) {
     e.preventDefault();
-    ClientActions.respondToFriendRequest(this.response('accept'));
+    ClientActions.respondToFriendRequest(this.response('reject'));
+  },
+  onUnfriend: function (e) {
+    e.preventDefault();
+    ClientActions.unfriend(this.props.profileOwnerId);
   },
   preventDefault: function (e) {
     e.preventDefault();
-  },
-  rejectHandler: function (e) {
-    e.preventDefault();
-    ClientActions.respondToFriendRequest(this.response('reject'));
   },
   response: function (response) {
      var params = {
@@ -116,10 +120,6 @@ var AddFriend = React.createClass({
      };
      params[response] = true;
     return params;
-  },
-  unfriendHandler: function (e) {
-    e.preventDefault();
-    ClientActions.unfriend(this.props.profileOwnerId);
   }
 });
 
