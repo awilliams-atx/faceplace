@@ -28,8 +28,8 @@ FriendStore.__onDispatch = function (payload) {
 FriendStore.removeFriend = function () {
   currentUserId = SessionStore.currentUser().id;
   for (var i = 0; i < _friends.length; i++) {
-    if (_friends[user_id] === currentUserId) {
-      return _friends.spice(i, 1);
+    if (_friends[i].user_id === currentUserId) {
+      _friends.splice(i, 1);
     }
   }
 };
