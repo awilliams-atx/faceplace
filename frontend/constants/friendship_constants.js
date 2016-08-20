@@ -1,6 +1,6 @@
 var friendshipConstants = {
   FRIENDSHIP_DESTROYED: 'FRIENDSHIP_DESTROYED',
-  GET_UNFRIENDED: 'GET_UNFRIENDED'
+  UNFRIENDED: 'UNFRIENDED'
 };
 
 module.exports = friendshipConstants;

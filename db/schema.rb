@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812144950) do
+ActiveRecord::Schema.define(version: 20160820223801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,10 +28,11 @@ ActiveRecord::Schema.define(version: 20160812144950) do
   add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
 
   create_table "friend_requests", force: :cascade do |t|
-    t.integer  "maker_id",    null: false
-    t.integer  "receiver_id", null: false
+    t.integer  "maker_id",                    null: false
+    t.integer  "receiver_id",                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "checked",     default: false
   end
 
   add_index "friend_requests", ["maker_id", "receiver_id"], name: "index_friend_requests_on_maker_id_and_receiver_id", unique: true, using: :btree

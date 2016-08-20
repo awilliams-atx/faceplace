@@ -41,12 +41,6 @@ var ServerActions = {
       post: post
     });
   },
-  receiveFriendRequests: function (requests) {
-    Dispatcher.dispatch({
-      actionType: friendRequestConstants.FRIEND_REQUESTS_RECEIVED,
-      requests: requests
-    });
-  },
   receiveFriendRequestCancelation: function () {
     Dispatcher.dispatch({
       actionType: friendRequestConstants.MADE_FRIEND_REQUEST_CANCELED
@@ -54,8 +48,6 @@ var ServerActions = {
   },
   receiveFriendRequestResponse: function (response) {
     var actionType;
-    console.log('ServerActions#receiveFriendRequestResponse');
-    console.log(response);
     if (response['accept']) {
       actionType = friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED;
     } else if (response['reject']) {
@@ -65,6 +57,13 @@ var ServerActions = {
     Dispatcher.dispatch({
       actionType: actionType,
       response: response
+    });
+  },
+  receiveFriendRequests: function (requests) {
+    console.log(requests);
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.FRIEND_REQUESTS_RECEIVED,
+      requests: requests
     });
   },
   receiveFriendsForTagging: function (friends) {

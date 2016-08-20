@@ -16,26 +16,7 @@ FriendStore.__onDispatch = function (payload) {
       FriendStore.setFriends(payload.friends);
       FriendStore.__emitChange();
       break;
-    case friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED:
-      this.setOrFindFriend(payload.user_id);
-      break;
-    case friendshipConstants.FRIENDSHIP_DESTROYED:
-      this.removeFriend();
-      FriendStore.__emitChange();
   }
-};
-
-FriendStore.removeFriend = function () {
-  currentUserId = SessionStore.currentUser().id;
-  for (var i = 0; i < _friends.length; i++) {
-    if (_friends[i].user_id === currentUserId) {
-      _friends.splice(i, 1);
-    }
-  }
-};
-
-FriendStore.setOrFindFriend = function (profileOwnerId) {
-  ClientActions.fetchMostRecentlyAddedFriends(profileOwnerId);
 };
 
 FriendStore.setFriends = function (friends) {
