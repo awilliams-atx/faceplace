@@ -71,13 +71,15 @@ var FriendRequests = React.createClass({
     }
   },
   onAccept: function (user_id) {
-    ClientActions.respondToFriendRequest(this.response(user_id, 'accept'));
+    var response = this.response(user_id, 'accept');
+    ClientActions.respondToFriendRequest(response);
   },
   onFriendRequestStoreChange: function () {
     this.setState({ requests: FriendRequestStore.all() });
   },
   onReject: function (user_id) {
-    ClientActions.respondToFriendRequest(this.response(user_id, 'reject'));
+    var response = this.response(user_id, 'reject');
+    ClientActions.respondToFriendRequest(response);
   },
   response: function (user_id, response) {
     var params = {

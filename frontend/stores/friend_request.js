@@ -30,7 +30,7 @@ FriendRequestStore.__onDispatch = function (payload) {
 
 FriendRequestStore.addRequest = function (request) {
   for (var i = 0; i < _requests.length; i++) {
-    if (_requests[i].user_id === request.maker_id) {
+    if (_requests[i].maker_id === request.maker_id) {
       return;
     }
   }
@@ -41,9 +41,9 @@ FriendRequestStore.all = function () {
   return _requests.slice();
 };
 
-FriendRequestStore.removeRequest = function (user_id) {
+FriendRequestStore.removeRequest = function (maker_id) {
   for (var i = 0; i < _requests.length; i++) {
-    if (_requests[i].user_id === user_id) {
+    if (_requests[i].maker_id === maker_id) {
       _requests.splice(i, 1);
       return;
     }

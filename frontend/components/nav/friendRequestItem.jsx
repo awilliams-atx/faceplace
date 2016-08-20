@@ -25,12 +25,18 @@ var FriendRequestItem = React.createClass({
     );
   },
   onAccept: function (e) {
+    console.log('FriendRequestItem#onAccept');
+    console.log(this.props.req);
+
     e.preventDefault();
-    this.props.onAccept(this.props.req.user_id);
+    this.props.onAccept(this.props.req.maker_id);
   },
   onReject: function (e) {
+    console.log('FriendRequestItem#onReject');
+    console.log(this.props.req);
+
     e.preventDefault();
-    this.props.onReject(this.props.req.user_id);
+    this.props.onReject(this.props.req.maker_id);
   }
 });
 
