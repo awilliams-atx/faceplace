@@ -1,0 +1,6 @@
+$tomato: #fa3e3e;
+
+@mixin navDropCounterColor {
+  background-color: $tomato;
+  color: white;
+}

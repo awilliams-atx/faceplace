@@ -41,12 +41,22 @@ var FriendRequests = React.createClass({
         );
       }
     }.bind(this);
+
+    var requestCounter = function () {
+      if (this.state.requests.length > 0) {
+        return (
+          <mark>{this.state.requests.length}</mark>
+        );
+      }
+    }.bind(this);
+
     return (
       <div className={this.className() + ' nav-drop-icon'}
         id='friends-drop'
         onClick={this.toggleNavDrop}>
         <div className='fa-hover-box-25x25'>
           <i className="fa fa-user-plus" aria-hidden="true"></i>
+          {requestCounter()}
         </div>
         {dropDown(this.state.requests)}
       </div>
