@@ -31,8 +31,8 @@ var ServerActions = {
   },
   receiveDeletedFriendship: function (friendship) {
     Dispatcher.dispatch({
-      actionType: friendshipConstants.FRIENDSHIP_DESTROYED,
-      profileOwnerId: parseInt(friendship.user_id)
+      actionType: friendshipConstants.UNFRIENDED,
+      friend_id: parseInt(friendship.user_id)
     });
   },
   receiveDeletedPost: function (post) {
@@ -53,9 +53,12 @@ var ServerActions = {
     });
   },
   receiveFriendRequestResponse: function (response) {
-    if (response.response === 'accept') {
+    var actionType;
+    console.log('ServerActions#receiveFriendRequestResponse');
+    console.log(response);
+    if (response['accept']) {
       actionType = friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED;
-    } else if (response.response === 'reject') {
+    } else if (response['reject']) {
       actionType = friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED;
     }
 

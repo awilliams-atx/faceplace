@@ -70,14 +70,22 @@ var FriendRequests = React.createClass({
       return 'nav-drop-inactive';
     }
   },
-  onAccept: function (userId) {
-    ClientActions.respondToFriendRequest(userId, 'accept');
+  onAccept: function (user_id) {
+    ClientActions.respondToFriendRequest(this.response(user_id, 'accept'));
   },
   onFriendRequestStoreChange: function () {
     this.setState({ requests: FriendRequestStore.all() });
   },
-  onReject: function (userId) {
-    ClientActions.respondToFriendRequest(userId, 'reject');
+  onReject: function (user_id) {
+    ClientActions.respondToFriendRequest(this.response(user_id, 'reject'));
+  },
+  response: function (user_id, response) {
+    var params = {
+      maker_id: user_id,
+      receiver_id: SessionStore.currentUser().id,
+    };
+    params[response] = true;
+    return params;
   },
   toggleNavDrop: function () {
     this.props.toggleNavDrop('friendRequests');

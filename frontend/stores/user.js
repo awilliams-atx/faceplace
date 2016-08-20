@@ -18,6 +18,10 @@ UserStore.__onDispatch = function (payload) {
     _user.isFriendOfCurrentUser = true;
     UserStore.__emitChange();
     break;
+  case friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED:
+    _user.isFriendOfCurrentUser = false;
+    UserStore.__emitChange();
+    break;
   case userConstants.UPDATED_COVER_PHOTO_URL_RECEIVED:
     _user.coverPhotoUrl = payload.coverPhotoUrl;
     UserStore.__emitChange();

@@ -39,13 +39,13 @@ class Api::FriendRequestsController < ApplicationController
     if request_accepted
       request.destroy
       make_friendships
-      acceptance = base_params.merge(accept: 'accept')
+      acceptance = base_params.merge(accept: true)
       render json: acceptance
     elsif request_rejected
       request.destroy
-      render json: base_params.merge(response: 'reject')
+      render json: base_params.merge(reject: true)
     elsif request_canceled
-      render json: base_params.merge(response: 'reject')
+      render json: base_params.merge(reject: true)
     end
   end
 

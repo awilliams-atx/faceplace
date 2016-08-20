@@ -17,11 +17,11 @@ FriendRequestStore.__onDispatch = function (payload) {
     FriendRequestStore.__emitChange();
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED:
-    FriendRequestStore.removeRequest(parseInt(payload.userId));
+    FriendRequestStore.removeRequest(payload.response.maker_id);
     FriendRequestStore.__emitChange();
     break;
     case friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED:
-    FriendRequestStore.removeRequest(parseInt(payload.userId));
+    FriendRequestStore.removeRequest(payload.response.maker_id);
     FriendRequestStore.__emitChange();
     break;
   }
@@ -35,9 +35,9 @@ FriendRequestStore.all = function () {
   return _requests.slice();
 };
 
-FriendRequestStore.removeRequest = function (userId) {
+FriendRequestStore.removeRequest = function (user_id) {
   for (var i = 0; i < _requests.length; i++) {
-    if (_requests[i].user_id === userId) {
+    if (_requests[i].user_id === user_id) {
       _requests.splice(i, 1);
       return;
     }

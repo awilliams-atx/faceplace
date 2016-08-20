@@ -12,7 +12,8 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     ProfileApiUtil = require('../util/profile_api_util'),
     SearchApiUtil = require('../util/search_api_util'),
     TagApiUtil = require('../util/tag_api_util'),
-    UserApiUtil = require('../util/user_api_util');
+    UserApiUtil = require('../util/user_api_util'),
+    SessionStore = require('../stores/session');
 
 var ClientActions = {
   addTaggedFriend: function (userId) {
@@ -21,8 +22,8 @@ var ClientActions = {
       userId: userId
     });
   },
-  cancelFriendRequest: function (user_id) {
-    FriendRequestApiUtil.cancelRequest(user_id);
+  cancelFriendRequest: function (cancellation) {
+    FriendRequestApiUtil.cancelRequest(cancellation);
   },
   cancelModal: function () {
     Dispatcher.dispatch({
@@ -86,8 +87,8 @@ var ClientActions = {
       userId: userId
     });
   },
-  respondToFriendRequest: function (user_id, response) {
-    FriendRequestApiUtil.respondToFriendRequest(user_id, response);
+  respondToFriendRequest: function (response) {
+    FriendRequestApiUtil.respondToFriendRequest(response);
   },
   submitComment: function (comment) {
     CommentApiUtil.submitComment(comment);

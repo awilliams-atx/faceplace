@@ -90,24 +90,36 @@ var AddFriend = React.createClass({
     e.preventDefault();
     ClientActions.makeFriendRequest(this.props.profileOwnerId);
   },
-  unfriendHandler: function (e) {
+  cancelHandler: function (e) {
     e.preventDefault();
-    ClientActions.unfriend(this.props.profileOwnerId);
+    ClientActions.cancelFriendRequest({
+      maker_id: SessionStore.currentUser().id,
+      receiver_id: this.props.profileOwnerId,
+      cancel: true
+    });
   },
   confirmHandler: function (e) {
     e.preventDefault();
-    ClientActions.respondToFriendRequest(this.props.profileOwnerId, 'accept');
-  },
-  rejectHandler: function (e) {
-    e.preventDefault();
-    ClientActions.respondToFriendRequest(this.props.profileOwnerId, 'reject');
-  },
-  cancelHandler: function (e) {
-    e.preventDefault();
-    ClientActions.cancelFriendRequest(this.props.profileOwnerId);
+    ClientActions.respondToFriendRequest(this.response('accept'));
   },
   preventDefault: function (e) {
     e.preventDefault();
+  },
+  rejectHandler: function (e) {
+    e.preventDefault();
+    ClientActions.respondToFriendRequest(this.response('reject'));
+  },
+  response: function (response) {
+     var params = {
+       maker_id: this.props.profileOwnerId,
+       receiver_id: SessionStore.currentUser().id,
+     };
+     params[response] = true;
+    return params;
+  },
+  unfriendHandler: function (e) {
+    e.preventDefault();
+    ClientActions.unfriend(this.props.profileOwnerId);
   }
 });
 
