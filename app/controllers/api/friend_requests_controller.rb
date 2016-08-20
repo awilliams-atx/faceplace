@@ -6,13 +6,14 @@ class Api::FriendRequestsController < ApplicationController
 
   def create
     return if !logged_in?
-    @request = FriendRequest.new(maker_id: current_user.id,
+    @request = FriendRequest.find_or_create_by(maker_id: current_user.id,
       receiver_id: params[:receiver_id])
 
-    @request.save!
-    render json: { request_made: true }
+    down_params = {name: current_user.full_name, maker_id: current_user.id, receiver_id: params[:received_id].to_i}
+
+    render json: down_params
     Pusher.trigger("friend_requests_#{params[:receiver_id]}", 'received',
-      profile_pic_url: current_user.profile_pic.url, name: current_user.full_name, user_id: current_user.id)
+      down_params.merge(profile_pic_url: current_user.profile_pic.url))
   end
 
   def destroy
@@ -43,8 +44,8 @@ class Api::FriendRequestsController < ApplicationController
   private
 
   def make_friendships
-    Friendship.create(user_id: current_user.id, friend_id: @maker_id)
-    Friendship.create(user_id: @maker_id, friend_id: current_user.id)
+    Friendship.find_or_create_by(user_id: current_user.id, friend_id: @maker_id)
+    Friendship.find_or_create_by(user_id: @maker_id, friend_id: current_user.id)
   end
 
   def cancel

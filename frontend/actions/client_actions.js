@@ -86,8 +86,8 @@ var ClientActions = {
       userId: userId
     });
   },
-  respondToFriendRequest: function (userId, response) {
-    FriendRequestApiUtil.respondToFriendRequest(userId, response);
+  respondToFriendRequest: function (user_id, response) {
+    FriendRequestApiUtil.respondToFriendRequest(user_id, response);
   },
   submitComment: function (comment) {
     CommentApiUtil.submitComment(comment);
