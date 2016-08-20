@@ -59,4 +59,12 @@ FriendRequestStore.setRequests = function (requests) {
   }
 };
 
+FriendRequestStore.uncheckedRequestIds = function () {
+  return _requests.filter(function (request) {
+    return !request.checked;
+  }).map(function (request) {
+    return request.id;
+  });
+};
+
 module.exports = FriendRequestStore;
