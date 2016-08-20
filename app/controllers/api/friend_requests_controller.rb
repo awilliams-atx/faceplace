@@ -18,25 +18,24 @@ class Api::FriendRequestsController < ApplicationController
 
   def destroy
     # User canceling own request, regardless if already accepted/rejected
-    if request_params[:cancel]
-      base_params = { maker_id: current_user.id, receiver_id:
-        request_params[:receiver_id] }
-      request = FriendRequest.find_by(base_params)
+    if params.has_key?(:cancellation)
+      cancellation = { maker_id: current_user.id, receiver_id:
+        cancel_params[:receiver_id] }
+      request = FriendRequest.find_by(cancellation)
       request.destroy if request
-      render json: base_params.merge(cancel: true)
+      render json: cancellation.merge(cancel: true)
       return
     end
 
     # User responding to request
-    @maker_id = request_params[:maker_id].to_i
+    @maker_id = response_params[:maker_id].to_i
     base_params = { receiver_id: current_user.id, maker_id: @maker_id }
 
     request = FriendRequest.find_by(base_params)
-    request_accepted = request && request_params[:response] == 'accept'
-    request_rejected = request && request_params[:response] == 'reject'
+    request_accepted = request && response_params[:response] == 'accept'
+    request_rejected = request && response_params[:response] == 'reject'
     request_canceled = !request
 
-    debugger
     if request_accepted
       request.destroy
       make_friendships
@@ -52,13 +51,18 @@ class Api::FriendRequestsController < ApplicationController
 
   private
 
+  def cancel_params
+    params.require(:cancellation)
+      .permit(:maker_id, :receiver_id, :cancel)
+  end
+
   def make_friendships
     Friendship.find_or_create_by(user_id: current_user.id, friend_id: @maker_id)
     Friendship.find_or_create_by(user_id: @maker_id, friend_id: current_user.id)
   end
 
-  def request_params
-    params.require(:friend_request)
-      .permit(:maker_id, :receiver_id, :response, :cancel)
+  def response_params
+    params.require(:response)
+      .permit(:maker_id, :receiver_id, :response)
   end
 end
