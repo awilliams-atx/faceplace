@@ -50,12 +50,10 @@ var App = React.createClass({
   componentDidMount: function () {
     this.modalListener =
       ModalStore.addListener(this.onModalStoreChange);
-    this.friendshipSocket = new Socket('friendships');
     this.friendRequestSocket = new Socket('friend_requests');
   },
   componentWillUnmount: function () {
     this.modalListener.remove();
-    this.friendshipSocket.unsubscribe();
     this.friendRequestSocket.unsubscribe();
   },
   onModalStoreChange: function () {

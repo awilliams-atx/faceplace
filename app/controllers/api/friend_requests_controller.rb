@@ -5,7 +5,7 @@ class Api::FriendRequestsController < ApplicationController
   end
 
   def create
-    return if !logged_in?
+    return unless logged_in?
     @request = FriendRequest.find_or_create_by(maker_id: current_user.id,
       receiver_id: params[:receiver_id])
 
