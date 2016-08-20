@@ -6,7 +6,7 @@ var FriendIndexItem = React.createClass({
 
     return (
       <div className='friend-thumb'>
-        <a href={'#/users/' + this.props.friend.userId}>
+        <a href={'#/users/' + this.props.friend.user_id}>
           <img src={friend.thumbUrl}/>
           <div className='friend-thumb-name'>
             {friend.fullName}
