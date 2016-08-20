@@ -1,13 +1,13 @@
 class Api::FriendRequestsController < ApplicationController
+  before_action :require_login
+
   def index
     @requests = current_user.received_friend_requests.includes(:maker)
     render 'api/friend_requests/index'
   end
 
   def create
-    return unless logged_in?
-
-    down_params = { name: current_user.full_name, maker_id: current_user.id, receiver_id: params[:received_id].to_i }
+    down_params = { name: current_user.full_name, maker_id: current_user.id, receiver_id: params[:receiver_id].to_i }
 
     unless Friendship.exists?(user_id: current_user.id, friend_id:
       params[:receiver_id])
@@ -18,7 +18,7 @@ class Api::FriendRequestsController < ApplicationController
       Pusher.trigger("friend_requests_#{params[:receiver_id]}", 'received',
         down_params.merge(profile_pic_url: current_user.profile_pic.url))
     end
-    
+
     render json: down_params
   end
 
