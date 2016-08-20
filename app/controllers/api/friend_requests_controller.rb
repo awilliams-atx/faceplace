@@ -6,35 +6,27 @@ class Api::FriendRequestsController < ApplicationController
 
   def create
     return if !logged_in?
-    @request = FriendRequest.new({
-      maker_id: current_user.id,
-      receiver_id: params[:request_receiver_id]
-    })
+    @request = FriendRequest.new(maker_id: current_user.id,
+      receiver_id: params[:receiver_id])
 
     @request.save!
     render json: { request_made: true }
-    Pusher.trigger "friend_requests_#{params[:request_receiver_id].to_i}",
-      'received',
-      {
-        profile_pic_url: current_user.profile_pic.url,
-        name: current_user.full_name,
-        user_id: current_user.id
-      }
+    Pusher.trigger("friend_requests_#{params[:receiver_id]}", 'received',
+      profile_pic_url: current_user.profile_pic.url, name: current_user.full_name, user_id: current_user.id)
   end
 
   def destroy
     return cancel if request_params[:cancel]
 
-    @maker_id = request_params[:maker_id]
+    @maker_id = request_params[:maker_id].to_i
     base_params = { receiver_id: current_user.id, maker_id: @maker_id }
 
-    request = FriendRequest.find_by(maker_id: @maker_id, receiver_id:
-      current_user.id)
+    request = FriendRequest.find_by(base_params)
 
     if request
       accept_response = 'accept'
       request.destroy
-    else
+    else # Request canceled by requester
       accept_response = 'reject'
     end
 
@@ -58,8 +50,8 @@ class Api::FriendRequestsController < ApplicationController
   def cancel
     cancellation = { maker_id: current_user.id, receiver_id: request_params[:receiver_id] }
     request = FriendRequest.find_by(cancellation)
-    request.destroy if request
-    render json: cancellation
+    request.destroy if request # Possibly rejected by receiver
+    render json: cancellation.merge(cancel: true)
   end
 
   def request_params

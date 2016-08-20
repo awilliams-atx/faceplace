@@ -27,7 +27,7 @@ var FriendRequestApiUtil = {
       url: 'api/friend_requests',
       method: 'POST',
       dataType: 'json',
-      data: {request_receiver_id: userId},
+      data: {receiver_id: userId},
       success: function (friendRequest) {
         ServerActions.receiveMadeFriendRequest(friendRequest);
       }
