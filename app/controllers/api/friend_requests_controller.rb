@@ -32,14 +32,14 @@ class Api::FriendRequestsController < ApplicationController
     base_params = { receiver_id: current_user.id, maker_id: @maker_id }
 
     request = FriendRequest.find_by(base_params)
-    request_accepted = request && response_params[:response] == 'accept'
-    request_rejected = request && response_params[:response] == 'reject'
+    request_accepted = request && response_params[:accept]
+    request_rejected = request && response_params[:reject]
     request_canceled = !request
 
     if request_accepted
       request.destroy
       make_friendships
-      acceptance = base_params.merge(response: 'accept')
+      acceptance = base_params.merge(accept: 'accept')
       render json: acceptance
     elsif request_rejected
       request.destroy
@@ -63,6 +63,6 @@ class Api::FriendRequestsController < ApplicationController
 
   def response_params
     params.require(:response)
-      .permit(:maker_id, :receiver_id, :response)
+      .permit(:maker_id, :receiver_id, :accept, :reject)
   end
 end
