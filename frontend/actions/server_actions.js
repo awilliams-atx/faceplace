@@ -61,8 +61,7 @@ var ServerActions = {
 
     Dispatcher.dispatch({
       actionType: actionType,
-      maker_id: response.maker_id,
-      receiver_id: response.receiver_id
+      response: response
     });
   },
   receiveFriendsForTagging: function (friends) {

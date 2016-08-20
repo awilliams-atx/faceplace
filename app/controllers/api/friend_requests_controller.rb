@@ -17,26 +17,35 @@ class Api::FriendRequestsController < ApplicationController
   end
 
   def destroy
-    return cancel if request_params[:cancel]
+    # User canceling own request, regardless if already accepted/rejected
+    if request_params[:cancel]
+      base_params = { maker_id: current_user.id, receiver_id:
+        request_params[:receiver_id] }
+      request = FriendRequest.find_by(base_params)
+      request.destroy if request
+      render json: base_params.merge(cancel: true)
+      return
+    end
 
+    # User responding to request
     @maker_id = request_params[:maker_id].to_i
     base_params = { receiver_id: current_user.id, maker_id: @maker_id }
 
     request = FriendRequest.find_by(base_params)
+    request_accepted = request && request_params[:response] == 'accept'
+    request_rejected = request && request_params[:response] == 'reject'
+    request_canceled = !request
 
-    if request
-      accept_response = 'accept'
+    debugger
+    if request_accepted
       request.destroy
-    else # Request canceled by requester
-      accept_response = 'reject'
-    end
-
-    if request_params[:response] == 'accept'
       make_friendships
-      acceptance = base_params.merge(response: accept_response)
+      acceptance = base_params.merge(response: 'accept')
       render json: acceptance
-      Pusher.trigger("friendships_#{@maker_id}", 'accept', acceptance)
-    elsif request_params[:response] == 'reject'
+    elsif request_rejected
+      request.destroy
+      render json: base_params.merge(response: 'reject')
+    elsif request_canceled
       render json: base_params.merge(response: 'reject')
     end
   end
@@ -46,13 +55,6 @@ class Api::FriendRequestsController < ApplicationController
   def make_friendships
     Friendship.find_or_create_by(user_id: current_user.id, friend_id: @maker_id)
     Friendship.find_or_create_by(user_id: @maker_id, friend_id: current_user.id)
-  end
-
-  def cancel
-    cancellation = { maker_id: current_user.id, receiver_id: request_params[:receiver_id] }
-    request = FriendRequest.find_by(cancellation)
-    request.destroy if request # Possibly rejected by receiver
-    render json: cancellation.merge(cancel: true)
   end
 
   def request_params
