@@ -34,7 +34,13 @@ class User < ActiveRecord::Base
 
   has_many :received_friend_requests,
     class_name: 'FriendRequest',
-    foreign_key: :receiver_id
+    foreign_key: :receiver_id,
+    dependent: :destroy
+
+  has_many :made_friend_requests,
+    class_name: 'FriendRequest',
+    foreign_key: :maker_id,
+    dependent: :destroy
 
   has_many :notifications,
     class_name: 'Notification',
