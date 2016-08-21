@@ -6,8 +6,8 @@ var IntroItemSchool = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      major: ProfileStore.major(),
-      school: ProfileStore.school()
+      major: ProfileStore.profile().major,
+      school: ProfileStore.profile().school
     });
   },
   render: function () {
@@ -65,8 +65,8 @@ var IntroItemSchool = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      school: ProfileStore.school(),
-      major: ProfileStore.major()
+      school: ProfileStore.profile().school,
+      major: ProfileStore.profile().major
     }, function () {
     this.toggleEdit();
   });
@@ -92,8 +92,8 @@ var IntroItemSchool = React.createClass({
   },
   onProfileStoreChange: function (e) {
     this.setState({
-      school: ProfileStore.school(),
-      major: ProfileStore.major()
+      school: ProfileStore.profile().school,
+      major: ProfileStore.profile().major
     });
   }
 });

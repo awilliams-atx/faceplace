@@ -58,8 +58,6 @@ ProfileStore.hometown = function () { return _profile.hometown; };
 
 ProfileStore.location = function () { return _profile.location; };
 
-ProfileStore.major = function () { return _profile.major; };
-
 ProfileStore.position = function () { return _profile.position; };
 
 ProfileStore.profileFetched = function (id) {
@@ -71,7 +69,5 @@ ProfileStore.profilePicUrl = function () { return _profile.profilePicUrl; };
 ProfileStore.requestMade = function () { return _profile.requestMade; };
 
 ProfileStore.requestReceived = function () { return _profile.requestReceived; };
-
-ProfileStore.school = function () { return _profile.school; };
 
 module.exports = ProfileStore;
