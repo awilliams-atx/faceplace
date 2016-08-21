@@ -56,7 +56,8 @@ class User < ActiveRecord::Base
     source: :post
 
   has_many :timeline_postings,
-    foreign_key: :profile_owner_id
+    foreign_key: :profile_owner_id,
+    dependent: :destroy
 
   has_many :received_timeline_posts,
     through: :timeline_postings,
