@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
     resources :friend_requests, only: [:create, :index]
     resource :friend_request, only: [:destroy]
+    post 'friend_requests/mark_checked', to: 'friend_requests#mark_checked'
 
     # -------------------------------FRIENDSHIP------------------------------- #
 

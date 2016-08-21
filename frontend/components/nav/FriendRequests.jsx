@@ -6,7 +6,7 @@ var React = require('react'),
 
 var FriendRequests = React.createClass({
   getInitialState: function () {
-    return { requests: [] };
+    return { requests: [], uncheckedRequestIds: [] };
   },
   render: function () {
     var renderRequests = function () {
@@ -43,9 +43,9 @@ var FriendRequests = React.createClass({
     }.bind(this);
 
     var requestCounter = function () {
-      if (this.state.requests.length > 0) {
+      if (this.state.uncheckedRequestIds.length > 0) {
         return (
-          <mark>{this.state.requests.length}</mark>
+          <mark>{this.state.uncheckedRequestIds.length}</mark>
         );
       }
     }.bind(this);
@@ -70,11 +70,8 @@ var FriendRequests = React.createClass({
   componentWillUnmount: function () {
     this.friendRequestListener.remove();
   },
-  componentWillReceiveProps: function (props) {
-    this.setState({ dropped: props.dropped });
-  },
   className: function () {
-    if (this.state.requests.length > 0) {
+    if (this.state.uncheckedRequestIds.length > 0) {
       return 'nav-drop-active';
     } else if (this.props.dropToggles['friendRequests']) {
       return 'nav-drop-active';
@@ -87,11 +84,24 @@ var FriendRequests = React.createClass({
     ClientActions.respondToFriendRequest(response);
   },
   onFriendRequestStoreChange: function () {
-    this.setState({ requests: FriendRequestStore.all() });
+    console.log('FriendRequest#onFriendRequestStoreChange');
+    console.log('uncheckedRequestIds');
+    console.log(FriendRequestStore.uncheckedRequestIds());
+    this.setState({
+      requests: FriendRequestStore.all(),
+      uncheckedRequestIds: FriendRequestStore.uncheckedRequestIds()
+    }, function () {
+      console.log(this.state);
+    }.bind(this));
   },
   onReject: function (user_id) {
     var response = this.response(user_id, 'reject');
     ClientActions.respondToFriendRequest(response);
+  },
+  markRequestsChecked: function () {
+    if (this.state.uncheckedRequestIds.length > 0) {
+      ClientActions.markRequestsChecked(this.state.uncheckedRequestIds);
+    }
   },
   response: function (user_id, response) {
     var params = {
@@ -102,6 +112,7 @@ var FriendRequests = React.createClass({
     return params;
   },
   toggleNavDrop: function () {
+    this.markRequestsChecked();
     this.props.toggleNavDrop('friendRequests');
     var body = document.getElementsByTagName('body')[0];
     this.navDropClickListener = function (e) {

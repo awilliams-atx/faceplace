@@ -9,8 +9,12 @@ _requests = [];
 
 FriendRequestStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
+  case friendRequestConstants.CHECKED_FRIEND_REQUEST_IDS_RECEIVED:
+    FriendRequestStore.markRequestsChecked(payload.checked_ids);
+    FriendRequestStore.__emitChange();
+    break;
   case friendRequestConstants.FRIEND_REQUESTS_RECEIVED:
-    this.setRequests(payload.requests);
+    FriendRequestStore.setRequests(payload.requests);
     FriendRequestStore.__emitChange();
     break;
   case socketConstants.PUSH_FRIEND_REQUEST:
@@ -39,6 +43,16 @@ FriendRequestStore.addRequest = function (request) {
 
 FriendRequestStore.all = function () {
   return _requests.slice();
+};
+
+FriendRequestStore.markRequestsChecked = function (checked_ids) {
+  console.log('FriendRequestStore::markRequestsChecked');
+  console.log(checked_ids);
+  for (var i = 0; i < _requests.length; i++) {
+    if (checked_ids.indexOf(_requests[i].id) >= 0) {
+      _requests[i].checked = true;
+    }
+  }
 };
 
 FriendRequestStore.removeRequest = function (maker_id) {

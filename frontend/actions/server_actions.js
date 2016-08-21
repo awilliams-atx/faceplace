@@ -16,6 +16,12 @@ var ServerActions = {
       userId: request.receiver_id
     });
   },
+  receiveCheckedRequestIds: function (checked_ids) {
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.CHECKED_FRIEND_REQUEST_IDS_RECEIVED,
+      checked_ids: checked_ids
+    });
+  },
   receiveComment: function (comment) {
     Dispatcher.dispatch({
       actionType: commentConstants.COMMENT_RECEIVED,

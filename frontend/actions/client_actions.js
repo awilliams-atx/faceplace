@@ -81,6 +81,9 @@ var ClientActions = {
   makeFriendRequest: function (userId) {
     FriendRequestApiUtil.makeFriendRequest(userId);
   },
+  markRequestsChecked: function (checkedIds) {
+    FriendRequestApiUtil.markRequestsChecked(checkedIds);
+  },
   removeTaggedFriend: function (userId) {
     Dispatcher.dispatch({
       actionType: tagConstants.FRIEND_UNTAGGED,

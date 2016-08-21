@@ -27,11 +27,22 @@ var FriendRequestApiUtil = {
       url: 'api/friend_requests',
       method: 'POST',
       dataType: 'json',
-      data: {receiver_id: userId},
+      data: { receiver_id: userId },
       success: function (friendRequest) {
         ServerActions.receiveMadeFriendRequest(friendRequest);
       }
     });
+  },
+  markRequestsChecked: function (checkedIds) {
+    $.ajax({
+      url: 'api/friend_requests/mark_checked',
+      method: 'POST',
+      dataType: 'json',
+      data: { checked_ids : JSON.stringify(checkedIds) },
+      success: function (checked_ids) {
+        ServerActions.receiveCheckedRequestIds(checked_ids);
+      }
+    })
   },
   respondToFriendRequest: function (response) {
     $.ajax({

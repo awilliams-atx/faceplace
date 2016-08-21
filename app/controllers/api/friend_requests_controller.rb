@@ -1,3 +1,5 @@
+require 'json'
+
 class Api::FriendRequestsController < ApplicationController
   before_action :require_login
 
@@ -58,6 +60,15 @@ class Api::FriendRequestsController < ApplicationController
     elsif request_canceled
       render json: base_params.merge(reject: true)
     end
+  end
+
+  def mark_checked
+    ids = JSON.parse(params[:checked_ids])
+    ids.each do |id|
+      FriendRequest.find(id).update(checked: true)
+    end
+
+    render json: ids
   end
 
   private
