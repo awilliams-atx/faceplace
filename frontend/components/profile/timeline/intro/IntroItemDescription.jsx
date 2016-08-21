@@ -11,8 +11,7 @@ var IntroItemDescription = React.createClass({
     });
   },
   render: function () {
-    if (this.state.editing)
-    {
+    if (this.state.editing) {
       return (
         <div id='description-form group'>
           <form onSubmit={this.handleSubmit}>
@@ -53,9 +52,7 @@ var IntroItemDescription = React.createClass({
     });
   },
   toggleEdit: function () {
-    this.setState({
-      editing: !this.state.editing
-    });
+    this.setState({editing: !this.state.editing});
   },
   cancel: function (e) {
     e.preventDefault();
@@ -66,15 +63,13 @@ var IntroItemDescription = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    UserApiUtil.setProfile({
-      description: this.state.description
-    });
+    UserApiUtil.setProfile({description: this.state.description});
   },
   onFormChange: function (e) {
     this.setState({description: e.target.value});
   },
   onUserStoreChange: function (e) {
-    this.setState({description: UserStore.user().desription});
+    this.setState({description: UserStore.user().description});
   },
   onFormStoreChange: function (e) {
     if (FormStore.isOpen('INTRO_DESCRIPTION') && !this.state.editing) {

@@ -5,7 +5,6 @@ var React = require('react'),
     ClientActions = require('../../../actions/client_actions'),
     FriendApiUtil = require('../../../util/friend_api_util'),
     PostApiUtil = require('../../../util/post_api_util'),
-    UserApiUtil = require('../../../util/user_api_util'),
     FriendStore = require('../../../stores/friend'),
     PostStore = require('../../../stores/post'),
     SessionStore = require('../../../stores/session'),
@@ -56,11 +55,8 @@ var React = require('react'),
       },
       componentDidMount: function () {
         var profileOwnerId = this.props.params.userId;
-
         this.profileListener =
           UserStore.addListener(this.onUserStoreChange);
-        ClientActions.fetchProfile(profileOwnerId);
-
         this.friendListener =
           FriendStore.addListener(this.onFriendStoreChange);
         ClientActions.fetchMostRecentlyAddedFriends(profileOwnerId);
@@ -74,9 +70,7 @@ var React = require('react'),
       },
        componentWillReceiveProps: function (newProps) {
          var newProfileOwnerId = newProps.params.userId;
-
          FriendApiUtil.fetchMostRecentlyAddedFriends(newProfileOwnerId);
-         UserApiUtil.fetchProfile(newProfileOwnerId);
          PostApiUtil.fetchTimelinePosts(newProfileOwnerId);
        },
        onPostStoreChange: function () {

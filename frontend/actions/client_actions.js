@@ -47,9 +47,6 @@ var ClientActions = {
   fetchNotifications: function () {
     NotificationApiUtil.fetchNotifications();
   },
-  fetchProfile: function (userId) {
-    UserApiUtil.fetchProfile(userId);
-  },
   fetchSearchResults: function (searchString) {
     SearchApiUtil.fetchSearchResults(searchString);
   },

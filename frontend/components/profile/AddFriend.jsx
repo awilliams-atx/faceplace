@@ -69,13 +69,11 @@ var AddFriend = React.createClass({
   },
   componentDidMount: function () {
     this.userListener = UserStore.addListener(this.onUserStoreChange);
-    ClientActions.fetchUser(this.props.profileOwnerId);
   },
   componentWillUnmount: function () {
     this.userListener.remove();
   },
   componentWillReceiveProps: function (newProps) {
-    var oldProfileOwnerId = this.props.profileOwnerId;
     this.setState({reRender: true});
   },
   onUserStoreChange: function () {
