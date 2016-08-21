@@ -6,8 +6,8 @@ var IntroItemWork = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      company: ProfileStore.company(),
-      position: ProfileStore.position()
+      company: ProfileStore.profile().company,
+      position: ProfileStore.profile().position
     });
   },
   render: function () {
@@ -67,8 +67,8 @@ var IntroItemWork = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      position: ProfileStore.position(),
-      company: ProfileStore.company()
+      position: ProfileStore.profile().position,
+      company: ProfileStore.profile().company
     }, this.toggleEdit);
   },
   toggleEdit: function () {
@@ -92,8 +92,8 @@ var IntroItemWork = React.createClass({
   },
   onProfileStoreChange: function (e) {
     this.setState({
-      position: ProfileStore.position(),
-      company: ProfileStore.company()
+      position: ProfileStore.profile().position,
+      company: ProfileStore.profile().company
     });
   }
 });

@@ -44,8 +44,6 @@ ProfileStore.profile = function () {
 
 ProfileStore.alreadyFriends = function () { return _profile.alreadyFriends; };
 
-ProfileStore.company = function () { return _profile.company; };
-
 ProfileStore.coverPhotoUrl = function () { return _profile.coverPhotoUrl; };
 
 ProfileStore.getFriended = function () {
@@ -53,8 +51,6 @@ ProfileStore.getFriended = function () {
   _profile.requestMade = false;
   _profile.requestReceived = false;
 }
-
-ProfileStore.position = function () { return _profile.position; };
 
 ProfileStore.profileFetched = function (id) {
   return _profile.userId === id;
