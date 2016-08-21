@@ -7,7 +7,7 @@ var IntroItemDescription = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      description: ProfileStore.description()
+      description: ProfileStore.profile().description
     });
   },
   render: function () {
@@ -62,7 +62,7 @@ var IntroItemDescription = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      description: ProfileStore.description()
+      description: ProfileStore.profile().description
     }, this.toggleEdit);
   },
   handleSubmit: function (e) {
@@ -76,7 +76,7 @@ var IntroItemDescription = React.createClass({
     this.setState({description: e.target.value});
   },
   onProfileStoreChange: function (e) {
-    this.setState({description: ProfileStore.description()});
+    this.setState({description: ProfileStore.profile().desription});
   },
   onFormStoreChange: function (e) {
     if (FormStore.isOpen('INTRO_DESCRIPTION') && !this.state.editing) {

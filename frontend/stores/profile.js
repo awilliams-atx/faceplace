@@ -48,8 +48,6 @@ ProfileStore.company = function () { return _profile.company; };
 
 ProfileStore.coverPhotoUrl = function () { return _profile.coverPhotoUrl; };
 
-ProfileStore.description = function () { return _profile.description; };
-
 ProfileStore.getFriended = function () {
   _profile.alreadyFriends = true;
   _profile.requestMade = false;
