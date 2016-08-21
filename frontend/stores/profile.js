@@ -54,8 +54,6 @@ ProfileStore.getFriended = function () {
   _profile.requestReceived = false;
 }
 
-ProfileStore.location = function () { return _profile.location; };
-
 ProfileStore.position = function () { return _profile.position; };
 
 ProfileStore.profileFetched = function (id) {

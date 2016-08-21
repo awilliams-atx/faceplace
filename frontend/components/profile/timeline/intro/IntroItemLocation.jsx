@@ -6,7 +6,7 @@ var IntroItemLocation = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      location: ProfileStore.location()
+      location: ProfileStore.profile().location
     });
   },
   render: function () {
@@ -50,7 +50,7 @@ var IntroItemLocation = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      location: ProfileStore.location()
+      location: ProfileStore.profile().location
     }, this.toggleEdit);
   },
   toggleEdit: function () {
@@ -70,7 +70,7 @@ var IntroItemLocation = React.createClass({
     this.setState({location: e.target.value});
   },
   onProfileStoreChange: function () {
-    this.setState({location: ProfileStore.location()});
+    this.setState({location: ProfileStore.profile().location});
   }
 });
 
