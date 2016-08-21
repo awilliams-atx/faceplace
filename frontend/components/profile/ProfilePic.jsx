@@ -1,33 +1,24 @@
 var React = require('react'),
     EditButton = require('./EditProfilePicButton'),
     UserApiUtil = require('../../util/user_api_util'),
-    SessionStore = require('../../stores/session'),
-    UserStore = require('../../stores/user');
+    SessionStore = require('../../stores/session');
 
 var ProfilePic = React.createClass({
   getInitialState: function () {
     return ({profilePicUrl: this.props.profilePicUrl});
   },
   render: function () {
-    if (this.state.profilePicUrl) {
-      profilePicUrl = this.state.profilePicUrl;
-    } else {
-      profilePicUrl = this.props.profilePicUrl;
-    }
-
     return (
       <div className='profile-pic'>
-        <img src={profilePicUrl} />
+        <img src={this.props.profilePicUrl} />
         <EditButton authorizedToEdit={this.authorizedToEdit()}
           updateProfilePicFile={this.updateProfilePicFile}
           />
       </div>
     );
   },
-  componentWillReceiveProps: function (newProps) {
-    this.setState({
-      profilePicUrl: newProps.profilePicUrl
-    });
+  componentWillReceiveProps: function (props) {
+    this.setState({profilePicUrl: props.profilePicUrl});
   },
   authorizedToEdit: function () {
     return this.props.profileOwnerId === SessionStore.currentUser().id;
