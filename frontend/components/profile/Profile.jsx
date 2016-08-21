@@ -10,9 +10,6 @@ var React = require('react'),
 
 var Profile = React.createClass({
   getInitialState: function () {
-    this.profileOwnerId = function () {
-      return parseInt(this.props.params.userId) || SessionStore.currentUser().id
-    }.bind(this)
     return ({profileOwner: UserStore.user()});
   },
   render: function () {
@@ -80,6 +77,9 @@ var Profile = React.createClass({
   },
   onUserStoreChange: function () {
     this.setState({profileOwner: UserStore.user()});
+  },
+  profileOwnerId: function () {
+    return parseInt(this.props.params.userId) || SessionStore.currentUser().id
   }
 });
 

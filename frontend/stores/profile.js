@@ -4,21 +4,7 @@ var Store = require('flux/utils').Store,
     friendRequestConstants = require('../constants/friend_request_constants'),
     friendshipConstants = require('../constants/friendship_constants');
 
-var _profile = {
-  userId: '',
-  description: '',
-  position: '',
-  company: '',
-  major: '',
-  school: '',
-  location: '',
-  hometown: '',
-  coverPhotoUrl: '',
-  profilePicUrl: '',
-  requestMade: null,
-  requestReceived: null,
-  alreadyFriends: null
-};
+var _profile = {};
 
 var ProfileStore = new Store(AppDispatcher);
 
