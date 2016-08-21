@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react')
+    UserApiUtil = require('../../util/user_api_util');
 
 var EditProfilePicButton = React.createClass({
   render: function () {
@@ -14,7 +15,7 @@ var EditProfilePicButton = React.createClass({
             <input type='file'
               className='profile-pic-input'
               id='profile-pic-input'
-              onChange={this.props.updateProfilePicFile}>
+              onChange={this.updateProfilePic}>
             </input>
 
             <div className='profile-pic-input-cover' />
@@ -23,6 +24,19 @@ var EditProfilePicButton = React.createClass({
       );
     } else {
       return <div id='profile-pic-input'/>;
+    }
+  },
+  updateProfilePic: function (e) {
+    var profilePicFile = e.currentTarget.files[0];
+    var fileReader = new FileReader();
+    fileReader.onloadend = function() {
+      var formData = new FormData();
+      formData.append('user[profile_pic]', profilePicFile);
+      UserApiUtil.submitProfilePic(formData);
+    };
+
+    if (profilePicFile) {
+      fileReader.readAsDataURL(profilePicFile);
     }
   }
 });

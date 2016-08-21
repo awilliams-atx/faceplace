@@ -1,6 +1,5 @@
 var React = require('react'),
     EditButton = require('./EditProfilePicButton'),
-    UserApiUtil = require('../../util/user_api_util'),
     SessionStore = require('../../stores/session');
 
 var ProfilePic = React.createClass({
@@ -22,19 +21,6 @@ var ProfilePic = React.createClass({
   },
   authorizedToEdit: function () {
     return this.props.profileOwnerId === SessionStore.currentUser().id;
-  },
-  updateProfilePicFile: function (e) {
-    var profilePicFile = e.currentTarget.files[0];
-    var fileReader = new FileReader();
-    fileReader.onloadend = function() {
-      var formData = new FormData();
-      formData.append('user[profile_pic]', profilePicFile);
-      UserApiUtil.submitProfilePic(formData);
-    };
-
-    if (profilePicFile) {
-      fileReader.readAsDataURL(profilePicFile);
-    }
   }
 });
 
