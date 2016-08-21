@@ -1,5 +1,4 @@
 var React = require('react'),
-    ProfileStore = require('../../../../stores/profile'),
     IntroItemDescription = require('./IntroItemDescription'),
     IntroItemWork = require('./IntroItemWork'),
     IntroItemSchool = require('./IntroItemSchool'),

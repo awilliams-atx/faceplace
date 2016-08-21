@@ -8,8 +8,8 @@ var React = require('react'),
     ProfileApiUtil = require('../../../util/profile_api_util'),
     FriendStore = require('../../../stores/friend'),
     PostStore = require('../../../stores/post'),
-    ProfileStore = require('../../../stores/profile'),
-    SessionStore = require('../../../stores/session');
+    SessionStore = require('../../../stores/session'),
+    UserStore = require('../../../stores/user');
 
     var Timeline = React.createClass({
       getInitialState: function () {
@@ -18,7 +18,7 @@ var React = require('react'),
         }.bind(this)
         var profileOwnerId = this.profileOwnerId();
         return({
-          profileFetched: ProfileStore.profileFetched(profileOwnerId),
+          profileFetched: UserStore.profileFetched(profileOwnerId),
           friendsFetched: FriendStore.friendsFetched(profileOwnerId)
         });
       },
@@ -58,7 +58,7 @@ var React = require('react'),
         var profileOwnerId = this.props.params.userId;
 
         this.profileListener =
-          ProfileStore.addListener(this.onProfileStoreChange);
+          UserStore.addListener(this.onUserStoreChange);
         ClientActions.fetchProfile(profileOwnerId);
 
         this.friendListener =
@@ -84,11 +84,11 @@ var React = require('react'),
 
          this.setState({posts: PostStore.all(profileOwnerId)});
        },
-      onProfileStoreChange: function () {
+      onUserStoreChange: function () {
         var profileOwnerId = this.profileOwnerId();
 
         this.setState({
-          profileFetched: ProfileStore.profileFetched(profileOwnerId)
+          profileFetched: UserStore.profileFetched(profileOwnerId)
         });
       },
       onFriendStoreChange: function () {

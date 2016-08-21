@@ -1,12 +1,12 @@
 var React = require('react'),
     ProfileApiUtil = require('../../../../util/profile_api_util'),
-    ProfileStore = require('../../../../stores/profile');
+    UserStore = require('../../../../stores/user');
 
 var IntroItemLocation = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      location: ProfileStore.profile().location
+      location: UserStore.user().location
     });
   },
   render: function () {
@@ -33,10 +33,10 @@ var IntroItemLocation = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
+    this.UserListener = UserStore.addListener(this.onUserStoreChange);
   },
   componentWillUnmount: function () {
-    this.ProfileListener.remove();
+    this.UserListener.remove();
   },
   showEdit: function (e) {
     e.preventDefault();
@@ -50,7 +50,7 @@ var IntroItemLocation = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      location: ProfileStore.profile().location
+      location: UserStore.user().location
     }, this.toggleEdit);
   },
   toggleEdit: function () {
@@ -69,8 +69,8 @@ var IntroItemLocation = React.createClass({
     e.preventDefault();
     this.setState({location: e.target.value});
   },
-  onProfileStoreChange: function () {
-    this.setState({location: ProfileStore.profile().location});
+  onUserStoreChange: function () {
+    this.setState({location: UserStore.user().location});
   }
 });
 

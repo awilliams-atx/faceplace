@@ -14,12 +14,28 @@ UserStore.__onDispatch = function (payload) {
     _user.isFriendOfCurrentUser = false;
     UserStore.__emitChange();
     break;
+  case friendRequestConstants.MADE_FRIEND_REQUEST_CANCELED:
+    _user.requestMade = false;
+    UserStore.__emitChange();
+    break;
+  case friendRequestConstants.MADE_FRIEND_REQUEST_RECEIVED:
+    _user.requestMade = true;
+    UserStore.__emitChange();
+    break;
+  case userConstants.PROFILE_RECEIVED:
+    _userFetched = true;
+    _user = payload.profile;
+    UserStore.__emitChange();
+    break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED:
     _user.isFriendOfCurrentUser = true;
+    _user.requestReceived = false;
+    _user.alreadyFriends = true;
     UserStore.__emitChange();
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED:
     _user.isFriendOfCurrentUser = false;
+    _user.requestReceived = false;
     UserStore.__emitChange();
     break;
   case userConstants.UPDATED_COVER_PHOTO_URL_RECEIVED:
@@ -34,15 +50,24 @@ UserStore.__onDispatch = function (payload) {
     _user = payload.user;
     UserStore.__emitChange();
     break;
+  case friendshipConstants.UNFRIENDED:
+    _user.alreadyFriends = false;
+    UserStore.__emitChange();
   }
 };
 
 UserStore.user = function () {
-  return $.extend({}, _user);
+  return Object.assign({}, _user);
 };
 
-UserStore.authorizedToPost = function () {
+UserStore.getFriended = function () {
+  _user.alreadyFriends = true;
+  _user.requestMade = false;
+  _user.requestReceived = false;
+}
 
+UserStore.profileFetched = function (id) {
+  return _user.userId === id;
 };
 
 module.exports = UserStore;

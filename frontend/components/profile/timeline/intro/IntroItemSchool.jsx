@@ -1,13 +1,13 @@
 var React = require('react'),
     ProfileApiUtil = require('../../../../util/profile_api_util'),
-    ProfileStore = require('../../../../stores/profile');
+    UserStore = require('../../../../stores/user');
 
 var IntroItemSchool = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      major: ProfileStore.profile().major,
-      school: ProfileStore.profile().school
+      major: UserStore.user().major,
+      school: UserStore.user().school
     });
   },
   render: function () {
@@ -48,10 +48,10 @@ var IntroItemSchool = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
+    this.UserListener = UserStore.addListener(this.onUserStoreChange);
   },
   componentWillUnmount: function () {
-    this.ProfileListener.remove();
+    this.UserListener.remove();
   },
   showEdit: function (e) {
     e.preventDefault();
@@ -65,8 +65,8 @@ var IntroItemSchool = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      school: ProfileStore.profile().school,
-      major: ProfileStore.profile().major
+      school: UserStore.user().school,
+      major: UserStore.user().major
     }, function () {
     this.toggleEdit();
   });
@@ -90,10 +90,10 @@ var IntroItemSchool = React.createClass({
   onMajorChange: function (e) {
     this.setState({major: e.target.value});
   },
-  onProfileStoreChange: function (e) {
+  onUserStoreChange: function (e) {
     this.setState({
-      school: ProfileStore.profile().school,
-      major: ProfileStore.profile().major
+      school: UserStore.user().school,
+      major: UserStore.user().major
     });
   }
 });

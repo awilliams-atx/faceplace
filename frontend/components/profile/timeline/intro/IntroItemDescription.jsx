@@ -1,13 +1,13 @@
 var React = require('react'),
     ProfileApiUtil = require('../../../../util/profile_api_util'),
-    ProfileStore = require('../../../../stores/profile'),
+    UserStore = require('../../../../stores/user'),
     FormStore = require('../../../../stores/form');
 
 var IntroItemDescription = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      description: ProfileStore.profile().description
+      description: UserStore.user().description
     });
   },
   render: function () {
@@ -37,11 +37,10 @@ var IntroItemDescription = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
-    this.FormListener = FormStore.addListener(this.onFormStoreChange);
+    this.UserListener = UserStore.addListener(this.onUserStoreChange);
   },
   componentWillUnmount: function () {
-    this.ProfileListener.remove();
+    this.UserListener.remove();
     this.FormListener.remove();
   },
   showEdit: function (e) {
@@ -62,7 +61,7 @@ var IntroItemDescription = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      description: ProfileStore.profile().description
+      description: UserStore.user().description
     }, this.toggleEdit);
   },
   handleSubmit: function (e) {
@@ -75,8 +74,8 @@ var IntroItemDescription = React.createClass({
   onFormChange: function (e) {
     this.setState({description: e.target.value});
   },
-  onProfileStoreChange: function (e) {
-    this.setState({description: ProfileStore.profile().desription});
+  onUserStoreChange: function (e) {
+    this.setState({description: UserStore.user().desription});
   },
   onFormStoreChange: function (e) {
     if (FormStore.isOpen('INTRO_DESCRIPTION') && !this.state.editing) {

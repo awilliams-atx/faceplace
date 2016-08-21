@@ -1,12 +1,12 @@
 var React = require('react'),
     ProfileApiUtil = require('../../../../util/profile_api_util'),
-    ProfileStore = require('../../../../stores/profile');
+    UserStore = require('../../../../stores/user');
 
 var IntroItemHometown = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      hometown: ProfileStore.profile().hometown
+      hometown: UserStore.user().hometown
     });
   },
   render: function () {
@@ -34,10 +34,10 @@ var IntroItemHometown = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
+    this.UserListener = UserStore.addListener(this.onUserStoreChange);
   },
   componentWillUnmount: function () {
-    this.ProfileListener.remove();
+    this.UserListener.remove();
   },
   showEdit: function (e) {
     e.preventDefault();
@@ -51,7 +51,7 @@ var IntroItemHometown = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      hometown: ProfileStore.profile().hometown
+      hometown: UserStore.user().hometown
     }, function () {
       this.toggleEdit();
     });
@@ -71,8 +71,8 @@ var IntroItemHometown = React.createClass({
   onFormChange: function (e) {
     this.setState({hometown: e.target.value});
   },
-  onProfileStoreChange: function (e) {
-    this.setState({hometown: ProfileStore.profile().hometown});
+  onUserStoreChange: function (e) {
+    this.setState({hometown: UserStore.user().hometown});
   }
 });
 

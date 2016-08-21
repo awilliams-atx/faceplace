@@ -1,13 +1,13 @@
 var React = require('react'),
     ProfileApiUtil = require('../../../../util/profile_api_util'),
-    ProfileStore = require('../../../../stores/profile');
+    UserStore = require('../../../../stores/user');
 
 var IntroItemWork = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      company: ProfileStore.profile().company,
-      position: ProfileStore.profile().position
+      company: UserStore.user().company,
+      position: UserStore.user().position
     });
   },
   render: function () {
@@ -50,10 +50,10 @@ var IntroItemWork = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.ProfileListener = ProfileStore.addListener(this.onProfileStoreChange);
+    this.UserListener = UserStore.addListener(this.onUserStoreChange);
   },
   componentWillUnmount: function () {
-    this.ProfileListener.remove();
+    this.UserListener.remove();
   },
   showEdit: function (e) {
     e.preventDefault();
@@ -67,8 +67,8 @@ var IntroItemWork = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      position: ProfileStore.profile().position,
-      company: ProfileStore.profile().company
+      position: UserStore.user().position,
+      company: UserStore.user().company
     }, this.toggleEdit);
   },
   toggleEdit: function () {
@@ -90,10 +90,10 @@ var IntroItemWork = React.createClass({
   onCompanyChange: function (e) {
     this.setState({company: e.target.value});
   },
-  onProfileStoreChange: function (e) {
+  onUserStoreChange: function (e) {
     this.setState({
-      position: ProfileStore.profile().position,
-      company: ProfileStore.profile().company
+      position: UserStore.user().position,
+      company: UserStore.user().company
     });
   }
 });
