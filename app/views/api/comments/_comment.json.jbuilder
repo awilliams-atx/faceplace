@@ -9,4 +9,4 @@ json.createdAt time_ago_in_words(comment.created_at) + ' ago'
 
 json.authorId comment.author_id
 json.fullName comment.author.full_name
-json.commentPicUrl asset_path(comment.author.profile_pic.url(:comment))
+json.profile_pic_url asset_path(comment.author.profile_pic.url)

@@ -2,13 +2,11 @@ var React = require('react');
 
 var CommentIndexItem = React.createClass({
   render: function () {
-    var comment = this.props.comment;
-
     return (
       <div className='post-comment group'>
         <div className='post-comment-image'>
           <a href={'#/users/' + this.props.comment.authorId}>
-            <img src={this.props.comment.commentPicUrl}
+            <img src={this.props.comment.profile_pic_url}
               className='post-comment-profile-pic' />
           </a>
         </div>
@@ -16,7 +14,7 @@ var CommentIndexItem = React.createClass({
           <a href={'#/users/' + this.props.comment.authorId}>
             {this.props.comment.fullName}
           </a>
-          {' ' + comment.body}
+          {' ' + this.props.comment.body}
           <br />
           <i className="fa fa-pencil" aria-hidden="true"></i>
           <div className='post-comment-created-at'>
