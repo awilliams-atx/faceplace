@@ -1,6 +1,3 @@
-FreqStore = require('./stores/friend_request.js')
-// TESTING CODE ABOVE
-
 var React = require('react'),
     ReactDOM = require('react-dom');
 

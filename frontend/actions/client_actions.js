@@ -1,5 +1,6 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
     friendshipConstants = require('../constants/friendship_constants'),
+    friendRequestConstants = require('../constants/friend_request_constants'),
     modalConstants = require('../constants/modal_constants'),
     postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants'),
@@ -32,6 +33,11 @@ var ClientActions = {
   },
   deletePost: function (postId) {
     PostApiUtil.deletePost(postId);
+  },
+  emptyJustCheckedIds: function () {
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.CHECKING_REQUESTS_NOW
+    });
   },
   fetchFriendRequests: function () {
     FriendRequestApiUtil.fetchFriendRequests();

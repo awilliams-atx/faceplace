@@ -4,8 +4,6 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 
 var SocketActions = {
   pushFriendRequest: function (request) {
-    console.log('SocketActions#pushFriendRequest');
-    console.log(request);
     Dispatcher.dispatch({
       actionType: socketConstants.PUSH_FRIEND_REQUEST,
       request: request

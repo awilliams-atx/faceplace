@@ -66,7 +66,6 @@ var ServerActions = {
     });
   },
   receiveFriendRequests: function (requests) {
-    console.log(requests);
     Dispatcher.dispatch({
       actionType: friendRequestConstants.FRIEND_REQUESTS_RECEIVED,
       requests: requests

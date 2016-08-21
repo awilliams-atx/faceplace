@@ -6,6 +6,7 @@ var Store = require('flux/utils').Store,
 var FriendRequestStore = new Store(AppDispatcher);
 
 _requests = [];
+_justCheckedIds = [];
 
 FriendRequestStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
@@ -13,6 +14,9 @@ FriendRequestStore.__onDispatch = function (payload) {
     FriendRequestStore.markRequestsChecked(payload.checked_ids);
     FriendRequestStore.__emitChange();
     break;
+  case friendRequestConstants.CHECKING_REQUESTS_NOW:
+    FriendRequestStore.emptyJustCheckedIds();
+    break; // Not meant to emit change.
   case friendRequestConstants.FRIEND_REQUESTS_RECEIVED:
     FriendRequestStore.setRequests(payload.requests);
     FriendRequestStore.__emitChange();
@@ -45,9 +49,22 @@ FriendRequestStore.all = function () {
   return _requests.slice();
 };
 
+FriendRequestStore.emptyJustCheckedIds = function () {
+  while (_justCheckedIds.length > 0) {
+    _justCheckedIds.pop();
+  }
+};
+
+FriendRequestStore.justChecked = function (id) {
+  return _justCheckedIds.indexOf(id) >= 0;
+};
+
+FriendRequestStore.justCheckedIds = function () {
+  return _justCheckedIds.slice();
+};
+
 FriendRequestStore.markRequestsChecked = function (checked_ids) {
-  console.log('FriendRequestStore::markRequestsChecked');
-  console.log(checked_ids);
+  FriendRequestStore.setJustCheckedIds(checked_ids);
   for (var i = 0; i < _requests.length; i++) {
     if (checked_ids.indexOf(_requests[i].id) >= 0) {
       _requests[i].checked = true;
@@ -61,6 +78,12 @@ FriendRequestStore.removeRequest = function (maker_id) {
       _requests.splice(i, 1);
       return;
     }
+  }
+};
+
+FriendRequestStore.setJustCheckedIds = function (checked_ids) {
+  for (var i = 0; i < checked_ids.length; i++) {
+    _justCheckedIds.push(checked_ids[i]);
   }
 };
 

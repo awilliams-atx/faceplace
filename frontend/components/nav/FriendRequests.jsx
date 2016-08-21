@@ -1,5 +1,5 @@
 var React = require('react'),
-    FriendRequestItem = require('./FriendRequestItem'),
+    FriendRequestItem = require('./friendRequestItem'),
     ClientActions = require('../../actions/client_actions'),
     FriendRequestStore = require('../../stores/friend_request.js'),
     SessionStore = require('../../stores/session.js');
@@ -23,7 +23,8 @@ var FriendRequests = React.createClass({
               req={req}
               key={idx}
               onAccept={this.onAccept}
-              onReject={this.onReject} />
+              onReject={this.onReject}
+              checkedClass={this.checkedClass(req.id)} />
           );
         }.bind(this));
       }
@@ -70,6 +71,9 @@ var FriendRequests = React.createClass({
   componentWillUnmount: function () {
     this.friendRequestListener.remove();
   },
+  checkedClass: function (id) {
+    return FriendRequestStore.justChecked(id) ? ' unchecked-alert' : '';
+  },
   className: function () {
     if (this.state.uncheckedRequestIds.length > 0) {
       return 'nav-drop-active';
@@ -84,15 +88,10 @@ var FriendRequests = React.createClass({
     ClientActions.respondToFriendRequest(response);
   },
   onFriendRequestStoreChange: function () {
-    console.log('FriendRequest#onFriendRequestStoreChange');
-    console.log('uncheckedRequestIds');
-    console.log(FriendRequestStore.uncheckedRequestIds());
     this.setState({
       requests: FriendRequestStore.all(),
       uncheckedRequestIds: FriendRequestStore.uncheckedRequestIds()
-    }, function () {
-      console.log(this.state);
-    }.bind(this));
+    });
   },
   onReject: function (user_id) {
     var response = this.response(user_id, 'reject');
@@ -118,6 +117,7 @@ var FriendRequests = React.createClass({
     this.navDropClickListener = function (e) {
       var friendsDrop = document.getElementById('friends-drop');
       if (!friendsDrop.contains(e.target)) {
+        ClientActions.emptyJustCheckedIds();
         this.props.toggleNavDrop('null');
         body.removeEventListener('click', this.navDropClickListener);
       }
