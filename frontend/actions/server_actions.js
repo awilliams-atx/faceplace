@@ -102,6 +102,12 @@ var ServerActions = {
       post: post
     });
   },
+  receiveProfile: function (profile) {
+    Dispatcher.dispatch({
+      actionType: userConstants.PROFILE_RECEIVED,
+      profile: profile
+    });
+  },
   receiveReceivedFriendRequest: function (request) {
     Dispatcher.dispatch({
       actionType: friendRequestConstants.RECEIVED_FRIEND_REQUEST_RECEIVED,

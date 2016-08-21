@@ -1,6 +1,4 @@
-var SessionActions = require('../actions/session_actions'),
-    ErrorActions = require('../actions/error_actions'),
-    UserActions = require('../actions/user_actions');
+var ServerActions = require('../actions/server_actions');
 
 var ProfileApiUtil = {
   fetchProfile: function (id) {
@@ -9,9 +7,7 @@ var ProfileApiUtil = {
       method: 'GET',
       dataType: 'json',
       success: function (profile) {
-        UserActions.receiveProfile(profile);
-      },
-      error: function (errors) {
+        ServerActions.receiveProfile(profile);
       }
     });
   },
@@ -22,10 +18,8 @@ var ProfileApiUtil = {
       dataType: 'json',
       data: {profile: profile},
       success: function (profile) {
-        UserActions.receiveProfile(profile);
-        if (cb) { cb(); }
-      },
-      error: function (errors) {
+        ServerActions.receiveProfile(profile);
+        cb && cb();
       }
     });
   }
