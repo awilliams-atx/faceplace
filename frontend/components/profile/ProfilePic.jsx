@@ -10,7 +10,7 @@ var ProfilePic = React.createClass({
         <EditButton authorizedToEdit={this.authorizedToEdit()}
           updateUtil='submitProfilePic'
           formName='user[profile_pic]'
-          photoClassName='profile-pic'
+          photoType='profile-pic'
           />
       </div>
     );
