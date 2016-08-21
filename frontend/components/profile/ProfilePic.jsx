@@ -1,5 +1,5 @@
 var React = require('react'),
-    EditButton = require('./EditProfilePicButton'),
+    EditButton = require('./EditPhotoButton'),
     SessionStore = require('../../stores/session');
 
 var ProfilePic = React.createClass({
@@ -12,6 +12,9 @@ var ProfilePic = React.createClass({
         <img src={this.props.profilePicUrl} />
         <EditButton authorizedToEdit={this.authorizedToEdit()}
           updateProfilePicFile={this.updateProfilePicFile}
+          updateUtil='submitProfilePic'
+          formName='user[profile_pic]'
+          photoClassName='profile-pic'
           />
       </div>
     );

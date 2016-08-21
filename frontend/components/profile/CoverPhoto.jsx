@@ -22,7 +22,7 @@ var CoverPhoto = React.createClass({
           <div className='cover-photo-input-container'>
             <div className='cover-photo-input-replacement'>
               <i className="fa fa-camera" aria-hidden="true"></i>
-              <strong>Change cover photo</strong>
+              <strong>Change photo</strong>
             </div>
 
             <div className='cover-photo-input-cover' />
