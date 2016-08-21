@@ -17,9 +17,9 @@ class Api::FriendRequestsController < ApplicationController
       @request = FriendRequest.find_by(down_params)
 
       unless @request
-        @request = FriendRequest.create(down_params)
+        @request = FriendRequest.create!(down_params)
 
-        down_params.merge!(id: @request.id, profile_pic_url: current_user.profile_pic.url, name: current_user.full_name, checked: @request.checked)
+        down_params.merge!(id: @request.id, profile_pic_url: current_user.profile_pic.url, name: current_user.full_name, checked: false)
 
         Pusher.trigger("friend_requests_#{params[:receiver_id]}", 'received',
           down_params)
