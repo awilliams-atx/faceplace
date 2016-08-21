@@ -6,7 +6,7 @@ var IntroItemHometown = React.createClass({
   getInitialState: function () {
     return ({
       editing: false,
-      hometown: ProfileStore.hometown()
+      hometown: ProfileStore.profile().hometown
     });
   },
   render: function () {
@@ -51,7 +51,7 @@ var IntroItemHometown = React.createClass({
   cancel: function (e) {
     e.preventDefault();
     this.setState({
-      hometown: ProfileStore.hometown()
+      hometown: ProfileStore.profile().hometown
     }, function () {
       this.toggleEdit();
     });
@@ -72,7 +72,7 @@ var IntroItemHometown = React.createClass({
     this.setState({hometown: e.target.value});
   },
   onProfileStoreChange: function (e) {
-    this.setState({hometown: ProfileStore.hometown()});
+    this.setState({hometown: ProfileStore.profile().hometown});
   }
 });
 
