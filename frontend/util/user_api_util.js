@@ -1,6 +1,5 @@
 var SessionActions = require('../actions/session_actions'),
     ErrorActions = require('../actions/error_actions'),
-    SessionApiUtil = require('./session_api_util'),
     ServerActions = require('../actions/server_actions');
 
 var UserApiUtil = {
@@ -61,8 +60,7 @@ var UserApiUtil = {
       contentType: false,
       processData: false,
       success: function (coverPhotoData) {
-        ServerActions
-          .receiveUpdatedCoverPhotoUrl(coverPhotoData.coverPhotoUrl);
+        ServerActions.receiveCoverPhotoUrl(coverPhotoData.coverPhotoUrl);
       }
     });
   },
@@ -75,8 +73,7 @@ var UserApiUtil = {
       contentType: false,
       processData: false,
       success: function (profilePicData) {
-        ServerActions
-          .receiveUpdatedProfilePicUrl(profilePicData.profilePicUrl);
+        ServerActions.receiveProfilePicUrl(profilePicData.profilePicUrl);
       }
     });
   }

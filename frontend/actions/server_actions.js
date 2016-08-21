@@ -10,12 +10,6 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     userConstants = require('../constants/user_constants');
 
 var ServerActions = {
-  receiveAcceptedMadeFriendRequest: function (request) {
-    Dispatcher.dispatch({
-      actionType: friendRequestConstants.MADE_FRIEND_REQUEST_ACCEPTED,
-      userId: request.receiver_id
-    });
-  },
   receiveCheckedRequestIds: function (checked_ids) {
     Dispatcher.dispatch({
       actionType: friendRequestConstants.CHECKED_FRIEND_REQUEST_IDS_RECEIVED,
@@ -77,10 +71,10 @@ var ServerActions = {
       friends: friends
     });
   },
-  receiveMadeFriendRequest: function (response) {
+  receiveMadeFriendRequest: function (request) {
     Dispatcher.dispatch({
       actionType: friendRequestConstants.MADE_FRIEND_REQUEST_RECEIVED,
-      response: response
+      request: request
     });
   },
   receiveMostRecentlyAddedFriends: function (friendsData) {
@@ -139,7 +133,7 @@ var ServerActions = {
       searchResults: searchResults
     });
   },
-  receiveUpdatedCoverPhotoUrl: function (coverPhotoUrl) {
+  receiveCoverPhotoUrl: function (coverPhotoUrl) {
     Dispatcher.dispatch({
       actionType: userConstants.UPDATED_COVER_PHOTO_URL_RECEIVED,
       coverPhotoUrl: coverPhotoUrl
@@ -151,7 +145,7 @@ var ServerActions = {
       post: post
     });
   },
-  receiveUpdatedProfilePicUrl: function (profilePicUrl) {
+  receiveProfilePicUrl: function (profilePicUrl) {
     Dispatcher.dispatch({
       actionType: userConstants.UPDATED_PROFILE_PIC_URL_RECEIVED,
       profilePicUrl: profilePicUrl

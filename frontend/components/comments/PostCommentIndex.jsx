@@ -13,10 +13,9 @@ var PostCommentIndex = React.createClass({
     });
   },
   render: function () {
-    commentIndexItems = this.state.comments.map(function (comment) {
+    var commentIndexItems = this.state.comments.map(function (comment) {
       return <PostCommentIndexItem comment={comment} key={comment.id} />;
     });
-    // return <div className='nothing-here' />;
 
     return (
       <section className='comment-section'>
@@ -40,9 +39,7 @@ var PostCommentIndex = React.createClass({
     this.setState({commentBody: e.target.value});
   },
   onCommentStoreChange: function () {
-    this.setState({
-      comments: CommentStore.allPostComments(this.props.postId)
-    });
+    this.setState({comments: CommentStore.allPostComments(this.props.postId)});
   }
 });
 
