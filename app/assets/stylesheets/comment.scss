@@ -4,4 +4,9 @@ $comment-background-blue: #f6f7f9;
   margin-top: 11px;
   border-top: 1px solid #e5e5e5;
   background-color: $comment-background-blue;
+  img {
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+  }
 }
