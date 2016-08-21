@@ -1,6 +1,7 @@
 var React = require('react'),
-    SessionStore = require('../../stores/session'),
+    EditButton = require('./EditProfilePicButton'),
     UserApiUtil = require('../../util/user_api_util'),
+    SessionStore = require('../../stores/session'),
     UserStore = require('../../stores/user');
 
 var ProfilePic = React.createClass({
@@ -8,55 +9,28 @@ var ProfilePic = React.createClass({
     return ({profilePicUrl: this.props.profilePicUrl});
   },
   render: function () {
-    var profileOwnerId = this.props.profileOwnerId,
-        currentUserId = SessionStore.currentUser().id;
-
-    var authorizedToEdit = (profileOwnerId === currentUserId);
-
-    var editProfilePicButton =
-      <div className='empty-edit-profile-pic-button' />;
-
-    if (authorizedToEdit) {
-      editProfilePicButton = (
-        <form>
-          <div className='profile-pic-input-container'>
-            <div className='profile-pic-input-replacement group'>
-              <i className="fa fa-camera" aria-hidden="true"></i>
-              <strong>Change photo</strong>
-            </div>
-
-            <input type='file'
-              className='profile-pic-input'
-              id='profile-pic-input'
-              onChange={this.updateProfilePicFile}>
-            </input>
-
-            <div className='profile-pic-input-cover' />
-          </div>
-        </form>
-      );
-    }
-
     if (this.state.profilePicUrl) {
       profilePicUrl = this.state.profilePicUrl;
     } else {
       profilePicUrl = this.props.profilePicUrl;
     }
 
-    var profilePic = (
+    return (
       <div className='profile-pic'>
         <img src={profilePicUrl} />
-        {editProfilePicButton}
+        <EditButton authorizedToEdit={this.authorizedToEdit()}
+          updateProfilePicFile={this.updateProfilePicFile}
+          />
       </div>
     );
-
-    return profilePic;
   },
   componentWillReceiveProps: function (newProps) {
     this.setState({
-      profileOwnerId: newProps.profileOwnerId,
       profilePicUrl: newProps.profilePicUrl
     });
+  },
+  authorizedToEdit: function () {
+    return this.props.profileOwnerId === SessionStore.currentUser().id;
   },
   updateProfilePicFile: function (e) {
     var profilePicFile = e.currentTarget.files[0];
