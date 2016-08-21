@@ -1,5 +1,5 @@
 var React = require('react'),
-    ProfileApiUtil = require('../../../../util/profile_api_util'),
+    UserApiUtil = require('../../../../util/user_api_util'),
     UserStore = require('../../../../stores/user');
 
 var IntroItemWork = React.createClass({
@@ -79,7 +79,7 @@ var IntroItemWork = React.createClass({
     this.setState({
       editing: false
     });
-    ProfileApiUtil.setProfile({
+    UserApiUtil.setProfile({
       company: this.state.company,
       position: this.state.position
     });

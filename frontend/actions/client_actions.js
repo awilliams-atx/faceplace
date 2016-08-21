@@ -10,7 +10,6 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     FriendRequestApiUtil = require('../util/friend_request_api_util'),
     NotificationApiUtil = require('../util/notification_api_util'),
     PostApiUtil = require('../util/post_api_util'),
-    ProfileApiUtil = require('../util/profile_api_util'),
     SearchApiUtil = require('../util/search_api_util'),
     TagApiUtil = require('../util/tag_api_util'),
     UserApiUtil = require('../util/user_api_util'),
@@ -49,7 +48,7 @@ var ClientActions = {
     NotificationApiUtil.fetchNotifications();
   },
   fetchProfile: function (userId) {
-    ProfileApiUtil.fetchProfile(userId);
+    UserApiUtil.fetchProfile(userId);
   },
   fetchSearchResults: function (searchString) {
     SearchApiUtil.fetchSearchResults(searchString);

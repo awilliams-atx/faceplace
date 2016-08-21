@@ -1,5 +1,5 @@
 var React = require('react'),
-    ProfileApiUtil = require('../../../../util/profile_api_util'),
+    UserApiUtil = require('../../../../util/user_api_util'),
     UserStore = require('../../../../stores/user');
 
 var IntroItemSchool = React.createClass({
@@ -79,7 +79,7 @@ var IntroItemSchool = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    ProfileApiUtil.setProfile({
+    UserApiUtil.setProfile({
       major: this.state.major,
       school: this.state.school
     });

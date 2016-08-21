@@ -1,5 +1,5 @@
 var React = require('react'),
-    ProfileApiUtil = require('../../../../util/profile_api_util'),
+    UserApiUtil = require('../../../../util/user_api_util'),
     UserStore = require('../../../../stores/user');
 
 var IntroItemHometown = React.createClass({
@@ -64,7 +64,7 @@ var IntroItemHometown = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    ProfileApiUtil.setProfile({
+    UserApiUtil.setProfile({
       hometown: this.state.hometown
     });
   },

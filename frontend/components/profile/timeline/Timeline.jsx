@@ -5,7 +5,7 @@ var React = require('react'),
     ClientActions = require('../../../actions/client_actions'),
     FriendApiUtil = require('../../../util/friend_api_util'),
     PostApiUtil = require('../../../util/post_api_util'),
-    ProfileApiUtil = require('../../../util/profile_api_util'),
+    UserApiUtil = require('../../../util/user_api_util'),
     FriendStore = require('../../../stores/friend'),
     PostStore = require('../../../stores/post'),
     SessionStore = require('../../../stores/session'),
@@ -76,7 +76,7 @@ var React = require('react'),
          var newProfileOwnerId = newProps.params.userId;
 
          FriendApiUtil.fetchMostRecentlyAddedFriends(newProfileOwnerId);
-         ProfileApiUtil.fetchProfile(newProfileOwnerId);
+         UserApiUtil.fetchProfile(newProfileOwnerId);
          PostApiUtil.fetchTimelinePosts(newProfileOwnerId);
        },
        onPostStoreChange: function () {

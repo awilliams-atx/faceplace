@@ -1,5 +1,5 @@
 var React = require('react'),
-    ProfileApiUtil = require('../../../../util/profile_api_util'),
+    UserApiUtil = require('../../../../util/user_api_util'),
     UserStore = require('../../../../stores/user'),
     FormStore = require('../../../../stores/form');
 
@@ -41,7 +41,6 @@ var IntroItemDescription = React.createClass({
   },
   componentWillUnmount: function () {
     this.UserListener.remove();
-    this.FormListener.remove();
   },
   showEdit: function (e) {
     e.preventDefault();
@@ -67,7 +66,7 @@ var IntroItemDescription = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    ProfileApiUtil.setProfile({
+    UserApiUtil.setProfile({
       description: this.state.description
     });
   },

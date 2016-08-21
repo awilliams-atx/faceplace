@@ -42,8 +42,4 @@ SessionStore.isUserLoggedIn = function () {
   return !!_currentUser.id;
 };
 
-SessionStore.authorizedToEdit = function () {
-  return _authorizedToEdit;
-};
-
 module.exports = SessionStore;
