@@ -19,6 +19,11 @@ section.profile-friends-container {
   width: 318px;
 }
 .friend-thumb {
+  img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+  }
   display: block;
   position: relative;
   width: 100px;
