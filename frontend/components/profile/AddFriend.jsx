@@ -6,9 +6,9 @@ var React = require('react'),
 var AddFriend = React.createClass({
   getInitialState: function () {
     return({
-      alreadyFriends: ProfileStore.alreadyFriends(),
-      requestMade: ProfileStore.requestMade(),
-      requestReceived: ProfileStore.requestReceived()
+      alreadyFriends: ProfileStore.profile().alreadyFriends,
+      requestMade: ProfileStore.profile().requestMade,
+      requestReceived: ProfileStore.profile().requestReceived
     });
   },
   render: function () {
@@ -23,7 +23,7 @@ var AddFriend = React.createClass({
       return emptyAddFriendContainer;
     }
 
-    if (ProfileStore.alreadyFriends()) {
+    if (ProfileStore.profile().alreadyFriends) {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
           <button className='unfriend-button' onClick={this.onUnfriend}>
@@ -31,7 +31,7 @@ var AddFriend = React.createClass({
           </button>
         </div>
       );
-    } else if (ProfileStore.requestReceived()) {
+    } else if (ProfileStore.profile().requestReceived) {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
           <button className='accept-button' onClick={this.onAccept}>
@@ -42,7 +42,7 @@ var AddFriend = React.createClass({
           </button>
         </div>
       );
-    } else if (ProfileStore.requestMade()) {
+    } else if (ProfileStore.profile().requestMade) {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
           <button className='request-sent-button' onClick={this.preventDefault}>

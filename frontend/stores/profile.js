@@ -42,8 +42,6 @@ ProfileStore.profile = function () {
   return Object.assign({}, _profile);
 };
 
-ProfileStore.alreadyFriends = function () { return _profile.alreadyFriends; };
-
 ProfileStore.coverPhotoUrl = function () { return _profile.coverPhotoUrl; };
 
 ProfileStore.getFriended = function () {
@@ -57,9 +55,5 @@ ProfileStore.profileFetched = function (id) {
 };
 
 ProfileStore.profilePicUrl = function () { return _profile.profilePicUrl; };
-
-ProfileStore.requestMade = function () { return _profile.requestMade; };
-
-ProfileStore.requestReceived = function () { return _profile.requestReceived; };
 
 module.exports = ProfileStore;
