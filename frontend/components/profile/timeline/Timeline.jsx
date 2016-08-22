@@ -16,7 +16,7 @@ var React = require('react'),
             <aside className='timeline-sidebar'>
               <IntroIndex userId={this.profileOwnerId()}
                 authorizedToEdit={this.authorizedToEdit()} />
-              <FriendIndex profileOwnerId={this.profileOwnerId()} />
+              <FriendIndex user_id={this.profileOwnerId()} />
             </aside>
             <section className='timeline-main-content'>
               <PostIndex profileOwnerId={this.profileOwnerId()} />
@@ -30,7 +30,6 @@ var React = require('react'),
         }
       },
       componentWillReceiveProps: function (props) {
-        console.log('Timeline#componentWillReceiveProps');
         ClientActions.fetchTimelinePosts(props.params.userId);
       },
       authorizedToEdit: function () {

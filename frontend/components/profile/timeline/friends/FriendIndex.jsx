@@ -27,10 +27,10 @@ var FriendIndex = React.createClass({
   },
   componentDidMount: function () {
     this.friendListener = FriendStore.addListener(this.onFriendStoreChange);
-    ClientActions.fetchMostRecentlyAddedFriends(this.props.profileOwnerId);
+    ClientActions.fetchMostRecentlyAddedFriends(this.props.user_id);
   },
   componentWillReceiveProps: function (props) {
-    ClientActions.fetchMostRecentlyAddedFriends(props.profileOwnerId);
+    ClientActions.fetchMostRecentlyAddedFriends(props.user_id);
   },
   componentWillUnmount: function () {
     this.friendListener.remove();
