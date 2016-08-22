@@ -72,7 +72,7 @@ validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
     return true if self == post.author
     profile_owner = post.profile_owner
     if profile_owner # Posted on friend's timeline
-      friends_with?(profile_owner)
+      friends_with?(profile_owner) || self == profile_owner
     else # Posted on own timeline
       friends_with?(post.author)
     end

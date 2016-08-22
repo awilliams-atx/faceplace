@@ -21,13 +21,9 @@ var CommentIndexItem = React.createClass({
       </div>
     );
   },
-  handleSubmit: function (e) {
-
-  },
   onCommentBodyChange: function (e) {
     this.setState({commentBody: e.target.value});
   },
-
 });
 
 module.exports = CommentIndexItem;

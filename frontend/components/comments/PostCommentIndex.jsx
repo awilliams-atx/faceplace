@@ -15,7 +15,7 @@ var PostCommentIndex = React.createClass({
         return <PostCommentIndexItem comment={comment} key={comment.id} />;
       });
     }.bind(this);
-    
+
     var renderCommentForm = function () {
       if (this.props.post.authorized_to_comment) {
         return <PostCommentForm postId={this.props.post.postId} />;
