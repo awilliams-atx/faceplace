@@ -14,30 +14,20 @@ var Profile = React.createClass({
     return ({ user: UserStore.user() });
   },
   render: function () {
-    if (this.state.user) {
-      var coverPhotoUrl = this.state.user.coverPhotoUrl,
-          profilePicUrl = this.state.user.profilePicUrl;
-    }
-
-    var renderProfilePic = function () {
-      if (profilePicUrl) {
-        return <ProfilePic profileOwnerId={this.profileOwnerId()}
-          profilePicUrl={profilePicUrl} />;
-      }
-    }.bind(this);
-
-    var profile = (
+    console.log('Profile#render');
+    return (
       <div className='content'>
         <Nav />
         <div className='profile-sub-content'>
           <div className='profile-top-content'>
             <div className='cover-photo-container'>
-              <CoverPhoto coverPhotoUrl={coverPhotoUrl}
+              <CoverPhoto coverPhotoUrl={this.state.user.coverPhotoUrl}
                 authorizedToEdit={this.authorizedToEdit()}
                 profileOwnerId={this.profileOwnerId()} />
               <AddFriend profileOwnerId={this.profileOwnerId()} />
             </div>
-            {renderProfilePic()}
+            <ProfilePic profileOwnerId={this.profileOwnerId()}
+              profilePicUrl={this.state.user.profilePicUrl} />
             <nav className='profile-nav'>
               <div className='profile-nav-links'>
                 <ul>
@@ -52,7 +42,6 @@ var Profile = React.createClass({
         </div>
       </div>
     );
-    return profile;
   },
   componentDidMount: function () {
     this.userListener = UserStore.addListener(this.onUserStoreChange);

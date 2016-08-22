@@ -10,12 +10,14 @@ var React = require('react'),
 
     var Timeline = React.createClass({
       getInitialState: function () {
+        console.log('Timeline#getInitialState');
         return({
           profileFetched: UserStore.profileFetched(this.profileOwnerId()),
           friendsFetched: FriendStore.friendsFetched(this.profileOwnerId())
         });
       },
       render: function () {
+        console.log('Timeline#render');
         var renderIntro = function () {
           if (this.state.profileFetched) {
             return <IntroIndex userId={this.profileOwnerId()}
@@ -48,6 +50,7 @@ var React = require('react'),
         this.friendListener.remove();
       },
       componentWillReceiveProps: function (props) {
+        console.log('Timeline#componentWillReceiveProps');
         ClientActions.fetchMostRecentlyAddedFriends(props.params.userId);
         ClientActions.fetchTimelinePosts(props.params.userId);
       },
@@ -61,6 +64,7 @@ var React = require('react'),
         });
       },
       onFriendStoreChange: function () {
+        console.log('Timeline#onFriendStoreChange');
         var profileOwnerId = this.profileOwnerId();
         this.setState({
           friendsFetched: FriendStore.friendsFetched(profileOwnerId)
