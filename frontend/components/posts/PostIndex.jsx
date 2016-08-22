@@ -16,15 +16,6 @@ var PostIndex = React.createClass({
     });
   },
   render: function () {
-    var profileOwnerId = this.props.profileOwnerId,
-        authorizedToPost = false;
-
-    if (profileOwnerId === SessionStore.currentUser().id) {
-      authorizedToPost = true;
-    } else if (this.state.isFriendOfProfileOwner) {
-      authorizedToPost = true;
-    }
-
     var posts = this.state.posts,
         postIndexItems,
         postForm;
@@ -35,8 +26,9 @@ var PostIndex = React.createClass({
 
     postForm = <div className='empty-post-form' />;
 
-  if (authorizedToPost) {
-    postForm = <PostForm isEditing={false} profileOwnerId={profileOwnerId}/>;
+  if (this.authorizedToPost()) {
+    postForm = <PostForm isEditing={false}
+      profileOwnerId={this.props.profileOwnerId}/>;
   }
 
     return (
@@ -60,6 +52,14 @@ var PostIndex = React.createClass({
   componentWillUnmount: function () {
     this.postListener.remove();
     this.userListener.remove();
+  },
+  authorizedToPost: function () {
+    if (this.props.profileOwnerId === SessionStore.currentUser().id) {
+      return true;
+    } else if (UserStore.user().isFriendOfCurrentUser) {
+      return true;
+    }
+    return false;
   },
   onPostStoreChange: function () {
     this.setState({posts: PostStore.all()});

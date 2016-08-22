@@ -80,14 +80,12 @@ var React = require('react'),
        },
       onUserStoreChange: function () {
         var profileOwnerId = this.profileOwnerId();
-
         this.setState({
           profileFetched: UserStore.profileFetched(profileOwnerId)
         });
       },
       onFriendStoreChange: function () {
         var profileOwnerId = this.profileOwnerId();
-
         this.setState({
           friendsFetched: FriendStore.friendsFetched(profileOwnerId)
         });
