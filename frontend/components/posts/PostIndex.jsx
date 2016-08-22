@@ -17,23 +17,22 @@ var PostIndex = React.createClass({
   },
   render: function () {
     var posts = this.state.posts,
-        postIndexItems,
-        postForm;
+        postIndexItems;
 
     postIndexItems = posts.map(function (post) {
       return <PostIndexItem post={post} key={post.postId} />;
     });
 
-    postForm = <div className='empty-post-form' />;
-
-  if (this.authorizedToPost()) {
-    postForm = <PostForm isEditing={false}
-      profileOwnerId={this.props.profileOwnerId}/>;
-  }
+    var renderForm = function () {
+      if (this.authorizedToPost()) {
+        return <PostForm isEditing={false}
+          profileOwnerId={this.props.profileOwnerId}/>;
+      }
+    }.bind(this);
 
     return (
       <section className='post-index'>
-        {postForm}
+        {renderForm()}
         {postIndexItems}
       </section>
     );
