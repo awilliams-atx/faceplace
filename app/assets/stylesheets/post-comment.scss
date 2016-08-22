@@ -4,6 +4,10 @@
 
 .post-comment-form {
   padding: 8px 12px 8px;
+  img {
+    @include commentProfilePic;
+    @include squareObjectFit(30px);
+  }
   textarea {
     @include freeStandard12;
     display: block;
@@ -15,14 +19,6 @@
     outline: none;
     padding: 7px 5px;
   }
-  .post-comment-profile-pic {
-    @include commentProfilePic;
-    @include squareObjectFit(30px);
-  }
-}
-.post-comment-image {
-  display: block;
-  float: left;
 }
 .post-comment-body {
   @include freeStandard12;

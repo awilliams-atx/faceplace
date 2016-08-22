@@ -9,8 +9,7 @@ var PostCommentForm = React.createClass({
   render: function () {
     return (
       <div className='post-comment-form group'>
-        <img src={SessionStore.currentUser().profile_pic_url}
-          className='post-comment-profile-pic' />
+        <img src={SessionStore.currentUser().profile_pic_url} />
         <textarea placeholder='Write a comment...'
           value={this.state.body}
           onChange={this.onChange}
