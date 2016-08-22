@@ -37,29 +37,27 @@ var PostIndexItem = React.createClass({
       }
     }.bind(this);
 
-    var postOptionsIcon = <div className='empty-post-options-icon' />;
+    var renderOptionsIcon = function () {
+      if (this.authorizedToEdit()) {
+        return (
+          <i className="fa fa-chevron-down"
+            aria-hidden="true"
+            onClick={this.toggleOptions}>
+          </i>
+        );
+      }
+    }.bind(this);
 
-    if (this.authorizedToEdit()) {
-      postOptionsIcon = (
-        <i className="fa fa-chevron-down"
-          aria-hidden="true"
-          onClick={this.toggleOptions}>
-        </i>
-      );
-    }
-    
-    var renderPostOptions = function () {
+    var renderOptions = function () {
       if (this.state.selectingOptions) {
         return (
           <ul className='post-options group'>
-            <li className='post-option'
-              onClick={this.editPost}>
+            <li className='post-option' onClick={this.editPost}>
               Edit Post
             </li>
             <br />
             <hr />
-            <li className='post-option'
-              onClick={this.deletePost}>
+            <li className='post-option' onClick={this.deletePost}>
               Delete Post
             </li>
           </ul>
@@ -84,8 +82,8 @@ var PostIndexItem = React.createClass({
             <div className='post-datetime'>{this.props.post.createdAt}</div>
           </div>
           <aside className='post-options-container'>
-            {postOptionsIcon}
-            {renderPostOptions()}
+            {renderOptionsIcon()}
+            {renderOptions()}
           </aside>
         </header>
         <section className='post-body'>
@@ -165,7 +163,7 @@ var PostIndexItem = React.createClass({
           <PostForm isEditing={true}
             modalCallback={completionCallback}
             post={post}
-            isModalElement={true}/>
+            isModalElement={true} />
           </aside>
         </div>
       );
@@ -176,7 +174,7 @@ var PostIndexItem = React.createClass({
     });
   },
   toggleOptions: function () {
-    this.setState({selectingOptions: !this.state.selectingOptions});
+    this.setState({ selectingOptions: !this.state.selectingOptions });
   }
 });
 
