@@ -1,4 +1,5 @@
 var React = require('react'),
+    Util = require('../../util/general'),
     PostForm = require('./PostForm'),
     ClientActions = require('../../actions/client_actions'),
     PostCommentIndex = require('../comments/PostCommentIndex'),
@@ -18,37 +19,13 @@ var PostIndexItem = React.createClass({
     if (taggedFriends.length > 0) {
       withText = '—with ';
 
-      taggedFriendSpans = taggedFriends.map(function (friend, idx) {
-        var separator = ', ';
+      taggedFriends = (
+        <div className='post-tagged-friends'>
+          <span className='post-tagged-friends-with'>{withText}</span>
+          {Util.toCommaSeparatedAnchors(taggedFriends)}
+        </div>
+      );
 
-        if (taggedFriends.length === 2) {
-          if (idx === taggedFriends.length - 2) {
-            separator = ' and ';
-          }
-        } else if (taggedFriends.length > 2) {
-          if (idx === taggedFriends.length - 2) {
-            separator = ', and ';
-          }
-        }
-
-        if (idx === taggedFriends.length -1) {
-          separator = '';
-        }
-
-        return (
-          <span key={idx}>
-            <a href={'#/users/' + friend.taggedId}>
-              {friend.fullName}
-            </a>
-            {separator}
-          </span>
-        );
-      });
-      taggedFriends =
-      <div className='post-tagged-friends'>
-        <span className='post-tagged-friends-with'>{withText}</span>
-        {taggedFriendSpans}
-      </div>
     } else {
       taggedFriends = <span className='empty-post-tagged-friends'></span>;
     }
@@ -215,7 +192,7 @@ var PostIndexItem = React.createClass({
       );
     };
 
-    this.setState({selectingOptions: false}, function () {
+    this.setState({ selectingOptions: false }, function () {
       ClientActions.triggerModal(modalContent);
     });
   },
