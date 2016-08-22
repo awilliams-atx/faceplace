@@ -62,22 +62,9 @@ var ClientActions = {
   fetchUser: function (id) {
     UserApiUtil.fetchUser(id);
   },
-  fetchUsers: function () {
-    UserApiUtil.fetchUsers();
-  },
   freezeTags: function () {
     Dispatcher.dispatch({
       actionType: tagConstants.FREEZE_TAGS
-    });
-  },
-  getFriended: function () {
-    Dispatcher.dispatch({
-      actionType: friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED
-    });
-  },
-  getUnfriended: function () {
-    Dispatcher.dispatch({
-      actionType: friendshipConstants.GET_UNFRIENDED
     });
   },
   makeFriendRequest: function (userId) {

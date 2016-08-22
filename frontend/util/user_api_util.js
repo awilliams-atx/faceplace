@@ -13,16 +13,6 @@ var UserApiUtil = {
       }
     });
   },
-  fetchUsers: function () {
-    $.ajax({
-      url: 'api/users',
-      method: 'GET',
-      dataType: 'json',
-      success: function (users) {
-        ServerActions.receiveUsers(users);
-      }
-    });
-  },
   setProfile: function (profile, cb) {
     $.ajax({
       url: 'api/user',

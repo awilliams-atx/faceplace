@@ -28,15 +28,19 @@ UserStore.__onDispatch = function (payload) {
     UserStore.__emitChange();
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED:
-    _user.isFriendOfCurrentUser = true;
-    _user.requestReceived = false;
-    _user.alreadyFriends = true;
-    UserStore.__emitChange();
+    if (payload.response.maker_id === _user.userId) {
+      _user.isFriendOfCurrentUser = true;
+      _user.requestReceived = false;
+      _user.alreadyFriends = true;
+      UserStore.__emitChange();
+    }
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED:
-    _user.isFriendOfCurrentUser = false;
-    _user.requestReceived = false;
-    UserStore.__emitChange();
+    if (payload.response.maker_id === _user.userId) {
+      _user.isFriendOfCurrentUser = false;
+      _user.requestReceived = false;
+      UserStore.__emitChange();
+    }
     break;
   case userConstants.UPDATED_COVER_PHOTO_URL_RECEIVED:
     _user.coverPhotoUrl = payload.coverPhotoUrl;
