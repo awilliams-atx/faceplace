@@ -24,15 +24,10 @@ var React = require('react'),
           </div>
         );
       },
-      componentDidMount: function () {
-        this.friendListener = FriendStore.addListener(this.onFriendStoreChange);
-        ClientActions.fetchMostRecentlyAddedFriends(this.props.params.userId);
-      },
       componentWillUnmount: function () {
         this.profileOwnerId = function () {
           return this.props.params.userId || SessionStore.currentUser().id
         }
-        this.friendListener.remove();
       },
       componentWillReceiveProps: function (props) {
         console.log('Timeline#componentWillReceiveProps');
@@ -41,10 +36,6 @@ var React = require('react'),
       },
       authorizedToEdit: function () {
         return this.profileOwnerId() === SessionStore.currentUser().id;
-      },
-      onFriendStoreChange: function () {
-        console.log('Timeline#onFriendStoreChange');
-        this.forceUpdate();
       },
       profileOwnerId: function () {
         return parseInt(this.props.params.userId) || SessionStore.currentUser().id
