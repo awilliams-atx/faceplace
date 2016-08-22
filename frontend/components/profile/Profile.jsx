@@ -24,7 +24,6 @@ var Profile = React.createClass({
       }
     }.bind(this);
 
-
     var profile = (
       <div className='content'>
         <Nav />
@@ -70,7 +69,7 @@ var Profile = React.createClass({
     this.setState({ profileOwner: UserStore.user() });
   },
   profileOwnerId: function () {
-    return parseInt(this.props.params.userId) || SessionStore.currentUser().id
+    return parseInt(this.props.params.userId);
   }
 });
 
