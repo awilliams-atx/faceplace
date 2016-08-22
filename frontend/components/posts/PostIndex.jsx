@@ -8,11 +8,9 @@ var React = require('react'),
 
 var PostIndex = React.createClass({
   getInitialState: function () {
-    var profileOwnerId = this.props.profileOwnerId;
     return ({
       isFriendOfProfileOwner: UserStore.user().isFriendOfCurrentUser,
-      posts: PostStore.all(),
-      editingPosts: {}
+      posts: PostStore.all()
     });
   },
   render: function () {
@@ -37,39 +35,32 @@ var PostIndex = React.createClass({
     );
   },
   componentDidMount: function () {
-    var profileOwnerId = this.props.profileOwnerId;
-
-    this.postListener =
-      PostStore.addListener(this.onPostStoreChange);
-
-    this.userListener =
-      UserStore.addListener(this.onUserStoreChange);
-
-    ClientActions.fetchTimelinePosts(profileOwnerId);
+    this.postListener = PostStore.addListener(this.onPostStoreChange);
+    this.userListener = UserStore.addListener(this.onUserStoreChange);
+    ClientActions.fetchTimelinePosts(this.props.profileOwnerId);
   },
   componentWillUnmount: function () {
     this.postListener.remove();
     this.userListener.remove();
   },
   authorizedToPost: function () {
-    if (this.props.profileOwnerId === SessionStore.currentUser().id) {
-      return true;
-    } else if (UserStore.user().isFriendOfCurrentUser) {
-      return true;
+    var authorized = false;
+    if (UserStore.user().isFriendOfCurrentUser ||
+      this.props.profileOwnerId === SessionStore.currentUser().id) {
+      authorized = true;
     }
-    return false;
+    return authorized;
   },
   onPostStoreChange: function () {
-    this.setState({posts: PostStore.all()});
+    this.setState({ posts: PostStore.all() });
   },
   onUserStoreChange: function () {
-    var profileOwnerId = this.props.profileOwnerId;
-
-    this.setState({isFriendOfProfileOwner:
-      UserStore.user().isFriendOfCurrentUser});
+    this.setState({
+      isFriendOfProfileOwner: UserStore.user().isFriendOfCurrentUser
+    });
   },
   componentWillReceiveProps: function (newProps) {
-    this.setState({posts: PostStore.all()});
+    this.setState({ posts: PostStore.all() });
   }
 });
 

@@ -12,13 +12,9 @@ var React = require('react'),
 
     var Timeline = React.createClass({
       getInitialState: function () {
-        this.profileOwnerId = function () {
-          return parseInt(this.props.params.userId) || SessionStore.currentUser().id
-        }.bind(this)
-        var profileOwnerId = this.profileOwnerId();
         return({
-          profileFetched: UserStore.profileFetched(profileOwnerId),
-          friendsFetched: FriendStore.friendsFetched(profileOwnerId)
+          profileFetched: UserStore.profileFetched(this.profileOwnerId()),
+          friendsFetched: FriendStore.friendsFetched(this.profileOwnerId())
         });
       },
       render: function () {
@@ -54,12 +50,9 @@ var React = require('react'),
         );
       },
       componentDidMount: function () {
-        var profileOwnerId = this.props.params.userId;
-        this.profileListener =
-          UserStore.addListener(this.onUserStoreChange);
-        this.friendListener =
-          FriendStore.addListener(this.onFriendStoreChange);
-        ClientActions.fetchMostRecentlyAddedFriends(profileOwnerId);
+        this.profileListener = UserStore.addListener(this.onUserStoreChange);
+        this.friendListener = FriendStore.addListener(this.onFriendStoreChange);
+        ClientActions.fetchMostRecentlyAddedFriends(this.props.params.userId);
       },
       componentWillUnmount: function () {
         this.profileOwnerId = function () {
@@ -68,20 +61,17 @@ var React = require('react'),
         this.profileListener.remove();
         this.friendListener.remove();
       },
-       componentWillReceiveProps: function (newProps) {
-         var newProfileOwnerId = newProps.params.userId;
-         FriendApiUtil.fetchMostRecentlyAddedFriends(newProfileOwnerId);
-         PostApiUtil.fetchTimelinePosts(newProfileOwnerId);
-       },
-       onPostStoreChange: function () {
-         var profileOwnerId = this.profileOwnerId();
-
-         this.setState({posts: PostStore.all(profileOwnerId)});
-       },
+      componentWillReceiveProps: function (newProps) {
+        var newProfileOwnerId = newProps.params.userId;
+        FriendApiUtil.fetchMostRecentlyAddedFriends(newProfileOwnerId);
+        PostApiUtil.fetchTimelinePosts(newProfileOwnerId);
+      },
+      onPostStoreChange: function () {
+        this.setState({ posts: PostStore.all(this.profileOwnerId()) });
+      },
       onUserStoreChange: function () {
-        var profileOwnerId = this.profileOwnerId();
         this.setState({
-          profileFetched: UserStore.profileFetched(profileOwnerId)
+          profileFetched: UserStore.profileFetched(this.profileOwnerId())
         });
       },
       onFriendStoreChange: function () {
@@ -89,6 +79,9 @@ var React = require('react'),
         this.setState({
           friendsFetched: FriendStore.friendsFetched(profileOwnerId)
         });
+      },
+      profileOwnerId: function () {
+        return parseInt(this.props.params.userId) || SessionStore.currentUser().id
       }
     });
 
