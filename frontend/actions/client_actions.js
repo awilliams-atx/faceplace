@@ -38,6 +38,9 @@ var ClientActions = {
       actionType: friendRequestConstants.CHECKING_REQUESTS_NOW
     });
   },
+  fetchComments: function (type, id) {
+    CommentApiUtil.fetchComments(type, id);
+  },
   fetchFriendRequests: function () {
     FriendRequestApiUtil.fetchFriendRequests();
   },

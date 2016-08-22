@@ -31,10 +31,6 @@ var PostCommentIndex = React.createClass({
   },
   componentDidMount: function () {
     this.commentListener = CommentStore.addListener(this.onCommentStoreChange);
-    CommentApiUtil.fetchComments({
-      commentable_id: this.props.post.postId,
-      commentable_type: 'Post'
-    });
   },
   componentWillUnmount: function () {
     this.commentListener.remove();

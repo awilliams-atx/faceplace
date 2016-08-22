@@ -1,13 +1,13 @@
 var ServerActions = require('../actions/server_actions');
 
 var CommentApiUtil = {
-  fetchComments: function (opts) {
+  fetchComments: function (type, id) {
     var url = 'api/';
 
-    if (opts.commentable_type === 'Post') {
-      url += 'posts/' + opts.commentable_id + '/comments';
-    } else if (opts.commentable_type === 'Comment') {
-      url += 'comments/' + opts.commentable_id + '/comments';
+    if (type === 'Post') {
+      url += 'posts/' + id + '/comments';
+    } else if (type === 'Comment') {
+      url += 'comments/' + id + '/comments';
     }
 
     $.ajax({

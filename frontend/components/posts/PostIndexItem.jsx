@@ -143,6 +143,9 @@ var PostIndexItem = React.createClass({
       </article>
     );
   },
+  componentDidMount: function () {
+    ClientActions.fetchComments('Post', this.props.post.postId);
+  },
   deletePost: function () {
     $('body').addClass('no-scroll-body');
 
