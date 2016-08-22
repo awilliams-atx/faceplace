@@ -34,15 +34,15 @@ var SearchIndex = React.createClass({
     }
 
     return (
-      <div className='nav-search' id='search-bar'>
+      <div id='search-bar-container'>
         <form onSubmit={this.handleSubmit} >
           <input placeholder='Search Faceplace'
+            id='search-bar'
             onChange={this.onSearchStringChange}
-            onFocus={this.showIndexItems}
-            className='search-bar' />
+            onFocus={this.showIndexItems} />
         </form>
 
-        <div className='search-index-items overlay'>
+        <div id='search-index' className='overlay'>
           {searchIndexItems}
         </div>
       </div>
@@ -81,7 +81,7 @@ var SearchIndex = React.createClass({
       searching: true
     }, function () {
       this.clickListener = function (e) {
-        var searchBar = document.getElementById('search-bar');
+        var searchBar = document.getElementById('search-bar-container');
 
         if (!searchBar.contains(e.target)) {
           this.hideIndexItems();
