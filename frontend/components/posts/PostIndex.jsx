@@ -16,13 +16,6 @@ var PostIndex = React.createClass({
     });
   },
   render: function () {
-    var posts = this.state.posts,
-        postIndexItems;
-
-    postIndexItems = posts.map(function (post) {
-      return <PostIndexItem post={post} key={post.postId} />;
-    });
-
     var renderForm = function () {
       if (this.authorizedToPost()) {
         return <PostForm isEditing={false}
@@ -30,10 +23,16 @@ var PostIndex = React.createClass({
       }
     }.bind(this);
 
+    var renderPosts = function () {
+      return this.state.posts.map(function (post) {
+        return <PostIndexItem post={post} key={post.postId} />;
+      });
+    }.bind(this);
+
     return (
       <section className='post-index'>
         {renderForm()}
-        {postIndexItems}
+        {renderPosts()}
       </section>
     );
   },
