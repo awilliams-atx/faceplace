@@ -10,8 +10,23 @@ var PostIndexItem = React.createClass({
     return ({ selectingOptions: false });
   },
   render: function () {
-    console.log(this.props.post);
     var post = this.props.post
+
+    var renderCrossPostBreakdown = function () {
+      if (!this.props.post.profileOwner) { return; }
+      return (
+        <div>
+          <div className='friend-post-icon'>
+            <i className='fa fa-caret-right' aria-hidden='true'></i>
+          </div>
+          <div className='friend-post-breakdown'>
+            <a href={'#/users/' + this.props.post.profileOwner.userId}>
+              {this.props.post.profileOwner.fullName}
+            </a>
+          </div>
+        </div>
+      );
+    }.bind(this);
 
     var renderTaggedFriends = function () {
       if (this.props.post.taggedFriends.length > 0) {
@@ -23,26 +38,6 @@ var PostIndexItem = React.createClass({
         );
       }
     }.bind(this);
-
-    var friendPostBreakdown = <div className='empty-friend-post-breakdown'/>;
-    var friendPostBreakdownImg =
-      <div className='empty-friend-post-breakdown-img' />;
-
-    if (this.props.post.profileOwner) {
-      friendPostBreakdownImg = (
-        <div className='friend-post-icon'>
-          <i className='fa fa-caret-right' aria-hidden='true'></i>
-        </div>
-      );
-
-      friendPostBreakdown = (
-        <div className='friend-post-breakdown'>
-          <a href={'#/users/' + this.props.post.profileOwner.userId}>
-            {this.props.post.profileOwner.fullName}
-          </a>
-        </div>
-      );
-    }
     var postOptionsIconUrl =
       'https://s3.amazonaws.com/faceplace-dev/assets/post_options_icon.png';
     var postOptionsIcon = <div className='empty-post-options-icon' />;
@@ -89,8 +84,7 @@ var PostIndexItem = React.createClass({
             <a href={'#/users/' + post.authorId}>
               <div className='post-author-name'>{post.fullName}</div>
             </a>
-            {friendPostBreakdownImg}
-            {friendPostBreakdown}
+            {renderCrossPostBreakdown()}
           </div>
           <br />
           <div className='post-datetime-container group'>
