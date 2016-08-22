@@ -7,12 +7,11 @@ var React = require('react'),
 
 var PostIndexItem = React.createClass({
   getInitialState: function () {
-    return ({selectingOptions: false});
+    return ({ selectingOptions: false });
   },
   render: function () {
-    var post = this.props.post;
-
-    var authorUrl = '#/users/' + post.authorId;
+    console.log(this.props.post);
+    var post = this.props.post
 
     var renderTaggedFriends = function () {
       if (this.props.post.taggedFriends.length > 0) {
@@ -25,16 +24,11 @@ var PostIndexItem = React.createClass({
       }
     }.bind(this);
 
-
-    var friendTimelinePostIconUrl = 'https://s3.amazonaws.com/faceplace-dev/assets/friend_timeline_post_icon.png';
-
-    var friendPostBreakdown =
-      <div className='empty-friend-post-breakdown'/>,
-        friendProfileOwner = this.props.post.profileOwner,
-        friendPostBreakdownImg =
+    var friendPostBreakdown = <div className='empty-friend-post-breakdown'/>;
+    var friendPostBreakdownImg =
       <div className='empty-friend-post-breakdown-img' />;
 
-    if (friendProfileOwner) {
+    if (this.props.post.profileOwner) {
       friendPostBreakdownImg = (
         <div className='friend-post-icon'>
           <i className='fa fa-caret-right' aria-hidden='true'></i>
@@ -43,8 +37,8 @@ var PostIndexItem = React.createClass({
 
       friendPostBreakdown = (
         <div className='friend-post-breakdown'>
-          <a href={'#/users/' + friendProfileOwner.userId}>
-            {friendProfileOwner.fullName}
+          <a href={'#/users/' + this.props.post.profileOwner.userId}>
+            {this.props.post.profileOwner.fullName}
           </a>
         </div>
       );
@@ -88,11 +82,11 @@ var PostIndexItem = React.createClass({
     return (
       <article className='timeline-feed-item'>
         <header className='post-breakdown group'>
-          <a href={authorUrl}>
+          <a href={'#/users/' + post.authorId}>
             <img src={post.postPicUrl} />
           </a>
           <div className='post-breakdown-details group'>
-            <a href={authorUrl}>
+            <a href={'#/users/' + post.authorId}>
               <div className='post-author-name'>{post.fullName}</div>
             </a>
             {friendPostBreakdownImg}
