@@ -6,11 +6,8 @@ var React = require('react'),
 
 var PostCommentIndex = React.createClass({
   getInitialState: function () {
-    var postId = this.props.postId;
-
-    return ({
-      comments: CommentStore.allPostComments(postId)
-    });
+    var postId = this.props.post.postId;
+    return ({ comments: CommentStore.allPostComments(postId) });
   },
   render: function () {
     var commentIndexItems = this.state.comments.map(function (comment) {
@@ -20,15 +17,14 @@ var PostCommentIndex = React.createClass({
     return (
       <section className='comment-section'>
         {commentIndexItems}
-        <PostCommentForm postId={this.props.postId} />
+        <PostCommentForm postId={this.props.post.postId} />
       </section>
     );
   },
   componentDidMount: function () {
     this.commentListener = CommentStore.addListener(this.onCommentStoreChange);
-
     CommentApiUtil.fetchComments({
-      commentable_id: this.props.postId,
+      commentable_id: this.props.post.postId,
       commentable_type: 'Post'
     });
   },
@@ -39,7 +35,9 @@ var PostCommentIndex = React.createClass({
     this.setState({commentBody: e.target.value});
   },
   onCommentStoreChange: function () {
-    this.setState({comments: CommentStore.allPostComments(this.props.postId)});
+    this.setState({
+      comments: CommentStore.allPostComments(this.props.post.postId)
+    });
   }
 });
 

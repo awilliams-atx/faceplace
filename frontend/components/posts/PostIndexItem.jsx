@@ -139,7 +139,7 @@ var PostIndexItem = React.createClass({
           {post.body}
         </section>
         {taggedFriends}
-        <PostCommentIndex postId={post.postId} />
+        <PostCommentIndex post={post} />
       </article>
     );
   },
@@ -211,7 +211,6 @@ var PostIndexItem = React.createClass({
         </div>
       );
     };
-
 
     this.setState({selectingOptions: false}, function () {
       ClientActions.triggerModal(modalContent);
