@@ -38,7 +38,6 @@ var PostIndexItem = React.createClass({
     }.bind(this);
 
     var postOptionsIcon = <div className='empty-post-options-icon' />;
-    var postOptions = <div className='empty-post-options' />;
 
     if (this.authorizedToEdit()) {
       postOptionsIcon = (
@@ -47,9 +46,11 @@ var PostIndexItem = React.createClass({
           onClick={this.toggleOptions}>
         </i>
       );
-
+    }
+    
+    var renderPostOptions = function () {
       if (this.state.selectingOptions) {
-        postOptions = (
+        return (
           <ul className='post-options group'>
             <li className='post-option'
               onClick={this.editPost}>
@@ -64,7 +65,7 @@ var PostIndexItem = React.createClass({
           </ul>
         );
       }
-    }
+    }.bind(this);
 
     return (
       <article className='timeline-feed-item'>
@@ -84,7 +85,7 @@ var PostIndexItem = React.createClass({
           </div>
           <aside className='post-options-container'>
             {postOptionsIcon}
-            {postOptions}
+            {renderPostOptions()}
           </aside>
         </header>
         <section className='post-body'>
