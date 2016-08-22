@@ -10,11 +10,9 @@ var React = require('react'),
 
 var Profile = React.createClass({
   getInitialState: function () {
-    console.log('Profile#getInitialState');
     return ({ user: UserStore.user() });
   },
   render: function () {
-    console.log('Profile#render');
     return (
       <div className='content'>
         <Nav />
@@ -51,14 +49,12 @@ var Profile = React.createClass({
     this.userListener.remove();
   },
   componentWillReceiveProps: function (props) {
-    console.log('Profile#componentWillReceiveProps');
     ClientActions.fetchUser(props.params.userId);
   },
   authorizedToEdit: function () {
     return this.profileOwnerId() === SessionStore.currentUser().id;
   },
   onUserStoreChange: function () {
-    console.log('Profile#onUserStoreChange');
     this.setState({ user: UserStore.user() });
   },
   profileOwnerId: function () {

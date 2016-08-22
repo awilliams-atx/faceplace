@@ -10,7 +10,6 @@ var React = require('react'),
 
     var Timeline = React.createClass({
       render: function () {
-        console.log('Timeline#render');
         return (
           <div className='timeline-content group'>
             <aside className='timeline-sidebar'>
@@ -24,12 +23,12 @@ var React = require('react'),
           </div>
         );
       },
-      componentWillUnmount: function () {
-        this.profileOwnerId = function () {
-          return this.props.params.userId || SessionStore.currentUser().id
-        }
+      componentDidMount: function () {
+        ClientActions.fetchMostRecentlyAddedFriends(this.props.params.userId);
+        ClientActions.fetchTimelinePosts(this.props.params.userId);
       },
       componentWillReceiveProps: function (props) {
+        ClientActions.fetchMostRecentlyAddedFriends(props.params.userId);
         ClientActions.fetchTimelinePosts(props.params.userId);
       },
       authorizedToEdit: function () {

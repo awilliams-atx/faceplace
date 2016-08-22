@@ -1,6 +1,5 @@
 var React = require('react'),
     FriendIndexItem = require('./FriendIndexItem'),
-    ClientActions = require('../../../../actions/client_actions'),
     FriendStore = require('../../../../stores/friend');
 
 var FriendIndex = React.createClass({
@@ -27,10 +26,6 @@ var FriendIndex = React.createClass({
   },
   componentDidMount: function () {
     this.friendListener = FriendStore.addListener(this.onFriendStoreChange);
-    ClientActions.fetchMostRecentlyAddedFriends(this.props.user_id);
-  },
-  componentWillReceiveProps: function (props) {
-    ClientActions.fetchMostRecentlyAddedFriends(props.user_id);
   },
   componentWillUnmount: function () {
     this.friendListener.remove();

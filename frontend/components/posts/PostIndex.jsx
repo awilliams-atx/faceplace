@@ -1,7 +1,6 @@
 var React = require('react'),
     PostForm = require('./PostForm'),
     PostIndexItem = require('./PostIndexItem'),
-    ClientActions = require('../../actions/client_actions'),
     PostStore = require('../../stores/post'),
     SessionStore = require('../../stores/session'),
     UserStore = require('../../stores/user');
@@ -37,7 +36,6 @@ var PostIndex = React.createClass({
   componentDidMount: function () {
     this.postListener = PostStore.addListener(this.onPostStoreChange);
     this.userListener = UserStore.addListener(this.onUserStoreChange);
-    ClientActions.fetchTimelinePosts(this.props.profileOwnerId);
   },
   componentWillUnmount: function () {
     this.postListener.remove();
