@@ -12,23 +12,18 @@ var PostIndexItem = React.createClass({
   render: function () {
     var post = this.props.post;
 
-    var authorUrl = '#/users/' + post.authorId,
-        taggedFriends = post.taggedFriends,
-        withText = '';
+    var authorUrl = '#/users/' + post.authorId;
 
-    if (taggedFriends.length > 0) {
-      withText = '—with ';
-
-      taggedFriends = (
-        <div className='post-tagged-friends'>
-          <span className='post-tagged-friends-with'>{withText}</span>
-          {Util.toCommaSeparatedAnchors(taggedFriends)}
-        </div>
-      );
-
-    } else {
-      taggedFriends = <span className='empty-post-tagged-friends'></span>;
-    }
+    var renderTaggedFriends = function () {
+      if (this.props.post.taggedFriends.length > 0) {
+        return (
+          <div className='post-tagged-friends'>
+            <span className='post-tagged-friends-with'>—with </span>
+            {Util.toCommaSeparatedAnchors(this.props.post.taggedFriends)}
+          </div>
+        );
+      }
+    }.bind(this);
 
 
     var friendTimelinePostIconUrl = 'https://s3.amazonaws.com/faceplace-dev/assets/friend_timeline_post_icon.png';
@@ -115,7 +110,7 @@ var PostIndexItem = React.createClass({
         <section className='post-body'>
           {post.body}
         </section>
-        {taggedFriends}
+        {renderTaggedFriends()}
         <PostCommentIndex post={post} />
       </article>
     );
