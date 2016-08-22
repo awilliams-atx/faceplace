@@ -10,43 +10,31 @@ var PostCommentForm = React.createClass({
     return (
       <div className='post-comment-form group'>
         <img src={SessionStore.currentUser().profile_pic_url}
-          className='post-comment-profile-pic'/>
-        <form onSubmit={this.doNothing}>
-          <textarea placeholder='Write a comment...'
-            value={this.state.body}
-            onChange={this.onCommentBodyChange}
-            onKeyPress={this.handleEnter}></textarea>
-        </form>
+          className='post-comment-profile-pic' />
+        <textarea placeholder='Write a comment...'
+          value={this.state.body}
+          onChange={this.onChange}
+          onKeyPress={this.onSubmit}></textarea>
       </div>
     );
   },
-  handleEnter: function (e) {
+  onChange: function (e) {
+    this.setState({body: e.target.value});
+  },
+  onSubmit: function (e) {
     if (e.charCode === 13) {
-      e.preventDefault();
-      if (this.state.body.length) {
+      if (this.state.body.length > 0) {
         var comment = {
           body: this.state.body,
           commentableId: this.props.postId,
           commentableType: 'Post'
         };
-
         this.setState({body: ''}, function () {
           ClientActions.submitComment(comment);
         });
       }
     }
-
-  },
-  handleSubmit: function () {
-
-  },
-  doNothing: function (e) {
-    e.preventDefault();
-  },
-  onCommentBodyChange: function (e) {
-    this.setState({body: e.target.value});
-  },
-
+  }
 });
 
 module.exports = PostCommentForm;
