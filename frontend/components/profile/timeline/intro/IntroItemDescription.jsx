@@ -1,5 +1,5 @@
 var React = require('react'),
-    UserApiUtil = require('../../../../util/user_api_util'),
+    ClientActions = require('../../../../actions/client_actions'),
     UserStore = require('../../../../stores/user'),
     FormStore = require('../../../../stores/form');
 
@@ -63,13 +63,13 @@ var IntroItemDescription = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    UserApiUtil.setProfile({description: this.state.description});
+    ClientActions.submitProfile({ description: this.state.description });
   },
   onFormChange: function (e) {
-    this.setState({description: e.target.value});
+    this.setState({ description: e.target.value });
   },
   onUserStoreChange: function (e) {
-    this.setState({description: UserStore.user().description});
+    this.setState({ description: UserStore.user().description });
   },
   onFormStoreChange: function (e) {
     if (FormStore.isOpen('INTRO_DESCRIPTION') && !this.state.editing) {

@@ -1,5 +1,5 @@
 var React = require('react'),
-    UserApiUtil = require('../../../../util/user_api_util'),
+    ClientActions = require('../../../../actions/client_actions'),
     UserStore = require('../../../../stores/user');
 
 var IntroItemHometown = React.createClass({
@@ -64,15 +64,13 @@ var IntroItemHometown = React.createClass({
   handleSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    UserApiUtil.setProfile({
-      hometown: this.state.hometown
-    });
+    ClientActions.submitProfile({ hometown: this.state.hometown });
   },
   onFormChange: function (e) {
-    this.setState({hometown: e.target.value});
+    this.setState({ hometown: e.target.value });
   },
   onUserStoreChange: function (e) {
-    this.setState({hometown: UserStore.user().hometown});
+    this.setState({ hometown: UserStore.user().hometown });
   }
 });
 

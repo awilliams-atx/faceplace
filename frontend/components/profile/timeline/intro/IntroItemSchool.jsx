@@ -1,5 +1,5 @@
 var React = require('react'),
-    UserApiUtil = require('../../../../util/user_api_util'),
+    ClientActions = require('../../../../actions/client_actions'),
     UserStore = require('../../../../stores/user');
 
 var IntroItemSchool = React.createClass({
@@ -56,9 +56,7 @@ var IntroItemSchool = React.createClass({
   showEdit: function (e) {
     e.preventDefault();
     if (!this.props.authorizedToEdit) { return; }
-    this.setState({
-      editing: true
-    }, function () {
+    this.setState({ editing: true }, function () {
       this.refs.autoFocus.focus();
     });
   },
@@ -67,28 +65,24 @@ var IntroItemSchool = React.createClass({
     this.setState({
       school: UserStore.user().school,
       major: UserStore.user().major
-    }, function () {
-    this.toggleEdit();
-  });
+    }, function () { this.toggleEdit(); });
   },
   toggleEdit: function () {
-    this.setState({
-      editing: !this.state.editing
-    });
+    this.setState({ editing: !this.state.editing });
   },
   handleSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    UserApiUtil.setProfile({
+    ClientActions.submitProfile({
       major: this.state.major,
       school: this.state.school
     });
   },
   onSchoolChange: function (e) {
-    this.setState({school: e.target.value});
+    this.setState({ school: e.target.value });
   },
   onMajorChange: function (e) {
-    this.setState({major: e.target.value});
+    this.setState({ major: e.target.value });
   },
   onUserStoreChange: function (e) {
     this.setState({

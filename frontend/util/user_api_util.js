@@ -13,12 +13,12 @@ var UserApiUtil = {
       }
     });
   },
-  setProfile: function (profile, cb) {
+  submitProfile: function (profile, cb) {
     $.ajax({
       url: 'api/user',
       method: 'PATCH',
       dataType: 'json',
-      data: {profile: profile},
+      data: { profile: profile },
       success: function (profile) {
         ServerActions.receiveProfile(profile);
         cb && cb();

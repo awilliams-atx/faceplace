@@ -94,8 +94,10 @@ var ClientActions = {
       profile_owner_id: post.profileOwnerId,
       tagged_ids: post.taggedFriendIds
     };
-
     PostApiUtil.submitPost(submissionPost);
+  },
+  submitProfile: function (changes) {
+    UserApiUtil.submitProfile(changes);
   },
   triggerModal: function (modalContent, cb) {
     Dispatcher.dispatch({

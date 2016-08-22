@@ -1,5 +1,5 @@
 var React = require('react'),
-    UserApiUtil = require('../../../../util/user_api_util'),
+    ClientActions = require('../../../../actions/client_actions'),
     UserStore = require('../../../../stores/user');
 
 var IntroItemWork = React.createClass({
@@ -58,9 +58,7 @@ var IntroItemWork = React.createClass({
   showEdit: function (e) {
     e.preventDefault();
     if (!this.props.authorizedToEdit) { return; }
-    this.setState({
-      editing: true
-    }, function () {
+    this.setState({ editing: true }, function () {
       this.refs.autoFocus.focus();
     });
   },
@@ -72,23 +70,21 @@ var IntroItemWork = React.createClass({
     }, this.toggleEdit);
   },
   toggleEdit: function () {
-    this.setState({editing: !this.state.editing});
+    this.setState({ editing: !this.state.editing });
   },
   handleSubmit: function (e) {
     e.preventDefault();
-    this.setState({
-      editing: false
-    });
-    UserApiUtil.setProfile({
+    this.setState({ editing: false });
+    ClientActions.submitProfile({
       company: this.state.company,
       position: this.state.position
     });
   },
   onPositionChange: function (e) {
-    this.setState({position: e.target.value});
+    this.setState({ position: e.target.value });
   },
   onCompanyChange: function (e) {
-    this.setState({company: e.target.value});
+    this.setState({ company: e.target.value });
   },
   onUserStoreChange: function (e) {
     this.setState({
