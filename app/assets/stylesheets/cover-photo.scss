@@ -1,59 +1,53 @@
 @import 'free-type-size';
 
-.cover-photo {
+#cover-photo {
   img {
     height: 315px;
-    width: 851px;
     object-fit: cover;
-  }
-  input {
-    position: absolute;
-    cursor: pointer;
-    top: 2px;
-    left: -91px;
-    z-index: 2;
-    outline: none;
-    width: 280px;
-    opacity: 0;
-  }
-  input:hover {
-    cursor: pointer;
+    width: 851px;
   }
   i {
-    margin-right: 5px;
+    color: rgba(#ffffff, 0.5);
     display: block;
     float: left;
-    color: rgba(#ffffff, 0.5);
     font-size: 26px;
-    width: 28px;
     height: 28px;
+    margin-right: 5px;
+    width: 28px;
   }
-  i:hover {
-    cursor: pointer;
+  #cover-photo-input-container {
+    left: 21px;
+    position: absolute;
+    top: 15px;
+    strong {
+      color: rgba(#ffffff, 0.5);
+      display: block;
+      float: left;
+      font-family: $freeStandardFontFamily;
+      line-height: 27px;
+      z-index: 1;
+    }
+    input {
+      cursor: pointer;
+      position: absolute;
+      left: -91px;
+      opacity: 0;
+      outline: none;
+      top: 2px;
+      width: 280px;
+      z-index: 2;
+    }
+    input:hover {
+      cursor: pointer;
+    }
+    #cover-photo-input-cover {
+      bottom: 27px;
+      height: 25px;
+      left: -93px;
+      opacity: 0;
+      position: relative;
+      width: 90px;
+      z-index: 5;
+    }
   }
-  strong {
-    font-family: $freeStandardFontFamily;
-    display: block;
-    float: left;
-    line-height: 27px;
-    z-index: 1;
-    color: rgba(#ffffff, 0.5);
-  }
-  strong:hover {
-    cursor: pointer;
-  }
-}
-.cover-photo-input-container {
-  position: absolute;
-  top:15px;
-  left: 21px;
-}
-.cover-photo-input-cover {
-  opacity: 0;
-  z-index: 5;
-  position: relative;
-  background-color: orange;
-  height: 25px;
-  width: 90px;
-  left: -93px;
 }

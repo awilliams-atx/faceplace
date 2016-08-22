@@ -1,47 +1,54 @@
 @import 'free-type-size';
 @import 'profile-pic-size';
 
-.profile-pic-input-container {
-  left: 12px;
+#profile-pic {
+  background-color: white;
+  border: 1px solid rgba(#000000, 0.3);
+  border-radius: 3px;
+  bottom: -31px;
+  left: 11px;
+  padding: 4px;
   position: absolute;
-  top: 10px;
-}
-.profile-pic {
   img {
     @include squareObjectFit(160px);
     display: block;
   }
-  input {
+  #profile-pic-input-container {
+    left: 12px;
+    position: absolute;
+    top: 10px;
+    input {
+      height: 27px;
+      left: -93px;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      width: 240px;
+    }
+    input:hover {
+      cursor: pointer;
+    }
+  }
+  #profile-pic-input-cover {
     height: 27px;
     left: -93px;
-    opacity: 0;
     position: absolute;
     top: 0;
-    width: 240px;
+    width: 89px;
   }
-  input:hover {
-    cursor: pointer;
-  }
-}
-.profile-pic-input-cover {
-  height: 27px;
-  left: -93px;
-  position: absolute;
-  top: 0;
-  width: 89px;
-}
-.profile-pic-input-replacement {
-  color: rgba(#ffffff, 0.5);
-  i {
-    display: block;
-    float: left;
-    font-size: 26px;
-    margin-right: 5px;
-  }
-  strong {
-    @include freeStandard16;
-    display: block;
-    float: left;
-    line-height: 27px;
+  #profile-pic-input-replacement {
+    color: rgba(#ffffff, 0.5);
+    i {
+      display: block;
+      float: left;
+      font-size: 26px;
+      margin-right: 5px;
+    }
+    strong {
+      @include freeStandard16;
+      display: block;
+      float: left;
+      line-height: 27px;
+    }
   }
 }

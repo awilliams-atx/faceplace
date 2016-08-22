@@ -6,23 +6,23 @@ var EditPhotoButton = React.createClass({
     if (this.props.authorizedToEdit) {
       return (
         <form>
-          <div className={this.props.photoType + '-input-container'}>
-            <div className={this.props.photoType + '-input-replacement group'}>
+          <div id={this.props.photoType + '-input-container'}>
+            <div id={this.props.photoType + '-input-replacement'}
+              className='group'>
               <i className="fa fa-camera" aria-hidden="true"></i>
               <strong>Change photo</strong>
             </div>
 
             <input type='file'
-              className={this.props.photoType + '-input'}
               id={this.props.photoType + '-input'}
               onChange={this.updatePhoto} />
 
-            <div className={this.props.photoType + '-input-cover'} />
+            <div id={this.props.photoType + '-input-cover'} />
           </div>
         </form>
       );
     } else {
-      return <div id={this.props.photoType + '-input'}/>;
+      return <div id={this.props.photoType + '-input'} />;
     }
   },
   updatePhoto: function (e) {

@@ -5,7 +5,7 @@ var React = require('react'),
 var CoverPhoto = React.createClass({
   render: function () {
     return (
-      <div className='cover-photo'>
+      <div id='cover-photo'>
         <img src={this.props.coverPhotoUrl} />
         <EditButton authorizedToEdit={this.authorizedToEdit()}
           updateUtil='submitCoverPhoto'

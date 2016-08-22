@@ -5,7 +5,7 @@ var React = require('react'),
 var ProfilePic = React.createClass({
   render: function () {
     return (
-      <div className='profile-pic'>
+      <div id='profile-pic'>
         <img src={this.props.profilePicUrl} />
         <EditButton authorizedToEdit={this.authorizedToEdit()}
           updateUtil='submitProfilePic'
