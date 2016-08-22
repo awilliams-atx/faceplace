@@ -16,6 +16,7 @@ var React = require('react'),
         });
       },
       render: function () {
+        console.log('Timeline#render');
         var renderIntro = function () {
           if (this.state.profileFetched) {
             return <IntroIndex userId={this.profileOwnerId()}
@@ -54,10 +55,8 @@ var React = require('react'),
       authorizedToEdit: function () {
         return this.profileOwnerId() === SessionStore.currentUser().id;
       },
-      onPostStoreChange: function () {
-        this.setState({ posts: PostStore.all(this.profileOwnerId()) });
-      },
       onUserStoreChange: function () {
+        console.log('Timeline#onUserStoreChange');
         this.setState({
           profileFetched: UserStore.profileFetched(this.profileOwnerId())
         });
