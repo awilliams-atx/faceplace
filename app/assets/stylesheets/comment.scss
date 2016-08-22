@@ -1,3 +1,5 @@
+@import 'free-type-size';
+@import 'misc-color';
 @import 'profile-pic-size';
 
 $comment-background-blue: #f6f7f9;
@@ -13,4 +15,49 @@ $comment-background-blue: #f6f7f9;
       @include squareObjectFit(30px);
     }
   }
+}
+.post-comment-form {
+  padding: 8px 12px 8px;
+  img {
+    @include commentProfilePic;
+    @include squareObjectFit(30px);
+  }
+  textarea {
+    @include freeStandard12;
+    display: block;
+    float: left;
+    width: 434px;
+    height: 16px;
+    border: 1px solid $hawkesBlueGray;
+    resize: none;
+    outline: none;
+    padding: 7px 5px;
+  }
+}
+.post-comment-body {
+  @include freeStandard12;
+  display: block;
+  float: left;
+  position: relative;
+  width: 446px;
+  a {
+    @include freeInteractiveLinkSmall;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  i {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #d6d8db;
+  }
+  i:hover {
+    cursor: pointer;
+    color: #a0a4ae;
+  }
+}
+.post-comment-created-at {
+  margin-top: 2px;
+  color: #90949c;
 }
