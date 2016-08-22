@@ -31,7 +31,6 @@ var React = require('react'),
       },
       componentWillReceiveProps: function (props) {
         console.log('Timeline#componentWillReceiveProps');
-        ClientActions.fetchMostRecentlyAddedFriends(props.params.userId);
         ClientActions.fetchTimelinePosts(props.params.userId);
       },
       authorizedToEdit: function () {

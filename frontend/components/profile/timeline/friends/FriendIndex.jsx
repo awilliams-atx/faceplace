@@ -29,6 +29,9 @@ var FriendIndex = React.createClass({
     this.friendListener = FriendStore.addListener(this.onFriendStoreChange);
     ClientActions.fetchMostRecentlyAddedFriends(this.props.profileOwnerId);
   },
+  componentWillReceiveProps: function (props) {
+    ClientActions.fetchMostRecentlyAddedFriends(props.profileOwnerId);
+  },
   componentWillUnmount: function () {
     this.friendListener.remove();
   },
