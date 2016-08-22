@@ -18,17 +18,10 @@ var React = require('react'),
         });
       },
       render: function () {
-        var timelineContent,
-            introContent,
-            friendsContent;
-
-        var authorizedToEdit =
-          this.profileOwnerId() === SessionStore.currentUser().id;
-
         var renderIntro = function () {
           if (this.state.profileFetched) {
             return <IntroIndex userId={this.profileOwnerId()}
-              authorizedToEdit={authorizedToEdit} />;
+              authorizedToEdit={this.authorizedToEdit()} />;
           }
         }.bind(this);
 
@@ -56,10 +49,13 @@ var React = require('react'),
         this.profileListener.remove();
         this.friendListener.remove();
       },
-      componentWillReceiveProps: function (newProps) {
-        var newProfileOwnerId = newProps.params.userId;
+      componentWillReceiveProps: function (props) {
+        var newProfileOwnerId = props.params.userId;
         FriendApiUtil.fetchMostRecentlyAddedFriends(newProfileOwnerId);
         PostApiUtil.fetchTimelinePosts(newProfileOwnerId);
+      },
+      authorizedToEdit: function () {
+        return this.profileOwnerId() === SessionStore.currentUser().id;
       },
       onPostStoreChange: function () {
         this.setState({ posts: PostStore.all(this.profileOwnerId()) });
