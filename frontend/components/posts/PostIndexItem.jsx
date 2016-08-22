@@ -10,9 +10,7 @@ var PostIndexItem = React.createClass({
     return ({ selectingOptions: false });
   },
   render: function () {
-    var post = this.props.post
-
-    var renderCrossPostBreakdown = function () {
+    var renderCrossPostUser = function () {
       if (!this.props.post.profileOwner) { return; }
       return (
         <div>
@@ -38,8 +36,7 @@ var PostIndexItem = React.createClass({
         );
       }
     }.bind(this);
-    var postOptionsIconUrl =
-      'https://s3.amazonaws.com/faceplace-dev/assets/post_options_icon.png';
+
     var postOptionsIcon = <div className='empty-post-options-icon' />;
     var postOptions = <div className='empty-post-options' />;
 
@@ -84,7 +81,7 @@ var PostIndexItem = React.createClass({
             <a href={'#/users/' + post.authorId}>
               <div className='post-author-name'>{post.fullName}</div>
             </a>
-            {renderCrossPostBreakdown()}
+            {renderCrossPostUser()}
           </div>
           <br />
           <div className='post-datetime-container group'>
