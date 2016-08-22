@@ -16,7 +16,6 @@ var React = require('react'),
         });
       },
       render: function () {
-        console.log('Timeline#render');
         var renderIntro = function () {
           if (this.state.profileFetched) {
             return <IntroIndex userId={this.profileOwnerId()}
