@@ -8,8 +8,8 @@ json.location @user.location
 json.hometown @user.hometown
 json.school @user.school
 json.major @user.major
-json.coverPhotoUrl asset_path(@user.cover_photo.url(:cover))
-json.profilePicUrl asset_path(@user.profile_pic.url(:profile))
+json.coverPhotoUrl asset_path(@user.cover_photo.url)
+json.profilePicUrl asset_path(@user.profile_pic.url)
 json.alreadyFriends @user.friends_with?(current_user.id)
 json.requestMade @user.has_pending_request_from?(current_user.id)
 json.requestReceived @user.has_pending_request_for?(current_user.id)

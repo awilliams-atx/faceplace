@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 has_attached_file :profile_pic, default_url: "default_profile_pic.png"
 validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
-  has_attached_file :cover_photo, styles: { cover: '851x315#' }, default_url: "default_:style_cover_photo.png"
+  has_attached_file :cover_photo, default_url: "default_cover_photo.png"
   validates_attachment_content_type :cover_photo, content_type: /\Aimage\/.*\Z/
 
   # -------------------------------ASSOCIATIONS------------------------------ #

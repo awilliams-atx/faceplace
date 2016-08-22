@@ -1,6 +1,11 @@
 @import 'free-type-size';
 
 .cover-photo {
+  img {
+    height: 315px;
+    width: 851px;
+    object-fit: cover;
+  }
   input {
     position: absolute;
     cursor: pointer;
