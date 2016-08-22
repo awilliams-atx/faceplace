@@ -9,7 +9,7 @@
     display: block;
     float: left;
     width: 434px;
-    height: 14px;
+    height: 16px;
     border: 1px solid $hawkesBlueGray;
     resize: none;
     outline: none;
@@ -17,6 +17,7 @@
   }
   .post-comment-profile-pic {
     @include commentProfilePic;
+    @include squareObjectFit(30px);
   }
 }
 .post-comment-image {

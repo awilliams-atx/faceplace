@@ -3,17 +3,14 @@
 $comment-background-blue: #f6f7f9;
 
 .comment-section {
-  margin-top: 11px;
-  border-top: 1px solid #e5e5e5;
   background-color: $comment-background-blue;
-  img {
-    @include squareObjectFit(30px);
-  }
-}
-
-.post-comment {
-  padding: 8px 12px;
-  img {
-    @include commentProfilePic;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 11px;
+  .post-comment {
+    padding: 8px 12px;
+    img {
+      @include commentProfilePic;
+      @include squareObjectFit(30px);
+    }
   }
 }
