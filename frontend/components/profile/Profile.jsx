@@ -13,9 +13,8 @@ var Profile = React.createClass({
     return ({profileOwner: UserStore.user()});
   },
   render: function () {
-    var profileOwnerId = this.profileOwnerId();
-
-    var authorizedToEdit = profileOwnerId === SessionStore.currentUser().id;
+    var authorizedToEdit =
+      this.profileOwnerId() === SessionStore.currentUser().id;
 
     var profileOwner = this.state.profileOwner,
         coverPhotoUrl = profileOwner ? profileOwner.coverPhotoUrl : null,
@@ -25,7 +24,7 @@ var Profile = React.createClass({
 
     if (profileOwner.profilePicUrl) {
       profilePic = (
-        <ProfilePic profileOwnerId={profileOwnerId}
+        <ProfilePic profileOwnerId={this.profileOwnerId()}
           profilePicUrl={profilePicUrl}/>
       );
     } else {
@@ -40,8 +39,8 @@ var Profile = React.createClass({
             <div className='cover-photo-container'>
               <CoverPhoto coverPhotoUrl={coverPhotoUrl}
                 authorizedToEdit={authorizedToEdit}
-                profileOwnerId={profileOwnerId} />
-              <AddFriend profileOwnerId={profileOwnerId} />
+                profileOwnerId={this.profileOwnerId()} />
+              <AddFriend profileOwnerId={this.profileOwnerId()} />
             </div>
             {profilePic}
             <nav className='profile-nav'>
@@ -70,13 +69,11 @@ var Profile = React.createClass({
   componentWillUnmount: function () {
     this.userListener.remove();
   },
-  componentWillReceiveProps: function (newProps) {
-    var profileOwnerId = newProps.params.userId;
-
-    ClientActions.fetchUser(profileOwnerId);
+  componentWillReceiveProps: function (props) {
+    ClientActions.fetchUser(props.params.userId);
   },
   onUserStoreChange: function () {
-    this.setState({profileOwner: UserStore.user()});
+    this.setState({ profileOwner: UserStore.user() });
   },
   profileOwnerId: function () {
     return parseInt(this.props.params.userId) || SessionStore.currentUser().id
