@@ -11,18 +11,18 @@ var React = require('react'),
 var Profile = React.createClass({
   getInitialState: function () {
     console.log('Profile#getInitialState');
-    return ({ profileOwner: UserStore.user() });
+    return ({ user: UserStore.user() });
   },
   render: function () {
-    if (this.state.profileOwner) {
-      var coverPhotoUrl = this.state.profileOwner.coverPhotoUrl,
-          profilePicUrl = this.state.profileOwner.profilePicUrl;
+    if (this.state.user) {
+      var coverPhotoUrl = this.state.user.coverPhotoUrl,
+          profilePicUrl = this.state.user.profilePicUrl;
     }
 
     var renderProfilePic = function () {
       if (profilePicUrl) {
         return <ProfilePic profileOwnerId={this.profileOwnerId()}
-          profilePicUrl={profilePicUrl}/>;
+          profilePicUrl={profilePicUrl} />;
       }
     }.bind(this);
 
@@ -70,7 +70,7 @@ var Profile = React.createClass({
   },
   onUserStoreChange: function () {
     console.log('Profile#onUserStoreChange');
-    this.setState({ profileOwner: UserStore.user() });
+    this.setState({ user: UserStore.user() });
   },
   profileOwnerId: function () {
     return parseInt(this.props.params.userId);
