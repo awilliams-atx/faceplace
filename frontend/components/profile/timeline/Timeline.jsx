@@ -18,18 +18,16 @@ var React = require('react'),
         });
       },
       render: function () {
-        var profileOwnerId = this.profileOwnerId();
-
         var timelineContent,
             introContent,
             friendsContent;
 
         var authorizedToEdit =
-          profileOwnerId === SessionStore.currentUser().id;
+          this.profileOwnerId() === SessionStore.currentUser().id;
 
         if (this.state.profileFetched) {
           introContent = (
-                <IntroIndex userId={profileOwnerId}
+                <IntroIndex userId={this.profileOwnerId()}
                   authorizedToEdit={authorizedToEdit} />
           );
         } else {
@@ -41,10 +39,10 @@ var React = require('react'),
           <div className='timeline-content group'>
             <aside className='timeline-sidebar'>
               {introContent}
-              <FriendIndex profileOwnerId={profileOwnerId} />
+              <FriendIndex profileOwnerId={this.profileOwnerId()} />
             </aside>
             <section className='timeline-main-content'>
-              <PostIndex profileOwnerId={profileOwnerId}/>
+              <PostIndex profileOwnerId={this.profileOwnerId()} />
             </section>
           </div>
         );
