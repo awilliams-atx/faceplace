@@ -10,23 +10,20 @@ var React = require('react'),
 
 var Profile = React.createClass({
   getInitialState: function () {
-    return ({profileOwner: UserStore.user()});
+    return ({ profileOwner: UserStore.user() });
   },
   render: function () {
     var profileOwner = this.state.profileOwner,
         coverPhotoUrl = profileOwner ? profileOwner.coverPhotoUrl : null,
         profilePicUrl = profileOwner ? profileOwner.profilePicUrl : null;
 
-    var profilePic;
+    var renderProfilePic = function () {
+      if (profileOwner.profilePicUrl) {
+        return <ProfilePic profileOwnerId={this.profileOwnerId()}
+          profilePicUrl={profilePicUrl}/>;
+      }
+    }.bind(this);
 
-    if (profileOwner.profilePicUrl) {
-      profilePic = (
-        <ProfilePic profileOwnerId={this.profileOwnerId()}
-          profilePicUrl={profilePicUrl}/>
-      );
-    } else {
-      profilePic = <div className='empty-profile-pic'/>;
-    }
 
     var profile = (
       <div className='content'>
@@ -39,7 +36,7 @@ var Profile = React.createClass({
                 profileOwnerId={this.profileOwnerId()} />
               <AddFriend profileOwnerId={this.profileOwnerId()} />
             </div>
-            {profilePic}
+            {renderProfilePic()}
             <nav className='profile-nav'>
               <div className='profile-nav-links'>
                 <ul>
@@ -57,11 +54,8 @@ var Profile = React.createClass({
     return profile;
   },
   componentDidMount: function () {
-    var profileOwnerId = this.profileOwnerId();
-
-    this.userListener =
-      UserStore.addListener(this.onUserStoreChange);
-    ClientActions.fetchUser(profileOwnerId);
+    this.userListener = UserStore.addListener(this.onUserStoreChange);
+    ClientActions.fetchUser(this.profileOwnerId());
   },
   componentWillUnmount: function () {
     this.userListener.remove();
