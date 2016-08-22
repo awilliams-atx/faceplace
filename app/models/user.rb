@@ -13,8 +13,7 @@ class User < ActiveRecord::Base
 
   # ---------------------------------PAPERCLIP-------------------------------- #
 
-has_attached_file :profile_pic, styles:
-  { notifications: '48x48#', profile: '160x160#' }, default_url: "default_profile_pic.png"
+has_attached_file :profile_pic, default_url: "default_profile_pic.png"
 validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
   has_attached_file :cover_photo, styles: { cover: '851x315#' }, default_url: "default_:style_cover_photo.png"
