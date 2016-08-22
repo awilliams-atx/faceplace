@@ -25,20 +25,17 @@ var React = require('react'),
         var authorizedToEdit =
           this.profileOwnerId() === SessionStore.currentUser().id;
 
-        if (this.state.profileFetched) {
-          introContent = (
-                <IntroIndex userId={this.profileOwnerId()}
-                  authorizedToEdit={authorizedToEdit} />
-          );
-        } else {
-          // spinner
-          introContent = <div className='empty-intro-content' />;
-        }
+        var renderIntro = function () {
+          if (this.state.profileFetched) {
+            return <IntroIndex userId={this.profileOwnerId()}
+              authorizedToEdit={authorizedToEdit} />;
+          }
+        }.bind(this);
 
         return (
           <div className='timeline-content group'>
             <aside className='timeline-sidebar'>
-              {introContent}
+              {renderIntro()}
               <FriendIndex profileOwnerId={this.profileOwnerId()} />
             </aside>
             <section className='timeline-main-content'>
