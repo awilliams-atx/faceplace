@@ -40,12 +40,7 @@ var PostIndexItem = React.createClass({
     var postOptionsIcon = <div className='empty-post-options-icon' />;
     var postOptions = <div className='empty-post-options' />;
 
-    var authorId = this.props.post.authorId,
-        currentUserId = SessionStore.currentUser().id;
-
-    var authorizedToEdit = (authorId === currentUserId);
-
-    if (authorizedToEdit) {
+    if (this.authorizedToEdit()) {
       postOptionsIcon = (
         <i className="fa fa-chevron-down"
           aria-hidden="true"
@@ -74,18 +69,18 @@ var PostIndexItem = React.createClass({
     return (
       <article className='timeline-feed-item'>
         <header className='post-breakdown group'>
-          <a href={'#/users/' + post.authorId}>
-            <img src={post.postPicUrl} />
+          <a href={'#/users/' + this.props.post.authorId}>
+            <img src={this.props.post.postPicUrl} />
           </a>
           <div className='post-breakdown-details group'>
-            <a href={'#/users/' + post.authorId}>
-              <div className='post-author-name'>{post.fullName}</div>
+            <a href={'#/users/' + this.props.post.authorId}>
+              <div className='post-author-name'>{this.props.post.fullName}</div>
             </a>
             {renderCrossPostUser()}
           </div>
           <br />
           <div className='post-datetime-container group'>
-            <div className='post-datetime'>{post.createdAt}</div>
+            <div className='post-datetime'>{this.props.post.createdAt}</div>
           </div>
           <aside className='post-options-container'>
             {postOptionsIcon}
@@ -93,15 +88,18 @@ var PostIndexItem = React.createClass({
           </aside>
         </header>
         <section className='post-body'>
-          {post.body}
+          {this.props.post.body}
         </section>
         {renderTaggedFriends()}
-        <PostCommentIndex post={post} />
+        <PostCommentIndex post={this.props.post} />
       </article>
     );
   },
   componentDidMount: function () {
     ClientActions.fetchComments('Post', this.props.post.postId);
+  },
+  authorizedToEdit: function () {
+    return this.props.post.authorId === SessionStore.currentUser().id;
   },
   deletePost: function () {
     $('body').addClass('no-scroll-body');
