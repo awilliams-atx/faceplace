@@ -5,19 +5,14 @@ var React = require('react'),
 
 var FriendIndex = React.createClass({
   getInitialState: function () {
-    console.log('FriendIndex#getInitialState');
     return { friends: [] };
   },
   render: function () {
-    console.log('FriendIndex#render');
-    var profileOwnerId = this.props.profileOwnerId;
-
     var renderFriends = function () {
       return this.state.friends.map(function (friend) {
         return <FriendIndexItem friend={friend} key={friend.user_id}/>;
       });
-    }.bind(this)
-
+    }.bind(this);
 
     return (
       <section id='friends-index'
@@ -37,11 +32,7 @@ var FriendIndex = React.createClass({
   componentWillUnmount: function () {
     this.friendListener.remove();
   },
-  componentWillReceiveProps: function (newProps) {
-    this.forceUpdate();
-  },
   onFriendStoreChange: function () {
-    console.log('FriendIndex#onFriendStoreChange');
     this.setState({ friends: FriendStore.all() });
   }
 });
