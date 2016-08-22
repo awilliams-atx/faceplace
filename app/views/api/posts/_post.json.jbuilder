@@ -1,7 +1,7 @@
 json.postId post.id
 json.body post.body
 json.authorId post.author_id
-json.postPicUrl asset_path(post.author.profile_pic.url(:post))
+json.postPicUrl asset_path(post.author.profile_pic.url)
 json.fullName post.author.full_name
 
 time = post.created_at.localtime

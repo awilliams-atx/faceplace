@@ -4,6 +4,10 @@
 .post-breakdown {
   margin: 0 12px;
   img {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    height: 38px;
+    width: 38px;
+    object-fit: cover;
     display: block;
     float: left;
     margin-right: 8px;
