@@ -10,14 +10,22 @@ var PostCommentIndex = React.createClass({
     return ({ comments: CommentStore.allPostComments(postId) });
   },
   render: function () {
-    var commentIndexItems = this.state.comments.map(function (comment) {
-      return <PostCommentIndexItem comment={comment} key={comment.id} />;
-    });
+    var renderComments = function () {
+      return this.state.comments.map(function (comment) {
+        return <PostCommentIndexItem comment={comment} key={comment.id} />;
+      });
+    }.bind(this);
+    
+    var renderCommentForm = function () {
+      if (this.props.post.authorized_to_comment) {
+        return <PostCommentForm postId={this.props.post.postId} />;
+      }
+    }.bind(this);
 
     return (
       <section className='comment-section'>
-        {commentIndexItems}
-        <PostCommentForm postId={this.props.post.postId} />
+        {renderComments()}
+        {renderCommentForm()}
       </section>
     );
   },
