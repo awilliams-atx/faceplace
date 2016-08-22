@@ -3,7 +3,6 @@ var React = require('react'),
     IntroIndex = require('./intro/IntroIndex'),
     PostIndex = require('../../posts/PostIndex'),
     ClientActions = require('../../../actions/client_actions'),
-    PostApiUtil = require('../../../util/post_api_util'),
     FriendStore = require('../../../stores/friend'),
     PostStore = require('../../../stores/post'),
     SessionStore = require('../../../stores/session'),
@@ -50,7 +49,7 @@ var React = require('react'),
       },
       componentWillReceiveProps: function (props) {
         ClientActions.fetchMostRecentlyAddedFriends(props.params.userId);
-        PostApiUtil.fetchTimelinePosts(props.params.userId);
+        ClientActions.fetchTimelinePosts(props.params.userId);
       },
       authorizedToEdit: function () {
         return this.profileOwnerId() === SessionStore.currentUser().id;
