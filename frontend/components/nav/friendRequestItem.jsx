@@ -9,7 +9,7 @@ var FriendRequestItem = React.createClass({
         </div>
         <div className='friend-request-details nav-drop-block'>
           <a href={'#/users/' +
-            this.props.req.user_id}>{this.props.req.name}</a>
+            this.props.req.maker_id}>{this.props.req.name}</a>
           <aside>a million friends</aside>
         </div>
         <div className='friend-request-response'>

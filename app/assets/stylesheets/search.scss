@@ -26,6 +26,11 @@
   background-color: #ecf0f7;
 }
 .search-icon {
+  img {
+    height: 36px;
+    width: 36px;
+    object-fit: cover;
+  }
   height: 36px;
   background-color: red;
   float: left;
