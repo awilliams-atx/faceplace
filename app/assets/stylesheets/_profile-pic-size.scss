@@ -1,24 +1,5 @@
-@mixin profilePic32x32 {
-  height: 32px;
-  width: 32px;
-}
-@mixin profilePic36x36 {
-  height: 36px;
-  width: 36px;
-}
-@mixin profilePic40x40 {
-  height: 40px;
-  width: 40px;
-}
-@mixin profilePic48x48 {
-  height: 48px;
-  width: 48px;
-}
-@mixin profilePic100x100 {
-  height: 100px;
-  width: 100px;
-}
-@mixin profilePic160x160 {
-  height: 160px;
-  width: 160px;
+@mixin squareObjectFit($dim) {
+  height: $dim;
+  width: $dim;
+  object-fit: cover;
 }

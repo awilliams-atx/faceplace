@@ -1,5 +1,6 @@
 @import 'button-style';
 @import 'free-type-size';
+@import 'profile-pic-size';
 
 #post-form-section {
   float: left;
@@ -35,9 +36,7 @@ header#post-types {
   padding: 12px 12px 0 12px;
 }
 .post-pic {
-  height: 38px;
-  width: 38px;
-  object-fit: cover;
+  @include squareObjectFit(38px);
   border: 1px solid rgba(#000000, 0.1);
   display: block;
   float: left;

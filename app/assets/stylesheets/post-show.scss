@@ -1,13 +1,12 @@
 @import 'misc-color';
 @import 'free-type-size';
+@import 'profile-pic-size';
 
 .post-breakdown {
   margin: 0 12px;
   img {
+    @include squareObjectFit(38px);
     border: 1px solid rgba(0, 0, 0, 0.1);
-    height: 38px;
-    width: 38px;
-    object-fit: cover;
     display: block;
     float: left;
     margin-right: 8px;

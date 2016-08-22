@@ -1,4 +1,5 @@
 @import 'free-type-size';
+@import 'profile-pic-size';
 
 section#friends-index > img {
   margin-top: 6px;
@@ -20,13 +21,10 @@ section.profile-friends-container {
 }
 .friend-thumb {
   img {
-    height: 100px;
-    width: 100px;
-    object-fit: cover;
+    @include squareObjectFit(100px);
   }
   display: block;
   position: relative;
-  width: 100px;
   float: left;
 }
 .friend-thumb:nth-child(3n+2) {

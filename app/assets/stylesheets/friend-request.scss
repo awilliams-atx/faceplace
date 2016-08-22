@@ -57,7 +57,7 @@
   margin-left: 12px;
   margin-right: 10px;
   img {
-    @include profilePic48x48;
+    @include squareObjectFit(48px);
   }
 }
 .friend-request-details {
