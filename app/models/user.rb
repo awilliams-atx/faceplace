@@ -68,6 +68,16 @@ validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
   attr_reader :password
 
+  def authorized_to_comment_on?(post)
+    return true if self == post.author
+    profile_owner = post.profile_owner
+    if profile_owner # Posted on friend's timeline
+      friends_with?(profile_owner)
+    else # Posted on own timeline
+      friends_with?(post.author)
+    end
+  end
+
   def friends_with?(id)
     Friendship.exists?(user_id: self.id, friend_id: id)
   end
