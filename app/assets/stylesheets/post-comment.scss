@@ -1,9 +1,7 @@
 @import 'free-type-size';
 @import 'misc-color';
+@import 'profile-pic-size';
 
-.post-comment {
-  padding: 8px 12px;
-}
 .post-comment-form {
   padding: 8px 12px 8px;
   textarea {
@@ -17,12 +15,9 @@
     outline: none;
     padding: 7px 5px;
   }
-}
-.post-comment-profile-pic {
-  display: block;
-  float: left;
-  border: 1px solid rgba(#000000, 0.1);
-  margin-right: 8px;
+  .post-comment-profile-pic {
+    @include commentProfilePic;
+  }
 }
 .post-comment-image {
   display: block;

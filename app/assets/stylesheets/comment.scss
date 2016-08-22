@@ -10,3 +10,10 @@ $comment-background-blue: #f6f7f9;
     @include squareObjectFit(30px);
   }
 }
+
+.post-comment {
+  padding: 8px 12px;
+  img {
+    @include commentProfilePic;
+  }
+}
