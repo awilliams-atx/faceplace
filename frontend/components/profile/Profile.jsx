@@ -13,9 +13,6 @@ var Profile = React.createClass({
     return ({profileOwner: UserStore.user()});
   },
   render: function () {
-    var authorizedToEdit =
-      this.profileOwnerId() === SessionStore.currentUser().id;
-
     var profileOwner = this.state.profileOwner,
         coverPhotoUrl = profileOwner ? profileOwner.coverPhotoUrl : null,
         profilePicUrl = profileOwner ? profileOwner.profilePicUrl : null;
@@ -38,7 +35,7 @@ var Profile = React.createClass({
           <div className='profile-top-content'>
             <div className='cover-photo-container'>
               <CoverPhoto coverPhotoUrl={coverPhotoUrl}
-                authorizedToEdit={authorizedToEdit}
+                authorizedToEdit={this.authorizedToEdit()}
                 profileOwnerId={this.profileOwnerId()} />
               <AddFriend profileOwnerId={this.profileOwnerId()} />
             </div>
@@ -71,6 +68,9 @@ var Profile = React.createClass({
   },
   componentWillReceiveProps: function (props) {
     ClientActions.fetchUser(props.params.userId);
+  },
+  authorizedToEdit: function () {
+    return this.profileOwnerId() === SessionStore.currentUser().id;
   },
   onUserStoreChange: function () {
     this.setState({ profileOwner: UserStore.user() });
