@@ -1,7 +1,31 @@
 @import 'free-type-size';
 @import 'misc-color';
+@import 'profile-pic-size';
 
 .tagging-container {
+  .search-index-item {
+    .search-icon {
+      float: left;
+      margin: 4px 8px 4px 6px;
+      img {
+        @include squareObjectFit(36px);
+      }
+    }
+    .search-text {
+      @include freeStandard14;
+      height: 33px;
+      float: left;
+      padding: 6px 0 5px;
+      small {
+        color: #999999;
+        font-size: 12px;
+      }
+    }
+  }
+  .search-index-item:hover {
+    cursor: pointer;
+    background-color: #ecf0f7;
+  }
   input {
     padding-left: 5px;
     display: block;
