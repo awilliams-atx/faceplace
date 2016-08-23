@@ -2,7 +2,7 @@ var React = require('react'),
     ClientActions = require('../../../../actions/client_actions'),
     UserStore = require('../../../../stores/user');
 
-var IntroItemHometown = React.createClass({
+var IntroItemSingle = React.createClass({
   getInitialState: function () {
     var state = { editing: false };
     return this.initialState();
@@ -11,10 +11,10 @@ var IntroItemHometown = React.createClass({
     if (this.state.editing) {
       return (
         <form onSubmit={this.onSubmit}>
-          <input value={this.state.hometown || ''}
+          <input value={this.state[this.props.item] || ''}
             ref='autoFocus'
-            placeholder={'Where are you from?'}
-            onChange={this.onHometownChange} />
+            placeholder={this.props.placeholder}
+            onChange={this.onChange} />
 
           <div className='buttons'>
             <button>Submit</button>
@@ -25,7 +25,8 @@ var IntroItemHometown = React.createClass({
     } else {
       return (
         <div className='intro-item-text' onClick={this.showEdit}>
-          {this.state.hometown ? this.state.hometown : 'Where are you from?'}
+          {this.state[this.props.item] ? this.state[this.props.item] :
+            this.props.prompt}
         </div>
       );
     }
@@ -38,25 +39,31 @@ var IntroItemHometown = React.createClass({
   },
   onCancel: function (e) {
     e.preventDefault();
-    this.setState({ hometown: UserStore.user().hometown }, function () {
-      this.toggleEdit();
-    });
+    var state = { editing: false }
+    state[this.props.item] = UserStore.user()[this.props.item];
+    this.setState(state);
   },
   initialState: function () {
     var state = { editing: false }
     state[this.props.item] = UserStore.user()[this.props.item];
     return state;
   },
-  onHometownChange: function (e) {
-    this.setState({ hometown: e.target.value });
+  onChange: function (e) {
+    var state = {};
+    state[this.props.item] = e.target.value;
+    this.setState(state);
   },
   onSubmit: function (e) {
     e.preventDefault();
     this.toggleEdit();
-    ClientActions.submitProfile({ hometown: this.state.hometown });
+    var submission = {};
+    submission[this.props.item] = this.state[this.props.item];
+    ClientActions.submitProfile(submission);
   },
   onUserStoreChange: function (e) {
-    this.setState({ hometown: UserStore.user().hometown });
+    var state = {};
+    state[this.props.item] = UserStore.user()[this.props.item];
+    this.setState(state);
   },
   showEdit: function (e) {
     e.preventDefault();
@@ -70,4 +77,4 @@ var IntroItemHometown = React.createClass({
   }
 });
 
-module.exports = IntroItemHometown;
+module.exports = IntroItemSingle;

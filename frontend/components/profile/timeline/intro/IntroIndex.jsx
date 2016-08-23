@@ -2,8 +2,7 @@ var React = require('react'),
     IntroItemDescription = require('./IntroItemDescription'),
     IntroItemWork = require('./IntroItemWork'),
     IntroItemSchool = require('./IntroItemSchool'),
-    IntroItemLocation = require('./IntroItemLocation'),
-    IntroItemHometown = require('./IntroItemHometown');
+    IntroItemSingle = require('./IntroItemSingle');
 
 var IntroIndex = React.createClass({
   render: function () {
@@ -41,16 +40,22 @@ var IntroIndex = React.createClass({
             <tr>
               <td className='intro-img' id='intro-location-img'></td>
               <td>
-                <IntroItemLocation
-                  authorizedToEdit={this.props.authorizedToEdit} />
+                <IntroItemSingle
+                  authorizedToEdit={this.props.authorizedToEdit}
+                  item='location'
+                  prompt='Where do you live?'
+                  placeholder='Location' />
               </td>
             </tr>
 
             <tr>
               <td className='intro-img' id='intro-hometown-img'></td>
               <td>
-                <IntroItemHometown
-                  authorizedToEdit={this.props.authorizedToEdit} />
+              <IntroItemSingle
+                authorizedToEdit={this.props.authorizedToEdit}
+                item='hometown'
+                prompt='Where are you from?'
+                placeholder='Hometown' />
               </td>
             </tr>
           </tbody>
