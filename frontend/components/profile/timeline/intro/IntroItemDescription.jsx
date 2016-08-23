@@ -1,7 +1,6 @@
 var React = require('react'),
     ClientActions = require('../../../../actions/client_actions'),
-    UserStore = require('../../../../stores/user'),
-    FormStore = require('../../../../stores/form');
+    UserStore = require('../../../../stores/user');
 
 var IntroItemDescription = React.createClass({
   getInitialState: function () {
