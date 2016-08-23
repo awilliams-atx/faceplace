@@ -1,0 +1,8 @@
+#load-fader {
+  animation: fadein 0.2s;
+  background-color: rgba(#000000, 0.5);
+  height: 100%;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}

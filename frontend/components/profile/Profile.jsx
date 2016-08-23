@@ -10,6 +10,7 @@ var React = require('react'),
 
 var Profile = React.createClass({
   getInitialState: function () {
+    ClientActions.loadFiles('coverPhoto', 'profilePic');
     return ({ user: UserStore.user() });
   },
   render: function () {
@@ -49,6 +50,7 @@ var Profile = React.createClass({
     this.userListener.remove();
   },
   componentWillReceiveProps: function (props) {
+    ClientActions.loadFiles('coverPhoto', 'profilePic');
     ClientActions.fetchUser(props.params.userId);
   },
   authorizedToEdit: function () {

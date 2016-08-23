@@ -1,18 +1,20 @@
 @import 'free-type-size';
 @import 'misc-color';
+@import 'animation';
 
 .no-scroll-body {
   overflow: hidden;
 }
 .modal-background-opaque {
+  animation: fadein 0.2s;
   background-color: rgba(#000000, 0.5);
   position: fixed;
   height: 100%;
   width: 100%;
   opacity: 1;
   z-index: 2000;
-  transition: opacity 0.2s;
 }
+
 .modal-background-transparent {
   opacity: 0;
   transition: opacity 0.2s;

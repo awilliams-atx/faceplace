@@ -13,6 +13,7 @@ var Router = ReactRouter.Router,
     Profile = require('./components/profile/Profile'),
     Timeline = require('./components/profile/timeline/Timeline'),
 
+    LoadStore = require('./stores/load'),
     ModalStore = require('./stores/modal'),
     SessionStore = require('./stores/session'),
     SessionApiUtil = require('./util/session_api_util');
@@ -21,15 +22,24 @@ var Socket = require('./vendor/socket');
 
 var App = React.createClass({
   getInitialState: function () {
-    return ({isModalDisplayed: ModalStore.isModalDisplayed()});
+    return ({
+      isModalDisplayed: ModalStore.isModalDisplayed(),
+      loading: false
+    });
   },
   render: function () {
     return (
       <div id='app'>
+        {this.renderFader()}
         {this.renderModal()}
         {this.props.children}
       </div>
     );
+  },
+  renderFader: function () {
+    if (this.state.loading) {
+      return <div id='load-fader' />;
+    }
   },
   renderModal: function () {
     if (this.state.isModalDisplayed) {
@@ -41,13 +51,23 @@ var App = React.createClass({
     }
   },
   componentDidMount: function () {
-    this.modalListener =
-      ModalStore.addListener(this.onModalStoreChange);
+    this.loadListener = LoadStore.addListener(this.onLoadStoreChange);
+    this.modalListener = ModalStore.addListener(this.onModalStoreChange);
     this.friendRequestSocket = new Socket('friend_requests');
   },
   componentWillUnmount: function () {
+    this.loadListener.remove();
     this.modalListener.remove();
     this.friendRequestSocket.unsubscribe();
+  },
+  onLoadStoreChange: function () {
+    if (LoadStore.loading() && !this.state.loading) {
+      this.setState({ loading: true });
+    } else if (!LoadStore.loading() && this.state.loading) {
+      setTimeout(function () {
+        this.setState({ loading: false });
+      }.bind(this), 300);
+    }
   },
   onModalStoreChange: function () {
     this.setState({
