@@ -8,15 +8,9 @@ class Api::CommentsController < ApplicationController
       commentable_type = 'Comment'
     end
 
-    @comments = Comment.all.where(
-      'commentable_type = :type AND commentable_id = :id',
-        {
-          type: commentable_type,
-          id: params[:post_id] || params[:comment_id]
-        }
-    )
-    .order('comments.created_at ASC')
-    .includes(:author)
+    @comments = Comment.all.where('commentable_type = :type AND commentable_id = :id', type: commentable_type, id: params[:post_id] || params[:comment_id])
+      .order('comments.created_at ASC')
+      .includes(:author)
 
     render 'api/comments/index'
   end

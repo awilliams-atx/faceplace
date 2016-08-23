@@ -1,6 +1,6 @@
 class Api::NotificationsController < ApplicationController
   before_action :require_login
-  
+
   def index
     @notifications =
       current_user.notifications.includes(:notifying_user).map do |notif|
@@ -19,11 +19,6 @@ class Api::NotificationsController < ApplicationController
       end
     end
     render json: @notifications
-    # render 'api/notifications/index'
-  end
-
-  def show
-
   end
 
   def destroy
