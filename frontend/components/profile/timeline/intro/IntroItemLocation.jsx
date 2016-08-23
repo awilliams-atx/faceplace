@@ -9,14 +9,14 @@ var IntroItemLocation = React.createClass({
   render: function () {
     if (this.state.editing) {
       return (
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.onSubmit}>
           <input value={this.state.location || ''}
             ref='autoFocus'
             placeholder={'Where do you live?'}
-            onChange={this.onFormChange} />
+            onChange={this.onLocationChange} />
           <div className='buttons'>
             <button>Submit</button>
-            <button onClick={this.cancel}>Cancel</button>
+            <button onClick={this.onCancel}>Cancel</button>
           </div>
         </form>
       );
@@ -34,31 +34,28 @@ var IntroItemLocation = React.createClass({
   componentWillUnmount: function () {
     this.UserListener.remove();
   },
+  onCancel: function (e) {
+    e.preventDefault();
+    this.setState({ location: UserStore.user().location, editing: false });
+  },
+  onLocationChange: function (e) {
+    e.preventDefault();
+    this.setState({ location: e.target.value });
+  },
+  onSubmit: function (e) {
+    e.preventDefault();
+    this.setState({ editing: false });
+    ClientActions.submitProfile({ location: this.state.location });
+  },
+  onUserStoreChange: function () {
+    this.setState({ location: UserStore.user().location });
+  },
   showEdit: function (e) {
     e.preventDefault();
     if (!this.props.authorizedToEdit) { return; }
     this.setState({ editing: true }, function () {
       this.refs.autoFocus.focus();
     });
-  },
-  cancel: function (e) {
-    e.preventDefault();
-    this.setState({ location: UserStore.user().location }, this.toggleEdit);
-  },
-  toggleEdit: function () {
-    this.setState({ editing: !this.state.editing });
-  },
-  handleSubmit: function (e) {
-    e.preventDefault();
-    this.toggleEdit();
-    ClientActions.submitProfile({ location: this.state.location });
-  },
-  onFormChange: function (e) {
-    e.preventDefault();
-    this.setState({ location: e.target.value });
-  },
-  onUserStoreChange: function () {
-    this.setState({ location: UserStore.user().location });
   }
 });
 

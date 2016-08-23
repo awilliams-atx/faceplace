@@ -4,10 +4,8 @@ var React = require('react'),
 
 var IntroItemHometown = React.createClass({
   getInitialState: function () {
-    return ({
-      editing: false,
-      hometown: UserStore.user().hometown
-    });
+    var state = { editing: false };
+    return this.initialState();
   },
   render: function () {
     if (this.state.editing) {
@@ -38,29 +36,24 @@ var IntroItemHometown = React.createClass({
   componentWillUnmount: function () {
     this.UserListener.remove();
   },
-  showEdit: function (e) {
-    e.preventDefault();
-    if (!this.props.authorizedToEdit) { return; }
-    this.setState({
-      editing: true
-    }, function () {
-      this.refs.autoFocus.focus();
-    });
-  },
-  toggleEdit: function () {
-    this.setState({ editing: !this.state.editing });
-  },
   onCancel: function (e) {
     e.preventDefault();
-    this.setState({ hometown: UserStore.user().hometown, editing: false });
+    this.setState({ hometown: UserStore.user().hometown }, function () {
+      this.toggleEdit();
+    });
+  },
+  initialState: function () {
+    var state = { editing: false }
+    state[this.props.item] = UserStore.user()[this.props.item];
+    return state;
   },
   onHometownChange: function (e) {
     this.setState({ hometown: e.target.value });
   },
   onSubmit: function (e) {
     e.preventDefault();
+    this.toggleEdit();
     ClientActions.submitProfile({ hometown: this.state.hometown });
-    this.setState({ editing: false });
   },
   onUserStoreChange: function (e) {
     this.setState({ hometown: UserStore.user().hometown });
@@ -71,6 +64,9 @@ var IntroItemHometown = React.createClass({
     this.setState({ editing: true }, function () {
       this.refs.autoFocus.focus();
     });
+  },
+  toggleEdit: function () {
+    this.setState({ editing: !this.state.editing });
   }
 });
 

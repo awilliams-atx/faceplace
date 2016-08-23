@@ -22,20 +22,17 @@ var IntroItemSchool = React.createClass({
 
     if (this.state.editing) {
       return (
-        <form onSubmit={this.handleSubmit} >
-
+        <form onSubmit={this.onSubmit} >
           <input value={this.state.major || ''}
             ref='autoFocus'
             placeholder='What is your area of study?'
             onChange={this.onMajorChange} />
-
           <input value={this.state.school || ''}
             placeholder='What school did you attend?'
             onChange={this.onSchoolChange} />
-
           <div className='buttons'>
             <button>Submit</button>
-            <button onClick={this.cancel}>Cancel</button>
+            <button onClick={this.onCancel}>Cancel</button>
           </div>
         </form>
       );
@@ -53,33 +50,24 @@ var IntroItemSchool = React.createClass({
   componentWillUnmount: function () {
     this.UserListener.remove();
   },
-  showEdit: function (e) {
-    e.preventDefault();
-    if (!this.props.authorizedToEdit) { return; }
-    this.setState({ editing: true }, function () {
-      this.refs.autoFocus.focus();
-    });
-  },
-  cancel: function (e) {
+  onCancel: function (e) {
     e.preventDefault();
     this.setState({
       school: UserStore.user().school,
-      major: UserStore.user().major
-    }, function () { this.toggleEdit(); });
-  },
-  toggleEdit: function () {
-    this.setState({ editing: !this.state.editing });
-  },
-  handleSubmit: function (e) {
-    e.preventDefault();
-    this.toggleEdit();
-    ClientActions.submitProfile({
-      major: this.state.major,
-      school: this.state.school
+      major: UserStore.user().major,
+      editing: false
     });
   },
   onSchoolChange: function (e) {
     this.setState({ school: e.target.value });
+  },
+  onSubmit: function (e) {
+    e.preventDefault();
+    ClientActions.submitProfile({
+      major: this.state.major,
+      school: this.state.school
+    });
+    this.setState({ editing: false });
   },
   onMajorChange: function (e) {
     this.setState({ major: e.target.value });
@@ -88,6 +76,13 @@ var IntroItemSchool = React.createClass({
     this.setState({
       school: UserStore.user().school,
       major: UserStore.user().major
+    });
+  },
+  showEdit: function (e) {
+    e.preventDefault();
+    if (!this.props.authorizedToEdit) { return; }
+    this.setState({ editing: true }, function () {
+      this.refs.autoFocus.focus();
     });
   }
 });

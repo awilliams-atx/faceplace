@@ -21,8 +21,7 @@ var IntroItemWork = React.createClass({
     }
     if (this.state.editing) {
       return (
-        <form onSubmit={this.handleSubmit}
-              onBlur={this.onBlur}>
+        <form onSubmit={this.onSubmit} >
           <input value={this.state.position || ''}
             placeholder='What do you do?'
             onChange={this.onPositionChange}
@@ -34,7 +33,7 @@ var IntroItemWork = React.createClass({
 
           <div className='buttons'>
             <button>Submit</button>
-            <button onClick={this.cancel}>Cancel</button>
+            <button onClick={this.onCancel}>Cancel</button>
           </div>
         </form>
       );
@@ -55,41 +54,39 @@ var IntroItemWork = React.createClass({
   componentWillUnmount: function () {
     this.UserListener.remove();
   },
-  showEdit: function (e) {
-    e.preventDefault();
-    if (!this.props.authorizedToEdit) { return; }
-    this.setState({ editing: true }, function () {
-      this.refs.autoFocus.focus();
-    });
-  },
-  cancel: function (e) {
+  onCancel: function (e) {
     e.preventDefault();
     this.setState({
       position: UserStore.user().position,
-      company: UserStore.user().company
-    }, this.toggleEdit);
-  },
-  toggleEdit: function () {
-    this.setState({ editing: !this.state.editing });
-  },
-  handleSubmit: function (e) {
-    e.preventDefault();
-    this.setState({ editing: false });
-    ClientActions.submitProfile({
-      company: this.state.company,
-      position: this.state.position
+      company: UserStore.user().company,
+      editing: false
     });
+  },
+  onCompanyChange: function (e) {
+    this.setState({ company: e.target.value });
   },
   onPositionChange: function (e) {
     this.setState({ position: e.target.value });
   },
-  onCompanyChange: function (e) {
-    this.setState({ company: e.target.value });
+  onSubmit: function (e) {
+    e.preventDefault();
+    ClientActions.submitProfile({
+      company: this.state.company,
+      position: this.state.position
+    });
+    this.setState({ editing: false });
   },
   onUserStoreChange: function (e) {
     this.setState({
       position: UserStore.user().position,
       company: UserStore.user().company
+    });
+  },
+  showEdit: function (e) {
+    e.preventDefault();
+    if (!this.props.authorizedToEdit) { return; }
+    this.setState({ editing: true }, function () {
+      this.refs.autoFocus.focus();
     });
   }
 });

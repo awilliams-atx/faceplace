@@ -14,15 +14,15 @@ var IntroItemDescription = React.createClass({
     if (this.state.editing) {
       return (
         <div id='description-form group'>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.onSubmit}>
             <textarea value={this.state.description || ''}
               ref='autoFocus'
               placeholder='Tell everyone about yourself.'
-              onChange={this.onFormChange} />
+              onChange={this.onDescriptionChange} />
 
             <div className='buttons' >
               <button>Submit</button>
-              <button onClick={this.cancel}>Cancel</button>
+              <button onClick={this.onCancel}>Cancel</button>
             </div>
           </form>
         </div>
@@ -41,42 +41,34 @@ var IntroItemDescription = React.createClass({
   componentWillUnmount: function () {
     this.UserListener.remove();
   },
-  showEdit: function (e) {
-    e.preventDefault();
-    if (!this.props.authorizedToEdit) { return; }
-    this.unchangedDescription = this.state.description;
-    this.setState({
-      editing: true
-    }, function () {
-      this.refs.autoFocus.focus();
-    });
-  },
   toggleEdit: function () {
     this.setState({editing: !this.state.editing});
   },
-  cancel: function (e) {
+  onCancel: function (e) {
     e.preventDefault();
     this.setState({
-      description: UserStore.user().description
-    }, this.toggleEdit);
+      description: UserStore.user().description,
+      editing: false
+    });
   },
-  handleSubmit: function (e) {
-    e.preventDefault();
-    this.toggleEdit();
-    ClientActions.submitProfile({ description: this.state.description });
-  },
-  onFormChange: function (e) {
+  onDescriptionChange: function (e) {
     this.setState({ description: e.target.value });
+  },
+  onSubmit: function (e) {
+    e.preventDefault();
+    ClientActions.submitProfile({ description: this.state.description });
+    this.setState({ editing: false });
   },
   onUserStoreChange: function (e) {
     this.setState({ description: UserStore.user().description });
   },
-  onFormStoreChange: function (e) {
-    if (FormStore.isOpen('INTRO_DESCRIPTION') && !this.state.editing) {
-      this.setState({editing: true});
-    } else if (!FormStore.isOpen('INTRO_DESCRIPTION') && this.state.editing) {
-      this.setState({editing: false});
-    }
+  showEdit: function (e) {
+    e.preventDefault();
+    if (!this.props.authorizedToEdit) { return; }
+    this.unchangedDescription = this.state.description;
+    this.setState({ editing: true }, function () {
+      this.refs.autoFocus.focus();
+    });
   }
 });
 
