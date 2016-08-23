@@ -1,5 +1,4 @@
-var SessionActions = require('../actions/session_actions'),
-    ErrorActions = require('../actions/error_actions'),
+var ErrorActions = require('../actions/error_actions'),
     ServerActions = require('../actions/server_actions');
 
 var UserApiUtil = {

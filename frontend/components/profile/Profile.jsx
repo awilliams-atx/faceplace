@@ -4,7 +4,6 @@ var React = require('react'),
     Nav = require('../nav/Nav'),
     ProfilePic = require('./ProfilePic'),
     ClientActions = require('../../actions/client_actions'),
-    SessionActions = require('../../actions/session_actions'),
     SessionStore = require('../../stores/session'),
     UserStore = require('../../stores/user');
 

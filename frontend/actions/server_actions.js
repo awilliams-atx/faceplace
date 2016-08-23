@@ -6,6 +6,7 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     notificationConstants = require('../constants/notification_constants'),
     postConstants = require('../constants/post_constants'),
     searchConstants = require('../constants/search_constants'),
+    sessionConstants = require('../constants/session_constants'),
     tagConstants = require('../constants/tag_constants'),
     userConstants = require('../constants/user_constants');
 
@@ -27,6 +28,12 @@ var ServerActions = {
     Dispatcher.dispatch({
       actionType: commentConstants.COMMENTS_RECEIVED,
       comments: comments
+    });
+  },
+  receiveCurrentUser: function (user) {
+    Dispatcher.dispatch({
+      actionType: sessionConstants.RECEIVE_CURRENT_USER,
+      user: user
     });
   },
   receiveDeletedFriendship: function (friendship) {
@@ -162,7 +169,12 @@ var ServerActions = {
       actionType: userConstants.USER_RECEIVED,
       user: user
     });
-  }
+  },
+  removeCurrentUser: function () {
+    Dispatcher.dispatch({
+      actionType: sessionConstants.LOGOUT
+    });
+  },
 };
 
 module.exports = ServerActions;

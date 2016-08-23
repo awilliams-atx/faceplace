@@ -1,6 +1,6 @@
 var ErrorActions = require('../actions/error_actions'),
     ErrorStore = require('../stores/error'),
-    SessionActions = require('../actions/session_actions');
+    ServerActions = require('../actions/server_actions');
 
 SessionApiUtil = {
   login: function (credentials, cb) {
@@ -10,7 +10,7 @@ SessionApiUtil = {
       dataType: 'json',
       data: {user: credentials},
       success: function (user) {
-        SessionActions.receiveCurrentUser(user);
+        ServerActions.receiveCurrentUser(user);
         cb();
       },
       error: function (errors) {
@@ -24,7 +24,7 @@ SessionApiUtil = {
       method: 'DELETE',
       dataType: 'json',
       success: function () {
-        SessionActions.removeCurrentUser();
+        ServerActions.removeCurrentUser();
         cb();
       }
     });
@@ -35,7 +35,7 @@ SessionApiUtil = {
       method: 'GET',
       dataType: 'json',
       success: function (user) {
-        SessionActions.receiveCurrentUser(user);
+        ServerActions.receiveCurrentUser(user);
       },
       complete: function () {
         cb();
