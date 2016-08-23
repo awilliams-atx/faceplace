@@ -47,7 +47,8 @@ Refer to images via 'asset_path' to access images, e.g...
 json.id @user.id
 json.first_name @user.first_name
 json.last_name @user.last_name
-json.postPicUrl asset_path(@user.profile_pic.url(:post))
+json.postPicUrl asset_path(@user.profile_pic.url)
+json.postPicUrl asset_path(@user.profile_pic.url(:post)) # Paperclip style
 ```
 
 #### Accessing images in the asset pipeline on Heroku

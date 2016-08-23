@@ -2,7 +2,7 @@ var React = require('react'),
     ClientActions = require('../../../../actions/client_actions'),
     UserStore = require('../../../../stores/user');
 
-var IntroItemPoly = React.createClass({
+var PolyIntroItem = React.createClass({
   getInitialState: function () {
     return this.initialState();
   },
@@ -100,4 +100,4 @@ var IntroItemPoly = React.createClass({
   }
 });
 
-module.exports = IntroItemPoly;
+module.exports = PolyIntroItem;
