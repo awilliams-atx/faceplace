@@ -24,25 +24,21 @@ var App = React.createClass({
     return ({isModalDisplayed: ModalStore.isModalDisplayed()});
   },
   render: function () {
-    var modal;
-
+    return (
+      <div id='app'>
+        {this.renderModal()}
+        {this.props.children}
+      </div>
+    );
+  },
+  renderModal: function () {
     if (this.state.isModalDisplayed) {
-      modal = (
+      return (
         <div id='modal-background' className='modal-background-opaque'>
           {ModalStore.modalContent()()}
         </div>
       );
-    } else {
-      modal =
-        <div id='modal-background' className='modal-background-transparent' />;
     }
-
-    return (
-      <div id='app'>
-        {modal}
-        {this.props.children}
-      </div>
-    );
   },
   componentDidMount: function () {
     this.modalListener =
