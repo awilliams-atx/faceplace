@@ -41,15 +41,10 @@ var IntroItemDescription = React.createClass({
   componentWillUnmount: function () {
     this.UserListener.remove();
   },
-  toggleEdit: function () {
-    this.setState({editing: !this.state.editing});
-  },
   onCancel: function (e) {
     e.preventDefault();
-    this.setState({
-      description: UserStore.user().description,
-      editing: false
-    });
+    this.setState({ description: UserStore.user().description },
+      this.toggleEdit);
   },
   onDescriptionChange: function (e) {
     this.setState({ description: e.target.value });

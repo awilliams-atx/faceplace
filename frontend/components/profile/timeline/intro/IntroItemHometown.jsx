@@ -38,21 +38,11 @@ var IntroItemHometown = React.createClass({
   componentWillUnmount: function () {
     this.UserListener.remove();
   },
-  showEdit: function (e) {
-    e.preventDefault();
-    if (!this.props.authorizedToEdit) { return; }
-    this.setState({
-      editing: true
-    }, function () {
-      this.refs.autoFocus.focus();
-    });
-  },
-  toggleEdit: function () {
-    this.setState({ editing: !this.state.editing });
-  },
   onCancel: function (e) {
     e.preventDefault();
-    this.setState({ hometown: UserStore.user().hometown, editing: false });
+    this.setState({ hometown: UserStore.user().hometown }, function () {
+      this.toggleEdit();
+    });
   },
   onHometownChange: function (e) {
     this.setState({ hometown: e.target.value });
