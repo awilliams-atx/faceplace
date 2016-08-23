@@ -4,27 +4,17 @@ var Store = require('flux/utils').Store,
 
 var _currentUser = {};
 var _currentUserHasBeenFetched = false;
-var _authorizedToEdit = false;
 
 var SessionStore = new Store(AppDispatcher);
-
-function _login(currentUser) {
-  _currentUser = currentUser;
-  _currentUserHasBeenFetched = true;
-}
-
-function _logout() {
-  _currentUser = {};
-}
 
 SessionStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case sessionConstants.RECEIVE_CURRENT_USER:
-      _login(payload.user);
+      SessionStore.login(payload.user);
       SessionStore.__emitChange();
       break;
     case sessionConstants.LOGOUT:
-      _logout();
+      SessionStore.logout();
       SessionStore.__emitChange();
       break;
   }
@@ -40,6 +30,17 @@ SessionStore.currentUserHasBeenFetched = function () {
 
 SessionStore.isUserLoggedIn = function () {
   return !!_currentUser.id;
+};
+
+SessionStore.login = function (currentUser) {
+  _currentUser = currentUser;
+  _currentUserHasBeenFetched = true;
+};
+
+SessionStore.logout = function () {
+  Object.keys(_currentUser).forEach(function (key) {
+    _currentUser[key] = undefined;
+  });
 };
 
 module.exports = SessionStore;
