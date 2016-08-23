@@ -1,4 +1,6 @@
 class Api::NotificationsController < ApplicationController
+  before_action :require_login
+  
   def index
     @notifications =
       current_user.notifications.includes(:notifying_user).map do |notif|

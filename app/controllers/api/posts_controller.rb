@@ -1,4 +1,6 @@
 class Api::PostsController < ApplicationController
+  before_action :require_login
+  
   def index
     if params[:profilePosts]
       user = User.find(params[:user_id])

@@ -1,4 +1,5 @@
 class Api::UsersController < ApplicationController
+  before_action :require_login, except: :create
   def index
     @users = User.all
     if params[:search]

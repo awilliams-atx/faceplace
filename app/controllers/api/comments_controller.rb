@@ -1,4 +1,6 @@
 class Api::CommentsController < ApplicationController
+  before_action :require_login
+
   def index
     if params[:post_id]
       commentable_type = 'Post'

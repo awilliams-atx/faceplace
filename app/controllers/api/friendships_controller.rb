@@ -1,4 +1,6 @@
 class Api::FriendshipsController < ApplicationController
+  before_action :require_login
+
   def destroy
     friendship = Friendship.find_by( user_id: params[:id], friend_id: current_user.id)
     friendship.destroy if friendship
