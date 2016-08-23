@@ -19,7 +19,6 @@ var IntroItemDescription = React.createClass({
               ref='autoFocus'
               placeholder='Tell everyone about yourself.'
               onChange={this.onDescriptionChange} />
-
             <div className='buttons' >
               <button>Submit</button>
               <button onClick={this.onCancel}>Cancel</button>
