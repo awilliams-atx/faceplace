@@ -11,14 +11,11 @@ var IntroIndex = React.createClass({
         className='profile-aside-item subcontent-container'>
         <img src={window.intro_icon} className='icon'/>
         <h2>Intro</h2>
-
         <div className='intro-line'>
           <IntroItemDescription
             authorizedToEdit={this.props.authorizedToEdit} />
         </div>
-
         <hr />
-
         <table>
           <tbody>
             <tr>
@@ -28,7 +25,6 @@ var IntroIndex = React.createClass({
                   authorizedToEdit={this.props.authorizedToEdit} />
               </td>
             </tr>
-
             <tr>
               <td className='intro-img' id='intro-school-img'></td>
               <td>
@@ -36,7 +32,6 @@ var IntroIndex = React.createClass({
                   authorizedToEdit={this.props.authorizedToEdit} />
               </td>
             </tr>
-
             <tr>
               <td className='intro-img' id='intro-location-img'></td>
               <td>
@@ -47,21 +42,19 @@ var IntroIndex = React.createClass({
                   placeholder='Location' />
               </td>
             </tr>
-
             <tr>
               <td className='intro-img' id='intro-hometown-img'></td>
               <td>
-              <IntroItemSingle
-                authorizedToEdit={this.props.authorizedToEdit}
-                item='hometown'
-                prompt='Where are you from?'
-                placeholder='Hometown' />
+                <IntroItemSingle
+                  authorizedToEdit={this.props.authorizedToEdit}
+                  item='hometown'
+                  prompt='Where are you from?'
+                  placeholder='Hometown' />
               </td>
             </tr>
           </tbody>
         </table>
       </section>
-
     );
   }
 });

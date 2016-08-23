@@ -4,7 +4,6 @@ var React = require('react'),
 
 var IntroItemSingle = React.createClass({
   getInitialState: function () {
-    var state = { editing: false };
     return this.initialState();
   },
   render: function () {
@@ -37,16 +36,16 @@ var IntroItemSingle = React.createClass({
   componentWillUnmount: function () {
     this.UserListener.remove();
   },
+  initialState: function () {
+    var state = { editing: false }
+    state[this.props.item] = UserStore.user()[this.props.item];
+    return state;
+  },
   onCancel: function (e) {
     e.preventDefault();
     var state = { editing: false }
     state[this.props.item] = UserStore.user()[this.props.item];
     this.setState(state);
-  },
-  initialState: function () {
-    var state = { editing: false }
-    state[this.props.item] = UserStore.user()[this.props.item];
-    return state;
   },
   onChange: function (e) {
     var state = {};
@@ -55,10 +54,10 @@ var IntroItemSingle = React.createClass({
   },
   onSubmit: function (e) {
     e.preventDefault();
-    this.toggleEdit();
     var submission = {};
     submission[this.props.item] = this.state[this.props.item];
     ClientActions.submitProfile(submission);
+    this.setState({ editing: false });
   },
   onUserStoreChange: function (e) {
     var state = {};
@@ -71,9 +70,6 @@ var IntroItemSingle = React.createClass({
     this.setState({ editing: true }, function () {
       this.refs.autoFocus.focus();
     });
-  },
-  toggleEdit: function () {
-    this.setState({ editing: !this.state.editing });
   }
 });
 
