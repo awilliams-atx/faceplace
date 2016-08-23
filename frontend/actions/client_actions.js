@@ -1,7 +1,6 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
     friendshipConstants = require('../constants/friendship_constants'),
     friendRequestConstants = require('../constants/friend_request_constants'),
-    loadConstants = require('../constants/load_constants'),
     modalConstants = require('../constants/modal_constants'),
     postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants'),
@@ -69,12 +68,6 @@ var ClientActions = {
   freezeTags: function () {
     Dispatcher.dispatch({
       actionType: tagConstants.FREEZE_TAGS
-    });
-  },
-  loadFiles: function () {
-    Dispatcher.dispatch({
-      actionType: loadConstants.LOADING,
-      fileNames: [].slice.apply(arguments)
     });
   },
   makeFriendRequest: function (userId) {
