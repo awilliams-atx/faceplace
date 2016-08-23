@@ -24,9 +24,7 @@ module.exports = {
 
         return (
           <span key={idx}>
-            <a href={'#/users/' + friend.taggedId}>
-              {friend.fullName}
-            </a>
+            <a href={'#/users/' + friend.taggedId}>{friend.fullName}</a>
             {separator}
           </span>
         );

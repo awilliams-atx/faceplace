@@ -1,7 +1,5 @@
 var React = require('react'),
     IntroItemDescription = require('./IntroItemDescription'),
-    IntroItemDouble = require('./IntroItemDouble'),
-    IntroItemSingle = require('./IntroItemSingle'),
     PolyIntroItem = require('./PolyIntroItem');
 
 var IntroIndex = React.createClass({
@@ -21,25 +19,21 @@ var IntroIndex = React.createClass({
             <tr>
               <td className='intro-img' id='intro-work-img'></td>
               <td>
-                <IntroItemDouble
+                <PolyIntroItem
                   authorizedToEdit={this.props.authorizedToEdit}
-                  item1='position'
-                  placeholder1='Position'
-                  item2='company'
-                  placeholder2='Company'
-                  toFormattedString={this.formattedWorkString} />
+                  items={[{ name: 'position', placeholder: 'Position' },
+                          { name: 'company', placeholder: 'Company'}]}
+                  toFormattedString={this.formatWork} />
               </td>
             </tr>
             <tr>
               <td className='intro-img' id='intro-school-img'></td>
               <td>
-                <IntroItemDouble
+                <PolyIntroItem
                   authorizedToEdit={this.props.authorizedToEdit}
-                  item1='major'
-                  placeholder1='Major'
-                  item2='school'
-                  placeholder2='School'
-                  toFormattedString={this.formattedSchoolString} />
+                  items={[{ name: 'major', placeholder: 'Major' },
+                          { name: 'school', placeholder: 'School'}]}
+                  toFormattedString={this.formatSchool} />
               </td>
             </tr>
             <tr>
@@ -53,17 +47,22 @@ var IntroIndex = React.createClass({
             <tr>
               <td className='intro-img' id='intro-hometown-img'></td>
               <td>
-                <IntroItemSingle
+                <PolyIntroItem
                   authorizedToEdit={this.props.authorizedToEdit}
-                  item='hometown'
-                  prompt='Where are you from?'
-                  placeholder='Hometown' />
+                  items={[{ name: 'hometown', placeholder: 'Hometown' }]} toFormattedString={this.formatHometown} />
               </td>
             </tr>
           </tbody>
         </table>
       </section>
     );
+  },
+  formatHometown: function (state) {
+    if (state.hometown) {
+      return state.hometown;
+    } else {
+      return 'Where are you from?';
+    }
   },
   formatLocation: function (state) {
     if (state.location) {
@@ -72,7 +71,7 @@ var IntroIndex = React.createClass({
       return 'Where do you live?';
     }
   },
-  formattedSchoolString: function (state) {
+  formatSchool: function (state) {
     if (state.major && state.school) {
       return state.major + ' at ' + state.school;
     } else if (state.major) {
@@ -83,7 +82,7 @@ var IntroIndex = React.createClass({
       return 'What\'s your education?';
     }
   },
-  formattedWorkString: function (state) {
+  formatWork: function (state) {
     if (state.position && state.company) {
       return state.position + ' at ' + state.company;
     } else if (state.position) {

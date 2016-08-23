@@ -42,8 +42,10 @@ var IntroItemDescription = React.createClass({
   },
   onCancel: function (e) {
     e.preventDefault();
-    this.setState({ description: UserStore.user().description },
-      this.toggleEdit);
+    this.setState({
+      description: UserStore.user().description,
+      editing: false
+    });
   },
   onDescriptionChange: function (e) {
     this.setState({ description: e.target.value });
