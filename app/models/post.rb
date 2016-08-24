@@ -20,4 +20,10 @@ class Post < ActiveRecord::Base
   has_one :timeline_posting, dependent: :destroy
 
   has_many :comments, as: :commentable
+
+  has_many :commenters,
+    through: :comments,
+    class_name: 'User',
+    foreign_key: :author_id,
+    source: :author
 end
