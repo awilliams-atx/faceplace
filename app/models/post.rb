@@ -16,5 +16,5 @@ class Post < ActiveRecord::Base
 
   has_one :timeline_posting, dependent: :destroy
 
-  has_many :watchings, as: :watchable
+  has_many :watchings, as: :watchable, dependent: :destroy
 end
