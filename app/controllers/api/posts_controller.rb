@@ -1,6 +1,7 @@
 class Api::PostsController < ApplicationController
   before_action :require_login
-  
+  after_action :add_watchers, only: :create
+
   def index
     if params[:profilePosts]
       user = User.find(params[:user_id])
@@ -67,7 +68,16 @@ class Api::PostsController < ApplicationController
 
   private
 
+  def add_watchers
+    users = [@post.author] + @post.tagged_friends
+    users << @post.profile_owner if @post.profile_owner
+    users.uniq.each do |user|
+      Watcher.create(watchable_id: @post.id, watchable_type: 'Post', watcher_id: user.id)
+    end
+  end
+
   def post_params
-    params.require(:post).permit(:id, :body, :profile_owner_id, :tagged_ids => [])
+    params.require(:post).permit(:id, :body, :profile_owner_id,
+      :tagged_ids => [])
   end
 end
