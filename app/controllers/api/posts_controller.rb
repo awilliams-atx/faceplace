@@ -1,11 +1,12 @@
 class Api::PostsController < ApplicationController
   before_action :require_login
-  after_action :add_watchers, only: :create
+  after_action :add_watchings, only: :create
 
   def index
     if params[:profilePosts]
       user = User.find(params[:user_id])
-      @posts = user.timeline_posts.includes(:author, :profile_owner, :tagged_friends)
+      @posts = user.timeline_posts.includes(:author, :profile_owner,
+        :tagged_friends)
     end
     render 'api/posts/index'
   end
@@ -68,11 +69,12 @@ class Api::PostsController < ApplicationController
 
   private
 
-  def add_watchers
+  def add_watchings
     users = [@post.author] + @post.tagged_friends
     users << @post.profile_owner if @post.profile_owner
     users.uniq.each do |user|
-      Watcher.create(watchable_id: @post.id, watchable_type: 'Post', watcher_id: user.id)
+      Watching.create(watchable_id: @post.id, watchable_type: 'Post',
+        watcher_id: user.id)
     end
   end
 
