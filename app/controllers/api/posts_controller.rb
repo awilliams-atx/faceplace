@@ -1,6 +1,5 @@
 class Api::PostsController < ApplicationController
   before_action :require_login
-  after_action :add_watching, only: :create
 
   def index
     if params[:profilePosts]
@@ -68,13 +67,6 @@ class Api::PostsController < ApplicationController
   end
 
   private
-
-  def add_watching
-    if @post.profile_owner
-      Watching.create(watchable_id: @post.id, watchable_type: 'Post',
-        watcher_id: @post.profile_owner.id)
-    end
-  end
 
   def post_params
     params.require(:post).permit(:id, :body, :profile_owner_id,
