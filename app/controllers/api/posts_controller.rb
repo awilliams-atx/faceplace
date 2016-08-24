@@ -70,7 +70,7 @@ class Api::PostsController < ApplicationController
   private
 
   def add_watchings
-    users = [@post.author] + @post.tagged_friends
+    users = [@post.author]
     users << @post.profile_owner if @post.profile_owner
     users.uniq.each do |user|
       Watching.create(watchable_id: @post.id, watchable_type: 'Post',
