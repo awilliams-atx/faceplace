@@ -11,8 +11,8 @@ class Tagging < ActiveRecord::Base
   private
 
   def add_watching
-    Watching.create!(watchable_type: 'Post', watchable_id: post_id, watcher_id:
-      tagged_id)
+    Watching.find_or_create_by!(watchable_type: 'Post', watchable_id: post_id,
+      watcher_id: tagged_id)
   end
 
   def remove_watching

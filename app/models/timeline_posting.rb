@@ -12,8 +12,8 @@ class TimelinePosting < ActiveRecord::Base
   private
 
   def add_watching
-    Watching.create!(watchable_type: 'Post', watchable_id: post_id, watcher_id:
-      profile_owner_id)
+    Watching.find_or_create_by!(watchable_type: 'Post', watchable_id: post_id,
+      watcher_id: profile_owner_id)
   end
 
   def remove_watching
