@@ -1,6 +1,8 @@
 class Comment < ActiveRecord::Base
-  include Watchable
   validates :commentable_id, :commentable_type, presence: true
+
+  after_create :add_watching
+  after_destroy :remove_watching
 
   belongs_to :author, class_name: 'User'
   belongs_to :commentable, polymorphic: true
