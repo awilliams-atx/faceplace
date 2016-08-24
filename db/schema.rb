@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820223801) do
+ActiveRecord::Schema.define(version: 20160824215708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,5 +99,13 @@ ActiveRecord::Schema.define(version: 20160820223801) do
     t.datetime "updated_at"
     t.string   "facebook_uid"
   end
+
+  create_table "watchers", force: :cascade do |t|
+    t.integer "watchable_id",   null: false
+    t.string  "watchable_type", null: false
+    t.integer "watcher_id",     null: false
+  end
+
+  add_index "watchers", ["watchable_id", "watcher_id"], name: "index_watchers_on_watchable_id_and_watcher_id", unique: true, using: :btree
 
 end
