@@ -1,5 +1,6 @@
 class Api::CommentsController < ApplicationController
   before_action :require_login
+  after_action :add_watching, only: :create
 
   def index
     if params[:post_id]
@@ -36,5 +37,10 @@ class Api::CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :commentable_id, :commentable_type)
+  end
+
+  def add_watching
+    Watching.find_or_create_by(watchable_id: @comment.commentable_id,
+      watchable_type: @comment.commentable_type, watcher_id: current_user.id)
   end
 end

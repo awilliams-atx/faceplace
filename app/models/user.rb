@@ -3,66 +3,47 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: { message: 'Email already taken' }
   validates :first_name, presence: { message: 'First name required' }
   validates :last_name, presence: { message: 'Last name required' }
-  validates :password,
-    length: {
-      minimum: 6,
-      allow_nil: true,
-      message: 'Password must be at least six characters long'
-    }
+  validates :password, length: { minimum: 6, allow_nil: true, message: 'Password must be at least six characters long' }
   validates :session_token, presence: true
 
   # ---------------------------------PAPERCLIP-------------------------------- #
 
-has_attached_file :profile_pic, default_url: "default_profile_pic.png"
-validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
+  has_attached_file :profile_pic, default_url: "default_profile_pic.png"
+  validates_attachment_content_type :profile_pic, content_type: /\Aimage\/.*\Z/
 
   has_attached_file :cover_photo, default_url: "default_cover_photo.png"
   validates_attachment_content_type :cover_photo, content_type: /\Aimage\/.*\Z/
 
-  # -------------------------------ASSOCIATIONS------------------------------ #
+  # ----------------------------------HOOKS---------------------------------- #
 
-  has_many :posts,
-    foreign_key: :author_id
+  after_initialize :ensure_session_token
+
+  # -------------------------------ASSOCIATIONS------------------------------ #
 
   has_many :friendships, dependent: :destroy
 
-  has_many :friends,
-    class_name: 'User',
-    through: :friendships,
-    source: :friend
+  has_many :friends, class_name: 'User', through: :friendships, source: :friend
 
-  has_many :received_friend_requests,
-    class_name: 'FriendRequest',
-    foreign_key: :receiver_id,
-    dependent: :destroy
+  has_many :made_friend_requests, class_name: 'FriendRequest', foreign_key:
+    :maker_id, dependent: :destroy
 
-  has_many :made_friend_requests,
-    class_name: 'FriendRequest',
-    foreign_key: :maker_id,
-    dependent: :destroy
+  has_many :notifications, class_name: 'Notification', foreign_key:
+    :notified_user_id, dependent: :destroy
 
-  has_many :notifications,
-    class_name: 'Notification',
-    foreign_key: :notified_user_id,
-    dependent: :destroy
+  has_many :posts, foreign_key: :author_id
 
-  has_many :taggings,
-    foreign_key: :tagged_id,
-    dependent: :destroy
+  has_many :received_friend_requests, class_name: 'FriendRequest',
+    foreign_key: :receiver_id, dependent: :destroy
 
-  has_many :tagged_posts,
-    through: :taggings,
-    source: :post
+  has_many :received_timeline_posts, through: :timeline_postings, source: :post
 
-  has_many :timeline_postings,
-    foreign_key: :profile_owner_id,
-    dependent: :destroy
+  has_many :taggings, foreign_key: :tagged_id, dependent: :destroy
 
-  has_many :received_timeline_posts,
-    through: :timeline_postings,
-    source: :post
+  has_many :tagged_posts, through: :taggings, source: :post
 
-  after_initialize :ensure_session_token
+  has_many :timeline_postings, foreign_key: :profile_owner_id, dependent: :destroy
+
+  has_many :watchings, foreign_key: :watcher_id, dependent: :destroy
 
   # ----------------------------------METHODS--------------------------------- #
 
