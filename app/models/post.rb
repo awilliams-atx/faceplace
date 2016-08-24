@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
     through: :taggings,
     source: :tagged
 
-  has_one :timeline_posting
+  has_one :receiver
 
   has_one :profile_owner,
     through: :timeline_posting,
