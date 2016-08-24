@@ -1,6 +1,6 @@
 class Api::PostsController < ApplicationController
   before_action :require_login
-  after_action :add_watchings, only: :create
+  after_action :add_watching, only: :create
 
   def index
     if params[:profilePosts]
@@ -69,12 +69,10 @@ class Api::PostsController < ApplicationController
 
   private
 
-  def add_watchings
-    users = [@post.author]
-    users << @post.profile_owner if @post.profile_owner
-    users.uniq.each do |user|
+  def add_watching
+    if @post.profile_owner
       Watching.create(watchable_id: @post.id, watchable_type: 'Post',
-        watcher_id: user.id)
+        watcher_id: @post.profile_owner.id)
     end
   end
 
