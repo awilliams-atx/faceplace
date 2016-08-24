@@ -8,8 +8,8 @@ module Notifiable
     notif = Notification.new
     notif.notifiable_type = self.class.to_s
     notif.notifiable_id = self.id
-    notif.notifying_user_id = options[:notifying_user_id]
-    notif.notified_user_id = options[:notified_user_id]
+    notif.notifier_id = options[:notifier_id]
+    notif.notified_id = options[:notified_id]
     notif.save!
   end
 end

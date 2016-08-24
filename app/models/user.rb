@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
     :maker_id, dependent: :destroy
 
   has_many :notifications, class_name: 'Notification', foreign_key:
-    :notified_user_id, dependent: :destroy
+    :notified_id, dependent: :destroy
 
   has_many :posts, foreign_key: :author_id
 
