@@ -1,8 +1,6 @@
 class Post < ActiveRecord::Base
+  include Watchable
   validates :author_id, presence: true
-
-  after_create :add_watching
-  after_destroy :remove_watching
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
   has_many :comments, as: :commentable

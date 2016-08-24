@@ -1,9 +1,6 @@
 class Tagging < ActiveRecord::Base
-  include Notifiable
+  include Notifiable, Watchable
   validates :tagged_id, :post_id, presence: true
-
-  after_create :add_watching
-  after_destroy :remove_watching
 
   belongs_to :post
   belongs_to :tagged, class_name: 'User', foreign_key: :tagged_id

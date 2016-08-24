@@ -1,9 +1,6 @@
 class TimelinePosting < ActiveRecord::Base
-  include Notifiable
+  include Notifiable, Watchable
   validates :post_id, :profile_owner_id, presence: true
-
-  after_create :add_watching
-  after_destroy :remove_watching
 
   has_one :author, through: :post, source: :author
   belongs_to :post
