@@ -1,7 +1,5 @@
-json.notifier do
-  json.id notification.notifier_id
-  json.name notification.notifier.full_name
-  json.profile_pic_url notification.notifier.profile_pic.url
-end
-
+json.id notification.id
+json.name notification.notifier.full_name
+json.profile_pic_url asset_path(notification.notifier.profile_pic.url)
+json.checked notification.checked
 json.explanation notification.explanation
