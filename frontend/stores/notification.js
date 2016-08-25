@@ -23,6 +23,14 @@ NotificationStore.all = function () {
   return _notifications.slice();
 };
 
+NotificationStore.justChecked = function (id) {
+  return _justCheckedIds.indexOf(id) >= 0;
+};
+
+NotificationStore.justCheckedIds = function () {
+  return _justCheckedIds.slice();
+};
+
 NotificationStore.markNotificationsChecked = function (checked_ids) {
   NotificationStore.setJustCheckedIds(checked_ids);
   for (var i = 0; i < _notifications.length; i++) {
