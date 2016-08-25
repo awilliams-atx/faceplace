@@ -5,7 +5,7 @@ var React = require('react'),
 
 var Notifications = React.createClass({
   getInitialState: function () {
-    return { notifications: [] };
+    return { notifications: [], uncheckedNotificationIds: [] };
   },
   render: function () {
     var dropDown = function () {
