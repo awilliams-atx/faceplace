@@ -1,5 +1,4 @@
 class TimelinePosting < ActiveRecord::Base
-  include Notifiable
   validates :post_id, :profile_owner_id, presence: true
 
   after_create :add_watching

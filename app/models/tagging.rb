@@ -1,5 +1,4 @@
 class Tagging < ActiveRecord::Base
-  include Notifiable
   validates :tagged_id, :post_id, presence: true
 
   after_create :add_watching
