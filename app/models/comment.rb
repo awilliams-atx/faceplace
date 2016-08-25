@@ -19,7 +19,7 @@ class Comment < ActiveRecord::Base
     commentable.watchers.each do |user|
       next if author == user
       Notification.create!(notifiable_type: 'Comment', notifiable_id: id,
-        notifier_id: author.id, notified_id: user.id)
+        notifier_id: author.id, notified_id: user.id, notifier_name: author.full_name)
     end
   end
 

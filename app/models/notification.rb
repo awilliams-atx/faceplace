@@ -18,18 +18,18 @@ class Notification < ActiveRecord::Base
     when 'Comment'
       @post = notifiable.commentable
       if notifying_post_author?
-        "#{notifier.full_name} commented on your post."
+        "commented on your post."
       elsif notifying_profile_owner?
-        "#{notifier.full_name} commented on a post on your timeline."
+        "commented on a post on your timeline."
       elsif notifying_tagged_user?
-        "#{notifier.full_name} commented on a post you're tagged in."
+        "commented on a post you're tagged in."
       elsif notifying_commenter?
-        "#{notifier.full_name} commented on a post you commented on."
+        "commented on a post you commented on."
       end
     when 'Tagging'
-      "#{notifier.full_name} tagged you in a post."
+      "tagged you in a post."
     when 'TimelinePosting'
-      "#{notifier.full_name} posted on your timeline."
+      "posted on your timeline."
     end
   end
 
