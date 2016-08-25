@@ -25,7 +25,7 @@
   height: 100%;
   float: left;
 }
-.nav-right {
+#nav-right {
   height: 100%;
   float: right;
   color: white;
@@ -33,10 +33,10 @@
   font-weight: bold;
   font-size: 12px;
 }
-.nav-right > div {
+#nav-right > div {
   float: left;
 }
-.nav-right {
+#nav-right {
   #user-icon {
     margin-top: 14px;
     margin-right: 3px;

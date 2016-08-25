@@ -28,7 +28,7 @@ var Nav = React.createClass({
             </a></div>
           <SearchIndex />
           </div>
-          <div className='nav-right group'>
+          <div id='nav-right' className='group'>
             <div id='user-icon'>
               <a onClick={this.closeForms} href={'#/users/' + SessionStore.currentUser().id}>
                 {this.state.user.first_name}!
