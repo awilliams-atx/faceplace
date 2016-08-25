@@ -23,12 +23,18 @@ class Notification < ActiveRecord::Base
         "#{notifier.full_name} commented on a post on your timeline."
       elsif notifying_tagged_user?
         "#{notifier.full_name} commented on a post you're tagged in."
+      elsif notifying_commenter?
+        "#{notifier.full_name} commented on a post you commented on."
       end
     when 'Tagging'
       "#{notifier.full_name} tagged you in a post."
     when 'TimelinePosting'
       "#{notifier.full_name} posted on your timeline."
     end
+  end
+
+  def notifying_commenter?
+    @post.comments.pluck(:author_id).include?(notified.id)
   end
 
   def notifying_post_author?
