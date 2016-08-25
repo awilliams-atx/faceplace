@@ -9,27 +9,6 @@ var FriendRequests = React.createClass({
     return { requests: [], uncheckedRequestIds: [] };
   },
   render: function () {
-    var renderRequests = function () {
-      if (this.state.requests.length === 0) {
-        return (
-          <div id='empty-friend-requests'>
-            <aside>No friend requests</aside>
-          </div>
-        );
-      } else {
-        return this.state.requests.map(function (req, idx) {
-          return (
-            <FriendRequestItem
-              req={req}
-              key={idx}
-              onAccept={this.onAccept}
-              onReject={this.onReject}
-              checkedClass={this.checkedClass(req.id)} />
-          );
-        }.bind(this));
-      }
-    }.bind(this);
-
     var dropDown = function () {
       if (this.props.dropToggles['friendRequests']) {
         return (
@@ -37,7 +16,7 @@ var FriendRequests = React.createClass({
             <div id='friend-request-overlay-title'>
               <strong>Friend Requests</strong>
             </div>
-            {renderRequests()}
+            {this.renderRequests()}
           </div>
         );
       }
@@ -62,6 +41,26 @@ var FriendRequests = React.createClass({
         {dropDown(this.state.requests)}
       </div>
     );
+  },
+  renderRequests: function () {
+    if (this.state.requests.length === 0) {
+      return (
+        <div id='empty-friend-requests'>
+          <aside>No friend requests</aside>
+        </div>
+      );
+    } else {
+      return this.state.requests.map(function (req, idx) {
+        return (
+          <FriendRequestItem
+            req={req}
+            key={idx}
+            onAccept={this.onAccept}
+            onReject={this.onReject}
+            checkedClass={this.checkedClass(req.id)} />
+        );
+      }.bind(this));
+    }
   },
   componentDidMount: function () {
     ClientActions.fetchFriendRequests();
