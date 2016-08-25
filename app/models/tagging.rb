@@ -17,7 +17,7 @@ class Tagging < ActiveRecord::Base
 
   def make_notification
     Notification.create!(notifiable_type: 'Tagging', notifiable_id: id,
-      notifier_id: author.id, notified_id: profile_owner.id)
+      notifier_id: tagger.id, notified_id: tagged_id)
   end
 
   def remove_notification
