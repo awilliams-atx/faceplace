@@ -8,23 +8,54 @@ var Notifications = React.createClass({
     return { notifications: [], uncheckedNotificationIds: [] };
   },
   render: function () {
-    var dropDown = function () {
-      if (this.props.dropToggles['notifications']) {
-        return(
-          <div>{this.state.notifications.length}</div>
-        );
-      }
-    }.bind(this);
     return (
       <div className={this.className() + ' nav-drop-icon'}
         id='notifications-drop'
         onClick={this.toggleNavDrop}>
         <div className='fa-hover-box-25x25'>
           <i className="fa fa-globe" aria-hidden="true"></i>
+          {this.renderNotificationCounter()}
         </div>
-        {dropDown()}
+        {this.renderDropDown()}
       </div>
     );
+  },
+  renderDropDown: function () {
+    if (this.props.dropToggles['notifications']) {
+      return (
+        <div id='notification-overlay'>
+          <div id='notification-overlay-title'>
+            <strong>Notifications</strong>
+          </div>
+          {this.renderNotifications()}
+        </div>
+      );
+    }
+  },
+  renderNotificationCounter: function () {
+    if (this.state.uncheckedNotificationIds.length > 0) {
+      return (
+        <mark>{this.state.uncheckedNotificationIds.length}</mark>
+      );
+    }
+  },
+  renderNotifications: function () {
+    if (this.state.notifications.length === 0) {
+      return (
+        <div id='empty-notifications'>
+          <aside>No notifications</aside>
+        </div>
+      );
+    } else {
+      return this.state.notifications.map(function (notif, idx) {
+        return (
+          <NotificationItem
+            notif={notif}
+            key={idx}
+            checkedClass={this.checkedClass(req.id)} />
+        );
+      }.bind(this));
+    }
   },
   componentDidMount: function () {
     this.notificationListener =
@@ -34,11 +65,13 @@ var Notifications = React.createClass({
   componentWillUnmount: function () {
     this.notificationListener.remove();
   },
-  componentWillReceiveProps: function (props) {
-    this.setState({ dropped: props.dropped });
+  checkedClass: function (id) {
+    return NotificationStore.justChecked(id) ? 'unchecked-alert' : '';
   },
   className: function () {
-    if (this.props.dropToggles['notifications']) {
+    if (this.state.uncheckedNotitificationIds > 0) {
+      return 'nav-drop-active';
+    } else if (this.props.dropToggles['notifications']) {
       return 'nav-drop-active';
     } else {
       return 'nav-drop-inactive';
@@ -51,7 +84,10 @@ var Notifications = React.createClass({
     }
   },
   onNotificationStoreChange: function () {
-    this.setState({ notifications: NotificationStore.all() });
+    this.setState({
+      notifications: NotificationStore.all(),
+      uncheckedNotificationIds: NotificationStore.uncheckedNotificationIds()
+    });
   },
   toggleNavDrop: function () {
     this.markNotificationsChecked();
@@ -60,6 +96,7 @@ var Notifications = React.createClass({
     this.navDropClickListener = function (e) {
       var notificationsDrop = document.getElementById('notifications-drop');
       if (!notificationsDrop.contains(e.target)) {
+        // ClientActions.emptyJustCheckedIds();
         this.props.toggleNavDrop('null');
         body.removeEventListener('click', this.navDropClickListener);
       }
