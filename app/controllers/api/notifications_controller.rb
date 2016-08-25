@@ -9,4 +9,13 @@ class Api::NotificationsController < ApplicationController
   def destroy
     Notification.find(params[:id]).destroy
   end
+
+  def mark_checked
+    ids = JSON.parse(params[:checked_ids])
+    ids.each do |id|
+      Notification.find(id).update(checked: true)
+    end
+
+    render json: ids
+  end
 end
