@@ -9,21 +9,13 @@ var FriendRequests = React.createClass({
     return { requests: [], uncheckedRequestIds: [] };
   },
   render: function () {
-    var requestCounter = function () {
-      if (this.state.uncheckedRequestIds.length > 0) {
-        return (
-          <mark>{this.state.uncheckedRequestIds.length}</mark>
-        );
-      }
-    }.bind(this);
-
     return (
       <div className={this.className() + ' nav-drop-icon'}
         id='friends-drop'
         onClick={this.toggleNavDrop}>
         <div className='fa-hover-box-25x25'>
           <i className="fa fa-user-plus" aria-hidden="true"></i>
-          {requestCounter()}
+          {this.renderRequestCounter()}
         </div>
         {this.renderDropDown()}
       </div>
@@ -38,6 +30,13 @@ var FriendRequests = React.createClass({
           </div>
           {this.renderRequests()}
         </div>
+      );
+    }
+  },
+  renderRequestCounter: function () {
+    if (this.state.uncheckedRequestIds.length > 0) {
+      return (
+        <mark>{this.state.uncheckedRequestIds.length}</mark>
       );
     }
   },
