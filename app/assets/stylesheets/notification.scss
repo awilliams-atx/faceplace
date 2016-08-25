@@ -1,0 +1,13 @@
+@import 'free-type-type';
+@import 'global';
+@import 'nav-drop';
+
+.notification-details {
+  color: $notBlack;
+  font-family: $freeStandardFontFamily;
+  font-size: 12px;
+  width: 324px;
+  .notifier_name {
+    font-weight: bold;
+  }
+}
