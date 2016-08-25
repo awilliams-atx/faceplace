@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     # -----------------------------NOTIFICATIONS----------------------------- #
 
     resources :notifications, only: [:index]
+    post 'notifications/mark_checked', to: 'notifications#mark_checked'
 
     # ----------------------------------POST---------------------------------- #
 
