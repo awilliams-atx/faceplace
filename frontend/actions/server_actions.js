@@ -11,6 +11,12 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     userConstants = require('../constants/user_constants');
 
 var ServerActions = {
+  receiveCheckedNotificationIds: function (checked_ids) {
+    Dispatcher.dispatch({
+      actionType: notificationConstants.CHECKED_NOTIFICATION_IDS_RECEIVED,
+      checked_ids: checked_ids
+    });
+  },
   receiveCheckedRequestIds: function (checked_ids) {
     Dispatcher.dispatch({
       actionType: friendRequestConstants.CHECKED_FRIEND_REQUEST_IDS_RECEIVED,
