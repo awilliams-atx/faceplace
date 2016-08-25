@@ -73,11 +73,9 @@
       width: 406px;
       z-index: 1000;
       .nav-drop-profile-pic {
+        @include squareObjectFit(48px);
         margin-left: 12px;
         margin-right: 10px;
-        img {
-          @include squareObjectFit(48px);
-        }
       }
     }
     .nav-drop-overlay:after,

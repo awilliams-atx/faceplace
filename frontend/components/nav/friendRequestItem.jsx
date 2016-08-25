@@ -4,9 +4,8 @@ var FriendRequestItem = React.createClass({
   render: function () {
     return (
       <div className={'friend-request-item group' + this.props.checkedClass}>
-        <div className='nav-drop-profile-pic nav-drop-block'>
-          <img src={this.props.req.profile_pic_url} />
-        </div>
+        <img src={this.props.req.profile_pic_url}
+          className='nav-drop-profile-pic nav-drop-block' />
         <div className='friend-request-details nav-drop-block'>
           <a href={'#/users/' +
             this.props.req.maker_id}>{this.props.req.name}</a>
