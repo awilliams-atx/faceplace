@@ -1,5 +1,6 @@
 @import 'misc-color';
 @import 'nav-drop';
+@import 'profile-pic-size';
 
 .main-header {
   height: 42px;
@@ -71,6 +72,13 @@
       top: 34px;
       width: 406px;
       z-index: 1000;
+      .nav-drop-profile-pic {
+        margin-left: 12px;
+        margin-right: 10px;
+        img {
+          @include squareObjectFit(48px);
+        }
+      }
     }
     .nav-drop-overlay:after,
     .nav-drop-overlay:before {
