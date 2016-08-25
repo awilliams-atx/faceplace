@@ -10,7 +10,18 @@ var NotificationApiUtil = {
         ServerActions.receiveNotifications(notifications);
       }
     });
-  }
+  },
+  markNotificationsChecked: function (checkedIds) {
+    $.ajax({
+      url: 'api/notifications/mark_checked',
+      method: 'POST',
+      dataType: 'json',
+      data: { checked_ids : JSON.stringify(checkedIds) },
+      success: function (checked_ids) {
+        ServerActions.receiveCheckedNotificationIds(checked_ids);
+      }
+    })
+  },
 };
 
 module.exports = NotificationApiUtil;
