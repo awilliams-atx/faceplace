@@ -25,7 +25,7 @@ var Notifications = React.createClass({
     if (this.props.dropToggles['notifications']) {
       return (
         <div className='nav-drop-overlay'>
-          <div id='notification-overlay-title'>
+          <div className='nav-drop-title'>
             <strong>Notifications</strong>
           </div>
           {this.renderNotifications()}

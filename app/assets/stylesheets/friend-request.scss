@@ -7,15 +7,6 @@
   border-bottom: 1px solid $miscThinSeparatorGray;
 }
 
-#friend-request-overlay-title {
-  @include bottomBorder;
-  strong {
-    line-height: 30px;
-    margin-left: 12px;
-    font-size: 12px;
-    color: #333338;
-  }
-}
 .friend-request-details {
   a {
     @include freeInteractiveLinkSmall;
