@@ -62,6 +62,36 @@
     mark {
       @include navDropCounter;
     }
+    .nav-drop-overlay {
+      background-color: white;
+      border: 1px solid rgba(#636363, 0.4);
+      box-shadow: 0 3px 8px rgba(#000000, 0.25);
+      left: -370px;
+      position: absolute;
+      top: 34px;
+      width: 406px;
+      z-index: 1000;
+    }
+    .nav-drop-overlay:after,
+    .nav-drop-overlay:before {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 100%;
+      width: 0;
+      height: 0;
+      border-style: solid;
+    }
+    .nav-drop-overlay:after {
+      right: 18px;
+      border-color: transparent transparent white transparent;
+      border-width: 10px;
+    }
+    .nav-drop-overlay:before {
+      right: 17px;
+      border-color: transparent transparent rgba(#000000, 0.25) transparent;
+      border-width: 11px;
+    }
     .unchecked-alert {
       background-color: $lavenderGray;
     }

@@ -1,41 +1,10 @@
 @import 'free-type-size';
 @import 'misc-color';
-@import 'nav-drop';
 @import 'button-style';
 @import 'profile-pic-size';
 
 @mixin bottomBorder {
   border-bottom: 1px solid $miscThinSeparatorGray;
-}
-#friend-request-overlay {
-  background-color: white;
-  border: 1px solid rgba(#636363, 0.4);
-  box-shadow: 0 3px 8px rgba(#000000, 0.25);
-  left: -370px;
-  position: absolute;
-  top: 34px;
-  width: 406px;
-  z-index: 1000;
-}
-#friend-request-overlay:after,
-#friend-request-overlay:before {
-  content: '';
-  display: block;
-  position: absolute;
-  bottom: 100%;
-  width: 0;
-  height: 0;
-  border-style: solid;
-}
-#friend-request-overlay:after {
-  right: 18px;
-  border-color: transparent transparent white transparent;
-  border-width: 10px;
-}
-#friend-request-overlay:before {
-  right: 17px;
-  border-color: transparent transparent rgba(#000000, 0.25) transparent;
-  border-width: 11px;
 }
 #friend-request-overlay-title {
   @include bottomBorder;

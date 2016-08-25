@@ -24,7 +24,7 @@ var Notifications = React.createClass({
   renderDropDown: function () {
     if (this.props.dropToggles['notifications']) {
       return (
-        <div id='notification-overlay'>
+        <div className='nav-drop-overlay'>
           <div id='notification-overlay-title'>
             <strong>Notifications</strong>
           </div>
