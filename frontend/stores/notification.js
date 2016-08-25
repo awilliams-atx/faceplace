@@ -55,4 +55,12 @@ NotificationStore.setNotifications = function (notifications) {
   }
 };
 
+NotificationStore.uncheckedNotificationIds = function () {
+  return _notifications.filter(function (notif) {
+    return !notif.checked;
+  }).map(function (notif) {
+    return notif.id;
+  });
+};
+
 module.exports = NotificationStore;
