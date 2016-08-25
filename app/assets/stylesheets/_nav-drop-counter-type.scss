@@ -1,8 +1,0 @@
-@import 'nav-drop-counter-color';
-@import 'free-type-type';
-
-@mixin navDropCounterType {
-  @include navDropCounterColor;
-  font-family: $freeStandardFontFamily;
-  font-size: 10px;
-}

@@ -1,8 +1,0 @@
-@import 'nav-drop-counter-size';
-
-@mixin navDropCounterPosition {
-  @include navDropCounterSize;
-  position: relative;
-  left: 15px;
-  bottom: 35px;
-}

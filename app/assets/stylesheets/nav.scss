@@ -1,5 +1,5 @@
-@import 'nav-drop-counter-position';
 @import 'misc-color';
+@import 'nav-drop';
 
 .main-header {
   height: 42px;
@@ -60,7 +60,7 @@
       color: #0b121e;
     }
     mark {
-      @include navDropCounterPosition;
+      @include navDropCounter;
     }
     .unchecked-alert {
       background-color: $lavenderGray;

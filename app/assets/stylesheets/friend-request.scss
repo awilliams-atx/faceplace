@@ -1,5 +1,6 @@
 @import 'free-type-size';
 @import 'misc-color';
+@import 'nav-drop';
 @import 'button-style';
 @import 'profile-pic-size';
 
@@ -7,14 +8,14 @@
   border-bottom: 1px solid $miscThinSeparatorGray;
 }
 #friend-request-overlay {
-  position: absolute;
-  width: 406px;
-  border: 1px solid rgba(#636363, 0.4);
-  top: 34px;
-  left: -370px;
-  z-index: 1000;
   background-color: white;
+  border: 1px solid rgba(#636363, 0.4);
   box-shadow: 0 3px 8px rgba(#000000, 0.25);
+  left: -370px;
+  position: absolute;
+  top: 34px;
+  width: 406px;
+  z-index: 1000;
 }
 #friend-request-overlay:after,
 #friend-request-overlay:before {
