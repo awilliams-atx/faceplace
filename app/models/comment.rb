@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
   validates :commentable_id, :commentable_type, presence: true
 
-  after_create :add_watching
+  after_create :add_watching, :make_notifications
   after_destroy :remove_watching
 
   belongs_to :author, class_name: 'User'
@@ -12,6 +12,13 @@ class Comment < ActiveRecord::Base
   def add_watching
     Watching.find_or_create_by(watchable_type: 'Post', watchable_id:
       commentable_id, watcher_id: author_id)
+  end
+
+  def make_notifications
+    commentable.watchers.each do |user|
+      Notification.create!(notifiable_type: 'Comment', notifiable_id: id,
+        notifier_id: author.id, notified_id: user.id)
+    end
   end
 
   def remove_watching
