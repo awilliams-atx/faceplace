@@ -22,7 +22,7 @@ class Tagging < ActiveRecord::Base
 
   def remove_notification
     notification = Notification.find_by(notifiable_type: 'Tagging',
-      notifiable_id: id, notifier_id: tagger.id, notified_id: tagged_id)
+      notifiable_id: id, notified_id: tagged_id)
     notification.destroy if notification
   end
 
