@@ -29,6 +29,7 @@ var Notifications = React.createClass({
   componentDidMount: function () {
     this.notificationListener =
       NotificationStore.addListener(this.onNotificationStoreChange);
+    ClientActions.fetchNotifications();
   },
   componentWillUnmount: function () {
     this.notificationListener.remove();
