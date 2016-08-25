@@ -9,19 +9,6 @@ var FriendRequests = React.createClass({
     return { requests: [], uncheckedRequestIds: [] };
   },
   render: function () {
-    var dropDown = function () {
-      if (this.props.dropToggles['friendRequests']) {
-        return (
-          <div id='friend-request-overlay'>
-            <div id='friend-request-overlay-title'>
-              <strong>Friend Requests</strong>
-            </div>
-            {this.renderRequests()}
-          </div>
-        );
-      }
-    }.bind(this);
-
     var requestCounter = function () {
       if (this.state.uncheckedRequestIds.length > 0) {
         return (
@@ -38,9 +25,21 @@ var FriendRequests = React.createClass({
           <i className="fa fa-user-plus" aria-hidden="true"></i>
           {requestCounter()}
         </div>
-        {dropDown(this.state.requests)}
+        {this.renderDropDown()}
       </div>
     );
+  },
+  renderDropDown: function () {
+    if (this.props.dropToggles['friendRequests']) {
+      return (
+        <div id='friend-request-overlay'>
+          <div id='friend-request-overlay-title'>
+            <strong>Friend Requests</strong>
+          </div>
+          {this.renderRequests()}
+        </div>
+      );
+    }
   },
   renderRequests: function () {
     if (this.state.requests.length === 0) {
