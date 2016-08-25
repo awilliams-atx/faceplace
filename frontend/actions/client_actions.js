@@ -76,6 +76,9 @@ var ClientActions = {
   markRequestsChecked: function (checkedIds) {
     FriendRequestApiUtil.markRequestsChecked(checkedIds);
   },
+  markNotificationsChecked: function (checkedIds) {
+    NotificationApiUtil.markNotificationsChecked(checkedIds);
+  },
   removeTaggedFriend: function (userId) {
     Dispatcher.dispatch({
       actionType: tagConstants.FRIEND_UNTAGGED,
