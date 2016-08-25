@@ -16,8 +16,8 @@ class TimelinePosting < ActiveRecord::Base
   end
 
   def make_notification
-    Notification.create!(notifiable_type: 'Post', notifiable_id: post_id,
-      notifier_id: author.id, notified_id: profile_owner.id)
+    Notification.create!(notifiable_type: 'TimelinePosting', notifiable_id:
+      post_id, notifier_id: author.id, notified_id: profile_owner.id)
   end
 
   def remove_watching
