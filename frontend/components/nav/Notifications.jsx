@@ -11,7 +11,7 @@ var Notifications = React.createClass({
     var dropDown = function () {
       if (this.props.dropToggles['notifications']) {
         return(
-          <div>NOTIFICATIONS {this.state.notifications.length}</div>
+          <div>{this.state.notifications.length}</div>
         );
       }
     }.bind(this);
@@ -44,10 +44,17 @@ var Notifications = React.createClass({
       return 'nav-drop-inactive';
     }
   },
+  markNotificationsChecked: function () {
+    if (this.state.uncheckedNotificationIds.length > 0) {
+      ClientActions
+        .markNotificationsChecked(this.state.uncheckedNotificationIds);
+    }
+  },
   onNotificationStoreChange: function () {
     this.setState({ notifications: NotificationStore.all() });
   },
   toggleNavDrop: function () {
+    this.markNotificationsChecked();
     this.props.toggleNavDrop('notifications');
     var body = document.getElementsByTagName('body')[0];
     this.navDropClickListener = function (e) {
