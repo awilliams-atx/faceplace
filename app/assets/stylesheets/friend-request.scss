@@ -6,6 +6,7 @@
 @mixin bottomBorder {
   border-bottom: 1px solid $miscThinSeparatorGray;
 }
+
 #friend-request-overlay-title {
   @include bottomBorder;
   strong {
@@ -14,14 +15,6 @@
     font-size: 12px;
     color: #333338;
   }
-}
-.friend-request-item {
-  @include bottomBorder;
-  display: block;
-  padding: 5px 0 2px;
-}
-.friend-request-item:last-child {
-  border-bottom: none;
 }
 .friend-request-details {
   a {

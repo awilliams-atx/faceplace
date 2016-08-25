@@ -3,7 +3,7 @@ var React = require('react');
 var FriendRequestItem = React.createClass({
   render: function () {
     return (
-      <div className={'friend-request-item group' + this.props.checkedClass}>
+      <div className={'nav-drop-item group' + this.props.checkedClass}>
         <img src={this.props.req.profile_pic_url}
           className='nav-drop-profile-pic nav-drop-block' />
         <div className='friend-request-details nav-drop-block'>

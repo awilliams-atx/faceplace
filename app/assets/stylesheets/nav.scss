@@ -2,6 +2,10 @@
 @import 'nav-drop';
 @import 'profile-pic-size';
 
+@mixin bottomBorder {
+  border-bottom: 1px solid $miscThinSeparatorGray;
+}
+
 .main-header {
   height: 42px;
 }
@@ -72,10 +76,18 @@
       top: 34px;
       width: 406px;
       z-index: 1000;
-      .nav-drop-profile-pic {
-        @include squareObjectFit(48px);
-        margin-left: 12px;
-        margin-right: 10px;
+      .nav-drop-item {
+        @include bottomBorder;
+        display: block;
+        padding: 5px 0 2px;
+        .nav-drop-profile-pic {
+          @include squareObjectFit(48px);
+          margin-left: 12px;
+          margin-right: 10px;
+        }
+      }
+      .nav-drop-item:last-child {
+        border-bottom: none;
       }
     }
     .nav-drop-overlay:after,
