@@ -1,4 +1,5 @@
 var React = require('react'),
+    NotificationItem = require('./NotificationItem'),
     NotificationStore = require('../../stores/notification.js'),
     ClientActions = require('../../actions/client_actions'),
     SessionStore = require('../../stores/session.js');
@@ -52,7 +53,7 @@ var Notifications = React.createClass({
           <NotificationItem
             notif={notif}
             key={idx}
-            checkedClass={this.checkedClass(req.id)} />
+            checkedClass={this.checkedClass(notif.id)} />
         );
       }.bind(this));
     }
