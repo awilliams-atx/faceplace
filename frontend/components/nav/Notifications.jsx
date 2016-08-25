@@ -29,11 +29,9 @@ var Notifications = React.createClass({
   componentDidMount: function () {
     this.notificationListener =
       NotificationStore.addListener(this.onNotificationStoreChange);
-    this.pusherSubscribe();
   },
   componentWillUnmount: function () {
     this.notificationListener.remove();
-    this.pusher.unsubscribe('notifications_' + SessionStore.currentUser().id);
   },
   componentWillReceiveProps: function (props) {
     this.setState({ dropped: props.dropped });
@@ -47,13 +45,6 @@ var Notifications = React.createClass({
   },
   onNotificationStoreChange: function () {
     this.setState({ notifications: NotificationStore.all() });
-  },
-  pusherSubscribe: function () {
-    this.pusher = new Pusher('3d702a0663f5bd8c69dd', {
-      encrypted: true
-    });
-    var channel = this.pusher.subscribe('notifications_' + SessionStore.currentUser().id);
-    channel.bind('notification_received', ClientActions.fetchNotifications);
   },
   toggleNavDrop: function () {
     this.props.toggleNavDrop('notifications');
