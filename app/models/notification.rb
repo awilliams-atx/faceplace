@@ -16,13 +16,12 @@ class Notification < ActiveRecord::Base
   def make_explanation
     case notifiable_type
     when 'Comment'
-      post = notifiable.commentable
-      if post.author == notified
+      @post = notifiable.commentable
+      if notifying_post_author?
         "#{notifier.full_name} commented on your post."
-      elsif post.timeline_posting && post.timeline_posting.profile_owner ==
-        notified
+      elsif notifying_profile_owner?
         "#{notifier.full_name} commented on a post on your timeline."
-      elsif post.taggings.pluck(:tagged_id).include?(notified.id)
+      elsif notifying_tagged_user?
         "#{notifier.full_name} commented on a post you're tagged in."
       end
     when 'Tagging'
@@ -30,5 +29,18 @@ class Notification < ActiveRecord::Base
     when 'TimelinePosting'
       "#{notifier.full_name} posted on your timeline."
     end
+  end
+
+  def notifying_post_author?
+    @post.author == notified
+  end
+
+  def notifying_profile_owner?
+    @post.timeline_posting && @post.timeline_posting.profile_owner ==
+      notified
+  end
+
+  def notifying_tagged_user?
+    @post.taggings.pluck(:tagged_id).include?(notified.id)
   end
 end
