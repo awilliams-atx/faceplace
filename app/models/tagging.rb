@@ -1,8 +1,8 @@
 class Tagging < ActiveRecord::Base
   validates :tagged_id, :post_id, presence: true
 
-  after_create :add_watching
-  after_destroy :remove_watching
+  after_create :add_watching, :make_notification
+  after_destroy :remove_watching, :remove_notification
 
   belongs_to :post
   belongs_to :tagged, class_name: 'User', foreign_key: :tagged_id
@@ -13,6 +13,17 @@ class Tagging < ActiveRecord::Base
   def add_watching
     Watching.find_or_create_by!(watchable_type: 'Post', watchable_id: post_id,
       watcher_id: tagged_id)
+  end
+
+  def make_notification
+    Notification.create!(notifiable_type: 'Tagging', notifiable_id: id,
+      notifier_id: author.id, notified_id: profile_owner.id)
+  end
+
+  def remove_notification
+    notification = Notification.find_by(notifiable_type: 'Tagging',
+      notifiable_id: id, notifier_id: author.id, notified_id: profile_owner.id)
+    notification.destroy if notification
   end
 
   def remove_watching
