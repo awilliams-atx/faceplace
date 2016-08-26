@@ -19,7 +19,7 @@ class Notification < ActiveRecord::Base
   end
 
   def add_timeline_owner_id
-    self.timeline_owner_id = timeline_owner_id
+    self.timeline_owner_id = get_timeline_owner_id
   end
 
   def get_post_id
@@ -70,7 +70,7 @@ class Notification < ActiveRecord::Base
     @post.taggings.pluck(:tagged_id).include?(notified.id)
   end
 
-  def timeline_owner_id
+  def get_timeline_owner_id
     case notifiable_type
     when 'Comment'
       notifiable.commentable.author_id
