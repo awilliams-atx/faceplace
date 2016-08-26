@@ -1,14 +1,19 @@
 var React = require('react');
 
 var CommentIndexItem = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   render: function () {
     return (
       <div className='post-comment group'>
-        <a href={'#/users/' + this.props.comment.authorId}>
+        <a href={'/users/' + this.props.comment.authorId}
+          onClick={this.pushAuthorRoute}>
           <img src={this.props.comment.profile_pic_url} />
         </a>
         <div className='post-comment-body'>
-          <a href={'#/users/' + this.props.comment.authorId}>
+          <a href={'/users/' + this.props.comment.authorId}
+            onClick={this.pushAuthorRoute}>
             {this.props.comment.fullName}
           </a>
           {' ' + this.props.comment.body}
@@ -24,6 +29,10 @@ var CommentIndexItem = React.createClass({
   onCommentBodyChange: function (e) {
     this.setState({commentBody: e.target.value});
   },
+  pushAuthorRoute: function (e) {
+    e.preventDefault();
+    this.context.router.push('/users/' + this.props.comment.authorId);
+  }
 });
 
 module.exports = CommentIndexItem;
