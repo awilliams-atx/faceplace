@@ -1,14 +1,19 @@
 var React = require('react');
 
 var FriendRequestItem = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   render: function () {
     return (
       <div className={'nav-drop-item group' + this.props.checkedClass}>
         <img src={this.props.req.profile_pic_url}
           className='nav-drop-profile-pic nav-drop-block' />
         <div className='friend-request-details nav-drop-block'>
-          <a href={'#/users/' +
-            this.props.req.maker_id}>{this.props.req.name}</a>
+          <a href={'/users/' + this.props.req.maker_id}
+            onClick={this.pushUserRoute}>
+            {this.props.req.name}
+          </a>
           <aside>a million friends</aside>
         </div>
         <div className='friend-request-response'>
@@ -31,6 +36,10 @@ var FriendRequestItem = React.createClass({
   onReject: function (e) {
     e.preventDefault();
     this.props.onReject(this.props.req.maker_id);
+  },
+  pushUserRoute: function (e) {
+    e.preventDefault();
+    this.context.router.push('/users/' + this.props.req.maker_id);
   }
 });
 
