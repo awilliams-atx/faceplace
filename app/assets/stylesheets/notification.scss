@@ -11,6 +11,9 @@
     font-weight: bold;
   }
   .notification-footer {
+    i {
+      margin-right: 5px;
+    }
     .notification-date {
       @include freeSmallDetailType;
     }
