@@ -5,7 +5,7 @@ var ReactRouter = require('react-router');
 var Router = ReactRouter.Router,
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
-    hashHistory = ReactRouter.hashHistory,
+    browserHistory = ReactRouter.browserHistory,
     Redirect = ReactRouter.Redirect
 
     LogInForm = require('./components/LogInForm'),
@@ -126,6 +126,6 @@ function redirectToProfile (nextState, replace, asyncDoneCallback) {
 
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById('root');
-  var router = <Router history={hashHistory} routes={routes} />;
+  var router = <Router history={browserHistory} routes={routes} />;
   ReactDOM.render(router, root);
 });
