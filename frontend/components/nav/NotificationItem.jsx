@@ -8,13 +8,16 @@ var NotificationItem = React.createClass({
         <img src={this.props.notif.profile_pic_url}
           className='nav-drop-profile-pic nav-drop-block' />
         <div className='notification-details nav-drop-block'>
-          <span className='notifier-name'>
-            {this.props.notif.notifier_name}
-          </span>
-          &nbsp;{this.props.notif.explanation}
-          <br />
-          <i className="fa fa-comment" aria-hidden="true"></i>
-          {this.renderDate()}
+          <div className='notification-explanation'>
+            <span className='notifier-name'>
+              {this.props.notif.notifier_name}
+            </span>
+            &nbsp;{this.props.notif.explanation}
+          </div>
+          <div className='notification-footer'>
+            <i className="fa fa-comment" aria-hidden="true"></i>
+            {this.renderDate()}
+          </div>
         </div>
       </div>
     );
