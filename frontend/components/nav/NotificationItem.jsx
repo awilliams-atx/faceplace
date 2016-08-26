@@ -7,33 +7,38 @@ var NotificationItem = React.createClass({
   },
   render: function () {
     return (
-      <div className={'nav-drop-item group ' + this.props.checkedClass}
+      <a href={'#' + this.props.notif.post_id}
         onClick={this.pushPostRoute}>
-        <img src={this.props.notif.profile_pic_url}
-          className='nav-drop-profile-pic nav-drop-block' />
-        <div className='notification-details nav-drop-block'>
-          <div>
-            <div className='notification-explanation'>
-              <span className='notifier-name'>
-                {this.props.notif.notifier_name}
-              </span>
-              &nbsp;{this.props.notif.explanation}
-            </div>
-            <div className='notification-footer'>
-              <i className="fa fa-comment" aria-hidden="true"></i>
-              <span className='notification-date'>{this.renderDate()}</span>
+        <div className={'nav-drop-item group ' + this.props.checkedClass}>
+          <img src={this.props.notif.profile_pic_url}
+            className='nav-drop-profile-pic nav-drop-block' />
+          <div className='notification-details nav-drop-block'>
+            <div>
+              <div className='notification-explanation'>
+                <span className='notifier-name'>
+                  {this.props.notif.notifier_name}
+                </span>
+                &nbsp;{this.props.notif.explanation}
+              </div>
+              <div className='notification-footer'>
+                <i className="fa fa-comment" aria-hidden="true"></i>
+                <span className='notification-date'>{this.renderDate()}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </a>
     );
   },
   pushPostRoute: function (e) {
-    e.preventDefault();
-    this.context.router.push({
-      pathname: '/users/' + this.props.notif.timeline_owner_id,
-      query: { post_id: this.props.notif.post_id }
-    });
+    var pushPath = '/users/' + this.props.notif.timeline_owner_id;
+    if (window.location.pathname !== pushPath) {
+      e.preventDefault();
+      this.context.router.push({
+        pathname: pushPath,
+        query: { post_id: this.props.notif.post_id }
+      });
+    }
   },
   renderDate: function () {
     var currentTime = new Date();
