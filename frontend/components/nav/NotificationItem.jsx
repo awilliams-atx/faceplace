@@ -38,9 +38,8 @@ var NotificationItem = React.createClass({
         pathname: pushPath,
         query: { post_id: this.props.notif.post_id }
       });
-    } else {
-      this.props.rollUp();
     }
+    this.props.rollUp();
   },
   renderDate: function () {
     var currentTime = new Date();
