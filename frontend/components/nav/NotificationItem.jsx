@@ -1,4 +1,5 @@
 var React = require('react');
+var Moment = require('moment');
 
 var NotificationItem = React.createClass({
   render: function () {
@@ -13,9 +14,19 @@ var NotificationItem = React.createClass({
           &nbsp;{this.props.notif.explanation}
           <br />
           <i className="fa fa-comment" aria-hidden="true"></i>
+          {this.renderDate()}
         </div>
       </div>
     );
+  },
+  renderDate: function () {
+    var currentTime = new Date();
+    var notifTime = this.props.notif.created_at;
+    if (currentTime - new Date(notifTime) < 86400000) {
+      return Moment(notifTime).fromNow();
+    } else {
+      return Moment(notifTime).format("dddd, MMMM Do YYYY, h:mm a");
+    }
   }
 });
 
