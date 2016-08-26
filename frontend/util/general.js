@@ -33,5 +33,16 @@ module.exports = {
         );
       });
     }
+  },
+  function queryString (key) {
+    var query = window.location.search.substring(1);
+    var pairs = query.split('&');
+    for (var i = 0; i < pairs.length; i++) {
+      var pair = pairs[i].split('=');
+      if (pair[0] === key) {
+        return pair[1];
+      }
+    }
+    return(null);
   }
 };
