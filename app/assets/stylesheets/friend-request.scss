@@ -2,16 +2,15 @@
 @import 'free-type-size';
 @import 'global';
 @import 'misc-color';
+@import 'nav-drop';
 @import 'profile-pic-size';
 
 @mixin bottomBorder {
   border-bottom: 1px solid $miscThinSeparatorGray;
 }
 
-$navDropInnerHeight: 48px;
-
 .friend-request-details {
-  @include flexAlign($navDropInnerHeight);
+  @include flexAlign($navDropItemInnerHeight);
   a {
     @include freeInteractiveLinkSmall;
   }
@@ -21,7 +20,7 @@ $navDropInnerHeight: 48px;
   }
 }
 .friend-request-response {
-  @include flexAlign($navDropInnerHeight);
+  @include flexAlign($navDropItemInnerHeight);
   float: right;
   margin-right: 12px;
   button {
