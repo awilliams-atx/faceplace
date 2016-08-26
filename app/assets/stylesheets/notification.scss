@@ -8,8 +8,11 @@
   font-family: $freeStandardFontFamily;
   font-size: 12px;
   width: 324px;
-  .notifier-name {
-    font-weight: bold;
+  .notification-explanation {
+    margin-bottom: 1px;
+    .notifier-name {
+      font-weight: bold;
+    }
   }
   .notification-footer {
     i {
