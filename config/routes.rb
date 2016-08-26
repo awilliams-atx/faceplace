@@ -54,4 +54,6 @@ Rails.application.routes.draw do
     get '/users/:id/most_recently_added',
     to: 'users#most_recently_added'
   end
+
+  get '/*unmatched', to: 'static_pages#root'
 end
