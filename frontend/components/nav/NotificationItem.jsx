@@ -2,9 +2,13 @@ var React = require('react');
 var Moment = require('moment');
 
 var NotificationItem = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   render: function () {
     return (
-      <div className={'nav-drop-item group ' + this.props.checkedClass}>
+      <div className={'nav-drop-item group ' + this.props.checkedClass}
+        onClick={this.pushPostRoute}>
         <img src={this.props.notif.profile_pic_url}
           className='nav-drop-profile-pic nav-drop-block' />
         <div className='notification-details nav-drop-block'>
@@ -23,6 +27,13 @@ var NotificationItem = React.createClass({
         </div>
       </div>
     );
+  },
+  pushPostRoute: function (e) {
+    e.preventDefault();
+    this.context.router.push({
+      pathname: '/users/' + this.props.notif.timeline_owner_id,
+      query: { jump: this.props.notif.post_id }
+    });
   },
   renderDate: function () {
     var currentTime = new Date();
