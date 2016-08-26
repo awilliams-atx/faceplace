@@ -1,6 +1,13 @@
-$navDropItemInnerHeight: 48px;
+// COLORS
+
+$catskillWhite: #ecf0f7;
 $notBlack: #333333;
 $wildWillow: #a2ce70;
+
+$listItemHoverBackgroundColor: $catskillWhite;
+// DIMENSIONS
+
+$navDropItemInnerHeight: 48px;
 
 @mixin flexAlign($height) {
   align-items: center;
