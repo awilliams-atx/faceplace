@@ -6,7 +6,11 @@ var React = require('react'),
 
 var Notifications = React.createClass({
   getInitialState: function () {
-    return { notifications: [], uncheckedNotificationIds: [] };
+    return {
+      notifications: [],
+      uncheckedNotificationIds: [],
+      droppedDown: false
+    };
   },
   render: function () {
     return (
@@ -84,6 +88,15 @@ var Notifications = React.createClass({
         .markNotificationsChecked(this.state.uncheckedNotificationIds);
     }
   },
+  navDropClickListener: function (e) {
+    var notificationsDrop = document.getElementById('notifications-drop');
+    if (!notificationsDrop.contains(e.target)) {
+      // ClientActions.emptyJustCheckedIds();
+      this.props.toggleNavDrop('null');
+      document.body.removeEventListener('click', this.navDropClickListener);
+      this.setState({ droppedDown: false });
+    }
+  },
   onNotificationStoreChange: function () {
     this.setState({
       notifications: NotificationStore.all(),
@@ -91,18 +104,10 @@ var Notifications = React.createClass({
     });
   },
   toggleNavDrop: function () {
+    if (this.state.droppedDown) { return }
     this.markNotificationsChecked();
     this.props.toggleNavDrop('notifications');
-    var body = document.getElementsByTagName('body')[0];
-    this.navDropClickListener = function (e) {
-      var notificationsDrop = document.getElementById('notifications-drop');
-      if (!notificationsDrop.contains(e.target)) {
-        // ClientActions.emptyJustCheckedIds();
-        this.props.toggleNavDrop('null');
-        body.removeEventListener('click', this.navDropClickListener);
-      }
-    }.bind(this);
-    body.addEventListener('click', this.navDropClickListener);
+    document.body.addEventListener('click', this.navDropClickListener);
   }
 });
 

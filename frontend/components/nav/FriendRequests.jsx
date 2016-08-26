@@ -6,7 +6,7 @@ var React = require('react'),
 
 var FriendRequests = React.createClass({
   getInitialState: function () {
-    return { requests: [], uncheckedRequestIds: [] };
+    return { requests: [], uncheckedRequestIds: [], droppedDown: false };
   },
   render: function () {
     return (
@@ -80,6 +80,20 @@ var FriendRequests = React.createClass({
       return 'nav-drop-inactive';
     }
   },
+  markRequestsChecked: function () {
+    if (this.state.uncheckedRequestIds.length > 0) {
+      ClientActions.markRequestsChecked(this.state.uncheckedRequestIds);
+    }
+  },
+  navDropClickListener: function (e) {
+    var friendsDrop = document.getElementById('friends-drop');
+    if (!friendsDrop.contains(e.target) && this.state.droppedDown) {
+      ClientActions.emptyJustCheckedIds();
+      this.props.toggleNavDrop('null');
+      document.body.removeEventListener('click', this.navDropClickListener);
+      this.setState({ droppedDown: false });
+    }
+  },
   onAccept: function (user_id) {
     var response = this.response(user_id, 'accept');
     ClientActions.respondToFriendRequest(response);
@@ -94,11 +108,6 @@ var FriendRequests = React.createClass({
     var response = this.response(user_id, 'reject');
     ClientActions.respondToFriendRequest(response);
   },
-  markRequestsChecked: function () {
-    if (this.state.uncheckedRequestIds.length > 0) {
-      ClientActions.markRequestsChecked(this.state.uncheckedRequestIds);
-    }
-  },
   response: function (user_id, response) {
     var params = {
       maker_id: user_id,
@@ -108,18 +117,11 @@ var FriendRequests = React.createClass({
     return params;
   },
   toggleNavDrop: function () {
+    if (this.state.droppedDown) { return; }
     this.markRequestsChecked();
     this.props.toggleNavDrop('friendRequests');
-    var body = document.getElementsByTagName('body')[0];
-    this.navDropClickListener = function (e) {
-      var friendsDrop = document.getElementById('friends-drop');
-      if (!friendsDrop.contains(e.target)) {
-        ClientActions.emptyJustCheckedIds();
-        this.props.toggleNavDrop('null');
-        body.removeEventListener('click', this.navDropClickListener);
-      }
-    }.bind(this);
-    body.addEventListener('click', this.navDropClickListener);
+    document.body.addEventListener('click', this.navDropClickListener);
+    this.setState({ droppedDown: true });
   }
 });
 
