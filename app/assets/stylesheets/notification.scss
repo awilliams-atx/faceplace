@@ -10,4 +10,9 @@
   .notifier-name {
     font-weight: bold;
   }
+  .notification-footer {
+    .notification-date {
+      @include freeSmallDetailType;
+    }
+  }
 }
