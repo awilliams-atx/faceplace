@@ -1,7 +1,7 @@
 var React = require('react');
 
 module.exports = {
-  toCommaSeparatedAnchors: function (friends) {
+  toCommaSeparatedAnchors: function (friends, handler) {
     if (friends.length === 0) {
       return '';
     } else {
@@ -24,7 +24,10 @@ module.exports = {
 
         return (
           <span key={idx}>
-            <a href={'#/users/' + friend.taggedId}>{friend.fullName}</a>
+            <a href={'/users/' + friend.taggedId}
+              onClick={handler}>
+              {friend.fullName}
+            </a>
             {separator}
           </span>
         );

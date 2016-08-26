@@ -34,7 +34,8 @@ var PostIndexItem = React.createClass({
         return (
           <div className='post-tagged-friends'>
             <span className='post-tagged-friends-with'>—with </span>
-            {Util.toCommaSeparatedAnchors(this.props.post.taggedFriends)}
+            {Util.toCommaSeparatedAnchors(this.props.post.taggedFriends,
+              this.pushUserRoute)}
           </div>
         );
       }
@@ -181,6 +182,10 @@ var PostIndexItem = React.createClass({
   pushAuthorRoute: function (e) {
     e.preventDefault();
     this.context.router.push('/users/' + this.props.post.authorId);
+  },
+  pushUserRoute: function (e) {
+    e.preventDefault();
+    this.context.router.push(e.target.pathname);
   },
   toggleOptions: function () {
     this.setState({ selectingOptions: !this.state.selectingOptions });
