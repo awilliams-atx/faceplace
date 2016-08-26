@@ -71,6 +71,7 @@ var PostIndexItem = React.createClass({
 
     return (
       <article className='timeline-feed-item'>
+        <a name={this.props.post.postId}></a>
         <header className='post-breakdown group'>
           <a href={'/users/' + this.props.post.authorId}
             onClick={this.pushAuthorRoute} >
