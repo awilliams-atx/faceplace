@@ -6,6 +6,9 @@ var React = require('react'),
     SessionStore = require('../../stores/session');
 
 var PostIndexItem = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function () {
     return ({ selectingOptions: false });
   },
@@ -18,7 +21,7 @@ var PostIndexItem = React.createClass({
             <i className='fa fa-caret-right' aria-hidden='true'></i>
           </div>
           <div className='friend-post-breakdown'>
-            <a href={'#/users/' + this.props.post.profileOwner.userId}>
+            <a href={'/users/' + this.props.post.profileOwner.userId}>
               {this.props.post.profileOwner.fullName}
             </a>
           </div>
@@ -68,7 +71,8 @@ var PostIndexItem = React.createClass({
     return (
       <article className='timeline-feed-item'>
         <header className='post-breakdown group'>
-          <a href={'#/users/' + this.props.post.authorId}>
+          <a href={'/users/' + this.props.post.authorId}
+            onClick={this.pushAuthorRoute} >
             <img src={this.props.post.postPicUrl} />
           </a>
           <div className='post-breakdown-details group'>
@@ -172,6 +176,10 @@ var PostIndexItem = React.createClass({
     this.setState({ selectingOptions: false }, function () {
       ClientActions.triggerModal(modalContent);
     });
+  },
+  pushAuthorRoute: function (e) {
+    e.preventDefault();
+    this.context.router.push('/users/' + this.props.post.authorId);
   },
   toggleOptions: function () {
     this.setState({ selectingOptions: !this.state.selectingOptions });
