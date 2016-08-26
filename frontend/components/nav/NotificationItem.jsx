@@ -32,7 +32,7 @@ var NotificationItem = React.createClass({
     e.preventDefault();
     this.context.router.push({
       pathname: '/users/' + this.props.notif.timeline_owner_id,
-      query: { jump: this.props.notif.post_id }
+      query: { post_id: this.props.notif.post_id }
     });
   },
   renderDate: function () {
