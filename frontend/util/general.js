@@ -1,7 +1,7 @@
 var React = require('react');
 
 module.exports = {
-  toCommaSeparatedAnchors: function (friends, handler) {
+  toCommaSeparatedAnchors: function toCSAnchors (friends, handler) {
     if (friends.length === 0) {
       return '';
     } else {
@@ -34,7 +34,7 @@ module.exports = {
       });
     }
   },
-  function queryString (key) {
+  queryString: function queryString (key) {
     var query = window.location.search.substring(1);
     var pairs = query.split('&');
     for (var i = 0; i < pairs.length; i++) {
