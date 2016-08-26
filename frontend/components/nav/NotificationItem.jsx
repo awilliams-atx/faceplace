@@ -11,6 +11,8 @@ var NotificationItem = React.createClass({
             {this.props.notif.notifier_name}
           </span>
           &nbsp;{this.props.notif.explanation}
+          <br />
+          <i className="fa fa-comment" aria-hidden="true"></i>
         </div>
       </div>
     );
