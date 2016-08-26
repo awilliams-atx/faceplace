@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160826035909) do
+ActiveRecord::Schema.define(version: 20160826042037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20160826035909) do
     t.boolean  "checked",           default: false
     t.string   "notifier_name"
     t.integer  "timeline_owner_id",                 null: false
+    t.integer  "post_id",                           null: false
   end
 
   create_table "posts", force: :cascade do |t|
