@@ -1,7 +1,7 @@
 class Notification < ActiveRecord::Base
-  validates :notifiable_id, :notifiable_type, :notified_id, :notifier_id, presence: true
+  validates :notifiable_id, :notifiable_type, :notified_id, :notifier_id, :explanation, :timeline_owner_id, presence: true
 
-  before_create :add_explanation
+  before_create :add_timeline_owner_id, :add_explanation
 
   belongs_to :notifiable, polymorphic: true
   belongs_to :notified, class_name: 'User'
@@ -11,6 +11,10 @@ class Notification < ActiveRecord::Base
 
   def add_explanation
     self.explanation = make_explanation
+  end
+
+  def add_timeline_owner_id
+    self.timeline_owner_id = timeline_owner_id
   end
 
   def make_explanation
@@ -48,5 +52,16 @@ class Notification < ActiveRecord::Base
 
   def notifying_tagged_user?
     @post.taggings.pluck(:tagged_id).include?(notified.id)
+  end
+
+  def timeline_owner_id
+    case notifiable_type
+    when 'Comment'
+      notifiable.commentable.author_id
+    when 'Tagging'
+      notifiable.post.timeline_owner_id
+    when 'TimelinePosting'
+      notifiable.profile_owner_id
+    end
   end
 end

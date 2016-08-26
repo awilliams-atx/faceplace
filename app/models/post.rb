@@ -15,6 +15,10 @@ class Post < ActiveRecord::Base
   has_many :watchers, through: :watchings, source: :watcher
   has_many :watchings, as: :watchable, dependent: :destroy
 
+  def timeline_owner_id
+    timeline_posting ? timeline_posting.profile_owner_id : author.id
+  end
+
   private
 
   def add_watching
