@@ -1,16 +1,17 @@
-@import 'free-type-size';
-@import 'misc-color';
 @import 'button-style';
+@import 'free-type-size';
+@import 'global';
+@import 'misc-color';
 @import 'profile-pic-size';
 
 @mixin bottomBorder {
   border-bottom: 1px solid $miscThinSeparatorGray;
 }
 
+$navDropInnerHeight: 48px;
+
 .friend-request-details {
-  align-items: center;
-  display: flex;
-  height: 48px;
+  @include flexAlign($navDropInnerHeight);
   a {
     @include freeInteractiveLinkSmall;
   }
@@ -20,10 +21,8 @@
   }
 }
 .friend-request-response {
-  align-items: center;
-  display: flex;
+  @include flexAlign($navDropInnerHeight);
   float: right;
-  height: 48px;
   margin-right: 12px;
   button {
     @include slimButtonSizes;

@@ -1,1 +1,7 @@
 $notBlack: #333333;
+
+@mixin flexAlign($height) {
+  align-items: center;
+  display: flex;
+  height: $height;
+}
