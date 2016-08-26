@@ -8,24 +8,23 @@
 }
 
 .friend-request-details {
+  align-items: center;
+  display: flex;
+  height: 48px;
   a {
     @include freeInteractiveLinkSmall;
-    display: block;
-    margin-top: 9px;
-    height: 15px;
-    line-height: 15px;
   }
   aside {
     @include freeSmallDetail;
     display: block;
-    height: 15px;
-    line-height: 15px;
   }
 }
 .friend-request-response {
+  align-items: center;
+  display: flex;
   float: right;
   margin-right: 12px;
-  margin-top: 8px;
+  // margin-top: 8px;
   button {
     @include slimButtonSizes;
   }
