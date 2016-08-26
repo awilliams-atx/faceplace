@@ -16,7 +16,7 @@ var NotificationItem = React.createClass({
           </div>
           <div className='notification-footer'>
             <i className="fa fa-comment" aria-hidden="true"></i>
-            {this.renderDate()}
+            <span className='notification-date'>{this.renderDate()}</span>
           </div>
         </div>
       </div>
