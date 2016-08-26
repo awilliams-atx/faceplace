@@ -23,14 +23,17 @@ var Nav = React.createClass({
       <header className='main-header'>
         <nav className='main-header-nav group'>
           <div className='nav-left group'>
-            <div id='faceplace-icon'><a href="#/main">
-              <i className="fa fa-facebook-official" aria-hidden="true"></i>
-            </a></div>
+            <div id='faceplace-icon'>
+              <a href="/main" onClick={this.pushMainRoute}>
+                <i className="fa fa-facebook-official" aria-hidden="true"></i>
+              </a>
+            </div>
           <SearchIndex />
           </div>
           <div id='nav-right' className='group'>
             <div id='user-icon'>
-              <a onClick={this.closeForms} href={'#/users/' + SessionStore.currentUser().id}>
+              <a href={'/users/' + SessionStore.currentUser().id}
+                onClick={this.pushCurrentUserRoute}>
                 {this.state.user.first_name}!
               </a>
             </div>
@@ -47,6 +50,14 @@ var Nav = React.createClass({
     SessionApiUtil.logout(function () {
       this.context.router.push('/login');
     }.bind(this));
+  },
+  pushCurrentUserRoute: function (e) {
+    e.preventDefault();
+    this.context.router.push('/users/' + SessionStore.currentUser().id);
+  },
+  pushMainRoute: function (e) {
+    e.preventDefault();
+    this.context.router.push('/main');
   },
   toggleNavDrop: function (drop) {
     var dropToggles = { notifications: false, friendRequests: false };
