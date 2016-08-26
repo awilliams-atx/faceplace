@@ -23,8 +23,8 @@
   align-items: center;
   display: flex;
   float: right;
+  height: 48px;
   margin-right: 12px;
-  // margin-top: 8px;
   button {
     @include slimButtonSizes;
   }
