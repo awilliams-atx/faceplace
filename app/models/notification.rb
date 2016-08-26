@@ -1,5 +1,5 @@
 class Notification < ActiveRecord::Base
-  validates :notifiable_id, :notifiable_type, :notified_id, :notifier_id, :explanation, :timeline_owner_id, presence: true
+  validates :notifiable_id, :notifiable_type, :notified_id, :notifier_id, :timeline_owner_id, :explanation, presence: true
 
   before_create :add_timeline_owner_id, :add_explanation
 
