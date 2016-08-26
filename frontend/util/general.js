@@ -35,6 +35,7 @@ module.exports = {
     }
   },
   queryString: function queryString (key) {
+    // NB: Breaks if hash is present in URL.
     var query = window.location.search.substring(1);
     var pairs = query.split('&');
     for (var i = 0; i < pairs.length; i++) {
