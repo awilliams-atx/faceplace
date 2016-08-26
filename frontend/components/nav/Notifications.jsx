@@ -55,9 +55,10 @@ var Notifications = React.createClass({
       return this.state.notifications.map(function (notif, idx) {
         return (
           <NotificationItem
-            notif={notif}
+            checkedClass={this.checkedClass(notif.id)}
+            rollUp={this.rollUp}
             key={idx}
-            checkedClass={this.checkedClass(notif.id)} />
+            notif={notif} />
         );
       }.bind(this));
     }
@@ -102,6 +103,12 @@ var Notifications = React.createClass({
       notifications: NotificationStore.all(),
       uncheckedNotificationIds: NotificationStore.uncheckedNotificationIds()
     });
+  },
+  rollUp: function () {
+    this.setState({ droppedDown: false }, function () {
+      document.body.removeEventListener('click', this.navDropClickListener);
+      this.props.toggleNavDrop('null');
+    }.bind(this));
   },
   toggleNavDrop: function () {
     if (this.state.droppedDown) { return }

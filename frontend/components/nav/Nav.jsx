@@ -12,7 +12,7 @@ var Nav = React.createClass({
     return ({
       user: SessionStore.currentUser(),
       toggled: false,
-      dropToggles: { notifications: false, friendRequests: false }
+      dropToggles: { notifications: false, friendRequests: false, null: true }
     });
   },
   contextTypes: {
@@ -60,7 +60,7 @@ var Nav = React.createClass({
     this.context.router.push('/main');
   },
   toggleNavDrop: function (drop) {
-    var dropToggles = { notifications: false, friendRequests: false };
+    var dropToggles = { notifications: false, friendRequests: false, null: false };
     dropToggles[drop] = true;
     this.setState({dropToggles: dropToggles});
   }
