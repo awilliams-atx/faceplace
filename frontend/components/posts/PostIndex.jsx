@@ -50,14 +50,10 @@ var PostIndex = React.createClass({
     }
     return authorized;
   },
-  jumpToPost: function () {
-    var post_id = Util.queryString('post_id');
-    if (post_id) { window.location.hash = post_id }
-  },
   onPostStoreChange: function () {
     this.setState({ posts: PostStore.all() }, function () {
-      this.jumpToPost();
-    }.bind(this));
+      Util.jumpToQueryStringPost();
+    });
   },
   onUserStoreChange: function () {
     this.setState({

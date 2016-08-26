@@ -1,6 +1,10 @@
 var React = require('react');
 
 module.exports = {
+  jumpToQueryStringPost: function () {
+    var post_id = this.queryString('post_id');
+    if (post_id) { window.location.hash = post_id }
+  },
   toCommaSeparatedAnchors: function toCSAnchors (friends, handler) {
     if (friends.length === 0) {
       return '';
