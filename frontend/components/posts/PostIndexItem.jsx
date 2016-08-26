@@ -76,7 +76,8 @@ var PostIndexItem = React.createClass({
             <img src={this.props.post.postPicUrl} />
           </a>
           <div className='post-breakdown-details group'>
-            <a href={'#/users/' + this.props.post.authorId}>
+            <a href={'/users/' + this.props.post.authorId}
+              onClick={this.pushAuthorRoute}>
               <div className='post-author-name'>{this.props.post.fullName}</div>
             </a>
             {renderCrossPostUser()}
