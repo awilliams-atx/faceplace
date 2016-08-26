@@ -3,6 +3,7 @@
 @import 'nav-drop';
 
 .notification-details {
+  @include flexAlign($navDropItemInnerHeight);
   color: $notBlack;
   font-family: $freeStandardFontFamily;
   font-size: 12px;
