@@ -5,7 +5,7 @@ var ErrorActions = require('../actions/error_actions'),
 SessionApiUtil = {
   login: function (credentials, cb) {
     $.ajax({
-      url: 'api/session',
+      url: '/api/session',
       method: 'POST',
       dataType: 'json',
       data: {user: credentials},
@@ -20,7 +20,7 @@ SessionApiUtil = {
   },
   logout: function (cb) {
     $.ajax({
-      url: 'api/session',
+      url: '/api/session',
       method: 'DELETE',
       dataType: 'json',
       success: function () {
@@ -31,7 +31,7 @@ SessionApiUtil = {
   },
   fetchCurrentUser: function (cb) {
     $.ajax({
-      url: 'api/session',
+      url: '/api/session',
       method: 'GET',
       dataType: 'json',
       success: function (user) {

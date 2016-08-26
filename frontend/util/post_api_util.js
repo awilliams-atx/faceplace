@@ -3,7 +3,7 @@ var ServerActions = require('../actions/server_actions');
 var PostApiUtil = {
   deletePost: function (postId) {
     $.ajax({
-      url: 'api/posts/' + postId,
+      url: '/api/posts/' + postId,
       method: 'DELETE',
       dataType: 'json',
       success: function (post) {
@@ -13,7 +13,7 @@ var PostApiUtil = {
   },
   fetchTaggedFriends: function (postId) {
     $.ajax({
-      url: 'api/posts/' + postId + '/tagged_friends',
+      url: '/api/posts/' + postId + '/tagged_friends',
       method: 'GET',
       dataType: 'json',
       success: function (friends) {
@@ -23,7 +23,7 @@ var PostApiUtil = {
   },
   fetchTimelinePosts: function (userId) {
     $.ajax({
-      url: 'api/users/' + userId + '/posts',
+      url: '/api/users/' + userId + '/posts',
       method: 'GET',
       dataType: 'json',
       data: {profilePosts: true},
@@ -37,7 +37,7 @@ var PostApiUtil = {
   },
   submitPost: function (post) {
     $.ajax({
-      url: 'api/posts',
+      url: '/api/posts',
       method: 'POST',
       dataType: 'json',
       data: {post: post},
@@ -48,7 +48,7 @@ var PostApiUtil = {
   },
   updatePost: function (post) {
     $.ajax({
-      url: 'api/posts/' + post.id,
+      url: '/api/posts/' + post.id,
       method: 'PUT',
       dataType: 'json',
       data: {post: post},

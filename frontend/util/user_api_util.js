@@ -4,7 +4,7 @@ var ErrorActions = require('../actions/error_actions'),
 var UserApiUtil = {
   fetchUser: function (id) {
     $.ajax({
-      url: 'api/users/' + id,
+      url: '/api/users/' + id,
       method: 'GET',
       dataType: 'json',
       success: function (user) {
@@ -14,7 +14,7 @@ var UserApiUtil = {
   },
   submitProfile: function (profile, cb) {
     $.ajax({
-      url: 'api/user',
+      url: '/api/user',
       method: 'PATCH',
       dataType: 'json',
       data: { profile: profile },
@@ -26,7 +26,7 @@ var UserApiUtil = {
   },
   signUp: function (user, redirectCB) {
     $.ajax({
-      url: 'api/user',
+      url: '/api/user',
       method: 'POST',
       dataType: 'json',
       data: {user: user},
@@ -42,7 +42,7 @@ var UserApiUtil = {
   },
   submitCoverPhoto: function (formData) {
     $.ajax({
-      url: 'api/user/cover_photo',
+      url: '/api/user/cover_photo',
       method: 'POST',
       dataType: 'json',
       data: formData,
@@ -55,7 +55,7 @@ var UserApiUtil = {
   },
   submitProfilePic: function (formData) {
     $.ajax({
-      url: 'api/user/profile_pic',
+      url: '/api/user/profile_pic',
       method: 'POST',
       dataType: 'json',
       data: formData,

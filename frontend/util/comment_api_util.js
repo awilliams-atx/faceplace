@@ -2,7 +2,7 @@ var ServerActions = require('../actions/server_actions');
 
 var CommentApiUtil = {
   fetchComments: function (type, id) {
-    var url = 'api/';
+    var url = '/api/';
 
     if (type === 'Post') {
       url += 'posts/' + id + '/comments';
@@ -38,7 +38,7 @@ var CommentApiUtil = {
       parentId = comment.commentableId;
     }
 
-    var url = 'api/' + parentRoute + '/' + parentId + '/comments';
+    var url = '/api/' + parentRoute + '/' + parentId + '/comments';
 
     $.ajax({
       url: url,
