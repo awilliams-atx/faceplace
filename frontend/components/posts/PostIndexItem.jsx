@@ -103,7 +103,6 @@ var PostIndexItem = React.createClass({
   },
   componentDidMount: function () {
     ClientActions.fetchComments('Post', this.props.post.postId);
-    this.jumpToPost();
   },
   authorizedToEdit: function () {
     return this.props.post.authorId === SessionStore.currentUser().id;
@@ -180,12 +179,6 @@ var PostIndexItem = React.createClass({
     this.setState({ selectingOptions: false }, function () {
       ClientActions.triggerModal(modalContent);
     });
-  },
-  jumpToPost: function () {
-    var post_id = Util.queryString('post_id');
-    if (post_id === this.props.post.postId.toString()) {
-      window.location.hash = post_id;
-    }
   },
   pushAuthorRoute: function (e) {
     e.preventDefault();

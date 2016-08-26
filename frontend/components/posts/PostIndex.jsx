@@ -1,4 +1,5 @@
 var React = require('react'),
+    Util = require('../../util/general'),
     PostForm = require('./PostForm'),
     PostIndexItem = require('./PostIndexItem'),
     PostStore = require('../../stores/post'),
@@ -49,8 +50,14 @@ var PostIndex = React.createClass({
     }
     return authorized;
   },
+  jumpToPost: function () {
+    var post_id = Util.queryString('post_id');
+    if (post_id) { window.location.hash = post_id }
+  },
   onPostStoreChange: function () {
-    this.setState({ posts: PostStore.all() });
+    this.setState({ posts: PostStore.all() }, function () {
+      this.jumpToPost();
+    }.bind(this));
   },
   onUserStoreChange: function () {
     this.setState({
