@@ -86,10 +86,9 @@
       .nav-drop-item {
         @include bottomBorder;
         display: block;
-        padding: 6px 0 5px;
+        padding: 6px 0 5px 12px;
         .nav-drop-profile-pic {
           @include squareObjectFit(48px);
-          margin-left: 12px;
           margin-right: 10px;
         }
       }
