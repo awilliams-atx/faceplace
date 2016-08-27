@@ -75,10 +75,10 @@ var Notifications = React.createClass({
     return NotificationStore.justChecked(id) ? 'unchecked-alert' : '';
   },
   className: function () {
-    if (this.state.uncheckedNotificationIds > 0) {
+    if (this.props.dropToggles['notifications']) {
       return 'nav-drop-active';
-    } else if (this.props.dropToggles['notifications']) {
-      return 'nav-drop-active';
+    } else if (this.state.uncheckedNotificationIds.length > 0) {
+      return 'nav-drop-unchecked';
     } else {
       return 'nav-drop-inactive';
     }

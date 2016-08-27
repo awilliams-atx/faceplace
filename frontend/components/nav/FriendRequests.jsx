@@ -72,10 +72,10 @@ var FriendRequests = React.createClass({
     return FriendRequestStore.justChecked(id) ? ' unchecked-alert' : '';
   },
   className: function () {
-    if (this.state.uncheckedRequestIds.length > 0) {
+    if (this.props.dropToggles['friendRequests']) {
       return 'nav-drop-active';
-    } else if (this.props.dropToggles['friendRequests']) {
-      return 'nav-drop-active';
+    } else if (this.state.uncheckedRequestIds.length > 0) {
+      return 'nav-drop-unchecked';
     } else {
       return 'nav-drop-inactive';
     }
