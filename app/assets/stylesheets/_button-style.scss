@@ -7,13 +7,15 @@
 }
 
 @mixin grayButton {
-  color: $abbey;
   background-color: $athensGray3;
   border: 1px solid $iron1;
+  color: $abbey;
+  cursor: pointer;
 }
 
 @mixin blueButton {
-  color: white;
   background-color: $sanMarino;
   font-family: $typeStandardFontFamily;
+  color: white;
+  cursor: pointer;
 }

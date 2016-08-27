@@ -10,7 +10,6 @@ $grayButtonHoverBackgroundColor: $athensGray1;
 $grayButtonActiveBackgroundColor: $iron2;
 
 @mixin blueButtonHoverColors {
-  cursor: pointer;
   background-color: $blueButtonHoverBackgroundColor;
 }
 @mixin blueButtonActiveColors {
