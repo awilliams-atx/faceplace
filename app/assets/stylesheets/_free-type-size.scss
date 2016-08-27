@@ -1,5 +1,5 @@
-@import 'free-type-type';
 @import 'global';
+$freeStandardFontFamily: helvetica, arial, sans-serif;
 
 @mixin freeChambray($size) {
   color: $mariner;
@@ -14,18 +14,18 @@
   font-weight: normal;
 }
 @mixin freeStandard12 {
-  @include freeStandardType;
+  font-family: $freeStandardFontFamily;
   font-size: 12px;
 }
 @mixin freeStandard14 {
-  @include freeStandardType;
+  font-family: $freeStandardFontFamily;
   font-size: 14px;
 }
 @mixin freeStandard15 {
-  @include freeStandardType;
+  font-family: $freeStandardFontFamily;
   font-size: 15px;
 }
 @mixin freeStandard16 {
-  @include freeStandardType;
+  font-family: $freeStandardFontFamily;
   font-size: 16px;
 }
