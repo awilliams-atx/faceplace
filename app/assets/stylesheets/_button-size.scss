@@ -1,4 +1,4 @@
-$grayButtonBorder: 1px solid #cdcfd4;
+@import 'global';
 
 $slimButtonBorderRadius: 2px;
 $slimButtonFontSize: 12px;
@@ -17,5 +17,5 @@ $slimButtonPadding: 0 8px;
   margin-left: $slimButtonMarginLeft;
 }
 @mixin grayButtonBorder {
-  border: $grayButtonBorder;
+  border: 1px solid $iron1;
 }

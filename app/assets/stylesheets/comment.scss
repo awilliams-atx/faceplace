@@ -1,7 +1,7 @@
 @import 'global';
 
 .comment-section {
-  background-color: $athensGray3;;
+  background-color: $athensGray1;
   border-top: 1px solid $mercury;
   margin-top: 11px;
   img {
@@ -44,7 +44,7 @@
     padding: 8px 12px 8px;
     textarea {
       @include typeStandard;
-      border: 1px solid $iron;
+      border: 1px solid $iron2;
       display: block;
       float: left;
       height: 16px;

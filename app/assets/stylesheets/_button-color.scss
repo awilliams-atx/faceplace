@@ -9,11 +9,11 @@ $grayButtonColor: $abbey;
 $grayButtonBorderColor: $sanMarino;
 $grayButtonBackgroundColor: $athensGray3;
 $grayButtonHoverBackgroundColor: $athensGray1;
-$grayButtonActiveBackgroundColor: $iron;
+$grayButtonActiveBackgroundColor: $iron2;
 
 @mixin blueButtonColors {
-  color: $blueButtonColor;
-  background-color: $blueButtonBackgroundColor;
+  color: white;
+  background-color: $sanMarino;
 }
 @mixin blueButtonHoverColors {
   cursor: pointer;
