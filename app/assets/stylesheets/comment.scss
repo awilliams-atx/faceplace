@@ -2,7 +2,7 @@
 
 .comment-section {
   background-color: $athensGray1;
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid $mercury;
   margin-top: 11px;
   img {
     @include squareObjectFit(30px);

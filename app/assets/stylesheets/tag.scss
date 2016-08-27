@@ -78,7 +78,7 @@
   cursor: pointer;
 }
 .tagging-field-container {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid $mercury;
 }
 .tagging-field-with {
   @include typeStandard;
