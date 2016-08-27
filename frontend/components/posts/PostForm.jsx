@@ -41,11 +41,13 @@ var PostForm = React.createClass({
     footerRightButtons = (
       <div className='post-footer-right-buttons'>
         <button className='button-gray'
-                onClick={this.handleCancel}>
+          id='modal-cancel'
+          onClick={this.handleCancel}>
           Cancel
         </button>
         <button className='button-blue'
-                onClick={this.handleSubmit}>
+          id='modal-submit'
+          onClick={this.handleSubmit}>
           Update
         </button>
       </div>
@@ -64,7 +66,7 @@ var PostForm = React.createClass({
 
     return (
       // CSS is complicated because of header.
-      <section id='post-form-section'
+      <section id={this.postSectionId()}
         className={elTypeClass + ' profile-post'}>
         <div className='post-types-background'>
           <header id='post-types'>
@@ -156,6 +158,20 @@ var PostForm = React.createClass({
   },
   onPostBodyChange: function (e) {
     this.setState({postBody: e.target.value});
+  },
+  postSectionId: function () {
+    if (this.props.isEditing) {
+      return 'modal';
+    } else {
+      return 'post-form-section';
+    }
+  },
+  submitButtonId: function () {
+    if (this.props.isModalElement) {
+      return 'modal-submit';
+    } else {
+      return '';
+    }
   },
   toggleTag: function (e) {
     e.preventDefault();

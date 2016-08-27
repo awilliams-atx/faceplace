@@ -4,7 +4,7 @@ var React = require('react'),
 
 var Options = React.createClass({
   getInitialState: function () {
-    return { selectingOptions: false };
+    return { selectingOptions: false, editing: false, deleting: false };
   },
   render: function () {
     return (
@@ -33,6 +33,13 @@ var Options = React.createClass({
       );
     }
   },
+  cancelModal: function () {
+    if (this.state.deleting) {
+      this.deleteCancelCallback();
+    } else if (this.state.editing) {
+      this.editCallback();
+    }
+  },
   clickOutListener: function (e) {
     var options = document.getElementById('post-options');
     if (!options || !options.contains(e.target)) {
@@ -41,25 +48,28 @@ var Options = React.createClass({
   },
   delete: function () {
     document.body.setAttribute('class', 'no-scroll-body');
-    this.setState({ selectingOptions: false }, function () {
+    this.setState({ selectingOptions: false, deleting: true }, function () {
       ClientActions.triggerModal(this.deleteModal);
       this.toggleOptions();
+      document.addEventListener('click', this.modalClickOutListener);
     });
   },
   deleteCancelCallback: function () {
     document.body.removeAttribute('class');
     ClientActions.cancelModal();
+    document.removeEventListener('click', this.modalClickOutListener);
   },
   deleteConfirmCallback: function () {
     document.body.removeAttribute('class');
     ClientActions.cancelModal();
     ClientActions.deletePost(this.props.post.postId);
+    document.removeEventListener('click', this.modalClickOutListener);
   },
   deleteModal: function () {
     return (
       <div className='modal-outer group'>
         <div className='modal-inner group'>
-          <aside className='modal-delete-post modal-element group'>
+          <aside id='modal' className='modal-delete-post modal-element group'>
             <header className='modal-header'>
               <strong>
                 Delete Post
@@ -74,11 +84,11 @@ var Options = React.createClass({
             <hr />
             <footer className='modal-footer group'>
               <div className='modal-button-container group'>
-                <button className='button-gray'
+                <button id='modal-cancel' className='button-gray'
                   onClick={this.deleteCancelCallback}>
                     Cancel
                 </button>
-                <button className='button-blue'
+                <button id='modal-sumbit' className='button-blue'
                   onClick={this.deleteConfirmCallback}
                   ref='autoFocus'>
                     Delete Post
@@ -93,15 +103,17 @@ var Options = React.createClass({
   edit: function () {
     document.body.setAttribute('class', 'no-scroll-body');
     ClientActions.freezeTags();
-    this.setState({ selectingOptions: false }, function () {
+    this.setState({ selectingOptions: false, editing: true }, function () {
       ClientActions.triggerModal(this.editModal);
       this.toggleOptions();
+      document.addEventListener('click', this.modalClickOutListener);
     });
   },
   editCallback: function () {
     document.body.removeAttribute('class');
     ClientActions.cancelModal();
     ClientActions.unfreezeTags();
+    document.removeEventListener('click', this.modalClickOutListener);
   },
   editModal: function () {
     return (
@@ -114,6 +126,17 @@ var Options = React.createClass({
         </aside>
       </div>
     );
+  },
+  modalClickOutListener: function (e) {
+    console.log(e.target);
+    var modal = document.getElementById('modal');
+    if (!this.submittingOrCanceling(e) && !modal.contains(e.target)) {
+      this.cancelModal();
+      document.removeEventListener('click', this.modalClickOutListener);
+    }
+  },
+  submittingOrCanceling: function (e) {
+    return ['modal-submit', 'modal-cancel'].indexOf(e.target.id) >= 0;
   },
   toggleOptions: function () {
     var state = { selectingOptions: !this.state.selectingOptions };
