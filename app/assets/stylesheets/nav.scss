@@ -70,6 +70,8 @@
       border: 1px solid rgba(#636363, 0.4);
       box-shadow: 0 3px 8px rgba(#000000, 0.25);
       left: -370px;
+      max-height: 80vh;
+      overflow: hidden;
       position: absolute;
       top: 34px;
       width: 406px;
@@ -86,6 +88,7 @@
       .nav-drop-item {
         @include bottomBorder;
         display: block;
+        overflow-x: hidden;
         padding: 6px 0 5px 12px;
         .nav-drop-profile-pic {
           @include squareObjectFit(48px);
@@ -95,6 +98,9 @@
       .nav-drop-item:last-child {
         border-bottom: none;
       }
+    }
+    .nav-drop-overlay:hover {
+      overflow-y: scroll;
     }
     .nav-drop-overlay:after,
     .nav-drop-overlay:before {
