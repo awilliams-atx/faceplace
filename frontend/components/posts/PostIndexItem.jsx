@@ -13,21 +13,6 @@ var PostIndexItem = React.createClass({
     return ({ selectingOptions: false });
   },
   render: function () {
-    var renderCrossPostUser = function () {
-      if (!this.props.post.profileOwner) { return; }
-      return (
-        <div>
-          <div className='friend-post-icon'>
-            <i className='fa fa-caret-right' aria-hidden='true'></i>
-          </div>
-          <div className='friend-post-breakdown'>
-            <a href={'/users/' + this.props.post.profileOwner.userId}>
-              {this.props.post.profileOwner.fullName}
-            </a>
-          </div>
-        </div>
-      );
-    }.bind(this);
 
     var renderTaggedFriends = function () {
       if (this.props.post.taggedFriends.length > 0) {
@@ -82,7 +67,7 @@ var PostIndexItem = React.createClass({
               onClick={this.pushAuthorRoute}>
               <div className='post-author-name'>{this.props.post.fullName}</div>
             </a>
-            {renderCrossPostUser()}
+            {this.renderCrossPostUser()}
           </div>
           <br />
           <div className='post-datetime-container group'>
@@ -99,6 +84,21 @@ var PostIndexItem = React.createClass({
         {renderTaggedFriends()}
         <PostCommentIndex post={this.props.post} />
       </article>
+    );
+  },
+  renderCrossPostUser: function () {
+    if (!this.props.post.profileOwner) { return; }
+    return (
+      <div>
+        <div className='friend-post-icon'>
+          <i className='fa fa-caret-right' aria-hidden='true'></i>
+        </div>
+        <div className='friend-post-breakdown'>
+          <a href={'/users/' + this.props.post.profileOwner.userId}>
+            {this.props.post.profileOwner.fullName}
+          </a>
+        </div>
+      </div>
     );
   },
   componentDidMount: function () {
