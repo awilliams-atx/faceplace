@@ -26,7 +26,7 @@ var Options = React.createClass({
           </li>
           <br />
           <hr />
-          <li className='post-option' onClick={this.deletePost}>
+          <li className='post-option' onClick={this.delete}>
             Delete Post
           </li>
         </ul>
@@ -39,56 +39,56 @@ var Options = React.createClass({
       this.toggleOptions();
     }
   },
-  deletePost: function () {
+  delete: function () {
     document.body.setAttribute('class', 'no-scroll-body');
-    var confirmCallback = function () {
-      document.body.removeAttribute('class');
-      ClientActions.cancelModal();
-      ClientActions.deletePost(this.props.post.postId);
-    }.bind(this);
-    var cancelCallback = function () {
-      document.body.removeAttribute('class');
-      ClientActions.cancelModal();
-    };
-    var modalContent = function () {
-      return (
-        <div className='modal-outer group'>
-          <div className='modal-inner group'>
-            <aside className='modal-delete-post modal-element group'>
-              <header className='modal-header'>
-                <strong>
-                  Delete Post
-                </strong>
-              </header>
-              <div className='modal-message-container'>
-                <mark>
-                  Really delete this post?
-                </mark>
-              </div>
-              <br />
-              <hr />
-              <footer className='modal-footer group'>
-                <div className='modal-button-container group'>
-                  <button className='button-gray'
-                    onClick={cancelCallback}>
-                      Cancel
-                  </button>
-                  <button className='button-blue'
-                    onClick={confirmCallback}
-                    ref='autoFocus'>
-                      Delete Post
-                  </button>
-                </div>
-              </footer>
-            </aside>
-          </div>
-        </div>
-      );
-    };
     this.setState({ selectingOptions: false }, function () {
-      ClientActions.triggerModal(modalContent);
+      ClientActions.triggerModal(this.deleteModal);
       this.toggleOptions();
     });
+  },
+  deleteCancelCallback: function () {
+    document.body.removeAttribute('class');
+    ClientActions.cancelModal();
+  },
+  deleteConfirmCallback: function () {
+    document.body.removeAttribute('class');
+    ClientActions.cancelModal();
+    ClientActions.deletePost(this.props.post.postId);
+  },
+  deleteModal: function () {
+    return (
+      <div className='modal-outer group'>
+        <div className='modal-inner group'>
+          <aside className='modal-delete-post modal-element group'>
+            <header className='modal-header'>
+              <strong>
+                Delete Post
+              </strong>
+            </header>
+            <div className='modal-message-container'>
+              <mark>
+                Really delete this post?
+              </mark>
+            </div>
+            <br />
+            <hr />
+            <footer className='modal-footer group'>
+              <div className='modal-button-container group'>
+                <button className='button-gray'
+                  onClick={this.deleteCancelCallback}>
+                    Cancel
+                </button>
+                <button className='button-blue'
+                  onClick={this.deleteConfirmCallback}
+                  ref='autoFocus'>
+                    Delete Post
+                </button>
+              </div>
+            </footer>
+          </aside>
+        </div>
+      </div>
+    );
   },
   edit: function () {
     document.body.setAttribute('class', 'no-scroll-body');
