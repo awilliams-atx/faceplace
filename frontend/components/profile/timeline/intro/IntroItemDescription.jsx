@@ -13,14 +13,18 @@ var IntroItemDescription = React.createClass({
     if (this.state.editing) {
       return (
         <div id='description-form group'>
-          <form onSubmit={this.onSubmit}>
+          <form id='intro-form' onSubmit={this.onSubmit}>
             <textarea value={this.state.description || ''}
               ref='autoFocus'
               placeholder='Tell everyone about yourself.'
               onChange={this.onDescriptionChange} />
             <div className='buttons' >
-              <button>Submit</button>
-              <button onClick={this.onCancel}>Cancel</button>
+              <button id='intro-submit'>
+                Submit
+              </button>
+              <button id='intro-cancel' onClick={this.onCancel}>
+                Cancel
+              </button>
             </div>
           </form>
         </div>
@@ -39,12 +43,22 @@ var IntroItemDescription = React.createClass({
   componentWillUnmount: function () {
     this.UserListener.remove();
   },
+  clickOutListener: function (e) {
+    var form = document.getElementById('intro-form');
+    if (!this.submittingOrCanceling(e) && !form.contains(e.target)) {
+      this.setState({ editing: false }, function () {
+        document.removeEventListener('click', this.clickOutListener);
+      }.bind(this));
+    }
+  },
   onCancel: function (e) {
     e.preventDefault();
     this.setState({
       description: UserStore.user().description,
       editing: false
-    });
+    }, function () {
+      document.removeEventListener('click', this.clickOutListener);
+    }.bind(this));
   },
   onDescriptionChange: function (e) {
     this.setState({ description: e.target.value });
@@ -52,7 +66,9 @@ var IntroItemDescription = React.createClass({
   onSubmit: function (e) {
     e.preventDefault();
     ClientActions.submitProfile({ description: this.state.description });
-    this.setState({ editing: false });
+    this.setState({ editing: false }, function () {
+      document.removeEventListener('click', this.clickOutListener);
+    }.bind(this));
   },
   onUserStoreChange: function (e) {
     this.setState({ description: UserStore.user().description });
@@ -63,7 +79,11 @@ var IntroItemDescription = React.createClass({
     this.unchangedDescription = this.state.description;
     this.setState({ editing: true }, function () {
       this.refs.autoFocus.focus();
+      document.addEventListener('click', this.clickOutListener);
     });
+  },
+  submittingOrCanceling: function (e) {
+    return ['intro-submit', 'intro-cancel'].indexOf(e.target.id) >= 0;
   }
 });
 
