@@ -9,16 +9,24 @@
 
 .main-header {
   height: 42px;
+  .main-header-nav {
+    width: 980px;
+    height: 100%;
+    margin: auto;
+    #faceplace-icon {
+      float: left;
+      font-size: 28px;
+    }
+    .nav-left {
+      height: 100%;
+      float: left;
+    }
+    #nav-right > div {
+      float: left;
+    }
+  }
 }
-.main-header-nav {
-  width: 980px;
-  height: 100%;
-  margin: auto;
-}
-#faceplace-icon {
-  float: left;
-  font-size: 28px;
-}
+
 .fa-facebook-official {
   color: white;
   display: block;
@@ -26,13 +34,6 @@
   height: 60px;
   margin-top: 6px;
   margin-right: 7px;
-}
-.nav-left {
-  height: 100%;
-  float: left;
-}
-#nav-right > div {
-  float: left;
 }
 #nav-right {
   height: 100%;
