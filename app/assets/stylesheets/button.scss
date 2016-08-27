@@ -10,9 +10,8 @@
   margin-left: 7px;
 }
 .button-blue {
+  @include blueButton;
   line-height: 24px;
-  background-color: $blueButtonBackgroundColor;
-  color: white;
 }
 .button-blue:hover { @include blueButtonHover }
 .button-blue:active { @include blueButtonActive }
