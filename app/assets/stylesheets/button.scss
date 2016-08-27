@@ -22,7 +22,5 @@
   background-color: $grayButtonBackgroundColor;
   border: 1px solid #ced0d4;
 }
-.button-gray:hover {
-  background-color: $grayButtonHoverBackgroundColor;
-}
+.button-gray:hover { @include grayButtonHover }
 .button-gray:active { @include grayButtonActive }
