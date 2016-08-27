@@ -15,7 +15,7 @@
   color: white;
 }
 .button-blue:hover {
-  background-color: $blueButtonHoverBackgroundColor;
+  @include blueButtonHover;
 }
 .button-blue:active {
   background-color: $blueButtonActiveBackgroundColor;

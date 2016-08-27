@@ -2,16 +2,12 @@
 
 $blueButtonColor: white;
 $blueButtonBackgroundColor: $sanMarino;
-$blueButtonHoverBackgroundColor: $chambray;
 $blueButtonActiveBackgroundColor: $astronaut;
 
 $grayButtonBackgroundColor: $athensGray3;
 $grayButtonHoverBackgroundColor: $athensGray1;
 $grayButtonActiveBackgroundColor: $iron2;
 
-@mixin blueButtonHoverColors {
-  background-color: $blueButtonHoverBackgroundColor;
-}
 @mixin blueButtonActiveColors {
   background-color: $blueButtonActiveBackgroundColor;
 }

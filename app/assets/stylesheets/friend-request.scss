@@ -30,7 +30,7 @@
     @include blueButton;
   }
   button.nav-drop-request-confirm:hover {
-    @include blueButtonHoverColors;
+    @include blueButtonHover;
   }
   button.nav-drop-request-confirm:active {
     @include blueButtonActiveColors;

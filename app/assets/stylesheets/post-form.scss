@@ -61,7 +61,7 @@ header#post-types {
     @include blueButton;
     @include slimButtonSizes;
   }
-  button:hover { @include blueButtonHoverColors; }
+  button:hover { @include blueButtonHover; }
   button:active { @include blueButtonActiveColors; }
   button:focus { @include buttonFocusBoxShadow; }
   margin: 8px;
