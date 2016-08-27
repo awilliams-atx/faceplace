@@ -1,7 +1,7 @@
 var React = require('react');
 
-module.exports = function profileOwner (post) {
-  if (profileOwner) { return; }
+module.exports = function profileOwner (profileOwner) {
+  if (!profileOwner) { return; }
   return (
     <div>
       <div className='friend-post-icon'>
