@@ -21,7 +21,7 @@ var Options = React.createClass({
     if (this.state.selectingOptions) {
       return (
         <ul id='post-options' className='group'>
-          <li className='post-option' onClick={this.editPost}>
+          <li className='post-option' onClick={this.edit}>
             Edit Post
           </li>
           <br />
@@ -90,25 +90,25 @@ var Options = React.createClass({
       this.toggleOptions();
     });
   },
-  editCompletionCallback: function () {
+  edit: function () {
+    document.body.setAttribute('class', 'no-scroll-body');
+    ClientActions.freezeTags();
+    this.setState({ selectingOptions: false }, function () {
+      ClientActions.triggerModal(this.editModal);
+      this.toggleOptions();
+    });
+  },
+  editCallback: function () {
     document.body.removeAttribute('class');
     ClientActions.cancelModal();
     ClientActions.unfreezeTags();
   },
-  editPost: function () {
-    document.body.setAttribute('class', 'no-scroll-body');
-    ClientActions.freezeTags();
-    this.setState({ selectingOptions: false }, function () {
-      ClientActions.triggerModal(this.modalContent);
-      this.toggleOptions();
-    });
-  },
-  modalContent: function () {
+  editModal: function () {
     return (
       <div className='modal-outer group'>
         <aside className='modal-inner'>
         <PostForm isEditing={true}
-          modalCallback={this.editCompletionCallback}
+          modalCallback={this.editCallback}
           post={this.props.post}
           isModalElement={true} />
         </aside>
