@@ -1,5 +1,6 @@
 var React = require('react'),
     PostForm = require('./PostForm'),
+    ProfileOwner = require('./ProfileOwner'),
     TaggedFriends = require('./TaggedFriends'),
     ClientActions = require('../../actions/client_actions'),
     PostCommentIndex = require('../comments/PostCommentIndex'),
@@ -26,7 +27,7 @@ var PostIndexItem = React.createClass({
               onClick={this.pushAuthorRoute}>
               <div className='post-author-name'>{this.props.post.fullName}</div>
             </a>
-            {this.renderCrossPostUser()}
+            {ProfileOwner(this.props.post.profileOwner)}
           </div>
           <br />
           <div className='post-datetime-container group'>
@@ -43,21 +44,6 @@ var PostIndexItem = React.createClass({
         {TaggedFriends(this.props.post.taggedFriends, this.pushUserRoute)}
         <PostCommentIndex post={this.props.post} />
       </article>
-    );
-  },
-  renderCrossPostUser: function () {
-    if (!this.props.post.profileOwner) { return; }
-    return (
-      <div>
-        <div className='friend-post-icon'>
-          <i className='fa fa-caret-right' aria-hidden='true'></i>
-        </div>
-        <div className='friend-post-breakdown'>
-          <a href={'/users/' + this.props.post.profileOwner.userId}>
-            {this.props.post.profileOwner.fullName}
-          </a>
-        </div>
-      </div>
     );
   },
   renderOptions: function () {
