@@ -13,23 +13,6 @@ var PostIndexItem = React.createClass({
     return ({ selectingOptions: false });
   },
   render: function () {
-    var renderOptions = function () {
-      if (this.state.selectingOptions) {
-        return (
-          <ul className='post-options group'>
-            <li className='post-option' onClick={this.editPost}>
-              Edit Post
-            </li>
-            <br />
-            <hr />
-            <li className='post-option' onClick={this.deletePost}>
-              Delete Post
-            </li>
-          </ul>
-        );
-      }
-    }.bind(this);
-
     return (
       <article className='timeline-feed-item'>
         <a name={this.props.post.postId}></a>
@@ -51,7 +34,7 @@ var PostIndexItem = React.createClass({
           </div>
           <aside className='post-options-container'>
             {this.renderOptionsIcon()}
-            {renderOptions()}
+            {this.renderOptions()}
           </aside>
         </header>
         <section className='post-body'>
@@ -85,6 +68,22 @@ var PostIndexItem = React.createClass({
           {Util.toCommaSeparatedAnchors(this.props.post.taggedFriends,
             this.pushUserRoute)}
         </div>
+      );
+    }
+  },
+  renderOptions: function () {
+    if (this.state.selectingOptions) {
+      return (
+        <ul className='post-options group'>
+          <li className='post-option' onClick={this.editPost}>
+            Edit Post
+          </li>
+          <br />
+          <hr />
+          <li className='post-option' onClick={this.deletePost}>
+            Delete Post
+          </li>
+        </ul>
       );
     }
   },
