@@ -16,8 +16,3 @@ $slimButtonPadding: 0 8px;
   line-height: $slimButtonLineHeight;
   margin-left: $slimButtonMarginLeft;
 }
-@mixin grayButtonBorder {
-  color: $abbey;
-  background-color: $grayButtonBackgroundColor;
-  border: 1px solid $iron1;
-}
