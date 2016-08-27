@@ -11,10 +11,6 @@ $grayButtonBackgroundColor: $athensGray3;
 $grayButtonHoverBackgroundColor: $athensGray1;
 $grayButtonActiveBackgroundColor: $iron;
 
-@mixin buttonFocusBoxShadow {
-  outline: none;
-  box-shadow: 0 0 3px 2px rgba($dodgerBlue, 0.75);
-}
 @mixin blueButtonColors {
   color: $blueButtonColor;
   background-color: $blueButtonBackgroundColor;
