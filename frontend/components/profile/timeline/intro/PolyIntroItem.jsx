@@ -6,10 +6,17 @@ var PolyIntroItem = React.createClass({
   getInitialState: function () {
     return this.initialState();
   },
+  initialState: function () {
+    var state = { editing: false }
+    this.props.items.forEach(function (item) {
+      state[item.name] = UserStore.user()[item.name];
+    });
+    return state;
+  },
   render: function () {
     if (this.state.editing) {
       return (
-        <form onSubmit={this.onSubmit} >
+        <form id='intro-form' onSubmit={this.onSubmit} >
           {this.renderInputs()}
           <div className='buttons'>
             <button>Submit</button>
@@ -55,12 +62,14 @@ var PolyIntroItem = React.createClass({
   componentWillUnmount: function () {
     this.UserListener.remove();
   },
-  initialState: function () {
-    var state = { editing: false }
-    this.props.items.forEach(function (item) {
-      state[item.name] = UserStore.user()[item.name];
-    });
-    return state;
+  clickOutListener: function (e) {
+    console.log('uh');
+    var form = document.getElementById('intro-form');
+    if (!this.submittingOrCanceling(e) && !form.contains(e.target)) {
+      this.setState({ editing: false }, function () {
+        document.removeEventListener('click', this.clickOutListener);
+      }.bind(this));
+    }
   },
   onCancel: function (e) {
     e.preventDefault();
@@ -68,7 +77,9 @@ var PolyIntroItem = React.createClass({
     this.props.items.forEach(function (item) {
       state[item.name] = UserStore.user()[item.name];
     });
-    this.setState(state);
+    this.setState(state, function () {
+      document.removeEventListener('click', this.clickOutListener);
+    }.bind(this));
   },
   onChange: function (e) {
     var state = {};
@@ -82,7 +93,9 @@ var PolyIntroItem = React.createClass({
       submission[item.name] = this.state[item.name];
     }.bind(this));
     ClientActions.submitProfile(submission);
-    this.setState({ editing: false });
+    this.setState({ editing: false }, function () {
+      document.removeEventListener('click', this.clickOutListener);
+    }.bind(this));
   },
   onUserStoreChange: function (e) {
     var state = {};
@@ -93,10 +106,14 @@ var PolyIntroItem = React.createClass({
   },
   showEdit: function (e) {
     e.preventDefault();
+    document.addEventListener('click', this.clickOutListener);
     if (!this.props.authorizedToEdit) { return; }
     this.setState({ editing: true }, function () {
       this.refs.autoFocus.focus();
     });
+  },
+  submittingOrCanceling: function (e) {
+    return ['intro-submit', 'intro-cancel'].indexOf(e.target.id) >= 0;
   }
 });
 
