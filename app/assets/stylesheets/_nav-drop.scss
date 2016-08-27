@@ -1,6 +1,6 @@
 @import 'global';
 
-$navDropBorderBottom: 1px solid $miscThinSeparatorGray;
+$navDropBorderBottom: 1px solid rgba($doveGray, 0.22);
 
 @mixin navDropCounter {
   bottom: 35px;

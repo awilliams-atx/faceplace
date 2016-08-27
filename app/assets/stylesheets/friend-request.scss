@@ -3,7 +3,7 @@
 @import 'nav-drop';
 
 @mixin bottomBorder {
-  border-bottom: 1px solid $miscThinSeparatorGray;
+  border-bottom: 1px solid rgba($doveGray, 0.22);
 }
 
 .friend-request-details {
