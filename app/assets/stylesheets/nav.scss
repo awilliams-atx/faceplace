@@ -32,10 +32,10 @@
 #nav-right {
   height: 100%;
   float: right;
-  color: white;
   font-family: tahoma;
   font-size: 12px;
   #user-icon {
+    color: white;
     font-weight: bold;
     margin-right: 3px;
     margin-top: 14px;
@@ -58,6 +58,9 @@
     }
     .nav-drop-inactive:hover {
       color: #0b121e;
+    }
+    .nav-drop-unchecked, .nav-drop-active {
+      color: white;
     }
     mark {
       @include navDropCounter;
@@ -129,6 +132,7 @@
     background-color: #5a74a8;
     border-radius: 2px;
     box-shadow: 0 0 1px black;
+    color: white;
     cursor: pointer;
     display: block;
     float: left;
