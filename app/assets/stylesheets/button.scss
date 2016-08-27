@@ -1,5 +1,4 @@
 @import 'button-style';
-@import 'global';
 
 .button-blue { @include blueButton }
 .button-blue:hover { @include blueButtonHover }

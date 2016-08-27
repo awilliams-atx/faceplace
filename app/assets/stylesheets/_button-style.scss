@@ -1,7 +1,4 @@
-@mixin buttonFocus {
-  outline: none;
-  box-shadow: 0 0 3px 2px rgba($dodgerBlue, 0.75);
-}
+@import 'global';
 
 @mixin button {
   box-sizing: border-box;
@@ -12,7 +9,10 @@
   line-height: 22px;
   margin-left: 4px;
 }
-
+@mixin buttonFocus {
+  outline: none;
+  box-shadow: 0 0 3px 2px rgba($dodgerBlue, 0.75);
+}
 @mixin grayButton {
   @include button;
   background-color: $athensGray3;
@@ -20,15 +20,12 @@
   color: $abbey;
   cursor: pointer;
 }
-
 @mixin grayButtonHover {
   background-color: $athensGray1;
 }
-
 @mixin grayButtonActive {
   background-color: $iron2;
 }
-
 @mixin blueButton($padding: 8px) {
   @include button;
   background-color: $sanMarino;
@@ -37,11 +34,9 @@
   font-family: $typeStandardFontFamily;
   padding: 0 $padding;
 }
-
 @mixin blueButtonHover {
   background-color: $chambray;
 }
-
 @mixin blueButtonActive {
   background-color: $astronaut;
 }
