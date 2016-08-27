@@ -20,13 +20,6 @@
   @include flexAlign($navDropItemInnerHeight);
   float: right;
   margin-right: 12px;
-  button:focus { @include buttonFocus }
-  button.nav-drop-request-confirm { @include blueButton }
-  button.nav-drop-request-confirm:hover { @include blueButtonHover }
-  button.nav-drop-request-confirm:active { @include blueButtonActive }
-  button.nav-drop-request-delete { @include grayButton }
-  button.nav-drop-request-delete:hover { @include grayButtonHover }
-  button.nav-drop-request-delete:active { @include grayButtonActive }
 }
 .nav-drop-block {
   display: block;

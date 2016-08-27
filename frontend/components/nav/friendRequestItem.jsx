@@ -17,11 +17,11 @@ var FriendRequestItem = React.createClass({
           <aside>a million friends</aside>
         </div>
         <div className='friend-request-response'>
-          <button className='nav-drop-request-confirm'
+          <button className='button-blue'
             onClick={this.onAccept}>
             Confirm
           </button>
-          <button className='nav-drop-request-delete'
+          <button className='button-gray'
             onClick={this.onReject}>
             Delete Request
           </button>
