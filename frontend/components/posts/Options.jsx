@@ -34,14 +34,14 @@ var Options = React.createClass({
     }
   },
   deletePost: function () {
-    $('body').addClass('no-scroll-body');
+    document.body.setAttribute('class', 'no-scroll-body');
     var confirmCallback = function () {
-      $('body').removeClass('no-scroll-body');
+      document.body.removeAttribute('class');
       ClientActions.cancelModal();
       ClientActions.deletePost(this.props.post.postId);
     }.bind(this);
     var cancelCallback = function () {
-      $('body').removeClass('no-scroll-body');
+      document.body.removeAttribute('class');
       ClientActions.cancelModal();
     };
     var modalContent = function () {
@@ -71,17 +71,17 @@ var Options = React.createClass({
         </div>
       );
     };
-    this.setState({selectingOptions: false}, function () {
+    this.setState({ selectingOptions: false }, function () {
       ClientActions.triggerModal(modalContent);
     });
   },
   editCompletionCallback: function () {
-    $('body').removeClass('no-scroll-body');
+    document.body.removeAttribute('class');
     ClientActions.cancelModal();
     ClientActions.unfreezeTags();
   },
   editPost: function () {
-    $('body').addClass('no-scroll-body');
+    document.body.setAttribute('class', 'no-scroll-body');
     ClientActions.freezeTags();
     this.setState({ selectingOptions: false }, function () {
       ClientActions.triggerModal(this.modalContent);
