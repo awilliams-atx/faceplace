@@ -16,10 +16,8 @@
 .button-blue:hover { @include blueButtonHover }
 .button-blue:active { @include blueButtonActive }
 .button-gray {
-  color: $abbey;
+  @include grayButton;
   line-height: 22px;
-  background-color: $grayButtonBackgroundColor;
-  border: 1px solid #ced0d4;
 }
 .button-gray:hover { @include grayButtonHover }
 .button-gray:active { @include grayButtonActive }
