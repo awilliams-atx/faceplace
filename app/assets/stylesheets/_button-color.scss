@@ -11,7 +11,7 @@ $grayButtonColor: $abbey;
 $grayButtonBorderColor: $sanMarino;
 $grayButtonBackgroundColor: $athensGray3;
 $grayButtonHoverBackgroundColor: $athensGray1;
-$grayButtonActiveBackgroundColor: #dddfe2;
+$grayButtonActiveBackgroundColor: $iron;
 
 @mixin buttonFocusBoxShadow {
   outline: none;
