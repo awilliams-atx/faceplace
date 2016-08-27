@@ -1,6 +1,8 @@
 @import 'misc-color';
 @import 'free-type-size';
 
+$navDropBorderBottom: 1px solid $miscThinSeparatorGray;
+
 @mixin navDropCounter {
   bottom: 35px;
   background-color: $tomato;

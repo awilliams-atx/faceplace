@@ -3,10 +3,6 @@
 @import 'nav-drop';
 @import 'profile-pic-size';
 
-@mixin bottomBorder {
-  border-bottom: 1px solid $miscThinSeparatorGray;
-}
-
 .main-header {
   height: 42px;
   .main-header-nav {
@@ -101,7 +97,7 @@
       width: 406px;
       z-index: 1000;
       .nav-drop-title {
-        @include bottomBorder;
+        border-bottom: $navDropBorderBottom;
         strong {
           line-height: 30px;
           margin-left: 12px;
@@ -109,8 +105,8 @@
           color: #333338;
         }
       }
-      .nav-drop-item {
-        @include bottomBorder;
+        .nav-drop-item {
+        border-bottom: $navDropBorderBottom;
         display: block;
         overflow-x: hidden;
         padding: 6px 0 5px 12px;
