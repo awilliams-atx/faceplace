@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+@mixin grayButtonHover {
+  background-color: $athensGray1;
+}
+
 @mixin blueButton {
   background-color: $sanMarino;
   font-family: $typeStandardFontFamily;
