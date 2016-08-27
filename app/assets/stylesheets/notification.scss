@@ -11,7 +11,7 @@
 .notification-details {
   @include flexAlign($navDropItemInnerHeight);
   color: $notBlack;
-  font-family: $freeStandardFontFamily;
+  font-family: $typeStandardFontFamily;
   font-size: 12px;
   width: 324px;
   .notification-explanation {
@@ -26,7 +26,7 @@
       margin-right: 5px;
     }
     .notification-date {
-      @include freeShadyLady;
+      @include typeShadyLady;
     }
   }
 }

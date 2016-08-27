@@ -18,7 +18,7 @@
 }
 header#post-types {
   div.post-type-text {
-    @include freeChambray(12px);
+    @include typeChambray(12px);
     height: 16px;
     line-height: 16px;
   }
@@ -42,7 +42,7 @@ header#post-types {
   float: left;
 }
 .post-textarea {
-  @include freeStandard(14px);
+  @include typeStandard(14px);
   padding: 11px 0 13px 12px;
   border: none;
   outline: none;

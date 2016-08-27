@@ -1,7 +1,7 @@
 @import 'global';
 
 .timeline-feed-item {
-  @include freeStandard(14px);
+  @include typeStandard(14px);
   display: block;
   float: left;
   width: 510px;

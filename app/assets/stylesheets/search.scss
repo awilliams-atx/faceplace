@@ -6,7 +6,7 @@
   float: left;
   margin-top: 8px;
   #search-bar {
-    @include freeStandard(14px);
+    @include typeStandard(14px);
     border-radius: 3px;
     display: block;
     margin-bottom: 1px;
@@ -27,7 +27,7 @@
         }
       }
       .search-text {
-        @include freeStandard(14px);
+        @include typeStandard(14px);
         height: 33px;
         float: left;
         padding: 6px 0 5px;

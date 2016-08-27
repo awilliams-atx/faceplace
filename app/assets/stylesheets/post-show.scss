@@ -13,7 +13,7 @@
   }
 }
 .post-breakdown-details {
-  @include freeChambray(14px);
+  @include typeChambray(14px);
   float: left;
   width: 416px;
   position: relative;
@@ -38,7 +38,7 @@ div.friend-post-icon {
   float: left;
 }
 .post-datetime {
-  @include freeShadyLady;
+  @include typeShadyLady;
 }
 .post-options-container {
   position: relative;
@@ -67,7 +67,7 @@ div.friend-post-icon {
     box-shadow: 0 3px 8px rgba(#000000, 0.3);
   }
   li {
-    @include freeStandard;
+    @include typeStandard;
     float: left;
     margin: 6px 0;
     padding: 3px 12px;
@@ -90,7 +90,7 @@ div.friend-post-icon {
   }
 }
 .post-body {
-  @include freeStandard(14px);
+  @include typeStandard(14px);
   padding: 14px 12px 3px;
 }
 .post-tagged-friends {

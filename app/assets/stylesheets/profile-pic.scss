@@ -45,7 +45,7 @@
       margin-right: 5px;
     }
     strong {
-      @include freeStandard(16px);
+      @include typeStandard(16px);
       display: block;
       float: left;
       line-height: 27px;

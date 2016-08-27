@@ -18,7 +18,7 @@
   margin: auto;
   position: relative;
   label {
-    @include freeStandard;
+    @include typeStandard;
     color: white;
   }
 }
@@ -32,7 +32,7 @@ label:after {
   margin-top: 25px;
 }
 .log-in-form {
-  @include freeStandard;
+  @include typeStandard;
   position: absolute;
   display: block;
   float: right;

@@ -11,10 +11,10 @@
 .friend-request-details {
   @include flexAlign($navDropItemInnerHeight);
   a {
-    @include freeChambray(12px);
+    @include typeChambray(12px);
   }
   aside {
-    @include freeShadyLady;
+    @include typeShadyLady;
     display: block;
   }
 }
@@ -53,7 +53,7 @@
   float: left;
 }
 div#empty-friend-requests {
-  @include freeShadyLady;
+  @include typeShadyLady;
   padding: 8px;
   text-align: center;
   font-style: italic;

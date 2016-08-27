@@ -6,7 +6,7 @@
 #intro-hometown-img { background-image: url(asset_path('intro_hometown.png')); }
 
 #intro-index {
-  @include freeStandard;
+  @include typeStandard;
   line-height: 16px;
   width: 301px;
   hr {

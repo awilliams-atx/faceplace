@@ -1,18 +1,18 @@
-$freeStandardFontFamily: helvetica, arial, sans-serif;
+$typeStandardFontFamily: helvetica, arial, sans-serif;
 
-@mixin freeChambray($size) {
+@mixin typeChambray($size) {
   color: $mariner;
-  font-family: $freeStandardFontFamily;
+  font-family: $typeStandardFontFamily;
   font-size: $size;
   font-weight: bold;
 }
-@mixin freeShadyLady {
+@mixin typeShadyLady {
   color: $shadyLady;
-  font-family: $freeStandardFontFamily;
+  font-family: $typeStandardFontFamily;
   font-size: 12px;
   font-weight: normal;
 }
-@mixin freeStandard($size: 12px) {
-  font-family: $freeStandardFontFamily;
+@mixin typeStandard($size: 12px) {
+  font-family: $typeStandardFontFamily;
   font-size: $size;
 }
