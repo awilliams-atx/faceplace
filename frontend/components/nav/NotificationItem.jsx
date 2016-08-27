@@ -9,8 +9,9 @@ var NotificationItem = React.createClass({
   render: function () {
     return (
       <a href={'#' + this.props.notif.post_id}
-        onClick={this.checkNotification}>
-        <div className={'nav-drop-item group ' + this.props.checkedClass}>
+        onClick={this.checkNotification}
+        className='nav-drop-item'>
+        <div className={'group ' + this.props.checkedClass}>
           <img src={this.props.notif.profile_pic_url}
             className='nav-drop-profile-pic nav-drop-block' />
           <div className='notification-details nav-drop-block'>
