@@ -36,8 +36,7 @@
     @include blueButtonActiveColors;
   }
   button.nav-drop-request-delete {
-    @include grayButtonColors;
-    @include grayButtonBorder;
+    @include grayButton
   }
   button.nav-drop-request-delete:hover {
     @include grayButtonHoverColors;

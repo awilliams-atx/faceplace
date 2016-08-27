@@ -6,3 +6,9 @@
   outline: none;
   box-shadow: 0 0 3px 2px rgba($dodgerBlue, 0.75);
 }
+
+@mixin grayButton {
+  color: $abbey;
+  background-color: $athensGray3;
+  border: 1px solid $iron1;
+}
