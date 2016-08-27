@@ -4,6 +4,7 @@
 
 #notifications-drop {
   .nav-drop-item:hover {
+    background-color: $navDropItemHoverBackgroundColor;
     cursor: pointer;
   }
 }

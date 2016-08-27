@@ -119,10 +119,7 @@
         border-bottom: none;
       }
       .unchecked-alert {
-        background-color: $lavenderGray;
-      }
-      .nav-drop-item:hover {
-        background-color: $listItemHoverBackgroundColor;
+        background-color: $navDropItemUncheckedBackgroundColor;
       }
     }
     .nav-drop-overlay:hover {
