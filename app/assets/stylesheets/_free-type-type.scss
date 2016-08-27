@@ -6,10 +6,6 @@ $freeStandardFontFamily: helvetica, arial, sans-serif;
   @include freeFloatingTextWhite;
   font-family: $freeStandardFontFamily;
 }
-@mixin freeInteractiveLinkType {
-  @include freeInteractiveLinkBlue;
-  font-family: $freeStandardFontFamily;
-}
 @mixin freeSmallDetailType {
   @include freeSmallDetailGray;
   font-family: $freeStandardFontFamily;

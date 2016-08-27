@@ -12,7 +12,7 @@
 .friend-request-details {
   @include flexAlign($navDropItemInnerHeight);
   a {
-    @include freeInteractiveLinkSmall;
+    @include freeChambray(12px);
   }
   aside {
     @include freeSmallDetail;

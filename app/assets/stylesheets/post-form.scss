@@ -18,7 +18,7 @@
 }
 header#post-types {
   div.post-type-text {
-    @include freeInteractiveLinkSmall;
+    @include freeChambray(12px);
     height: 16px;
     line-height: 16px;
   }

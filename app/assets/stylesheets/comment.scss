@@ -20,7 +20,7 @@ $comment-background-blue: #f6f7f9;
       position: relative;
       width: 446px;
       a {
-        @include freeInteractiveLinkSmall;
+        @include freeChambray(12px);
       }
       a:hover {
         text-decoration: underline;

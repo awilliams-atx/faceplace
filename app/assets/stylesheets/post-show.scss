@@ -13,12 +13,13 @@
   }
 }
 .post-breakdown-details {
-  @include freeInteractiveLinkMedium;
+  @include freeChambray(14px);
   float: left;
   width: 416px;
   position: relative;
   margin-bottom: 5px;
   top: 2px;
+;
   div {
     float: left;
   }
