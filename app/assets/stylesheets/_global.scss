@@ -1,7 +1,18 @@
-@import 'color-style';
-@import 'type-style';
-
 // COLORS
+
+$almostWhite: #f6f7f9;
+$athensGray: #edeff5;
+$catskillWhite: #ecf0f7;
+$chambray: #365899;
+$facebookBlue: #3b5998;
+$hawkesBlueGray: #dddfe2;
+$lavenderGray: #e9ebee;
+$miscThinSeparatorGray: rgba(#636363, 0.22);
+$notBlack: #333333;
+$paleYellow: #fff9d7;
+$shadyLady: #9e9b9e;
+$tomato: #fa3e3e;
+$wildWillow: #a2ce70;
 
 $listItemHoverBackgroundColor: $catskillWhite;
 $navDropItemUncheckedBackgroundColor: $athensGray;
@@ -14,4 +25,23 @@ $navDropItemInnerHeight: 48px;
   align-items: center;
   display: flex;
   height: $height;
+}
+
+$typeStandardFontFamily: helvetica, arial, sans-serif;
+
+@mixin typeChambray($size) {
+  color: $chambray;
+  font-family: $typeStandardFontFamily;
+  font-size: $size;
+  font-weight: bold;
+}
+@mixin typeShadyLady {
+  color: $shadyLady;
+  font-family: $typeStandardFontFamily;
+  font-size: 12px;
+  font-weight: normal;
+}
+@mixin typeStandard($size: 12px) {
+  font-family: $typeStandardFontFamily;
+  font-size: $size;
 }
