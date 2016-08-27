@@ -20,7 +20,7 @@ var Options = React.createClass({
   renderOptions: function () {
     if (this.state.selectingOptions) {
       return (
-        <ul className='post-options group'>
+        <ul id='post-options' className='group'>
           <li className='post-option' onClick={this.editPost}>
             Edit Post
           </li>
@@ -31,6 +31,12 @@ var Options = React.createClass({
           </li>
         </ul>
       );
+    }
+  },
+  clickOutListener: function (e) {
+    var options = document.getElementById('post-options');
+    if (!options || !options.contains(e.target)) {
+      this.toggleOptions();
     }
   },
   deletePost: function () {
@@ -81,6 +87,7 @@ var Options = React.createClass({
     };
     this.setState({ selectingOptions: false }, function () {
       ClientActions.triggerModal(modalContent);
+      this.toggleOptions();
     });
   },
   editCompletionCallback: function () {
@@ -93,6 +100,7 @@ var Options = React.createClass({
     ClientActions.freezeTags();
     this.setState({ selectingOptions: false }, function () {
       ClientActions.triggerModal(this.modalContent);
+      this.toggleOptions();
     });
   },
   modalContent: function () {
@@ -108,7 +116,14 @@ var Options = React.createClass({
     );
   },
   toggleOptions: function () {
-    this.setState({ selectingOptions: !this.state.selectingOptions });
+    var state = { selectingOptions: !this.state.selectingOptions };
+    this.setState(state, function () {
+      if (this.state.selectingOptions) {
+        document.addEventListener('click', this.clickOutListener);
+      } else {
+        document.removeEventListener('click', this.clickOutListener);
+      }
+    }.bind(this));
   }
 });
 
