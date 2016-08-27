@@ -1,11 +1,6 @@
 class Api::NotificationsController < ApplicationController
   before_action :require_login
 
-  def index
-    @notifications = current_user.notifications
-    render 'api/notifications/index'
-  end
-
   def destroy
     Notification.find(params[:id]).destroy
   end
@@ -19,8 +14,19 @@ class Api::NotificationsController < ApplicationController
   end
 
   def mark_read
-    notification = Notification.find(params[:id])
-    notification.update(read: true)
+    notification = Notification.find(params[:id]).update(read: true)
     render json: notification.id
+  end
+
+  def page
+    @notifications = User.find(378).notifications.order(created_at: :desc)
+      .limit(5).offset(calculate_offset(5)).reverse
+    render 'api/notifications/index'
+  end
+
+  private
+
+  def calculate_offset(per_page)
+    (params[:page].to_i - 1) * per_page + params[:offset].to_i
   end
 end
