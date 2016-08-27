@@ -7,9 +7,9 @@ var React = require('react'),
 var Notifications = React.createClass({
   getInitialState: function () {
     return {
+      droppedDown: false,
       notifications: [],
       uncheckedNotificationIds: [],
-      droppedDown: false
     };
   },
   render: function () {
@@ -28,12 +28,12 @@ var Notifications = React.createClass({
   renderDropDown: function () {
     if (this.props.dropToggles['notifications']) {
       return (
-        <div className='nav-drop-overlay'>
+        <aside className='nav-drop-overlay'>
           <div className='nav-drop-title'>
             <strong>Notifications</strong>
           </div>
           {this.renderNotifications()}
-        </div>
+        </aside>
       );
     }
   },
@@ -66,7 +66,7 @@ var Notifications = React.createClass({
   componentDidMount: function () {
     this.notificationListener =
       NotificationStore.addListener(this.onNotificationStoreChange);
-    ClientActions.fetchNotifications();
+    ClientActions.fetchNotifications(NotificationStore.pagination());
   },
   componentWillUnmount: function () {
     this.notificationListener.remove();
@@ -100,7 +100,7 @@ var Notifications = React.createClass({
   },
   onNotificationStoreChange: function () {
     this.setState({
-      notifications: NotificationStore.all(),
+      notifications: NotificationStore.all().reverse(),
       uncheckedNotificationIds: NotificationStore.uncheckedNotificationIds()
     });
   },

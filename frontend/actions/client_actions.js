@@ -47,8 +47,8 @@ var ClientActions = {
   fetchMostRecentlyAddedFriends: function (userId) {
     FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
   },
-  fetchNotifications: function () {
-    NotificationApiUtil.fetchNotifications();
+  fetchNotifications: function (pagination) {
+    NotificationApiUtil.fetchNotifications(pagination);
   },
   fetchSearchResults: function (searchString) {
     SearchApiUtil.fetchSearchResults(searchString);

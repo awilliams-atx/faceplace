@@ -6,6 +6,7 @@ var NotificationStore = new Store(AppDispatcher);
 
 _justCheckedIds = [];
 _notifications = [];
+_pagination = { offset: 0, page: 1 }; // for next request, not current notifs
 
 NotificationStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
@@ -14,7 +15,7 @@ NotificationStore.__onDispatch = function (payload) {
     NotificationStore.__emitChange();
     break;
   case notificationConstants.NOTIFICATIONS_RECEIVED:
-    NotificationStore.setNotifications(payload.notifications);
+    NotificationStore.addNotifications(payload.notifications);
     NotificationStore.__emitChange();
     break;
   case notificationConstants.READ_NOTIFICATION_ID_RECEIVED:
@@ -22,6 +23,13 @@ NotificationStore.__onDispatch = function (payload) {
     NotificationStore.__emitChange();
     break;
   }
+};
+
+NotificationStore.addNotifications = function (notifications) {
+  for (var i = 0; i < notifications.length; i++) {
+    _notifications.push(notifications[i]);
+  }
+  _pagination.page += 1;
 };
 
 NotificationStore.all = function () {
@@ -54,18 +62,13 @@ NotificationStore.markNotificationsChecked = function (checked_ids) {
   }
 };
 
+NotificationStore.pagination = function () {
+  return Object.assign({}, _pagination);
+};
+
 NotificationStore.setJustCheckedIds = function (checked_ids) {
   for (var i = 0; i < checked_ids.length; i++) {
     _justCheckedIds.push(checked_ids[i]);
-  }
-};
-
-NotificationStore.setNotifications = function (notifications) {
-  while (_notifications.length > 0) {
-    _notifications.pop();
-  }
-  for (var i = 0; i < notifications.length; i++) {
-    _notifications.push(notifications[i]);
   }
 };
 

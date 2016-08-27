@@ -1,9 +1,9 @@
 var ServerActions = require('../actions/server_actions');
 
 var NotificationApiUtil = {
-  fetchNotifications: function () {
+  fetchNotifications: function (pagination) {
     $.ajax({
-      url: '/api/notifications',
+      url: '/api/notifications/' + pagination.page + '/' + pagination.offset,
       method: 'GET',
       dataType: 'json',
       success: function (notifications) {
