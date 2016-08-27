@@ -14,17 +14,6 @@ var PostIndexItem = React.createClass({
   },
   render: function () {
 
-    var renderTaggedFriends = function () {
-      if (this.props.post.taggedFriends.length > 0) {
-        return (
-          <div className='post-tagged-friends'>
-            <span className='post-tagged-friends-with'>—with </span>
-            {Util.toCommaSeparatedAnchors(this.props.post.taggedFriends,
-              this.pushUserRoute)}
-          </div>
-        );
-      }
-    }.bind(this);
 
     var renderOptionsIcon = function () {
       if (this.authorizedToEdit()) {
@@ -81,7 +70,7 @@ var PostIndexItem = React.createClass({
         <section className='post-body'>
           {this.props.post.body}
         </section>
-        {renderTaggedFriends()}
+        {this.renderTaggedFriends()}
         <PostCommentIndex post={this.props.post} />
       </article>
     );
@@ -100,6 +89,17 @@ var PostIndexItem = React.createClass({
         </div>
       </div>
     );
+  },
+  renderTaggedFriends: function () {
+    if (this.props.post.taggedFriends.length > 0) {
+      return (
+        <div className='post-tagged-friends'>
+          <span className='post-tagged-friends-with'>—with </span>
+          {Util.toCommaSeparatedAnchors(this.props.post.taggedFriends,
+            this.pushUserRoute)}
+        </div>
+      );
+    }
   },
   componentDidMount: function () {
     ClientActions.fetchComments('Post', this.props.post.postId);
