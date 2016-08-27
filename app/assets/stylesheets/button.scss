@@ -4,6 +4,8 @@
 .button-blue { @include blueButton }
 .button-blue:hover { @include blueButtonHover }
 .button-blue:active { @include blueButtonActive }
+.button-blue:focus { @include buttonFocus }
+
 .button-gray { @include grayButton }
 .button-gray:hover { @include grayButtonHover }
 .button-gray:active { @include grayButtonActive }
