@@ -59,7 +59,6 @@ header#post-types {
 .post-footer-right-buttons {
   button {
     @include blueButton;
-    @include slimButtonSizes;
   }
   button:hover { @include blueButtonHover }
   button:active { @include blueButtonActive }
