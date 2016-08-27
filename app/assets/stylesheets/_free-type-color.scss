@@ -1,9 +1,5 @@
 $mariner: #365899;
-$freeSmallDetailGray: #9e9b9e;
 
 @mixin freeFloatingTextWhite {
   color: white;
-}
-@mixin freeSmallDetailGray {
-  color: $freeSmallDetailGray;
 }

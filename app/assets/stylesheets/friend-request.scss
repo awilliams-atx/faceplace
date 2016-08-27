@@ -15,7 +15,7 @@
     @include freeChambray(12px);
   }
   aside {
-    @include freeSmallDetail;
+    @include freeShadyLady;
     display: block;
   }
 }
@@ -54,7 +54,7 @@
   float: left;
 }
 div#empty-friend-requests {
-  @include freeSmallDetail;
+  @include freeShadyLady;
   padding: 8px;
   text-align: center;
   font-style: italic;

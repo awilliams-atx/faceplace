@@ -6,10 +6,6 @@ $freeStandardFontFamily: helvetica, arial, sans-serif;
   @include freeFloatingTextWhite;
   font-family: $freeStandardFontFamily;
 }
-@mixin freeSmallDetailType {
-  @include freeSmallDetailGray;
-  font-family: $freeStandardFontFamily;
-}
 @mixin freeStandardType {
    font-family: $freeStandardFontFamily;
  }

@@ -1,4 +1,4 @@
-@import 'free-type-type';
+@import 'free-type-size';
 @import 'global';
 @import 'nav-drop';
 
@@ -27,7 +27,7 @@
       margin-right: 5px;
     }
     .notification-date {
-      @include freeSmallDetailType;
+      @include freeShadyLady;
     }
   }
 }

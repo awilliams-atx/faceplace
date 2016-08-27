@@ -1,6 +1,5 @@
 @import 'free-type-type';
-$freeSmallDetailGrayFontSize: 12px;
-$freeSmallDetailGrayFontWeight: normal;
+@import 'global';
 
 @mixin freeChambray($size) {
   color: $mariner;
@@ -13,10 +12,11 @@ $freeSmallDetailGrayFontWeight: normal;
   font-size: 12px;
   font-weight: normal;
 }
-@mixin freeSmallDetail {
-  @include freeSmallDetailType;
-  font-size: $freeSmallDetailGrayFontSize;
-  font-weight: $freeSmallDetailGrayFontWeight;
+@mixin freeShadyLady {
+  color: $shadyLady;
+  font-family: $freeStandardFontFamily;
+  font-size: 12px;
+  font-weight: normal;
 }
 @mixin freeStandard12 {
   @include freeStandardType;
