@@ -3,10 +3,8 @@
 @mixin button {
   box-sizing: border-box;
   border-radius: 2px;
-  padding: 0 8px;
   font-size: 12px;
   font-weight: normal;
-  line-height: 22px;
   margin-left: 4px;
 }
 @mixin buttonFocus {
@@ -19,6 +17,8 @@
   border: 1px solid $iron1;
   color: $abbey;
   cursor: pointer;
+  line-height: 22px;
+  padding: 0 8px;
 }
 @mixin grayButtonHover {
   background-color: $athensGray1;
@@ -32,6 +32,7 @@
   color: white;
   cursor: pointer;
   font-family: $typeStandardFontFamily;
+  line-height: 24px;
   padding: 0 $padding;
 }
 @mixin blueButtonHover {

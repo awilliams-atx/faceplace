@@ -26,7 +26,7 @@ var AddFriend = React.createClass({
     if (UserStore.user().alreadyFriends) {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
-          <button className='unfriend-button' onClick={this.onUnfriend}>
+          <button className='button-gray' onClick={this.onUnfriend}>
             <strong>Unfriend</strong>
           </button>
         </div>
@@ -34,10 +34,10 @@ var AddFriend = React.createClass({
     } else if (UserStore.user().requestReceived) {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
-          <button className='accept-button' onClick={this.onAccept}>
+          <button className='button-blue' onClick={this.onAccept}>
             <strong>Confirm</strong>
           </button>
-          <button className='reject-request-button' onClick={this.onReject}>
+          <button className='button-gray' onClick={this.onReject}>
             <strong>Delete Request</strong>
           </button>
         </div>
@@ -45,11 +45,12 @@ var AddFriend = React.createClass({
     } else if (UserStore.user().requestMade) {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
-          <button className='request-sent-button' onClick={this.preventDefault}>
+          <button className='request-sent-button'
+            onClick={this.preventDefault}>
             <img src={window.add_friend_icon} />
             <strong>Request Sent!</strong>
           </button>
-          <button className='cancel-button' onClick={this.onCancel}>
+          <button className='button-gray' onClick={this.onCancel}>
             <strong>Cancel Request</strong>
           </button>
         </div>
@@ -57,7 +58,7 @@ var AddFriend = React.createClass({
     } else {
       friendshipButtonContainer = (
         <div className='friendship-button-container'>
-          <button className='add-friend-button' onClick={this.onAddFriend}>
+          <button className='button-blue' onClick={this.onAddFriend}>
             <img src={window.add_friend_icon} />
             <strong>Add Friend</strong>
           </button>

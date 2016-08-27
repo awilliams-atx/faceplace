@@ -1,4 +1,5 @@
 @import 'global';
+@import 'button-style';
 
 .profile-sub-content {
   margin: auto;
@@ -25,39 +26,18 @@
 .friendship-button-container {
   @include typeStandard;
   bottom: 16px;
-  color: #4b4f56;
-  font-weight: bold;
-  line-height: 15px;
   position: absolute;
   right: 16px;
-
   overflow: hidden;
   img {
     display: block;
     margin-right: 5px;
     float: left;
   }
-  button {
-    background-color: $athensGray3;;
-    height: 28px;
-    border: 1px solid $iron1;
-    border-radius: 3px;
-    margin-left: 5px;
-  }
-  button:hover {
-    background-color: $athensGray1;
-    cursor: pointer;
-  }
-  .accept-button {
-    color: white;
-    background-color: $sanMarino;
-    border: none;
-  }
-  .accept-button:hover {
-    background-color: $chambray;
-  }
   .request-sent-button {
-    background-color: $athensGray1;
+    @include grayButton;
+    background-color: $iron2;
+    outline: none;
   }
   .request-sent-button:hover {
     cursor: default;
