@@ -27,7 +27,7 @@
     @include buttonFocusBoxShadow;
   }
   button.nav-drop-request-confirm {
-    @include blueButtonColors;
+    @include blueButton;
   }
   button.nav-drop-request-confirm:hover {
     @include blueButtonHoverColors;
