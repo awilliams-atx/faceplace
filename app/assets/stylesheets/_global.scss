@@ -18,10 +18,21 @@ $wildWillow: #a2ce70;
 
 $navDropItemInnerHeight: 48px;
 
+@mixin commentProfilePic {
+  border: 1px solid rgba(#000000, 0.1);
+  float: left;
+  margin-right: 8px;
+}
 @mixin flexAlign($height) {
   align-items: center;
   display: flex;
   height: $height;
+}
+
+@mixin squareObjectFit($dim) {
+  height: $dim;
+  width: $dim;
+  object-fit: cover;
 }
 
 // TYPE

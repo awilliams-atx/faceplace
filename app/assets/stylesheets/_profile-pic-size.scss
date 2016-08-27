@@ -1,8 +1,4 @@
-@mixin squareObjectFit($dim) {
-  height: $dim;
-  width: $dim;
-  object-fit: cover;
-}
+
 
 @mixin commentProfilePic {
   border: 1px solid rgba(#000000, 0.1);
