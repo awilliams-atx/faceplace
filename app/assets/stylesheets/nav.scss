@@ -51,8 +51,9 @@
     font-size: 20px;
     margin-top: 9px;
     .nav-drop-icon {
-      margin-left: 10px;
       float: left;
+      margin-left: 10px;
+      position: relative;
     }
     .nav-drop-inactive {
       color: #17233d;
@@ -140,7 +141,4 @@
 }
 #nav-drops > div {
   margin-left: 5px;
-}
-.nav-drop-active {
-  position: relative;
 }
