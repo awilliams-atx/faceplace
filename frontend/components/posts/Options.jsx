@@ -75,30 +75,29 @@ var Options = React.createClass({
       ClientActions.triggerModal(modalContent);
     });
   },
+  editCompletionCallback: function () {
+    $('body').removeClass('no-scroll-body');
+    ClientActions.cancelModal();
+    ClientActions.unfreezeTags();
+  },
   editPost: function () {
     $('body').addClass('no-scroll-body');
     ClientActions.freezeTags();
-    var completionCallback = function () {
-      $('body').removeClass('no-scroll-body');
-      ClientActions.cancelModal();
-      ClientActions.unfreezeTags();
-    };
-    var modalContent = function () {
-      return (
-        <div className='modal-outer group'>
-          <aside className='modal-inner'>
-          <PostForm isEditing={true}
-            modalCallback={completionCallback}
-            post={this.props.post}
-            isModalElement={true} />
-          </aside>
-        </div>
-      );
-    }.bind(this);
-
     this.setState({ selectingOptions: false }, function () {
-      ClientActions.triggerModal(modalContent);
+      ClientActions.triggerModal(this.modalContent);
     });
+  },
+  modalContent: function () {
+    return (
+      <div className='modal-outer group'>
+        <aside className='modal-inner'>
+        <PostForm isEditing={true}
+          modalCallback={this.editCompletionCallback}
+          post={this.props.post}
+          isModalElement={true} />
+        </aside>
+      </div>
+    );
   },
   toggleOptions: function () {
     this.setState({ selectingOptions: !this.state.selectingOptions });
