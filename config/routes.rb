@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
     # -----------------------------NOTIFICATIONS----------------------------- #
 
-    resources :notifications, only: [:index]
+    get 'notifications/:page/:offset', to: 'notifications#page'
     post 'notifications/mark_checked', to: 'notifications#mark_checked'
     post 'notifications/:id/mark_read', to: 'notifications#mark_read'
 
