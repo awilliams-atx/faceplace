@@ -9,8 +9,8 @@ $blueButtonActiveBackgroundColor: $astronaut;
 
 $grayButtonColor: $abbey;
 $grayButtonBorderColor: $sanMarino;
-$grayButtonBackgroundColor: $athensGray2;
-$grayButtonHoverBackgroundColor: #e9ebee;
+$grayButtonBackgroundColor: $athensGray3;
+$grayButtonHoverBackgroundColor: $athensGray1;
 $grayButtonActiveBackgroundColor: #dddfe2;
 
 @mixin buttonFocusBoxShadow {

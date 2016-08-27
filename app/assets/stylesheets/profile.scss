@@ -38,14 +38,14 @@
     float: left;
   }
   button {
-    background-color: $athensGray2;;
+    background-color: $athensGray3;;
     height: 28px;
     border: 1px solid #cdcfd4;
     border-radius: 3px;
     margin-left: 5px;
   }
   button:hover {
-    background-color: #e9ebee;
+    background-color: $athensGray1;
     cursor: pointer;
   }
   .accept-button {
@@ -57,7 +57,7 @@
     background-color: $chambray;
   }
   .request-sent-button {
-    background-color: #e9ebee;
+    background-color: $athensGray1;
   }
   .request-sent-button:hover {
     cursor: default;
