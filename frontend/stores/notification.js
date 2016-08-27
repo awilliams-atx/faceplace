@@ -14,8 +14,13 @@ NotificationStore.__onDispatch = function (payload) {
     NotificationStore.__emitChange();
     break;
   case notificationConstants.NOTIFICATIONS_RECEIVED:
-    this.setNotifications(payload.notifications);
+    NotificationStore.setNotifications(payload.notifications);
     NotificationStore.__emitChange();
+    break;
+  case notificationConstants.READ_NOTIFICATION_ID_RECEIVED:
+    NotificationStore.markNotificationRead(payload.id);
+    NotificationStore.__emitChange();
+    break;
   }
 };
 
@@ -29,6 +34,15 @@ NotificationStore.justChecked = function (id) {
 
 NotificationStore.justCheckedIds = function () {
   return _justCheckedIds.slice();
+};
+
+NotificationStore.markNotificationRead = function (id) {
+  for (var i = 0; i < _notifications.length; i++) {
+    if (_notifications[i].id === id) {
+      _notifications[i].read = true;
+      return
+    }
+  }
 };
 
 NotificationStore.markNotificationsChecked = function (checked_ids) {

@@ -115,6 +115,12 @@ var ServerActions = {
       profile: profile
     });
   },
+  receiveReadNotificationId: function (id) {
+    Dispatcher.dispatch({
+      actionType: notificationConstants.READ_NOTIFICATION_ID_RECEIVED,
+      id: id
+    });
+  },
   receiveReceivedFriendRequest: function (request) {
     Dispatcher.dispatch({
       actionType: friendRequestConstants.RECEIVED_FRIEND_REQUEST_RECEIVED,

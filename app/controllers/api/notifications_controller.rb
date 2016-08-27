@@ -15,7 +15,12 @@ class Api::NotificationsController < ApplicationController
     ids.each do |id|
       Notification.find(id).update(checked: true)
     end
-
     render json: ids
+  end
+
+  def mark_read
+    notification = Notification.find(params[:id])
+    notification.update(read: true)
+    render json: notification.id
   end
 end

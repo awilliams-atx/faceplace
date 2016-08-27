@@ -76,6 +76,9 @@ var ClientActions = {
   markRequestsChecked: function (checkedIds) {
     FriendRequestApiUtil.markRequestsChecked(checkedIds);
   },
+  markNotificationRead: function (id) {
+    NotificationApiUtil.markNotificationRead(id);
+  },
   markNotificationsChecked: function (checkedIds) {
     NotificationApiUtil.markNotificationsChecked(checkedIds);
   },

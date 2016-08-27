@@ -11,6 +11,16 @@ var NotificationApiUtil = {
       }
     });
   },
+  markNotificationRead: function (id) {
+    $.ajax({
+      url: '/api/notifications/' + id + '/mark_read',
+      method: 'POST',
+      dataType: 'json',
+      success: function (id) {
+        ServerActions.receiveReadNotificationId(id);
+      }
+    })
+  },
   markNotificationsChecked: function (checkedIds) {
     $.ajax({
       url: '/api/notifications/mark_checked',

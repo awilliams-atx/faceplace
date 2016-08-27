@@ -1,5 +1,6 @@
-var React = require('react');
-var Moment = require('moment');
+var React = require('react'),
+    Moment = require('moment'),
+    ClientActions = require('../../actions/client_actions');
 
 var NotificationItem = React.createClass({
   contextTypes: {
@@ -8,7 +9,7 @@ var NotificationItem = React.createClass({
   render: function () {
     return (
       <a href={'#' + this.props.notif.post_id}
-        onClick={this.pushPostRoute}>
+        onClick={this.checkNotification}>
         <div className={'nav-drop-item group ' + this.props.checkedClass}>
           <img src={this.props.notif.profile_pic_url}
             className='nav-drop-profile-pic nav-drop-block' />
@@ -29,6 +30,12 @@ var NotificationItem = React.createClass({
         </div>
       </a>
     );
+  },
+  checkNotification: function (e) {
+    if (!this.props.notif.read) {
+      ClientActions.markNotificationRead(this.props.notif.id);
+    }
+    this.pushPostRoute(e);
   },
   pushPostRoute: function (e) {
     var pushPath = '/users/' + this.props.notif.timeline_owner_id;
