@@ -40,11 +40,11 @@ var PostForm = React.createClass({
   if (this.props.isEditing) {
     footerRightButtons = (
       <div className='post-footer-right-buttons'>
-        <button className='button button-gray button-cancel'
+        <button className='button-gray'
                 onClick={this.handleCancel}>
           Cancel
         </button>
-        <button className='button button-blue'
+        <button className='button-blue'
                 onClick={this.handleSubmit}>
           Update
         </button>
