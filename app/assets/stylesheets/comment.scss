@@ -5,8 +5,10 @@
   border-top: 1px solid #e5e5e5;
   margin-top: 11px;
   img {
-    @include commentProfilePic;
     @include squareObjectFit(30px);
+    border: 1px solid rgba(#000000, 0.1);
+    float: left;
+    margin-right: 8px;
   }
   .post-comment {
     padding: 8px 12px;
