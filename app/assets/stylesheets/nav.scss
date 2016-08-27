@@ -1,3 +1,4 @@
+@import 'global';
 @import 'misc-color';
 @import 'nav-drop';
 @import 'profile-pic-size';
@@ -98,6 +99,12 @@
       .nav-drop-item:last-child {
         border-bottom: none;
       }
+      .unchecked-alert {
+        background-color: $lavenderGray;
+      }
+      .nav-drop-item:hover {
+        background-color: $listItemHoverBackgroundColor;
+      }
     }
     .nav-drop-overlay:hover {
       overflow-y: scroll;
@@ -121,9 +128,6 @@
       right: 17px;
       border-color: transparent transparent rgba(#000000, 0.25) transparent;
       border-width: 11px;
-    }
-    .unchecked-alert {
-      background-color: $lavenderGray;
     }
   }
   #logout {
