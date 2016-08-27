@@ -66,6 +66,28 @@
     mark {
       @include navDropCounter;
     }
+    .nav-drop-active:after,
+    .nav-drop-active:before {
+      border-style: solid;
+      content: '';
+      display: block;
+      height: 0;
+      position: absolute;
+      width: 0;
+      z-index: 1001;
+    }
+    .nav-drop-active:after {
+      border-color: transparent transparent white transparent;
+      border-width: 10px;
+      right: 7px;
+      top: 15px;
+    }
+    .nav-drop-active:before {
+      border-color: transparent transparent rgba(#000000, 0.25) transparent;
+      border-width: 11px;
+      right: 6px;
+      top: 13px;
+    }
     .nav-drop-overlay {
       background-color: white;
       border: 1px solid rgba(#636363, 0.4);
@@ -108,26 +130,6 @@
     }
     .nav-drop-overlay:hover {
       overflow-y: scroll;
-    }
-    .nav-drop-overlay:after,
-    .nav-drop-overlay:before {
-      content: '';
-      display: block;
-      position: absolute;
-      bottom: 100%;
-      width: 0;
-      height: 0;
-      border-style: solid;
-    }
-    .nav-drop-overlay:after {
-      right: 18px;
-      border-color: transparent transparent white transparent;
-      border-width: 10px;
-    }
-    .nav-drop-overlay:before {
-      right: 17px;
-      border-color: transparent transparent rgba(#000000, 0.25) transparent;
-      border-width: 11px;
     }
   }
   #logout {
