@@ -1,18 +1,9 @@
-@import 'global';
-
-$slimButtonBorderRadius: 2px;
-$slimButtonFontSize: 12px;
-$slimButtonFontWeight: normal;
-$slimButtonLineHeight: 22px;
-$slimButtonMarginLeft: 4px;
-$slimButtonPadding: 0 8px;
-
 @mixin slimButtonSizes {
   box-sizing: border-box;
-  border-radius: $slimButtonBorderRadius;
-  padding: $slimButtonPadding;
-  font-size: $slimButtonFontSize;
-  font-weight: $slimButtonFontWeight;
-  line-height: $slimButtonLineHeight;
-  margin-left: $slimButtonMarginLeft;
+  border-radius: 2px;
+  padding: 0 8px;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 22px;
+  margin-left: 4px;
 }
