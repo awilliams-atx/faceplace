@@ -50,20 +50,28 @@ var Options = React.createClass({
           <div className='modal-inner group'>
             <aside className='modal-delete-post modal-element group'>
               <header className='modal-header'>
-                <strong>Delete Post</strong>
+                <strong>
+                  Delete Post
+                </strong>
               </header>
               <div className='modal-message-container'>
-                <mark>Really delete this post?</mark>
+                <mark>
+                  Really delete this post?
+                </mark>
               </div>
               <br />
               <hr />
               <footer className='modal-footer group'>
                 <div className='modal-button-container group'>
                   <button className='button-gray'
-                    onClick={cancelCallback}>Cancel</button>
+                    onClick={cancelCallback}>
+                      Cancel
+                  </button>
                   <button className='button-blue'
                     onClick={confirmCallback}
-                    ref='autoFocus'>Delete Post</button>
+                    ref='autoFocus'>
+                      Delete Post
+                  </button>
                 </div>
               </footer>
             </aside>
