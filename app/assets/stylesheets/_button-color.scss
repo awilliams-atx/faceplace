@@ -2,15 +2,11 @@
 
 $blueButtonColor: white;
 $blueButtonBackgroundColor: $sanMarino;
-$blueButtonActiveBackgroundColor: $astronaut;
 
 $grayButtonBackgroundColor: $athensGray3;
 $grayButtonHoverBackgroundColor: $athensGray1;
 $grayButtonActiveBackgroundColor: $iron2;
 
-@mixin blueButtonActiveColors {
-  background-color: $blueButtonActiveBackgroundColor;
-}
 @mixin grayButtonHoverColors {
   cursor: pointer;
   background-color: $grayButtonHoverBackgroundColor;

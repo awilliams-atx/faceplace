@@ -14,12 +14,8 @@
   background-color: $blueButtonBackgroundColor;
   color: white;
 }
-.button-blue:hover {
-  @include blueButtonHover;
-}
-.button-blue:active {
-  background-color: $blueButtonActiveBackgroundColor;
-}
+.button-blue:hover { @include blueButtonHover }
+.button-blue:active { @include blueButtonActive }
 .button-gray {
   color: $abbey;
   line-height: 22px;

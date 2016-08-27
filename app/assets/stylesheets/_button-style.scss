@@ -23,3 +23,7 @@
 @mixin blueButtonHover {
   background-color: $chambray;
 }
+
+@mixin blueButtonActive {
+  background-color: $astronaut;
+}

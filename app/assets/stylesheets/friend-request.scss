@@ -33,7 +33,7 @@
     @include blueButtonHover;
   }
   button.nav-drop-request-confirm:active {
-    @include blueButtonActiveColors;
+    @include blueButtonActive;
   }
   button.nav-drop-request-delete {
     @include grayButton
