@@ -27,7 +27,7 @@
   button.nav-drop-request-confirm:active { @include blueButtonActive }
   button.nav-drop-request-delete { @include grayButton }
   button.nav-drop-request-delete:hover { @include grayButtonHover }
-  button.nav-drop-request-delete:active { @include grayButtonActiveColors }
+  button.nav-drop-request-delete:active { @include grayButtonActive }
 }
 .nav-drop-block {
   display: block;

@@ -25,6 +25,4 @@
 .button-gray:hover {
   background-color: $grayButtonHoverBackgroundColor;
 }
-.button-gray:active {
-  background-color: $grayButtonActiveBackgroundColor;
-}
+.button-gray:active { @include grayButtonActive }

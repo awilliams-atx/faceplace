@@ -17,6 +17,10 @@
   background-color: $athensGray1;
 }
 
+@mixin grayButtonActive {
+  background-color: $iron2;
+}
+
 @mixin blueButton {
   background-color: $sanMarino;
   font-family: $typeStandardFontFamily;

@@ -5,8 +5,3 @@ $blueButtonBackgroundColor: $sanMarino;
 
 $grayButtonBackgroundColor: $athensGray3;
 $grayButtonHoverBackgroundColor: $athensGray1;
-$grayButtonActiveBackgroundColor: $iron2;
-
-@mixin grayButtonActiveColors {
-  background-color: $grayButtonActiveBackgroundColor;
-}
