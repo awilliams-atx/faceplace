@@ -32,7 +32,12 @@ var Notifications = React.createClass({
           <div className='nav-drop-title'>
             <strong>Notifications</strong>
           </div>
-          {this.renderNotifications()}
+          <div id='nav-drop-index'>
+            {this.renderNotifications()}
+          </div>
+          <footer onClick={this.fetchNotifications}>
+            Load more notifications
+          </footer>
         </aside>
       );
     }
@@ -82,6 +87,9 @@ var Notifications = React.createClass({
     } else {
       return 'nav-drop-inactive';
     }
+  },
+  fetchNotifications: function () {
+    ClientActions.fetchNotifications(NotificationStore.pagination());
   },
   markNotificationsChecked: function () {
     if (this.state.uncheckedNotificationIds.length > 0) {

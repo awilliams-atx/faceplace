@@ -1,0 +1,102 @@
+@import 'global';
+
+$navDropBorderBottom: 1px solid rgba($doveGray, 0.22);
+
+#nav-drops {
+  font-size: 20px;
+  margin-top: 9px;
+  .nav-drop-icon {
+    float: left;
+    margin-left: 10px;
+    position: relative;
+  }
+  .nav-drop-inactive {
+    color: #17233d;
+  }
+  .nav-drop-inactive:hover {
+    color: #0b121e;
+  }
+  .nav-drop-unchecked, .nav-drop-active {
+    color: white;
+  }
+  mark {
+    bottom: 35px;
+    background-color: $tomato;
+    border-radius: 2px;
+    color: white;
+    font-family: $typeStandardFontFamily;
+    font-size: 10px;
+    left: 15px;
+    position: relative;
+    padding: 1px 3px;
+  }
+  .nav-drop-active:after,
+  .nav-drop-active:before {
+    border-style: solid;
+    content: '';
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+    z-index: 1001;
+  }
+  .nav-drop-active:after {
+    border-color: transparent transparent white transparent;
+    border-width: 10px;
+    right: 7px;
+    top: 15px;
+  }
+  .nav-drop-active:before {
+    border-color: transparent transparent rgba(#000000, 0.25) transparent;
+    border-width: 11px;
+    right: 6px;
+    top: 13px;
+  }
+  .nav-drop-overlay {
+    background-color: white;
+    border: 1px solid rgba($doveGray, 0.4);
+    box-shadow: 0 3px 8px rgba(#000000, 0.25);
+    left: -370px;
+    max-height: 80vh;
+    overflow: hidden;
+    position: absolute;
+    top: 34px;
+    width: 406px;
+    z-index: 1000;
+    #nav-drop-index {
+      overflow: hidden;
+    }
+    #nav-drop-index:hover {
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+    .nav-drop-title {
+      border-bottom: $navDropBorderBottom;
+      strong {
+        line-height: 30px;
+        margin-left: 12px;
+        font-size: 12px;
+        color: #333338;
+      }
+    }
+    .nav-drop-item {
+    border-bottom: $navDropBorderBottom;
+    display: block;
+    overflow-x: hidden;
+    padding: 6px 0 5px 12px;
+      .nav-drop-profile-pic {
+        @include squareObjectFit(48px);
+        margin-right: 10px;
+      }
+    }
+    .nav-drop-item:last-child {
+      border-bottom: none;
+    }
+    .unchecked-alert {
+      background-color: $athensGray2;
+    }
+  }
+  // .nav-drop-overlay:hover {
+  //   overflow-y: scroll;
+  // }
+}

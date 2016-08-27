@@ -6,6 +6,16 @@
     background-color: $athensGray3;
     cursor: pointer;
   }
+  footer {
+    color: $chambray;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 8px 0;
+    text-align: center;
+  }
+  footer:hover {
+    text-decoration: underline;
+  }
 }
 
 .notification-details {
@@ -13,7 +23,7 @@
   color: $notBlack;
   font-family: $typeStandardFontFamily;
   font-size: 12px;
-  width: 324px;
+  width: 323px;
   .notification-explanation {
     margin-bottom: 1px;
     .notifier-name {
