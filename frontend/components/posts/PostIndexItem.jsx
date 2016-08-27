@@ -13,19 +13,6 @@ var PostIndexItem = React.createClass({
     return ({ selectingOptions: false });
   },
   render: function () {
-
-
-    var renderOptionsIcon = function () {
-      if (this.authorizedToEdit()) {
-        return (
-          <i className="fa fa-chevron-down"
-            aria-hidden="true"
-            onClick={this.toggleOptions}>
-          </i>
-        );
-      }
-    }.bind(this);
-
     var renderOptions = function () {
       if (this.state.selectingOptions) {
         return (
@@ -63,7 +50,7 @@ var PostIndexItem = React.createClass({
             <div className='post-datetime'>{this.props.post.createdAt}</div>
           </div>
           <aside className='post-options-container'>
-            {renderOptionsIcon()}
+            {this.renderOptionsIcon()}
             {renderOptions()}
           </aside>
         </header>
@@ -98,6 +85,16 @@ var PostIndexItem = React.createClass({
           {Util.toCommaSeparatedAnchors(this.props.post.taggedFriends,
             this.pushUserRoute)}
         </div>
+      );
+    }
+  },
+  renderOptionsIcon: function () {
+    if (this.authorizedToEdit()) {
+      return (
+        <i className="fa fa-chevron-down"
+          aria-hidden="true"
+          onClick={this.toggleOptions}>
+        </i>
       );
     }
   },
