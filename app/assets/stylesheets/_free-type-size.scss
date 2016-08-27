@@ -7,11 +7,6 @@
   font-size: $size;
   font-weight: bold;
 }
-@mixin freeFloatingTextMedium {
-  @include freeFloatingTextType;
-  font-size: 12px;
-  font-weight: normal;
-}
 @mixin freeShadyLady {
   color: $shadyLady;
   font-family: $freeStandardFontFamily;

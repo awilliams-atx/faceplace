@@ -35,10 +35,13 @@ section.profile-friends-container {
   margin-left: 1px;
 }
 .friend-thumb-name {
-  @include freeFloatingTextMedium;
-  position: absolute;
-  bottom: 0px;
+  bottom: 0;
+  color: white;
+  font-family: $freeStandardFontFamily;
+  font-size: 12px;
+  font-weight: normal;
   left: 0px;
-  z-index: 1000;
   margin: 5px;
+  position: absolute;
+  z-index: 1000;
 }
