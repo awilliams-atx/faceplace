@@ -1,6 +1,6 @@
 var React = require('react'),
-    Util = require('../../util/general'),
     PostForm = require('./PostForm'),
+    TaggedFriends = require('./TaggedFriends'),
     ClientActions = require('../../actions/client_actions'),
     PostCommentIndex = require('../comments/PostCommentIndex'),
     SessionStore = require('../../stores/session');
@@ -40,7 +40,7 @@ var PostIndexItem = React.createClass({
         <section className='post-body'>
           {this.props.post.body}
         </section>
-        {this.renderTaggedFriends()}
+        {TaggedFriends(this.props.post.taggedFriends, this.pushUserRoute)}
         <PostCommentIndex post={this.props.post} />
       </article>
     );
@@ -59,17 +59,6 @@ var PostIndexItem = React.createClass({
         </div>
       </div>
     );
-  },
-  renderTaggedFriends: function () {
-    if (this.props.post.taggedFriends.length > 0) {
-      return (
-        <div className='post-tagged-friends'>
-          <span className='post-tagged-friends-with'>—with </span>
-          {Util.toCommaSeparatedAnchors(this.props.post.taggedFriends,
-            this.pushUserRoute)}
-        </div>
-      );
-    }
   },
   renderOptions: function () {
     if (this.state.selectingOptions) {
