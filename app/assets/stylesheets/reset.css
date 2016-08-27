@@ -12,17 +12,15 @@ body, html, header, section, nav, h1, h2, label, input, a {
   font-weight: inherit;
 }
 button {
-  font: inherit;
+  border: medium none;
+  border-spacing: 0;
   color: inherit;
   decoration: inherit;
+  font: inherit;
   font-weight: inherit;
 }
 li {
   list-style: none;
-}
-button {
-  border: medium none;
-  border-spacing: 0;
 }
 
 /* CLEARFIX */
