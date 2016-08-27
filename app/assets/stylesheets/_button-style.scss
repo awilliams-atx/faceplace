@@ -1,4 +1,4 @@
-@mixin buttonFocusBoxShadow {
+@mixin buttonFocus {
   outline: none;
   box-shadow: 0 0 3px 2px rgba($dodgerBlue, 0.75);
 }
@@ -29,12 +29,13 @@
   background-color: $iron2;
 }
 
-@mixin blueButton {
+@mixin blueButton($padding: 8px) {
   @include button;
   background-color: $sanMarino;
-  font-family: $typeStandardFontFamily;
   color: white;
   cursor: pointer;
+  font-family: $typeStandardFontFamily;
+  padding: 0 $padding;
 }
 
 @mixin blueButtonHover {
