@@ -5,7 +5,6 @@ $blueButtonBackgroundColor: $sanMarino;
 $blueButtonHoverBackgroundColor: $chambray;
 $blueButtonActiveBackgroundColor: $astronaut;
 
-$grayButtonColor: $abbey;
 $grayButtonBorderColor: $sanMarino;
 $grayButtonBackgroundColor: $athensGray3;
 $grayButtonHoverBackgroundColor: $athensGray1;
@@ -23,7 +22,7 @@ $grayButtonActiveBackgroundColor: $iron2;
   background-color: $blueButtonActiveBackgroundColor;
 }
 @mixin grayButtonColors {
-  color: $grayButtonColor;
+  color: $abbey;
   background-color: $grayButtonBackgroundColor;
   border-color: $grayButtonBorderColor;
 }
