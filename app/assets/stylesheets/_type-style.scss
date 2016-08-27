@@ -12,19 +12,7 @@ $freeStandardFontFamily: helvetica, arial, sans-serif;
   font-size: 12px;
   font-weight: normal;
 }
-@mixin freeStandard12 {
+@mixin freeStandard($size: 12px) {
   font-family: $freeStandardFontFamily;
-  font-size: 12px;
-}
-@mixin freeStandard14 {
-  font-family: $freeStandardFontFamily;
-  font-size: 14px;
-}
-@mixin freeStandard15 {
-  font-family: $freeStandardFontFamily;
-  font-size: 15px;
-}
-@mixin freeStandard16 {
-  font-family: $freeStandardFontFamily;
-  font-size: 16px;
+  font-size: $size;
 }

@@ -29,7 +29,7 @@ section#propaganda {
     text-align: center;
   }
   .propaganda-text {
-    @include freeStandard15;
+    @include freeStandard(15px);
     height: 47px;
     line-height: 47px;
     float: left;

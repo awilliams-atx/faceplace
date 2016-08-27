@@ -14,7 +14,7 @@ $comment-background-blue: #f6f7f9;
   .post-comment {
     padding: 8px 12px;
     .post-comment-body {
-      @include freeStandard12;
+      @include freeStandard;
       display: block;
       float: left;
       position: relative;
@@ -44,7 +44,7 @@ $comment-background-blue: #f6f7f9;
   .post-comment-form {
     padding: 8px 12px 8px;
     textarea {
-      @include freeStandard12;
+      @include freeStandard;
       border: 1px solid $hawkesBlueGray;
       display: block;
       float: left;

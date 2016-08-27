@@ -67,7 +67,7 @@ div.friend-post-icon {
     box-shadow: 0 3px 8px rgba(#000000, 0.3);
   }
   li {
-    @include freeStandard12;
+    @include freeStandard;
     float: left;
     margin: 6px 0;
     padding: 3px 12px;
@@ -90,7 +90,7 @@ div.friend-post-icon {
   }
 }
 .post-body {
-  @include freeStandard14;
+  @include freeStandard(14px);
   padding: 14px 12px 3px;
 }
 .post-tagged-friends {

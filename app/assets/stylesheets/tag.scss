@@ -12,7 +12,7 @@
       }
     }
     .search-text {
-      @include freeStandard14;
+      @include freeStandard(14px);
       height: 33px;
       float: left;
       padding: 6px 0 5px;
@@ -60,14 +60,14 @@
   margin: 5px 12px 3px;
 }
 .tagged-friends-with {
-  @include freeStandard12;
+  @include freeStandard;
   display: block;
   float: left;
   margin: 7px 6px 5px 0;
   color: #888888;
 }
 .tagged-friends-list-item {
-  @include freeStandard12;
+  @include freeStandard;
   display: block;
   float: left;
   margin: 3px;
@@ -83,7 +83,7 @@
   border-top: 1px solid #e5e5e5;
 }
 .tagging-field-with {
-  @include freeStandard12;
+  @include freeStandard;
   float: left;
   background-color: #e2e8f6;
   width: 29px;
@@ -92,7 +92,7 @@
 }
 .tagging-field {
   input {
-    @include freeStandard14;
+    @include freeStandard(14px);
     outline: none;
   }
 }

@@ -4,7 +4,7 @@
   margin: auto;
   width: 980px;
   h2 {
-    @include freeStandard16;
+    @include freeStandard(16px);
     margin: 3px 0 20px 35px;
   }
   .icon {
@@ -23,7 +23,7 @@
   width: 851px;
 }
 .friendship-button-container {
-  @include freeStandard12;
+  @include freeStandard;
   bottom: 16px;
   color: #4b4f56;
   font-weight: bold;

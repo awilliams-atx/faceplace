@@ -2,7 +2,7 @@
 @import 'global';
 
 .button {
-  @include freeStandard12;
+  @include freeStandard;
   padding: 0 16px;
   border-radius: 3px;
   cursor: pointer;
