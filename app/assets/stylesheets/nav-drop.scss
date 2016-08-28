@@ -102,5 +102,11 @@
     footer:hover {
       text-decoration: underline;
     }
+    #empty-nav-drop {
+      @include typeShadyLady;
+      padding: 8px;
+      text-align: center;
+      font-style: italic;
+    }
   }
 }

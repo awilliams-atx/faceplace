@@ -43,7 +43,7 @@ var FriendRequests = React.createClass({
   renderRequests: function () {
     if (this.state.requests.length === 0) {
       return (
-        <div id='empty-friend-requests'>
+        <div id='empty-nav-drop'>
           <aside>No friend requests</aside>
         </div>
       );
