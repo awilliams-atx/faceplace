@@ -46,6 +46,9 @@ var NotificationItem = React.createClass({
         pathname: pushPath,
         query: { post_id: this.props.notif.post_id }
       });
+    } else if (window.location.hash === '#' + this.props.notif.post_id) {
+      window.location.hash = '';
+      window.location.hash = this.props.notif.post_id;
     }
     this.props.rollUp();
   },
