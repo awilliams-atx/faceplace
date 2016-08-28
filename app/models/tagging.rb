@@ -5,7 +5,7 @@ class Tagging < ActiveRecord::Base
   after_destroy :remove_watching, :remove_notification
 
   belongs_to :post
-  belongs_to :tagged, class_name: 'User', foreign_key: :tagged_id
+  belongs_to :tagged, class_name: 'User'
   has_one :tagger, through: :post, source: :author
 
   private
