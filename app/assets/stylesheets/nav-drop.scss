@@ -1,7 +1,5 @@
 @import 'global';
 
-$navDropBorderBottom: 1px solid rgba($doveGray, 0.22);
-
 #nav-drops {
   font-size: 20px;
   margin-top: 9px;
@@ -54,24 +52,22 @@ $navDropBorderBottom: 1px solid rgba($doveGray, 0.22);
   }
   .nav-drop-overlay {
     background-color: white;
-    border: 1px solid rgba($doveGray, 0.4);
+    border: $navDropBorder;
     box-shadow: 0 3px 8px rgba(#000000, 0.25);
     left: -370px;
-    max-height: 80vh;
-    overflow: hidden;
     position: absolute;
     top: 34px;
     width: 406px;
     z-index: 1000;
-    #nav-drop-index {
+    .nav-drop-index {
+      max-height: 70vh;
       overflow: hidden;
     }
-    #nav-drop-index:hover {
-      overflow-x: hidden;
-      overflow-y: scroll;
+    .nav-drop-index:hover {
+      overflow-y: auto;
     }
     .nav-drop-title {
-      border-bottom: $navDropBorderBottom;
+      border-bottom: $navDropBorder;
       strong {
         line-height: 30px;
         margin-left: 12px;
@@ -80,10 +76,10 @@ $navDropBorderBottom: 1px solid rgba($doveGray, 0.22);
       }
     }
     .nav-drop-item {
-    border-bottom: $navDropBorderBottom;
+    border-bottom: $navDropBorder;
     display: block;
-    overflow-x: hidden;
     padding: 6px 0 5px 12px;
+    width: 406px;
       .nav-drop-profile-pic {
         @include squareObjectFit(48px);
         margin-right: 10px;
@@ -96,7 +92,4 @@ $navDropBorderBottom: 1px solid rgba($doveGray, 0.22);
       background-color: $athensGray2;
     }
   }
-  // .nav-drop-overlay:hover {
-  //   overflow-y: scroll;
-  // }
 }

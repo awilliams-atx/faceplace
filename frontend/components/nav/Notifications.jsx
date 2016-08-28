@@ -32,7 +32,7 @@ var Notifications = React.createClass({
           <div className='nav-drop-title'>
             <strong>Notifications</strong>
           </div>
-          <div id='nav-drop-index'>
+          <div className='nav-drop-index'>
             {this.renderNotifications()}
           </div>
           <footer onClick={this.fetchNotifications}>

@@ -1,5 +1,4 @@
 @import 'global';
-@import 'nav-drop';
 
 #notifications-drop {
   .nav-drop-item:hover {
@@ -7,6 +6,7 @@
     cursor: pointer;
   }
   footer {
+    border-top: $navDropBorder;
     color: $chambray;
     cursor: pointer;
     font-size: 12px;
@@ -23,7 +23,6 @@
   color: $notBlack;
   font-family: $typeStandardFontFamily;
   font-size: 12px;
-  width: 323px;
   .notification-explanation {
     margin-bottom: 1px;
     .notifier-name {
