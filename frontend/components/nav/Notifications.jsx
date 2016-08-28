@@ -108,7 +108,7 @@ var Notifications = React.createClass({
   },
   onNotificationStoreChange: function () {
     this.setState({
-      notifications: NotificationStore.all().reverse(),
+      notifications: NotificationStore.all(),
       uncheckedNotificationIds: NotificationStore.uncheckedNotificationIds()
     });
   },
