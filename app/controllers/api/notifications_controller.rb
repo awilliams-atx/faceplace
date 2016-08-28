@@ -19,7 +19,7 @@ class Api::NotificationsController < ApplicationController
   end
 
   def page
-    @notifications = User.find(378).notifications.order(created_at: :desc)
+    @notifications = current_user.notifications.order(created_at: :desc)
       .limit(5).offset(calculate_offset(5))
     render 'api/notifications/index'
   end
