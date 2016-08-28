@@ -243,7 +243,7 @@ comment.body = 'Gorsh, I\'d be mighty pleased if you stopped by my perfile.'
 comment.author_id = delmar.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = walter
@@ -267,7 +267,7 @@ comment.body = 'I\'m there!'
 comment.author_id = donny.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = walter
@@ -312,7 +312,7 @@ comment.body = 'I think bowling is a perfectly barbaric pastime.'
 comment.author_id = maude.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = walter
@@ -336,7 +336,7 @@ comment.body = 'Walter, he\'s just a kid, man.'
 comment.author_id = jeffrey.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = walter
@@ -355,7 +355,7 @@ comment.body = 'You don\'t scare me.'
 comment.author_id = jesus.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = walter
@@ -374,7 +374,7 @@ comment.body = 'I don\'t know how you get past those freaks in the league office
 comment.author_id = jesus.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = donny
@@ -393,7 +393,7 @@ comment.body = 'Hello? Dude speaking.'
 comment.author_id = jeffrey.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = jeffrey
@@ -429,7 +429,7 @@ comment.body = 'Would you two calm down?'
 comment.author_id = maude.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = walter
@@ -467,7 +467,7 @@ comment.body = 'Way out.'
 comment.author_id = walter.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = jeffrey
@@ -479,7 +479,7 @@ timeline_posting.post = post
 timeline_posting.profile_owner = jesus
 timeline_posting.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = jesus
@@ -498,7 +498,7 @@ comment.body = 'Shut up and roll.'
 comment.author_id = walter.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = jeffrey
@@ -510,7 +510,7 @@ timeline_posting.post = post
 timeline_posting.profile_owner = walter
 timeline_posting.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = maude
@@ -529,7 +529,7 @@ comment.body = 'That\'s cool with me, man.'
 comment.author_id = jeffrey.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = jeff_sr
@@ -541,7 +541,7 @@ timeline_posting.post = post
 timeline_posting.profile_owner = jeffrey
 timeline_posting.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = jeff_sr
@@ -560,7 +560,7 @@ comment.body = 'That\'s just, like, your opinion, man.'
 comment.author_id = jeffrey.id
 comment.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = jeffrey
@@ -572,7 +572,7 @@ timeline_posting.post = post
 timeline_posting.profile_owner = jeff_sr
 timeline_posting.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = tommy
@@ -584,7 +584,7 @@ timeline_posting.post = post
 timeline_posting.profile_owner = ulysses
 timeline_posting.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = ulysses
@@ -596,7 +596,7 @@ timeline_posting.post = post
 timeline_posting.profile_owner = pete
 timeline_posting.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = ulysses
@@ -608,7 +608,7 @@ timeline_posting.post = post
 timeline_posting.profile_owner = pete
 timeline_posting.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = pete
@@ -625,7 +625,7 @@ tagging.post = post
 tagging.tagged = ulysses
 tagging.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = tommy
@@ -642,7 +642,7 @@ tagging.post = post
 tagging.tagged = ulysses
 tagging.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = delmar
@@ -659,7 +659,7 @@ tagging.post = post
 tagging.tagged = ulysses
 tagging.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = delmar
@@ -676,7 +676,7 @@ timeline_posting.post = post
 timeline_posting.profile_owner = ulysses
 timeline_posting.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = daniel
@@ -698,7 +698,7 @@ tagging.post = post
 tagging.tagged = pete
 tagging.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = pappy
@@ -720,7 +720,7 @@ tagging.post = post
 tagging.tagged = pete
 tagging.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = pappy
@@ -742,16 +742,27 @@ tagging.post = post
 tagging.tagged = pete
 tagging.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = pappy
 post.body = 'We ain\'t one-at-a-timin\' here. We\'re MASS communicating!'
 post.save!
 
-
+# # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
 post.author = pappy
 post.body = 'I invented moral fibre!'
 post.save!
+
+
+
+(lebowski_friends + oh_brother_friends).uniq.each do |friend|
+  notification_ids = friend.notifications.pluck(:id)
+  if notification_ids.length > 10
+      notification_ids[-1..-10].each do |notif_id|
+      Notification.find(notif_id).destroy
+    end
+  end
+end
