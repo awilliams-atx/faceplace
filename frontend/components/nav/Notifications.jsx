@@ -28,11 +28,11 @@ var Notifications = React.createClass({
   renderDropDown: function () {
     if (this.props.dropToggles['notifications']) {
       return (
-        <aside className='nav-drop-overlay'>
-          <div className='nav-drop-title'>
+        <aside id='nav-drop-overlay'>
+          <div id='nav-drop-title'>
             <strong>Notifications</strong>
           </div>
-          <div className='nav-drop-index'>
+          <div id='nav-drop-index'>
             {this.renderNotifications()}
           </div>
           {this.renderLoadMore()}

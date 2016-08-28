@@ -50,7 +50,7 @@
     right: 6px;
     top: 13px;
   }
-  .nav-drop-overlay {
+  #nav-drop-overlay {
     background-color: white;
     border: $navDropBorder;
     box-shadow: 0 3px 8px rgba(#000000, 0.25);
@@ -63,10 +63,10 @@
       max-height: 70vh;
       overflow: hidden;
     }
-    .nav-drop-index:hover {
+    #nav-drop-index:hover {
       overflow-y: auto;
     }
-    .nav-drop-title {
+    #nav-drop-title {
       border-bottom: $navDropBorder;
       strong {
         line-height: 30px;

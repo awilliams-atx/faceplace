@@ -24,8 +24,8 @@ var FriendRequests = React.createClass({
   renderDropDown: function () {
     if (this.props.dropToggles['friendRequests']) {
       return (
-        <div className='nav-drop-overlay'>
-          <div className='nav-drop-title'>
+        <div id='nav-drop-overlay'>
+          <div id='nav-drop-title'>
             <strong>Friend Requests</strong>
           </div>
           {this.renderRequests()}
