@@ -5,17 +5,6 @@
     background-color: $athensGray3;
     cursor: pointer;
   }
-  footer {
-    border-top: $navDropBorder;
-    color: $chambray;
-    cursor: pointer;
-    font-size: 12px;
-    padding: 8px 0;
-    text-align: center;
-  }
-  footer:hover {
-    text-decoration: underline;
-  }
 }
 
 .notification-details {

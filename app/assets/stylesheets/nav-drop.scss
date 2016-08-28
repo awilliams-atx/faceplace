@@ -91,5 +91,16 @@
     .unchecked-alert {
       background-color: $athensGray2;
     }
+    footer {
+      border-top: $navDropBorder;
+      color: $chambray;
+      cursor: pointer;
+      font-size: 12px;
+      padding: 8px 0;
+      text-align: center;
+    }
+    footer:hover {
+      text-decoration: underline;
+    }
   }
 }
