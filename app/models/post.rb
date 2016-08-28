@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
   after_destroy :remove_watching
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
-  has_many :comments, as: :commentable
+  has_many :comments, as: :commentable, dependent: :destroy
   has_many :commenters, through: :comments, class_name: 'User', foreign_key:
     :author_id, source: :author
   has_one :profile_owner, through: :timeline_posting, source: :profile_owner
