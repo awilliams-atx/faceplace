@@ -8,8 +8,8 @@ var Notifications = React.createClass({
   getInitialState: function () {
     return {
       droppedDown: false,
-      notifications: [],
-      uncheckedNotificationIds: [],
+      notifications: NotificationStore.all(),
+      uncheckedNotificationIds: NotificationStore.uncheckedNotificationIds()
     };
   },
   render: function () {
@@ -93,6 +93,7 @@ var Notifications = React.createClass({
     this.markNotificationsChecked();
     this.props.toggleNavDrop('notifications');
     document.body.addEventListener('click', this.navDropClickListener);
+    this.setState({ droppedDown: true });
   },
   fetchNotifications: function () {
     if (NotificationStore.nomore()) { return }
@@ -107,7 +108,6 @@ var Notifications = React.createClass({
   navDropClickListener: function (e) {
     var notificationsDrop = document.getElementById('notifications-drop');
     if (!notificationsDrop.contains(e.target)) {
-      // ClientActions.emptyJustCheckedIds();
       this.props.toggleNavDrop('null');
       document.body.removeEventListener('click', this.navDropClickListener);
       this.setState({ droppedDown: false });
@@ -117,7 +117,11 @@ var Notifications = React.createClass({
     this.setState({
       notifications: NotificationStore.all(),
       uncheckedNotificationIds: NotificationStore.uncheckedNotificationIds()
-    });
+    }, function () {
+      if (this.state.droppedDown) {
+        this.markNotificationsChecked()
+      }
+    }.bind(this));
   },
   rollUp: function () {
     this.setState({ droppedDown: false }, function () {
