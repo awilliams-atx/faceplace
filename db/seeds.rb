@@ -189,6 +189,11 @@ tagging.post = post
 tagging.tagged = donny
 tagging.save!
 
+tagging = Tagging.new
+tagging.post = post
+tagging.tagged = daniel
+tagging.save!
+
 comment = Comment.new
 comment.commentable_type = 'Post'
 comment.commentable_id = post.id
