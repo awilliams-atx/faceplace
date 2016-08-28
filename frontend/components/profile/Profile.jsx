@@ -13,11 +13,11 @@ var Profile = React.createClass({
   },
   render: function () {
     return (
-      <div className='content'>
+      <div id='content'>
         <Nav />
-        <div className='profile-sub-content'>
-          <div className='profile-top-content'>
-            <div className='cover-photo-container'>
+        <div id='profile-sub-content'>
+          <div id='profile-top-content'>
+            <div id='cover-photo-container'>
               <CoverPhoto coverPhotoUrl={this.state.user.coverPhotoUrl}
                 authorizedToEdit={this.authorizedToEdit()}
                 profileOwnerId={this.profileOwnerId()} />
@@ -25,8 +25,8 @@ var Profile = React.createClass({
             </div>
             <ProfilePic profileOwnerId={this.profileOwnerId()}
               profilePicUrl={this.state.user.profilePicUrl} />
-            <nav className='profile-nav'>
-              <div className='profile-nav-links'>
+            <nav id='profile-nav'>
+              <div id='profile-nav-links'>
                 <ul>
                   <li>
                     Timeline

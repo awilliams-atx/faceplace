@@ -1,7 +1,7 @@
 @import 'global';
 @import 'button-style';
 
-.profile-sub-content {
+#profile-sub-content {
   margin: auto;
   width: 980px;
   h2 {
@@ -15,10 +15,10 @@
     width: 25px;
   }
 }
-.profile-top-content {
+#profile-top-content {
   position: relative;
 }
-.cover-photo-container {
+#cover-photo-container {
   height: 315px;
   position: relative;
   width: 851px;
