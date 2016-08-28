@@ -11,7 +11,7 @@ var FriendRequests = React.createClass({
   render: function () {
     return (
       <div className={this.className() + ' nav-drop-icon'}
-        id='friends-drop'
+        id='requests-drop'
         onClick={this.dropDown}>
         <div className='fa-hover-box-25x25'>
           <i className="fa fa-user-plus" aria-hidden="true"></i>
@@ -96,7 +96,7 @@ var FriendRequests = React.createClass({
     }
   },
   navDropClickListener: function (e) {
-    var requestsDrop = document.getElementById('friends-drop');
+    var requestsDrop = document.getElementById('requests-drop');
     if (!requestsDrop.contains(e.target)
       && e.target.parentNode.parentNode !== requestsDrop) {
       this.rollUp();
