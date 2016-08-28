@@ -24,10 +24,4 @@ class Post < ActiveRecord::Base
     Watching.create!(watchable_type: 'Post', watchable_id: id, watcher_id:
       author_id)
   end
-
-  def remove_watching
-    watching = Watching.find_by(watchable_type: 'Post', watchable_id: id,
-      watcher_id: author_id)
-    watching.destroy if watching
-  end
 end
