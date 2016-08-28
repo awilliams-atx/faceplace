@@ -10,7 +10,7 @@ var NotificationItem = React.createClass({
     return (
       <a href={'#' + this.props.notif.post_id}
         onClick={this.checkNotification}
-        className={'nav-drop-item ' + this.props.checkedClass}>
+        className={'nav-drop-item ' + this.readClass()}>
         <div className='group'>
           <img src={this.props.notif.profile_pic_url}
             className='nav-drop-profile-pic nav-drop-block' />
@@ -51,6 +51,9 @@ var NotificationItem = React.createClass({
       window.location.hash = this.props.notif.post_id;
     }
     this.props.rollUp();
+  },
+  readClass: function (id) {
+    return this.props.notif.read ? '' : 'unchecked-alert';
   },
   renderDate: function () {
     var currentTime = new Date();

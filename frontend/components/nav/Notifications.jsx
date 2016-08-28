@@ -60,7 +60,6 @@ var Notifications = React.createClass({
       return this.state.notifications.map(function (notif, idx) {
         return (
           <NotificationItem
-            checkedClass={this.checkedClass(notif.id)}
             rollUp={this.rollUp}
             key={idx}
             notif={notif} />
@@ -75,9 +74,6 @@ var Notifications = React.createClass({
   },
   componentWillUnmount: function () {
     this.notificationListener.remove();
-  },
-  checkedClass: function (id) {
-    return NotificationStore.justChecked(id) ? 'unchecked-alert' : '';
   },
   className: function () {
     if (this.props.dropToggles['notifications']) {
