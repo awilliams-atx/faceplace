@@ -128,7 +128,6 @@ var Options = React.createClass({
     );
   },
   modalClickOutListener: function (e) {
-    console.log(e.target);
     var modal = document.getElementById('modal');
     if (!this.submittingOrCanceling(e) && !modal.contains(e.target)) {
       this.cancelModal();

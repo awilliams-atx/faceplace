@@ -63,7 +63,6 @@ var PolyIntroItem = React.createClass({
     this.UserListener.remove();
   },
   clickOutListener: function (e) {
-    console.log('uh');
     var form = document.getElementById('intro-form');
     if (!this.submittingOrCanceling(e) && !form.contains(e.target)) {
       this.setState({ editing: false }, function () {
