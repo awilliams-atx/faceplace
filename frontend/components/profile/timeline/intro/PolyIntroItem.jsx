@@ -1,5 +1,6 @@
 var React = require('react'),
     ClientActions = require('../../../../actions/client_actions'),
+    SessionStoe = require('../../../../stores/session'),
     UserStore = require('../../../../stores/user');
 
 var PolyIntroItem = React.createClass({
@@ -105,6 +106,7 @@ var PolyIntroItem = React.createClass({
   },
   showEdit: function (e) {
     e.preventDefault();
+    if (SessionStore.currentUser().id !== UserStore.user().userId) { return }
     document.addEventListener('click', this.clickOutListener);
     if (!this.props.authorizedToEdit) { return; }
     this.setState({ editing: true }, function () {
