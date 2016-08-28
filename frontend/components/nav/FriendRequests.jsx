@@ -12,7 +12,7 @@ var FriendRequests = React.createClass({
     return (
       <div className={this.className() + ' nav-drop-icon'}
         id='friends-drop'
-        onClick={this.toggleNavDrop}>
+        onClick={this.dropDown}>
         <div className='fa-hover-box-25x25'>
           <i className="fa fa-user-plus" aria-hidden="true"></i>
           {this.renderRequestCounter()}
@@ -80,6 +80,13 @@ var FriendRequests = React.createClass({
       return 'nav-drop-inactive';
     }
   },
+  dropDown: function () {
+    if (this.state.droppedDown) { return; }
+    this.markRequestsChecked();
+    this.props.toggleNavDrop('friendRequests');
+    document.body.addEventListener('click', this.navDropClickListener);
+    this.setState({ droppedDown: true });
+  },
   markRequestsChecked: function () {
     if (this.state.uncheckedRequestIds.length > 0) {
       ClientActions.markRequestsChecked(this.state.uncheckedRequestIds);
@@ -115,13 +122,6 @@ var FriendRequests = React.createClass({
     };
     params[response] = true;
     return params;
-  },
-  toggleNavDrop: function () {
-    if (this.state.droppedDown) { return; }
-    this.markRequestsChecked();
-    this.props.toggleNavDrop('friendRequests');
-    document.body.addEventListener('click', this.navDropClickListener);
-    this.setState({ droppedDown: true });
   }
 });
 

@@ -16,7 +16,7 @@ var Notifications = React.createClass({
     return (
       <div className={this.className() + ' nav-drop-icon'}
         id='notifications-drop'
-        onClick={this.toggleNavDrop}>
+        onClick={this.dropDown}>
         <div className='fa-hover-box-25x25'>
           <i className="fa fa-globe" aria-hidden="true"></i>
           {this.renderNotificationCounter()}
@@ -88,6 +88,12 @@ var Notifications = React.createClass({
       return 'nav-drop-inactive';
     }
   },
+  dropDown: function () {
+    if (this.state.droppedDown) { return }
+    this.markNotificationsChecked();
+    this.props.toggleNavDrop('notifications');
+    document.body.addEventListener('click', this.navDropClickListener);
+  },
   fetchNotifications: function () {
     if (NotificationStore.nomore()) { return }
     ClientActions.fetchNotifications(NotificationStore.pagination());
@@ -118,12 +124,6 @@ var Notifications = React.createClass({
       document.body.removeEventListener('click', this.navDropClickListener);
       this.props.toggleNavDrop('null');
     }.bind(this));
-  },
-  toggleNavDrop: function () {
-    if (this.state.droppedDown) { return }
-    this.markNotificationsChecked();
-    this.props.toggleNavDrop('notifications');
-    document.body.addEventListener('click', this.navDropClickListener);
   }
 });
 
