@@ -11,7 +11,7 @@ class Post < ActiveRecord::Base
   has_many :tagged_friends, through: :taggings, source: :tagged
   has_many :taggings, dependent: :destroy
   has_one :timeline_posting, dependent: :destroy
-  has_many :watchers, through: :watchings, source: :watcher
+  has_many :watchers, through: :watchings
   has_many :watchings, as: :watchable, dependent: :destroy
 
   def timeline_owner_id
