@@ -1,4 +1,7 @@
-[User, Post].each { |klass| klass.destroy_all }
+['jeff', 'walter', 'donny', 'jeff_sr', 'maude', 'andrew', 'jesus', 'brandt', 'daniel', 'ulysses', 'pete', 'delmar', 'tommy', 'pappy'].each do |email|
+  user = User.find_by(email: email)
+  user.destroy if user
+end
 
 lebowski_friends = [];
 
@@ -747,7 +750,3 @@ post = Post.new
 post.author = pappy
 post.body = 'I invented moral fibre!'
 post.save!
-
-# u = User.find_by(last_name: 'Kerabatsos')
-# u.cover_photo = File.open("#{Rails.root}/app/assets/images/donald_kerabatsos_cover_photo.jpg")
-# u.save!
