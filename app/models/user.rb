@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
 
   # -------------------------------ASSOCIATIONS------------------------------ #
 
+  has_many :comments, foreign_key: :author_id, dependent: :destroy
+
   has_many :friendships, dependent: :destroy
 
   has_many :friends, class_name: 'User', through: :friendships, source: :friend
@@ -30,7 +32,7 @@ class User < ActiveRecord::Base
   has_many :notifications, class_name: 'Notification', foreign_key:
     :notified_id, dependent: :destroy
 
-  has_many :posts, foreign_key: :author_id
+  has_many :posts, foreign_key: :author_id, dependent: :destroy
 
   has_many :received_friend_requests, class_name: 'FriendRequest',
     foreign_key: :receiver_id, dependent: :destroy
