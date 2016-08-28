@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    Util = require('../../util/general');
 
 var CommentIndexItem = React.createClass({
   contextTypes: {
@@ -32,6 +33,7 @@ var CommentIndexItem = React.createClass({
   pushAuthorRoute: function (e) {
     e.preventDefault();
     this.context.router.push(e.target.pathname);
+    Util.jumpToTop();
   }
 });
 

@@ -1,4 +1,5 @@
 var React = require('react'),
+    Util = require('../../util/general'),
     Options = require('./Options'),
     ProfileOwner = require('./ProfileOwner'),
     TaggedFriends = require('./TaggedFriends'),
@@ -62,14 +63,17 @@ var PostIndexItem = React.createClass({
   pushAuthorRoute: function (e) {
     e.preventDefault();
     this.context.router.push(e.currentTarget.pathname);
+    Util.jumpToTop();
   },
   pushProfileOwnerRoute: function (e) {
     e.preventDefault();
     this.context.router.push(e.target.pathname);
+    Util.jumpToTop();
   },
   pushUserRoute: function (e) {
     e.preventDefault();
     this.context.router.push(e.target.pathname);
+    Util.jumpToTop();
   }
 });
 

@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    Util = require('../../../../util/general');
 
 var FriendIndexItem = React.createClass({
   contextTypes: {
@@ -20,6 +21,7 @@ var FriendIndexItem = React.createClass({
   pushUserRoute: function (e) {
     e.preventDefault();
     this.context.router.push(e.currentTarget.pathname);
+    Util.jumpToTop();
   }
 });
 

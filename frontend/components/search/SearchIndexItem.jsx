@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    Util = require('../../util/general');
 
 var SearchIndexItem = React.createClass({
   contextTypes: {
@@ -24,6 +25,7 @@ var SearchIndexItem = React.createClass({
     e.preventDefault();
     this.props.clickHandler();
     this.context.router.push('/users/' + this.props.user.userId);
+    Util.jumpToTop();
   }
 });
 

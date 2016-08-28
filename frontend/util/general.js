@@ -5,6 +5,9 @@ module.exports = {
     var post_id = this.queryString('post_id');
     if (post_id) { window.location.hash = post_id }
   },
+  jumpToTop: function () {
+    window.scrollTo(0, 0);
+  },
   toCommaSeparatedAnchors: function toCSAnchors (friends, handler) {
     if (friends.length === 0) {
       return '';

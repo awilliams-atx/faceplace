@@ -1,4 +1,5 @@
 var React = require('react'),
+    Util = require('../../util/general'),
     NavDrops = require('./NavDrops'),
     SignUpForm = require('../SignUpForm'),
     SearchIndex = require('../search/SearchIndex'),
@@ -50,10 +51,12 @@ var Nav = React.createClass({
   pushCurrentUserRoute: function (e) {
     e.preventDefault();
     this.context.router.push(e.target.pathname);
+    Util.jumpToTop();
   },
   pushMainRoute: function (e) {
     e.preventDefault();
     this.context.router.push('/main');
+    Util.jumpToTop();
   }
 });
 
