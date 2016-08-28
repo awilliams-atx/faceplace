@@ -1,4 +1,5 @@
 json.id notification.id
+json.notified_id notification.notified_id
 json.timeline_owner_id notification.timeline_owner_id
 json.post_id notification.post_id
 json.notifier_name notification.notifier_name

@@ -1,4 +1,5 @@
 var Store = require('flux/utils').Store,
+    SessionStore = require('./session'),
     AppDispatcher = require('../dispatcher/dispatcher'),
     notificationConstants = require('../constants/notification_constants');
 
@@ -15,7 +16,12 @@ NotificationStore.__onDispatch = function (payload) {
     NotificationStore.__emitChange();
     break;
   case notificationConstants.NOTIFICATIONS_RECEIVED:
-    NotificationStore.addNotifications(payload.notifications);
+    if (_notifications[0] && _notifications[0].notified_id !==
+      SessionStore.currentUser().id) {
+      NotificationStore.setNotifications(payload.notifications);
+    } else {
+      NotificationStore.addNotifications(payload.notifications);
+    }
     NotificationStore.__emitChange();
     break;
   case notificationConstants.READ_NOTIFICATION_ID_RECEIVED:
@@ -75,6 +81,20 @@ NotificationStore.setJustCheckedIds = function (checked_ids) {
   for (var i = 0; i < checked_ids.length; i++) {
     _justCheckedIds.push(checked_ids[i]);
   }
+};
+
+NotificationStore.setNotifications = function (notifications) {
+  [_notifications, _justCheckedIds].forEach(function (arr) {
+    while (arr.length > 0) {
+      arr.pop();
+    }
+  });
+  notifications.forEach(function (notification) {
+    _notifications.push(notification);
+  });
+  _pagination.page = 2;
+  _pagination.offset = 0;
+  _pagination.nomore = false;
 };
 
 NotificationStore.uncheckedNotificationIds = function () {
