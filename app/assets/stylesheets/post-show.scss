@@ -17,7 +17,9 @@
   position: relative;
   margin-bottom: 5px;
   top: 2px;
-;
+  a:hover {
+    text-decoration: underline;
+  }
   div {
     float: left;
   }

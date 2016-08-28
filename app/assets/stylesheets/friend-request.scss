@@ -10,6 +10,9 @@
   a {
     @include typeChambray(12px);
   }
+  a:hover {
+    text-decoration: underline;
+  }
   aside {
     @include typeShadyLady;
     display: block;
