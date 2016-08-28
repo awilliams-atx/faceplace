@@ -29,7 +29,8 @@ var PostIndexItem = React.createClass({
                 {this.props.post.fullName}
               </div>
             </a>
-            {ProfileOwner(this.props.post.profileOwner)}
+            {ProfileOwner(this.props.post.profileOwner,
+              this.pushProfileOwnerRoute)}
           </div>
           <br />
           <div className='post-datetime-container group'>
@@ -61,6 +62,10 @@ var PostIndexItem = React.createClass({
   pushAuthorRoute: function (e) {
     e.preventDefault();
     this.context.router.push('/users/' + this.props.post.authorId);
+  },
+  pushProfileOwnerRoute: function (e) {
+    e.preventDefault();
+    this.context.router.push(e.target.pathname);
   },
   pushUserRoute: function (e) {
     e.preventDefault();

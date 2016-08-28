@@ -1,6 +1,6 @@
 var React = require('react');
 
-module.exports = function profileOwner (profileOwner) {
+module.exports = function profileOwner (profileOwner, pushRoute) {
   if (!profileOwner) { return; }
   return (
     <div>
@@ -8,7 +8,8 @@ module.exports = function profileOwner (profileOwner) {
         <i className='fa fa-caret-right' aria-hidden='true'></i>
       </div>
       <div className='friend-post-breakdown'>
-        <a href={'/users/' + profileOwner.userId}>
+        <a href={'/users/' + profileOwner.userId}
+          onClick={pushRoute}>
           {profileOwner.fullName}
         </a>
       </div>
