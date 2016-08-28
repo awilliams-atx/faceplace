@@ -31,7 +31,7 @@ var CommentIndexItem = React.createClass({
   },
   pushAuthorRoute: function (e) {
     e.preventDefault();
-    this.context.router.push('/users/' + this.props.comment.authorId);
+    this.context.router.push(e.target.pathname);
   }
 });
 

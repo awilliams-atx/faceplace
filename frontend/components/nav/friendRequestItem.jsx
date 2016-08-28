@@ -39,7 +39,7 @@ var FriendRequestItem = React.createClass({
   },
   pushUserRoute: function (e) {
     e.preventDefault();
-    this.context.router.push('/users/' + this.props.req.maker_id);
+    this.context.router.push(e.target.pathname);
   }
 });
 

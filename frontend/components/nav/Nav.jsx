@@ -49,7 +49,7 @@ var Nav = React.createClass({
   },
   pushCurrentUserRoute: function (e) {
     e.preventDefault();
-    this.context.router.push('/users/' + SessionStore.currentUser().id);
+    this.context.router.push(e.target.pathname);
   },
   pushMainRoute: function (e) {
     e.preventDefault();

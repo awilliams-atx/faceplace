@@ -19,7 +19,7 @@ var FriendIndexItem = React.createClass({
   },
   pushUserRoute: function (e) {
     e.preventDefault();
-    this.context.router.push('/users/' + this.props.friend.user_id);
+    this.context.router.push(e.currentTarget.pathname);
   }
 });
 

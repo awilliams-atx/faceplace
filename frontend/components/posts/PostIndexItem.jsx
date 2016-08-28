@@ -61,7 +61,7 @@ var PostIndexItem = React.createClass({
   },
   pushAuthorRoute: function (e) {
     e.preventDefault();
-    this.context.router.push('/users/' + this.props.post.authorId);
+    this.context.router.push(e.currentTarget.pathname);
   },
   pushProfileOwnerRoute: function (e) {
     e.preventDefault();
