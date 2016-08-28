@@ -22,7 +22,7 @@ var FriendRequests = React.createClass({
     );
   },
   renderDropDown: function () {
-    if (this.props.dropToggles['friendRequests']) {
+    if (this.state.droppedDown) {
       return (
         <div id='nav-drop-overlay'>
           <div id='nav-drop-title'>
@@ -72,7 +72,7 @@ var FriendRequests = React.createClass({
     return FriendRequestStore.justChecked(id) ? ' unchecked-alert' : '';
   },
   className: function () {
-    if (this.props.dropToggles['friendRequests']) {
+    if (this.state.droppedDown) {
       return 'nav-drop-active';
     } else if (this.state.uncheckedRequestIds.length > 0) {
       return 'nav-drop-unchecked';
@@ -81,11 +81,14 @@ var FriendRequests = React.createClass({
     }
   },
   dropDown: function () {
-    if (this.state.droppedDown) { return; }
-    this.markRequestsChecked();
-    this.props.toggleNavDrop('friendRequests');
-    document.body.addEventListener('click', this.navDropClickListener);
-    this.setState({ droppedDown: true });
+    if (!this.state.droppedDown) {
+      this.setState({ droppedDown: true }, function () {
+        this.markRequestsChecked();
+        document.addEventListener('click', this.navDropClickListener);
+      }.bind(this));
+    } else {
+      this.rollUp();
+    }
   },
   markRequestsChecked: function () {
     if (this.state.uncheckedRequestIds.length > 0) {
@@ -93,12 +96,10 @@ var FriendRequests = React.createClass({
     }
   },
   navDropClickListener: function (e) {
-    var friendsDrop = document.getElementById('friends-drop');
-    if (!friendsDrop.contains(e.target) && this.state.droppedDown) {
-      ClientActions.emptyJustCheckedIds();
-      this.props.toggleNavDrop('null');
-      document.body.removeEventListener('click', this.navDropClickListener);
-      this.setState({ droppedDown: false });
+    var requestsDrop = document.getElementById('friends-drop');
+    if (!requestsDrop.contains(e.target)
+      && e.target.parentNode.parentNode !== requestsDrop) {
+      this.rollUp();
     }
   },
   onAccept: function (user_id) {
@@ -122,6 +123,11 @@ var FriendRequests = React.createClass({
     };
     params[response] = true;
     return params;
+  },
+  rollUp: function () {
+    this.setState({ droppedDown: false }, function () {
+      document.removeEventListener('click', this.navDropClickListener);
+    }.bind(this));
   }
 });
 

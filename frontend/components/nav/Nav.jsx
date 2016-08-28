@@ -9,11 +9,7 @@ var React = require('react'),
 
 var Nav = React.createClass({
   getInitialState: function () {
-    return ({
-      user: SessionStore.currentUser(),
-      toggled: false,
-      dropToggles: { notifications: false, friendRequests: false, null: true }
-    });
+    return ({ user: SessionStore.currentUser() });
   },
   contextTypes: {
     router: React.PropTypes.object.isRequired
@@ -58,11 +54,6 @@ var Nav = React.createClass({
   pushMainRoute: function (e) {
     e.preventDefault();
     this.context.router.push('/main');
-  },
-  toggleNavDrop: function (drop) {
-    var dropToggles = { notifications: false, friendRequests: false, null: false };
-    dropToggles[drop] = true;
-    this.setState({dropToggles: dropToggles});
   }
 });
 

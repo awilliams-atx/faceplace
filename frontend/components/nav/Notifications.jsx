@@ -26,7 +26,7 @@ var Notifications = React.createClass({
     );
   },
   renderDropDown: function () {
-    if (this.props.dropToggles['notifications']) {
+    if (this.state.droppedDown) {
       return (
         <aside id='nav-drop-overlay'>
           <div id='nav-drop-title'>
@@ -83,7 +83,7 @@ var Notifications = React.createClass({
     this.notificationListener.remove();
   },
   className: function () {
-    if (this.props.dropToggles['notifications']) {
+    if (this.state.droppedDown) {
       return 'nav-drop-active';
     } else if (this.state.uncheckedNotificationIds.length > 0) {
       return 'nav-drop-unchecked';
@@ -92,11 +92,14 @@ var Notifications = React.createClass({
     }
   },
   dropDown: function () {
-    if (this.state.droppedDown) { return }
-    this.markNotificationsChecked();
-    this.props.toggleNavDrop('notifications');
-    document.body.addEventListener('click', this.navDropClickListener);
-    this.setState({ droppedDown: true });
+    if (!this.state.droppedDown) {
+      this.setState({ droppedDown: true }, function () {
+        this.markNotificationsChecked();
+        document.body.addEventListener('click', this.navDropClickListener);
+      }.bind(this));
+    } else {
+      this.rollUp();
+    }
   },
   fetchNotifications: function () {
     if (NotificationStore.nomore()) { return }
@@ -110,10 +113,9 @@ var Notifications = React.createClass({
   },
   navDropClickListener: function (e) {
     var notificationsDrop = document.getElementById('notifications-drop');
-    if (!notificationsDrop.contains(e.target)) {
-      this.props.toggleNavDrop('null');
-      document.body.removeEventListener('click', this.navDropClickListener);
-      this.setState({ droppedDown: false });
+    if (!notificationsDrop.contains(e.target)
+      && e.target.parentNode.parentNode !== notificationsDrop) {
+      this.rollUp();
     }
   },
   onNotificationStoreChange: function () {
@@ -129,7 +131,6 @@ var Notifications = React.createClass({
   rollUp: function () {
     this.setState({ droppedDown: false }, function () {
       document.body.removeEventListener('click', this.navDropClickListener);
-      this.props.toggleNavDrop('null');
     }.bind(this));
   }
 });

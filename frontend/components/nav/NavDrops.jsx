@@ -6,10 +6,8 @@ var NavDrops = React.createClass({
   render: function () {
     return (
       <div id='nav-drops' className='group'>
-        <FriendRequests dropToggles={this.props.dropToggles}
-          toggleNavDrop={this.props.toggleNavDrop} />
-        <Notifications dropToggles={this.props.dropToggles}
-          toggleNavDrop={this.props.toggleNavDrop} />
+        <FriendRequests />
+        <Notifications />
       </div>
     );
   }
