@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
   has_many :comments, as: :commentable, dependent: :destroy
   has_many :commenters, through: :comments, class_name: 'User', foreign_key:
     :author_id, source: :author
-  has_one :profile_owner, through: :timeline_posting, source: :profile_owner
+  has_one :profile_owner, through: :timeline_posting
   has_many :tagged_friends, through: :taggings, source: :tagged
   has_many :taggings, dependent: :destroy
   has_one :timeline_posting, dependent: :destroy
