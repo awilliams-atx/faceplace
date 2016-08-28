@@ -89,6 +89,7 @@ var Notifications = React.createClass({
     }
   },
   fetchNotifications: function () {
+    if (NotificationStore.nomore()) { return }
     ClientActions.fetchNotifications(NotificationStore.pagination());
   },
   markNotificationsChecked: function () {

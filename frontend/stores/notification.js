@@ -6,7 +6,7 @@ var NotificationStore = new Store(AppDispatcher);
 
 _justCheckedIds = [];
 _notifications = [];
-_pagination = { offset: 0, page: 1 }; // for next request, not current notifs
+_pagination = { offset: 0, page: 1, nomore: false }; // for next request
 
 NotificationStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
@@ -30,6 +30,7 @@ NotificationStore.addNotifications = function (notifications) {
     _notifications.push(notifications[i]);
   }
   _pagination.page += 1;
+  _pagination.nomore = notifications.length === 0;
 };
 
 NotificationStore.all = function () {
@@ -60,6 +61,10 @@ NotificationStore.markNotificationsChecked = function (checked_ids) {
       _notifications[i].checked = true;
     }
   }
+};
+
+NotificationStore.nomore = function () {
+  return _pagination.nomore;
 };
 
 NotificationStore.pagination = function () {
