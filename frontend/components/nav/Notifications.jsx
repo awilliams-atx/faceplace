@@ -35,10 +35,17 @@ var Notifications = React.createClass({
           <div className='nav-drop-index'>
             {this.renderNotifications()}
           </div>
-          <footer onClick={this.fetchNotifications}>
-            Load more notifications
-          </footer>
+          {this.renderLoadMore()}
         </aside>
+      );
+    }
+  },
+  renderLoadMore: function () {
+    if (this.state.notifications.length > 0 && !NotificationStore.nomore()) {
+      return (
+        <footer onClick={this.fetchNotifications}>
+          Load more notifications
+        </footer>
       );
     }
   },
@@ -52,7 +59,7 @@ var Notifications = React.createClass({
   renderNotifications: function () {
     if (this.state.notifications.length === 0) {
       return (
-        <div id='empty-notifications'>
+        <div id='empty-nav-drop'>
           <aside>No notifications</aside>
         </div>
       );
