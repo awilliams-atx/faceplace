@@ -91,13 +91,14 @@ var Notifications = React.createClass({
       return 'nav-drop-inactive';
     }
   },
-  dropDown: function () {
+  dropDown: function (e) {
     if (!this.state.droppedDown) {
       this.setState({ droppedDown: true }, function () {
         this.markNotificationsChecked();
         document.body.addEventListener('click', this.navDropClickListener);
       }.bind(this));
-    } else {
+    } else if (!document.getElementById('nav-drop-overlay')
+      .contains(e.target)) {
       this.rollUp();
     }
   },
@@ -112,9 +113,10 @@ var Notifications = React.createClass({
     }
   },
   navDropClickListener: function (e) {
-    var notificationsDrop = document.getElementById('notifications-drop');
-    if (!notificationsDrop.contains(e.target)
-      && e.target.parentNode.parentNode !== notificationsDrop) {
+    var navDropIcon = document.getElementById('notifications-drop');
+    var overlay = document.getElementById('nav-drop-overlay');
+    if (!overlay.contains(e.target)
+      && e.target.parentNode.parentNode !== navDropIcon) {
       this.rollUp();
     }
   },

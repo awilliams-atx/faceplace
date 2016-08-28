@@ -80,14 +80,15 @@ var FriendRequests = React.createClass({
       return 'nav-drop-inactive';
     }
   },
-  dropDown: function () {
+  dropDown: function (e) {
     if (!this.state.droppedDown) {
       this.setState({ droppedDown: true }, function () {
         this.markRequestsChecked();
         document.addEventListener('click', this.navDropClickListener);
       }.bind(this));
-    } else {
-      this.rollUp();
+    } else if (!document.getElementById('nav-drop-overlay')
+      .contains(e.target)) {
+        this.rollUp();
     }
   },
   markRequestsChecked: function () {
@@ -96,9 +97,10 @@ var FriendRequests = React.createClass({
     }
   },
   navDropClickListener: function (e) {
-    var requestsDrop = document.getElementById('requests-drop');
-    if (!requestsDrop.contains(e.target)
-      && e.target.parentNode.parentNode !== requestsDrop) {
+    var navDropIcon = document.getElementById('requests-drop');
+    var overlay = document.getElementById('nav-drop-overlay');
+    if (!overlay.contains(e.target)
+      && e.target.parentNode.parentNode !== navDropIcon) {
       this.rollUp();
     }
   },
