@@ -74,7 +74,17 @@ NotificationStore.nomore = function () {
 };
 
 NotificationStore.pagination = function () {
+  NotificationStore.resetPagination();
   return Object.assign({}, _pagination);
+};
+
+NotificationStore.resetPagination = function () {
+  if (_notifications.length === 0) { return }
+  if (_notifications[0].notified_id !== SessionStore.currentUser().id) {
+    _pagination.offset = 0;
+    _pagination.page = 1;
+    _pagination.nomore = false;
+  }
 };
 
 NotificationStore.setJustCheckedIds = function (checked_ids) {
