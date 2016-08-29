@@ -22,6 +22,7 @@ var PostCommentForm = React.createClass({
   },
   onSubmit: function (e) {
     if (e.charCode === 13) {
+      e.preventDefault();
       if (this.state.body.length > 0) {
         var comment = {
           body: this.state.body,
