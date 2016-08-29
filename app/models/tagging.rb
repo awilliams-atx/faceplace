@@ -16,8 +16,12 @@ class Tagging < ActiveRecord::Base
   end
 
   def make_notification
-    Notification.create!(notifiable_type: 'Tagging', notifiable_id: id,
-      notifier_id: tagger.id, notified_id: tagged_id, notifier_name: tagger.full_name)
+    debugger
+    unless Notification.exists?(notifiable_type: 'TimelinePosting',
+      post_id: post.id, notified_id: tagged_id)
+      Notification.create!(notifiable_type: 'Tagging', notifiable_id: id,
+        notifier_id: tagger.id, notified_id: tagged_id, notifier_name: tagger.full_name)
+      end
   end
 
   def remove_notification
