@@ -7,15 +7,14 @@ var FriendIndexItem = React.createClass({
   },
   render: function () {
     return (
-      <div className='friend-thumb'>
-        <a href={'/users/' + this.props.friend.user_id}
-          onClick={this.pushUserRoute}>
-          <img src={this.props.friend.profile_pic_url}/>
-          <div className='friend-thumb-name'>
-            {this.props.friend.fullName}
-          </div>
-        </a>
-      </div>
+      <a href={'/users/' + this.props.friend.user_id}
+        onClick={this.pushUserRoute}
+        className='friend-thumb'>
+        <img src={this.props.friend.profile_pic_url}/>
+        <div className='friend-thumb-name'>
+          {this.props.friend.fullName}
+        </div>
+      </a>
     );
   },
   pushUserRoute: function (e) {

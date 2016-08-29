@@ -1,6 +1,6 @@
 /* RESET */
 
-body, html, header, section, nav, h1, h2, label, input, a {
+a, body, div, header, html, h1, h2, input, label, nav, section {
   margin: 0;
   border: 0;
   padding: 0;

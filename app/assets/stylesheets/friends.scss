@@ -26,6 +26,9 @@ section.profile-friends-container {
   position: relative;
   float: left;
 }
+.friend-thumb:hover {
+  text-decoration: underline;
+}
 .friend-thumb:nth-child(3n+2) {
   margin-left: 5px;
   margin-right: 5px;
