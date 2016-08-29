@@ -73,7 +73,7 @@ class Notification < ActiveRecord::Base
   def get_timeline_owner_id
     case notifiable_type
     when 'Comment'
-      notifiable.commentable.author_id
+      notifiable.commentable.timeline_owner_id
     when 'Tagging'
       notifiable.post.timeline_owner_id
     when 'TimelinePosting'
