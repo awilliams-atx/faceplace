@@ -14,25 +14,23 @@ var PostIndex = React.createClass({
     });
   },
   render: function () {
-    var renderForm = function () {
-      if (this.authorizedToPost()) {
-        return <PostForm isEditing={false}
-          profileOwnerId={this.props.profileOwnerId}/>;
-      }
-    }.bind(this);
-
-    var renderPosts = function () {
-      return this.state.posts.map(function (post) {
-        return <PostIndexItem post={post} key={post.postId} />;
-      });
-    }.bind(this);
-
     return (
       <section className='post-index'>
-        {renderForm()}
-        {renderPosts()}
+        {this.renderForm()}
+        {this.renderPosts()}
       </section>
     );
+  },
+  renderForm: function () {
+    if (this.authorizedToPost()) {
+      return <PostForm isEditing={false}
+        profileOwnerId={this.props.profileOwnerId}/>;
+    }
+  },
+  renderPosts: function () {
+    return this.state.posts.map(function (post) {
+      return <PostIndexItem post={post} key={post.postId} />;
+    });
   },
   componentDidMount: function () {
     this.postListener = PostStore.addListener(this.onPostStoreChange);
