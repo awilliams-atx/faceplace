@@ -8,6 +8,12 @@ var SocketActions = {
       actionType: socketConstants.PUSH_FRIEND_REQUEST,
       request: request
     });
+  },
+  pushNotification: function (notification) {
+    Dispatcher.dispatch({
+      actionType: socketConstants.PUSH_NOTIFICATION,
+      notification: notification
+    });
   }
 };
 

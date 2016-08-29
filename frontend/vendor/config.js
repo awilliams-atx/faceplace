@@ -8,6 +8,12 @@ module.exports = {
       events: [
         { received: SocketActions.pushFriendRequest }
       ]
+    },
+    notifications: {
+      channelRoot: 'notifications_',
+      events: [
+        { received: SocketActions.pushNotification }
+      ]
     }
   }
 };

@@ -1,7 +1,8 @@
 var Store = require('flux/utils').Store,
     SessionStore = require('./session'),
     AppDispatcher = require('../dispatcher/dispatcher'),
-    notificationConstants = require('../constants/notification_constants');
+    notificationConstants = require('../constants/notification_constants'),
+    socketConstants = require('../constants/socket_constants');
 
 var NotificationStore = new Store(AppDispatcher);
 
@@ -24,11 +25,20 @@ NotificationStore.__onDispatch = function (payload) {
     }
     NotificationStore.__emitChange();
     break;
+  case socketConstants.PUSH_NOTIFICATION:
+    NotificationStore.addNewNotification(payload.notification);
+    NotificationStore.__emitChange();
+    break;
   case notificationConstants.READ_NOTIFICATION_ID_RECEIVED:
     NotificationStore.markNotificationRead(payload.id);
     NotificationStore.__emitChange();
     break;
   }
+};
+
+NotificationStore.addNewNotification = function (notification) {
+  _notifications.unshift(notification);
+  _pagination.offset += 1;
 };
 
 NotificationStore.addNotifications = function (notifications) {
