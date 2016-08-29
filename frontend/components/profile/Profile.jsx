@@ -18,9 +18,7 @@ var Profile = React.createClass({
         <div id='profile-sub-content'>
           <div id='profile-top-content'>
             <div id='cover-photo-container'>
-              <CoverPhoto coverPhotoUrl={this.state.user.coverPhotoUrl}
-                authorizedToEdit={this.authorizedToEdit()}
-                profileOwnerId={this.profileOwnerId()} />
+              <CoverPhoto profileOwner={this.state.user} />
               <AddFriend profileOwnerId={this.profileOwnerId()} />
             </div>
             <ProfilePic profileOwnerId={this.profileOwnerId()}
@@ -49,9 +47,6 @@ var Profile = React.createClass({
   },
   componentWillReceiveProps: function (props) {
     ClientActions.fetchUser(props.params.userId);
-  },
-  authorizedToEdit: function () {
-    return this.profileOwnerId() === SessionStore.currentUser().id;
   },
   onUserStoreChange: function () {
     this.setState({ user: UserStore.user() });

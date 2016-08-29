@@ -50,4 +50,17 @@
       z-index: 5;
     }
   }
+  #cover-photo-name {
+    bottom: 10px;
+    color: white;
+    font-family: $typeStandardFontFamily;
+    font-size: 20px;
+    left: 200px;
+    pointer-events: none;
+    position: absolute;
+  }
+}
+
+#cover-photo-tinter {
+  position: absolute;
 }
