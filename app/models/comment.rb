@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
+  attr_accessor :notifications
   validates :commentable_id, :commentable_type, presence: true
 
   after_create :add_watching, :make_notifications
@@ -16,10 +17,12 @@ class Comment < ActiveRecord::Base
   end
 
   def make_notifications
+    self.notifications = []
     commentable.watchers.each do |user|
       next if author == user
-      Notification.create!(notifiable_type: 'Comment', notifiable_id: id,
-        notifier_id: author.id, notified_id: user.id, notifier_name: author.full_name)
+      notification = Notification.create!(notifiable_type: 'Comment',
+        notifiable_id: id, notifier_id: author.id, notified_id: user.id, notifier_name: author.full_name)
+      self.notifications << notification
     end
   end
 
