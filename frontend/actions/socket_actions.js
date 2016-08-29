@@ -3,6 +3,12 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     Sessionstore = require('../stores/session');
 
 var SocketActions = {
+  pushComment: function (comment) {
+    Dispatcher.dispatch({
+      actionType: socketConstants.PUSH_COMMENT,
+      comment: comment
+    });
+  },
   pushFriendRequest: function (request) {
     Dispatcher.dispatch({
       actionType: socketConstants.PUSH_FRIEND_REQUEST,

@@ -1,4 +1,5 @@
-var ServerActions = require('../actions/server_actions');
+var ServerActions = require('../actions/server_actions')
+    SocketActions = require('../actions/socket_actions');
 
 var CommentApiUtil = {
   fetchComments: function (type, id) {
@@ -16,6 +17,18 @@ var CommentApiUtil = {
       dataType: 'json',
       success: function (comments) {
         ServerActions.receiveComments(comments);
+      }
+    });
+  },
+  fetchSingleComment: function (notification) {
+    var url = '/api/posts/' + notification.post_id + '/comments/' +
+      notification.notifiable_id;
+    $.ajax({
+      url: url,
+      method: 'GET',
+      dataType: 'json',
+      success: function (comment) {
+        SocketActions.pushComment(comment);
       }
     });
   },

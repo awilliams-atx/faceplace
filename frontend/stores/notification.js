@@ -79,6 +79,10 @@ NotificationStore.markNotificationsChecked = function (checked_ids) {
   }
 };
 
+NotificationStore.mostRecent = function () {
+  return Object.assign({}, _notifications[0]);
+};
+
 NotificationStore.nomore = function () {
   return _pagination.nomore;
 };

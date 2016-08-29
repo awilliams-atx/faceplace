@@ -13,6 +13,7 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     SearchApiUtil = require('../util/search_api_util'),
     TagApiUtil = require('../util/tag_api_util'),
     UserApiUtil = require('../util/user_api_util'),
+    CommentStore = require('../stores/comment'),
     SessionStore = require('../stores/session');
 
 var ClientActions = {
@@ -46,6 +47,17 @@ var ClientActions = {
   },
   fetchMostRecentlyAddedFriends: function (userId) {
     FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
+  },
+  fetchMostRecentNotifiable: function (notification) {
+    // Only fetch if notifiable is on current page; navigating to another page fetches up-to-date notifiables by default.
+    switch (notification.notifiable_type) {
+    case 'Comment':
+      if (!CommentStore.exists(notification.post_id,
+          notification.notifiable_id)) {
+        CommentApiUtil.fetchSingleComment(notification);
+      }
+      break;
+    }
   },
   fetchNotifications: function (pagination) {
     NotificationApiUtil.fetchNotifications(pagination);

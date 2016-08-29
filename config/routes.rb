@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get 'posts/:id/tagged_friends', to: 'posts#tagged_friends'
 
     resources :posts, only: [:index, :show, :create, :destroy, :update] do
-      resources :comments, only: [:create, :index]
+      resources :comments, only: [:create, :show, :index]
     end
 
     # --------------------------------SESSION-------------------------------- #
