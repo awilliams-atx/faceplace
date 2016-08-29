@@ -15,10 +15,9 @@ var CoverPhoto = React.createClass({
   renderEditButton: function () {
     if (this.props.profileOwner.userId === SessionStore.currentUser().id) {
       return (
-        <EditButton authorizedToEdit={this.authorizedToEdit()}
-          updateUtil='submitCoverPhoto'
-          formName='user[cover_photo]'
-          photoType='cover-photo' />
+        <EditButton formName='user[cover_photo]'
+          photoType='cover-photo'
+          updateUtil='submitCoverPhoto' />
       );
     }
   },

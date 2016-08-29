@@ -21,8 +21,7 @@ var Profile = React.createClass({
               <CoverPhoto profileOwner={this.state.user} />
               <AddFriend profileOwnerId={this.profileOwnerId()} />
             </div>
-            <ProfilePic profileOwnerId={this.profileOwnerId()}
-              profilePicUrl={this.state.user.profilePicUrl} />
+            <ProfilePic profileOwner={this.state.user} />
             <nav id='profile-nav'>
               <div id='profile-nav-links'>
                 <ul>

@@ -6,17 +6,19 @@ var ProfilePic = React.createClass({
   render: function () {
     return (
       <div id='profile-pic'>
-        <img src={this.props.profilePicUrl} />
-        <EditButton authorizedToEdit={this.authorizedToEdit()}
-          updateUtil='submitProfilePic'
-          formName='user[profile_pic]'
-          photoType='profile-pic'
-          />
+        <img src={this.props.profileOwner.profilePicUrl} />
+        {this.renderEditButton()}
       </div>
     );
   },
-  authorizedToEdit: function () {
-    return this.props.profileOwnerId === SessionStore.currentUser().id;
+  renderEditButton: function () {
+    if (this.props.profileOwner.userId === SessionStore.currentUser().id) {
+      return (
+        <EditButton formName='user[profile_pic]'
+          photoType='profile-pic'
+          updateUtil='submitProfilePic' />
+      );
+    }
   }
 });
 
