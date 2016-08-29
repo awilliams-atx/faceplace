@@ -50,15 +50,16 @@ var TagSearch = React.createClass({
         <div className='tagging-field-container'>
           <div className='tagging-field-with'>With:</div>
           <div className='tagging-field'>
-            <input className='tagged-friends-input'
-              placeholder='Who are you with?'
+            <input autoComplete='off'
+              className='tagged-friends-input'
               onChange={this.onSearchStringChange}
-              value={this.state.searchString}
+              placeholder='Who are you with?'
               ref={function (input) {
                 if (input != null) {
                   input.focus();
                 }
-              }} />
+              }}
+              value={this.state.searchString} />
           </div>
         </div>
       );

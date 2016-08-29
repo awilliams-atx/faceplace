@@ -36,10 +36,11 @@ var SearchIndex = React.createClass({
     return (
       <div id='search-bar-container'>
         <form onSubmit={this.handleSubmit} >
-          <input placeholder='Search Faceplace'
+          <input autoComplete='off'
             id='search-bar'
             onChange={this.onSearchStringChange}
-            onFocus={this.showIndexItems} />
+            onFocus={this.showIndexItems}
+            placeholder='Search Faceplace' />
         </form>
 
         <div id='search-index' className='overlay'>
