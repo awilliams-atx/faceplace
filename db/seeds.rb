@@ -1,4 +1,4 @@
-['jeff', 'walter', 'donny', 'jeff_sr', 'maude', 'andrew', 'jesus', 'brandt', 'daniel', 'ulysses', 'pete', 'delmar', 'tommy', 'pappy'].each do |email|
+['walter', 'donny', 'jeff_sr', 'maude', 'andrew', 'jesus', 'brandt', 'daniel', 'ulysses', 'pete', 'delmar', 'tommy', 'pappy'].each do |email|
   user = User.find_by(email: email)
   user.destroy if user
 end
@@ -18,15 +18,19 @@ andrew.save!
 
 lebowski_friends << andrew
 
-jeffrey = User.create(first_name: "Jeffrey", last_name: "Lebowski", email: "jeff", password: "starwars")
+# NB: Jeff is the guest user. Never delete him or guest user content will be lost.
 
-jeffrey.description = 'I\'m just the dude, man'
-jeffrey.location = 'Los Angeles'
-jeffrey.profile_pic = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_profile_pic.jpg")
-jeffrey.cover_photo = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_cover_photo.jpg")
-jeffrey.save!
+# jeff = User.create(first_name: "Jeffrey", last_name: "Lebowski", email: "jeff", password: "starwars")
+#
+# jeff.description = 'I\'m just the dude, man'
+# jeff.location = 'Los Angeles'
+# jeff.profile_pic = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_profile_pic.jpg")
+# jeff.cover_photo = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_cover_photo.jpg")
+# jeffrey.save!
 
-lebowski_friends << jeffrey
+jeff = User.find_by(email: 'jeff')
+
+lebowski_friends << jeff
 
 
 walter = User.create(first_name: "Walter", last_name: "Sobchak", email: "walter", password: "starwars")
@@ -176,7 +180,7 @@ post.save!
 
 tagging = Tagging.new
 tagging.post = post
-tagging.tagged = jeffrey
+tagging.tagged = jeff
 tagging.save!
 
 tagging = Tagging.new
@@ -205,7 +209,7 @@ comment = Comment.new
 comment.commentable_type = 'Post'
 comment.commentable_id = post.id
 comment.body = 'Check out my profile first. Or don\'t, man. It\'s your life, man.'
-comment.author_id = jeffrey.id
+comment.author_id = jeff.id
 comment.save!
 
 comment = Comment.new
@@ -257,7 +261,7 @@ tagging.save!
 
 tagging = Tagging.new
 tagging.post = post
-tagging.tagged = jeffrey
+tagging.tagged = jeff
 tagging.save!
 
 comment = Comment.new
@@ -281,14 +285,14 @@ tagging.save!
 
 tagging = Tagging.new
 tagging.post = post
-tagging.tagged = jeffrey
+tagging.tagged = jeff
 tagging.save!
 
 comment = Comment.new
 comment.commentable_type = 'Post'
 comment.commentable_id = post.id
 comment.body = 'Calm down, man.'
-comment.author_id = jeffrey.id
+comment.author_id = jeff.id
 comment.save!
 
 comment = Comment.new
@@ -326,14 +330,14 @@ tagging.save!
 
 tagging = Tagging.new
 tagging.post = post
-tagging.tagged = jeffrey
+tagging.tagged = jeff
 tagging.save!
 
 comment = Comment.new
 comment.commentable_type = 'Post'
 comment.commentable_id = post.id
 comment.body = 'Walter, he\'s just a kid, man.'
-comment.author_id = jeffrey.id
+comment.author_id = jeff.id
 comment.save!
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -383,20 +387,20 @@ post.save!
 
 timeline_posting = TimelinePosting.new
 timeline_posting.post = post
-timeline_posting.profile_owner = jeffrey
+timeline_posting.profile_owner = jeff
 timeline_posting.save!
 
 comment = Comment.new
 comment.commentable_type = 'Post'
 comment.commentable_id = post.id
 comment.body = 'Hello? Dude speaking.'
-comment.author_id = jeffrey.id
+comment.author_id = jeff.id
 comment.save!
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
-post.author = jeffrey
+post.author = jeff
 post.body = 'That\'s just, like, your opinion, man.'
 post.save!
 
@@ -443,14 +447,14 @@ timeline_posting.save!
 
 tagging = Tagging.new
 tagging.post = post
-tagging.tagged = jeffrey
+tagging.tagged = jeff
 tagging.save!
 
 comment = Comment.new
 comment.commentable_type = 'Post'
 comment.commentable_id = post.id
 comment.body = 'Walter, would you cut the kid a break?'
-comment.author_id = jeffrey.id
+comment.author_id = jeff.id
 comment.save!
 
 comment = Comment.new
@@ -470,7 +474,7 @@ comment.save!
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
-post.author = jeffrey
+post.author = jeff
 post.body = 'That\'s just, like, your opinion, man.'
 post.save!
 
@@ -501,7 +505,7 @@ comment.save!
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
-post.author = jeffrey
+post.author = jeff
 post.body = 'No, Walter, it did NOT look like Larry was about to crack!'
 post.save!
 
@@ -519,14 +523,14 @@ post.save!
 
 timeline_posting = TimelinePosting.new
 timeline_posting.post = post
-timeline_posting.profile_owner = jeffrey
+timeline_posting.profile_owner = jeff
 timeline_posting.save!
 
 comment = Comment.new
 comment.commentable_type = 'Post'
 comment.commentable_id = post.id
 comment.body = 'That\'s cool with me, man.'
-comment.author_id = jeffrey.id
+comment.author_id = jeff.id
 comment.save!
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -538,7 +542,7 @@ post.save!
 
 timeline_posting = TimelinePosting.new
 timeline_posting.post = post
-timeline_posting.profile_owner = jeffrey
+timeline_posting.profile_owner = jeff
 timeline_posting.save!
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -550,20 +554,20 @@ post.save!
 
 timeline_posting = TimelinePosting.new
 timeline_posting.post = post
-timeline_posting.profile_owner = jeffrey
+timeline_posting.profile_owner = jeff
 timeline_posting.save!
 
 comment = Comment.new
 comment.commentable_type = 'Post'
 comment.commentable_id = post.id
 comment.body = 'That\'s just, like, your opinion, man.'
-comment.author_id = jeffrey.id
+comment.author_id = jeff.id
 comment.save!
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 post = Post.new
-post.author = jeffrey
+post.author = jeff
 post.body = 'Where\'s the freaking money, Lebowski?'
 post.save!
 
