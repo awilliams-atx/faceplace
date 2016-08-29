@@ -11,6 +11,7 @@ var FriendIndexItem = React.createClass({
         onClick={this.pushUserRoute}
         className='friend-thumb'>
         <img src={this.props.friend.profile_pic_url}/>
+        <div className='friend-thumb-tinter' />
         <div className='friend-thumb-name'>
           {this.props.friend.fullName}
         </div>
