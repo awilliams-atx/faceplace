@@ -8,3 +8,5 @@ json.checked notification.checked
 json.read notification.read
 json.explanation notification.explanation
 json.created_at notification.created_at
+json.notifiable_type notification.notifiable_type
+json.notifiable_id notification.notifiable_id
