@@ -51,11 +51,12 @@ var FriendRequests = React.createClass({
       return this.state.requests.map(function (req, idx) {
         return (
           <FriendRequestItem
+            checkedClass={this.checkedClass(req.id)}
             req={req}
             key={idx}
             onAccept={this.onAccept}
             onReject={this.onReject}
-            checkedClass={this.checkedClass(req.id)} />
+            rollUp={this.rollUp} />
         );
       }.bind(this));
     }

@@ -40,6 +40,7 @@ var FriendRequestItem = React.createClass({
   },
   pushUserRoute: function (e) {
     e.preventDefault();
+    this.props.rollUp();
     this.context.router.push(e.target.pathname);
     Util.jumpToTop();
   }
