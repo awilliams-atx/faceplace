@@ -9,8 +9,8 @@ var SignUpForm = React.createClass({
   },
   getInitialState: function () {
     return({
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
       password: "",
       errors: ErrorStore.errors('signUp')
@@ -58,7 +58,7 @@ var SignUpForm = React.createClass({
                 onChange={this.onFirstNameChange}
                 placeholder='First name'
                 ref='first_name'
-                value={this.state.firstName} />
+                value={this.state.first_name} />
               {this.renderError('first_name')}
             </div>
 
@@ -67,7 +67,7 @@ var SignUpForm = React.createClass({
                 onChange={this.onLastNameChange}
                 placeholder='Last name'
                 ref='last_name'
-                value={this.state.lastName} />
+                value={this.state.last_name} />
               {this.renderError('last_name')}
             </div>
 
@@ -147,13 +147,13 @@ var SignUpForm = React.createClass({
     ErrorActions.clearSignUpError('first_name');
   },
   onFirstNameChange: function (e) {
-    this.setState({firstName: e.target.value});
+    this.setState({first_name: e.target.value});
   },
   onLastNameBlur: function () {
     ErrorActions.clearSignUpError('last_name');
   },
   onLastNameChange: function (e) {
-    this.setState({lastName: e.target.value});
+    this.setState({last_name: e.target.value});
   },
   onPasswordBlur: function () {
     ErrorActions.clearSignUpError('password');
@@ -164,8 +164,8 @@ var SignUpForm = React.createClass({
   onSubmit: function (e) {
     e.preventDefault();
     UserApiUtil.signUp({
-      first_name: this.state.firstName,
-      last_name: this.state.lastName,
+      first_name: this.state.first_name,
+      last_name: this.state.last_name,
       email: this.state.email,
       password: this.state.password
     }, function () {
