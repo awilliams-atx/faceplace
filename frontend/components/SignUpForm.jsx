@@ -79,7 +79,6 @@ var SignUpForm = React.createClass({
           onBlur={this.onInputBlur}
           onChange={this.onInputChange}
           placeholder={placeholder}
-          ref={inputName}
           type={inputName === 'password' ? 'password' : ''}
           value={this.state[inputName]} />
         {this.renderError(inputName)}
@@ -103,7 +102,7 @@ var SignUpForm = React.createClass({
     var fields = ['first_name', 'last_name', 'email', 'password'];
     for (var i = 0; i < fields.length; i++) {
       if (this.state.errors[fields[i]]) {
-        this.refs[fields[i]].focus();
+        document.getElementById([fields[i]]).focus();
         return;
       }
     }
