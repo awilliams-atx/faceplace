@@ -5,6 +5,7 @@ class TimelinePosting < ActiveRecord::Base
   after_destroy :remove_watching
 
   has_one :author, through: :post, source: :author
+  has_one :notification, as: :notifiable, dependent: :destroy
   belongs_to :post
   belongs_to :profile_owner, class_name: 'User', foreign_key: :profile_owner_id
 

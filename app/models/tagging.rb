@@ -6,6 +6,7 @@ class Tagging < ActiveRecord::Base
 
   belongs_to :post
   belongs_to :tagged, class_name: 'User'
+  has_one :notification, as: :notifiable, dependent: :destroy
   has_one :tagger, through: :post, source: :author
 
   private
