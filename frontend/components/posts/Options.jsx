@@ -128,8 +128,10 @@ var Options = React.createClass({
     );
   },
   modalClickOutListener: function (e) {
+    var modalBackground = document.getElementById('modal-background');
     var modal = document.getElementById('modal');
-    if (!this.submittingOrCanceling(e) && !modal.contains(e.target)) {
+    if (!this.submittingOrCanceling(e) &&
+     (!modal.contains(e.target) && modalBackground.contains(e.target))) {
       this.cancelModal();
       document.removeEventListener('click', this.modalClickOutListener);
     }
