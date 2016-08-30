@@ -12,7 +12,6 @@ var UIManipulator = {
     id = ui.scrollPost;
     var post = document.getElementById(id);
     if (!post) { return }
-    console.log('SCROLLING');
     window.scrollTo(0, post.offsetTop - 20);
     this.clearScrollPost();
   },

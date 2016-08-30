@@ -42,7 +42,6 @@ var PostIndex = React.createClass({
     this.userListener = UserStore.addListener(this.onUserStoreChange);
   },
   componentDidUpdate: function () {
-    console.log('PostIndex');
     UI.scrollToPost()
   },
   componentWillUnmount: function () {

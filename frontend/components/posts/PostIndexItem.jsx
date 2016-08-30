@@ -56,7 +56,6 @@ var PostIndexItem = React.createClass({
   },
   componentDidMount: function () {
     ClientActions.fetchComments('Post', this.props.post.postId);
-    console.log('PostIndexItem');
     UI.scrollToPost(this.props.post.postId);
   },
   authorizedToEdit: function () {

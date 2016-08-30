@@ -46,7 +46,6 @@ var NotificationItem = React.createClass({
     var pushPath = '/users/' + this.props.notif.timeline_owner_id;
     UI.setScrollPost(this.props.notif.post_id);
     if (Util.pathMatch('/users/' + this.props.notif.timeline_owner_id)) {
-      console.log('NotificationItem');
       UI.scrollToPost();
     }
     this.context.router.push(pushPath);
