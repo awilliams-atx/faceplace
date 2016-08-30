@@ -56,14 +56,15 @@ var PostIndex = React.createClass({
   onNotificationStoreChange: function () {
     var notification = NotificationStore.mostRecent();
     if (Object.keys(notification).length === 0) { return }
+    if (notification.notifiable_type !== 'Comment') { return }
     if (UserStore.user().userId === notification.timeline_owner_id) {
-      ClientActions.fetchMostRecentNotifiable(notification);
+      ClientActions.fetchNotifiableComment(notification);
     } else {
       var postIds = this.state.posts.map(function (post) {
         return post.postId;
       });
       if (postIds.indexOf(notification.post_id) >= 0) {
-        ClientActions.fetchMostRecentNotifiable(notification);
+        ClientActions.fetchNotifiableComment(notification);
       }
     }
   },

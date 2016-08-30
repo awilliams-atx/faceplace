@@ -48,15 +48,11 @@ var ClientActions = {
   fetchMostRecentlyAddedFriends: function (userId) {
     FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
   },
-  fetchMostRecentNotifiable: function (notification) {
+  fetchNotifiableComment: function (notification) {
     // Only fetch if notifiable is on current page; navigating to another page fetches up-to-date notifiables by default.
-    switch (notification.notifiable_type) {
-    case 'Comment':
-      if (!CommentStore.exists(notification.post_id,
-          notification.notifiable_id)) {
-        CommentApiUtil.fetchSingleComment(notification);
-      }
-      break;
+    if (!CommentStore.exists(notification.post_id,
+        notification.notifiable_id)) {
+      CommentApiUtil.fetchSingleComment(notification);
     }
   },
   fetchNotifications: function (pagination) {
