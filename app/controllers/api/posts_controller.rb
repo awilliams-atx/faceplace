@@ -26,6 +26,12 @@ class Api::PostsController < ApplicationController
       post_params[:tagged_ids].each do |user_id|
         tagging = Tagging.new(tagged_id: user_id, post_id: @post.id)
         tagging.save!
+        if tagging.notification
+          @notification = tagging.notification
+          rendered = render_to_string('api/notifications/show')
+          Pusher.trigger("notifications_#{@notification.notified_id}",
+            'received', rendered)
+        end
       end
     end
 
