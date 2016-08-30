@@ -26,7 +26,8 @@ var SignUpForm = React.createClass({
       var errors = this.state.errors;
       if (errors.first_name) {
         firstNameError = (
-          <aside className='error-container sign-up-error' >
+          <aside className='error-container sign-up-error'
+            id='first-name-error-container'>
             {this.state.errors.first_name}
           </aside>
         );
@@ -36,7 +37,8 @@ var SignUpForm = React.createClass({
 
       if (errors.last_name) {
         lastNameError = (
-          <aside className='error-container sign-up-error' >
+          <aside className='error-container sign-up-error'
+            id='last-name-error-container'>
             {this.state.errors.last_name}
           </aside>
         );
@@ -46,7 +48,8 @@ var SignUpForm = React.createClass({
 
       if (errors.email) {
         emailError = (
-          <aside className='error-container sign-up-error' >
+          <aside className='error-container sign-up-error'
+            id='email-error-container'>
             {this.state.errors.email}
           </aside>
         );
@@ -56,7 +59,8 @@ var SignUpForm = React.createClass({
 
       if (errors.password) {
         passwordError = (
-          <aside className='error-container sign-up-error' >
+          <aside className='error-container sign-up-error'
+            id='password-error-container'>
             {this.state.errors.password}
           </aside>
         );
@@ -102,41 +106,49 @@ var SignUpForm = React.createClass({
           </div>
           <form id="sign-up-form" onSubmit={this.onSubmit}>
 
-            <div className='sign-up-input-container group'>
-              <input onBlur={this.onFirstNameBlur}
-                onChange={this.onFirstNameChange}
-                placeholder='First name'
-                ref='first_name'
-                value={this.state.firstName} />
+            <div className='sign-up-input-container group'
+              id='first-name-input-container'>
+              <input onChange={this.onFirstNameChange}
+                     value={this.state.firstName}
+                     placeholder='First name'
+                     onBlur={this.onFirstNameBlur}
+                     ref='first_name'
+              />
               {firstNameError}
             </div>
 
-            <div className='sign-up-input-container group'>
-              <input onBlur={this.onLastNameBlur}
-                onChange={this.onLastNameChange}
-                placeholder='Last name'
-                ref='last_name'
-                value={this.state.lastName} />
+            <div className='sign-up-input-container group'
+              id='last-name-input-container'>
+              <input onChange={this.onLastNameChange}
+                     value={this.state.lastName}
+                     placeholder='Last name'
+                     onBlur={this.onLastNameBlur}
+                     ref='last_name'
+              />
               {lastNameError}
             </div>
 
-            <div className='sign-up-input-container group'>
-              <input id='email'
-                onBlur={this.onEmailBlur}
-                onChange={this.onEmailChange}
-                placeholder='Email'
-                ref='email'
-                value={this.state.email} />
+            <div className='sign-up-input-container group'
+              id='email-input-container'>
+              <input onChange={this.onEmailChange}
+                     value={this.state.email}
+                     id='email'
+                     placeholder='Email'
+                     onBlur={this.onEmailBlur}
+                     ref='email'
+              />
               {emailError}
             </div>
 
-            <div className='sign-up-input-container group'>
-              <input onBlur={this.onPasswordBlur}
-                onChange={this.onPasswordChange}
-                placeholder='Password'
-                ref='password'
-                type='password'
-                value={this.state.password} />
+            <div className='sign-up-input-container group'
+              id='password-input-container'>
+              <input type='password'
+                     onChange={this.onPasswordChange}
+                     value={this.state.password}
+                     placeholder='Password'
+                     onBlur={this.onPasswordBlur}
+                     ref='password'
+              />
               {passwordError}
             </div>
 
