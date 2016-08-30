@@ -53,47 +53,10 @@ var SignUpForm = React.createClass({
             <div id="consolation">It's free and you pretty much have no choice.</div>
           </div>
           <form id="sign-up-form" onSubmit={this.onSubmit}>
-            <div className='sign-up-input-container group'>
-              <input id='first_name'
-                onBlur={this.onInputBlur}
-                onChange={this.onInputChange}
-                placeholder='First name'
-                ref='first_name'
-                value={this.state.first_name} />
-              {this.renderError('first_name')}
-            </div>
-
-            <div className='sign-up-input-container group'>
-              <input id='last_name'
-                onBlur={this.onInputBlur}
-                onChange={this.onInputChange}
-                placeholder='Last name'
-                ref='last_name'
-                value={this.state.last_name} />
-              {this.renderError('last_name')}
-            </div>
-
-            <div className='sign-up-input-container group'>
-              <input id='email'
-                onBlur={this.onInputBlur}
-                onChange={this.onInputChange}
-                placeholder='Email'
-                ref='email'
-                value={this.state.email} />
-              {this.renderError('email')}
-            </div>
-
-            <div className='sign-up-input-container group'>
-              <input id='password'
-                onBlur={this.onInputBlur}
-                onChange={this.onInputChange}
-                placeholder='Password'
-                ref='password'
-                type='password'
-                value={this.state.password} />
-              {this.renderError('password')}
-            </div>
-
+            {this.renderInput('first_name', 'First name')}
+            {this.renderInput('last_name', 'Last name')}
+            {this.renderInput('email', 'Email')}
+            {this.renderInput('password', 'Password')}
             <button>Give In</button>
           </form>
         </section>
@@ -108,6 +71,20 @@ var SignUpForm = React.createClass({
         </aside>
       );
     }
+  },
+  renderInput: function (inputName, placeholder) {
+    return (
+      <div className='sign-up-input-container group'>
+        <input id={inputName}
+          onBlur={this.onInputBlur}
+          onChange={this.onInputChange}
+          placeholder={placeholder}
+          ref={inputName}
+          type={inputName === 'password' ? 'password' : ''}
+          value={this.state[inputName]} />
+        {this.renderError(inputName)}
+      </div>
+    );
   },
   componentDidMount: function () {
     this.errorListener = ErrorStore.addListener(this.onErrorStoreChange);
