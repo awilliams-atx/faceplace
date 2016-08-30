@@ -28,6 +28,18 @@ SessionStore.currentUserHasBeenFetched = function () {
   return _currentUserHasBeenFetched;
 };
 
+SessionStore.friendsWith = function () {
+  var ids = [].slice.call(arguments);
+  for (var i = 0; i < _currentUser.friends.length; i++) {
+    for (var j = 0; j < ids.length; j++) {
+      if (_currentUser.friends[i] === ids[j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+};
+
 SessionStore.isUserLoggedIn = function () {
   return !!_currentUser.id;
 };

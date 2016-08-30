@@ -6,37 +6,33 @@ var React = require('react'),
 
 var PostCommentIndex = React.createClass({
   getInitialState: function () {
-    var postId = this.props.post.postId;
-    return ({ comments: CommentStore.allPostComments(postId) });
+    return ({ comments: CommentStore.allPostComments(this.props.post.postId) });
   },
   render: function () {
-    var renderComments = function () {
-      return this.state.comments.map(function (comment) {
-        return <PostCommentIndexItem comment={comment} key={comment.id} />;
-      });
-    }.bind(this);
-
-    var renderCommentForm = function () {
-      if (this.props.post.authorized_to_comment) {
-        return <PostCommentForm postId={this.props.post.postId} />;
-      }
-    }.bind(this);
-
     return (
       <section className='comment-section'>
-        {renderComments()}
-        {renderCommentForm()}
+        {this.renderComments()}
+        {this.renderForm()}
       </section>
     );
+  },
+  renderComments: function () {
+    return this.state.comments.map(function (comment) {
+      return <PostCommentIndexItem comment={comment} key={comment.id} />;
+    });
+  },
+  renderForm: function () {
+    var profileOwnerId = this.props.post.profileOwner ? this.props.post.profileOwner.id : undefined
+    if (SessionStore.friendsWith(this.props.post.authorId, profileOwnerId) ||
+      SessionStore.currentUser().id === this.props.post.authorId) {
+      return <PostCommentForm postId={this.props.post.postId} />;
+    }
   },
   componentDidMount: function () {
     this.commentListener = CommentStore.addListener(this.onCommentStoreChange);
   },
   componentWillUnmount: function () {
     this.commentListener.remove();
-  },
-  onCommentBodyChange: function (e) {
-    this.setState({commentBody: e.target.value});
   },
   onCommentStoreChange: function () {
     this.setState({
