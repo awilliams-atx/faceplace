@@ -2,6 +2,7 @@ var React = require('react'),
     Moment = require('moment'),
     QC = require('../../util/query_code'),
     UI = require('../../util/ui'),
+    Util = require('../../util/general'),
     ClientActions = require('../../actions/client_actions');
 
 var NotificationItem = React.createClass({
@@ -44,6 +45,10 @@ var NotificationItem = React.createClass({
     e.preventDefault();
     var pushPath = '/users/' + this.props.notif.timeline_owner_id;
     UI.setScrollPost(this.props.notif.post_id);
+    if (Util.pathMatch('/users/' + this.props.notif.timeline_owner_id)) {
+      console.log('NotificationItem');
+      UI.scrollToPost();
+    }
     this.context.router.push(pushPath);
     this.props.rollUp();
   },

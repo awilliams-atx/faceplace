@@ -5,6 +5,9 @@ module.exports = {
   jumpToTop: function () {
     window.scrollTo(0, 0);
   },
+  pathMatch: function (pathname) {
+    return window.location.pathname.match(pathname);
+  },
   scrollToPost: function (id) {
     var post = document.getElementById(id);
     if (post && post.offsetTop) {

@@ -56,11 +56,8 @@ var PostIndexItem = React.createClass({
   },
   componentDidMount: function () {
     ClientActions.fetchComments('Post', this.props.post.postId);
-    if (UI.scrollPost() === this.props.post.postId) {
-      var post = document.getElementById(UI.scrollPost());
-      UI.clearScrollPost();
-      Util.scrollToPost(UI.scrollPost());
-    }
+    console.log('PostIndexItem');
+    UI.scrollToPost(this.props.post.postId);
   },
   authorizedToEdit: function () {
     return this.props.post.authorId === SessionStore.currentUser().id;

@@ -42,9 +42,8 @@ var PostIndex = React.createClass({
     this.userListener = UserStore.addListener(this.onUserStoreChange);
   },
   componentDidUpdate: function () {
-    if (UI.scrollPost() && Util.scrollToPost(UI.scrollPost())) {
-      UI.clearScrollPost();
-    }
+    console.log('PostIndex');
+    UI.scrollToPost()
   },
   componentWillUnmount: function () {
     this.notificationListener.remove();
