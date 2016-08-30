@@ -31,7 +31,7 @@ var UserApiUtil = {
       dataType: 'json',
       data: {user: user},
       success: function (user) {
-        SessionActions.receiveCurrentUser(user);
+        ServerActions.receiveCurrentUser(user);
         redirectCB();
       },
       error: function (errors) {
