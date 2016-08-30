@@ -4,6 +4,7 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     modalConstants = require('../constants/modal_constants'),
     postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants'),
+    uiConstants = require('../constants/ui_constants'),
     CommentApiUtil = require('../util/comment_api_util'),
     FriendApiUtil = require('../util/friend_api_util'),
     FriendshipApiUtil = require('../util/friendship_api_util'),
@@ -98,6 +99,12 @@ var ClientActions = {
   },
   respondToFriendRequest: function (response) {
     FriendRequestApiUtil.respondToFriendRequest(response);
+  },
+  setScrollPost: function (id) {
+    Dispatcher.dispatch({
+      actionType: uiConstants.SET_SCROLL_POST,
+      id: id
+    });
   },
   submitComment: function (comment) {
     CommentApiUtil.submitComment(comment);

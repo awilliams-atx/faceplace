@@ -5,7 +5,8 @@ var React = require('react'),
     TaggedFriends = require('./TaggedFriends'),
     ClientActions = require('../../actions/client_actions'),
     PostCommentIndex = require('../comments/PostCommentIndex'),
-    SessionStore = require('../../stores/session');
+    SessionStore = require('../../stores/session'),
+    UIStore = require('../../stores/ui');
 
 var PostIndexItem = React.createClass({
   contextTypes: {
@@ -16,8 +17,7 @@ var PostIndexItem = React.createClass({
   },
   render: function () {
     return (
-      <article className='timeline-feed-item'>
-        <a name={this.props.post.postId}></a>
+      <article id={this.props.post.postId} className='timeline-feed-item'>
         <header className='post-breakdown group'>
           <a href={'/users/' + this.props.post.authorId}
             onClick={this.pushAuthorRoute} >
@@ -56,6 +56,11 @@ var PostIndexItem = React.createClass({
   },
   componentDidMount: function () {
     ClientActions.fetchComments('Post', this.props.post.postId);
+    //
+    if (UIStore.ui().scrollPostId === this.props.post.postId) {
+      var post = document.getElementById(UIStore.ui().scrollPostId);
+      window.scrollTo(0, post.offsetTop);
+    }
   },
   authorizedToEdit: function () {
     return this.props.post.authorId === SessionStore.currentUser().id;

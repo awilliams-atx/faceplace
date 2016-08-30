@@ -17,7 +17,7 @@ var PostIndex = React.createClass({
   },
   render: function () {
     return (
-      <section className='post-index'>
+      <section id='post-index'>
         {this.renderForm()}
         {this.renderPosts()}
       </section>
@@ -39,6 +39,9 @@ var PostIndex = React.createClass({
       NotificationStore.addListener(this.onNotificationStoreChange);
     this.postListener = PostStore.addListener(this.onPostStoreChange);
     this.userListener = UserStore.addListener(this.onUserStoreChange);
+  },
+  componentDidUpdate: function () {
+    Util.scrollToQueryStringPost();
   },
   componentWillUnmount: function () {
     this.notificationListener.remove();
@@ -69,9 +72,7 @@ var PostIndex = React.createClass({
     }
   },
   onPostStoreChange: function () {
-    this.setState({ posts: PostStore.all() }, function () {
-      Util.jumpToQueryStringPost();
-    });
+    this.setState({ posts: PostStore.all() });
   },
   onUserStoreChange: function () {
     this.setState({

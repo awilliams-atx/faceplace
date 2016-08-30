@@ -1,4 +1,6 @@
 var React = require('react'),
+    QC = require('../../util/query_code'),
+    Util = require('../../util/general'),
     AddFriend = require('./AddFriend'),
     CoverPhoto = require('./CoverPhoto'),
     Nav = require('../nav/Nav'),

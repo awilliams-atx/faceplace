@@ -1,12 +1,17 @@
-var React = require('react');
+var React = require('react'),
+    QC = require('./query_code');
 
 module.exports = {
-  jumpToQueryStringPost: function () {
-    var post_id = this.queryString('post_id');
-    if (post_id) { window.location.hash = post_id }
-  },
   jumpToTop: function () {
     window.scrollTo(0, 0);
+  },
+  scrollToQueryStringPost: function () {
+    var post_id = this.queryString('post_id');
+
+    if (post_id) {
+      var post = document.getElementById(post_id);
+      if (post && post.offsetTop) { window.scrollTo(0, post.offsetTop) }
+    }
   },
   toCommaSeparatedAnchors: function toCSAnchors (friends, handler) {
     if (friends.length === 0) {
@@ -43,6 +48,7 @@ module.exports = {
   },
   queryString: function queryString (key) {
     // NB: Breaks if hash is present in URL.
+    key = QC(key);
     var query = window.location.search.substring(1);
     var pairs = query.split('&');
     for (var i = 0; i < pairs.length; i++) {
