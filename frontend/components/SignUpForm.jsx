@@ -55,7 +55,7 @@ var SignUpForm = React.createClass({
           <form id="sign-up-form" onSubmit={this.onSubmit}>
             <div className='sign-up-input-container group'>
               <input id='first_name'
-                onBlur={this.onFirstNameBlur}
+                onBlur={this.onInputBlur}
                 onChange={this.onInputChange}
                 placeholder='First name'
                 ref='first_name'
@@ -65,7 +65,7 @@ var SignUpForm = React.createClass({
 
             <div className='sign-up-input-container group'>
               <input id='last_name'
-                onBlur={this.onLastNameBlur}
+                onBlur={this.onInputBlur}
                 onChange={this.onInputChange}
                 placeholder='Last name'
                 ref='last_name'
@@ -75,7 +75,7 @@ var SignUpForm = React.createClass({
 
             <div className='sign-up-input-container group'>
               <input id='email'
-                onBlur={this.onEmailBlur}
+                onBlur={this.onInputBlur}
                 onChange={this.onInputChange}
                 placeholder='Email'
                 ref='email'
@@ -85,7 +85,7 @@ var SignUpForm = React.createClass({
 
             <div className='sign-up-input-container group'>
               <input id='password'
-                onBlur={this.onPasswordBlur}
+                onBlur={this.onInputBlur}
                 onChange={this.onInputChange}
                 placeholder='Password'
                 ref='password'
@@ -140,22 +140,13 @@ var SignUpForm = React.createClass({
       }
     }.bind(this));
   },
-  onEmailBlur: function () {
-    ErrorActions.clearSignUpError('email');
-  },
-  onFirstNameBlur: function () {
-    ErrorActions.clearSignUpError('first_name');
+  onInputBlur: function (e) {
+    ErrorActions.clearSignUpError(e.target.id);
   },
   onInputChange: function (e) {
     var state = {}
     state[e.target.id] = e.target.value;
     this.setState(state);
-  },
-  onLastNameBlur: function () {
-    ErrorActions.clearSignUpError('last_name');
-  },
-  onPasswordBlur: function () {
-    ErrorActions.clearSignUpError('password');
   },
   onSubmit: function (e) {
     e.preventDefault();
