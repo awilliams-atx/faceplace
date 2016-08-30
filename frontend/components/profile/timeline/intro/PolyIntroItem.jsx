@@ -1,6 +1,7 @@
 var React = require('react'),
     ClientActions = require('../../../../actions/client_actions'),
-    SessionStore = require('../../../../stores/session');
+    SessionStoe = require('../../../../stores/session'),
+    UserStore = require('../../../../stores/user');
 
 var PolyIntroItem = React.createClass({
   getInitialState: function () {
@@ -9,8 +10,8 @@ var PolyIntroItem = React.createClass({
   initialState: function () {
     var state = { editing: false }
     this.props.items.forEach(function (item) {
-      state[item.name] = this.props.user[item.name];
-    }.bind(this));
+      state[item.name] = UserStore.user()[item.name];
+    });
     return state;
   },
   render: function () {
@@ -56,6 +57,12 @@ var PolyIntroItem = React.createClass({
       }
     }.bind(this));
   },
+  componentDidMount: function () {
+    this.UserListener = UserStore.addListener(this.onUserStoreChange);
+  },
+  componentWillUnmount: function () {
+    this.UserListener.remove();
+  },
   clickOutListener: function (e) {
     var form = document.getElementById('intro-form');
     if (!this.submittingOrCanceling(e) && !form.contains(e.target)) {
@@ -68,8 +75,8 @@ var PolyIntroItem = React.createClass({
     e.preventDefault();
     var state = { editing: false }
     this.props.items.forEach(function (item) {
-      state[item.name] = this.props.user[item.name];
-    }.bind(this));
+      state[item.name] = UserStore.user()[item.name];
+    });
     this.setState(state, function () {
       document.removeEventListener('click', this.clickOutListener);
     }.bind(this));
@@ -90,9 +97,16 @@ var PolyIntroItem = React.createClass({
       document.removeEventListener('click', this.clickOutListener);
     }.bind(this));
   },
+  onUserStoreChange: function (e) {
+    var state = {};
+    this.props.items.forEach(function (item) {
+      state[item.name] = UserStore.user()[item.name];
+    });
+    this.setState(state);
+  },
   showEdit: function (e) {
     e.preventDefault();
-    if (SessionStore.currentUser().id !== this.props.user.userId) { return }
+    if (SessionStore.currentUser().id !== UserStore.user().userId) { return }
     document.addEventListener('click', this.clickOutListener);
     if (!this.props.authorizedToEdit) { return; }
     this.setState({ editing: true }, function () {

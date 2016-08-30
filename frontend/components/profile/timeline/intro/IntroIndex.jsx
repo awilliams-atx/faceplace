@@ -11,88 +11,51 @@ var IntroIndex = React.createClass({
         <h2>Intro</h2>
         <div className='intro-line'>
           <IntroItemDescription
-            authorizedToEdit={this.props.authorizedToEdit}
-            user={this.props.user} />
+            authorizedToEdit={this.props.authorizedToEdit} />
         </div>
         <hr />
         <table>
           <tbody>
-            {this.renderWork()}
-            {this.renderEducation()}
-            {this.renderLocation()}
-            {this.renderHometown()}
+            <tr>
+              <td className='intro-img' id='intro-work-img'></td>
+              <td>
+                <PolyIntroItem
+                  authorizedToEdit={this.props.authorizedToEdit}
+                  items={[{ name: 'position', placeholder: 'Position' },
+                          { name: 'company', placeholder: 'Company'}]}
+                  toFormattedString={this.formatWork} />
+              </td>
+            </tr>
+            <tr>
+              <td className='intro-img' id='intro-school-img'></td>
+              <td>
+                <PolyIntroItem
+                  authorizedToEdit={this.props.authorizedToEdit}
+                  items={[{ name: 'major', placeholder: 'Major' },
+                          { name: 'school', placeholder: 'School'}]}
+                  toFormattedString={this.formatSchool} />
+              </td>
+            </tr>
+            <tr>
+              <td className='intro-img' id='intro-location-img'></td>
+              <td>
+                <PolyIntroItem
+                  authorizedToEdit={this.props.authorizedToEdit}
+                  items={[{ name: 'location', placeholder: 'Location' }]} toFormattedString={this.formatLocation} />
+              </td>
+            </tr>
+            <tr>
+              <td className='intro-img' id='intro-hometown-img'></td>
+              <td>
+                <PolyIntroItem
+                  authorizedToEdit={this.props.authorizedToEdit}
+                  items={[{ name: 'hometown', placeholder: 'Hometown' }]} toFormattedString={this.formatHometown} />
+              </td>
+            </tr>
           </tbody>
         </table>
       </section>
     );
-  },
-  renderWork: function () {
-    if (SessionStore.currentUser().id !== this.props.user.userId && !this.props.user.position && !this.props.user.work) {
-      return
-    } else {
-      return (
-        <tr>
-          <td className='intro-img' id='intro-work-img'></td>
-          <td>
-            <PolyIntroItem authorizedToEdit={this.props.authorizedToEdit}
-              items={[{ name: 'position', placeholder: 'Position' },
-                      { name: 'company', placeholder: 'Company'}]}
-              toFormattedString={this.formatWork}
-              user={this.props.user} />
-          </td>
-        </tr>
-      );
-    }
-  },
-  renderEducation: function () {
-    if (SessionStore.currentUser().id !== this.props.user.userId && !this.props.user.major && !this.props.user.school) {
-      return
-    } else {
-      return (
-        <tr>
-          <td className='intro-img' id='intro-school-img'></td>
-          <td>
-            <PolyIntroItem authorizedToEdit={this.props.authorizedToEdit}
-              items={[{ name: 'major', placeholder: 'Major' },
-                      { name: 'school', placeholder: 'School'}]}
-              toFormattedString={this.formatSchool}
-              user={this.props.user} />
-          </td>
-        </tr>
-      );
-    }
-  },
-  renderHometown: function () {
-    if (SessionStore.currentUser().id !== this.props.user.userId && !this.props.user.major && !this.props.user.school) {
-      return
-    } else {
-      return (
-        <tr>
-          <td className='intro-img' id='intro-hometown-img'></td>
-          <td>
-            <PolyIntroItem authorizedToEdit={this.props.authorizedToEdit}
-              items={[{ name: 'hometown', placeholder: 'Hometown' }]} toFormattedString={this.formatHometown}
-              user={this.props.user} />
-          </td>
-        </tr>
-      );
-    }
-  },
-  renderLocation: function () {
-    if (SessionStore.currentUser().id !== this.props.user.userId && !this.props.user.major && !this.props.user.school) {
-      return
-    } else {
-      return (
-        <tr>
-          <td className='intro-img' id='intro-location-img'></td>
-          <td>
-            <PolyIntroItem authorizedToEdit={this.props.authorizedToEdit}
-              items={[{ name: 'location', placeholder: 'Location' }]} toFormattedString={this.formatLocation}
-              user={this.props.user} />
-          </td>
-        </tr>
-      );
-    }
   },
   formatHometown: function (state) {
     if (state.hometown) {
