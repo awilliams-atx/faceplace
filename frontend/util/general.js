@@ -5,13 +5,13 @@ module.exports = {
   jumpToTop: function () {
     window.scrollTo(0, 0);
   },
-  scrollToQueryStringPost: function () {
-    var post_id = this.queryString('post_id');
-
-    if (post_id) {
-      var post = document.getElementById(post_id);
-      if (post && post.offsetTop) { window.scrollTo(0, post.offsetTop) }
+  scrollToPost: function (id) {
+    var post = document.getElementById(id);
+    if (post && post.offsetTop) {
+      window.scrollTo(0, post.offsetTop - 10)
+      return true
     }
+    return false
   },
   toCommaSeparatedAnchors: function toCSAnchors (friends, handler) {
     if (friends.length === 0) {

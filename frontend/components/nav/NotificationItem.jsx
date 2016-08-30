@@ -1,6 +1,7 @@
 var React = require('react'),
     Moment = require('moment'),
     QC = require('../../util/query_code'),
+    UI = require('../../util/ui'),
     ClientActions = require('../../actions/client_actions');
 
 var NotificationItem = React.createClass({
@@ -42,14 +43,8 @@ var NotificationItem = React.createClass({
   pushPostRoute: function (e) {
     e.preventDefault();
     var pushPath = '/users/' + this.props.notif.timeline_owner_id;
-    ClientActions.setScrollPost(this.props.notif.post_id);
-    query = {};
-    query[QC('post_id')] = this.props.notif.post_id;
-    query[QC('notifiable_type')] = QC(this.props.notif.notifiable_type);
-    this.context.router.push({
-      pathname: pushPath,
-      query: query
-    });
+    UI.setScrollPost(this.props.notif.post_id);
+    this.context.router.push(pushPath);
     this.props.rollUp();
   },
   readClass: function (id) {

@@ -1,12 +1,12 @@
 var React = require('react'),
+    UI = require('../../util/ui'),
     Util = require('../../util/general'),
     Options = require('./Options'),
     ProfileOwner = require('./ProfileOwner'),
     TaggedFriends = require('./TaggedFriends'),
     ClientActions = require('../../actions/client_actions'),
     PostCommentIndex = require('../comments/PostCommentIndex'),
-    SessionStore = require('../../stores/session'),
-    UI = require('../../stores/ui');
+    SessionStore = require('../../stores/session');
 
 var PostIndexItem = React.createClass({
   contextTypes: {
@@ -56,10 +56,10 @@ var PostIndexItem = React.createClass({
   },
   componentDidMount: function () {
     ClientActions.fetchComments('Post', this.props.post.postId);
-    //
-    if (UI().scrollPostId === this.props.post.postId) {
-      var post = document.getElementById(UI().scrollPostId);
-      window.scrollTo(0, post.offsetTop);
+    if (UI.scrollPost() === this.props.post.postId) {
+      var post = document.getElementById(UI.scrollPost());
+      UI.clearScrollPost();
+      Util.scrollToPost(UI.scrollPost());
     }
   },
   authorizedToEdit: function () {
