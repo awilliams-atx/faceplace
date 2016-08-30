@@ -20,6 +20,10 @@ class Api::PostsController < ApplicationController
         TimelinePosting.new(profile_owner_id: profile_owner_id,
           post_id: @post.id)
       timeline_posting.save!
+      @notification = timeline_posting.notification
+      rendered = render_to_string('api/notifications/show')
+      Pusher.trigger("notifications_#{@notification.notified_id}", 'received',
+        rendered)
     end
 
     if post_params[:tagged_ids]
