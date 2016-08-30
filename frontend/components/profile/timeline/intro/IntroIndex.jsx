@@ -11,7 +11,8 @@ var IntroIndex = React.createClass({
         <h2>Intro</h2>
         <div className='intro-line'>
           <IntroItemDescription
-            authorizedToEdit={this.props.authorizedToEdit} />
+            authorizedToEdit={this.props.authorizedToEdit}
+            user={this.props.user} />
         </div>
         <hr />
         <table>
@@ -19,37 +20,37 @@ var IntroIndex = React.createClass({
             <tr>
               <td className='intro-img' id='intro-work-img'></td>
               <td>
-                <PolyIntroItem
-                  authorizedToEdit={this.props.authorizedToEdit}
+                <PolyIntroItem authorizedToEdit={this.props.authorizedToEdit}
                   items={[{ name: 'position', placeholder: 'Position' },
                           { name: 'company', placeholder: 'Company'}]}
-                  toFormattedString={this.formatWork} />
+                  toFormattedString={this.formatWork}
+                  user={this.props.user} />
               </td>
             </tr>
             <tr>
               <td className='intro-img' id='intro-school-img'></td>
               <td>
-                <PolyIntroItem
-                  authorizedToEdit={this.props.authorizedToEdit}
+                <PolyIntroItem authorizedToEdit={this.props.authorizedToEdit}
                   items={[{ name: 'major', placeholder: 'Major' },
                           { name: 'school', placeholder: 'School'}]}
-                  toFormattedString={this.formatSchool} />
+                  toFormattedString={this.formatSchool}
+                  user={this.props.user} />
               </td>
             </tr>
             <tr>
               <td className='intro-img' id='intro-location-img'></td>
               <td>
-                <PolyIntroItem
-                  authorizedToEdit={this.props.authorizedToEdit}
-                  items={[{ name: 'location', placeholder: 'Location' }]} toFormattedString={this.formatLocation} />
+                <PolyIntroItem authorizedToEdit={this.props.authorizedToEdit}
+                  items={[{ name: 'location', placeholder: 'Location' }]} toFormattedString={this.formatLocation}
+                  user={this.props.user} />
               </td>
             </tr>
             <tr>
               <td className='intro-img' id='intro-hometown-img'></td>
               <td>
-                <PolyIntroItem
-                  authorizedToEdit={this.props.authorizedToEdit}
-                  items={[{ name: 'hometown', placeholder: 'Hometown' }]} toFormattedString={this.formatHometown} />
+                <PolyIntroItem authorizedToEdit={this.props.authorizedToEdit}
+                  items={[{ name: 'hometown', placeholder: 'Hometown' }]} toFormattedString={this.formatHometown}
+                  user={this.props.user} />
               </td>
             </tr>
           </tbody>

@@ -9,12 +9,14 @@ var React = require('react'),
     UserStore = require('../../../stores/user');
 
     var Timeline = React.createClass({
+      getInitialState: function () {
+        return { user: UserStore.user() }
+      },
       render: function () {
         return (
           <div id='timeline-content group'>
             <aside id='timeline-sidebar'>
-              <IntroIndex userId={this.profileOwnerId()}
-                authorizedToEdit={this.authorizedToEdit()} />
+              {this.renderIntroIndex()}
               <FriendIndex user_id={this.profileOwnerId()} />
             </aside>
             <section id='timeline-main-content'
@@ -24,10 +26,20 @@ var React = require('react'),
           </div>
         );
       },
+      renderIntroIndex: function () {
+        if (Object.keys(this.state.user).length > 0) {
+          return (
+            <IntroIndex user={this.state.user}
+              userId={this.profileOwnerId()}
+              authorizedToEdit={this.authorizedToEdit()} />
+          );
+        }
+      },
       componentDidMount: function () {
         ClientActions.fetchMostRecentlyAddedFriends(this.props.params.userId);
         ClientActions.fetchTimelinePosts(this.props.params.userId);
         window.addEventListener('scroll', this.stickListener);
+        this.userListener = UserStore.addListener(this.onUserStoreChange);
       },
       componentWillReceiveProps: function (props) {
         ClientActions.fetchMostRecentlyAddedFriends(props.params.userId);
@@ -38,6 +50,9 @@ var React = require('react'),
       },
       authorizedToEdit: function () {
         return this.profileOwnerId() === SessionStore.currentUser().id;
+      },
+      onUserStoreChange: function () {
+        this.setState({ user: UserStore.user() });
       },
       profileOwnerId: function () {
         return parseInt(this.props.params.userId) || SessionStore.currentUser().id
