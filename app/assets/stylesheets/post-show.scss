@@ -1,5 +1,18 @@
 @import 'global';
 
+.post-head {
+  padding-bottom: 12px;
+  padding-top: 11px;
+}
+.scroll-post-flash {
+  animation: flash 600ms alternate 2;
+}
+
+@keyframes flash {
+  from { background-color: white; }
+  to { background-color: $kashmir; }
+}
+
 .post-breakdown {
   margin: 0 12px;
   img {

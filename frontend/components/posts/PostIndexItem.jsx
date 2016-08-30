@@ -18,33 +18,35 @@ var PostIndexItem = React.createClass({
   render: function () {
     return (
       <article id={this.props.post.postId} className='timeline-feed-item'>
-        <header className='post-breakdown group'>
-          <a href={'/users/' + this.props.post.authorId}
-            onClick={this.pushAuthorRoute} >
-            <img src={this.props.post.postPicUrl} />
-          </a>
-          <div className='post-breakdown-details group'>
-            <div className='post-author-name'>
-              <a href={'/users/' + this.props.post.authorId}
-                onClick={this.pushAuthorRoute}>
-                  {this.props.post.fullName}
-              </a>
+        <div className='post-head'>
+          <header className='post-breakdown group'>
+            <a href={'/users/' + this.props.post.authorId}
+              onClick={this.pushAuthorRoute} >
+              <img src={this.props.post.postPicUrl} />
+            </a>
+            <div className='post-breakdown-details group'>
+              <div className='post-author-name'>
+                <a href={'/users/' + this.props.post.authorId}
+                  onClick={this.pushAuthorRoute}>
+                    {this.props.post.fullName}
+                </a>
+              </div>
+              {ProfileOwner(this.props.post.profileOwner,
+                this.pushProfileOwnerRoute)}
             </div>
-            {ProfileOwner(this.props.post.profileOwner,
-              this.pushProfileOwnerRoute)}
-          </div>
-          <br />
-          <div className='post-datetime-container group'>
-            <div className='post-datetime'>
-              {this.props.post.createdAt}
+            <br />
+            <div className='post-datetime-container group'>
+              <div className='post-datetime'>
+                {this.props.post.createdAt}
+              </div>
             </div>
-          </div>
-          {this.renderOptions()}
-        </header>
-        <section className='post-body'>
-          {this.props.post.body}
-        </section>
-        {TaggedFriends(this.props.post.taggedFriends, this.pushUserRoute)}
+            {this.renderOptions()}
+          </header>
+          <section className='post-body'>
+            {this.props.post.body}
+          </section>
+          {TaggedFriends(this.props.post.taggedFriends, this.pushUserRoute)}
+        </div>
         <PostCommentIndex post={this.props.post} />
       </article>
     );

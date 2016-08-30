@@ -3,7 +3,6 @@
 .comment-section {
   background-color: $athensGray3;
   border-top: 1px solid $mercury;
-  margin-top: 11px;
   img {
     @include squareObjectFit(30px);
     border: 1px solid rgba(#000000, 0.1);

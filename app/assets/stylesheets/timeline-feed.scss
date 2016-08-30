@@ -2,11 +2,11 @@
 
 .timeline-feed-item {
   @include typeStandard(14px);
+  background-color: white;
+  border-radius: 3px;
   display: block;
   float: left;
-  width: 510px;
-  padding: 12px 0 0;
-  border-radius: 3px;
-  background-color: white;
   margin-bottom: 20px;
+  overflow-y: hidden;
+  width: 510px;
 }
