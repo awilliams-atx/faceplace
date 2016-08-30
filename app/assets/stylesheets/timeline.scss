@@ -1,14 +1,26 @@
 .timeline-content {
   width: 851px;
 }
-.timeline-sidebar {
+#timeline-sidebar {
   display: block;
   float: left;
   width: 321px;
 }
-.timeline-main-content {
+
+.timeline-sidebar-stick {
+  position: fixed;
+  top: 20px;
+}
+
+#timeline-main-content {
   width: 490px;
   display: block;
   float: left;
+}
+
+.timeline-main-content-anchored {
   margin: 0 0 0 20px;
+}
+.timeline-main-content-unanchored {
+  margin: 0 0 0 341px;
 }
