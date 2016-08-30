@@ -54,8 +54,9 @@ var SignUpForm = React.createClass({
           </div>
           <form id="sign-up-form" onSubmit={this.onSubmit}>
             <div className='sign-up-input-container group'>
-              <input onBlur={this.onFirstNameBlur}
-                onChange={this.onFirstNameChange}
+              <input id='first_name'
+                onBlur={this.onFirstNameBlur}
+                onChange={this.onInputChange}
                 placeholder='First name'
                 ref='first_name'
                 value={this.state.first_name} />
@@ -63,8 +64,9 @@ var SignUpForm = React.createClass({
             </div>
 
             <div className='sign-up-input-container group'>
-              <input onBlur={this.onLastNameBlur}
-                onChange={this.onLastNameChange}
+              <input id='last_name'
+                onBlur={this.onLastNameBlur}
+                onChange={this.onInputChange}
                 placeholder='Last name'
                 ref='last_name'
                 value={this.state.last_name} />
@@ -74,7 +76,7 @@ var SignUpForm = React.createClass({
             <div className='sign-up-input-container group'>
               <input id='email'
                 onBlur={this.onEmailBlur}
-                onChange={this.onEmailChange}
+                onChange={this.onInputChange}
                 placeholder='Email'
                 ref='email'
                 value={this.state.email} />
@@ -82,8 +84,9 @@ var SignUpForm = React.createClass({
             </div>
 
             <div className='sign-up-input-container group'>
-              <input onBlur={this.onPasswordBlur}
-                onChange={this.onPasswordChange}
+              <input id='password'
+                onBlur={this.onPasswordBlur}
+                onChange={this.onInputChange}
                 placeholder='Password'
                 ref='password'
                 type='password'
@@ -140,26 +143,19 @@ var SignUpForm = React.createClass({
   onEmailBlur: function () {
     ErrorActions.clearSignUpError('email');
   },
-  onEmailChange: function (e) {
-    this.setState({email: e.target.value});
-  },
   onFirstNameBlur: function () {
     ErrorActions.clearSignUpError('first_name');
   },
-  onFirstNameChange: function (e) {
-    this.setState({first_name: e.target.value});
+  onInputChange: function (e) {
+    var state = {}
+    state[e.target.id] = e.target.value;
+    this.setState(state);
   },
   onLastNameBlur: function () {
     ErrorActions.clearSignUpError('last_name');
   },
-  onLastNameChange: function (e) {
-    this.setState({last_name: e.target.value});
-  },
   onPasswordBlur: function () {
     ErrorActions.clearSignUpError('password');
-  },
-  onPasswordChange: function (e) {
-    this.setState({password: e.target.value});
   },
   onSubmit: function (e) {
     e.preventDefault();
