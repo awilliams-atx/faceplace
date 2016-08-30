@@ -17,54 +17,6 @@ var SignUpForm = React.createClass({
     });
   },
   render: function () {
-    var firstNameError;
-    var lastNameError;
-    var emailError;
-    var passwordError;
-
-    if (this.state.errors) {
-      var errors = this.state.errors;
-      if (errors.first_name) {
-        firstNameError = (
-          <aside className='error-container sign-up-error' >
-            {this.state.errors.first_name}
-          </aside>
-        );
-      } else {
-        firstNameError = <div id='empty-first-name-error' />;
-      }
-
-      if (errors.last_name) {
-        lastNameError = (
-          <aside className='error-container sign-up-error' >
-            {this.state.errors.last_name}
-          </aside>
-        );
-      } else {
-        lastNameError = <div id='empty-last-name-error' />;
-      }
-
-      if (errors.email) {
-        emailError = (
-          <aside className='error-container sign-up-error' >
-            {this.state.errors.email}
-          </aside>
-        );
-      } else {
-        emailError = <div id='empty-email-error' />;
-      }
-
-      if (errors.password) {
-        passwordError = (
-          <aside className='error-container sign-up-error' >
-            {this.state.errors.password}
-          </aside>
-        );
-      } else {
-        passwordError = <div id='empty-password-error' />;
-      }
-    }
-
     return (
       <div id='sign-up-content' className='group'>
         <section id='propaganda'>
@@ -101,14 +53,13 @@ var SignUpForm = React.createClass({
             <div id="consolation">It's free and you pretty much have no choice.</div>
           </div>
           <form id="sign-up-form" onSubmit={this.onSubmit}>
-
             <div className='sign-up-input-container group'>
               <input onBlur={this.onFirstNameBlur}
                 onChange={this.onFirstNameChange}
                 placeholder='First name'
                 ref='first_name'
                 value={this.state.firstName} />
-              {firstNameError}
+              {this.renderError('first_name')}
             </div>
 
             <div className='sign-up-input-container group'>
@@ -117,7 +68,7 @@ var SignUpForm = React.createClass({
                 placeholder='Last name'
                 ref='last_name'
                 value={this.state.lastName} />
-              {lastNameError}
+              {this.renderError('last_name')}
             </div>
 
             <div className='sign-up-input-container group'>
@@ -127,7 +78,7 @@ var SignUpForm = React.createClass({
                 placeholder='Email'
                 ref='email'
                 value={this.state.email} />
-              {emailError}
+              {this.renderError('email')}
             </div>
 
             <div className='sign-up-input-container group'>
@@ -137,7 +88,7 @@ var SignUpForm = React.createClass({
                 ref='password'
                 type='password'
                 value={this.state.password} />
-              {passwordError}
+              {this.renderError('password')}
             </div>
 
             <button>Give In</button>
@@ -145,6 +96,15 @@ var SignUpForm = React.createClass({
         </section>
       </div>
     );
+  },
+  renderError: function (errorName) {
+    if (this.state.errors && this.state.errors[errorName]) {
+      return (
+        <aside className='error-container sign-up-error' >
+          {this.state.errors[errorName]}
+        </aside>
+      );
+    }
   },
   componentDidMount: function () {
     this.errorListener = ErrorStore.addListener(this.onErrorStoreChange);
