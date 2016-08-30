@@ -111,17 +111,16 @@ var SignUpForm = React.createClass({
   },
   componentDidMount: function () {
     this.errorListener = ErrorStore.addListener(this.onErrorStoreChange);
-    this.blurListener = this.blurListener || function blurListener (e) {
-      var noBlurClassNames =
-        ['sign-up-input', 'error-container sign-up-error'];
-      if (!noBlurClassNames.includes(e.target.className)) {
-        ErrorActions.clearErrors('signUp');
-        document.removeEventListener('click', this.blurListener);
-      }
-    }.bind(this);
   },
   componentWillUnmount: function () {
     this.errorListener.remove();
+  },
+  blurListener: function (e) {
+    if (!['sign-up-input', 'error-container sign-up-error']
+      .includes(e.target.className)) {
+        ErrorActions.clearErrors('signUp');
+        document.removeEventListener('click', this.blurListener);
+    }
   },
   focusErrorInputField: function () {
     var fields = ['first_name', 'last_name', 'email', 'password'];
@@ -158,7 +157,6 @@ var SignUpForm = React.createClass({
     }, function () {
       this.context.router.push('/users/' + SessionStore.currentUser().id);
     }.bind(this));
-
   }
 });
 
