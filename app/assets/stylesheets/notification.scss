@@ -1,30 +1,32 @@
 @import 'global';
 
 #notifications-drop {
+  .unchecked-alert {
+    background-color: $athensGray2;
+  }
   .nav-drop-item:hover {
     background-color: $athensGray3;
     cursor: pointer;
   }
-}
-
-.notification-details {
-  @include flexAlign($navDropItemInnerHeight);
-  color: $notBlack;
-  font-family: $typeStandardFontFamily;
-  font-size: 12px;
-  .notification-explanation {
-    margin-bottom: 1px;
-    .notifier-name {
-      font-weight: bold;
+  .notification-details {
+    @include flexAlign($navDropItemInnerHeight);
+    color: $notBlack;
+    font-family: $typeStandardFontFamily;
+    font-size: 12px;
+    .notification-explanation {
+      margin-bottom: 1px;
+      .notifier-name {
+        font-weight: bold;
+      }
     }
-  }
-  .notification-footer {
-    i {
-      color: $wildWillow;
-      margin-right: 5px;
-    }
-    .notification-date {
-      @include typeShadyLady;
+    .notification-footer {
+      i {
+        color: $wildWillow;
+        margin-right: 5px;
+      }
+      .notification-date {
+        @include typeShadyLady;
+      }
     }
   }
 }

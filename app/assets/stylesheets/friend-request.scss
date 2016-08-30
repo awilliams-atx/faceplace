@@ -5,6 +5,12 @@
   border-bottom: 1px solid rgba($doveGray, 0.22);
 }
 
+#requests-drop {
+  .unchecked-alert {
+    background-color: $athensGray2;
+  }
+}
+
 .friend-request-details {
   @include flexAlign($navDropItemInnerHeight);
   a {
