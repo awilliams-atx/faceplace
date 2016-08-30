@@ -18,6 +18,6 @@ UIStore.ui = function () {
   return Object.assign({}, _ui);
 };
 
-window.ui = UIStore.ui;
+window.UI = UIStore.ui;
 
-module.exports = UIStore;
+module.exports = UIStore.ui;

@@ -6,6 +6,7 @@ var React = require('react'),
     NotificationStore = require('../../stores/notification'),
     PostStore = require('../../stores/post'),
     SessionStore = require('../../stores/session'),
+    UI = require('../../stores/ui'),
     UserStore = require('../../stores/user');
 
 var PostIndex = React.createClass({
@@ -41,7 +42,10 @@ var PostIndex = React.createClass({
     this.userListener = UserStore.addListener(this.onUserStoreChange);
   },
   componentDidUpdate: function () {
-    Util.scrollToQueryStringPost();
+    if (UI().scrollPostId &&
+      UI().scrollPostId.toString() === Util.queryString('post_id')) {
+      Util.scrollToQueryStringPost();
+    }
   },
   componentWillUnmount: function () {
     this.notificationListener.remove();

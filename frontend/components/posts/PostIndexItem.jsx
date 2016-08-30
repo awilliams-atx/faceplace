@@ -6,7 +6,7 @@ var React = require('react'),
     ClientActions = require('../../actions/client_actions'),
     PostCommentIndex = require('../comments/PostCommentIndex'),
     SessionStore = require('../../stores/session'),
-    UIStore = require('../../stores/ui');
+    UI = require('../../stores/ui');
 
 var PostIndexItem = React.createClass({
   contextTypes: {
@@ -57,8 +57,8 @@ var PostIndexItem = React.createClass({
   componentDidMount: function () {
     ClientActions.fetchComments('Post', this.props.post.postId);
     //
-    if (UIStore.ui().scrollPostId === this.props.post.postId) {
-      var post = document.getElementById(UIStore.ui().scrollPostId);
+    if (UI().scrollPostId === this.props.post.postId) {
+      var post = document.getElementById(UI().scrollPostId);
       window.scrollTo(0, post.offsetTop);
     }
   },
