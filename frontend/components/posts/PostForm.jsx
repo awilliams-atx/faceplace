@@ -102,24 +102,6 @@ var PostForm = React.createClass({
     )
   },
   componentDidMount: function () {
-    this.taggingBlurListener = function taggingListener (e) {
-      var node = e.target;
-      var noBlurClassNames =
-        ['search-index-item group', 'tagged-friends-list-item'];
-      for (var i = 0; i < 3; i++) {
-        if (!node) {
-          document.removeEventListener('click', this.taggingBlurListener);
-          this.setState({tagging: false});
-          return;
-        } else if (noBlurClassNames.includes(node.className)) {
-          return;
-        }
-        node = node.parentNode;
-      }
-      document.removeEventListener('click', this.taggingBlurListener);
-      this.setState({tagging: false});
-    }.bind(this);
-
     var post = this.props.post;
     if (post) {
       this.setState({ body: post.body }, function () {
@@ -169,6 +151,23 @@ var PostForm = React.createClass({
       return '';
     }
   },
+  taggingListener: function (e) {
+    var node = e.target;
+    var noBlurClassNames =
+      ['search-index-item group', 'tagged-friends-list-item'];
+    for (var i = 0; i < 3; i++) {
+      if (!node) {
+        document.removeEventListener('click', this.taggingListener);
+        this.setState({ tagging: false });
+        return;
+      } else if (noBlurClassNames.includes(node.className)) {
+        return;
+      }
+      node = node.parentNode;
+    }
+    document.removeEventListener('click', this.taggingListener);
+    this.setState({ tagging: false });
+  },
   toggleTag: function (e) {
     e.preventDefault();
     var willTagForTheFirstTime = !!this.state.isTaggingForTheFirstTime;
@@ -181,7 +180,7 @@ var PostForm = React.createClass({
         if (willTagForTheFirstTime) {
           ClientActions.fetchTagSearchResults('');
         }
-        document.addEventListener('click', this.taggingBlurListener);
+        document.addEventListener('click', this.taggingListener);
       }
     });
   },
