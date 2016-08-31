@@ -37,7 +37,7 @@ var PostIndexItem = React.createClass({
             <br />
             <div className='post-datetime-container group'>
               <div className='post-datetime'>
-                {this.props.post.createdAt}
+                {Util.moment(this.props.post.createdAt)}
               </div>
             </div>
             {this.renderOptions()}
