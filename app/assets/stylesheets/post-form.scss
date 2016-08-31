@@ -8,55 +8,58 @@
 }
 .profile-post {
   width: 510px;
-}
-.post-types-background {
-  background-color: $athensGray3;
-  height: 100%;
-  padding: 10px 0 10px 10px;
-  border-bottom: 1px solid $mercury;
-}
-header#post-types {
-  div.post-type-text {
-    @include typeChambray(12px);
-    height: 16px;
-    line-height: 16px;
+  .post-types-background {
+    background-color: $athensGray3;
+    height: 100%;
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid $mercury;
   }
-}
-.post-type-img {
-  position: relative;
-  top: -1px;
-  display: block;
-  float: left;
-  height: 16px;
-  width: 16px;
-  margin-right: 5px;
-}
-.post-form {
-  padding: 12px 12px 0 12px;
-}
-.post-pic {
-  @include squareObjectFit(38px);
-  border: 1px solid rgba(#000000, 0.1);
-  display: block;
-  float: left;
-}
-.post-textarea {
-  @include typeStandard(14px);
-  padding: 11px 0 13px 12px;
-  border: none;
-  outline: none;
-  resize: none;
-  width: 423px;
-}
-.post-footer-background {
-  border-top: 1px solid $mercury;
-  height: 40px;
-}
-.post-footer-left-buttons {
-  float: left;
-  cursor: pointer;
-}
-.post-footer-right-buttons {
-  margin: 8px;
-  float: right;
+  header#post-types {
+    div.post-type-text {
+      @include typeChambray(12px);
+      height: 16px;
+      line-height: 16px;
+    }
+  }
+  .post-type-img {
+    position: relative;
+    top: -1px;
+    display: block;
+    float: left;
+    height: 16px;
+    width: 16px;
+    margin-right: 5px;
+  }
+  .post-form {
+    padding: 12px 12px 0 12px;
+  }
+  .post-pic {
+    @include squareObjectFit(38px);
+    border: 1px solid rgba(#000000, 0.1);
+    display: block;
+    float: left;
+  }
+  .post-textarea {
+    @include typeStandard(14px);
+    padding: 11px 0 13px 12px;
+    border: none;
+    outline: none;
+    resize: none;
+    width: 423px;
+  }
+  .autogrower {
+    @include autoGrower(11px 0 13px 12px, 423px, 14px);
+  }
+  .post-footer-background {
+    border-top: 1px solid $mercury;
+    height: 40px;
+  }
+  .post-footer-left-buttons {
+    float: left;
+    cursor: pointer;
+  }
+  .post-footer-right-buttons {
+    margin: 8px;
+    float: right;
+  }
 }

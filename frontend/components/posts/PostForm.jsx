@@ -1,4 +1,5 @@
 var React = require('react'),
+    Util = require('../../util/general'),
     TagSearch = require('./TagSearch'),
     ClientActions = require('../../actions/client_actions'),
     FriendApiUtil = require('../../util/friend_api_util'),
@@ -38,6 +39,7 @@ var PostForm = React.createClass({
               placeholder={this.placeholder()}
               ref='autoFocus' >
             </textarea>
+            <div className='autogrower' ref='autogrower'></div>
           </div>
           <TagSearch tagging={this.state.tagging}
             isEditingPost={this.props.isEditing} />
@@ -86,14 +88,24 @@ var PostForm = React.createClass({
       this.setState({ body: this.props.post.body }, function () {
         ClientActions.fetchTaggedFriends(this.props.post.postId);
         this.refs.autoFocus.focus();
+        this.autogrow();
       }.bind(this));
     }
+  },
+  autogrow: function () {
+    Util.autogrow({
+      autogrower: this.refs.autogrower,
+      body: this.state.body,
+      difference: 8,
+      emptyHeight: 32,
+      textarea: this.refs.autoFocus
+    });
   },
   formTypeClass: function () {
     return this.props.isModalElement ? 'modal-element' : 'subcontent-container';
   },
   onBodyChange: function (e) {
-    this.setState({ body: e.target.value });
+    this.setState({ body: e.target.value }, this.autogrow);
   },
   onCancel: function (e) {
     e.preventDefault();
@@ -116,6 +128,7 @@ var PostForm = React.createClass({
       post.profileOwnerId = this.props.profileOwnerId;
       this.setState({ body: '', tagging: false }, function () {
         ClientActions.submitPost(post);
+        this.autogrow();
       });
     }
   },

@@ -105,6 +105,7 @@ div.friend-post-icon {
 .post-body {
   @include typeStandard(14px);
   padding: 14px 12px 3px;
+  word-wrap: break-word;
 }
 .post-tagged-friends {
   color: #888888;
