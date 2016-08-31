@@ -15,13 +15,10 @@ var PostForm = React.createClass({
     var tagUrl =
           'https://s3.amazonaws.com/faceplace-dev/assets/add_friend_icon+original.png';
 
-  var elTypeClass =
-    this.props.isModalElement ? 'modal-element' : 'subcontent-container';
-
     return (
       // CSS is complicated because of header.
       <section id={this.postSectionId()}
-        className={elTypeClass + ' profile-post'}>
+        className={this.formTypeClass() + ' profile-post'}>
         <div className='post-types-background'>
           <header id='post-types'>
             <img src='https://s3.amazonaws.com/faceplace-dev/assets/post_status.png' className='post-type-img' />
@@ -91,6 +88,9 @@ var PostForm = React.createClass({
         this.refs.autoFocus.focus();
       }.bind(this));
     }
+  },
+  formTypeClass: function () {
+    return this.props.isModalElement ? 'modal-element' : 'subcontent-container';
   },
   onBodyChange: function (e) {
     this.setState({ body: e.target.value });
