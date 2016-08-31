@@ -21,10 +21,10 @@ var PostCommentForm = React.createClass({
     );
   },
   autogrow: function () {
-    this.refs.autogrower.textContent = this.state.body;
     if (this.state.body.length === 0) {
       this.refs.textarea.style.height = '16px';
     } else {
+      this.refs.autogrower.textContent = this.state.body;
       this.refs.autogrower.style.display = 'block';
       var height = this.refs.autogrower.clientHeight;
       this.refs.autogrower.style.display = 'none'
@@ -44,9 +44,10 @@ var PostCommentForm = React.createClass({
           commentableId: this.props.postId,
           commentableType: 'Post'
         };
-        this.setState({body: ''}, function () {
+        this.setState({ body: '' }, function () {
           ClientActions.submitComment(comment);
-        });
+          this.autogrow();
+        }.bind(this));
       }
     }
   }
