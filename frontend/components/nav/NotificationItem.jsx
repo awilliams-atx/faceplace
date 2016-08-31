@@ -1,5 +1,4 @@
 var React = require('react'),
-    Moment = require('moment'),
     QC = require('../../util/query_code'),
     UI = require('../../util/ui'),
     Util = require('../../util/general'),
@@ -27,7 +26,9 @@ var NotificationItem = React.createClass({
               </div>
               <div className='notification-footer'>
                 <i className="fa fa-comment" aria-hidden="true"></i>
-                <span className='notification-date'>{this.renderDate()}</span>
+                <span className='notification-date'>
+                  {Util.moment(this.props.notif.created_at)}
+                </span>
               </div>
             </div>
           </div>
@@ -53,15 +54,6 @@ var NotificationItem = React.createClass({
   },
   readClass: function (id) {
     return this.props.notif.read ? '' : 'unchecked-alert';
-  },
-  renderDate: function () {
-    var currentTime = new Date();
-    var notifTime = this.props.notif.created_at;
-    if (currentTime - new Date(notifTime) < 86400000) {
-      return Moment(notifTime).fromNow();
-    } else {
-      return Moment(notifTime).format("dddd, MMMM Do YYYY, h:mm a");
-    }
   }
 });
 
