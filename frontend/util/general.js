@@ -35,6 +35,10 @@ module.exports = {
   pathMatch: function (pathname) {
     return window.location.pathname.match(pathname);
   },
+  sameImgUrl: function (img, url) {
+    return (!img.attributes.src || img.attributes.src.value !== url) ? false :
+      true;
+  },
   toCommaSeparatedAnchors: function toCSAnchors (friends, handler) {
     if (friends.length === 0) {
       return '';

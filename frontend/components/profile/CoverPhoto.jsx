@@ -1,4 +1,5 @@
 var React = require('react'),
+    Util = require('../../util/general'),
     EditButton = require('./EditPhotoButton'),
     SessionStore = require('../../stores/session');
 
@@ -37,10 +38,8 @@ var CoverPhoto = React.createClass({
     }
   },
   componentWillReceiveProps: function (props) {
-    if (!this.refs.coverPhoto.attributes.src) {
-      this.setState({ loading: true });
-    } else if (props.profileOwner.coverPhotoUrl !==
-      this.refs.coverPhoto.attributes.src.value) {
+    if (!Util.sameImgUrl(this.refs.coverPhoto,
+      props.profileOwner.coverPhotoUrl)) {
       this.setState({ loading: true });
     }
   },

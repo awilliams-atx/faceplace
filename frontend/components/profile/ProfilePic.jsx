@@ -1,4 +1,5 @@
 var React = require('react'),
+    Util = require('../../util/general'),
     EditButton = require('./EditPhotoButton'),
     SessionStore = require('../../stores/session');
 
@@ -36,10 +37,8 @@ var ProfilePic = React.createClass({
     }
   },
   componentWillReceiveProps: function (props) {
-    if (!this.refs.profilePic.attributes.src) {
-      this.setState({ loading: true });
-    } else if (props.profileOwner.profilePicUrl !==
-      this.refs.profilePic.attributes.src.value) {
+    if (!Util.sameImgUrl(this.refs.profilePic,
+      props.profileOwner.proflePicUrl)) {
       this.setState({ loading: true });
     }
   },
