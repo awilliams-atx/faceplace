@@ -8,14 +8,6 @@ module.exports = {
   pathMatch: function (pathname) {
     return window.location.pathname.match(pathname);
   },
-  scrollToPost: function (id) {
-    var post = document.getElementById(id);
-    if (post && post.offsetTop) {
-      window.scrollTo(0, post.offsetTop - 10)
-      return true
-    }
-    return false
-  },
   toCommaSeparatedAnchors: function toCSAnchors (friends, handler) {
     if (friends.length === 0) {
       return '';
