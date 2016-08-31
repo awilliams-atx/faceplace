@@ -32,7 +32,7 @@ var CommentIndexItem = React.createClass({
   },
   pushAuthorRoute: function (e) {
     e.preventDefault();
-    this.context.router.push(e.target.pathname);
+    this.context.router.push(Util.findSelfOrParent(e.target, 'A').pathname);
     Util.jumpToTop();
   }
 });

@@ -14,6 +14,13 @@ module.exports = {
       op.autogrower.style.display = 'none'
     }
   },
+  findSelfOrParent: function (node, nodeName) {
+    if (node.tagName === nodeName) {
+      return node;
+    } else {
+      return this.findSelfOrParent(node.parentNode, nodeName);
+    }
+  },
   jumpToTop: function () {
     window.scrollTo(0, 0);
   },
