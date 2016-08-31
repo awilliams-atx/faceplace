@@ -9,7 +9,9 @@ var CoverPhoto = React.createClass({
   render: function () {
     return (
       <div id='cover-photo'>
-        <img src={this.props.profileOwner.coverPhotoUrl} onLoad={this.onLoad} />
+        <img onLoad={this.onLoad}
+          ref='coverPhoto'
+          src={this.props.profileOwner.coverPhotoUrl} />
         {this.renderSpinner()}
         <div id='cover-photo-name'>{this.name()}</div>
         {this.renderEditButton()}
@@ -34,8 +36,10 @@ var CoverPhoto = React.createClass({
       );
     }
   },
-  componentWillReceiveProps: function () {
-    this.setState({ loading: true });
+  componentWillReceiveProps: function (props) {
+    if (props.profileOwner.coverPhotoUrl !== this.refs.coverPhoto.src) {
+      this.setState({ loading: true });
+    }
   },
   onLoad: function () {
     setTimeout(function () {

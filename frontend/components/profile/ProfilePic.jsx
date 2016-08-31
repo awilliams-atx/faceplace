@@ -9,7 +9,9 @@ var ProfilePic = React.createClass({
   render: function () {
     return (
       <div id='profile-pic'>
-        <img src={this.props.profileOwner.profilePicUrl} onLoad={this.onLoad}/>
+        <img onLoad={this.onLoad}
+          ref='profilePic'
+          src={this.props.profileOwner.profilePicUrl} />
         {this.renderSpinner()}
         {this.renderEditButton()}
       </div>
@@ -33,8 +35,10 @@ var ProfilePic = React.createClass({
       );
     }
   },
-  componentWillReceiveProps: function () {
-    this.setState({ loading: true });
+  componentWillReceiveProps: function (props) {
+    if (props.profileOwner.profilePicUrl !== this.refs.profilePic.src) {
+      this.setState({ loading: true });
+    }
   },
   onLoad: function () {
     setTimeout(function () {
