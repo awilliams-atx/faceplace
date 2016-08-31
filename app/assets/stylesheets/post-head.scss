@@ -1,14 +1,5 @@
 @import 'global';
 
-.scroll-post-flash {
-  animation: flash 600ms ease alternate 2;
-}
-
-@keyframes flash {
-  from { background-color: white; }
-  to { background-color: $polo; }
-}
-
 .post-head {
   padding-bottom: 12px;
   padding-top: 11px;
@@ -50,21 +41,28 @@
       }
     }
   }
+  .post-body {
+    @include typeStandard(14px);
+    padding: 14px 12px 3px;
+    word-wrap: break-word;
+  }
+  .post-tagged-friends {
+    color: #888888;
+    padding: 5px 12px 3px;
+    a {
+      color: $chambray;
+      cursor: pointer;
+    }
+    a:hover  {
+      text-decoration: underline;
+    }
+  }
 }
 
-.post-body {
-  @include typeStandard(14px);
-  padding: 14px 12px 3px;
-  word-wrap: break-word;
+.scroll-post-flash {
+  animation: flash 600ms ease alternate 2;
 }
-.post-tagged-friends {
-  color: #888888;
-  padding: 5px 12px 3px;
-  a {
-    color: $chambray;
-    cursor: pointer;
-  }
-  a:hover  {
-    text-decoration: underline;
-  }
+@keyframes flash {
+  from { background-color: white; }
+  to { background-color: $polo; }
 }
