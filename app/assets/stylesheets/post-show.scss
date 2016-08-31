@@ -5,12 +5,12 @@
   padding-top: 11px;
 }
 .scroll-post-flash {
-  animation: flash 600ms alternate 2;
+  animation: flash 600ms ease alternate 2;
 }
 
 @keyframes flash {
   from { background-color: white; }
-  to { background-color: $kashmir; }
+  to { background-color: $polo; }
 }
 
 .post-breakdown {
