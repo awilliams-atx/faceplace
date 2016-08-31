@@ -17,6 +17,7 @@
       float: left;
       position: relative;
       width: 446px;
+      word-wrap: break-word;
       a {
         @include typeChambray(12px);
       }
