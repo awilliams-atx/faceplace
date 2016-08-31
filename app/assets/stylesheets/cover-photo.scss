@@ -6,7 +6,17 @@
     object-fit: cover;
     width: 851px;
   }
-  i {
+  #cover-photo-spinner {
+    background-color: transparent;
+    bottom: 0;
+    color: rgba(#ffffff, 0.8);
+    height: 315px;
+    line-height: 351px;
+    position: absolute;
+    text-align: center;
+    width: 851px;
+  }
+  i.fa-camera {
     color: rgba(#ffffff, 0.5);
     display: block;
     float: left;

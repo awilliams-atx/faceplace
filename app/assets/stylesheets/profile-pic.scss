@@ -12,6 +12,16 @@
     @include squareObjectFit(160px);
     display: block;
   }
+  #profile-pic-spinner {
+    background-color: transparent;
+    bottom: 0;
+    color: rgba(#ffffff, 0.8);
+    height: 160px;
+    line-height: 160px;
+    position: absolute;
+    text-align: center;
+    width: 160px;
+  }
   #profile-pic-input-container {
     left: 12px;
     position: absolute;

@@ -1,22 +1,25 @@
-['walter', 'donny', 'jeff_sr', 'maude', 'andrew', 'jesus', 'brandt', 'daniel', 'ulysses', 'pete', 'delmar', 'tommy', 'pappy'].each do |email|
-  user = User.find_by(email: email)
-  user.destroy if user
+User.all.each do |user|
+  unless ['andrew', 'jeff'].include?(user.email)
+    user.destroy
+  end
 end
 
 lebowski_friends = [];
 
-andrew = User.create(first_name: "Andrew", last_name: "Williams", email: "andrew", password: "starwars")
+# andrew = User.create(first_name: "Andrew", last_name: "Williams", email: "andrew", password: "starwars")
+#
+# andrew.description = 'New York City software developer with experience in Rails, JavaScript, and React.js'
+# andrew.location = 'Manhattan'
+# andrew.hometown = 'New Braunfels, Texas'
+# andrew.school = 'The University of Texas at Austin'
+# andrew.major = 'French'
+# andrew.profile_pic = File.open("#{Rails.root}/app/assets/images/andrew_williams_profile_pic.jpg")
+# andrew.cover_photo = File.open("#{Rails.root}/app/assets/images/andrew_williams_cover_photo.jpg")
+# andrew.save!
+#
+# lebowski_friends << andrew
 
-andrew.description = 'New York City software developer with experience in Rails, JavaScript, and React.js'
-andrew.location = 'Manhattan'
-andrew.hometown = 'New Braunfels, Texas'
-andrew.school = 'The University of Texas at Austin'
-andrew.major = 'French'
-andrew.profile_pic = File.open("#{Rails.root}/app/assets/images/andrew_williams_profile_pic.jpg")
-andrew.cover_photo = File.open("#{Rails.root}/app/assets/images/andrew_williams_cover_photo.jpg")
-andrew.save!
-
-lebowski_friends << andrew
+andrew = User.find_by(email: 'andrew')
 
 # NB: Jeff is the guest user. Never delete him or guest user content will be lost.
 

@@ -5,6 +5,9 @@ var CommentIndexItem = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
+  getInitialState: function () {
+    return { loading: true };
+  },
   render: function () {
     return (
       <div className='post-comment group'>
