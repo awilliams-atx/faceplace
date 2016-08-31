@@ -53,14 +53,8 @@
       resize: none;
       width: 434px;
     }
-    .autogrower {
-      @include typeStandard;
-      display: none;
-      min-height: 16px;
-      padding: 7px 5px;
-      position: absolute;
-      white-space: pre-wrap;
-      width: 434px;
-    }
+  }
+  .autogrower {
+    @include autoGrower(7px 5px, 434px);
   }
 }

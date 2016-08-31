@@ -60,3 +60,18 @@ $typeStandardFontFamily: helvetica, arial, sans-serif;
   font-family: $typeStandardFontFamily;
   font-size: $size;
 }
+
+// HACKS
+
+@mixin autoGrower($padding, $width, $font-size: 12px, $font-family: $typeStandardFontFamily, $min-height: 0) {
+  @include typeStandard;
+  display: none;
+  font-family: $font-family;
+  font-size: $font-size;
+  min-height: $min-height;
+  padding: $padding;
+  position: absolute;
+  white-space: pre-wrap;
+  width: $width;
+  word-wrap: break-word;
+}
