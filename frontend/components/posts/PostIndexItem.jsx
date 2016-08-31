@@ -24,7 +24,7 @@ var PostIndexItem = React.createClass({
               onClick={this.pushAuthorRoute} >
               <img src={this.props.post.postPicUrl} />
             </a>
-            <div className='post-breakdown-details group'>
+            <div className='post-breakdown-users group'>
               <div className='post-author-name'>
                 <a href={'/users/' + this.props.post.authorId}
                   onClick={this.pushAuthorRoute}>
@@ -35,7 +35,7 @@ var PostIndexItem = React.createClass({
                 this.pushProfileOwnerRoute)}
             </div>
             <br />
-            <div className='post-datetime-container group'>
+            <div className='post-breakdown-datetime group'>
               <div className='post-datetime'>
                 {Util.moment(this.props.post.createdAt)}
               </div>

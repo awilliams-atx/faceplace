@@ -1,9 +1,5 @@
 @import 'global';
 
-.post-head {
-  padding-bottom: 12px;
-  padding-top: 11px;
-}
 .scroll-post-flash {
   animation: flash 600ms ease alternate 2;
 }
@@ -13,79 +9,81 @@
   to { background-color: $polo; }
 }
 
-.post-breakdown {
-  margin: 0 12px;
-  img {
-    @include squareObjectFit(38px);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    display: block;
-    float: left;
-    margin-right: 8px;
+.post-head {
+  padding-bottom: 12px;
+  padding-top: 11px;
+  .post-breakdown {
+    margin: 0 12px;
+    img {
+      @include squareObjectFit(38px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      display: block;
+      float: left;
+      margin-right: 8px;
+    }
+    .post-breakdown-users {
+      @include typeChambray(14px);
+      float: left;
+      width: 416px;
+      position: relative;
+      margin-bottom: 5px;
+      top: 2px;
+      .post-author-name {
+        float: left;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      i {
+        color: #969696;
+        font-size: 14px;
+        margin: 0 5px;
+      }
+    }
+    .post-breakdown-datetime {
+      float: left;
+      .post-datetime {
+        float: left;
+      }
+      .post-datetime {
+        @include typeShadyLady;
+      }
+    }
   }
 }
-.post-breakdown-details {
-  @include typeChambray(14px);
-  float: left;
-  width: 416px;
-  position: relative;
-  margin-bottom: 5px;
-  top: 2px;
-  a:hover {
-    text-decoration: underline;
-  }
-  div {
-    float: left;
-  }
-}
-div.friend-post-icon {
-  margin: 0 5px;
-  i {
-    font-size: 14px;
-    color: #969696;
-  }
-}
-.post-datetime-container {
-  float: left;
-}
-.post-datetime {
-  float: left;
-}
-.post-datetime {
-  @include typeShadyLady;
-}
+
 .post-options-container {
   position: relative;
   i {
-    position: absolute;
     color: #d8dbdf;
-    top: -17px;
-    right: 0;
     font-size: 13px;
+    position: absolute;
+    right: 0;
+    top: -17px;
   }
   i:hover {
     color: #c1c5cc;
     cursor: pointer;
   }
   ul {
-    padding: 0;
-    display: block;
-    position: absolute;
-    border-radius: 3px;
-    width: 110px;
-    top: -14px;
-    right: -5px;
-
     background-color: white;
     border: 1px solid rgba(#000000, 0.15);
+    border-radius: 3px;
     box-shadow: 0 3px 8px rgba(#000000, 0.3);
+    display: block;
+    padding: 0;
+    position: absolute;
+    right: -5px;
+    top: -14px;
+    width: 110px;
   }
   li {
     @include typeStandard;
+    cursor: pointer;
     float: left;
     margin: 6px 0;
     padding: 3px 12px;
     width: 86px;
-    cursor: pointer;
   }
   li:hover {
     background-color: #3d4ea7;
@@ -111,8 +109,8 @@ div.friend-post-icon {
   color: #888888;
   padding: 5px 12px 3px;
   a {
-    cursor: pointer;
     color: $chambray;
+    cursor: pointer;
   }
   a:hover  {
     text-decoration: underline;
