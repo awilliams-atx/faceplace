@@ -1,5 +1,4 @@
-var React = require('react'),
-    Util = require('../../util/general');
+var React = require('react');
 
 var SearchIndexItem = React.createClass({
   contextTypes: {
@@ -33,8 +32,6 @@ var SearchIndexItem = React.createClass({
   onFollowLink: function (e) {
     e.preventDefault();
     this.props.onFollowLink();
-    this.context.router.push('/users/' + this.props.user.userId);
-    Util.jumpToTop();
   }
 });
 

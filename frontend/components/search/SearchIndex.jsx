@@ -1,4 +1,5 @@
 var React = require('react'),
+    Util = require('../../util/general'),
     SearchIndex = require('./SearchIndex'),
     ClientActions = require('../../actions/client_actions'),
     SearchStore = require('../../stores/search'),
@@ -6,6 +7,9 @@ var React = require('react'),
     SessionStore = require('../../stores/session');
 
 var SearchIndex = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function () {
     return({
       searching: false,
@@ -69,12 +73,12 @@ var SearchIndex = React.createClass({
   },
   arrowScroll: function (difference) {
     if (this.state.selectedItem === undefined) {
-      var selectedItem = difference;
+      var selectedItem = difference - 1;
     } else {
       var selectedItem = this.state.selectedItem + difference;
     }
     if (selectedItem < 0) {
-      selectedItem = undefined
+      selectedItem = undefined;
     } else if (selectedItem + 1 > this.state.users.length) {
       selectedItem = this.state.users.length - 1;
     }
@@ -83,12 +87,22 @@ var SearchIndex = React.createClass({
   hideIndexItems: function (e) {
     document.removeEventListener('click', this.clickOutListener);
     document.removeEventListener('keyup', this.arrowListener);
-    this.setState({ searching: false });
+    this.setState({ searching: false, selectedItem: undefined });
   },
   onFollowLink: function () {
+    if (this.state.selectedItem === undefined) { return }
     document.removeEventListener('click', this.clickOutListener);
     document.removeEventListener('keyup', this.arrowListener);
-    this.setState({ searching: false, searchString: '' });
+    var id = this.state.users[this.state.selectedItem].userId;
+    this.setState({
+      searching: false,
+      searchString: '',
+      selectedItem: undefined
+    }, function () {
+      this.refs.searchBar.blur();
+      this.context.router.push('/users/' + id);
+      Util.jumpToTop();
+    }.bind(this));
   },
   onMouseOver: function (e) {
     if (parseInt(e.target.dataset.idx) !== this.state.selectedItem) {
@@ -105,18 +119,15 @@ var SearchIndex = React.createClass({
   },
   onSubmit: function (e) {
     e.preventDefault();
+    this.onFollowLink();
   },
   setSelectedItem: function () {
+    if (this.state.selectedItem === undefined) { return }
     if (this.state.users.length === 0
       && this.state.selectedItem !== undefined) {
-      var selectedItem = undefined;
-      var resetState = true;
+      this.setState({ selectedItem: undefined })
     } else if (this.state.selectedItem >= this.state.users.length) {
-      var selectedItem = this.state.users.length - 1;
-      var resetState = true;
-    }
-    if (resetState) {
-      this.setState({ selectedItem: selectedItem });
+      this.setState({ selectedItem: this.state.users.length - 1 })
     }
   },
   showIndexItems: function (e) {

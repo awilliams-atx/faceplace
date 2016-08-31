@@ -38,7 +38,9 @@
     }
     .search-index-item:hover {
       cursor: pointer;
-      background-color: $athensGray3;
+    }
+    .selected-search-item {
+      background-color: $catskillWhite;
     }
   }
 }
