@@ -1,4 +1,5 @@
 var React = require('react'),
+    Moment = require('moment'),
     QC = require('./query_code');
 
 module.exports = {
@@ -15,6 +16,14 @@ module.exports = {
   },
   jumpToTop: function () {
     window.scrollTo(0, 0);
+  },
+  moment: function (datetime) {
+    var currentTime = new Date();
+    if (currentTime - new Date(datetime) < 86400000) {
+      return Moment(datetime).fromNow();
+    } else {
+      return Moment(datetime).format("dddd, MMMM Do YYYY, h:mm a");
+    }
   },
   pathMatch: function (pathname) {
     return window.location.pathname.match(pathname);
