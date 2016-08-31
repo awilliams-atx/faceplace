@@ -40,6 +40,7 @@ var SearchIndex = React.createClass({
             key={idx}
             onFollowLink={this.onFollowLink}
             onMouseOver={this.onMouseOver}
+            selectedItem={this.state.selectedItem}
             user={user} />
         );
       }.bind(this));

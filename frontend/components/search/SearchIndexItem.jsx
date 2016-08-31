@@ -9,7 +9,7 @@ var SearchIndexItem = React.createClass({
     var user = this.props.user;
 
     return (
-      <div className='search-index-item group'
+      <div className={this.className() + 'search-index-item group'}
         data-idx={this.props.idx}
         id={user.id}
         onClick={this.onFollowLink}
@@ -22,6 +22,13 @@ var SearchIndexItem = React.createClass({
         </div>
       </div>
     );
+  },
+  className: function () {
+    if (this.props.idx === this.props.selectedItem) {
+      return 'selected-search-item ';
+    } else {
+      return '';
+    }
   },
   onFollowLink: function (e) {
     e.preventDefault();
