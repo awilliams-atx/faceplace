@@ -36,8 +36,10 @@ var SearchIndex = React.createClass({
     if (this.state.searching) {
       return this.state.users.map(function (user, idx) {
         return(
-          <SearchIndexItem key={idx}
+          <SearchIndexItem idx={idx}
+            key={idx}
             onFollowLink={this.onFollowLink}
+            onMouseOver={this.onMouseOver}
             user={user} />
         );
       }.bind(this));
@@ -75,9 +77,7 @@ var SearchIndex = React.createClass({
     } else if (selectedItem + 1 > this.state.users.length) {
       selectedItem = this.state.users.length - 1;
     }
-    this.setState({ selectedItem: selectedItem }, function () {
-      console.log(this.state);
-    }.bind(this));
+    this.setState({ selectedItem: selectedItem });
   },
   hideIndexItems: function (e) {
     document.removeEventListener('click', this.clickOutListener);
@@ -88,6 +88,11 @@ var SearchIndex = React.createClass({
     document.removeEventListener('click', this.clickOutListener);
     document.removeEventListener('keyup', this.arrowListener);
     this.setState({ searching: false, searchString: '' });
+  },
+  onMouseOver: function (e) {
+    if (parseInt(e.target.dataset.idx) !== this.state.selectedItem) {
+      this.setState({ selectedItem: parseInt(e.target.dataset.idx) });
+    }
   },
   onSearchStoreChange: function (e) {
     this.setState({ users: SearchStore.all() }, this.setSelectedItem);
@@ -101,10 +106,7 @@ var SearchIndex = React.createClass({
     e.preventDefault();
   },
   setSelectedItem: function () {
-    if (this.state.selectedItem < 0) {
-      var selectedItem = undefined;
-      var resetState = true;
-    } else if (this.state.users.length === 0
+    if (this.state.users.length === 0
       && this.state.selectedItem !== undefined) {
       var selectedItem = undefined;
       var resetState = true;
@@ -113,9 +115,7 @@ var SearchIndex = React.createClass({
       var resetState = true;
     }
     if (resetState) {
-      this.setState({ selectedItem: selectedItem }, function () {
-        console.log(this.state);
-      }.bind(this));
+      this.setState({ selectedItem: selectedItem });
     }
   },
   showIndexItems: function (e) {
