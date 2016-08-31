@@ -38,7 +38,7 @@ var ProfilePic = React.createClass({
   },
   componentWillReceiveProps: function (props) {
     if (!Util.sameImgUrl(this.refs.profilePic,
-      props.profileOwner.proflePicUrl)) {
+      props.profileOwner.profilePicUrl)) {
       this.setState({ loading: true });
     }
   },
