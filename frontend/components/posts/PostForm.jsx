@@ -15,9 +15,6 @@ var PostForm = React.createClass({
     var tagUrl =
           'https://s3.amazonaws.com/faceplace-dev/assets/add_friend_icon+original.png';
 
-  var taggingClass =
-    this.state.tagging ? ' tag-icon-active' : 'tag-icon';
-
   var elTypeClass =
     this.props.isModalElement ? 'modal-element' : 'subcontent-container';
 
@@ -50,7 +47,7 @@ var PostForm = React.createClass({
           <footer>
             <div className='post-footer-background'>
               <div className='post-footer-left-buttons'>
-                <div className={taggingClass}
+                <div className={this.taggingClass()}
                   onClick={this.toggleTag}>
                   <i className="fa fa-user-plus" aria-hidden="true"></i>
                 </div>
@@ -143,6 +140,9 @@ var PostForm = React.createClass({
     } else {
       return '';
     }
+  },
+  taggingClass: function () {
+    return this.state.tagging ? ' tag-icon-active' : 'tag-icon';
   },
   taggingListener: function (e) {
     var node = e.target;
