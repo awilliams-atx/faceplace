@@ -4,6 +4,9 @@ var UIManipulator = {
   clearScrollPost: function () {
     ui.scrollPost = undefined;
   },
+  focusScrollPost: function (post) {
+    post.getElementsByTagName('textarea')[0].focus();
+  },
   scrollPost: function () {
     return ui.scrollPost;
   },
@@ -14,6 +17,7 @@ var UIManipulator = {
     if (!post) { return }
     window.scrollTo(0, post.offsetTop - 20);
     this.styleScrollPost(post);
+    this.focusScrollPost(post);
     this.clearScrollPost();
   },
   setScrollPost: function (id) {
