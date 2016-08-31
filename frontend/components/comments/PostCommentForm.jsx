@@ -4,7 +4,7 @@ var React = require('react'),
 
 var PostCommentForm = React.createClass({
   getInitialState: function () {
-    return ({body: ''});
+    return ({ body: '' });
   },
   render: function () {
     return (
@@ -13,12 +13,27 @@ var PostCommentForm = React.createClass({
         <textarea placeholder='Write a comment...'
           value={this.state.body}
           onChange={this.onChange}
-          onKeyPress={this.onSubmit}></textarea>
+          onKeyPress={this.onSubmit}
+          ref='textarea'
+          rows='1'></textarea>
+        <div className='autogrower' ref='autogrower'></div>
       </div>
     );
   },
+  autogrow: function () {
+    this.refs.autogrower.textContent = this.state.body;
+    if (this.state.body.length === 0) {
+      this.refs.textarea.style.height = '16px';
+    } else {
+      this.refs.autogrower.style.display = 'block';
+      var height = this.refs.autogrower.clientHeight;
+      this.refs.autogrower.style.display = 'none'
+      height = (height - 18).toString() + 'px';
+      this.refs.textarea.style.height = height;
+    }
+  },
   onChange: function (e) {
-    this.setState({body: e.target.value});
+    this.setState({ body: e.target.value }, this.autogrow);
   },
   onSubmit: function (e) {
     if (e.charCode === 13) {

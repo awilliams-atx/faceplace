@@ -46,10 +46,20 @@
       border: 1px solid $iron2;
       display: block;
       float: left;
-      height: 16px;
+      min-height: 16px;
       outline: none;
+      overflow: hidden;
       padding: 7px 5px;
       resize: none;
+      width: 434px;
+    }
+    .autogrower {
+      @include typeStandard;
+      display: none;
+      min-height: 16px;
+      padding: 7px 5px;
+      position: absolute;
+      white-space: pre-wrap;
       width: 434px;
     }
   }
