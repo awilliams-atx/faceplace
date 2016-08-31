@@ -14,25 +14,6 @@ var SearchIndex = React.createClass({
     });
   },
   render: function () {
-    var currentUserId = SessionStore.currentUser().id;
-    var searchIndexItems = <div className='empty-search-index-items'></div>;
-
-    if (this.state.searching) {
-      var users;
-
-      var filteredUsers = this.state.users.filter(function (user) {
-        var name = (user.firstName + ' ' + user.lastName).toLowerCase();
-        return name.match(this.state.searchString.toLowerCase());
-      }.bind(this));
-
-      searchIndexItems = filteredUsers.map(function (user) {
-        return <SearchIndexItem
-          user={user}
-          key={user.userId}
-          clickHandler={this.hideIndexItems} />;
-      }.bind(this));
-    }
-
     return (
       <div id='search-bar-container'>
         <form onSubmit={this.handleSubmit} >
@@ -44,10 +25,21 @@ var SearchIndex = React.createClass({
         </form>
 
         <div id='search-index' className='overlay'>
-          {searchIndexItems}
+          {this.renderSearchIndexItems()}
         </div>
       </div>
     );
+  },
+  renderSearchIndexItems: function () {
+    if (this.state.searching) {
+      return this.state.users.map(function (user) {
+        return(
+          <SearchIndexItem clickHandler={this.hideIndexItems}
+            key={user.userId}
+            user={user} />
+        );
+      }.bind(this));
+    }
   },
   componentDidMount: function () {
     this.SearchListener = SearchStore.addListener(this.onSearchStoreChange);
