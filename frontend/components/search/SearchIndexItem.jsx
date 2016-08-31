@@ -11,7 +11,7 @@ var SearchIndexItem = React.createClass({
     return (
       <div className='search-index-item group'
         id={user.id}
-        onClick={this.clickHandler} >
+        onClick={this.onFollowLink} >
         <div className='search-icon'><img src={user.profilePicUrl} /></div>
         <div className='search-text'>
           <strong>{user.firstName + ' ' + user.lastName}</strong>
@@ -21,9 +21,9 @@ var SearchIndexItem = React.createClass({
       </div>
     );
   },
-  clickHandler: function (e) {
+  onFollowLink: function (e) {
     e.preventDefault();
-    this.props.clickHandler();
+    this.props.onFollowLink();
     this.context.router.push('/users/' + this.props.user.userId);
     Util.jumpToTop();
   }

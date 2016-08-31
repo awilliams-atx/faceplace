@@ -16,14 +16,15 @@ var SearchIndex = React.createClass({
   render: function () {
     return (
       <div id='search-bar-container'>
-        <form onSubmit={this.handleSubmit} >
+        <form onSubmit={this.onSubmit} >
           <input autoComplete='off'
             id='search-bar'
             onChange={this.onSearchStringChange}
             onFocus={this.showIndexItems}
-            placeholder='Search Faceplace' />
+            placeholder='Search Faceplace'
+            ref='searchBar'
+            value={this.state.searchString} />
         </form>
-
         <div id='search-index' className='overlay'>
           {this.renderSearchIndexItems()}
         </div>
@@ -34,7 +35,7 @@ var SearchIndex = React.createClass({
     if (this.state.searching) {
       return this.state.users.map(function (user) {
         return(
-          <SearchIndexItem clickHandler={this.hideIndexItems}
+          <SearchIndexItem onFollowLink={this.onFollowLink}
             key={user.userId}
             user={user} />
         );
@@ -43,46 +44,39 @@ var SearchIndex = React.createClass({
   },
   componentDidMount: function () {
     this.SearchListener = SearchStore.addListener(this.onSearchStoreChange);
-    $(document).keydown(function (event) {
-      if (event.which === 27) { this.setState({searching: false}); }
-    }.bind(this));
   },
   componentWillUnmount: function () {
     this.SearchListener.remove();
   },
-  handleSubmit: function (e) {
-    e.preventDefault();
+  clickOutListener: function (e) {
+    if (!this.refs.searchBar.contains(e.target)) {
+      this.hideIndexItems();
+    }
   },
   hideIndexItems: function (e) {
-    document.getElementsByTagName('body')[0]
-      .removeEventListener('click', this.clickListener);
-    this.setState({searching: false});
+    document.removeEventListener('click', this.clickOutListener);
+    this.setState({ searching: false });
+  },
+  onFollowLink: function () {
+    document.removeEventListener('click', this.clickOutListener);
+    this.setState({ searching: false, searchString: '' });
   },
   onSearchStoreChange: function (e) {
-    this.setState({users: SearchStore.all()});
+    this.setState({ users: SearchStore.all() });
   },
   onSearchStringChange: function (e) {
-    this.setState({searchString: e.target.value}, function () {
+    this.setState({ searchString: e.target.value }, function () {
       ClientActions.fetchSearchResults(this.state.searchString);
     });
   },
+  onSubmit: function (e) {
+    e.preventDefault();
+  },
   showIndexItems: function (e) {
-    if (this.state.searching) { return; }
+    if (this.state.searching) { return }
     ClientActions.fetchSearchResults(this.state.searchString);
-
-    this.setState({
-      searching: true
-    }, function () {
-      this.clickListener = function (e) {
-        var searchBar = document.getElementById('search-bar-container');
-
-        if (!searchBar.contains(e.target)) {
-          this.hideIndexItems();
-        }
-      }.bind(this);
-
-      document.getElementsByTagName('body')[0]
-      .addEventListener('click', this.clickListener);
+    this.setState({ searching: true }, function () {
+      document.addEventListener('click', this.clickOutListener);
     });
   }
 });
