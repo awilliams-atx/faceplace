@@ -4,7 +4,7 @@ json.body comment.body
 json.commentableId comment.commentable_id
 json.commentableType comment.commentable_type
 
-json.createdAt time_ago_in_words(comment.created_at) + ' ago'
+json.createdAt comment.created_at
 
 
 json.authorId comment.author_id

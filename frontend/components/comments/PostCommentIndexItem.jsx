@@ -21,7 +21,7 @@ var CommentIndexItem = React.createClass({
           <br />
           <i className="fa fa-pencil" aria-hidden="true"></i>
           <div className='post-comment-created-at'>
-            {this.props.comment.createdAt}
+            {Util.moment(this.props.comment.createdAt)}
           </div>
         </div>
       </div>
