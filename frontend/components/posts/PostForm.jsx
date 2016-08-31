@@ -9,11 +9,7 @@ var React = require('react'),
 
 var PostForm = React.createClass({
   getInitialState: function () {
-    return({
-      isTaggingForTheFirstTime: true,
-      postBody: '',
-      tagging: false
-    });
+    return({ body: '', isTaggingForTheFirstTime: true, tagging: false });
   },
   render: function () {
     var currentUser = SessionStore.currentUser(),
@@ -82,9 +78,9 @@ var PostForm = React.createClass({
             <img src={SessionStore.currentUser().postPicUrl}
               className='post-pic'/>
             <textarea className='post-textarea'
-              onChange={this.onPostBodyChange}
+              onChange={this.onBodyChange}
               onFocus={this.untoggleTag}
-              value={this.state.postBody}
+              value={this.state.body}
               placeholder={placeholderText}
               ref='autoFocus' >
             </textarea>
@@ -126,7 +122,7 @@ var PostForm = React.createClass({
 
     var post = this.props.post;
     if (post) {
-      this.setState({postBody: post.body}, function () {
+      this.setState({ body: post.body }, function () {
         ClientActions.fetchTaggedFriends(post.postId);
         this.refs.autoFocus.focus();
       }.bind(this));
@@ -138,9 +134,9 @@ var PostForm = React.createClass({
   },
   handleSubmit: function (e) {
     e.preventDefault();
-    if (this.state.postBody.length < 1) { return; }
+    if (this.state.body.length < 1) { return; }
     var post = {
-      body: this.state.postBody,
+      body: this.state.body,
       taggedFriendIds: Object.keys(TagStore.taggedFriends())
     };
     if (this.props.isEditing) {
@@ -151,13 +147,13 @@ var PostForm = React.createClass({
       this.props.modalCallback();
     } else {
       post.profileOwnerId = this.props.profileOwnerId;
-      this.setState({postBody: '', tagging: false}, function () {
+      this.setState({ body: '', tagging: false }, function () {
         ClientActions.submitPost(post);
       });
     }
   },
-  onPostBodyChange: function (e) {
-    this.setState({postBody: e.target.value});
+  onBodyChange: function (e) {
+    this.setState({ body: e.target.value });
   },
   postSectionId: function () {
     if (this.props.isEditing) {
@@ -178,8 +174,8 @@ var PostForm = React.createClass({
     var willTagForTheFirstTime = !!this.state.isTaggingForTheFirstTime;
 
     this.setState({
-      tagging: !this.state.tagging,
-      isTaggingForTheFirstTime: false
+      isTaggingForTheFirstTime: false,
+      tagging: !this.state.tagging
     }, function () {
       if (this.state.tagging) {
         if (willTagForTheFirstTime) {
@@ -190,7 +186,7 @@ var PostForm = React.createClass({
     });
   },
   untoggleTag: function () {
-    this.setState({tagging: false});
+    this.setState({ tagging: false });
   }
 });
 
