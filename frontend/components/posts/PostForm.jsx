@@ -14,15 +14,9 @@ var PostForm = React.createClass({
   render: function () {
     var currentUser = SessionStore.currentUser(),
         profileOwner = UserStore.user(),
-        placeholderText,
         tagUrl =
           'https://s3.amazonaws.com/faceplace-dev/assets/add_friend_icon+original.png';
 
-  if (SessionStore.currentUser().id === this.props.profileOwnerId) {
-    placeholderText = 'What\'s on your mind, ' + currentUser.first_name + '?';
-  } else {
-    placeholderText = 'Say something to ' + profileOwner.firstName + '...';
-  }
 
   var taggingClass =
     this.state.tagging ? ' tag-icon-active' : 'tag-icon';
@@ -75,7 +69,7 @@ var PostForm = React.createClass({
               onChange={this.onBodyChange}
               onFocus={this.untoggleTag}
               value={this.state.body}
-              placeholder={placeholderText}
+              placeholder={this.placeholder()}
               ref='autoFocus' >
             </textarea>
           </div>
@@ -120,7 +114,7 @@ var PostForm = React.createClass({
     };
     if (this.props.isEditing) {
       post.id = this.props.post.postId;
-      $('body').removeClass('no-scroll-body');
+      document.body.removeClass('no-scroll-body');
       ClientActions.cancelModal();
       ClientActions.updatePost(post);
       this.props.modalCallback();
@@ -129,6 +123,14 @@ var PostForm = React.createClass({
       this.setState({ body: '', tagging: false }, function () {
         ClientActions.submitPost(post);
       });
+    }
+  },
+  placeholder: function () {
+    if (SessionStore.currentUser().id === this.props.profileOwnerId) {
+      return 'What\'s on your mind, ' +
+        SessionStore.currentUser().first_name + '?';
+    } else {
+      return 'Say something to ' + UserStore.user().firstName + '...';
     }
   },
   postSectionId: function () {
