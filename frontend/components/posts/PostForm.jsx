@@ -38,7 +38,7 @@ var PostForm = React.createClass({
       <div className='post-footer-right-buttons'>
         <button className='button-gray'
           id='modal-cancel'
-          onClick={this.handleCancel}>
+          onClick={this.onCancel}>
           Cancel
         </button>
         <button className='button-blue'
@@ -110,12 +110,12 @@ var PostForm = React.createClass({
       }.bind(this));
     }
   },
-  handleCancel: function (e) {
-    e.preventDefault();
-    this.props.modalCallback();
-  },
   onBodyChange: function (e) {
     this.setState({ body: e.target.value });
+  },
+  onCancel: function (e) {
+    e.preventDefault();
+    this.props.modalCallback();
   },
   onSubmit: function (e) {
     e.preventDefault();
