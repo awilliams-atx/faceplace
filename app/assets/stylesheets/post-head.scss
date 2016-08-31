@@ -52,54 +52,6 @@
   }
 }
 
-.post-options-container {
-  position: relative;
-  i {
-    color: #d8dbdf;
-    font-size: 13px;
-    position: absolute;
-    right: 0;
-    top: -17px;
-  }
-  i:hover {
-    color: #c1c5cc;
-    cursor: pointer;
-  }
-  ul {
-    background-color: white;
-    border: 1px solid rgba(#000000, 0.15);
-    border-radius: 3px;
-    box-shadow: 0 3px 8px rgba(#000000, 0.3);
-    display: block;
-    padding: 0;
-    position: absolute;
-    right: -5px;
-    top: -14px;
-    width: 110px;
-  }
-  li {
-    @include typeStandard;
-    cursor: pointer;
-    float: left;
-    margin: 6px 0;
-    padding: 3px 12px;
-    width: 86px;
-  }
-  li:hover {
-    background-color: #3d4ea7;
-    color: white;
-  }
-  li::selection {
-    background: rgba(#000000, 0);
-  }
-  li::-moz-selection {
-    background: rgba(#000000, 0);
-  }
-  hr {
-    margin: 0 auto;
-    width: 92px;
-  }
-}
 .post-body {
   @include typeStandard(14px);
   padding: 14px 12px 3px;
