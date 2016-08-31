@@ -1,4 +1,5 @@
 var React = require('react'),
+    Util = require('../../util/general'),
     ClientActions = require('../../actions/client_actions'),
     SessionStore = require('../../stores/session');
 
@@ -21,16 +22,13 @@ var PostCommentForm = React.createClass({
     );
   },
   autogrow: function () {
-    if (this.state.body.length === 0) {
-      this.refs.textarea.style.height = '16px';
-    } else {
-      this.refs.autogrower.textContent = this.state.body;
-      this.refs.autogrower.style.display = 'block';
-      var height = this.refs.autogrower.clientHeight;
-      this.refs.autogrower.style.display = 'none'
-      height = (height - 18).toString() + 'px';
-      this.refs.textarea.style.height = height;
-    }
+    Util.autogrow({
+      autogrower: this.refs.autogrower,
+      body: this.state.body,
+      difference: 14,
+      emptyHeight: 16,
+      textarea: this.refs.textarea
+    });
   },
   onChange: function (e) {
     this.setState({ body: e.target.value }, this.autogrow);

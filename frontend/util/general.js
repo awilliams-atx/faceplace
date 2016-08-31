@@ -2,6 +2,17 @@ var React = require('react'),
     QC = require('./query_code');
 
 module.exports = {
+  autogrow: function (op) {
+    if (op.body.length === 0) {
+      op.textarea.style.height = op.emptyHeight + 'px';
+    } else {
+      op.autogrower.textContent = op.body;
+      op.autogrower.style.display = 'block';
+      op.textarea.style.height =
+        (op.autogrower.clientHeight - op.difference).toString() + 'px';
+      op.autogrower.style.display = 'none'
+    }
+  },
   jumpToTop: function () {
     window.scrollTo(0, 0);
   },
