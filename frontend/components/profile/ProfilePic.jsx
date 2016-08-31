@@ -36,9 +36,10 @@ var ProfilePic = React.createClass({
     }
   },
   componentWillReceiveProps: function (props) {
-    window.pic = this.refs.profilePic
-    window.proPicUrl = props.profileOwner.profilePicUrl;
-    if (props.profileOwner.profilePicUrl !== this.refs.profilePic.src) {
+    if (!this.refs.profilePic.attributes.src) {
+      this.setState({ loading: true });
+    } else if (props.profileOwner.profilePicUrl !==
+      this.refs.profilePic.attributes.src.value) {
       this.setState({ loading: true });
     }
   },

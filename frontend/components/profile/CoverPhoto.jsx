@@ -37,9 +37,10 @@ var CoverPhoto = React.createClass({
     }
   },
   componentWillReceiveProps: function (props) {
-    window.cp = this.refs.coverPhoto;
-    window.proCP = props.profileOwner.coverPhotoUrl;
-    if (props.profileOwner.coverPhotoUrl !== this.refs.coverPhoto.src) {
+    if (!this.refs.coverPhoto.attributes.src) {
+      this.setState({ loading: true });
+    } else if (props.profileOwner.coverPhotoUrl !==
+      this.refs.coverPhoto.attributes.src.value) {
       this.setState({ loading: true });
     }
   },
