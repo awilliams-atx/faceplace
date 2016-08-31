@@ -43,7 +43,7 @@ var PostForm = React.createClass({
         </button>
         <button className='button-blue'
           id='modal-submit'
-          onClick={this.handleSubmit}>
+          onClick={this.onSubmit}>
           Update
         </button>
       </div>
@@ -52,7 +52,7 @@ var PostForm = React.createClass({
     footerRightButtons = (
       <div className='post-footer-right-buttons'>
         <button className='button-blue-wide'
-          onClick={this.handleSubmit}>Post</button>
+          onClick={this.onSubmit}>Post</button>
       </div>
     );
   }
@@ -114,7 +114,10 @@ var PostForm = React.createClass({
     e.preventDefault();
     this.props.modalCallback();
   },
-  handleSubmit: function (e) {
+  onBodyChange: function (e) {
+    this.setState({ body: e.target.value });
+  },
+  onSubmit: function (e) {
     e.preventDefault();
     if (this.state.body.length < 1) { return; }
     var post = {
@@ -133,9 +136,6 @@ var PostForm = React.createClass({
         ClientActions.submitPost(post);
       });
     }
-  },
-  onBodyChange: function (e) {
-    this.setState({ body: e.target.value });
   },
   postSectionId: function () {
     if (this.props.isEditing) {
@@ -159,9 +159,9 @@ var PostForm = React.createClass({
       if (!node) {
         document.removeEventListener('click', this.taggingListener);
         this.setState({ tagging: false });
-        return;
+        return
       } else if (noBlurClassNames.includes(node.className)) {
-        return;
+        return
       }
       node = node.parentNode;
     }
@@ -171,7 +171,6 @@ var PostForm = React.createClass({
   toggleTag: function (e) {
     e.preventDefault();
     var willTagForTheFirstTime = !!this.state.isTaggingForTheFirstTime;
-
     this.setState({
       isTaggingForTheFirstTime: false,
       tagging: !this.state.tagging
