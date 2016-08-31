@@ -12,39 +12,11 @@ var PostForm = React.createClass({
     return({ body: '', isTaggingForTheFirstTime: true, tagging: false });
   },
   render: function () {
-    var currentUser = SessionStore.currentUser(),
-        profileOwner = UserStore.user(),
-        tagUrl =
+    var tagUrl =
           'https://s3.amazonaws.com/faceplace-dev/assets/add_friend_icon+original.png';
-
 
   var taggingClass =
     this.state.tagging ? ' tag-icon-active' : 'tag-icon';
-
-  var footerRightButtons;
-  if (this.props.isEditing) {
-    footerRightButtons = (
-      <div className='post-footer-right-buttons'>
-        <button className='button-gray'
-          id='modal-cancel'
-          onClick={this.onCancel}>
-          Cancel
-        </button>
-        <button className='button-blue'
-          id='modal-submit'
-          onClick={this.onSubmit}>
-          Update
-        </button>
-      </div>
-    );
-  } else {
-    footerRightButtons = (
-      <div className='post-footer-right-buttons'>
-        <button className='button-blue-wide'
-          onClick={this.onSubmit}>Post</button>
-      </div>
-    );
-  }
 
   var elTypeClass =
     this.props.isModalElement ? 'modal-element' : 'subcontent-container';
@@ -83,12 +55,37 @@ var PostForm = React.createClass({
                   <i className="fa fa-user-plus" aria-hidden="true"></i>
                 </div>
               </div>
-              {footerRightButtons}
+              {this.renderFooterRightButtons()}
             </div>
           </footer>
         </form>
       </section>
     )
+  },
+  renderFooterRightButtons: function () {
+    if (this.props.isEditing) {
+      return (
+        <div className='post-footer-right-buttons'>
+          <button className='button-gray'
+            id='modal-cancel'
+            onClick={this.onCancel}>
+            Cancel
+          </button>
+          <button className='button-blue'
+            id='modal-submit'
+            onClick={this.onSubmit}>
+            Update
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div className='post-footer-right-buttons'>
+          <button className='button-blue-wide'
+            onClick={this.onSubmit}>Post</button>
+        </div>
+      );
+    }
   },
   componentDidMount: function () {
     if (this.props.post) {
@@ -114,7 +111,7 @@ var PostForm = React.createClass({
     };
     if (this.props.isEditing) {
       post.id = this.props.post.postId;
-      document.body.removeClass('no-scroll-body');
+      document.body.className = '';
       ClientActions.cancelModal();
       ClientActions.updatePost(post);
       this.props.modalCallback();
