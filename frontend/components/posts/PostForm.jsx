@@ -15,13 +15,8 @@ var PostForm = React.createClass({
     var currentUser = SessionStore.currentUser(),
         profileOwner = UserStore.user(),
         placeholderText,
-        tagContents,
         tagUrl =
           'https://s3.amazonaws.com/faceplace-dev/assets/add_friend_icon+original.png';
-
-  tagContents =
-    <TagSearch tagging={this.state.tagging}
-      isEditingPost={this.props.isEditing} />;
 
   if (SessionStore.currentUser().id === this.props.profileOwnerId) {
     placeholderText = 'What\'s on your mind, ' + currentUser.first_name + '?';
@@ -74,7 +69,6 @@ var PostForm = React.createClass({
         </div>
         <form>
           <div className='post-form'>
-
             <img src={SessionStore.currentUser().postPicUrl}
               className='post-pic'/>
             <textarea className='post-textarea'
@@ -85,7 +79,8 @@ var PostForm = React.createClass({
               ref='autoFocus' >
             </textarea>
           </div>
-          {tagContents}
+          <TagSearch tagging={this.state.tagging}
+            isEditingPost={this.props.isEditing} />
           <footer>
             <div className='post-footer-background'>
               <div className='post-footer-left-buttons'>
@@ -186,6 +181,5 @@ var PostForm = React.createClass({
     this.setState({ tagging: false });
   }
 });
-
 
 module.exports = PostForm;
