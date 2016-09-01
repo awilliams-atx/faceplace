@@ -13,38 +13,6 @@ var TagSearch = React.createClass({
     });
   },
   render: function () {
-
-    var taggedFriends;
-
-    var taggedIds = Object.keys(this.state.taggedFriends);
-
-    if (taggedIds.length > 0) {
-
-      taggedFriends = (
-        <div className='tagged-friends-list group'>
-          <div className='tagged-friends-with'>{'— with '}</div>
-          {
-            taggedIds.map(function (id) {
-              var friend = this.state.taggedFriends[id];
-
-              return (
-                <div className='tagged-friends-list-item'
-                  data-userid={id}
-                  key={id}
-                  onClick={this.untagFriend}>
-                  {friend.fullName}
-                </div>
-              );
-            }.bind(this))
-          }
-        </div>
-      );
-    } else {
-      taggedFriends = <div className='empty-tagged-friends' />;
-    }
-
-    var filteredFriends;
-
     if (this.props.tagging &&
         Object.keys(this.state.untaggedFriends).length > 0) {
       var untaggedFriends =
@@ -84,11 +52,33 @@ var TagSearch = React.createClass({
 
     return (
       <div className='tagging-container group'>
-        {taggedFriends}
+        {this.renderTaggedFriends()}
         {this.renderTaggingField()}
         {tagSearchItems}
       </div>
     );
+  },
+  renderTaggedFriendNames: function () {
+    return Object.keys(this.state.taggedFriends).map(function (id) {
+      return (
+        <div className='tagged-friends-list-item'
+          data-userid={id}
+          key={id}
+          onClick={this.untagFriend}>
+          {this.state.taggedFriends[id].fullName}
+        </div>
+      );
+    }.bind(this));
+  },
+  renderTaggedFriends: function () {
+    if (Object.keys(this.state.taggedFriends).length > 0) {
+      return (
+        <div className='tagged-friends-list group'>
+          <div className='tagged-friends-with'>{'— with '}</div>
+          {this.renderTaggedFriendNames()}
+        </div>
+      )
+    }
   },
   renderTaggingField: function () {
     if (this.props.tagging) {
