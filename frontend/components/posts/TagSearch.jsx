@@ -22,20 +22,20 @@ var TagSearch = React.createClass({
   renderInput: function () {
     if (this.props.tagging) {
       return (
-        <div className='tagging-field-container'>
-          <div className='tagging-field-with'>With:</div>
-          <div className='tagging-field'>
-            <input autoComplete='off'
-              className='tagged-friends-input'
-              onChange={this.onSearchStringChange}
-              placeholder='Who are you with?'
-              ref={function (input) {
-                if (input != null) {
-                  input.focus();
-                }
-              }}
-              value={this.state.searchString} />
+        <div className='tagging-field-container group'>
+          <div className='tagging-field-with'>
+            With:
           </div>
+          <input autoComplete='off'
+            className='tagged-friends-input'
+            onChange={this.onSearchStringChange}
+            placeholder='Who are you with?'
+            ref={function (input) {
+              if (input != null) {
+                input.focus();
+              }
+            }}
+            value={this.state.searchString} />
         </div>
       );
     }
@@ -54,11 +54,10 @@ var TagSearch = React.createClass({
           {
             untaggedFriends.map(function (friend) {
               return (
-                <div
-                  className='search-index-item group'
-                  onClick={this.onTagFriend}
+                <div className='search-index-item group'
+                  data-userid={friend.userId}
                   key={friend.userId}
-                  data-userid={friend.userId} >
+                  onClick={this.onTagFriend}>
                   <div className='search-icon'>
                     <img src={friend.postPicUrl} />
                   </div>

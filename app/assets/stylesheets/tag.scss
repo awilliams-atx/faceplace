@@ -88,17 +88,15 @@
   height: calc(100% - 14px);
   padding: 8px 6px 6px 8px;
 }
-.tagging-field {
-  input {
-    @include typeStandard(14px);
-    outline: none;
-  }
+.tagged-friends-input {
+  @include typeStandard(14px);
+  outline: none;
 }
 .tag-search-anchor-point {
   position: relative;
 }
 .tagging-friends-search-results {
-  top: 29px;
+  top: 1px;
   left: 44px;
   width: 240px;
   border-radius: 3px;

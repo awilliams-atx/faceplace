@@ -49,7 +49,6 @@ var PostForm = React.createClass({
           </div>
           {TaggedBoxes(this.state.tagged, this.untag)}
           <TagSearch isEditingPost={this.props.isEditing}
-            tag={this.tag}
             tagging={this.state.tagging} />
           <footer>
             <div className='post-footer-background'>
