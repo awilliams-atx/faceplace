@@ -43,37 +43,33 @@ var TagSearch = React.createClass({
   renderSearch: function () {
     if (this.props.tagging &&
       Object.keys(this.state.untaggedFriends).length > 0) {
-      var untaggedFriends =
-        Object.keys(this.state.untaggedFriends).map(function (id) {
-        return this.state.untaggedFriends[id];
-      }.bind(this));
-
       return (
         <div className='tag-search-anchor-point'>
           <div className='tagging-friends-search-results overlay group'>
-          {
-            untaggedFriends.map(function (friend) {
-              return (
-                <div className='search-index-item group'
-                  data-userid={friend.userId}
-                  key={friend.userId}
-                  onClick={this.onTagFriend}>
-                  <div className='search-icon'>
-                    <img src={friend.postPicUrl} />
-                  </div>
-                  <div className='search-text'>
-                    <strong>{friend.fullName}</strong>
-                    <br />
-                    <small>{friend.location}</small>
-                  </div>
-                </div>
-              );
-            }.bind(this))
-          }
+            {this.renderUntaggedFriends()}
           </div>
         </div>
       );
     }
+  },
+  renderUntaggedFriends: function () {
+    return this.friendsArray().map(function (friend) {
+      return (
+        <div className='search-index-item group'
+          data-userid={friend.userId}
+          key={friend.userId}
+          onClick={this.onTagFriend}>
+          <div className='search-icon'>
+            <img src={friend.postPicUrl} />
+          </div>
+          <div className='search-text'>
+            <strong>{friend.fullName}</strong>
+            <br />
+            <small>{friend.location}</small>
+          </div>
+        </div>
+      );
+    }.bind(this));
   },
   componentDidMount: function () {
     this.tagListener = TagStore.addListener(this.onTagStoreChange);
@@ -90,6 +86,11 @@ var TagSearch = React.createClass({
       if (!this.state.wasJustTagging && this.props.tagging) {
         ClientActions.fetchTagSearchResults(this.state.searchString);
       }
+    }.bind(this));
+  },
+  friendsArray: function () {
+    return Object.keys(this.state.untaggedFriends).map(function (id) {
+      return this.state.untaggedFriends[id];
     }.bind(this));
   },
   onSearchStringChange: function (e) {
