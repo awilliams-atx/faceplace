@@ -29,17 +29,18 @@ var TagSearch = React.createClass({
           <div className='tagging-field-with'>
             With:
           </div>
-          <input autoComplete='off'
-            className='tagged-friends-input'
-            onChange={this.onSearchStringChange}
-            onSubmit={this.onSubmit}
-            placeholder='Who are you with?'
-            ref={function (input) {
-              if (input != null) {
-                input.focus();
-              }
-            }}
-            value={this.state.searchString} />
+          <form onSubmit={this.onSubmit}>
+            <input autoComplete='off'
+              className='tagged-friends-input'
+              onChange={this.onSearchStringChange}
+              placeholder='Who are you with?'
+              ref={function (input) {
+                if (input != null) {
+                  input.focus();
+                }
+              }}
+              value={this.state.searchString} />
+          </form>
         </div>
       );
     }
@@ -108,11 +109,14 @@ var TagSearch = React.createClass({
       ClientActions.fetchTagSearchResults(this.state.searchString);
     });
   },
-  onTag: function (e) {
+  onSubmit: function (e) {
+    this.onTag(e, this.state.untaggedFriends[this.state.cursor].userId);
+  },
+  onTag: function (e, id) {
     e.preventDefault();
-    var friendId = parseInt(e.currentTarget.dataset.userid);
+    id = id || parseInt(e.currentTarget.dataset.userid);
     this.setState({ cursor: 0, searchString: '' }, function () {
-      ClientActions.addTaggedFriend(friendId);
+      ClientActions.addTaggedFriend(id);
       ClientActions.fetchTagSearchResults(this.state.searchString);
     }.bind(this));
   },
