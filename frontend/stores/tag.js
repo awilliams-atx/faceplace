@@ -3,12 +3,12 @@ var Store = require('flux/utils').Store,
     postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants');
 
-var _friends = {},
+var _friends = [],
     _friendsFetched = false,
     _isEditingPost = false,
-    _taggedFriends = {},
-    _untaggedFriends = {},
-    _extraTaggedFriends = {};
+    _taggedFriends = [],
+    _untaggedFriends = [],
+    _extraTaggedFriends = [];
 
 var TagStore = new Store(AppDispatcher);
 
@@ -51,57 +51,78 @@ TagStore.__onDispatch = function (payload) {
   }
 };
 
+TagStore.find = function (set, id) {
+  for (var i = 0; i < set.length; i++) {
+    if (set[i].userId === id) {
+      return set[i];
+    }
+  }
+};
+
+TagStore.exists = function (set, friend) {
+  for (var i = 0; i < set.length; i++) {
+    if (set[i].userId === friend.userId) {
+      return true;
+    }
+  }
+  return false;
+};
+
 TagStore.isEditingPost = function () {
   return !!_isEditingPost;
 };
 
 TagStore.freezeTags = function () {
-  Object.keys(_taggedFriends).forEach(function (userId) {
-    _extraTaggedFriends[userId] = _taggedFriends[userId];
-    delete _taggedFriends[userId];
-  });
+  _extraTaggedFriends = _taggedFriends.slice();
+  _taggedFriends = [];
 };
 
 TagStore.friendsFetched = function () {
   return _friendsFetched;
 };
 
+TagStore.remove = function (set, id) {
+  for (var i = 0; i < set.length; i++) {
+    if (set[i].userId === id) {
+      var user = set[i];
+      set.splice(i, 1);
+      return user;
+    }
+  }
+};
+
 TagStore.resetFriends = function () {
-  _taggedFriends = {};
-  _untaggedFriends = {};
+  _taggedFriends = [];
+  _untaggedFriends = [];
 };
 
 TagStore.setFriends = function (friends) {
-  _untaggedFriends = {};
-
+  _untaggedFriends = [];
   friends.forEach(function (friend) {
-    if (!_taggedFriends[friend.userId]) {
-      _untaggedFriends[friend.userId] = friend;
+    if (!TagStore.exists(_taggedFriends, friend)) {
+      _untaggedFriends.push(friend);
     }
   });
 };
 
 TagStore.setTaggedFriends = function (friends) {
   friends.forEach(function (friend) {
-    _taggedFriends[friend.userId] = friend;
+    _taggedFriends.push(friend);
   });
 };
 
 TagStore.tagFriend = function (userId) {
-  _taggedFriends[userId] = _untaggedFriends[userId];
-  delete _untaggedFriends[userId];
+  var user = TagStore.remove(_untaggedFriends, userId);
+  _taggedFriends.push(user);
 };
 
 TagStore.taggedFriends = function () {
-  return $.extend({}, _taggedFriends);
+  return _taggedFriends.slice();
 };
 
 TagStore.unfreezeTags = function () {
-  _taggedFriends = {};
-  Object.keys(_extraTaggedFriends).forEach(function (userId) {
-    _taggedFriends[userId] = _extraTaggedFriends[userId];
-    delete _extraTaggedFriends[userId];
-  });
+  _taggedFriends = _extraTaggedFriends.slice();
+  _extraTaggedFriends = [];
 };
 
 TagStore.untagFriend = function (userId) {
@@ -109,7 +130,7 @@ TagStore.untagFriend = function (userId) {
 };
 
 TagStore.untaggedFriends = function () {
-  return $.extend({}, _untaggedFriends);
+  return _untaggedFriends.slice();
 };
 
 module.exports = TagStore;
