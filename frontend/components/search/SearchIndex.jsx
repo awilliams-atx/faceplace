@@ -62,27 +62,11 @@ var SearchIndex = React.createClass({
     }
   },
   arrowListener: function (e) {
-    if (e.key === 'ArrowUp') {
-      var difference = -1;
-    } else if (e.key === 'ArrowDown') {
-      var difference = 1;
-    } else {
-      return
-    }
-    this.arrowScroll(difference);
-  },
-  arrowScroll: function (difference) {
-    if (this.state.cursor === undefined) {
-      var cursor = difference - 1;
-    } else {
-      var cursor = this.state.cursor + difference;
-    }
-    if (cursor < 0) {
-      cursor = undefined;
-    } else if (cursor + 1 > this.state.users.length) {
-      cursor = this.state.users.length - 1;
-    }
-    this.setState({ cursor: cursor });
+    var difference = Util.dirToDifference(e);
+    if (!difference) { return }
+    var cursor = Util.applyCursorDifference(difference, this.state.cursor);
+    cursor = Util.resetCursor(cursor, this.state.users);
+    if (cursor !== this.state.cursor) { this.setState({ cursor: cursor }) }
   },
   hideIndexItems: function (e) {
     document.removeEventListener('click', this.clickOutListener);

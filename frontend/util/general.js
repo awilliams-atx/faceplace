@@ -3,6 +3,10 @@ var React = require('react'),
     QC = require('./query_code');
 
 module.exports = {
+  applyCursorDifference: function(difference, cursor) {
+    cursor = (cursor === undefined) ? difference - 1 : cursor + difference;
+    return (cursor < 0) ? undefined : cursor;
+  },
   autogrow: function (op) {
     if (op.body.length === 0) {
       op.textarea.style.height = op.emptyHeight + 'px';
@@ -12,6 +16,13 @@ module.exports = {
       op.textarea.style.height =
         (op.autogrower.clientHeight - op.difference).toString() + 'px';
       op.autogrower.style.display = 'none'
+    }
+  },
+  dirToDifference: function (e) {
+    if (e.key === 'ArrowUp') {
+      return -1
+    } else if (e.key === 'ArrowDown') {
+      return 1;
     }
   },
   findSelfOrParent: function (node, nodeName) {
