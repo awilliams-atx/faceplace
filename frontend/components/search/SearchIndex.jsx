@@ -14,7 +14,7 @@ var SearchIndex = React.createClass({
     return({
       searching: false,
       searchString: '',
-      selectedItem: undefined,
+      cursor: undefined,
       users: SearchStore.all()
     });
   },
@@ -39,12 +39,12 @@ var SearchIndex = React.createClass({
   renderSearchIndexItems: function () {
     if (this.state.searching) {
       return this.state.users.map(function (user, idx) {
+        // cursor= <- space for Atom text editor render bug
         return(
-          <SearchIndexItem idx={idx}
-            key={idx}
+          <SearchIndexItem idx={idx} key={idx}
+            cursor= {this.state.cursor}
             onFollowLink={this.onFollowLink}
             onMouseOver={this.onMouseOver}
-            selectedItem={this.state.selectedItem}
             user={user} />
         );
       }.bind(this));
@@ -72,32 +72,32 @@ var SearchIndex = React.createClass({
     this.arrowScroll(difference);
   },
   arrowScroll: function (difference) {
-    if (this.state.selectedItem === undefined) {
-      var selectedItem = difference - 1;
+    if (this.state.cursor === undefined) {
+      var cursor = difference - 1;
     } else {
-      var selectedItem = this.state.selectedItem + difference;
+      var cursor = this.state.cursor + difference;
     }
-    if (selectedItem < 0) {
-      selectedItem = undefined;
-    } else if (selectedItem + 1 > this.state.users.length) {
-      selectedItem = this.state.users.length - 1;
+    if (cursor < 0) {
+      cursor = undefined;
+    } else if (cursor + 1 > this.state.users.length) {
+      cursor = this.state.users.length - 1;
     }
-    this.setState({ selectedItem: selectedItem });
+    this.setState({ cursor: cursor });
   },
   hideIndexItems: function (e) {
     document.removeEventListener('click', this.clickOutListener);
     document.removeEventListener('keyup', this.arrowListener);
-    this.setState({ searching: false, selectedItem: undefined });
+    this.setState({ searching: false, cursor: undefined });
   },
   onFollowLink: function () {
-    if (this.state.selectedItem === undefined) { return }
+    if (this.state.cursor === undefined) { return }
     document.removeEventListener('click', this.clickOutListener);
     document.removeEventListener('keyup', this.arrowListener);
-    var id = this.state.users[this.state.selectedItem].userId;
+    var id = this.state.users[this.state.cursor].userId;
     this.setState({
       searching: false,
       searchString: '',
-      selectedItem: undefined
+      cursor: undefined
     }, function () {
       this.refs.searchBar.blur();
       this.context.router.push('/users/' + id);
@@ -105,12 +105,12 @@ var SearchIndex = React.createClass({
     }.bind(this));
   },
   onMouseOver: function (e) {
-    if (parseInt(e.target.dataset.idx) !== this.state.selectedItem) {
-      this.setState({ selectedItem: parseInt(e.target.dataset.idx) });
+    if (parseInt(e.target.dataset.idx) !== this.state.cursor) {
+      this.setState({ cursor: parseInt(e.target.dataset.idx) });
     }
   },
   onSearchStoreChange: function (e) {
-    this.setState({ users: SearchStore.all() }, this.setSelectedItem);
+    this.setState({ users: SearchStore.all() }, this.resetCursor);
   },
   onSearchStringChange: function (e) {
     this.setState({ searchString: e.target.value }, function () {
@@ -121,14 +121,10 @@ var SearchIndex = React.createClass({
     e.preventDefault();
     this.onFollowLink();
   },
-  setSelectedItem: function () {
-    if (this.state.selectedItem === undefined) { return }
-    if (this.state.users.length === 0
-      && this.state.selectedItem !== undefined) {
-      this.setState({ selectedItem: undefined })
-    } else if (this.state.selectedItem >= this.state.users.length) {
-      this.setState({ selectedItem: this.state.users.length - 1 })
-    }
+  resetCursor: function () {
+    var cursor = Util.resetCursor(this.state.cursor,
+      this.state.users);
+    if (cursor !== this.state.cursor) { this.setState({ cursor: cursor }) }
   },
   showIndexItems: function (e) {
     if (this.state.searching) { return }

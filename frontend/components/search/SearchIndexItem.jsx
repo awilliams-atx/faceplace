@@ -23,7 +23,7 @@ var SearchIndexItem = React.createClass({
     );
   },
   className: function () {
-    if (this.props.idx === this.props.selectedItem) {
+    if (this.props.idx === this.props.cursor) {
       return 'selected-search-item ';
     } else {
       return '';

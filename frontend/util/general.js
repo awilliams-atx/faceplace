@@ -35,6 +35,29 @@ module.exports = {
   pathMatch: function (pathname) {
     return window.location.pathname.match(pathname);
   },
+  queryString: function queryString (key) {
+    // NB: Breaks if hash is present in URL.
+    key = QC(key);
+    var query = window.location.search.substring(1);
+    var pairs = query.split('&');
+    for (var i = 0; i < pairs.length; i++) {
+      var pair = pairs[i].split('=');
+      if (pair[0] === key) {
+        return pair[1];
+      }
+    }
+    return(null);
+  },
+  resetCursor: function (cursor, list) {
+    if (cursor === undefined ||
+      (list.length === 0 && cursor !== undefined)) {
+      return undefined
+    } else if (cursor >= list.length) {
+      return list.length - 1
+    } else {
+      return cursor
+    }
+  },
   sameImgUrl: function (img, url) {
     return (!img.attributes.src || img.attributes.src.value !== url) ? false :
       true;
@@ -71,18 +94,5 @@ module.exports = {
         );
       });
     }
-  },
-  queryString: function queryString (key) {
-    // NB: Breaks if hash is present in URL.
-    key = QC(key);
-    var query = window.location.search.substring(1);
-    var pairs = query.split('&');
-    for (var i = 0; i < pairs.length; i++) {
-      var pair = pairs[i].split('=');
-      if (pair[0] === key) {
-        return pair[1];
-      }
-    }
-    return(null);
   }
 };
