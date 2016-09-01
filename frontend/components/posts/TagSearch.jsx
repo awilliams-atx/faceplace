@@ -13,14 +13,66 @@ var TagSearch = React.createClass({
     });
   },
   render: function () {
+    return (
+      <div className='tagging-container group'>
+        {this.renderTagged()}
+        {this.renderInput()}
+        {this.renderSearch()}
+      </div>
+    );
+  },
+  renderTaggedNames: function () {
+    return Object.keys(this.state.taggedFriends).map(function (id) {
+      return (
+        <div className='tagged-friends-list-item'
+          data-userid={id}
+          key={id}
+          onClick={this.untagFriend}>
+          {this.state.taggedFriends[id].fullName}
+        </div>
+      );
+    }.bind(this));
+  },
+  renderTagged: function () {
+    if (Object.keys(this.state.taggedFriends).length > 0) {
+      return (
+        <div className='tagged-friends-list group'>
+          <div className='tagged-friends-with'>{'— with '}</div>
+          {this.renderTaggedNames()}
+        </div>
+      )
+    }
+  },
+  renderInput: function () {
+    if (this.props.tagging) {
+      return (
+        <div className='tagging-field-container'>
+          <div className='tagging-field-with'>With:</div>
+          <div className='tagging-field'>
+            <input autoComplete='off'
+              className='tagged-friends-input'
+              onChange={this.onSearchStringChange}
+              placeholder='Who are you with?'
+              ref={function (input) {
+                if (input != null) {
+                  input.focus();
+                }
+              }}
+              value={this.state.searchString} />
+          </div>
+        </div>
+      );
+    }
+  },
+  renderSearch: function () {
     if (this.props.tagging &&
-        Object.keys(this.state.untaggedFriends).length > 0) {
+      Object.keys(this.state.untaggedFriends).length > 0) {
       var untaggedFriends =
         Object.keys(this.state.untaggedFriends).map(function (id) {
         return this.state.untaggedFriends[id];
       }.bind(this));
 
-      tagSearchItems = (
+      return (
         <div className='tag-search-anchor-point'>
           <div className='tagging-friends-search-results overlay group'>
           {
@@ -43,59 +95,6 @@ var TagSearch = React.createClass({
               );
             }.bind(this))
           }
-          </div>
-        </div>
-      );
-    } else {
-      tagSearchItems = <div className='empty-tagged-friends-search-results'/>;
-    }
-
-    return (
-      <div className='tagging-container group'>
-        {this.renderTaggedFriends()}
-        {this.renderTaggingField()}
-        {tagSearchItems}
-      </div>
-    );
-  },
-  renderTaggedFriendNames: function () {
-    return Object.keys(this.state.taggedFriends).map(function (id) {
-      return (
-        <div className='tagged-friends-list-item'
-          data-userid={id}
-          key={id}
-          onClick={this.untagFriend}>
-          {this.state.taggedFriends[id].fullName}
-        </div>
-      );
-    }.bind(this));
-  },
-  renderTaggedFriends: function () {
-    if (Object.keys(this.state.taggedFriends).length > 0) {
-      return (
-        <div className='tagged-friends-list group'>
-          <div className='tagged-friends-with'>{'— with '}</div>
-          {this.renderTaggedFriendNames()}
-        </div>
-      )
-    }
-  },
-  renderTaggingField: function () {
-    if (this.props.tagging) {
-      return (
-        <div className='tagging-field-container'>
-          <div className='tagging-field-with'>With:</div>
-          <div className='tagging-field'>
-            <input autoComplete='off'
-              className='tagged-friends-input'
-              onChange={this.onSearchStringChange}
-              placeholder='Who are you with?'
-              ref={function (input) {
-                if (input != null) {
-                  input.focus();
-                }
-              }}
-              value={this.state.searchString} />
           </div>
         </div>
       );
