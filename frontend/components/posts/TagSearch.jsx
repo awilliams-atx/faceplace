@@ -1,4 +1,5 @@
 var React = require('react'),
+    TaggedBoxes = require('./TaggedBoxes'),
     ClientActions = require('../../actions/client_actions'),
     TagApiUtil = require('../../util/tag_api_util'),
     TagStore = require('../../stores/tag');
@@ -15,33 +16,11 @@ var TagSearch = React.createClass({
   render: function () {
     return (
       <div className='tagging-container group'>
-        {this.renderTagged()}
+        {TaggedBoxes(this.state.taggedFriends, this.untag)}
         {this.renderInput()}
         {this.renderSearch()}
       </div>
     );
-  },
-  renderTaggedNames: function () {
-    return Object.keys(this.state.taggedFriends).map(function (id) {
-      return (
-        <div className='tagged-friends-list-item'
-          data-userid={id}
-          key={id}
-          onClick={this.untagFriend}>
-          {this.state.taggedFriends[id].fullName}
-        </div>
-      );
-    }.bind(this));
-  },
-  renderTagged: function () {
-    if (Object.keys(this.state.taggedFriends).length > 0) {
-      return (
-        <div className='tagged-friends-list group'>
-          <div className='tagged-friends-with'>{'— with '}</div>
-          {this.renderTaggedNames()}
-        </div>
-      )
-    }
   },
   renderInput: function () {
     if (this.props.tagging) {
@@ -139,7 +118,7 @@ var TagSearch = React.createClass({
       ClientActions.fetchTagSearchResults(this.state.searchString);
     }.bind(this));
   },
-  untagFriend: function (e) {
+  untag: function (e) {
     var friendId = parseInt(e.target.dataset.userid);
     ClientActions.removeTaggedFriend(friendId);
     if (this.props.tagging) {
