@@ -60,6 +60,7 @@ TagStore.find = function (set, id) {
 };
 
 TagStore.exists = function (set, friend) {
+  if (set.length === 0) { return false }
   for (var i = 0; i < set.length; i++) {
     if (set[i].userId === friend.userId) {
       return true;
@@ -84,9 +85,7 @@ TagStore.friendsFetched = function () {
 TagStore.remove = function (set, id) {
   for (var i = 0; i < set.length; i++) {
     if (set[i].userId === id) {
-      var user = set[i];
-      set.splice(i, 1);
-      return user;
+      return set.splice(i, 1)[0];
     }
   }
 };
@@ -126,7 +125,7 @@ TagStore.unfreezeTags = function () {
 };
 
 TagStore.untagFriend = function (userId) {
-  delete _taggedFriends[userId];
+  TagStore.remove(_taggedFriends, userId);
 };
 
 TagStore.untaggedFriends = function () {

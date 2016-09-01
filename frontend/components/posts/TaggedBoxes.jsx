@@ -1,7 +1,7 @@
 var React = require('react');
 
 module.exports = function TaggedBoxes (friends, untag) {
-  if (Object.keys(friends).length > 0) {
+  if (friends.length > 0) {
     return (
       <div className='tagged-friends-list group'>
         <div className='tagged-friends-with'>{'— with '}</div>
@@ -12,13 +12,13 @@ module.exports = function TaggedBoxes (friends, untag) {
 };
 
 function renderNames (friends, untag) {
-  return Object.keys(friends).map(function (id) {
+  return friends.map(function (friend) {
     return (
       <div className='tagged-friends-list-item'
-        data-userid={id}
-        key={id}
+        data-userid={friend.userId}
+        key={friend.userId}
         onClick={untag}>
-        {friends[id].fullName}
+        {friend.fullName}
       </div>
     );
   });

@@ -45,8 +45,7 @@ var TagSearch = React.createClass({
     }
   },
   renderSearch: function () {
-    if (this.props.tagging &&
-      Object.keys(this.state.untaggedFriends).length > 0) {
+    if (this.props.tagging && this.state.untaggedFriends.length > 0) {
       return (
         <div className='tag-search-anchor-point'>
           <div className='tagging-friends-search-results overlay group'>
@@ -57,13 +56,13 @@ var TagSearch = React.createClass({
     }
   },
   renderUntaggedFriends: function () {
-    return this.friendsArray().map(function (friend, idx) {
+    return this.state.untaggedFriends.map(function (friend, idx) {
       return (
         <TagSearchItem friend={friend}
           cursor= {this.state.cursor}
           idx={idx}
           key={idx}
-          onClick={this.onTagFriend}
+          onTag={this.onTagFriend}
           onMouseEnter={this.onMouseEnter} />
       );
     }.bind(this));
@@ -94,15 +93,10 @@ var TagSearch = React.createClass({
     var difference = Util.dirToDifference(e);
     if (!difference) { return }
     var cursor = Util.applyCursorDifference(difference, this.state.cursor);
-    cursor = Util.resetCursor(cursor, this.friendsArray());
+    cursor = Util.resetCursor(cursor, this.state.untaggedFriends);
     if (cursor !== this.state.cursor) {
       this.setState({ cursor: cursor });
     }
-  },
-  friendsArray: function () {
-    return Object.keys(this.state.untaggedFriends).map(function (id) {
-      return this.state.untaggedFriends[id];
-    }.bind(this));
   },
   onMouseEnter: function (e) {
     if (parseInt(e.target.dataset.idx) !== this.state.cursor) {
