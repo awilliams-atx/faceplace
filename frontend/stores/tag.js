@@ -67,18 +67,12 @@ TagStore.friendsFetched = function () {
 };
 
 TagStore.resetFriends = function () {
-  Object.keys(_taggedFriends).forEach(function (userId) {
-    delete _taggedFriends[userId];
-  });
-  Object.keys(_untaggedFriends).forEach(function (userId) {
-    delete _untaggedFriends[userId];
-  });
+  _taggedFriends = {};
+  _untaggedFriends = {};
 };
 
 TagStore.setFriends = function (friends) {
-  Object.keys(_untaggedFriends).forEach(function (userId) {
-    delete _untaggedFriends[userId];
-  });
+  _untaggedFriends = {};
 
   friends.forEach(function (friend) {
     if (!_taggedFriends[friend.userId]) {
@@ -103,10 +97,7 @@ TagStore.taggedFriends = function () {
 };
 
 TagStore.unfreezeTags = function () {
-  Object.keys(_taggedFriends).forEach(function (userId) {
-    delete _taggedFriends[userId];
-  });
-
+  _taggedFriends = {};
   Object.keys(_extraTaggedFriends).forEach(function (userId) {
     _taggedFriends[userId] = _extraTaggedFriends[userId];
     delete _extraTaggedFriends[userId];
