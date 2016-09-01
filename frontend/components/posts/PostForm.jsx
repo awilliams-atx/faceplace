@@ -47,21 +47,21 @@ var PostForm = React.createClass({
             </textarea>
             <div className='autogrower' ref='autogrower'></div>
           </div>
-          {TaggedBoxes(this.state.tagged, this.untag)}
-          <TagSearch isEditingPost={this.props.isEditing}
-            tagging={this.state.tagging} />
-          <footer>
-            <div className='post-footer-background'>
-              <div className='post-footer-left-buttons'>
-                <div className={this.taggingClass()}
-                  onClick={this.toggleTag}>
-                  <i className="fa fa-user-plus" aria-hidden="true"></i>
-                </div>
-              </div>
-              {this.renderFooterRightButtons()}
-            </div>
-          </footer>
         </form>
+        {TaggedBoxes(this.state.tagged, this.untag)}
+        <TagSearch isEditingPost={this.props.isEditing}
+          tagging={this.state.tagging} />
+        <footer>
+          <div className='post-footer-background'>
+            <div className='post-footer-left-buttons'>
+              <div className={this.taggingClass()}
+                onClick={this.toggleTag}>
+                <i className="fa fa-user-plus" aria-hidden="true"></i>
+              </div>
+            </div>
+            {this.renderFooterRightButtons()}
+          </div>
+        </footer>
       </section>
     )
   },

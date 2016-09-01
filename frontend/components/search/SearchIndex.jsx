@@ -12,9 +12,9 @@ var SearchIndex = React.createClass({
   },
   getInitialState: function () {
     return({
+      cursor: 0,
       searching: false,
       searchString: '',
-      cursor: 0,
       users: SearchStore.all()
     });
   },
@@ -26,6 +26,9 @@ var SearchIndex = React.createClass({
             id='search-bar'
             onChange={this.onSearchStringChange}
             onFocus={this.showIndexItems}
+            onKeyDown={Util.preventSelectionChange}
+            onKeyPress={Util.preventSelectionChange}
+            onKeyUp={this.arrowListener}
             placeholder='Search Faceplace'
             ref='searchBar'
             value={this.state.searchString} />
@@ -70,18 +73,16 @@ var SearchIndex = React.createClass({
   },
   hideIndexItems: function (e) {
     document.removeEventListener('click', this.clickOutListener);
-    document.removeEventListener('keyup', this.arrowListener);
     this.setState({ searching: false, cursor: undefined });
   },
   onFollowLink: function () {
     if (this.state.cursor === undefined) { return }
     document.removeEventListener('click', this.clickOutListener);
-    document.removeEventListener('keyup', this.arrowListener);
     var id = this.state.users[this.state.cursor].userId;
     this.setState({
+      cursor: 0,
       searching: false,
-      searchString: '',
-      cursor: 0
+      searchString: ''
     }, function () {
       this.refs.searchBar.blur();
       this.context.router.push('/users/' + id);
@@ -115,7 +116,6 @@ var SearchIndex = React.createClass({
     ClientActions.fetchSearchResults(this.state.searchString);
     this.setState({ searching: true }, function () {
       document.addEventListener('click', this.clickOutListener);
-      document.addEventListener('keyup', this.arrowListener);
     });
   }
 });

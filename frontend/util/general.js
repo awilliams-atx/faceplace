@@ -18,6 +18,13 @@ module.exports = {
       op.autogrower.style.display = 'none'
     }
   },
+  dirToDifference: function (e) {
+    if (e.key === 'ArrowUp') {
+      return -1;
+    } else if (e.key === 'ArrowDown') {
+      return 1;
+    }
+  },
   hasOrDescendsFromClass: function () {
     var args = [].slice.call(arguments);
     var node = args[0];
@@ -33,13 +40,6 @@ module.exports = {
       node = node.parentNode;
     }
     return false
-  },
-  dirToDifference: function (e) {
-    if (e.key === 'ArrowUp') {
-      return -1
-    } else if (e.key === 'ArrowDown') {
-      return 1;
-    }
   },
   findSelfOrParent: function (node, nodeName) {
     if (node.tagName === nodeName) {
@@ -72,6 +72,9 @@ module.exports = {
   },
   pathMatch: function (pathname) {
     return window.location.pathname.match(pathname);
+  },
+  preventSelectionChange: function (e) {
+    if (e.key === 'ArrowUp' || e.key === 'ArrowDown') { e.preventDefault() }
   },
   queryString: function queryString (key) {
     // NB: Breaks if hash is present in URL.

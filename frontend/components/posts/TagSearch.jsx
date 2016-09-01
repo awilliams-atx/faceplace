@@ -33,6 +33,9 @@ var TagSearch = React.createClass({
             <input autoComplete='off'
               className='tagged-friends-input'
               onChange={this.onSearchStringChange}
+              onKeyDown={Util.preventSelectionChange}
+              onKeyPress={Util.preventSelectionChange}
+              onKeyUp={this.arrowListener}
               placeholder='Who are you with?'
               ref={function (input) {
                 if (input != null) {
@@ -80,13 +83,8 @@ var TagSearch = React.createClass({
       tagging: props.tagging,
       wasJustTagging: wasJustTagging
     }, function () {
-      if (this.props.tagging) {
-        document.addEventListener('keyup', this.arrowListener);
-        if (!this.state.wasJustTagging) {
-          ClientActions.fetchTagSearchResults(this.state.searchString);
-        }
-      } else {
-        document.removeEventListener('keyup', this.arrowListener);
+      if (this.props.tagging && !this.state.wasJustTagging) {
+        ClientActions.fetchTagSearchResults(this.state.searchString);
       }
     }.bind(this));
   },
