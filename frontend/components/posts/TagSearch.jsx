@@ -1,4 +1,6 @@
 var React = require('react'),
+    TagSearchItem = require('./TagSearchItem'),
+    Util = require('../../util/general'),
     ClientActions = require('../../actions/client_actions'),
     TagApiUtil = require('../../util/tag_api_util'),
     TagStore = require('../../stores/tag');
@@ -6,6 +8,7 @@ var React = require('react'),
 var TagSearch = React.createClass({
   getInitialState: function () {
     return ({
+      cursor: undefined,
       searchString: '',
       untaggedFriends: TagStore.untaggedFriends(),
       wasJustTagging: false
@@ -29,6 +32,7 @@ var TagSearch = React.createClass({
           <input autoComplete='off'
             className='tagged-friends-input'
             onChange={this.onSearchStringChange}
+            onSubmit={this.onSubmit}
             placeholder='Who are you with?'
             ref={function (input) {
               if (input != null) {
@@ -53,21 +57,14 @@ var TagSearch = React.createClass({
     }
   },
   renderUntaggedFriends: function () {
-    return this.friendsArray().map(function (friend) {
+    return this.friendsArray().map(function (friend, idx) {
       return (
-        <div className='search-index-item group'
-          data-userid={friend.userId}
-          key={friend.userId}
-          onClick={this.onTagFriend}>
-          <div className='search-icon'>
-            <img src={friend.postPicUrl} />
-          </div>
-          <div className='search-text'>
-            <strong>{friend.fullName}</strong>
-            <br />
-            <small>{friend.location}</small>
-          </div>
-        </div>
+        <TagSearchItem friend={friend}
+          cursor= {this.state.cursor}
+          idx={idx}
+          key={idx}
+          onClick={this.onTagFriend}
+          onMouseEnter={this.onMouseEnter} />
       );
     }.bind(this));
   },
@@ -83,33 +80,52 @@ var TagSearch = React.createClass({
       tagging: props.tagging,
       wasJustTagging: wasJustTagging
     }, function () {
-      if (!this.state.wasJustTagging && this.props.tagging) {
-        ClientActions.fetchTagSearchResults(this.state.searchString);
+      if (this.props.tagging) {
+        document.addEventListener('keyup', this.arrowListener);
+        if (!this.state.wasJustTagging) {
+          ClientActions.fetchTagSearchResults(this.state.searchString);
+        }
+      } else {
+        document.removeEventListener('keyup', this.arrowListener);
       }
     }.bind(this));
+  },
+  arrowListener: function (e) {
+    var difference = Util.dirToDifference(e);
+    if (!difference) { return }
+    var cursor = Util.applyCursorDifference(difference, this.state.cursor);
+    cursor = Util.resetCursor(cursor, this.friendsArray());
+    if (cursor !== this.state.cursor) {
+      this.setState({ cursor: cursor });
+    }
   },
   friendsArray: function () {
     return Object.keys(this.state.untaggedFriends).map(function (id) {
       return this.state.untaggedFriends[id];
     }.bind(this));
   },
+  onMouseEnter: function (e) {
+    if (parseInt(e.target.dataset.idx) !== this.state.cursor) {
+      this.setState({ cursor: parseInt(e.currentTarget.dataset.idx) });
+    }
+  },
   onSearchStringChange: function (e) {
-    this.setState({searchString: e.target.value}, function () {
+    this.setState({cursor: 0, searchString: e.target.value}, function () {
       ClientActions.fetchTagSearchResults(this.state.searchString);
     });
+  },
+  onTagFriend: function (e) {
+    e.preventDefault();
+    var friendId = parseInt(e.currentTarget.dataset.userid);
+    this.setState({ cursor: 0, searchString: '', }, function () {
+      ClientActions.addTaggedFriend(friendId);
+      ClientActions.fetchTagSearchResults(this.state.searchString);
+    }.bind(this));
   },
   onTagStoreChange: function () {
     if (TagStore.isEditingPost() && !this.props.isEditingPost) { return; }
     this.setState({ untaggedFriends: TagStore.untaggedFriends() });
   },
-  onTagFriend: function (e) {
-    e.preventDefault();
-    var friendId = parseInt(e.currentTarget.dataset.userid);
-    this.setState({ searchString: '', }, function () {
-      ClientActions.addTaggedFriend(friendId);
-      ClientActions.fetchTagSearchResults(this.state.searchString);
-    }.bind(this));
-  }
 });
 
 module.exports = TagSearch;
