@@ -87,13 +87,14 @@ module.exports = {
     return(null);
   },
   resetCursor: function (cursor, list) {
-    if (cursor === undefined ||
-      (list.length === 0 && cursor !== undefined)) {
-      return undefined
+    if (list.length === 0 && cursor !== undefined) {
+      return undefined;
     } else if (cursor >= list.length) {
-      return list.length - 1
+      return list.length - 1;
+    } else if (cursor === undefined && list.length === 1) {
+      return 0;
     } else {
-      return cursor
+      return cursor;
     }
   },
   sameImgUrl: function (img, url) {
