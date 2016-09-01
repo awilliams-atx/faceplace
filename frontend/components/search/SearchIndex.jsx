@@ -47,7 +47,7 @@ var SearchIndex = React.createClass({
           <SearchIndexItem idx={idx} key={idx}
             cursor= {this.state.cursor}
             onFollowLink={this.onFollowLink}
-            onMouseOver={this.onMouseOver}
+            onMouseEnter={this.onMouseEnter}
             user={user} />
         );
       }.bind(this));
@@ -89,7 +89,7 @@ var SearchIndex = React.createClass({
       Util.jumpToTop();
     }.bind(this));
   },
-  onMouseOver: function (e) {
+  onMouseEnter: function (e) {
     if (parseInt(e.target.dataset.idx) !== this.state.cursor) {
       this.setState({ cursor: parseInt(e.target.dataset.idx) });
     }

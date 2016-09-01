@@ -12,8 +12,10 @@ var SearchIndexItem = React.createClass({
         data-idx={this.props.idx}
         id={user.id}
         onClick={this.onFollowLink}
-        onMouseOver={this.props.onMouseOver} >
-        <div className='search-icon'><img src={user.profilePicUrl} /></div>
+        onMouseEnter={this.props.onMouseEnter} >
+        <div className='search-icon'>
+          <img src={user.profilePicUrl} />
+        </div>
         <div className='search-text'>
           <strong>{user.firstName + ' ' + user.lastName}</strong>
           <br/>

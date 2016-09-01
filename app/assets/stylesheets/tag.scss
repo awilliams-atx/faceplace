@@ -5,6 +5,7 @@
     .search-icon {
       float: left;
       margin: 4px 8px 4px 6px;
+      pointer-events: none;
       img {
         @include squareObjectFit(36px);
       }
@@ -14,14 +15,12 @@
       height: 33px;
       float: left;
       padding: 6px 0 5px;
+      pointer-events: none;
       small {
         color: #999999;
         font-size: 12px;
       }
     }
-  }
-  .search-index-item:hover {
-    cursor: pointer;
   }
   .selected-tag-item {
     background-color: $catskillWhite;
@@ -98,12 +97,12 @@
   position: relative;
 }
 .tagging-friends-search-results {
+  cursor: pointer;
   top: 1px;
   left: 44px;
   width: 240px;
   border-radius: 3px;
   overflow: hidden;
-  padding: 9px 0;
   font-family: $typeStandardFontFamily;
 }
 .tagging-friends-search-result {

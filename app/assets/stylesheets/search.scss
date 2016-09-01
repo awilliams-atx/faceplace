@@ -16,11 +16,13 @@
     outline: none;
   }
   #search-index {
+    cursor: pointer;
     width: 410px;
     .search-index-item {
       .search-icon {
         float: left;
         margin: 4px 8px 4px 6px;
+        pointer-events: none;
         img {
           @include squareObjectFit(36px);
         }
@@ -30,17 +32,18 @@
         height: 33px;
         float: left;
         padding: 6px 0 5px;
+        pointer-events: none;
         small {
           color: #999999;
           font-size: 12px;
         }
       }
     }
-    .search-index-item:hover {
-      cursor: pointer;
-    }
     .selected-search-item {
       background-color: $catskillWhite;
     }
+  }
+  #search-index:hover {
+    cursor: pointer;
   }
 }
