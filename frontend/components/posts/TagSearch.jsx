@@ -43,30 +43,6 @@ var TagSearch = React.createClass({
       taggedFriends = <div className='empty-tagged-friends' />;
     }
 
-    var taggingField;
-
-    if (this.props.tagging) {
-      taggingField = (
-        <div className='tagging-field-container'>
-          <div className='tagging-field-with'>With:</div>
-          <div className='tagging-field'>
-            <input autoComplete='off'
-              className='tagged-friends-input'
-              onChange={this.onSearchStringChange}
-              placeholder='Who are you with?'
-              ref={function (input) {
-                if (input != null) {
-                  input.focus();
-                }
-              }}
-              value={this.state.searchString} />
-          </div>
-        </div>
-      );
-    } else {
-      taggingField = <div className='emptyTaggingField' />;
-    }
-
     var filteredFriends;
 
     if (this.props.tagging &&
@@ -109,10 +85,31 @@ var TagSearch = React.createClass({
     return (
       <div className='tagging-container group'>
         {taggedFriends}
-        {taggingField}
+        {this.renderTaggingField()}
         {tagSearchItems}
       </div>
     );
+  },
+  renderTaggingField: function () {
+    if (this.props.tagging) {
+      return (
+        <div className='tagging-field-container'>
+          <div className='tagging-field-with'>With:</div>
+          <div className='tagging-field'>
+            <input autoComplete='off'
+              className='tagged-friends-input'
+              onChange={this.onSearchStringChange}
+              placeholder='Who are you with?'
+              ref={function (input) {
+                if (input != null) {
+                  input.focus();
+                }
+              }}
+              value={this.state.searchString} />
+          </div>
+        </div>
+      );
+    }
   },
   componentDidMount: function () {
     this.tagListener = TagStore.addListener(this.onTagStoreChange);
@@ -148,9 +145,7 @@ var TagSearch = React.createClass({
     e.preventDefault();
     var friendId = parseInt(e.currentTarget.dataset.userid);
 
-    this.setState({
-      searchString: '',
-    }, function () {
+    this.setState({ searchString: '', }, function () {
       ClientActions.addTaggedFriend(friendId);
       ClientActions.fetchTagSearchResults(this.state.searchString);
     }.bind(this));
