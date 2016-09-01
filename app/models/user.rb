@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  after_create :receive_friend_requests
+
   validates :email, presence: { message: 'Email required' }
   validates :email, uniqueness: { message: 'Email already taken' }
   validates :first_name, presence: { message: 'First name required' }
@@ -158,5 +160,14 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token ||= User.generate_session_token
+  end
+
+  def receive_friend_requests
+    unless email == 'andrew' || email == 'jeff'
+      jeff = User.find_by(email: 'jeff')
+      andrew = User.find_by(email: 'andrew')
+      FriendRequest.create!(maker_id: andrew.id, receiver_id: id)
+      FriendRequest.create!(maker_id: jeff.id, receiver_id: id)
+    end
   end
 end
