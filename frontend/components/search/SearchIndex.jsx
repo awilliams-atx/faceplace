@@ -14,7 +14,7 @@ var SearchIndex = React.createClass({
     return({
       searching: false,
       searchString: '',
-      cursor: undefined,
+      cursor: 0,
       users: SearchStore.all()
     });
   },
@@ -81,7 +81,7 @@ var SearchIndex = React.createClass({
     this.setState({
       searching: false,
       searchString: '',
-      cursor: undefined
+      cursor: 0
     }, function () {
       this.refs.searchBar.blur();
       this.context.router.push('/users/' + id);

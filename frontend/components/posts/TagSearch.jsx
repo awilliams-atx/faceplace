@@ -8,7 +8,7 @@ var React = require('react'),
 var TagSearch = React.createClass({
   getInitialState: function () {
     return ({
-      cursor: undefined,
+      cursor: 0,
       searchString: '',
       untaggedFriends: TagStore.untaggedFriends(),
       wasJustTagging: false
