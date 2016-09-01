@@ -1,5 +1,4 @@
 var React = require('react'),
-    TaggedBoxes = require('./TaggedBoxes'),
     ClientActions = require('../../actions/client_actions'),
     TagApiUtil = require('../../util/tag_api_util'),
     TagStore = require('../../stores/tag');
@@ -8,7 +7,6 @@ var TagSearch = React.createClass({
   getInitialState: function () {
     return ({
       searchString: '',
-      taggedFriends: TagStore.taggedFriends(),
       untaggedFriends: TagStore.untaggedFriends(),
       wasJustTagging: false
     });
@@ -16,7 +14,6 @@ var TagSearch = React.createClass({
   render: function () {
     return (
       <div className='tagging-container group'>
-        {TaggedBoxes(this.state.taggedFriends, this.untag)}
         {this.renderInput()}
         {this.renderSearch()}
       </div>
@@ -87,7 +84,6 @@ var TagSearch = React.createClass({
   },
   componentWillReceiveProps: function (props) {
     var wasJustTagging = this.props.tagging ? true : false;
-
     this.setState({
       tagging: props.tagging,
       wasJustTagging: wasJustTagging
@@ -104,26 +100,15 @@ var TagSearch = React.createClass({
   },
   onTagStoreChange: function () {
     if (TagStore.isEditingPost() && !this.props.isEditingPost) { return; }
-    this.setState({
-      taggedFriends: TagStore.taggedFriends(),
-      untaggedFriends: TagStore.untaggedFriends()
-    });
+    this.setState({ untaggedFriends: TagStore.untaggedFriends() });
   },
   onTagFriend: function (e) {
     e.preventDefault();
     var friendId = parseInt(e.currentTarget.dataset.userid);
-
     this.setState({ searchString: '', }, function () {
       ClientActions.addTaggedFriend(friendId);
       ClientActions.fetchTagSearchResults(this.state.searchString);
     }.bind(this));
-  },
-  untag: function (e) {
-    var friendId = parseInt(e.target.dataset.userid);
-    ClientActions.removeTaggedFriend(friendId);
-    if (this.props.tagging) {
-      ClientActions.fetchTagSearchResults(this.state.searchString);
-    }
   }
 });
 

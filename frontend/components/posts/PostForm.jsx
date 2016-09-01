@@ -1,5 +1,6 @@
 var React = require('react'),
     Util = require('../../util/general'),
+    TaggedBoxes = require('./TaggedBoxes'),
     TagSearch = require('./TagSearch'),
     ClientActions = require('../../actions/client_actions'),
     FriendApiUtil = require('../../util/friend_api_util'),
@@ -13,7 +14,7 @@ var PostForm = React.createClass({
     return({
       body: '',
       isTaggingForTheFirstTime: true,
-      tagged: [],
+      tagged: TagStore.taggedFriends(),
       tagging: false
     });
   },
@@ -46,6 +47,7 @@ var PostForm = React.createClass({
             </textarea>
             <div className='autogrower' ref='autogrower'></div>
           </div>
+          {TaggedBoxes(this.state.tagged, this.untag)}
           <TagSearch isEditingPost={this.props.isEditing}
             tag={this.tag}
             tagging={this.state.tagging} />
@@ -90,6 +92,7 @@ var PostForm = React.createClass({
     }
   },
   componentDidMount: function () {
+    this.tagListener = TagStore.addListener(this.onTagStoreChange);
     if (this.props.post) {
       this.setState({ body: this.props.post.body }, function () {
         ClientActions.fetchTaggedFriends(this.props.post.postId);
@@ -97,6 +100,9 @@ var PostForm = React.createClass({
         this.autogrow();
       }.bind(this));
     }
+  },
+  componentWillUnmount: function () {
+    this.tagListener.remove();
   },
   autogrow: function () {
     Util.autogrow({
@@ -138,6 +144,9 @@ var PostForm = React.createClass({
       });
     }
   },
+  onTagStoreChange: function () {
+    this.setState({ tagged: TagStore.taggedFriends() });
+  },
   placeholder: function () {
     if (SessionStore.currentUser().id === this.props.profileOwnerId) {
       return 'What\'s on your mind, ' +
@@ -158,16 +167,6 @@ var PostForm = React.createClass({
       return 'modal-submit';
     } else {
       return '';
-    }
-  },
-  tag: function (id) {
-    var idx = this.state.tagged.indexOf(id);
-    if (idx >= 0) {
-      this.setState({ tagged: this.state.tagged.splice(idx, 1) })
-    } else {
-      var tagged = this.state.tagged.slice();
-      tagged.push(id);
-      this.setState({ tagged: tagged });
     }
   },
   taggingClass: function () {
@@ -204,6 +203,10 @@ var PostForm = React.createClass({
         document.addEventListener('click', this.taggingListener);
       }
     });
+  },
+  untag: function (e) {
+    var friendId = parseInt(e.target.dataset.userid);
+    ClientActions.removeTaggedFriend(friendId);
   },
   untoggleTag: function () {
     this.setState({ tagging: false });
