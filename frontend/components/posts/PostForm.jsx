@@ -10,7 +10,12 @@ var React = require('react'),
 
 var PostForm = React.createClass({
   getInitialState: function () {
-    return({ body: '', isTaggingForTheFirstTime: true, tagging: false });
+    return({
+      body: '',
+      isTaggingForTheFirstTime: true,
+      tagged: [],
+      tagging: false
+    });
   },
   render: function () {
     var tagUrl =
@@ -41,8 +46,9 @@ var PostForm = React.createClass({
             </textarea>
             <div className='autogrower' ref='autogrower'></div>
           </div>
-          <TagSearch tagging={this.state.tagging}
-            isEditingPost={this.props.isEditing} />
+          <TagSearch isEditingPost={this.props.isEditing}
+            tag={this.tag}
+            tagging={this.state.tagging} />
           <footer>
             <div className='post-footer-background'>
               <div className='post-footer-left-buttons'>
@@ -152,6 +158,16 @@ var PostForm = React.createClass({
       return 'modal-submit';
     } else {
       return '';
+    }
+  },
+  tag: function (id) {
+    var idx = this.state.tagged.indexOf(id);
+    if (idx >= 0) {
+      this.setState({ tagged: this.state.tagged.splice(idx, 1) })
+    } else {
+      var tagged = this.state.tagged.slice();
+      tagged.push(id);
+      this.setState({ tagged: tagged });
     }
   },
   taggingClass: function () {
