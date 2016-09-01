@@ -18,6 +18,22 @@ module.exports = {
       op.autogrower.style.display = 'none'
     }
   },
+  hasOrDescendsFromClass: function () {
+    var args = [].slice.call(arguments);
+    var node = args[0];
+    var steps = args[1];
+    var classes = args.slice(2);
+    for (var i = 0; i < steps; i++) {
+      if (!node) { return false }
+      for (var j = 0; j < classes.length; j++) {
+        if (this.hasClass(node, classes[j])) {
+          return true;
+        }
+      }
+      node = node.parentNode;
+    }
+    return false
+  },
   dirToDifference: function (e) {
     if (e.key === 'ArrowUp') {
       return -1
@@ -31,6 +47,17 @@ module.exports = {
     } else {
       return this.findSelfOrParent(node.parentNode, nodeName);
     }
+  },
+  hasClass: function (node, klass) {
+    var args = [].slice.call(arguments);
+    var node = args[0];
+    if (!node.classList) { return false }
+    var classes = args.slice(1);
+    var nodeClasses = [].slice.call(node.classList);
+    for (var i = 0; i < classes.length; i++) {
+      if (nodeClasses.indexOf(classes[i]) >= 0) { return true }
+    }
+    return false;
   },
   jumpToTop: function () {
     window.scrollTo(0, 0);

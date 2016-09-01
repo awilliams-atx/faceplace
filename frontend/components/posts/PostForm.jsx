@@ -171,22 +171,14 @@ var PostForm = React.createClass({
   taggingClass: function () {
     return this.state.tagging ? ' tag-icon-active' : 'tag-icon';
   },
-  taggingListener: function (e) {
-    var node = e.target;
-    var noBlurClassNames =
-      ['search-index-item group', 'tagged-friends-list-item'];
-    for (var i = 0; i < 3; i++) {
-      if (!node) {
-        document.removeEventListener('click', this.taggingListener);
-        this.setState({ tagging: false });
-        return
-      } else if (noBlurClassNames.includes(node.className)) {
-        return
-      }
-      node = node.parentNode;
+  taggingClickout: function (e) {
+    if (Util.hasOrDescendsFromClass(e.target, 3, 'search-index-item',
+      'tagged-friends-list-item')) {
+      return
+    } else {
+      document.removeEventListener('click', this.taggingClickout);
+      this.setState({ tagging: false });
     }
-    document.removeEventListener('click', this.taggingListener);
-    this.setState({ tagging: false });
   },
   toggleTag: function (e) {
     e.preventDefault();
@@ -199,7 +191,7 @@ var PostForm = React.createClass({
         if (willTagForTheFirstTime) {
           ClientActions.fetchTagSearchResults('');
         }
-        document.addEventListener('click', this.taggingListener);
+        document.addEventListener('click', this.taggingClickout);
       }
     });
   },

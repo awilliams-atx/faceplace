@@ -62,7 +62,7 @@ var TagSearch = React.createClass({
           cursor= {this.state.cursor}
           idx={idx}
           key={idx}
-          onTag={this.onTagFriend}
+          onTag={this.onTag}
           onMouseEnter={this.onMouseEnter} />
       );
     }.bind(this));
@@ -108,10 +108,10 @@ var TagSearch = React.createClass({
       ClientActions.fetchTagSearchResults(this.state.searchString);
     });
   },
-  onTagFriend: function (e) {
+  onTag: function (e) {
     e.preventDefault();
     var friendId = parseInt(e.currentTarget.dataset.userid);
-    this.setState({ cursor: 0, searchString: '', }, function () {
+    this.setState({ cursor: 0, searchString: '' }, function () {
       ClientActions.addTaggedFriend(friendId);
       ClientActions.fetchTagSearchResults(this.state.searchString);
     }.bind(this));
