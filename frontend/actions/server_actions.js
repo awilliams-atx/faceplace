@@ -11,6 +11,12 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     userConstants = require('../constants/user_constants');
 
 var ServerActions = {
+  receiveAcceptedFriendRequest: function (request) {
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED,
+      request: request
+    });
+  },
   receiveCheckedNotificationIds: function (checked_ids) {
     Dispatcher.dispatch({
       actionType: notificationConstants.CHECKED_NOTIFICATION_IDS_RECEIVED,
@@ -124,6 +130,14 @@ var ServerActions = {
   receiveReceivedFriendRequest: function (request) {
     Dispatcher.dispatch({
       actionType: friendRequestConstants.RECEIVED_FRIEND_REQUEST_RECEIVED,
+      request: request
+    });
+  },
+  receiveRejectedFriendRequest: function (request) {
+    // console.log('store is looking for a maker_id here');
+    // console.log(request);
+    Dispatcher.dispatch({
+      actionType: friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED,
       request: request
     });
   },
