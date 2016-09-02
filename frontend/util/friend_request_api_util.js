@@ -1,12 +1,23 @@
 var ServerActions = require('../actions/server_actions');
 
 var FriendRequestApiUtil = {
+  acceptFriendRequest: function (acceptance) {
+    $.ajax({
+      url: '/api/friend_request/accept',
+      method: 'PATCH',
+      dataType: 'json',
+      data: { accept: acceptance },
+      success: function (acceptance) {
+        ServerActions.receiveAcceptedFriendRequest(acceptance);
+      }
+    });
+  },
   cancelRequest: function (cancellation) {
     $.ajax({
       url: '/api/friend_request',
       method: 'DELETE',
       dataType: 'json',
-      data: { cancellation: cancellation },
+      data: { cancel: cancellation },
       success: function () {
         ServerActions.receiveFriendRequestCancelation();
       }
@@ -44,16 +55,17 @@ var FriendRequestApiUtil = {
       }
     })
   },
-  respondToFriendRequest: function (response) {
+  rejectFriendRequest: function (rejection) {
+    // console.log('CHECK!');
     $.ajax({
-      url: '/api/friend_request',
+      url: '/api/friend_request/reject',
       method: 'DELETE',
       dataType: 'json',
-      data: { response: response },
-      success: function (friendRequestResponse) {
-        ServerActions.receiveFriendRequestResponse(friendRequestResponse);
+      data: { reject: rejection },
+      success: function (rejection) {
+        ServerActions.receiveRejectedFriendRequest(rejection);
       }
-    });
+    })
   }
 };
 
