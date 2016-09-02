@@ -33,7 +33,7 @@ walter = User.create(first_name: "Walter", last_name: "Sobchak", email: "walter"
 
 walter.description = 'US veteran and avid bowler'
 walter.location = 'Los Angeles'
-walter.profile_pic = File.open("#{Rails.root}/app/assets/images/jeffrey_lebowski_profile_pic.jpg")
+walter.profile_pic = File.open("#{Rails.root}/app/assets/images/walter_sobchak_profile_pic.jpg")
 walter.cover_photo = File.open("#{Rails.root}/app/assets/images/walter_sobchak_cover_photo.jpg")
 walter.save!
 
