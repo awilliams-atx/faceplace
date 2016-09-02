@@ -12,7 +12,7 @@ class Api::FriendRequestsController < ApplicationController
   end
 
   def index
-    @requests = current_user.received_friend_requests.where(accepted: false).includes(:maker)
+    @requests = current_user.received_friend_requests.limit(8);
     render 'api/friend_requests/index'
   end
 
