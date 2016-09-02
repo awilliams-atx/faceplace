@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   after_create :receive_friend_requests
+  after_destroy :destroy_extra_friendships
 
   validates :email, presence: { message: 'Email required' }
   validates :email, uniqueness: { message: 'Email already taken' }
@@ -158,12 +159,16 @@ class User < ActiveRecord::Base
 
   private
 
-  def from_seeds?
-    ['andrew', 'jeff', 'donny', 'brandt', 'maude', 'walter', 'jeff_sr', 'jesus', 'ulysses', 'pete', 'delmar', 'pappy', 'daniel', 'tommy'].include?(email)
+  def destroy_extra_friendships
+    Friendship.where(friend_id: self.id).destroy_all
   end
 
   def ensure_session_token
     self.session_token ||= User.generate_session_token
+  end
+
+  def from_seeds?
+    ['andrew', 'jeff', 'donny', 'brandt', 'maude', 'walter', 'jeff_sr', 'jesus', 'ulysses', 'pete', 'delmar', 'pappy', 'daniel', 'tommy'].include?(email)
   end
 
   def receive_friend_requests
