@@ -1,6 +1,5 @@
 class Api::SessionsController < ApplicationController
   before_action :require_login, only: :destroy
-  after_action :receive_friend_request, only: :create
 
   def new
   end
@@ -43,19 +42,6 @@ class Api::SessionsController < ApplicationController
 
   def auth_hash
     request.env['omniauth.auth']
-  end
-
-  def receive_friend_request
-    return if !@user || @user.email != 'jeff'
-    andrew = User.find_by(email: 'andrew')
-    friendship = Friendship.find_by(user_id: @user.id, friend_id: andrew.id)
-    friendship.destroy if friendship
-    friendship = Friendship.find_by(user_id: andrew.id, friend_id: @user.id)
-    friendship.destroy if friendship
-    request = FriendRequest.find_by(maker_id: andrew.id, receiver_id: @user.id)
-    unless request
-      FriendRequest.create!(maker_id: andrew.id, receiver_id: @user.id)
-    end
   end
 
   def user_params
