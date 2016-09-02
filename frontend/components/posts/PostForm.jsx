@@ -127,7 +127,8 @@ var PostForm = React.createClass({
     if (this.state.body.length < 1) { return; }
     var post = {
       body: this.state.body,
-      taggedFriendIds: Object.keys(TagStore.taggedFriends())
+      taggedFriendIds: TagStore.taggedFriends().map(function (friend) {
+        return friend.userId })
     };
     if (this.props.isEditing) {
       post.id = this.props.post.postId;
