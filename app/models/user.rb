@@ -158,12 +158,16 @@ class User < ActiveRecord::Base
 
   private
 
+  def from_seeds?
+    ['andrew', 'jeff', 'donny', 'brandt', 'maude', 'walter', 'jeff_sr', 'jesus', 'ulysses', 'pete', 'delmar', 'pappy', 'daniel', 'tommy'].include?(email)
+  end
+
   def ensure_session_token
     self.session_token ||= User.generate_session_token
   end
 
   def receive_friend_requests
-    unless email == 'andrew' || email == 'jeff'
+    unless from_seeds?
       jeff = User.find_by(email: 'jeff')
       andrew = User.find_by(email: 'andrew')
       FriendRequest.create!(maker_id: andrew.id, receiver_id: id)
