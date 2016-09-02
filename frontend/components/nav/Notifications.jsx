@@ -60,7 +60,7 @@ var Notifications = React.createClass({
     if (this.state.notifications.length === 0) {
       return (
         <div id='empty-nav-drop'>
-          <aside>No notifications</aside>
+          <aside>No new notifications</aside>
         </div>
       );
     } else {
