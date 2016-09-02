@@ -145,16 +145,7 @@ var PostForm = React.createClass({
     }
   },
   onTagStoreChange: function () {
-    if (TagStore.untaggedFriends().length === 0) {
-      var tagging = false;
-      document.removeEventListener('click', this.taggingClickout);
-    } else {
-      var tagging = this.state.tagging;
-    }
-    this.setState({
-      tagged: TagStore.taggedFriends(),
-      tagging: tagging
-    }, function () { UI.toggleTagging(tagging) });
+    this.setState({ tagged: TagStore.taggedFriends() });
   },
   placeholder: function () {
     if (SessionStore.currentUser().id === this.props.profileOwnerId) {
