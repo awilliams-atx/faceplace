@@ -5,8 +5,9 @@ var Store = require('flux/utils').Store,
 
 var FriendRequestStore = new Store(AppDispatcher);
 
-_requests = [];
+_accepted = [];
 _justCheckedIds = [];
+_pending = [];
 
 FriendRequestStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
@@ -26,27 +27,31 @@ FriendRequestStore.__onDispatch = function (payload) {
     FriendRequestStore.__emitChange();
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED:
-    FriendRequestStore.removeRequest(payload.response.maker_id);
+    FriendRequestStore.acceptRequest(payload.request.maker_id);
     FriendRequestStore.__emitChange();
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED:
-    FriendRequestStore.removeRequest(payload.response.maker_id);
+    FriendRequestStore.removeRequest(payload.request.maker_id);
     FriendRequestStore.__emitChange();
     break;
   }
 };
 
+FriendRequestStore.accepted = function () {
+  return _accepted.slice();
+};
+
+FriendRequestStore.acceptRequest = function (maker_id) {
+  _accepted.push(FriendRequestStore.removeRequest(maker_id));
+};
+
 FriendRequestStore.addRequest = function (request) {
-  for (var i = 0; i < _requests.length; i++) {
-    if (_requests[i].maker_id === request.maker_id) {
+  for (var i = 0; i < _pending.length; i++) {
+    if (_pending[i].maker_id === request.maker_id) {
       return;
     }
   }
-  _requests.push(request);
-};
-
-FriendRequestStore.all = function () {
-  return _requests.slice();
+  _pending.push(request);
 };
 
 FriendRequestStore.emptyJustCheckedIds = function () {
@@ -65,18 +70,21 @@ FriendRequestStore.justCheckedIds = function () {
 
 FriendRequestStore.markRequestsChecked = function (checked_ids) {
   FriendRequestStore.setJustCheckedIds(checked_ids);
-  for (var i = 0; i < _requests.length; i++) {
-    if (checked_ids.indexOf(_requests[i].id) >= 0) {
-      _requests[i].checked = true;
+  for (var i = 0; i < _pending.length; i++) {
+    if (checked_ids.indexOf(_pending[i].id) >= 0) {
+      _pending[i].checked = true;
     }
   }
 };
 
+FriendRequestStore.pending = function () {
+  return _pending.slice();
+};
+
 FriendRequestStore.removeRequest = function (maker_id) {
-  for (var i = 0; i < _requests.length; i++) {
-    if (_requests[i].maker_id === maker_id) {
-      _requests.splice(i, 1);
-      return;
+  for (var i = 0; i < _pending.length; i++) {
+    if (_pending[i].maker_id === maker_id) {
+      return _pending.splice(i, 1)[0];
     }
   }
 };
@@ -88,16 +96,19 @@ FriendRequestStore.setJustCheckedIds = function (checked_ids) {
 };
 
 FriendRequestStore.setRequests = function (requests) {
-  while (_requests.length > 0) {
-    _requests.pop();
-  }
+  _pending = [];
+  _accepted = [];
   for (var i = 0; i < requests.length; i++) {
-    _requests.push(requests[i]);
+    if (requests[i].accepted) {
+      _accepted.push(requests[i]);
+    } else {
+      _pending.push(requests[i]);
+    }
   }
 };
 
 FriendRequestStore.uncheckedRequestIds = function () {
-  return _requests.filter(function (request) {
+  return _pending.filter(function (request) {
     return !request.checked;
   }).map(function (request) {
     return request.id;
