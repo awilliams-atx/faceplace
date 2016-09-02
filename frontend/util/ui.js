@@ -1,11 +1,22 @@
-var ui = { scrollPost: undefined };
+var ui = { scrollPost: undefined, tagging: false };
+var listeners = [];
 
 var UIManipulator = {
+  addListener: function (listener) {
+    listeners.push(listener);
+  },
   clearScrollPost: function () {
     ui.scrollPost = undefined;
   },
   focusScrollPost: function (post) {
     post.getElementsByTagName('textarea')[0].focus();
+  },
+  removeListener: function (listener) {
+    for (var i = 0; i < listeners.length; i++) {
+      if (listeners[i] === listener) {
+        listeners.splice(i, 1);
+      }
+    }
   },
   scrollPost: function () {
     return ui.scrollPost;
@@ -29,6 +40,16 @@ var UIManipulator = {
     setTimeout(function () {
       head.className = head.classList[0];
     }, 1200);
+  },
+  tagging: function () {
+    return ui.tagging;
+  },
+  toggleTagging: function (bool) {
+    ui.tagging = bool;
+    this.trigger();
+  },
+  trigger: function () {
+    listeners.forEach(function (listener) { listener() });
   }
 }
 

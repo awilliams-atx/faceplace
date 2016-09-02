@@ -1,4 +1,5 @@
 var React = require('react'),
+    UI = require('../../util/ui'),
     Util = require('../../util/general'),
     TaggedBoxes = require('./TaggedBoxes'),
     TagSearch = require('./TagSearch'),
@@ -40,7 +41,6 @@ var PostForm = React.createClass({
               className='post-pic'/>
             <textarea className='post-textarea'
               onChange={this.onBodyChange}
-              onFocus={this.untoggleTag}
               value={this.state.body}
               placeholder={this.placeholder()}
               ref='autoFocus' >
@@ -49,8 +49,7 @@ var PostForm = React.createClass({
           </div>
         </form>
         {TaggedBoxes(this.state.tagged, this.untag)}
-        <TagSearch isEditingPost={this.props.isEditing}
-          tagging={this.state.tagging} />
+        <TagSearch isEditingPost={this.props.isEditing} />
         <footer>
           <div className='post-footer-background'>
             <div className='post-footer-left-buttons'>
@@ -139,18 +138,23 @@ var PostForm = React.createClass({
     } else {
       post.profileOwnerId = this.props.profileOwnerId;
       this.setState({ body: '', tagging: false }, function () {
+        UI.toggleTagging(false);
         ClientActions.submitPost(post);
         this.autogrow();
-      });
+      }.bind(this));
     }
   },
   onTagStoreChange: function () {
     if (TagStore.untaggedFriends().length === 0) {
       var tagging = false;
+      document.removeEventListener('click', this.taggingClickout);
     } else {
       var tagging = this.state.tagging;
     }
-    this.setState({ tagged: TagStore.taggedFriends(), tagging: tagging });
+    this.setState({
+      tagged: TagStore.taggedFriends(),
+      tagging: tagging
+    }, function () { UI.toggleTagging(tagging) });
   },
   placeholder: function () {
     if (SessionStore.currentUser().id === this.props.profileOwnerId) {
@@ -182,31 +186,24 @@ var PostForm = React.createClass({
       'tagged-friends-list-item')) {
       return
     } else {
-      document.removeEventListener('click', this.taggingClickout);
-      this.setState({ tagging: false });
+      this.toggleTag(e);
     }
   },
   toggleTag: function (e) {
     e.preventDefault();
-    var willTagForTheFirstTime = !!this.state.isTaggingForTheFirstTime;
-    this.setState({
-      isTaggingForTheFirstTime: false,
-      tagging: !this.state.tagging
-    }, function () {
+    this.setState({ tagging: !this.state.tagging }, function () {
+      UI.toggleTagging(this.state.tagging);
       if (this.state.tagging) {
-        if (willTagForTheFirstTime) {
-          ClientActions.fetchTagSearchResults('');
-        }
+        ClientActions.fetchTagSearchResults('');
         document.addEventListener('click', this.taggingClickout);
+      } else {
+        document.removeEventListener('click', this.taggingClickout);
       }
-    });
+    }.bind(this));
   },
   untag: function (e) {
     var friendId = parseInt(e.target.dataset.userid);
     ClientActions.removeTaggedFriend(friendId);
-  },
-  untoggleTag: function () {
-    this.setState({ tagging: false });
   }
 });
 

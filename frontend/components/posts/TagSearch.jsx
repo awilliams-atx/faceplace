@@ -1,5 +1,6 @@
 var React = require('react'),
     TagSearchItem = require('./TagSearchItem'),
+    UI = require('../../util/ui'),
     Util = require('../../util/general'),
     ClientActions = require('../../actions/client_actions'),
     TagApiUtil = require('../../util/tag_api_util'),
@@ -10,8 +11,8 @@ var TagSearch = React.createClass({
     return ({
       cursor: 0,
       searchString: '',
-      untaggedFriends: TagStore.untaggedFriends(),
-      wasJustTagging: false
+      tagging: UI.tagging(),
+      untaggedFriends: TagStore.untaggedFriends()
     });
   },
   render: function () {
@@ -23,7 +24,7 @@ var TagSearch = React.createClass({
     );
   },
   renderInput: function () {
-    if (this.props.tagging) {
+    if (this.state.tagging) {
       return (
         <div className='tagging-field-container group'>
           <div className='tagging-field-with'>
@@ -49,7 +50,7 @@ var TagSearch = React.createClass({
     }
   },
   renderSearch: function () {
-    if (this.props.tagging && this.state.untaggedFriends.length > 0) {
+    if (this.state.tagging && this.state.untaggedFriends.length > 0) {
       return (
         <div className='tag-search-anchor-point'>
           <div className='tagging-friends-search-results overlay group'>
@@ -73,20 +74,11 @@ var TagSearch = React.createClass({
   },
   componentDidMount: function () {
     this.tagListener = TagStore.addListener(this.onTagStoreChange);
+    UI.addListener(this.onUIChange);
   },
   componentWillUnmount: function () {
     this.tagListener.remove();
-  },
-  componentWillReceiveProps: function (props) {
-    var wasJustTagging = this.props.tagging ? true : false;
-    this.setState({
-      tagging: props.tagging,
-      wasJustTagging: wasJustTagging
-    }, function () {
-      if (this.props.tagging && !this.state.wasJustTagging) {
-        ClientActions.fetchTagSearchResults(this.state.searchString);
-      }
-    }.bind(this));
+    UI.removeListener(this.onUIChange);
   },
   arrowListener: function (e) {
     var difference = Util.dirToDifference(e);
@@ -122,6 +114,9 @@ var TagSearch = React.createClass({
     if (TagStore.isEditingPost() && !this.props.isEditingPost) { return; }
     this.setState({ untaggedFriends: TagStore.untaggedFriends() });
   },
+  onUIChange: function () {
+    this.setState({ tagging: UI.tagging() });
+  }
 });
 
 module.exports = TagSearch;
