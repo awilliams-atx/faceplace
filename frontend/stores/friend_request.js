@@ -1,6 +1,7 @@
 var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher'),
     friendRequestConstants = require('../constants/friend_request_constants'),
+    friendshipConstants = require('../constants/friendship_constants'),
     socketConstants = require('../constants/socket_constants');
 
 var FriendRequestStore = new Store(AppDispatcher);
@@ -32,6 +33,10 @@ FriendRequestStore.__onDispatch = function (payload) {
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED:
     FriendRequestStore.removeRequest(payload.request.maker_id);
+    FriendRequestStore.__emitChange();
+    break;
+  case friendshipConstants.UNFRIENDED:
+    FriendRequestStore.removeAccepted(payload.friend_id);
     FriendRequestStore.__emitChange();
     break;
   }
@@ -79,6 +84,14 @@ FriendRequestStore.markRequestsChecked = function (checked_ids) {
 
 FriendRequestStore.pending = function () {
   return _pending.slice();
+};
+
+FriendRequestStore.removeAccepted = function (id) {
+  for (var i = 0; i < _accepted.length; i++) {
+    if (_accepted[i].maker_id === id || _accepted[i].receier_id === id) {
+      return _accepted.splice(i, 1)[0];
+    }
+  }
 };
 
 FriendRequestStore.removeRequest = function (maker_id) {
