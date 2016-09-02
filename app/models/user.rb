@@ -69,11 +69,11 @@ class User < ActiveRecord::Base
   end
 
   def has_pending_request_for?(id)
-    FriendRequest.exists?(maker_id: self.id, receiver_id: id)
+    FriendRequest.exists?(maker_id: self.id, receiver_id: id, accepted: false)
   end
 
   def has_pending_request_from?(id)
-    FriendRequest.exists?(maker_id: id, receiver_id: self.id)
+    FriendRequest.exists?(maker_id: id, receiver_id: self.id, accepted: false)
   end
 
   def most_recently_added
