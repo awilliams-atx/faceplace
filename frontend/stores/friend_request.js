@@ -7,7 +7,6 @@ var Store = require('flux/utils').Store,
 var FriendRequestStore = new Store(AppDispatcher);
 
 _accepted = [];
-_justCheckedIds = [];
 _pending = [];
 
 FriendRequestStore.__onDispatch = function (payload) {
@@ -16,9 +15,6 @@ FriendRequestStore.__onDispatch = function (payload) {
     FriendRequestStore.markRequestsChecked(payload.checked_ids);
     FriendRequestStore.__emitChange();
     break;
-  case friendRequestConstants.CHECKING_REQUESTS_NOW:
-    FriendRequestStore.emptyJustCheckedIds();
-    break; // Not meant to emit change.
   case friendRequestConstants.FRIEND_REQUESTS_RECEIVED:
     FriendRequestStore.setRequests(payload.requests);
     FriendRequestStore.__emitChange();
@@ -47,30 +43,17 @@ FriendRequestStore.accepted = function () {
 };
 
 FriendRequestStore.acceptRequest = function (maker_id) {
-  _accepted.push(FriendRequestStore.removePending(maker_id));
+  var req = FriendRequestStore.removePending(maker_id);
+  _accepted.push(req);
 };
 
 FriendRequestStore.addRequest = function (request) {
   for (var i = 0; i < _pending.length; i++) {
     if (_pending[i].maker_id === request.maker_id) {
-      return;
+      return
     }
   }
   _pending.push(request);
-};
-
-FriendRequestStore.emptyJustCheckedIds = function () {
-  while (_justCheckedIds.length > 0) {
-    _justCheckedIds.pop();
-  }
-};
-
-FriendRequestStore.justChecked = function (id) {
-  return _justCheckedIds.indexOf(id) >= 0;
-};
-
-FriendRequestStore.justCheckedIds = function () {
-  return _justCheckedIds.slice();
 };
 
 FriendRequestStore.markRequestsChecked = function (checked_ids) {
@@ -102,12 +85,6 @@ FriendRequestStore.removePending = function (maker_id) {
   }
 };
 
-FriendRequestStore.setJustCheckedIds = function (checked_ids) {
-  for (var i = 0; i < checked_ids.length; i++) {
-    _justCheckedIds.push(checked_ids[i]);
-  }
-};
-
 FriendRequestStore.setRequests = function (requests) {
   _pending = [];
   _accepted = [];
@@ -118,14 +95,6 @@ FriendRequestStore.setRequests = function (requests) {
       _pending.push(requests[i]);
     }
   }
-};
-
-FriendRequestStore.uncheckedRequestIds = function () {
-  return _pending.filter(function (request) {
-    return !request.checked;
-  }).map(function (request) {
-    return request.id;
-  });
 };
 
 module.exports = FriendRequestStore;
