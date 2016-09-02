@@ -85,9 +85,8 @@ var AddFriend = React.createClass({
       requestReceived: user.requestReceived
     });
   },
-  onAccept: function (e) {
-    e.preventDefault();
-    ClientActions.respondToFriendRequest(this.response('accept'));
+  onAccept: function (user_id) {
+    ClientActions.acceptFriendRequest({ maker_id: this.props.profileOwnerId });
   },
   onAddFriend: function (e) {
     e.preventDefault();
@@ -97,13 +96,11 @@ var AddFriend = React.createClass({
     e.preventDefault();
     ClientActions.cancelFriendRequest({
       maker_id: SessionStore.currentUser().id,
-      receiver_id: this.props.profileOwnerId,
-      cancel: true
+      receiver_id: this.props.profileOwnerId
     });
   },
-  onReject: function (e) {
-    e.preventDefault();
-    ClientActions.respondToFriendRequest(this.response('reject'));
+  onReject: function (user_id) {
+    ClientActions.rejectFriendRequest({ maker_id: this.props.profileOwnerId });
   },
   onUnfriend: function (e) {
     e.preventDefault();
@@ -111,14 +108,6 @@ var AddFriend = React.createClass({
   },
   preventDefault: function (e) {
     e.preventDefault();
-  },
-  response: function (response) {
-     var params = {
-       maker_id: this.props.profileOwnerId,
-       receiver_id: SessionStore.currentUser().id,
-     };
-     params[response] = true;
-    return params;
   }
 });
 
