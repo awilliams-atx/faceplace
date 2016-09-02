@@ -17,6 +17,9 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     SessionStore = require('../stores/session');
 
 var ClientActions = {
+  acceptFriendRequest: function (acceptance) {
+    FriendRequestApiUtil.acceptFriendRequest(acceptance);
+  },
   addTaggedFriend: function (userId) {
     Dispatcher.dispatch({
       actionType: tagConstants.FRIEND_TAGGED,
@@ -96,8 +99,8 @@ var ClientActions = {
       userId: userId
     });
   },
-  respondToFriendRequest: function (response) {
-    FriendRequestApiUtil.respondToFriendRequest(response);
+  rejectFriendRequest: function (rejection) {
+    FriendRequestApiUtil.rejectFriendRequest(rejection);
   },
   submitComment: function (comment) {
     CommentApiUtil.submitComment(comment);
