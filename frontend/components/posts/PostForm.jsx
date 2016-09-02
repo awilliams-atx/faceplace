@@ -145,7 +145,12 @@ var PostForm = React.createClass({
     }
   },
   onTagStoreChange: function () {
-    this.setState({ tagged: TagStore.taggedFriends() });
+    if (TagStore.untaggedFriends().length === 0) {
+      var tagging = false;
+    } else {
+      var tagging = this.state.tagging;
+    }
+    this.setState({ tagged: TagStore.taggedFriends(), tagging: tagging });
   },
   placeholder: function () {
     if (SessionStore.currentUser().id === this.props.profileOwnerId) {
