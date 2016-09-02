@@ -10,6 +10,8 @@
 .button-gray:active { @include grayButtonActive }
 .button-gray:focus { @include buttonFocus }
 
+.button-gray-inactive { @include grayButtonInactive }
+
 .button-blue-wide { @include blueButton(16px) }
 .button-blue-wide:hover { @include blueButtonHover }
 .button-blue-wide:active { @include blueButtonActive }

@@ -26,6 +26,16 @@
 @mixin grayButtonActive {
   background-color: $iron2;
 }
+@mixin grayButtonInactive {
+  @include button;
+  @include grayButton;
+  background-color: $iron2;
+  cursor: auto;
+  outline: none;
+  i {
+    color: rgba($abbey, 0.7);
+  }
+}
 @mixin blueButton($padding: 8px) {
   @include button;
   background-color: $sanMarino;

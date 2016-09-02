@@ -7,7 +7,7 @@ var FriendRequestItem = React.createClass({
   },
   render: function () {
     return (
-      <div className={'nav-drop-item group' + this.props.checkedClass}>
+      <div className={'nav-drop-item group'}>
         <img src={this.props.req.profile_pic_url}
           className='nav-drop-profile-pic nav-drop-block' />
         <div className='friend-request-details nav-drop-block'>
@@ -17,18 +17,32 @@ var FriendRequestItem = React.createClass({
           </a>
           <aside>a million friends</aside>
         </div>
+        {this.renderButtons()}
+      </div>
+    );
+  },
+  renderButtons: function () {
+    if (this.requestType() === 'pending') {
+      return (
         <div className='friend-request-response'>
-          <button className='button-blue'
-            onClick={this.onAccept}>
+          <button className='button-blue' onClick={this.onAccept}>
             Confirm
           </button>
-          <button className='button-gray'
-            onClick={this.onReject}>
+          <button className='button-gray' onClick={this.onReject}>
             Delete Request
           </button>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className='friend-request-response'>
+          <button className='button-gray-inactive'>
+            Friends&nbsp;
+            <i className="fa fa-check" aria-hidden="true"></i>
+          </button>
+        </div>
+      );
+    }
   },
   onAccept: function (e) {
     e.preventDefault();
@@ -43,6 +57,13 @@ var FriendRequestItem = React.createClass({
     this.props.rollUp();
     this.context.router.push(e.target.pathname);
     Util.jumpToTop();
+  },
+  requestType: function () {
+    if (this.props.onAccept) {
+      return 'pending';
+    } else {
+      return 'accepted';
+    }
   }
 });
 
