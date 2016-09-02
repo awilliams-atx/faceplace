@@ -46,13 +46,16 @@ class Api::SessionsController < ApplicationController
   end
 
   def receive_friend_request
-    return if @user.email != 'jeff'
+    return if !@user || @user.email != 'jeff'
     andrew = User.find_by(email: 'andrew')
     friendship = Friendship.find_by(user_id: @user.id, friend_id: andrew.id)
     friendship.destroy if friendship
     friendship = Friendship.find_by(user_id: andrew.id, friend_id: @user.id)
     friendship.destroy if friendship
-    FriendRequest.create!(maker_id: andrew.id, receiver_id: @user.id)
+    request = FriendRequest.find_by(maker_id: andrew.id, receiver_id: @user.id)
+    unless request
+      FriendRequest.create!(maker_id: andrew.id, receiver_id: @user.id)
+    end
   end
 
   def user_params
