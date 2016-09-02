@@ -29,7 +29,7 @@ var Notifications = React.createClass({
     if (this.state.droppedDown) {
       return (
         <aside id='nav-drop-overlay'>
-          <div id='nav-drop-title'>
+          <div className='nav-drop-title'>
             <strong>Notifications</strong>
           </div>
           <div id='nav-drop-index'>
