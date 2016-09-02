@@ -3,6 +3,14 @@ require 'json'
 class Api::FriendRequestsController < ApplicationController
   before_action :require_login
 
+  def accept
+    request = FriendRequest.find_by(maker_id: accept_params[:maker_id], receiver_id: current_user.id)
+    request.update(accepted: true)
+    Friendship.create!(user_id: current_user.id, friend_id: accept_params[:maker_id])
+    Friendship.create!(user_id: accept_params[:maker_id], friend_id: accept_params[:maker_id])
+    render json: request
+  end
+
   def index
     @requests = current_user.received_friend_requests.includes(:maker)
     render 'api/friend_requests/index'
@@ -30,36 +38,11 @@ class Api::FriendRequestsController < ApplicationController
   end
 
   def destroy
-    # User canceling own request, regardless if already accepted/rejected
-    if params.has_key?(:cancellation)
       cancellation = { maker_id: current_user.id, receiver_id:
         cancel_params[:receiver_id] }
       request = FriendRequest.find_by(cancellation)
       request.destroy if request
-      render json: cancellation.merge(cancel: true)
-      return
-    end
-
-    # User responding to request
-    @maker_id = response_params[:maker_id].to_i
-    base_params = { receiver_id: current_user.id, maker_id: @maker_id }
-
-    request = FriendRequest.find_by(base_params)
-    request_accepted = request && response_params[:accept]
-    request_rejected = request && response_params[:reject]
-    request_canceled = !request
-
-    if request_accepted
-      request.destroy
-      make_friendships
-      acceptance = base_params.merge(accept: true)
-      render json: acceptance
-    elsif request_rejected
-      request.destroy
-      render json: base_params.merge(reject: true)
-    elsif request_canceled
-      render json: base_params.merge(reject: true)
-    end
+      render json: cancellation
   end
 
   def mark_checked
@@ -71,11 +54,20 @@ class Api::FriendRequestsController < ApplicationController
     render json: ids
   end
 
+  def reject
+    request = FriendRequest.find_by(maker_id: reject_params[:maker_id], receiver_id: current_user.id)
+    request.destroy if request
+    render json: { maker_id: reject_params[:maker_id].to_i, receiver_id: current_user.id, reject: true }
+  end
+
   private
 
+  def accept_params
+    params.require(:accept).permit(:maker_id, :receiver_id)
+  end
+
   def cancel_params
-    params.require(:cancellation)
-      .permit(:maker_id, :receiver_id, :cancel)
+    params.require(:cancel).permit(:maker_id, :receiver_id)
   end
 
   def make_friendships
@@ -83,8 +75,7 @@ class Api::FriendRequestsController < ApplicationController
     Friendship.find_or_create_by(user_id: @maker_id, friend_id: current_user.id)
   end
 
-  def response_params
-    params.require(:response)
-      .permit(:maker_id, :receiver_id, :accept, :reject)
+  def reject_params
+    params.require(:reject).permit(:maker_id, :receiver_id)
   end
 end
