@@ -100,13 +100,16 @@ var TagSearch = React.createClass({
     });
   },
   onSubmit: function (e) {
-    this.onTag(e, this.state.untaggedFriends[this.state.cursor].userId);
+    this.onTag(e);
   },
-  onTag: function (e, id) {
+  onTag: function (e) {
     e.preventDefault();
-    id = id || parseInt(e.currentTarget.dataset.userid);
+    var cursor = this.state.cursor;
     this.setState({ cursor: 0, searchString: '' }, function () {
-      ClientActions.addTaggedFriend(id);
+      if (this.state.untaggedFriends.length > 0) {
+        ClientActions
+          .addTaggedFriend(this.state.untaggedFriends[cursor].userId);
+      }
       ClientActions.fetchTagSearchResults(this.state.searchString);
     }.bind(this));
   },
