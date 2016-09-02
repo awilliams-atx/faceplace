@@ -6,13 +6,13 @@ class Api::FriendRequestsController < ApplicationController
   def accept
     request = FriendRequest.find_by(maker_id: accept_params[:maker_id], receiver_id: current_user.id)
     request.update(accepted: true)
-    Friendship.create!(user_id: current_user.id, friend_id: accept_params[:maker_id])
-    Friendship.create!(user_id: accept_params[:maker_id], friend_id: accept_params[:maker_id])
+    Friendship.find_or_create_by(user_id: current_user.id, friend_id: accept_params[:maker_id])
+    Friendship.find_or_create_by(user_id: accept_params[:maker_id], friend_id: current_user.id)
     render json: request
   end
 
   def index
-    @requests = current_user.received_friend_requests.includes(:maker)
+    @requests = current_user.received_friend_requests.where(accepted: false).includes(:maker)
     render 'api/friend_requests/index'
   end
 
