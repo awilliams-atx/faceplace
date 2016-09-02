@@ -17,8 +17,8 @@ var Dispatcher = require('../dispatcher/dispatcher'),
     SessionStore = require('../stores/session');
 
 var ClientActions = {
-  acceptFriendRequest: function (acceptance) {
-    FriendRequestApiUtil.acceptFriendRequest(acceptance);
+  acceptFriendRequest: function (acceptance, uiAccept) {
+    FriendRequestApiUtil.acceptFriendRequest(acceptance, uiAccept);
   },
   addTaggedFriend: function (userId) {
     Dispatcher.dispatch({

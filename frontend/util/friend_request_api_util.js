@@ -1,7 +1,7 @@
 var ServerActions = require('../actions/server_actions');
 
 var FriendRequestApiUtil = {
-  acceptFriendRequest: function (acceptance) {
+  acceptFriendRequest: function (acceptance, uiAccept) {
     $.ajax({
       url: '/api/friend_request/accept',
       method: 'PATCH',
@@ -9,6 +9,7 @@ var FriendRequestApiUtil = {
       data: { accept: acceptance },
       success: function (acceptance) {
         ServerActions.receiveAcceptedFriendRequest(acceptance);
+        uiAccept && uiAccept();
       }
     });
   },
