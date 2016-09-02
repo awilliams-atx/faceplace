@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827002905) do
+ActiveRecord::Schema.define(version: 20160902184551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_trgm"
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160827002905) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "checked",     default: false
+    t.boolean  "accepted",    default: false
   end
 
   add_index "friend_requests", ["maker_id", "receiver_id"], name: "index_friend_requests_on_maker_id_and_receiver_id", unique: true, using: :btree
