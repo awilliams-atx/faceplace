@@ -28,7 +28,7 @@ UserStore.__onDispatch = function (payload) {
     UserStore.__emitChange();
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED:
-    if (payload.response.maker_id === _user.userId) {
+    if (payload.request.maker_id === _user.userId) {
       _user.isFriendOfCurrentUser = true;
       _user.requestReceived = false;
       _user.alreadyFriends = true;
@@ -36,7 +36,7 @@ UserStore.__onDispatch = function (payload) {
     }
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED:
-    if (payload.response.maker_id === _user.userId) {
+    if (payload.request.maker_id === _user.userId) {
       _user.isFriendOfCurrentUser = false;
       _user.requestReceived = false;
       UserStore.__emitChange();
