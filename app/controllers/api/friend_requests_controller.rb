@@ -12,7 +12,8 @@ class Api::FriendRequestsController < ApplicationController
   end
 
   def index
-    @requests = current_user.received_friend_requests.limit(8);
+    @requests = (current_user.received_friend_requests.order(created_at: :asc) +
+      current_user.made_friend_requests.where(accepted: true).order(created_at: :asc)).sort { |a, b| b.created_at <=> a.created_at }
     render 'api/friend_requests/index'
   end
 
@@ -26,11 +27,9 @@ class Api::FriendRequestsController < ApplicationController
 
       unless @request
         @request = FriendRequest.create!(down_params)
-
-        down_params.merge!(id: @request.id, profile_pic_url: current_user.profile_pic.url, name: current_user.full_name, checked: false)
-
+        rendered = render_to_string('api/friend_requests/push')
         Pusher.trigger("friend_requests_#{params[:receiver_id]}", 'received',
-          down_params)
+          rendered)
       end
     end
 
@@ -47,11 +46,18 @@ class Api::FriendRequestsController < ApplicationController
 
   def mark_checked
     ids = JSON.parse(params[:checked_ids])
+    @requests = []
     ids.each do |id|
-      FriendRequest.find(id).update(checked: true)
+      request = FriendRequest.find(id)
+      if request.accepted
+        request.update(acceptance_checked: true)
+      else
+        request.update(checked: true)
+      end
+      @requests << request
     end
 
-    render json: ids
+    render 'api/friend_requests/checking'
   end
 
   def reject

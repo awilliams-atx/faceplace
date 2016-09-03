@@ -1,7 +1,7 @@
 var ServerActions = require('../actions/server_actions');
 
 var FriendRequestApiUtil = {
-  acceptFriendRequest: function (acceptance, uiAccept) {
+  acceptFriendRequest: function (acceptance) {
     $.ajax({
       url: '/api/friend_request/accept',
       method: 'PATCH',
@@ -9,7 +9,6 @@ var FriendRequestApiUtil = {
       data: { accept: acceptance },
       success: function (acceptance) {
         ServerActions.receiveAcceptedFriendRequest(acceptance);
-        uiAccept && uiAccept();
       }
     });
   },
@@ -51,13 +50,12 @@ var FriendRequestApiUtil = {
       method: 'POST',
       dataType: 'json',
       data: { checked_ids : JSON.stringify(checkedIds) },
-      success: function (checked_ids) {
-        ServerActions.receiveCheckedRequestIds(checked_ids);
+      success: function (requests) {
+        ServerActions.receiveCheckedRequests(requests);
       }
     })
   },
   rejectFriendRequest: function (rejection) {
-    // console.log('CHECK!');
     $.ajax({
       url: '/api/friend_request/reject',
       method: 'DELETE',

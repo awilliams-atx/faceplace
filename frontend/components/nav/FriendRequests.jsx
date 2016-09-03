@@ -6,13 +6,13 @@ var React = require('react'),
 
 var FriendRequests = React.createClass({
   getInitialState: function () {
-    return { requests: [], uncheckedRequestIds: [], droppedDown: false };
+    return { accepted: [], droppedDown: false, pending: [] };
   },
   render: function () {
     return (
       <div className={this.className() + ' nav-drop-icon'}
         id='requests-drop'
-        onClick={this.dropDown}>
+        onClick={this.toggleDropDown}>
         <div className='fa-hover-box-25x25'>
           <i className="fa fa-user-plus" aria-hidden="true"></i>
           {this.renderRequestCounter()}
@@ -26,36 +26,46 @@ var FriendRequests = React.createClass({
       return (
         <div id='nav-drop-overlay'>
           <div className='nav-drop-title'>
+            <strong>Accepted Requests</strong>
+          </div>
+          {this.renderAccepted()}
+          <div className='nav-drop-title'>
             <strong>Friend Requests</strong>
           </div>
-          {this.renderRequests()}
+          {this.renderPending()}
         </div>
       );
     }
   },
-  renderRequestCounter: function () {
-    if (this.state.uncheckedRequestIds.length > 0) {
+  renderAccepted: function () {
+    return this.state.accepted.map(function (req, idx) {
       return (
-        <mark>{this.state.uncheckedRequestIds.length}</mark>
+        <FriendRequestItem key={idx}
+          req={req}
+          rollUp={this.rollUp} />
       );
+    }.bind(this));
+  },
+  renderRequestCounter: function () {
+    if (FriendRequestStore.allUnchecked().length > 0
+      && !this.state.droppedDown) {
+      return(<mark>{FriendRequestStore.allUnchecked().length}</mark>);
     }
   },
-  renderRequests: function () {
-    if (this.state.requests.length === 0) {
+  renderPending: function () {
+    if (this.state.pending.length === 0) {
       return (
         <div id='empty-nav-drop'>
-          <aside>No friend requests</aside>
+          <aside>No new requests</aside>
         </div>
       );
     } else {
-      return this.state.requests.map(function (req, idx) {
+      return this.state.pending.map(function (req, idx) {
         return (
-          <FriendRequestItem
-            checkedClass={this.checkedClass(req.id)}
-            req={req}
-            key={idx}
+          <FriendRequestItem key={idx}
             onAccept={this.onAccept}
             onReject={this.onReject}
+            req={req}
             rollUp={this.rollUp} />
         );
       }.bind(this));
@@ -69,22 +79,18 @@ var FriendRequests = React.createClass({
   componentWillUnmount: function () {
     this.friendRequestListener.remove();
   },
-  checkedClass: function (id) {
-    return FriendRequestStore.justChecked(id) ? ' unchecked-alert' : '';
-  },
   className: function () {
     if (this.state.droppedDown) {
       return 'nav-drop-active';
-    } else if (this.state.uncheckedRequestIds.length > 0) {
+    } else if (FriendRequestStore.allUnchecked().length > 0) {
       return 'nav-drop-unchecked';
     } else {
       return 'nav-drop-inactive';
     }
   },
-  dropDown: function (e) {
+  toggleDropDown: function (e) {
     if (!this.state.droppedDown) {
       this.setState({ droppedDown: true }, function () {
-        this.markRequestsChecked();
         document.addEventListener('click', this.navDropClickListener);
       }.bind(this));
     } else if (!document.getElementById('nav-drop-overlay')
@@ -92,10 +98,9 @@ var FriendRequests = React.createClass({
         this.rollUp();
     }
   },
-  markRequestsChecked: function () {
-    if (this.state.uncheckedRequestIds.length > 0) {
-      ClientActions.markRequestsChecked(this.state.uncheckedRequestIds);
-    }
+  markRequestsChecked: function (reqs) {
+    ClientActions.markRequestsChecked(FriendRequestStore
+      .allUnchecked().concat(FriendRequestStore.allNotifiedAccepted()));
   },
   navDropClickListener: function (e) {
     var navDropIcon = document.getElementById('requests-drop');
@@ -106,29 +111,20 @@ var FriendRequests = React.createClass({
     }
   },
   onAccept: function (user_id) {
-    var response = this.response(user_id, 'accept');
-    ClientActions.respondToFriendRequest(response);
+    ClientActions.acceptFriendRequest({ maker_id: user_id });
   },
   onFriendRequestStoreChange: function () {
     this.setState({
-      requests: FriendRequestStore.all(),
-      uncheckedRequestIds: FriendRequestStore.uncheckedRequestIds()
+      accepted: FriendRequestStore.accepted(),
+      pending: FriendRequestStore.pending()
     });
   },
   onReject: function (user_id) {
-    var response = this.response(user_id, 'reject');
-    ClientActions.respondToFriendRequest(response);
-  },
-  response: function (user_id, response) {
-    var params = {
-      maker_id: user_id,
-      receiver_id: SessionStore.currentUser().id,
-    };
-    params[response] = true;
-    return params;
+    ClientActions.rejectFriendRequest({ maker_id: user_id });
   },
   rollUp: function () {
     this.setState({ droppedDown: false }, function () {
+      this.markRequestsChecked();
       document.removeEventListener('click', this.navDropClickListener);
     }.bind(this));
   }
