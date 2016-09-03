@@ -96,6 +96,12 @@ var ServerActions = {
       request: request
     });
   },
+  receiveGlobalPosts: function (posts) {
+    Dispatcher.dispatch({
+      actionType: postConstants.GLOBAL_POSTS_RECEIVED,
+      posts: posts
+    });
+  },
   receiveMostRecentlyAddedFriends: function (friendsData) {
     Dispatcher.dispatch({
       actionType: friendConstants.MOST_RECENTLY_ADDED_FRIENDS_RECEIVED,

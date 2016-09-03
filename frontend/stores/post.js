@@ -13,6 +13,10 @@ PostStore.__onDispatch = function (payload) {
       this.removePost(payload.post);
       PostStore.__emitChange();
       break;
+    case postConstants.GLOBAL_POSTS_RECEIVED:
+      PostStore.setPosts(payload.posts);
+      PostStore.__emitChange();
+      break;
     case postConstants.OWN_POST_RECEIVED:
       this.addPost(payload.post);
       PostStore.__emitChange();

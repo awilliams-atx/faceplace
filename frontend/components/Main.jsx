@@ -1,5 +1,7 @@
 var React = require('react'),
-    Nav = require('./nav/Nav');
+    Nav = require('./nav/Nav'),
+    GlobalPostIndex = require('./posts/GlobalPostIndex'),
+    ClientActions = require('../actions/client_actions');
 
 var Main = React.createClass({
   getInitialState: function () {
@@ -14,7 +16,7 @@ var Main = React.createClass({
             l
           </aside>
           <section id='feed'>
-            o
+            <GlobalPostIndex />
           </section>
           <aside id='right-col'>
             l
@@ -22,6 +24,9 @@ var Main = React.createClass({
         </div>
       </div>
     );
+  },
+  componentDidMount: function () {
+    ClientActions.fetchGlobalPosts();
   }
 });
 

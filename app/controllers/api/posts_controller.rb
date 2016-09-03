@@ -6,6 +6,8 @@ class Api::PostsController < ApplicationController
       user = User.find(params[:user_id])
       @posts = user.timeline_posts.includes(:author, :profile_owner,
         :tagged_friends)
+    else
+      @posts = Post.all.limit(10)
     end
     render 'api/posts/index'
   end
