@@ -51,7 +51,7 @@ var FriendRequestApiUtil = {
       dataType: 'json',
       data: { checked_ids : JSON.stringify(checkedIds) },
       success: function (requests) {
-        ServerActions.receiveCheckedRequests(requests);
+        ServerActions.receiveCheckedFriendRequests(requests);
       }
     })
   },

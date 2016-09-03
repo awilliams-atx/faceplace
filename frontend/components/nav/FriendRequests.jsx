@@ -47,8 +47,7 @@ var FriendRequests = React.createClass({
     }.bind(this));
   },
   renderRequestCounter: function () {
-    if (FriendRequestStore.allUnchecked().length > 0
-      && !this.state.droppedDown) {
+    if (FriendRequestStore.allUnchecked().length > 0) {
       return(<mark>{FriendRequestStore.allUnchecked().length}</mark>);
     }
   },
@@ -98,9 +97,10 @@ var FriendRequests = React.createClass({
         this.rollUp();
     }
   },
-  markRequestsChecked: function (reqs) {
-    ClientActions.markRequestsChecked(FriendRequestStore
-      .allUnchecked().concat(FriendRequestStore.allNotifiedAccepted()));
+  markRequestsChecked: function () {
+    var ids = FriendRequestStore
+      .allUnchecked().concat(FriendRequestStore.allNotifiedAccepted());
+    ClientActions.markRequestsChecked(ids);
   },
   navDropClickListener: function (e) {
     var navDropIcon = document.getElementById('requests-drop');

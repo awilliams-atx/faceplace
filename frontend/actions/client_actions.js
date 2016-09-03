@@ -84,8 +84,9 @@ var ClientActions = {
   makeFriendRequest: function (userId) {
     FriendRequestApiUtil.makeFriendRequest(userId);
   },
-  markRequestsChecked: function (checkedIds) {
-    FriendRequestApiUtil.markRequestsChecked(checkedIds);
+  markRequestsChecked: function (ids) {
+    if (ids.length === 0) { return }
+    FriendRequestApiUtil.markRequestsChecked(ids);
   },
   markNotificationRead: function (id) {
     NotificationApiUtil.markNotificationRead(id);

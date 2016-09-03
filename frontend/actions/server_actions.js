@@ -23,10 +23,10 @@ var ServerActions = {
       checked_ids: checked_ids
     });
   },
-  receiveCheckedRequestIds: function (checked_ids) {
+  receiveCheckedFriendRequests: function (requests) {
     Dispatcher.dispatch({
-      actionType: friendRequestConstants.CHECKED_FRIEND_REQUEST_IDS_RECEIVED,
-      checked_ids: checked_ids
+      actionType: friendRequestConstants.CHECKED_FRIEND_REQUESTS_RECEIVED,
+      requests: requests
     });
   },
   receiveComment: function (comment) {
@@ -134,8 +134,6 @@ var ServerActions = {
     });
   },
   receiveRejectedFriendRequest: function (request) {
-    // console.log('store is looking for a maker_id here');
-    // console.log(request);
     Dispatcher.dispatch({
       actionType: friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED,
       request: request

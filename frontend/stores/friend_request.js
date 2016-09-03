@@ -2,7 +2,8 @@ var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher'),
     friendRequestConstants = require('../constants/friend_request_constants'),
     friendshipConstants = require('../constants/friendship_constants'),
-    socketConstants = require('../constants/socket_constants');
+    socketConstants = require('../constants/socket_constants'),
+    SessionStore = require('../stores/session');
 
 var FriendRequestStore = new Store(AppDispatcher);
 
@@ -11,8 +12,8 @@ _pending = [];
 
 FriendRequestStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-  case friendRequestConstants.CHECKED_FRIEND_REQUEST_IDS_RECEIVED:
-    FriendRequestStore.markRequestsChecked(payload.checked_ids);
+  case friendRequestConstants.CHECKED_FRIEND_REQUESTS_RECEIVED:
+    FriendRequestStore.markRequestsChecked(payload.requests);
     FriendRequestStore.__emitChange();
     break;
   case friendRequestConstants.FRIEND_REQUESTS_RECEIVED:
@@ -56,13 +57,41 @@ FriendRequestStore.addRequest = function (request) {
   _pending.push(request);
 };
 
-FriendRequestStore.markRequestsChecked = function (checked_ids) {
-  FriendRequestStore.setJustCheckedIds(checked_ids);
-  for (var i = 0; i < _pending.length; i++) {
-    if (checked_ids.indexOf(_pending[i].id) >= 0) {
-      _pending[i].checked = true;
+FriendRequestStore.allNotifiedAccepted = function () {
+  return _accepted.filter(function (req) {
+    return req.maker_id === SessionStore.currentUser().id &&
+      !req.acceptance_checked;
+  }).map(function (req) {
+    return req.id;
+  });
+};
+
+FriendRequestStore.allUnchecked = function () {
+  return _pending.filter(function (req) {
+    return !req.checked;
+  }).map(function (req) {
+    return req.id;
+  });
+};
+
+FriendRequestStore.markRequestsChecked = function (requests) {
+  requests.forEach(function (req) {
+    if (req.acceptance_checked) {
+      for (var i = 0; i < _accepted.length; i++) {
+        if (_accepted[i].id === req.id) {
+          _accepted[i].acceptance_checked = true;
+          return
+        }
+      }
+    } else if (req.checked) {
+      for (var j = 0; j < _pending.length; j++) {
+        if (_pending[j].id === req.id) {
+          _pending[j].checked = true;
+          return
+        }
+      }
     }
-  }
+  });
 };
 
 FriendRequestStore.pending = function () {

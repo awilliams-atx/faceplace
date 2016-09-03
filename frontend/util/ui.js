@@ -11,6 +11,13 @@ var UIManipulator = {
   focusScrollPost: function (post) {
     post.getElementsByTagName('textarea')[0].focus();
   },
+  removeListener: function (listener) {
+    for (var i = 0; i < listeners.length; i++) {
+      if (listener === listeners[i]) {
+        return listeners.splice(i, 1);
+      }
+    }
+  },
   scrollPost: function () {
     return ui.scrollPost;
   },
