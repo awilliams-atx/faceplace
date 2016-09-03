@@ -45,20 +45,11 @@ var PostCommentIndex = React.createClass({
     });
   },
   onNotificationStoreChange: function () {
-    console.log('if the notification has a post id, just use that');
     var notification = NotificationStore.mostRecent();
-    console.log(notification);
     if (Object.keys(notification).length === 0) { return }
     if (notification.notifiable_type !== 'Comment') { return }
     if (this.props.post.postId === notification.post_id) {
       ClientActions.fetchNotifiableComment(notification);
-    } else {
-      var postIds = this.state.posts.map(function (post) {
-        return post.postId;
-      });
-      if (postIds.indexOf(notification.post_id) >= 0) {
-        ClientActions.fetchNotifiableComment(notification);
-      }
     }
   }
 });
