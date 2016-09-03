@@ -10,10 +10,7 @@ var React = require('react'),
 
 var PostIndex = React.createClass({
   getInitialState: function () {
-    return ({
-      isFriendOfProfileOwner: UserStore.user().isFriendOfCurrentUser,
-      posts: PostStore.all()
-    });
+    return ({ posts: PostStore.all() });
   },
   render: function () {
     return (
@@ -25,43 +22,36 @@ var PostIndex = React.createClass({
   },
   renderForm: function () {
     if (this.authorizedToPost()) {
-      return <PostForm isEditing={false}
+      return <PostForm isEditing={false} // profileOwnerId undefined on <Main/>
         profileOwnerId={this.props.profileOwnerId}/>;
     }
   },
   renderPosts: function () {
     return this.state.posts.map(function (post) {
-      return <PostIndexItem post={post} key={post.postId} />;
+      return <PostIndexItem key={post.postId} post={post} />;
     });
   },
   componentDidMount: function () {
     this.postListener = PostStore.addListener(this.onPostStoreChange);
-    this.userListener = UserStore.addListener(this.onUserStoreChange);
   },
   componentDidUpdate: function () {
-    setTimeout(function () {
-      UI.scrollToPost()
-    }, 1000);
+    if (this.props.profileOwnerid) {
+      setTimeout(function () { UI.scrollToPost() }, 1000);
+    }
   },
   componentWillUnmount: function () {
     this.postListener.remove();
-    this.userListener.remove();
   },
   authorizedToPost: function () {
-    var authorized = false;
+    if (!this.props.profileOwnerId) { return true }
     if (UserStore.user().isFriendOfCurrentUser ||
       this.props.profileOwnerId === SessionStore.currentUser().id) {
-      authorized = true;
+      return true;
     }
-    return authorized;
+    return false;
   },
   onPostStoreChange: function () {
     this.setState({ posts: PostStore.all() });
-  },
-  onUserStoreChange: function () {
-    this.setState({
-      isFriendOfProfileOwner: UserStore.user().isFriendOfCurrentUser
-    });
   },
   componentWillReceiveProps: function (newProps) {
     this.setState({ posts: PostStore.all() });
