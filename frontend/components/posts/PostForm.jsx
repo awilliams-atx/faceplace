@@ -14,7 +14,6 @@ var PostForm = React.createClass({
   getInitialState: function () {
     return({
       body: '',
-      isTaggingForTheFirstTime: true,
       tagged: TagStore.taggedFriends(),
       tagging: false
     });
@@ -150,9 +149,10 @@ var PostForm = React.createClass({
     this.setState({ tagged: TagStore.taggedFriends() });
   },
   placeholder: function () {
-    if (SessionStore.currentUser().id === this.props.profileOwnerId) {
-      return 'What\'s on your mind, ' +
-        SessionStore.currentUser().first_name + '?';
+    if (!this.props.profileOwnerId || SessionStore.currentUser().id ===
+      this.props.profileOwnerId) {
+      return 'What\'s on your mind, ' + SessionStore.currentUser()
+        .first_name + '?';
     } else {
       return 'Say something to ' + UserStore.user().firstName + '...';
     }
