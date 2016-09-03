@@ -48,8 +48,8 @@ var FriendRequests = React.createClass({
     }.bind(this));
   },
   renderRequestCounter: function () {
-    if (FriendRequestStore.allUnchecked().length > 0) {
-      return(<mark>{FriendRequestStore.allUnchecked().length}</mark>);
+    if (FriendRequestStore.totalUnchecked() > 0) {
+      return(<mark>{FriendRequestStore.totalUnchecked()}</mark>);
     }
   },
   renderPending: function () {
@@ -96,7 +96,7 @@ var FriendRequests = React.createClass({
       }.bind(this));
     } else if (!document.getElementById('nav-drop-overlay')
       .contains(e.target)) {
-        this.rollUp();
+      this.rollUp();
     }
   },
   markRequestsChecked: function () {
