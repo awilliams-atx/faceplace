@@ -17,8 +17,6 @@ var Router = ReactRouter.Router,
     SessionStore = require('./stores/session'),
     SessionApiUtil = require('./util/session_api_util');
 
-var Socket = require('./vendor/socket');
-
 var App = React.createClass({
   getInitialState: function () {
     return ({isModalDisplayed: ModalStore.isModalDisplayed()});
@@ -47,13 +45,9 @@ var App = React.createClass({
   componentDidMount: function () {
     this.modalListener =
       ModalStore.addListener(this.onModalStoreChange);
-    this.friendRequestSocket = new Socket('friend_requests');
-    this.notificationSocket = new Socket('notifications');
   },
   componentWillUnmount: function () {
     this.modalListener.remove();
-    this.friendRequestSocket.unsubscribe();
-    this.notificationSocket.unsubscribe();
   },
   onModalStoreChange: function () {
     this.setState({

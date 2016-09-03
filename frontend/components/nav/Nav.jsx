@@ -1,4 +1,5 @@
 var React = require('react'),
+    Socket = require('../../lib/socket'),
     Util = require('../../util/general'),
     NavDrops = require('./NavDrops'),
     SignUpForm = require('../SignUpForm'),
@@ -42,9 +43,15 @@ var Nav = React.createClass({
       </header>
     );
   },
+  componentDidMount: function () {
+    this.friendRequestSocket = new Socket('friend_requests');
+    this.notificationSocket = new Socket('notifications');
+  },
   logout: function (e) {
     e.preventDefault();
     SessionApiUtil.logout(function () {
+      this.friendRequestSocket.unsubscribe();
+      this.notificationSocket.unsubscribe();
       this.context.router.push('/login');
     }.bind(this));
   },

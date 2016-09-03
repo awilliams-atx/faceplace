@@ -1,5 +1,19 @@
-var config = require('./config.js'),
+var SocketActions = require('../actions/socket_actions'),
     SessionStore = require('../stores/session');
+
+var config = {
+  channels: {
+    friend_requests: {
+      channelRoot: 'friend_requests_',
+      events: [{ received: SocketActions.pushFriendRequest }]
+    },
+    notifications: {
+      channelRoot: 'notifications_',
+      events: [{ received: SocketActions.pushNotification }]
+    }
+  },
+  pusherId: '3d702a0663f5bd8c69dd'
+};
 
 function Socket (channelName, channelId) {
   this.config = config.channels[channelName];
