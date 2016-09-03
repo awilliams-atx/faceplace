@@ -1,0 +1,21 @@
+@import 'global';
+
+
+#main-content {
+  margin: 11px auto 0;
+  width: 1014px;
+  #left-col {
+    float: left;
+    width: 180px;
+  }
+  #feed {
+    float: left;
+    padding-left: 11px;
+    width: 502px;
+  }
+  #right-col {
+    float: left;
+    padding-left: 12px;
+    width: 309px;
+  }
+}

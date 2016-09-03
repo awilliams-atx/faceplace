@@ -7,8 +7,19 @@ var Main = React.createClass({
   },
   render: function () {
     return (
-      <div className='content'>
+      <div id='main'>
         <Nav />
+        <div id='main-content' className='group'>
+          <aside id='left-col'>
+            l
+          </aside>
+          <section id='feed'>
+            o
+          </section>
+          <aside id='right-col'>
+            l
+          </aside>
+        </div>
       </div>
     );
   }
