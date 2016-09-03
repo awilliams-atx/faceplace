@@ -54,6 +54,12 @@ FriendRequestStore.addRequest = function (request) {
       return
     }
   }
+  for (var i = 0; i < _accepted.length; i++) {
+    if ([_accepted[i].maker_id, _accepted[i].receiver_id]
+      .indexOf(request.maker_id) >= 0) {
+      _accepted.splice(i, 1);
+    }
+  }
   _pending.push(request);
 };
 
