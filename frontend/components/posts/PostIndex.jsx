@@ -4,7 +4,6 @@ var React = require('react'),
     PostForm = require('./PostForm'),
     PostIndexItem = require('./PostIndexItem'),
     ClientActions = require('../../actions/client_actions'),
-    NotificationStore = require('../../stores/notification'),
     PostStore = require('../../stores/post'),
     SessionStore = require('../../stores/session'),
     UserStore = require('../../stores/user');
@@ -36,8 +35,6 @@ var PostIndex = React.createClass({
     });
   },
   componentDidMount: function () {
-    this.notificationListener =
-      NotificationStore.addListener(this.onNotificationStoreChange);
     this.postListener = PostStore.addListener(this.onPostStoreChange);
     this.userListener = UserStore.addListener(this.onUserStoreChange);
   },
@@ -47,7 +44,6 @@ var PostIndex = React.createClass({
     }, 1000);
   },
   componentWillUnmount: function () {
-    this.notificationListener.remove();
     this.postListener.remove();
     this.userListener.remove();
   },
@@ -58,21 +54,6 @@ var PostIndex = React.createClass({
       authorized = true;
     }
     return authorized;
-  },
-  onNotificationStoreChange: function () {
-    var notification = NotificationStore.mostRecent();
-    if (Object.keys(notification).length === 0) { return }
-    if (notification.notifiable_type !== 'Comment') { return }
-    if (UserStore.user().userId === notification.timeline_owner_id) {
-      ClientActions.fetchNotifiableComment(notification);
-    } else {
-      var postIds = this.state.posts.map(function (post) {
-        return post.postId;
-      });
-      if (postIds.indexOf(notification.post_id) >= 0) {
-        ClientActions.fetchNotifiableComment(notification);
-      }
-    }
   },
   onPostStoreChange: function () {
     this.setState({ posts: PostStore.all() });

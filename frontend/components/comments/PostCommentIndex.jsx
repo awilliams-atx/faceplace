@@ -1,8 +1,10 @@
 var React = require('react'),
     PostCommentForm = require('./PostCommentForm'),
     PostCommentIndexItem = require('./PostCommentIndexItem'),
+    ClientActions = require('../../actions/client_actions'),
     CommentApiUtil = require('../../util/comment_api_util'),
-    CommentStore = require('../../stores/comment');
+    CommentStore = require('../../stores/comment'),
+    NotificationStore = require('../../stores/notification');
 
 var PostCommentIndex = React.createClass({
   getInitialState: function () {
@@ -30,14 +32,34 @@ var PostCommentIndex = React.createClass({
   },
   componentDidMount: function () {
     this.commentListener = CommentStore.addListener(this.onCommentStoreChange);
+    this.notificationListener =
+      NotificationStore.addListener(this.onNotificationStoreChange);
   },
   componentWillUnmount: function () {
     this.commentListener.remove();
+    this.notificationListener.remove();
   },
   onCommentStoreChange: function () {
     this.setState({
       comments: CommentStore.allPostComments(this.props.post.postId)
     });
+  },
+  onNotificationStoreChange: function () {
+    console.log('if the notification has a post id, just use that');
+    var notification = NotificationStore.mostRecent();
+    console.log(notification);
+    if (Object.keys(notification).length === 0) { return }
+    if (notification.notifiable_type !== 'Comment') { return }
+    if (this.props.post.postId === notification.post_id) {
+      ClientActions.fetchNotifiableComment(notification);
+    } else {
+      var postIds = this.state.posts.map(function (post) {
+        return post.postId;
+      });
+      if (postIds.indexOf(notification.post_id) >= 0) {
+        ClientActions.fetchNotifiableComment(notification);
+      }
+    }
   }
 });
 
