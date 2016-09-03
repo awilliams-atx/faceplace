@@ -18,22 +18,28 @@ class Api::FriendRequestsController < ApplicationController
   end
 
   def create
-    down_params = { maker_id: current_user.id, receiver_id: params[:receiver_id].to_i }
+    req_params = { maker_id: current_user.id, receiver_id: params[:receiver_id]
+      .to_i }
 
     unless Friendship.exists?(user_id: current_user.id, friend_id:
       params[:receiver_id].to_i)
 
-      @request = FriendRequest.find_by(down_params)
+      @request = FriendRequest.find_by(maker_id: current_user.id, receiver_id:
+        params[:receiver_id])
 
       unless @request
-        @request = FriendRequest.create!(down_params)
-        rendered = render_to_string('api/friend_requests/push')
-        Pusher.trigger("friend_requests_#{params[:receiver_id]}", 'received',
-          rendered)
+        @request = FriendRequest.new(req_params)
+        if @request.save
+          rendered = render_to_string('api/friend_requests/push')
+          Pusher.trigger("friend_requests_#{params[:receiver_id]}", 'received',
+            rendered)
+          render json: req_params
+        else
+          render @request.errors.full_messages
+        end
       end
     end
 
-    render json: down_params
   end
 
   def destroy
