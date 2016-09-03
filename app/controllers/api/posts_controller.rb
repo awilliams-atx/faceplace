@@ -14,6 +14,7 @@ class Api::PostsController < ApplicationController
 
   def create
     @post = Post.new(author_id: current_user.id, body: post_params[:body])
+    @post.global = true unless post_params[:profile_owner_id]
     @post.save!
 
     profile_owner_id = post_params[:profile_owner_id]
