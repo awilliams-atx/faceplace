@@ -5,7 +5,7 @@ class Api::FriendRequestsController < ApplicationController
 
   def accept
     request = FriendRequest.find_by(maker_id: accept_params[:maker_id], receiver_id: current_user.id)
-    request.update(accepted: true)
+    request.update(accepted: true, checked: true)
     Friendship.find_or_create_by(user_id: current_user.id, friend_id: accept_params[:maker_id])
     Friendship.find_or_create_by(user_id: accept_params[:maker_id], friend_id: current_user.id)
     render json: request
