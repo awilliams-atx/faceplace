@@ -1,6 +1,6 @@
 var React = require('react'),
     Nav = require('./nav/Nav'),
-    GlobalPostIndex = require('./posts/GlobalPostIndex'),
+    PostIndex = require('./posts/PostIndex'),
     ClientActions = require('../actions/client_actions');
 
 var Main = React.createClass({
@@ -16,7 +16,7 @@ var Main = React.createClass({
             l
           </aside>
           <section id='feed'>
-            <GlobalPostIndex />
+            <PostIndex />
           </section>
           <aside id='right-col'>
             l
