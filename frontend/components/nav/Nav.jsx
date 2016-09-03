@@ -62,7 +62,7 @@ var Nav = React.createClass({
   },
   pushMainRoute: function (e) {
     e.preventDefault();
-    this.context.router.push('/main');
+    this.context.router.push('/');
     Util.jumpToTop();
   }
 });
