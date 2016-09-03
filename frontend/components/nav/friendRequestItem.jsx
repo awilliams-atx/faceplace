@@ -9,13 +9,13 @@ var FriendRequestItem = React.createClass({
   render: function () {
     return (
       <div className={this.className() + 'nav-drop-item group'}>
-        <a href={'/users/' + this.props.req.maker_id}
+        <a href={'/users/' + this.otherUserId()}
           onClick={this.pushUserRoute}>
           <img src={this.props.req.profile_pic_url}
             className='nav-drop-profile-pic nav-drop-block' />
         </a>
         <div className='friend-request-details nav-drop-block'>
-          <a href={'/users/' + this.props.req.maker_id}
+          <a href={'/users/' + this.otherUserId()}
             onClick={this.pushUserRoute}>
             {this.props.req.name}
           </a>
@@ -75,6 +75,13 @@ var FriendRequestItem = React.createClass({
     if (!UI.requestsDropped()) {
       this.props.req.acceptance_checked = true;
       UI.removeListener(this.onUIChange);
+    }
+  },
+  otherUserId: function () {
+    if (SessionStore.currentUser().id === this.props.req.maker_id) {
+      return this.props.req.receiver_id;
+    } else {
+      return this.props.req.maker_id;
     }
   },
   pushUserRoute: function (e) {

@@ -82,7 +82,7 @@ var FriendRequests = React.createClass({
   className: function () {
     if (this.state.droppedDown) {
       return 'nav-drop-active';
-    } else if (FriendRequestStore.allUnchecked().length > 0) {
+    } else if (FriendRequestStore.totalUnchecked() > 0) {
       return 'nav-drop-unchecked';
     } else {
       return 'nav-drop-inactive';
