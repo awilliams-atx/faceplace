@@ -48,7 +48,8 @@ class Api::FriendRequestsController < ApplicationController
     ids = JSON.parse(params[:checked_ids])
     @requests = []
     ids.each do |id|
-      request = FriendRequest.find(id)
+      request = FriendRequest.find_by(id: id)
+      next unless request
       if request.accepted
         request.update(acceptance_checked: true)
       else
