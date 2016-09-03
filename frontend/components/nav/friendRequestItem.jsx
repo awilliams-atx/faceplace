@@ -9,8 +9,11 @@ var FriendRequestItem = React.createClass({
   render: function () {
     return (
       <div className={this.className() + 'nav-drop-item group'}>
-        <img src={this.props.req.profile_pic_url}
-          className='nav-drop-profile-pic nav-drop-block' />
+        <a href={'/users/' + this.props.req.maker_id}
+          onClick={this.pushUserRoute}>
+          <img src={this.props.req.profile_pic_url}
+            className='nav-drop-profile-pic nav-drop-block' />
+        </a>
         <div className='friend-request-details nav-drop-block'>
           <a href={'/users/' + this.props.req.maker_id}
             onClick={this.pushUserRoute}>
@@ -77,7 +80,8 @@ var FriendRequestItem = React.createClass({
   pushUserRoute: function (e) {
     e.preventDefault();
     this.props.rollUp();
-    this.context.router.push(e.target.pathname);
+    var anchor = Util.findSelfOrParent(e.target, 'A');
+    this.context.router.push(anchor.pathname);
     Util.jumpToTop();
   },
   requestType: function () {
