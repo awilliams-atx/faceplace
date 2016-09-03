@@ -1,4 +1,5 @@
 var React = require('react'),
+    LeftCol = require('./main/LeftCol'),
     Nav = require('./nav/Nav'),
     PostIndex = require('./posts/PostIndex'),
     ClientActions = require('../actions/client_actions');
@@ -12,9 +13,7 @@ var Main = React.createClass({
       <div id='main'>
         <Nav />
         <div id='main-content' className='group'>
-          <aside id='left-col'>
-            l
-          </aside>
+          <LeftCol />
           <section id='feed'>
             <PostIndex />
           </section>
