@@ -1,4 +1,5 @@
 var React = require('react'),
+    UI = require('../../util/ui'),
     FriendRequestItem = require('./friendRequestItem'),
     ClientActions = require('../../actions/client_actions'),
     FriendRequestStore = require('../../stores/friend_request.js'),
@@ -90,6 +91,7 @@ var FriendRequests = React.createClass({
   toggleDropDown: function (e) {
     if (!this.state.droppedDown) {
       this.setState({ droppedDown: true }, function () {
+        UI.toggleRequestDrop(this.state.droppedDown);
         document.addEventListener('click', this.navDropClickListener);
       }.bind(this));
     } else if (!document.getElementById('nav-drop-overlay')
@@ -125,6 +127,7 @@ var FriendRequests = React.createClass({
   rollUp: function () {
     this.setState({ droppedDown: false }, function () {
       this.markRequestsChecked();
+      UI.toggleRequestDrop(this.state.droppedDown);
       document.removeEventListener('click', this.navDropClickListener);
     }.bind(this));
   }

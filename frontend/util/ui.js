@@ -1,5 +1,5 @@
 var listeners = [];
-var ui = { scrollPost: undefined, tagging: false };
+var ui = { requestsDropped: false, scrollPost: undefined, tagging: false };
 
 var UIManipulator = {
   addListener: function (listener) {
@@ -17,6 +17,9 @@ var UIManipulator = {
         return listeners.splice(i, 1);
       }
     }
+  },
+  requestsDropped: function () {
+    return ui.requestsDropped;
   },
   scrollPost: function () {
     return ui.scrollPost;
@@ -43,6 +46,10 @@ var UIManipulator = {
   },
   tagging: function () {
     return ui.tagging;
+  },
+  toggleRequestDrop: function (bool) {
+    ui.requestsDropped = bool;
+    this.trigger();
   },
   toggleTagging: function (bool) {
     ui.tagging = bool;

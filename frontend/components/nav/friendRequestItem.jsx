@@ -1,4 +1,5 @@
 var React = require('react'),
+    UI = require('../../util/ui'),
     Util = require('../../util/general');
 
 var FriendRequestItem = React.createClass({
@@ -7,7 +8,7 @@ var FriendRequestItem = React.createClass({
   },
   render: function () {
     return (
-      <div className={'nav-drop-item group'}>
+      <div className={this.className() + 'nav-drop-item group'}>
         <img src={this.props.req.profile_pic_url}
           className='nav-drop-profile-pic nav-drop-block' />
         <div className='friend-request-details nav-drop-block'>
@@ -44,13 +45,34 @@ var FriendRequestItem = React.createClass({
       );
     }
   },
+  className: function () {
+    if (this.props.req.acceptance_checked) {
+      return '';
+    } else if (!this.props.req.checked) {
+      return 'unchecked-alert ';
+    } else if (this.props.req.accepted && !this.props.req.acceptance_checked) {
+      return 'just-accepted ';
+    } else {
+      return '';
+    }
+  },
   onAccept: function (e) {
     e.preventDefault();
+    this.props.req.accepted = true;
+    this.props.req.acceptance_checked = false;
+    this.props.req.checked = true;
     this.props.onAccept(this.props.req.maker_id);
+    UI.addListener(this.onUIChange);
   },
   onReject: function (e) {
     e.preventDefault();
     this.props.onReject(this.props.req.maker_id);
+  },
+  onUIChange: function () {
+    if (!UI.requestsDropped()) {
+      this.props.req.acceptance_checked = true;
+      UI.removeListener(this.onUIChange);
+    }
   },
   pushUserRoute: function (e) {
     e.preventDefault();
