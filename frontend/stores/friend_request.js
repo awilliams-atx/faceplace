@@ -106,7 +106,7 @@ FriendRequestStore.pending = function () {
 
 FriendRequestStore.removeAccepted = function (id) {
   for (var i = 0; i < _accepted.length; i++) {
-    if (_accepted[i].maker_id === id || _accepted[i].receier_id === id) {
+    if (_accepted[i].maker_id === id || _accepted[i].receiver_id === id) {
       return _accepted.splice(i, 1)[0];
     }
   }
