@@ -60,9 +60,9 @@ var App = React.createClass({
 
 var routes = (
   <Route path='/' component={ App } >
-    <IndexRoute component={ Main } onEnter={ redirectToProfile } />
+    <IndexRoute component={ Main } onEnter={ ensureLoggedIn } />
     <Route path='login' component={ LogInForm } onEnter={ ensureNotLoggedIn }/>
-    <Route path='main' component={ Main } onEnter={ redirectToProfile } />
+    <Route path='main' component={ Main } onEnter={ ensureLoggedIn } />
     <Route path='users/:userId' component={ Profile } onEnter={ ensureLoggedIn } >
       <IndexRoute component={ Timeline } />
       <Route path='timeline' component={ Timeline } />
