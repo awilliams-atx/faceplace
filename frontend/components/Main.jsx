@@ -26,7 +26,7 @@ var Main = React.createClass({
     );
   },
   componentDidMount: function () {
-    ClientActions.fetchGlobalPosts();
+    ClientActions.fetchPosts();
   }
 });
 

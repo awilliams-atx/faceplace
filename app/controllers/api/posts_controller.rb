@@ -2,7 +2,7 @@ class Api::PostsController < ApplicationController
   before_action :require_login
 
   def index
-    if params[:profilePosts]
+    if params[:user_id]
       user = User.find(params[:user_id])
       @posts = user.timeline_posts.includes(:author, :profile_owner,
         :tagged_friends)

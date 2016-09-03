@@ -11,13 +11,15 @@ var PostApiUtil = {
       }
     });
   },
-  fetchGlobalPosts: function () {
+  fetchPosts: function (userId) {
+    var url = '/api/posts';
+    if (userId !== undefined) { url = '/api/users/' + userId + '/posts' }
     $.ajax({
-      url: '/api/posts',
+      url: url,
       method: 'GET',
       dataType: 'json',
       success: function (posts) {
-        ServerActions.receiveGlobalPosts({ posts: posts });
+        ServerActions.receivePosts(posts);
       }
     });
   },
@@ -28,20 +30,6 @@ var PostApiUtil = {
       dataType: 'json',
       success: function (friends) {
         ServerActions.receiveTaggedFriends(friends);
-      }
-    });
-  },
-  fetchTimelinePosts: function (userId) {
-    $.ajax({
-      url: '/api/users/' + userId + '/posts',
-      method: 'GET',
-      dataType: 'json',
-      data: {profilePosts: true},
-      success: function (posts) {
-        ServerActions.receiveTimelinePosts({
-          userId: userId,
-          posts: posts
-        });
       }
     });
   },

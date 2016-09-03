@@ -26,12 +26,12 @@ var React = require('react'),
       },
       componentDidMount: function () {
         ClientActions.fetchMostRecentlyAddedFriends(this.props.params.userId);
-        ClientActions.fetchTimelinePosts(this.props.params.userId);
+        ClientActions.fetchPosts(this.props.params.userId);
         window.addEventListener('scroll', this.stickListener);
       },
       componentWillReceiveProps: function (props) {
         ClientActions.fetchMostRecentlyAddedFriends(props.params.userId);
-        ClientActions.fetchTimelinePosts(props.params.userId);
+        ClientActions.fetchPosts(props.params.userId);
       },
       componentWillUnmount: function () {
         window.removeEventListener('scroll', this.stickListener);

@@ -45,9 +45,6 @@ var ClientActions = {
   fetchComments: function (type, id) {
     CommentApiUtil.fetchComments(type, id);
   },
-  fetchGlobalPosts: function () {
-    PostApiUtil.fetchGlobalPosts();
-  },
   fetchFriendRequests: function () {
     FriendRequestApiUtil.fetchFriendRequests();
   },
@@ -64,6 +61,9 @@ var ClientActions = {
   fetchNotifications: function (pagination) {
     NotificationApiUtil.fetchNotifications(pagination);
   },
+  fetchPosts: function (userId) {
+    PostApiUtil.fetchPosts(userId);
+  },
   fetchSearchResults: function (searchString) {
     SearchApiUtil.fetchSearchResults(searchString);
   },
@@ -72,9 +72,6 @@ var ClientActions = {
   },
   fetchTagSearchResults: function (searchString) {
     TagApiUtil.fetchSearchResults(searchString);
-  },
-  fetchTimelinePosts: function (profileOwnerId) {
-    PostApiUtil.fetchTimelinePosts(profileOwnerId);
   },
   fetchUser: function (id) {
     UserApiUtil.fetchUser(id);

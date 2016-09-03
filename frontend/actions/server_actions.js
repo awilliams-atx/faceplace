@@ -42,6 +42,12 @@ var ServerActions = {
       comments: comments
     });
   },
+  receiveCoverPhotoUrl: function (coverPhotoUrl) {
+    Dispatcher.dispatch({
+      actionType: userConstants.UPDATED_COVER_PHOTO_URL_RECEIVED,
+      coverPhotoUrl: coverPhotoUrl
+    });
+  },
   receiveCurrentUser: function (user) {
     Dispatcher.dispatch({
       actionType: sessionConstants.RECEIVE_CURRENT_USER,
@@ -96,12 +102,6 @@ var ServerActions = {
       request: request
     });
   },
-  receiveGlobalPosts: function (posts) {
-    Dispatcher.dispatch({
-      actionType: postConstants.GLOBAL_POSTS_RECEIVED,
-      posts: posts
-    });
-  },
   receiveMostRecentlyAddedFriends: function (friendsData) {
     Dispatcher.dispatch({
       actionType: friendConstants.MOST_RECENTLY_ADDED_FRIENDS_RECEIVED,
@@ -121,10 +121,22 @@ var ServerActions = {
       post: post
     });
   },
+  receivePosts: function (posts) {
+    Dispatcher.dispatch({
+      actionType: postConstants.POSTS_RECEIVED,
+      posts: posts
+    });
+  },
   receiveProfile: function (profile) {
     Dispatcher.dispatch({
       actionType: userConstants.PROFILE_RECEIVED,
       profile: profile
+    });
+  },
+  receiveProfilePicUrl: function (profilePicUrl) {
+    Dispatcher.dispatch({
+      actionType: userConstants.UPDATED_PROFILE_PIC_URL_RECEIVED,
+      profilePicUrl: profilePicUrl
     });
   },
   receiveReadNotificationId: function (id) {
@@ -145,17 +157,17 @@ var ServerActions = {
       request: request
     });
   },
+  receiveSearchResults: function (searchResults) {
+    Dispatcher.dispatch({
+      actionType: searchConstants.SEARCH_RESULTS_RECEIVED,
+      searchResults: searchResults
+    });
+  },
   receiveTimelinePosts: function (opts) {
     Dispatcher.dispatch({
       actionType: postConstants.POSTS_RECEIVED,
       posts: opts.posts,
       userId: opts.userId
-    });
-  },
-  receiveSearchResults: function (searchResults) {
-    Dispatcher.dispatch({
-      actionType: searchConstants.SEARCH_RESULTS_RECEIVED,
-      searchResults: searchResults
     });
   },
   receiveTaggedFriends: function (friends) {
@@ -170,28 +182,10 @@ var ServerActions = {
       searchResults: searchResults
     });
   },
-  receiveCoverPhotoUrl: function (coverPhotoUrl) {
-    Dispatcher.dispatch({
-      actionType: userConstants.UPDATED_COVER_PHOTO_URL_RECEIVED,
-      coverPhotoUrl: coverPhotoUrl
-    });
-  },
   receiveUpdatedPost: function (post) {
     Dispatcher.dispatch({
       actionType: postConstants.UPDATED_POST_RECEIVED,
       post: post
-    });
-  },
-  receiveProfilePicUrl: function (profilePicUrl) {
-    Dispatcher.dispatch({
-      actionType: userConstants.UPDATED_PROFILE_PIC_URL_RECEIVED,
-      profilePicUrl: profilePicUrl
-    });
-  },
-  receiveUsers: function (users) {
-    Dispatcher.dispatch({
-      actionType: userConstants.USERS_RECEIVED,
-      users: users
     });
   },
   receiveUser: function (user) {
@@ -200,11 +194,17 @@ var ServerActions = {
       user: user
     });
   },
+  receiveUsers: function (users) {
+    Dispatcher.dispatch({
+      actionType: userConstants.USERS_RECEIVED,
+      users: users
+    });
+  },
   removeCurrentUser: function () {
     Dispatcher.dispatch({
       actionType: sessionConstants.LOGOUT
     });
-  },
+  }
 };
 
 module.exports = ServerActions;
