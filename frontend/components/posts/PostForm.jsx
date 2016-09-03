@@ -136,7 +136,9 @@ var PostForm = React.createClass({
       ClientActions.updatePost(post);
       this.props.modalCallback();
     } else {
-      post.profileOwnerId = this.props.profileOwnerId;
+      if (this.props.profileOwnerId) {
+        post.profileOwnerId = this.props.profileOwnerId;
+      }
       this.setState({ body: '', tagging: false }, function () {
         UI.toggleTagging(false);
         ClientActions.submitPost(post);

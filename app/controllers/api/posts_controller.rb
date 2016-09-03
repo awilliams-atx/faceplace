@@ -17,7 +17,7 @@ class Api::PostsController < ApplicationController
     @post.save!
 
     profile_owner_id = post_params[:profile_owner_id]
-    if profile_owner_id.to_i != current_user.id
+    if profile_owner_id && profile_owner_id.to_i != current_user.id
       timeline_posting =
         TimelinePosting.new(profile_owner_id: profile_owner_id,
           post_id: @post.id)
