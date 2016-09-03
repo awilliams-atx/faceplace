@@ -59,12 +59,12 @@
     top: 34px;
     width: 406px;
     z-index: 1000;
-    .nav-drop-index {
+    #nav-drop-index {
       max-height: 70vh;
       overflow: hidden;
     }
     #nav-drop-index:hover {
-      overflow-y: auto;
+      overflow-y: scroll;
     }
     .nav-drop-title {
       border-bottom: $navDropBorder;
