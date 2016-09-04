@@ -12,22 +12,18 @@ var LeftCol = React.createClass({
     return (
       <aside id='left-col'>
         <ul>
-          <li>
+          <li className='group'>
             <a href={'/users/' + SessionStore.currentUser().id}
               onClick={this.pushUserRoute}>
-              {this.fullName()}
+              <img src={this.state.user.profile_pic_url} />
+              <div className='left-col-text'>
+                {SessionStore.fullName()}
+              </div>
             </a>
           </li>
         </ul>
       </aside>
     );
-  },
-  fullName: function () {
-    if (Object.keys(this.state.user).length > 0) {
-      return this.state.user.first_name + ' ' + this.state.user.last_name;
-    } else {
-      return '';
-    }
   },
   pushUserRoute: function (e) {
     e.preventDefault();
