@@ -14,7 +14,9 @@ var PostIndex = React.createClass({
   },
   render: function () {
     return (
-      <section className='group' id='post-index'>
+      <section className='group'
+        id='post-index'
+        style={{width: this.sectionWidth()}}>
         {this.renderForm()}
         {this.renderPosts()}
       </section>
@@ -42,6 +44,9 @@ var PostIndex = React.createClass({
   componentWillUnmount: function () {
     this.postListener.remove();
   },
+  componentWillReceiveProps: function (newProps) {
+    this.setState({ posts: PostStore.all() });
+  },
   authorizedToPost: function () {
     if (!this.props.profileOwnerId) { return true }
     if (UserStore.user().isFriendOfCurrentUser ||
@@ -53,8 +58,12 @@ var PostIndex = React.createClass({
   onPostStoreChange: function () {
     this.setState({ posts: PostStore.all() });
   },
-  componentWillReceiveProps: function (newProps) {
-    this.setState({ posts: PostStore.all() });
+  sectionWidth: function () {
+    if (window.location.pathname.match('/users/')) {
+      return '510px';
+    } else {
+      return '502px';
+    }
   }
 });
 
