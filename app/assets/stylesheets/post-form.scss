@@ -10,9 +10,10 @@
   width: 510px;
   .post-types-background {
     background-color: $athensGray3;
+    border-bottom: 1px solid $mercury;
+    border-radius: 3px;
     height: 100%;
     padding: 10px 0 10px 10px;
-    border-bottom: 1px solid $mercury;
   }
   header#post-types {
     div.post-type-text {
@@ -22,13 +23,13 @@
     }
   }
   .post-type-img {
-    position: relative;
-    top: -1px;
     display: block;
     float: left;
     height: 16px;
-    width: 16px;
     margin-right: 5px;
+    position: relative;
+    top: -1px;
+    width: 16px;
   }
   .post-form {
     padding: 12px 12px 0 12px;
@@ -41,9 +42,9 @@
   }
   .post-textarea {
     @include typeStandard(14px);
-    padding: 11px 0 13px 12px;
     border: none;
     outline: none;
+    padding: 11px 0 13px 12px;
     resize: none;
     width: 423px;
   }
@@ -55,11 +56,11 @@
     height: 40px;
   }
   .post-footer-left-buttons {
-    float: left;
     cursor: pointer;
+    float: left;
   }
   .post-footer-right-buttons {
-    margin: 8px;
     float: right;
+    margin: 8px;
   }
 }
