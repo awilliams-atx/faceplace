@@ -1,0 +1,36 @@
+@import 'global';
+
+#right-col {
+  .right-col-item {
+    @include contentItem;
+    margin-bottom: 10px;
+    padding: 12px;
+    pointer-events: stroke;
+    width: 251px;
+    .right-col-slider {
+      background-color: orange;
+      width: 400px;
+      .slider-content {
+        height: 35px;
+        line-height: 35px;
+      }
+      .download-resume {
+        float: left;
+        font-family: impact;
+        font-size: 23px;
+        font-style: italic;
+        margin-right: 10px;
+      }
+      .showcase-icon {
+        float: left;
+        font-size: 30px;
+        margin-right: 10px;
+      }
+      .showcase-text {
+        float: left;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 27px;
+      }
+    }
+  }
+}
