@@ -146,7 +146,9 @@ var PostForm = React.createClass({
     }
   },
   onTagStoreChange: function () {
-    this.setState({ tagged: TagStore.taggedFriends() });
+    if (this.props.isEditing === UI.editingPost()) {
+      this.setState({ tagged: TagStore.taggedFriends() });
+    }
   },
   placeholder: function () {
     if (!this.props.profileOwnerId || SessionStore.currentUser().id ===

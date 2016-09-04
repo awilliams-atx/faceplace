@@ -1,5 +1,11 @@
 var listeners = [];
-var ui = { requestsDropped: false, scrollPost: undefined, tagging: false };
+
+var ui = {
+  editingPost: false,
+  requestsDropped: false,
+  scrollPost: undefined,
+  tagging: false
+};
 
 var UIManipulator = {
   addListener: function (listener) {
@@ -7,6 +13,9 @@ var UIManipulator = {
   },
   clearScrollPost: function () {
     ui.scrollPost = undefined;
+  },
+  editingPost: function () {
+    return ui.editingPost;
   },
   focusScrollPost: function (post) {
     post.getElementsByTagName('textarea')[0].focus();
@@ -46,6 +55,9 @@ var UIManipulator = {
   },
   tagging: function () {
     return ui.tagging;
+  },
+  toggleEditingPost: function (bool) {
+    ui.editingPost = bool;
   },
   toggleRequestDrop: function (bool) {
     ui.requestsDropped = bool;

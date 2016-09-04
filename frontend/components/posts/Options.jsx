@@ -1,4 +1,5 @@
 var React = require('react'),
+    UI = require('../../util/ui'),
     PostForm = require('./PostForm'),
     ClientActions = require('../../actions/client_actions');
 
@@ -101,6 +102,7 @@ var Options = React.createClass({
     );
   },
   edit: function () {
+    UI.toggleEditingPost(true);
     document.body.setAttribute('class', 'no-scroll-body');
     ClientActions.freezeTags();
     this.setState({ selectingOptions: false, editing: true }, function () {
@@ -110,6 +112,7 @@ var Options = React.createClass({
     });
   },
   editCallback: function () {
+    UI.toggleEditingPost(false);
     document.body.removeAttribute('class');
     ClientActions.cancelModal();
     ClientActions.unfreezeTags();
