@@ -1,12 +1,7 @@
 @import 'global';
 
 .timeline-feed-item {
+  @include contentItem;
   @include typeStandard(14px);
-  background-color: white;
-  border-radius: 3px;
-  display: block;
-  float: left;
-  margin-bottom: 20px;
-  overflow-y: hidden;
   width: 510px;
 }

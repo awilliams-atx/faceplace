@@ -49,6 +49,15 @@ $navDropItemInnerHeight: 48px;
   object-fit: cover;
 }
 
+// SHAREABLE
+
+@mixin contentItem {
+  background-color: white;
+  border-radius: 3px;
+  float: left;
+  margin-bottom: 20px;
+}
+
 // TYPE
 
 $typeStandardFontFamily: helvetica, arial, sans-serif;
