@@ -40,6 +40,14 @@ SessionStore.friendsWith = function () {
   return false;
 };
 
+SessionStore.fullName = function () {
+  if (Object.keys(_currentUser).length > 0) {
+    return _currentUser.first_name + ' ' + _currentUser.last_name;
+  } else {
+    return '';
+  }
+},
+
 SessionStore.isUserLoggedIn = function () {
   return !!_currentUser.id;
 };
