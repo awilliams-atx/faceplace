@@ -2,6 +2,7 @@ var listeners = [];
 
 var ui = {
   editingPost: false,
+  fetchingMorePosts: false,
   requestsDropped: false,
   scrollPost: undefined,
   tagging: false
@@ -16,6 +17,9 @@ var UIManipulator = {
   },
   editingPost: function () {
     return ui.editingPost;
+  },
+  fetchingMorePosts: function () {
+    return ui.fetchingMorePosts;
   },
   focusScrollPost: function (post) {
     var textarea = post.getElementsByTagName('textarea')[0];
@@ -59,6 +63,9 @@ var UIManipulator = {
   },
   toggleEditingPost: function (bool) {
     ui.editingPost = bool;
+  },
+  toggleFetchingMorePosts: function (bool) {
+    ui.fetchingMorePosts = bool;
   },
   toggleRequestDrop: function (bool) {
     ui.requestsDropped = bool;

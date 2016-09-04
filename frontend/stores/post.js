@@ -10,19 +10,23 @@ var PostStore = new Store(AppDispatcher);
 PostStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case postConstants.DELETED_POST_RECEIVED:
-      this.removePost(payload.post);
+      PostStore.removePost(payload.post);
       PostStore.__emitChange();
       break;
     case postConstants.OWN_POST_RECEIVED:
-      this.addPost(payload.post);
+      PostStore.addPost(payload.post);
+      PostStore.__emitChange();
+      break;
+    case postConstants.OLD_POSTS_RECEIVED:
+      PostStore.addPosts(payload.posts);
       PostStore.__emitChange();
       break;
     case postConstants.POSTS_RECEIVED:
-      this.setPosts(payload);
+      PostStore.setPosts(payload);
       PostStore.__emitChange();
       break;
     case postConstants.UPDATED_POST_RECEIVED:
-      this.updatePost(payload.post);
+      PostStore.updatePost(payload.post);
       PostStore.__emitChange();
       break;
   }
@@ -30,6 +34,10 @@ PostStore.__onDispatch = function (payload) {
 
 PostStore.addPost = function (post) {
   _posts.unshift(post);
+};
+
+PostStore.addPosts = function (posts) {
+  _posts = _posts.concat(posts);
 };
 
 PostStore.all = function () {

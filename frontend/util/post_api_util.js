@@ -11,6 +11,19 @@ var PostApiUtil = {
       }
     });
   },
+  fetchMorePosts: function (userId, offset) {
+    var url = '/api/posts/';
+    if (userId !== undefined) { url = '/api/users/' + userId + '/posts/' }
+    $.ajax({
+      url: url,
+      method: 'GET',
+      dataType: 'json',
+      data: { offset: offset },
+      success: function (posts) {
+        ServerActions.receiveMorePosts(posts);
+      }
+    });
+  },
   fetchPosts: function (userId) {
     var url = '/api/posts';
     if (userId !== undefined) { url = '/api/users/' + userId + '/posts' }

@@ -10,7 +10,7 @@ var React = require('react'),
 
 var PostIndex = React.createClass({
   getInitialState: function () {
-    return ({ fetchingMore: false, posts: PostStore.all() });
+    return ({ posts: PostStore.all() });
   },
   render: function () {
     return (
@@ -44,6 +44,7 @@ var PostIndex = React.createClass({
   },
   componentWillUnmount: function () {
     this.postListener.remove();
+    UI.toggleFetchingMorePosts(false);
     window.removeEventListener('scroll', this.loadListener);
   },
   componentWillReceiveProps: function (newProps) {
@@ -58,13 +59,29 @@ var PostIndex = React.createClass({
     return false;
   },
   loadListener: function () {
-     if (document.body.scrollHeight - window.innerHeight <
-       window.scrollY + 100 && !this.state.fetchingMore) {
-       console.log('uh');
-     }
+    if ( document.body.scrollHeight - window.innerHeight <
+      window.scrollY + 100) {
+    }
+    if (!UI.fetchingMorePosts() && !this.state.nomore && document.body
+    .scrollHeight - window.innerHeight < window.scrollY + 100) {
+      UI.toggleFetchingMorePosts(true); // NB: Also takes care of not fetching when no more posts to fetch.
+      ClientActions
+        .fetchMorePosts(this.props.profileOwnerId, this.state.posts.length);
+    }
   },
   onPostStoreChange: function () {
-    this.setState({ posts: PostStore.all() });
+    if (this.state.posts.length > 0) {
+      var lastPostId = this.state.posts[this.state.posts.length - 1].postId;
+    }
+    this.setState({ posts: PostStore.all() }, function () {
+      if (lastPostId) {
+        var newLastPostId =
+          this.state.posts[this.state.posts.length - 1].postId;
+        if (lastPostId !== newLastPostId) {
+          UI.toggleFetchingMorePosts(false);
+        }
+      }
+    }.bind(this));
   },
   sectionWidth: function () {
     if (window.location.pathname.match('/users/')) {

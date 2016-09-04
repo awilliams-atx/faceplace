@@ -102,6 +102,12 @@ var ServerActions = {
       request: request
     });
   },
+  receiveMorePosts: function (posts) {
+    Dispatcher.dispatch({
+      actionType: postConstants.OLD_POSTS_RECEIVED,
+      posts: posts
+    });
+  },
   receiveMostRecentlyAddedFriends: function (friendsData) {
     Dispatcher.dispatch({
       actionType: friendConstants.MOST_RECENTLY_ADDED_FRIENDS_RECEIVED,

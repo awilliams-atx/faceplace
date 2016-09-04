@@ -48,6 +48,9 @@ var ClientActions = {
   fetchFriendRequests: function () {
     FriendRequestApiUtil.fetchFriendRequests();
   },
+  fetchMorePosts: function (userId, offset) {
+    PostApiUtil.fetchMorePosts(userId, offset);
+  },
   fetchMostRecentlyAddedFriends: function (userId) {
     FriendApiUtil.fetchMostRecentlyAddedFriends(userId);
   },

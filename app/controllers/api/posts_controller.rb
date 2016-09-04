@@ -2,12 +2,13 @@ class Api::PostsController < ApplicationController
   before_action :require_login
 
   def index
+    offset = params[:offset] ? params[:offset] : 0
     if params[:user_id]
       user = User.find(params[:user_id])
       @posts = user.timeline_posts.includes(:author, :profile_owner,
-        :tagged_friends)
+        :tagged_friends).offset(offset)
     else
-      @posts = Post.all.limit(10).order(created_at: :desc)
+      @posts = Post.all.limit(10).order(created_at: :desc).offset(offset)
     end
     render 'api/posts/index'
   end
