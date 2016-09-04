@@ -18,7 +18,7 @@ var PostIndexItem = React.createClass({
   render: function () {
     return (
       <article id={this.props.post.postId} className='timeline-feed-item'
-        style={{width: this.articleWidth()}}>
+        style={this.style()}>
         <div className='post-head'>
           {this.renderOptions()}
           <header className='post-breakdown group'>
@@ -62,13 +62,6 @@ var PostIndexItem = React.createClass({
     ClientActions.fetchComments('Post', this.props.post.postId);
     UI.scrollToPost(this.props.post.postId);
   },
-  articleWidth: function () {
-    if (window.location.pathname.match('/users/')) {
-      return '510px';
-    } else {
-      return '502px';
-    }
-  },
   authorizedToEdit: function () {
     return this.props.post.authorId === SessionStore.currentUser().id;
   },
@@ -86,6 +79,13 @@ var PostIndexItem = React.createClass({
     e.preventDefault();
     this.context.router.push(e.target.pathname);
     Util.jumpToTop();
+  },
+  style: function () {
+    var onTimeline = window.location.pathname.match('/users/') ? true : false;
+    return {
+      marginBottom: onTimeline ? '20px' : '10px',
+      width: onTimeline ? '510px' : '502px'
+    }
   }
 });
 
