@@ -3,5 +3,6 @@
 .timeline-feed-item {
   @include contentItem;
   @include typeStandard(14px);
+  float: left;
   width: 510px;
 }
