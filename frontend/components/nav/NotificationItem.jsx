@@ -44,13 +44,13 @@ var NotificationItem = React.createClass({
   },
   pushPostRoute: function (e) {
     e.preventDefault();
+    this.props.rollUp();
     var pushPath = '/users/' + this.props.notif.timeline_owner_id;
     UI.setScrollPost(this.props.notif.post_id);
     if (Util.pathMatch('/users/' + this.props.notif.timeline_owner_id)) {
       UI.scrollToPost();
     }
     this.context.router.push(pushPath);
-    this.props.rollUp();
   },
   readClass: function (id) {
     return this.props.notif.read ? '' : 'unchecked-alert';
