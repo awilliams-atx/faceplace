@@ -3,19 +3,28 @@
 
 #main-content {
   margin: 11px auto 0;
+  position: relative;
   width: 980px;
   #left-col {
     float: left;
     width: 180px;
   }
+  .left-col-stick {
+    position: fixed;
+    top: 13px;
+  }
   #feed {
-    float: left;
     padding-left: 11px;
+    float: left;
     width: 502px;
   }
   #right-col {
     float: left;
     padding-left: 12px;
     width: 266px;
+  }
+  .right-col-stick {
+    position: fixed;
+    top: 13px;
   }
 }

@@ -10,19 +10,21 @@ var LeftCol = React.createClass({
   },
   render: function () {
     return (
-      <aside id='left-col'>
-        <ul>
-          <li className='group'>
-            <a href={'/users/' + SessionStore.currentUser().id}
-              onClick={this.pushUserRoute}>
-              <img src={this.state.user.profile_pic_url} />
-              <div className='left-col-text'>
-                {SessionStore.fullName()}
-              </div>
-            </a>
-          </li>
-        </ul>
-      </aside>
+      <td id='left-col'>
+        <aside id='left-col-content'>
+          <ul>
+            <li className='group'>
+              <a href={'/users/' + SessionStore.currentUser().id}
+                onClick={this.pushUserRoute}>
+                <img src={this.state.user.profile_pic_url} />
+                <div className='left-col-text'>
+                  {SessionStore.fullName()}
+                </div>
+              </a>
+            </li>
+          </ul>
+        </aside>
+      </td>
     );
   },
   pushUserRoute: function (e) {

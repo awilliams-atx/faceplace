@@ -13,18 +13,39 @@ var Main = React.createClass({
     return (
       <div id='main'>
         <Nav />
-        <div id='main-content' className='group'>
-          <LeftCol />
-          <section id='feed'>
-            <PostIndex />
-          </section>
-          <RightCol />
-        </div>
+        <table id='main-content'>
+          <tbody>
+            <tr>
+              <LeftCol />
+              <td id='feed'>
+                <PostIndex />
+              </td>
+              <RightCol />
+            </tr>
+          </tbody>
+        </table>
       </div>
     );
   },
   componentDidMount: function () {
     ClientActions.fetchPosts();
+    window.addEventListener('scroll', this.stickListener);
+    this.leftCol = document.getElementById('left-col-content');
+    this.rightCol = document.getElementById('right-col-content');
+  },
+  componentWillUnmount: function () {
+    window.removeEventListener('scroll', this.stickListener);
+  },
+  stickListener: function () {
+    if (document.body.scrollTop >= 43 && this.leftCol.className !==
+      'left-col-stick') {
+      this.leftCol.className = 'left-col-stick';
+      this.rightCol.className = 'right-col-stick';
+    } else if (document.body.scrollTop < 43 && this.leftCol.className ===
+      'left-col-stick') {
+      this.leftCol.className = '';
+      this.rightCol.className = '';
+    }
   }
 });
 
