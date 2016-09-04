@@ -36,7 +36,7 @@ var RightCol = React.createClass({
             id='portfolio'
             target='_blank'>
             <div className='showcase-icon right-col-content'>
-              aW
+              <i className="fa fa-folder-open" aria-hidden="true"></i>
             </div>
             <div className='showcase-text right-col-content'>
               Portfolio
