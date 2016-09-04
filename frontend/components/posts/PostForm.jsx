@@ -25,7 +25,8 @@ var PostForm = React.createClass({
     return (
       // CSS is complicated because of header.
       <section id={this.postSectionId()}
-        className={this.formTypeClass() + ' profile-post'}>
+        className={this.formTypeClass() + ' profile-post'}
+        style={{width: this.sectionWidth()}}>
         <div className='post-types-background'>
           <header id='post-types'>
             <img src='https://s3.amazonaws.com/faceplace-dev/assets/post_status.png' className='post-type-img' />
@@ -44,7 +45,9 @@ var PostForm = React.createClass({
               placeholder={this.placeholder()}
               ref='autoFocus' >
             </textarea>
-            <div className='autogrower' ref='autogrower'></div>
+            <div className='autogrower'
+            ref='autogrower'
+            style={{width: this.textareaWidth()}}></div>
           </div>
         </form>
         {TaggedBoxes(this.state.tagged, this.untag)}
@@ -166,6 +169,13 @@ var PostForm = React.createClass({
       return 'post-form-section';
     }
   },
+  sectionWidth: function () {
+    if (this.props.profileOwnerId) {
+      return '510px';
+    } else {
+      return '502px';
+    }
+  },
   submitButtonId: function () {
     if (this.props.isModalElement) {
       return 'modal-submit';
@@ -182,6 +192,13 @@ var PostForm = React.createClass({
       return
     } else {
       this.toggleTag(e);
+    }
+  },
+  textareaWidth: function () {
+    if (this.refs.autoFocus) {
+      return (this.refs.autoFocus.clientWidth - 12).toString() + 'px';
+    } else {
+      return 0;
     }
   },
   toggleTag: function (e) {

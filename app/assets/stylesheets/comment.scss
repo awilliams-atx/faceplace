@@ -2,6 +2,8 @@
 
 .comment-section {
   background-color: $athensGray3;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
   border-top: 1px solid $mercury;
   img {
     @include squareObjectFit(30px);
@@ -41,6 +43,8 @@
     }
   }
   .post-comment-form {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     padding: 8px 12px 8px;
     textarea {
       @include typeStandard;
@@ -56,6 +60,7 @@
     }
   }
   .autogrower {
-    @include autoGrower(7px 5px, 434px);
+    @include autoGrower(7px 5px);
+    width: 434px;
   }
 }

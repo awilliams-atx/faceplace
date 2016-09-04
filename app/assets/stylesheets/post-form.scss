@@ -3,7 +3,6 @@
 
 #post-form-section {
   float: left;
-  width: 510px;
   padding: 0;
 }
 .profile-post {
@@ -46,10 +45,10 @@
     outline: none;
     padding: 11px 0 13px 12px;
     resize: none;
-    width: 423px;
+    width: calc(100% - 53px);
   }
   .autogrower {
-    @include autoGrower(11px 0 13px 12px, 423px, 14px);
+    @include autoGrower(11px 0 13px 12px, 14px);
   }
   .post-footer-background {
     border-top: 1px solid $mercury;
