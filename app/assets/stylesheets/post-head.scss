@@ -3,6 +3,7 @@
 .post-head {
   padding-bottom: 12px;
   padding-top: 11px;
+  position: relative;
   .post-breakdown {
     margin: 0 12px;
     img {
@@ -12,33 +13,31 @@
       float: left;
       margin-right: 8px;
     }
-    .post-breakdown-users {
-      @include typeChambray(14px);
+    .post-breakdown-text {
       float: left;
-      width: 416px;
-      position: relative;
-      margin-bottom: 5px;
-      top: 2px;
-      .post-author-name {
-        float: left;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-      i {
-        color: #969696;
-        font-size: 14px;
-        margin: 0 5px;
+      .post-breakdown-users {
+        @include typeChambray(14px);
+        position: relative;
+        margin-bottom: 5px;
+        top: 2px;
+        a:hover {
+          text-decoration: underline;
+        }
+        .post-author-name {
+          float: left;
+        }
+        i {
+          color: $darkNobel;
+          font-size: 14px;
+          margin: 0 5px;
+        }
+        .friend-post-breakdown {
+          float: left;
+        }
       }
     }
     .post-breakdown-datetime {
-      float: left;
-      .post-datetime {
-        float: left;
-      }
-      .post-datetime {
-        @include typeShadyLady;
-      }
+      @include typeShadyLady;
     }
   }
   .post-body {

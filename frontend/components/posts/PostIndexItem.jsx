@@ -17,30 +17,32 @@ var PostIndexItem = React.createClass({
   },
   render: function () {
     return (
-      <article id={this.props.post.postId} className='timeline-feed-item'>
+      <article id={this.props.post.postId} className='timeline-feed-item'
+        style={{width: this.articleWidth()}}>
         <div className='post-head'>
+          {this.renderOptions()}
           <header className='post-breakdown group'>
             <a href={'/users/' + this.props.post.authorId}
               onClick={this.pushAuthorRoute} >
               <img src={this.props.post.postPicUrl} />
             </a>
-            <div className='post-breakdown-users group'>
-              <div className='post-author-name'>
-                <a href={'/users/' + this.props.post.authorId}
-                  onClick={this.pushAuthorRoute}>
-                    {this.props.post.fullName}
-                </a>
+            <div className='post-breakdown-text'>
+              <div className='post-breakdown-users group'>
+                <div className='post-author-name'>
+                  <a href={'/users/' + this.props.post.authorId}
+                    onClick={this.pushAuthorRoute}>
+                      {this.props.post.fullName}
+                  </a>
+                </div>
+                {ProfileOwner(this.props.post.profileOwner,
+                  this.pushProfileOwnerRoute)}
               </div>
-              {ProfileOwner(this.props.post.profileOwner,
-                this.pushProfileOwnerRoute)}
-            </div>
-            <br />
-            <div className='post-breakdown-datetime group'>
-              <div className='post-datetime'>
-                {Util.moment(this.props.post.createdAt)}
+              <div className='post-breakdown-datetime group'>
+                <div className='post-datetime'>
+                  {Util.moment(this.props.post.createdAt)}
+                </div>
               </div>
             </div>
-            {this.renderOptions()}
           </header>
           <section className='post-body'>
             {this.props.post.body}
@@ -59,6 +61,13 @@ var PostIndexItem = React.createClass({
   componentDidMount: function () {
     ClientActions.fetchComments('Post', this.props.post.postId);
     UI.scrollToPost(this.props.post.postId);
+  },
+  articleWidth: function () {
+    if (window.location.pathname.match('/users/')) {
+      return '510px';
+    } else {
+      return '502px';
+    }
   },
   authorizedToEdit: function () {
     return this.props.post.authorId === SessionStore.currentUser().id;

@@ -17,7 +17,9 @@ var PostCommentForm = React.createClass({
           onKeyPress={this.onSubmit}
           ref='textarea'
           rows='1'></textarea>
-        <div className='autogrower' ref='autogrower'></div>
+        <div className='autogrower'
+          ref='autogrower'
+          style={{width: this.textareaWidth()}}></div>
       </div>
     );
   },
@@ -47,6 +49,13 @@ var PostCommentForm = React.createClass({
           this.autogrow();
         }.bind(this));
       }
+    }
+  },
+  textareaWidth: function () {
+    if (this.refs.textarea) {
+      return (this.refs.textarea.clientWidth - 10).toString() + 'px';
+    } else {
+      return '0px';
     }
   }
 });

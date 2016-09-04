@@ -56,7 +56,7 @@
       overflow: hidden;
       padding: 7px 5px;
       resize: none;
-      width: 434px;
+      width: calc(100% - 52px);
     }
   }
   .autogrower {
