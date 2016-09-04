@@ -42,6 +42,7 @@ var Profile = React.createClass({
   componentDidMount: function () {
     this.userListener = UserStore.addListener(this.onUserStoreChange);
     ClientActions.fetchUser(this.profileOwnerId());
+    Util.jumpToTop();
   },
   componentWillUnmount: function () {
     this.userListener.remove();
