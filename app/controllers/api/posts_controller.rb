@@ -7,7 +7,7 @@ class Api::PostsController < ApplicationController
       @posts = user.timeline_posts.includes(:author, :profile_owner,
         :tagged_friends)
     else
-      @posts = Post.all.limit(10)
+      @posts = Post.all.limit(10).order(created_at: :desc)
     end
     render 'api/posts/index'
   end
