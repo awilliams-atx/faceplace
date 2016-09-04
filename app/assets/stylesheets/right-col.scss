@@ -3,34 +3,44 @@
 #right-col {
   .right-col-item {
     @include contentItem;
+    cursor: pointer;
+    display: flex;
     margin-bottom: 10px;
     padding: 12px;
     pointer-events: stroke;
+    text-align: center;
     width: 251px;
-    .right-col-slider {
-      background-color: orange;
-      width: 400px;
-      .slider-content {
-        height: 35px;
-        line-height: 35px;
-      }
-      .download-resume {
-        float: left;
-        font-family: impact;
-        font-size: 23px;
-        font-style: italic;
-        margin-right: 10px;
-      }
+    .right-col-container {
+      font-size: 50px;
+      line-height: 50px;
+      margin: auto;
       .showcase-icon {
         float: left;
-        font-size: 30px;
         margin-right: 10px;
       }
       .showcase-text {
         float: left;
         font-family: 'Open Sans', sans-serif;
-        font-size: 27px;
       }
     }
+    #linked-in {
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 47px;
+      font-weight: bold;
+    }
+    #portfolio {
+      .showcase-icon {
+        font-family: 'Marck Script', cursive;
+        position: relative;
+        top: 4px;
+      }
+      .showcase-text {
+        font-size: 44px;
+      }
+    }
+  }
+  .right-col-item:hover {
+    background-color: $chambray;
+    color: white;
   }
 }
