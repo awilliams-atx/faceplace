@@ -131,9 +131,8 @@ var Notifications = React.createClass({
     }.bind(this));
   },
   rollUp: function () {
-    this.setState({ droppedDown: false }, function () {
-      document.body.removeEventListener('click', this.navDropClickListener);
-    }.bind(this));
+    document.body.removeEventListener('click', this.navDropClickListener);
+    this.setState({ droppedDown: false });
   }
 });
 
