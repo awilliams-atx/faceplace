@@ -45,6 +45,7 @@ FriendRequestStore.accepted = function () {
 
 FriendRequestStore.acceptRequest = function (maker_id) {
   var req = FriendRequestStore.removePending(maker_id);
+  req.acceptance_checked = true;
   _accepted.push(req);
 };
 
