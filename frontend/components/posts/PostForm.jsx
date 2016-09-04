@@ -26,7 +26,7 @@ var PostForm = React.createClass({
       // CSS is complicated because of header.
       <section id={this.postSectionId()}
         className={this.formTypeClass() + ' profile-post'}
-        style={{width: this.sectionWidth()}}>
+        style={this.style()}>
         <div className='post-types-background'>
           <header id='post-types'>
             <img src='https://s3.amazonaws.com/faceplace-dev/assets/post_status.png' className='post-type-img' />
@@ -169,12 +169,11 @@ var PostForm = React.createClass({
       return 'post-form-section';
     }
   },
-  sectionWidth: function () {
-    if (this.props.profileOwnerId) {
-      return '510px';
-    } else {
-      return '502px';
-    }
+  style: function () {
+    return {
+      width: this.props.profileOwnerId ? '510px' : '502px',
+      marginBottom: this.props.profileOwnerId? '20px' : '10px'
+    };
   },
   submitButtonId: function () {
     if (this.props.isModalElement) {
