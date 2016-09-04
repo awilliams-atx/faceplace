@@ -18,7 +18,8 @@ var UIManipulator = {
     return ui.editingPost;
   },
   focusScrollPost: function (post) {
-    post.getElementsByTagName('textarea')[0].focus();
+    var textarea = post.getElementsByTagName('textarea')[0];
+    if (textarea) { textarea.focus() }
   },
   removeListener: function (listener) {
     for (var i = 0; i < listeners.length; i++) {
