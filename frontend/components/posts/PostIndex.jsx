@@ -14,7 +14,7 @@ var PostIndex = React.createClass({
   },
   render: function () {
     return (
-      <section id='post-index'>
+      <section className='group' id='post-index'>
         {this.renderForm()}
         {this.renderPosts()}
       </section>
