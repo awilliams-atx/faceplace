@@ -10,7 +10,7 @@ var React = require('react'),
 
 var PostIndex = React.createClass({
   getInitialState: function () {
-    return ({ posts: PostStore.all() });
+    return ({ fetchingMore: false, posts: PostStore.all() });
   },
   render: function () {
     return (
@@ -35,6 +35,7 @@ var PostIndex = React.createClass({
   },
   componentDidMount: function () {
     this.postListener = PostStore.addListener(this.onPostStoreChange);
+    window.addEventListener('scroll', this.loadListener);
   },
   componentDidUpdate: function () {
     if (this.props.profileOwnerid) {
@@ -43,6 +44,7 @@ var PostIndex = React.createClass({
   },
   componentWillUnmount: function () {
     this.postListener.remove();
+    window.removeEventListener('scroll', this.loadListener);
   },
   componentWillReceiveProps: function (newProps) {
     this.setState({ posts: PostStore.all() });
@@ -54,6 +56,12 @@ var PostIndex = React.createClass({
       return true;
     }
     return false;
+  },
+  loadListener: function () {
+     if (document.body.scrollHeight - window.innerHeight <
+       window.scrollY + 100 && !this.state.fetchingMore) {
+       console.log('uh');
+     }
   },
   onPostStoreChange: function () {
     this.setState({ posts: PostStore.all() });
