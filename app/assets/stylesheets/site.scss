@@ -1,0 +1,10 @@
+@import 'global';
+
+body {
+  background-color: $athensGray1;
+  // For the side-scroll bar
+  min-height: 100%;
+}
+html {
+  height: 100%;
+}

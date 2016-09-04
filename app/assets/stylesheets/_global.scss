@@ -59,6 +59,22 @@ $navDropItemInnerHeight: 48px;
   margin-bottom: 20px;
 }
 
+.overlay {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 4px 6px 2px rgba(0, 0, 0, .10);
+  z-index: 1000;
+}
+
+.subcontent-container {
+  background-color: white;
+  display: block;
+  box-shadow: 0 0 1px $silver;
+  border-radius: 3px;
+  margin: 0 0 20px 0;
+  padding: 10px;
+}
+
 // TYPE
 
 $typeStandardFontFamily: helvetica, arial, sans-serif;
