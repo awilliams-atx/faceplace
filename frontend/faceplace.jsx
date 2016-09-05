@@ -10,6 +10,7 @@ var Router = ReactRouter.Router,
 
     LogInForm = require('./components/LogInForm'),
     Main = require('./components/Main'),
+    Nav = require('./components/nav/Nav'),
     Profile = require('./components/profile/Profile'),
     Timeline = require('./components/profile/timeline/Timeline'),
 
@@ -38,9 +39,15 @@ var App = React.createClass({
     return (
       <div id='app'>
         {modal}
+        {this.renderNav()}
         {this.props.children}
       </div>
     );
+  },
+  renderNav: function () {
+    if (!window.location.pathname.match('/login')) {
+      return <Nav />;
+    }
   },
   componentDidMount: function () {
     this.modalListener =

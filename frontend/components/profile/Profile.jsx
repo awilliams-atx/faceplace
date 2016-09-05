@@ -3,7 +3,6 @@ var React = require('react'),
     Util = require('../../util/general'),
     AddFriend = require('./AddFriend'),
     CoverPhoto = require('./CoverPhoto'),
-    Nav = require('../nav/Nav'),
     ProfilePic = require('./ProfilePic'),
     ClientActions = require('../../actions/client_actions'),
     SessionStore = require('../../stores/session'),
@@ -16,7 +15,6 @@ var Profile = React.createClass({
   render: function () {
     return (
       <div id='content'>
-        <Nav />
         <div id='profile-sub-content'>
           <div id='profile-top-content'>
             <div id='cover-photo-container'>
