@@ -132,6 +132,7 @@ var PostForm = React.createClass({
         return friend.userId })
     };
     if (this.props.isEditing) {
+      document.removeEventListener('click', this.taggingClickout);
       post.id = this.props.post.postId;
       document.body.className = '';
       ClientActions.cancelModal();
@@ -142,9 +143,9 @@ var PostForm = React.createClass({
         post.profileOwnerId = this.props.profileOwnerId;
       }
       this.setState({ body: '' }, function () {
+        if (this.state.tagging) { this.toggleTag() }
         ClientActions.submitPost(post);
         this.autogrow();
-        if (this.state.tagging) { this.toggleTag() }
       }.bind(this));
     }
   },
