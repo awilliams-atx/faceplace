@@ -126,9 +126,9 @@ var FriendRequests = React.createClass({
   },
   rollUp: function () {
     UI.toggleRequestDrop(false);
+    document.removeEventListener('click', this.navDropClickListener);
     this.setState({ droppedDown: false }, function () {
       this.markRequestsChecked();
-      document.removeEventListener('click', this.navDropClickListener);
     }.bind(this));
   }
 });
