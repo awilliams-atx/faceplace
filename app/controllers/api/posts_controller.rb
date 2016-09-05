@@ -6,7 +6,7 @@ class Api::PostsController < ApplicationController
     if params[:user_id]
       user = User.find(params[:user_id])
       @posts = user.timeline_posts.includes(:author, :profile_owner,
-        :tagged_friends).offset(offset)
+        :tagged_friends).limit(10).offset(offset)
     else
       @posts = Post.all.limit(10).order(created_at: :desc).offset(offset)
     end
