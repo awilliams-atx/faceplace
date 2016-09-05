@@ -141,10 +141,10 @@ var PostForm = React.createClass({
       if (this.props.profileOwnerId) {
         post.profileOwnerId = this.props.profileOwnerId;
       }
-      this.setState({ body: '', tagging: false }, function () {
-        UI.toggleTagging(false);
+      this.setState({ body: '' }, function () {
         ClientActions.submitPost(post);
         this.autogrow();
+        this.toggleTag();
       }.bind(this));
     }
   },
@@ -187,7 +187,7 @@ var PostForm = React.createClass({
   },
   taggingClickout: function (e) {
     if (Util.hasOrDescendsFromClass(e.target, 3, 'search-index-item',
-      'tagged-friends-list-item')) {
+      'tagged-friends-list-item', 'button-blue', 'button-blue-wide')) {
       return
     } else {
       this.toggleTag(e);
@@ -201,7 +201,7 @@ var PostForm = React.createClass({
     }
   },
   toggleTag: function (e) {
-    e.preventDefault();
+    if (e) { e.preventDefault() }
     this.setState({ tagging: !this.state.tagging }, function () {
       UI.toggleTagging(this.state.tagging);
       if (this.state.tagging) {
