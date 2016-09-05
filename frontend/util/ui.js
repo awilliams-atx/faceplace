@@ -46,9 +46,6 @@ var UIManipulator = {
     ui[key] = val;
     if (trigger) { this.trigger() }
   },
-  setScrollPost: function (id) {
-    ui.scrollPost = id;
-  },
   styleScrollPost: function (post) {
     var head = post.getElementsByClassName('post-head')[0];
     head.className += ' scroll-post-flash';
