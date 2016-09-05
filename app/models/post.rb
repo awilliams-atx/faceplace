@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   validates :author_id, presence: true
 
   after_create :add_watching
+  after_destroy :destroy_notifications
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
   has_many :comments, as: :commentable, dependent: :destroy
@@ -23,5 +24,9 @@ class Post < ActiveRecord::Base
   def add_watching
     Watching.create!(watchable_type: 'Post', watchable_id: id, watcher_id:
       author_id)
+  end
+
+  def destroy_notifications
+    Notification.where(post_id: id).destroy_all
   end
 end
