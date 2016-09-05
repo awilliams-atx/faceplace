@@ -65,9 +65,6 @@ var UIManipulator = {
     ui[toggle] = bool;
     if (trigger) { this.trigger() }
   },
-  toggleEditingPost: function (bool) {
-    ui.editingPost = bool;
-  },
   toggleFetchingMorePosts: function (bool) {
     ui.fetchingMorePosts = bool;
   },

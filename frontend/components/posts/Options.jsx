@@ -102,7 +102,7 @@ var Options = React.createClass({
     );
   },
   edit: function () {
-    UI.toggleEditingPost(true);
+    UI.toggle('editingPost', true);
     document.body.setAttribute('class', 'no-scroll-body');
     ClientActions.freezeTags();
     this.setState({ selectingOptions: false, editing: true }, function () {
@@ -112,7 +112,7 @@ var Options = React.createClass({
     });
   },
   editCallback: function () {
-    UI.toggleEditingPost(false);
+    UI.toggle('editingPost', false);
     document.body.removeAttribute('class');
     ClientActions.cancelModal();
     ClientActions.unfreezeTags();
