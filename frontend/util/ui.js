@@ -61,15 +61,15 @@ var UIManipulator = {
   tagging: function () {
     return ui.tagging;
   },
+  toggle: function (toggle, bool, trigger) {
+    ui[toggle] = bool;
+    if (trigger) { this.trigger() }
+  },
   toggleEditingPost: function (bool) {
     ui.editingPost = bool;
   },
   toggleFetchingMorePosts: function (bool) {
     ui.fetchingMorePosts = bool;
-  },
-  toggleRequestDrop: function (bool) {
-    ui.requestsDropped = bool;
-    this.trigger();
   },
   toggleTagging: function (bool) {
     ui.tagging = bool;
