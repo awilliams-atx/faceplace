@@ -10,7 +10,11 @@ var React = require('react'),
 
 var PostIndex = React.createClass({
   getInitialState: function () {
-    return ({ posts: PostStore.all() });
+    return ({
+      authorizedToPost: false,
+      posts: PostStore.all(),
+      profileOwner: UserStore.user() // empty object on <Main/>
+    });
   },
   render: function () {
     return (
@@ -36,6 +40,7 @@ var PostIndex = React.createClass({
   componentDidMount: function () {
     this.postListener = PostStore.addListener(this.onPostStoreChange);
     // User listener for #authorizedToPost
+    this.sessionListener = SessionStore.addListener(this.onSessionStoreChange);
     this.userListener = UserStore.addListener(this.onUserStoreChange);
     window.addEventListener('scroll', this.loadListener);
   },
@@ -45,6 +50,7 @@ var PostIndex = React.createClass({
   },
   componentWillUnmount: function () {
     this.postListener.remove();
+    this.sessionListener.remove();
     this.userListener.remove();
     UI.set('fetchingMorePosts', false);
     window.removeEventListener('scroll', this.loadListener);
@@ -54,11 +60,7 @@ var PostIndex = React.createClass({
   },
   authorizedToPost: function () {
     if (!this.props.profileOwnerId) { return true }
-    if (UserStore.user().isFriendOfCurrentUser ||
-      this.props.profileOwnerId === SessionStore.currentUser().id) {
-      return true;
-    }
-    return false;
+    return SessionStore.authorizedToPostOnTimeline(UserStore.user().userId);
   },
   checkNoMorePosts: function (id) {
     if (id !== undefined && this.state.posts.length > 0) {
@@ -69,7 +71,7 @@ var PostIndex = React.createClass({
     }
   },
   loadListener: function () {
-    if ( document.body.scrollHeight - window.innerHeight <
+    if (document.body.scrollHeight - window.innerHeight <
       window.scrollY + 100) {
     }
     if (!UI.now('fetchingMorePosts') && !this.state.nomore && document.body
@@ -87,10 +89,11 @@ var PostIndex = React.createClass({
       this.checkNoMorePosts(lastPostId);
     }.bind(this));
   },
+  onSessionStoreChange: function () {
+    this.setState({ authorizedToPost: this.authorizedToPost() });
+  },
   onUserStoreChange: function () {
-    this.setState({
-      friendsWithProfileOwner: UserStore.user().isFriendOfCurrentUser
-    });
+    this.setState({ profileOwner: UserStore.user() });
   },
   sectionWidth: function () {
     if (window.location.pathname.match('/users/')) {

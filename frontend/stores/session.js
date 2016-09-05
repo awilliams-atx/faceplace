@@ -13,7 +13,6 @@ SessionStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case sessionConstants.LOGOUT:
       SessionStore.logout();
-      SessionStore.__emitChange();
       break;
     case sessionConstants.RECEIVE_CURRENT_USER:
       SessionStore.login(payload.user);
@@ -38,6 +37,10 @@ SessionStore.authorizedToCommentOn = function (post) {
   var profileOwnerId = post.profileOwner ? post.profileOwner.id : undefined;
   return SessionStore.friendsWith(post.authorId, profileOwnerId) ||
     _currentUser.id === post.authorId;
+};
+
+SessionStore.authorizedToPostOnTimeline = function (uid) {
+  return _currentUser.id === uid || SessionStore.friendsWith(uid);
 };
 
 SessionStore.currentUser = function () {
@@ -78,9 +81,7 @@ SessionStore.login = function (currentUser) {
 };
 
 SessionStore.logout = function () {
-  Object.keys(_currentUser).forEach(function (key) {
-    _currentUser[key] = undefined;
-  });
+  _currentUser = {};
 };
 
 SessionStore.unfriend = function (id) {
