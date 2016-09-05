@@ -35,13 +35,16 @@ var PostIndex = React.createClass({
   },
   componentDidMount: function () {
     this.postListener = PostStore.addListener(this.onPostStoreChange);
-    // User listener needed for #authorizedToPost
+    // User listener for #authorizedToPost
     this.userListener = UserStore.addListener(this.onUserStoreChange);
     window.addEventListener('scroll', this.loadListener);
   },
   componentDidUpdate: function () {
-    if (this.props.profileOwnerid) {
-      setTimeout(function () { UI.scrollToPost() }, 2000);
+    // Post was mounted on prev. page
+    if (this.props.profileOwnerId) {
+      setTimeout(function ()
+        UI.scrollToPost()
+      }, 1000);
     }
   },
   componentWillUnmount: function () {
