@@ -1,5 +1,6 @@
 var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher.js'),
+    friendRequestConstants = require('../constants/friend_request_constants'),
     friendshipConstants = require('../constants/friendship_constants'),
     sessionConstants = require('../constants/session_constants');
 
@@ -18,11 +19,19 @@ SessionStore.__onDispatch = function (payload) {
       SessionStore.login(payload.user);
       SessionStore.__emitChange();
       break;
+    case friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED:
+      SessionStore.addFriend(payload.request.maker_id);
+      SessionStore.__emitChange();
+      break;
     case friendshipConstants.UNFRIENDED:
       SessionStore.unfriend(payload.friend_id);
       SessionStore.__emitChange();
       break;
   }
+};
+
+SessionStore.addFriend = function (id) {
+  _currentUser.friends.push(id);
 };
 
 SessionStore.authorizedToCommentOn = function (post) {
