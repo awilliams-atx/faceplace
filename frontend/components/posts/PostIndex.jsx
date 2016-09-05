@@ -46,7 +46,7 @@ var PostIndex = React.createClass({
   componentWillUnmount: function () {
     this.postListener.remove();
     this.userListener.remove();
-    UI.toggle('fetchingMorePosts', false);
+    UI.set('fetchingMorePosts', false);
     window.removeEventListener('scroll', this.loadListener);
   },
   componentWillReceiveProps: function (newProps) {
@@ -64,7 +64,7 @@ var PostIndex = React.createClass({
     if (id !== undefined && this.state.posts.length > 0) {
       var newLastPostId = this.state.posts[this.state.posts.length - 1].postId;
       if (id !== newLastPostId) {
-        UI.toggle('fetchingMorePosts', false);
+        UI.set('fetchingMorePosts', false);
       }
     }
   },
@@ -74,7 +74,7 @@ var PostIndex = React.createClass({
     }
     if (!UI.now('fetchingMorePosts') && !this.state.nomore && document.body
     .scrollHeight - window.innerHeight < window.scrollY + 100) {
-      UI.toggle('fetchingMorePosts', true); // NB: Also takes care of not fetching when no more posts to fetch.
+      UI.set('fetchingMorePosts', true); // NB: Also takes care of not fetching when no more posts to fetch.
       ClientActions
         .fetchMorePosts(this.props.profileOwnerId, this.state.posts.length);
     }

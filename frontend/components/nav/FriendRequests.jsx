@@ -91,7 +91,7 @@ var FriendRequests = React.createClass({
   toggleDropDown: function (e) {
     if (!this.state.droppedDown) {
       this.setState({ droppedDown: true }, function () {
-        UI.toggle('requestsDropped', this.state.droppedDown, true);
+        UI.set('requestsDropped', this.state.droppedDown, true);
         document.addEventListener('click', this.navDropClickListener);
       }.bind(this));
     } else if (!document.getElementById('nav-drop-overlay')
@@ -125,7 +125,7 @@ var FriendRequests = React.createClass({
     ClientActions.rejectFriendRequest({ maker_id: user_id });
   },
   rollUp: function () {
-    UI.toggle('requestsDropped', false, true);
+    UI.set('requestsDropped', false, true);
     document.removeEventListener('click', this.navDropClickListener);
     this.setState({ droppedDown: false }, function () {
       this.markRequestsChecked();

@@ -42,6 +42,10 @@ var UIManipulator = {
     UIManipulator.focusScrollPost(post);
     UIManipulator.clearScrollPost();
   },
+  set: function (key, val, trigger) {
+    ui[key] = val;
+    if (trigger) { this.trigger() }
+  },
   setScrollPost: function (id) {
     ui.scrollPost = id;
   },
@@ -51,10 +55,6 @@ var UIManipulator = {
     setTimeout(function () {
       head.className = head.classList[0];
     }, 1200);
-  },
-  toggle: function (toggle, bool, trigger) {
-    ui[toggle] = bool;
-    if (trigger) { this.trigger() }
   },
   trigger: function () {
     listeners.forEach(function (listener) { listener() });
