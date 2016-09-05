@@ -144,7 +144,7 @@ var PostForm = React.createClass({
       this.setState({ body: '' }, function () {
         ClientActions.submitPost(post);
         this.autogrow();
-        this.toggleTag();
+        if (this.state.tagging) { this.toggleTag() }
       }.bind(this));
     }
   },
