@@ -1,5 +1,6 @@
 var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher.js'),
+    friendshipConstants = require('../constants/friendship_constants'),
     sessionConstants = require('../constants/session_constants');
 
 var _currentUser = {};
@@ -9,12 +10,16 @@ var SessionStore = new Store(AppDispatcher);
 
 SessionStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
+    case sessionConstants.LOGOUT:
+      SessionStore.logout();
+      SessionStore.__emitChange();
+      break;
     case sessionConstants.RECEIVE_CURRENT_USER:
       SessionStore.login(payload.user);
       SessionStore.__emitChange();
       break;
-    case sessionConstants.LOGOUT:
-      SessionStore.logout();
+    case friendshipConstants.UNFRIENDED:
+      SessionStore.unfriend(payload.friend_id);
       SessionStore.__emitChange();
       break;
   }
@@ -67,6 +72,14 @@ SessionStore.logout = function () {
   Object.keys(_currentUser).forEach(function (key) {
     _currentUser[key] = undefined;
   });
+};
+
+SessionStore.unfriend = function (id) {
+  for (var i = 0; i < _currentUser.friends.length; i++) {
+    if (_currentUser.friends[i] === id) {
+      return _currentUser.friends.splice(i, 1);
+    }
+  }
 };
 
 module.exports = SessionStore;
