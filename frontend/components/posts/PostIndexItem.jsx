@@ -60,7 +60,9 @@ var PostIndexItem = React.createClass({
   },
   componentDidMount: function () {
     ClientActions.fetchComments('Post', this.props.post.postId);
-    UI.scrollToPost(this.props.post.postId);
+    setTimeout(function () {
+      UI.scrollToPost(this.props.post.postId);
+    }.bind(this), 1000);
   },
   authorizedToEdit: function () {
     return this.props.post.authorId === SessionStore.currentUser().id;
