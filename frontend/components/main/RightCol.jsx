@@ -44,6 +44,20 @@ var RightCol = React.createClass({
               </div>
             </a>
           </article>
+          <article className='right-col-item'>
+            <a className='right-col-container group'
+              download='Andrew Williams Resume'
+              href='https://s3.amazonaws.com/faceplace-dev/assets/AndrewWilliamsResume.pdf'
+              id='resume'
+              target='_blank'>
+              <div className='showcase-icon right-col-content'>
+                <i className="fa fa-file-text" aria-hidden="true"></i>
+              </div>
+              <div className='showcase-text right-col-content'>
+                Resume
+              </div>
+            </a>
+          </article>
         </aside>
       </td>
     );
