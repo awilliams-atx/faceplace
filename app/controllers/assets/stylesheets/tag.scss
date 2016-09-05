@@ -1,0 +1,126 @@
+@import 'global';
+
+.tagging-container {
+  .search-index-item {
+    .search-icon {
+      float: left;
+      margin: 4px 8px 4px 6px;
+      pointer-events: none;
+      img {
+        @include squareObjectFit(36px);
+      }
+    }
+    .search-text {
+      @include typeStandard(14px);
+      height: 33px;
+      float: left;
+      padding: 6px 0 5px;
+      pointer-events: none;
+      small {
+        color: #999999;
+        font-size: 12px;
+      }
+    }
+  }
+  .selected-tag-item {
+    background-color: $catskillWhite;
+  }
+  input {
+    padding-left: 5px;
+    display: block;
+    float: left;
+    width: calc(100% - 60px);
+    height: 28px;
+  }
+}
+.tag-icon {
+  float: left;
+  padding: 0 14px;
+  i {
+    line-height: 40px;
+    font-size: 14px;
+    color: #888888;
+  }
+}
+.tag-icon:hover {
+  background-color: #f2f2f2;
+}
+.tag-icon-active {
+  float: left;
+  padding: 0 14px;
+  background-color: #e2e2e2;
+  i {
+    line-height: 40px;
+    font-size: 14px;
+    color: #888888;
+  }
+}
+.tagged-friends-list {
+  margin: 5px 12px 3px;
+}
+.tagged-friends-with {
+  @include typeStandard;
+  display: block;
+  float: left;
+  margin: 7px 6px 5px 0;
+  color: #888888;
+}
+.tagged-friends-list-item {
+  @include typeStandard;
+  display: block;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+  border: 1px solid #9cb4d8 ;
+  border-radius: 3px;
+  background-color: $athensGray1;
+}
+.tagged-friends-list-item:hover {
+  cursor: pointer;
+}
+.tagging-field-container {
+  border-top: 1px solid $mercury;
+}
+.tagging-field-with {
+  @include typeStandard;
+  float: left;
+  background-color: #e2e8f6;
+  width: 29px;
+  height: calc(100% - 14px);
+  padding: 8px 6px 6px 8px;
+}
+.tagged-friends-input {
+  @include typeStandard(14px);
+  outline: none;
+}
+.tag-search-anchor-point {
+  position: relative;
+}
+.tagging-friends-search-results {
+  cursor: pointer;
+  top: 1px;
+  left: 44px;
+  width: 240px;
+  border-radius: 3px;
+  overflow: hidden;
+  font-family: $typeStandardFontFamily;
+}
+.tagging-friends-search-result {
+  background-color: white;
+  width: 100%;
+  cursor: pointer;
+  img {
+    display: block;
+    float: left;
+    margin: 4px 8px 4px 12px;
+  }
+  strong {
+    display: block;
+    float: left;
+    width: 182px;
+  }
+}
+.tagging-friends-search-result:hover {
+  background-color: $facebookBlue;
+  color: white;
+}

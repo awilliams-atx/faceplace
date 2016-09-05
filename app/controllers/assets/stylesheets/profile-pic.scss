@@ -1,0 +1,63 @@
+@import 'global';
+
+#profile-pic {
+  background-color: white;
+  border: 1px solid rgba(#000000, 0.3);
+  border-radius: 3px;
+  bottom: -31px;
+  left: 11px;
+  padding: 4px;
+  position: absolute;
+  img {
+    @include squareObjectFit(160px);
+    display: block;
+  }
+  #profile-pic-spinner {
+    background-color: transparent;
+    bottom: 0;
+    color: rgba(#ffffff, 0.8);
+    height: 160px;
+    line-height: 160px;
+    position: absolute;
+    text-align: center;
+    width: 160px;
+  }
+  #profile-pic-input-container {
+    left: 12px;
+    position: absolute;
+    top: 10px;
+    input {
+      height: 27px;
+      left: -93px;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      width: 240px;
+    }
+    input:hover {
+      cursor: pointer;
+    }
+  }
+  #profile-pic-input-cover {
+    height: 27px;
+    left: -93px;
+    position: absolute;
+    top: 0;
+    width: 89px;
+  }
+  #profile-pic-input-replacement {
+    color: rgba(#ffffff, 0.5);
+    i {
+      display: block;
+      float: left;
+      font-size: 26px;
+      margin-right: 5px;
+    }
+    strong {
+      @include typeStandard(16px);
+      display: block;
+      float: left;
+      line-height: 27px;
+    }
+  }
+}

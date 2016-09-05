@@ -41,7 +41,7 @@ var PostIndex = React.createClass({
   },
   componentDidUpdate: function () {
     if (this.props.profileOwnerid) {
-      setTimeout(function () { UI.scrollToPost() }, 1000);
+      setTimeout(function () { UI.scrollToPost() }, 2000);
     }
   },
   componentWillUnmount: function () {

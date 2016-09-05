@@ -1,0 +1,65 @@
+@import 'button-style';
+@import 'global';
+
+#post-form-section {
+  float: left;
+  padding: 0;
+}
+.profile-post {
+  width: 510px;
+  .post-types-background {
+    background-color: $athensGray3;
+    border-bottom: 1px solid $mercury;
+    border-radius: 3px;
+    height: 100%;
+    padding: 10px 0 10px 10px;
+  }
+  header#post-types {
+    div.post-type-text {
+      @include typeChambray(12px);
+      height: 16px;
+      line-height: 16px;
+    }
+  }
+  .post-type-img {
+    display: block;
+    float: left;
+    height: 16px;
+    margin-right: 5px;
+    position: relative;
+    top: -1px;
+    width: 16px;
+  }
+  .post-form {
+    padding: 12px 12px 0 12px;
+  }
+  .post-pic {
+    @include squareObjectFit(38px);
+    border: 1px solid rgba(#000000, 0.1);
+    display: block;
+    float: left;
+  }
+  .post-textarea {
+    @include typeStandard(14px);
+    border: none;
+    outline: none;
+    padding: 11px 0 13px 12px;
+    resize: none;
+    width: calc(100% - 53px);
+  }
+  .autogrower {
+    @include autoGrower(11px 0 13px 12px, 14px);
+  }
+  .post-footer-background {
+    border-top: 1px solid $mercury;
+    height: 40px;
+  }
+  .post-footer-left-buttons {
+    cursor: pointer;
+    float: left;
+  }
+  .post-footer-right-buttons {
+    float: right;
+    margin: 8px;
+  }
+}

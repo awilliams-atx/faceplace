@@ -1,0 +1,67 @@
+@import 'global';
+
+.post-head {
+  padding-bottom: 12px;
+  padding-top: 11px;
+  position: relative;
+  .post-breakdown {
+    margin: 0 12px;
+    img {
+      @include squareObjectFit(38px);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      display: block;
+      float: left;
+      margin-right: 8px;
+    }
+    .post-breakdown-text {
+      float: left;
+      .post-breakdown-users {
+        @include typeChambray(14px);
+        position: relative;
+        margin-bottom: 5px;
+        top: 2px;
+        a:hover {
+          text-decoration: underline;
+        }
+        .post-author-name {
+          float: left;
+        }
+        i {
+          color: $darkNobel;
+          font-size: 14px;
+          margin: 0 5px;
+        }
+        .friend-post-breakdown {
+          float: left;
+        }
+      }
+    }
+    .post-breakdown-datetime {
+      @include typeShadyLady;
+    }
+  }
+  .post-body {
+    @include typeStandard(14px);
+    padding: 14px 12px 3px;
+    word-wrap: break-word;
+  }
+  .post-tagged-friends {
+    color: #888888;
+    padding: 5px 12px 3px;
+    a {
+      color: $chambray;
+      cursor: pointer;
+    }
+    a:hover  {
+      text-decoration: underline;
+    }
+  }
+}
+
+.scroll-post-flash {
+  animation: flash 600ms ease alternate 2;
+}
+@keyframes flash {
+  from { background-color: white; }
+  to { background-color: $polo; }
+}

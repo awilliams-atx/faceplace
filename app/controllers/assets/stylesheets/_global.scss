@@ -1,0 +1,110 @@
+// ANIMATIONS
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// COLORS
+
+$abbey: #4a4e55;
+$astronaut: #29487d;
+$athensGray1: #e9ebee;
+$athensGray2: #edeff5;
+$athensGray3: #f6f7f9;
+$catskillWhite: #ecf0f7;
+$chambray: #365899;
+$darkNobel: #969696;
+$dodgerBlue: #5890ff;
+$doveGray: #636363;
+$facebookBlue: #3b5998;
+$iron1: #cdcfd4;
+$iron2: #dddfe2;
+$mercury: #e5e5e5;
+$navDropBorder: 1px solid rgba($doveGray, 0.22);
+$notBlack: #333333;
+$paleYellow: #fff9d7;
+$pipi: #fef8cc;
+$polo: #9bb0d5;
+$porcelain: #eaecee;
+$sanMarino: #4267b2;
+$shadyLady: #9e9b9e;
+$shark: #1d2129;
+$silver: #cccccc;
+$tomato: #fa3e3e;
+$wildWillow: #a2ce70;
+
+// DIMENSIONS
+
+$navDropItemInnerHeight: 48px;
+
+@mixin flexAlign($height) {
+  align-items: center;
+  display: flex;
+  height: $height;
+}
+
+@mixin squareObjectFit($dim) {
+  height: $dim;
+  width: $dim;
+  object-fit: cover;
+}
+
+// SHAREABLE
+
+@mixin contentItem {
+  background-color: white;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.overlay {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 4px 6px 2px rgba(0, 0, 0, .10);
+  z-index: 1000;
+}
+
+.subcontent-container {
+  background-color: white;
+  display: block;
+  box-shadow: 0 0 1px $silver;
+  border-radius: 3px;
+  margin: 0 0 20px 0;
+  padding: 10px;
+}
+
+// TYPE
+
+$typeStandardFontFamily: helvetica, arial, sans-serif;
+
+@mixin typeChambray($size) {
+  color: $chambray;
+  font-family: $typeStandardFontFamily;
+  font-size: $size;
+  font-weight: bold;
+}
+@mixin typeShadyLady {
+  color: $shadyLady;
+  font-family: $typeStandardFontFamily;
+  font-size: 12px;
+  font-weight: normal;
+}
+@mixin typeStandard($size: 12px) {
+  font-family: $typeStandardFontFamily;
+  font-size: $size;
+}
+
+// HACKS
+
+@mixin autoGrower($padding, $font-size: 12px, $font-family: $typeStandardFontFamily, $min-height: 0) {
+  @include typeStandard;
+  display: none;
+  font-family: $font-family;
+  font-size: $font-size;
+  min-height: $min-height;
+  padding: $padding;
+  position: absolute;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

@@ -1,0 +1,74 @@
+@import 'global';
+
+#intro-work-img { background-image: url(asset_path('intro_work.png')); }
+#intro-school-img { background-image: url(asset_path('intro_school.png')); }
+#intro-location-img { background-image: url(asset_path('intro_location.png')); }
+#intro-hometown-img { background-image: url(asset_path('intro_hometown.png')); }
+
+#intro-index {
+  @include typeStandard;
+  line-height: 16px;
+  width: 301px;
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid $silver;
+    margin: 1em 0;
+    padding: 0;
+  }
+  form {
+    display: block;
+    float: left;
+  }
+  input {
+    display: block;
+    border: 1px solid #bdc7d8;
+    border-radius: 3px;
+    padding: 4px 5px;
+    font-size: 12px;
+    width: 248px;
+    margin-bottom: 5px;
+  }
+  button {
+    display: block;
+    float: left;
+    border-radius: 3px;
+    box-shadow: 0 0 1px black;
+    margin-left: 5px;
+  }
+  textarea {
+    padding: 4px 5px;
+    border: 1px solid #bdc7d8;
+    border-radius: 3px;
+    width: 289px;
+    font-size: 12px;
+    resize: none;
+    display: block;
+    margin: auto;
+    margin-bottom: 5px;
+  }
+  .buttons {
+    float: right;
+  }
+}
+.intro-line {
+  display: block;
+  padding: 4px 0;
+  width: 295px;
+}
+.intro-line:first-of-type {
+  text-align: center;
+}
+.intro-img {
+  width: 13px;
+  height: 13px;
+  background-size: cover;
+  float: left;
+  margin-right: 10px;
+}
+.intro-item-text {
+  display: block;
+  float: left;
+  width: 260px;
+}

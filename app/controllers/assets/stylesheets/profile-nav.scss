@@ -1,0 +1,27 @@
+@import 'global';
+
+#profile-nav {
+  @include typeStandard(14px);
+  background-color: white;
+  border-radius: 0 0 3px 3px;
+  box-shadow: 0 0 1px $silver;
+  color: $abbey;
+  display: block;
+  float: left;
+  font-weight: bold;
+  height: 43px;
+  line-height: 44px;
+  margin: 0 auto 20px;
+  width: 851px;
+}
+#profile-nav-links ul {
+  display: block;
+  float: right;
+  margin: 0 0 0 201px;
+  padding: 0;
+  width: calc(100% - 201px);
+}
+#profile-nav-links li {
+  display: block;
+  float: left;
+}

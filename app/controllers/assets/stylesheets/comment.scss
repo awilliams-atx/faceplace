@@ -1,0 +1,66 @@
+@import 'global';
+
+.comment-section {
+  background-color: $athensGray3;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top: 1px solid $mercury;
+  img {
+    @include squareObjectFit(30px);
+    border: 1px solid rgba(#000000, 0.1);
+    float: left;
+    margin-right: 8px;
+  }
+  .post-comment {
+    padding: 8px 12px;
+    .post-comment-body {
+      @include typeStandard;
+      display: block;
+      float: left;
+      position: relative;
+      width: calc(100% - 40px);
+      word-wrap: break-word;
+      a {
+        @include typeChambray(12px);
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      i {
+        color: #d6d8db;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      i:hover {
+        color: #a0a4ae;
+        cursor: pointer;
+      }
+      .post-comment-created-at {
+        color: #90949c;
+        margin-top: 2px;
+      }
+    }
+  }
+  .post-comment-form {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 8px 12px 8px;
+    textarea {
+      @include typeStandard;
+      border: 1px solid $iron2;
+      display: block;
+      float: left;
+      min-height: 16px;
+      outline: none;
+      overflow: hidden;
+      padding: 7px 5px;
+      resize: none;
+      width: calc(100% - 52px);
+    }
+  }
+  .autogrower {
+    @include autoGrower(7px 5px);
+    width: 434px;
+  }
+}
