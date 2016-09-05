@@ -42,9 +42,7 @@ var PostIndex = React.createClass({
   componentDidUpdate: function () {
     // Post was mounted on prev. page
     if (this.props.profileOwnerId) {
-      setTimeout(function ()
-        UI.scrollToPost()
-      }, 1000);
+      setTimeout(UI.scrollToPost, 1000);
     }
   },
   componentWillUnmount: function () {
