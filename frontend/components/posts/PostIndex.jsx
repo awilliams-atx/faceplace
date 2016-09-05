@@ -61,6 +61,14 @@ var PostIndex = React.createClass({
     }
     return false;
   },
+  checkNoMorePosts: function (id) {
+    if (id !== undefined) {
+      var newLastPostId = this.state.posts[this.state.posts.length - 1].postId;
+      if (id !== newLastPostId) {
+        UI.toggle('fetchingMorePosts', false);
+      }
+    }
+  },
   loadListener: function () {
     if ( document.body.scrollHeight - window.innerHeight <
       window.scrollY + 100) {
@@ -77,13 +85,7 @@ var PostIndex = React.createClass({
       var lastPostId = this.state.posts[this.state.posts.length - 1].postId;
     }
     this.setState({ posts: PostStore.all() }, function () {
-      if (lastPostId) {
-        var newLastPostId =
-          this.state.posts[this.state.posts.length - 1].postId;
-        if (lastPostId !== newLastPostId) {
-          UI.toggle('fetchingMorePosts', false);
-        }
-      }
+      this.checkNoMorePosts(lastPostId);
     }.bind(this));
   },
   onUserStoreChange: function () {
