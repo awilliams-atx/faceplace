@@ -13,10 +13,6 @@ UserStore.__onDispatch = function (payload) {
   case userConstants.CLEAR_USER:
     _user = {};
     break; // Not meant to emit change.
-  case friendshipConstants.FRIENDSHIP_DESTROYED:
-    _user.isFriendOfCurrentUser = false;
-    UserStore.__emitChange();
-    break;
   case friendRequestConstants.MADE_FRIEND_REQUEST_CANCELED:
     _user.requestMade = false;
     UserStore.__emitChange();
@@ -32,7 +28,6 @@ UserStore.__onDispatch = function (payload) {
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_ACCEPTED:
     if (payload.request.maker_id === _user.userId) {
-      _user.isFriendOfCurrentUser = true;
       _user.requestReceived = false;
       _user.alreadyFriends = true;
       UserStore.__emitChange();
@@ -40,7 +35,6 @@ UserStore.__onDispatch = function (payload) {
     break;
   case friendRequestConstants.RECEIVED_FRIEND_REQUEST_REJECTED:
     if (payload.request.maker_id === _user.userId) {
-      _user.isFriendOfCurrentUser = false;
       _user.requestReceived = false;
       UserStore.__emitChange();
     }
