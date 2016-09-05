@@ -14,7 +14,7 @@ var CoverPhoto = React.createClass({
           ref='coverPhoto'
           src={this.props.profileOwner.coverPhotoUrl} />
         {this.renderSpinner()}
-        <div id='cover-photo-name'>{this.name()}</div>
+        {this.renderName()}
         {this.renderEditButton()}
       </div>
     );
@@ -26,6 +26,13 @@ var CoverPhoto = React.createClass({
           photoType='cover-photo'
           updateUtil='submitCoverPhoto' />
       );
+    }
+  },
+  renderName: function () {
+    if (this.props.profileOwner.firstName) {
+      var fullName = this.props.profileOwner.firstName + ' ' +
+        this.props.profileOwner.lastName;
+      return <div id='cover-photo-name'>{fullName}</div>;
     }
   },
   renderSpinner: function () {
@@ -50,10 +57,6 @@ var CoverPhoto = React.createClass({
   },
   authorizedToEdit: function () {
     return this.props.profileOwner.userId === SessionStore.currentUser().id;
-  },
-  name: function () {
-    return this.props.profileOwner.firstName + ' ' +
-      this.props.profileOwner.lastName;
   }
 });
 
