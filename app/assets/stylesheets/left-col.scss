@@ -6,7 +6,7 @@
     ul {
       margin: 0;
       padding: 0;
-      li {
+      li.group {
         color: $shark;
         cursor: pointer;
         font-family: $typeStandardFontFamily;
@@ -23,9 +23,16 @@
           float: left;
         }
       }
-      li:hover {
+      li.group:hover {
         background-color: $iron2;
       }
+    }
+    li.left-col-title {
+      color: rgba(#666666, .8);
+      font-family: $typeStandardFontFamily;
+      font-size: 11px;
+      font-weight: bold;
+      margin-top: 10px;
     }
   }
 }
