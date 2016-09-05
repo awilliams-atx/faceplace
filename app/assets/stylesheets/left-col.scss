@@ -1,28 +1,31 @@
 @import 'global';
 
 #left-col {
-  ul {
-    margin: 0;
-    padding: 0;
-    li {
-      color: $shark;
-      cursor: pointer;
-      font-family: $typeStandardFontFamily;
-      font-size: 12px;
-      padding: 4px 6px;
-      img {
-        display: block;
-        float: left;
-        margin-right: 5px;
-        @include squareObjectFit(16px);
+  #left-col-content {
+    width: 175px;
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        color: $shark;
+        cursor: pointer;
+        font-family: $typeStandardFontFamily;
+        font-size: 12px;
+        padding: 4px 6px;
+        img {
+          display: block;
+          float: left;
+          margin-right: 5px;
+          @include squareObjectFit(16px);
+        }
+        .left-col-text {
+          align-items: center;
+          float: left;
+        }
       }
-      .left-col-text {
-        align-items: center;
-        float: left;
+      li:hover {
+        background-color: $iron2;
       }
-    }
-    li:hover {
-      background-color: $iron2;
     }
   }
 }
