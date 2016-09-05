@@ -52,9 +52,6 @@ var UIManipulator = {
       head.className = head.classList[0];
     }, 1200);
   },
-  tagging: function () {
-    return ui.tagging;
-  },
   toggle: function (toggle, bool, trigger) {
     ui[toggle] = bool;
     if (trigger) { this.trigger() }

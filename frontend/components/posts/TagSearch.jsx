@@ -11,7 +11,7 @@ var TagSearch = React.createClass({
     return ({
       cursor: 0,
       searchString: '',
-      tagging: UI.tagging(),
+      tagging: UI.now('tagging'),
       untaggedFriends: TagStore.untaggedFriends()
     });
   },
@@ -119,7 +119,7 @@ var TagSearch = React.createClass({
   },
   onUIChange: function () {
     if (UI.now('editingPost') !== this.props.isEditingPost) { return }
-    this.setState({ tagging: UI.tagging() });
+    this.setState({ tagging: UI.now('tagging') });
   }
 });
 
