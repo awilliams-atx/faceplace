@@ -35,6 +35,8 @@ var PostIndex = React.createClass({
   },
   componentDidMount: function () {
     this.postListener = PostStore.addListener(this.onPostStoreChange);
+    // User listener needed for #authorizedToPost
+    this.userListener = UserStore.addListener(this.onUserStoreChange);
     window.addEventListener('scroll', this.loadListener);
   },
   componentDidUpdate: function () {
@@ -44,6 +46,7 @@ var PostIndex = React.createClass({
   },
   componentWillUnmount: function () {
     this.postListener.remove();
+    this.userListener.remove();
     UI.toggleFetchingMorePosts(false);
     window.removeEventListener('scroll', this.loadListener);
   },
@@ -82,6 +85,11 @@ var PostIndex = React.createClass({
         }
       }
     }.bind(this));
+  },
+  onUserStoreChange: function () {
+    this.setState({
+      friendsWithProfileOwner: UserStore.user().isFriendOfCurrentUser
+    });
   },
   sectionWidth: function () {
     if (window.location.pathname.match('/users/')) {
