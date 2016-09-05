@@ -13,7 +13,10 @@ var PostIndexItem = React.createClass({
     router: React.PropTypes.object.isRequired
   },
   getInitialState: function () {
-    return ({ selectingOptions: false });
+    return ({
+      authorizedToComment: SessionStore.authorizedToCommentOn(this.props.post),
+      selectingOptions: false
+    });
   },
   render: function () {
     return (
@@ -31,7 +34,7 @@ var PostIndexItem = React.createClass({
                 <div className='post-author-name'>
                   <a href={'/users/' + this.props.post.authorId}
                     onClick={this.pushAuthorRoute}>
-                      {this.props.post.fullName}
+                    {this.props.post.fullName}
                   </a>
                 </div>
                 {ProfileOwner(this.props.post.profileOwner,
@@ -49,8 +52,7 @@ var PostIndexItem = React.createClass({
           </section>
           {TaggedFriends(this.props.post.taggedFriends, this.pushUserRoute)}
         </div>
-        <PostCommentIndex authorizedToComment=
-            {SessionStore.authorizedToCommentOn(this.props.post)}
+        <PostCommentIndex authorizedToComment={this.state.authorizedToComment}
           post={this.props.post} />
       </article>
     );
@@ -61,13 +63,22 @@ var PostIndexItem = React.createClass({
     }
   },
   componentDidMount: function () {
+    this.sessionListener = SessionStore.addListener(this.onSessionStoreChange);
     ClientActions.fetchComments('Post', this.props.post.postId);
     setTimeout(function () {
       UI.scrollToPost(this.props.post.postId);
     }.bind(this), 1000);
   },
+  componentWillUnmount: function () {
+    this.sessionListener.remove();
+  },
   authorizedToEdit: function () {
     return this.props.post.authorId === SessionStore.currentUser().id;
+  },
+  onSessionStoreChange: function () {
+    this.setState({
+      authorizedToComment: SessionStore.authorizedToCommentOn(this.props.post)
+    });
   },
   pushAuthorRoute: function (e) {
     e.preventDefault();
