@@ -21,7 +21,7 @@ var LogInForm = React.createClass({
     var logInButton = <button className='login-button'>Log In</button>;
     if (this.state.email === "" && this.state.password === "") {
       logInButton = (
-        <button onClick={this.guestLogin} className='login-button'>
+        <button onClick={this.onGuestLogin} className='login-button'>
           Guest
         </button>
       );
@@ -51,7 +51,7 @@ var LogInForm = React.createClass({
         <header className='welcome-header'>
           <nav className='welcome-header-nav group'>
             <a href="/"><img src={window.logoUrl} className='header-logo' /></a>
-            <form onSubmit={this.handleSubmit}
+            <form onSubmit={this.onSubmit}
                   className='log-in-form'>
               <table>
                 <thead>
@@ -126,28 +126,6 @@ var LogInForm = React.createClass({
       }
     });
   },
-  handleSubmit: function (e, options) {
-    var credentials = {};
-    e.preventDefault();
-
-    if (options) {
-      credentials = options.credentials;
-    } else {
-      credentials.email = this.state.email;
-      credentials.password = this.state.password;
-    }
-    this.setState({
-      email: '',
-      password: ''
-    }, function () {
-      SessionApiUtil.login(credentials, this._redirectToTimeline);
-      ErrorActions.clearErrors();
-    }.bind(this))
-  },
-  guestLogin: function (e) {
-    var credentials = {email: 'jeff', password: 'starwars'};
-    this.handleSubmit(e, {credentials: credentials});
-  },
   onErrorStoreChange: function () {
     var errors = ErrorStore.errors('login');
     var loginInputClass = errors ? 'login-input-error' : 'login-input';
@@ -161,8 +139,28 @@ var LogInForm = React.createClass({
       }
     }.bind(this));
   },
-  _redirectToTimeline: function () {
-    this.context.router.push('/users/' + SessionStore.currentUser().id);
+  onGuestLogin: function (e) {
+    this.onSubmit(e, {
+      credentials: { email: 'jeff', password: 'starwars' }
+    });
+  },
+  onSubmit: function (e, options) {
+    var credentials = {};
+    e.preventDefault();
+
+    if (options) {
+      credentials = options.credentials;
+    } else {
+      credentials.email = this.state.email;
+      credentials.password = this.state.password;
+    }
+    this.setState({ email: '', password: '' }, function () {
+      SessionApiUtil.login(credentials, this.redirectToMain);
+      ErrorActions.clearErrors();
+    }.bind(this))
+  },
+  redirectToMain: function () {
+    this.context.router.push('/');
   }
 });
 
