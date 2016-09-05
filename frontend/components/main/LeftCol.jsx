@@ -9,7 +9,6 @@ var LeftCol = React.createClass({
     return { user: SessionStore.currentUser() }
   },
   render: function () {
-    console.log(this.state.user.profile_pic_url);
     return (
       <td id='left-col'>
         <aside id='left-col-content'>
