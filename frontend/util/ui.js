@@ -15,15 +15,15 @@ var UIManipulator = {
   clearScrollPost: function () {
     ui.scrollPost = undefined;
   },
-  editingPost: function () {
-    return ui.editingPost;
-  },
   fetchingMorePosts: function () {
     return ui.fetchingMorePosts;
   },
   focusScrollPost: function (post) {
     var textarea = post.getElementsByTagName('textarea')[0];
     if (textarea) { textarea.focus() }
+  },
+  now: function (toggle) {
+    return ui[toggle];
   },
   removeListener: function (listener) {
     for (var i = 0; i < listeners.length; i++) {

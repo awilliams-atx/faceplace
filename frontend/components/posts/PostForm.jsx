@@ -149,7 +149,7 @@ var PostForm = React.createClass({
     }
   },
   onTagStoreChange: function () {
-    if (this.props.isEditing === UI.editingPost()) {
+    if (this.props.isEditing === UI.now('editingPost')) {
       this.setState({ tagged: TagStore.taggedFriends() });
     }
   },
