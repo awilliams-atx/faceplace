@@ -65,7 +65,7 @@ var PostIndex = React.createClass({
     if ( document.body.scrollHeight - window.innerHeight <
       window.scrollY + 100) {
     }
-    if (!UI.fetchingMorePosts() && !this.state.nomore && document.body
+    if (!UI.now('fetchingMorePosts') && !this.state.nomore && document.body
     .scrollHeight - window.innerHeight < window.scrollY + 100) {
       UI.toggle('fetchingMorePosts', true); // NB: Also takes care of not fetching when no more posts to fetch.
       ClientActions

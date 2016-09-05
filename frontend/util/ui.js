@@ -15,9 +15,6 @@ var UIManipulator = {
   clearScrollPost: function () {
     ui.scrollPost = undefined;
   },
-  fetchingMorePosts: function () {
-    return ui.fetchingMorePosts;
-  },
   focusScrollPost: function (post) {
     var textarea = post.getElementsByTagName('textarea')[0];
     if (textarea) { textarea.focus() }
