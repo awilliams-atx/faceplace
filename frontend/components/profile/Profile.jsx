@@ -44,6 +44,7 @@ var Profile = React.createClass({
   },
   componentWillUnmount: function () {
     this.userListener.remove();
+    ClientActions.clearUser();
   },
   componentWillReceiveProps: function (props) {
     ClientActions.fetchUser(props.params.userId);

@@ -10,6 +10,9 @@ var UserStore = new Store(AppDispatcher);
 
 UserStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
+  case userConstants.CLEAR_USER:
+    _user = {};
+    break; // Not meant to emit change.
   case friendshipConstants.FRIENDSHIP_DESTROYED:
     _user.isFriendOfCurrentUser = false;
     UserStore.__emitChange();
