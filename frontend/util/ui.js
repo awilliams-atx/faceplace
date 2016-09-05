@@ -12,8 +12,9 @@ var UIManipulator = {
   addListener: function (listener) {
     listeners.push(listener);
   },
-  clearScrollPost: function () {
-    ui.scrollPost = undefined;
+  clear: function (key, trigger) {
+    ui[key] = undefined;
+    if (trigger) { UIManipulator.trigger() }
   },
   focusScrollPost: function (post) {
     var textarea = post.getElementsByTagName('textarea')[0];
@@ -40,7 +41,7 @@ var UIManipulator = {
     window.scrollTo(0, post.offsetTop - 20);
     UIManipulator.styleScrollPost(post);
     UIManipulator.focusScrollPost(post);
-    UIManipulator.clearScrollPost();
+    UIManipulator.clear('scrollPost');
   },
   set: function (key, val, trigger) {
     ui[key] = val;
