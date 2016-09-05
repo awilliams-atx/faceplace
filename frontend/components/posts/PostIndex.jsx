@@ -65,7 +65,7 @@ var PostIndex = React.createClass({
     return false;
   },
   checkNoMorePosts: function (id) {
-    if (id !== undefined) {
+    if (id !== undefined && this.state.posts.length > 0) {
       var newLastPostId = this.state.posts[this.state.posts.length - 1].postId;
       if (id !== newLastPostId) {
         UI.toggle('fetchingMorePosts', false);
