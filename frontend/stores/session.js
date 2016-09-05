@@ -20,6 +20,12 @@ SessionStore.__onDispatch = function (payload) {
   }
 };
 
+SessionStore.authorizedToCommentOn = function (post) {
+  var profileOwnerId = post.profileOwner ? post.profileOwner.id : undefined;
+  return SessionStore.friendsWith(post.authorId, profileOwnerId) ||
+    _currentUser.id === post.authorId;
+};
+
 SessionStore.currentUser = function () {
   return $.extend({}, _currentUser);
 };
@@ -46,7 +52,7 @@ SessionStore.fullName = function () {
   } else {
     return '';
   }
-},
+};
 
 SessionStore.isUserLoggedIn = function () {
   return !!_currentUser.id;

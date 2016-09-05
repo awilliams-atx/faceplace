@@ -24,9 +24,7 @@ var PostCommentIndex = React.createClass({
     });
   },
   renderForm: function () {
-    var profileOwnerId = this.props.post.profileOwner ? this.props.post.profileOwner.id : undefined
-    if (SessionStore.friendsWith(this.props.post.authorId, profileOwnerId) ||
-      SessionStore.currentUser().id === this.props.post.authorId) {
+    if (this.props.authorizedToComment) {
       return <PostCommentForm postId={this.props.post.postId} />;
     }
   },

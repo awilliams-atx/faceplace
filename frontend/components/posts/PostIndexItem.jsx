@@ -49,7 +49,9 @@ var PostIndexItem = React.createClass({
           </section>
           {TaggedFriends(this.props.post.taggedFriends, this.pushUserRoute)}
         </div>
-        <PostCommentIndex post={this.props.post} />
+        <PostCommentIndex authorizedToComment=
+            {SessionStore.authorizedToCommentOn(this.props.post)}
+          post={this.props.post} />
       </article>
     );
   },
