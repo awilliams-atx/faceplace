@@ -72,7 +72,7 @@ var FriendRequestItem = React.createClass({
     this.props.onReject(this.props.req.maker_id);
   },
   onUIChange: function () {
-    if (!UI.requestsDropped()) {
+    if (!UI.now('requestsDropped')) {
       this.props.req.acceptance_checked = true;
       UI.removeListener(this.onUIChange);
     }

@@ -29,9 +29,6 @@ var UIManipulator = {
       }
     }
   },
-  requestsDropped: function () {
-    return ui.requestsDropped;
-  },
   scrollPost: function () {
     return ui.scrollPost;
   },
