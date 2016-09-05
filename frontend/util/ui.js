@@ -38,9 +38,9 @@ var UIManipulator = {
     var post = document.getElementById(id);
     if (!post) { return }
     window.scrollTo(0, post.offsetTop - 20);
-    this.styleScrollPost(post);
-    this.focusScrollPost(post);
-    this.clearScrollPost();
+    UIManipulator.styleScrollPost(post);
+    UIManipulator.focusScrollPost(post);
+    UIManipulator.clearScrollPost();
   },
   setScrollPost: function (id) {
     ui.scrollPost = id;
