@@ -209,6 +209,7 @@ var PostForm = React.createClass({
         document.addEventListener('click', this.taggingClickout);
       } else {
         document.removeEventListener('click', this.taggingClickout);
+        if (e.target === this.refs.autoFocus) { this.refs.autoFocus.focus() }
       }
     }.bind(this));
   },
