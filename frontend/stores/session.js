@@ -71,6 +71,10 @@ SessionStore.fullName = function () {
   }
 };
 
+SessionStore.isMadeRequest = function (req) {
+  return _currentUser.id === req.maker_id;
+};
+
 SessionStore.isUserLoggedIn = function () {
   return !!_currentUser.id;
 };

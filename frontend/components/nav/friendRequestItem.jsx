@@ -1,6 +1,7 @@
 var React = require('react'),
     UI = require('../../util/ui'),
-    Util = require('../../util/general');
+    Util = require('../../util/general'),
+    SessionStore = require('../../stores/session');
 
 var FriendRequestItem = React.createClass({
   contextTypes: {
@@ -53,7 +54,8 @@ var FriendRequestItem = React.createClass({
       return '';
     } else if (!this.props.req.checked) {
       return 'unchecked-alert ';
-    } else if (this.props.req.accepted && !this.props.req.acceptance_checked) {
+    } else if (SessionStore.isMadeRequest(this.props.req) &&
+      this.props.req.accepted && !this.props.req.acceptance_checked) {
       return 'just-accepted ';
     } else {
       return '';

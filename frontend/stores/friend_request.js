@@ -136,7 +136,9 @@ FriendRequestStore.setRequests = function (requests) {
 FriendRequestStore.totalUnchecked = function () {
   var total = 0;
   _accepted.forEach(function (req) {
-    if (!req.acceptance_checked) { total += 1 }
+    if (!req.acceptance_checked && SessionStore.isMadeRequest(req)) {
+      total += 1
+    }
   });
   _pending.forEach(function (req) {
     if (!req.checked) { total += 1 }
