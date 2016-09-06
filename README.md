@@ -26,7 +26,7 @@ Submitting a post while visiting a friend's timeline causes the post to be avail
 
 #### Tagging
 
-Each Post form has a user search function on the Post form component which enables tagging friends. Tagged friends are displayed below the body of the post, making the post available on the timeline of both the author and each tagged friend. Tagged friends receive an instant notification of the post via websockets.
+Each Post form has a user search function which enables tagging friends. Tagged friends are displayed below the body of the post. The post will be available on the timeline of both the author and each tagged friend. Tagged friends receive an instant notification of the post via websockets.
 
 #### Friend Requests
 
@@ -38,6 +38,10 @@ Making a friend request is quite a big todo on Faceplace. First of all, the butt
  * **Confirm / Delete Request**: visiting a non-friend's profile *and* a request has been *received*
  * **Request Sent! / Cancel Request**: visiting a non-friend's profile *and* a request has been *made*
 
+ Making a friend request also sends an instant notification via websockets to the request receiver. Received friend requests are displayed in the 'Friend Requests' section of the navbar with an option to **Confirm** or **Delete Request**.
+
+ Accepted friend requests remain in the Friend Request drop-down menu indefinitely. **In the future**, there will be an option to remove accepted friend requests, and accepted friend requests will automatically remove themselves after a timeout of a few days.
+
 #### Notifications
 
 There are three cases where a notification is pushed out to a user via the [Pusher][Pusher] websockets API:
@@ -48,9 +52,11 @@ There are three cases where a notification is pushed out to a user via the [Push
 
 The notifications appear in the navbar instantaneously. The number of new notifications is displayed inside an attention-grabbing red rectangle. Five notifications are loaded on page load, but more can be loaded via SQL pagination by clicking *Load more notifications* until there are no more to be loaded.
 
+Clicking on a notification navigates to the timeline of either the timeline that was being visited when the post was created or the timeline of the author. Next, the window scrolls down to the post, and an animation is fired on the post head to improve visibility. The comment form is focused to improve UX.
+
 #### Watching a post
 
-In order to send out notifications via websockets, each post adds rows into a `watchings` join table connecting users to the post. By default, the post author, all commenters, all tagged friends, and the owner of the timeline where the post was submitted are included.
+In order to send out notifications via websockets, each post adds rows into a `watchings` join table connecting users to the post. By default, the post author, all tagged friends, and the owner of the timeline where the post was submitted are included. Commenting on a post makes the commenter a `watcher`.
 
 **In the future** I would like to implement *unwatching* a post in order to stop receiving notifications.
 
@@ -62,25 +68,29 @@ When you scroll down, a window `scroll` event listener picks up the distance fro
 
 Finding new friends is as simple as typing the first couple letters of either their first or last name into the search bar. Results of the search are fetched with each character typed. The drop down list is navigable with both the mouse and keyboard.
 
-#### Cover photo, Profile Picture
+#### Cover photo / Profile Picture
 
 When viewing one's own profile page, a small button appears in the corner of both images prompting to change the photo. All user-uploaded images are stored in AWS S3 buckets to ensure scalability.
 
 #### Intro
 
-The intro stores basic personal information input by a user for public display. Each item has an click event listener for the profile owner which transforms the item into a form for updating the information.
+The Intro (visible from a user's timeline) stores basic personal information input by a user for public display. Each item has a click event listener for the profile owner which transforms the item into a form for updating the information.
 
 ## To-Dos for this project:
 
-I am  excited to continue working on this project development. Some craved features include...
+I am  excited to continue working on this project's development. Some craved features include...
 
-#### Photo status updates and photo albums
+#### Photos / Photo albums
 
-In the future, users will be able to upload a photo instead of or along with a body of text in a post. Photo URLs will all be stored in a photos table and a join table `photo_albums` will store data relating photos to their owners and their containing albums.
+In the future, users will be able to upload a photo instead of or along with a body of text in a post. Photo URLs will all be stored in a photos table and a join table `photo_albums` will store data relating photos to their owners and their containing albums. The photos themselves will be stored in AWS S3 buckets to ensure scalability.
+
+#### Reactions
+
+In the future, users will be able to record their reactions via simple icons including the classic "like" thumbs-up, "love", "anry", "sad", "wow", and "laugh".
 
 #### Private messages
 
-In the future, users will be able to send simple messages back and forth to each other. The messages table will allow for either text or a photo URL for the body content.
+In the future, users will be able to share private messages. The messages table will allow for both text and image content.
 
 **Bonus**: Multi-user chatrooms.
 
