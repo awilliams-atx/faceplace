@@ -27,14 +27,12 @@ var PostForm = React.createClass({
       <section id={this.postSectionId()}
         className={this.formTypeClass() + ' profile-post'}
         style={this.style()}>
-        <div className='post-types-background'>
-          <header id='post-types'>
-            <img src='https://s3.amazonaws.com/faceplace-dev/assets/post_status.png' className='post-type-img' />
-            <div className='post-type-text'>
-              Status
-            </div>
-          </header>
-        </div>
+        <header className='post-types'>
+          <img src='https://s3.amazonaws.com/faceplace-dev/assets/post_status.png' className='post-type-img' />
+          <div className='post-type-text'>
+            Status
+          </div>
+        </header>
         <form>
           <div className='post-form'>
             <img src={SessionStore.currentUser().postPicUrl}
