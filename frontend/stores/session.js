@@ -35,8 +35,15 @@ SessionStore.addFriend = function (id) {
 
 SessionStore.authorizedToCommentOn = function (post) {
   var profileOwnerId = post.profileOwner ? post.profileOwner.id : undefined;
-  return SessionStore.friendsWith(post.authorId, profileOwnerId) ||
-    _currentUser.id === post.authorId;
+
+  if (_currentUser.id === post.authorId ||
+      _currentUser.id === profileOwnerId ||
+      SessionStore.taggedIn(post) ||
+      SessionStore.friendsWith(post.authorId, profileOwnerId)) {
+    return true;
+  }
+
+  return false;
 };
 
 SessionStore.authorizedToPostOnTimeline = function (uid) {
@@ -86,6 +93,15 @@ SessionStore.login = function (currentUser) {
 
 SessionStore.logout = function () {
   _currentUser = {};
+};
+
+SessionStore.taggedIn = function (post) {
+  for (var i = 0; i < post.taggedFriends.length; i++) {
+    if (_currentUser.id === post.taggedFriends[i].taggedId) {
+      return true;
+    }
+  }
+  return false;
 };
 
 SessionStore.unfriend = function (id) {
