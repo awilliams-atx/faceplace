@@ -67,8 +67,8 @@ var ClientActions = {
       CommentApiUtil.fetchSingleComment(notification);
     }
   },
-  fetchNotifications: function (pagination) {
-    NotificationApiUtil.fetchNotifications(pagination);
+  fetchNotifications: function (offset) {
+    NotificationApiUtil.fetchNotifications(offset);
   },
   fetchPosts: function (userId) {
     PostApiUtil.fetchPosts(userId);

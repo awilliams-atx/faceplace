@@ -8,7 +8,7 @@ var NotificationStore = new Store(AppDispatcher);
 
 _justCheckedIds = [];
 _notifications = [];
-_pagination = { offset: 0, page: 1, nomore: false }; // for next request
+_nomore = false;
 
 NotificationStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
@@ -17,6 +17,7 @@ NotificationStore.__onDispatch = function (payload) {
     NotificationStore.__emitChange();
     break;
   case notificationConstants.NOTIFICATIONS_RECEIVED:
+    if (payload.notifications.length === 0) { _nomore = true }
     if (_notifications[0] && _notifications[0].notified_id !==
       SessionStore.currentUser().id) {
       NotificationStore.setNotifications(payload.notifications);
@@ -38,15 +39,12 @@ NotificationStore.__onDispatch = function (payload) {
 
 NotificationStore.addNewNotification = function (notification) {
   _notifications.unshift(notification);
-  _pagination.offset += 1;
 };
 
 NotificationStore.addNotifications = function (notifications) {
   for (var i = 0; i < notifications.length; i++) {
     _notifications.push(notifications[i]);
   }
-  _pagination.page += 1;
-  _pagination.nomore = notifications.length === 0;
 };
 
 NotificationStore.all = function () {
@@ -84,21 +82,7 @@ NotificationStore.mostRecent = function () {
 };
 
 NotificationStore.nomore = function () {
-  return _pagination.nomore;
-};
-
-NotificationStore.pagination = function () {
-  NotificationStore.resetPagination();
-  return Object.assign({}, _pagination);
-};
-
-NotificationStore.resetPagination = function () {
-  if (_notifications.length === 0) { return }
-  if (_notifications[0].notified_id !== SessionStore.currentUser().id) {
-    _pagination.offset = 0;
-    _pagination.page = 1;
-    _pagination.nomore = false;
-  }
+  return _nomore;
 };
 
 NotificationStore.setJustCheckedIds = function (checked_ids) {
@@ -116,9 +100,6 @@ NotificationStore.setNotifications = function (notifications) {
   notifications.forEach(function (notification) {
     _notifications.push(notification);
   });
-  _pagination.page = 2;
-  _pagination.offset = 0;
-  _pagination.nomore = false;
 };
 
 NotificationStore.uncheckedNotificationIds = function () {

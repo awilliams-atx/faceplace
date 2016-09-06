@@ -77,7 +77,8 @@ var Notifications = React.createClass({
   componentDidMount: function () {
     this.notificationListener =
       NotificationStore.addListener(this.onNotificationStoreChange);
-    ClientActions.fetchNotifications(NotificationStore.pagination());
+    var offset = this.state.notifications ? this.state.notifications.length : 0;
+    ClientActions.fetchNotifications(offset);
   },
   componentWillUnmount: function () {
     this.notificationListener.remove();
@@ -104,7 +105,8 @@ var Notifications = React.createClass({
   },
   fetchNotifications: function () {
     if (NotificationStore.nomore()) { return }
-    ClientActions.fetchNotifications(NotificationStore.pagination());
+    var offset = this.state.notifications ? this.state.notifications.length : 0;
+    ClientActions.fetchNotifications(offset);
   },
   markNotificationsChecked: function () {
     if (this.state.uncheckedNotificationIds.length > 0) {
