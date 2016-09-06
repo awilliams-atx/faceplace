@@ -1,6 +1,7 @@
 var React = require('react'),
     UI = require('../../util/ui'),
     Util = require('../../util/general'),
+    ClientActions = require('../../actions/client_actions'),
     SessionStore = require('../../stores/session');
 
 var FriendRequestItem = React.createClass({
@@ -66,12 +67,12 @@ var FriendRequestItem = React.createClass({
     this.props.req.accepted = true;
     this.props.req.acceptance_checked = false;
     this.props.req.checked = true;
-    this.props.onAccept(this.props.req.maker_id);
+    ClientActions.acceptFriendRequest({ maker_id: this.props.req.maker_id });
     UI.addListener(this.onUIChange);
   },
   onReject: function (e) {
     e.preventDefault();
-    this.props.onReject(this.props.req.maker_id);
+    ClientActions.rejectFriendRequest({ maker_id: this.props.req.maker_id });
   },
   onUIChange: function () {
     if (!UI.now('requestsDropped')) {
@@ -94,10 +95,10 @@ var FriendRequestItem = React.createClass({
     Util.jumpToTop();
   },
   requestType: function () {
-    if (this.props.onAccept) {
-      return 'pending';
-    } else {
+    if (this.props.req.accepted) {
       return 'accepted';
+    } else {
+      return 'pending';
     }
   }
 });

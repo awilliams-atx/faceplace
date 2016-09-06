@@ -63,8 +63,6 @@ var FriendRequests = React.createClass({
       return this.state.pending.map(function (req, idx) {
         return (
           <FriendRequestItem key={idx}
-            onAccept={this.onAccept}
-            onReject={this.onReject}
             req={req}
             rollUp={this.rollUp} />
         );
@@ -112,17 +110,11 @@ var FriendRequests = React.createClass({
       this.rollUp();
     }
   },
-  onAccept: function (user_id) {
-    ClientActions.acceptFriendRequest({ maker_id: user_id });
-  },
   onFriendRequestStoreChange: function () {
     this.setState({
       accepted: FriendRequestStore.accepted(),
       pending: FriendRequestStore.pending()
     });
-  },
-  onReject: function (user_id) {
-    ClientActions.rejectFriendRequest({ maker_id: user_id });
   },
   rollUp: function () {
     UI.set('requestsDropped', false, true);
