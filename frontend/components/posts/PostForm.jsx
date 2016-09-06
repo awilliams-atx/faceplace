@@ -12,11 +12,7 @@ var React = require('react'),
 
 var PostForm = React.createClass({
   getInitialState: function () {
-    return({
-      body: '',
-      tagged: TagStore.taggedFriends(),
-      tagging: false
-    });
+    return({ body: '', tagged: TagStore.taggedFriends(), tagging: false });
   },
   render: function () {
     var tagUrl =
@@ -34,6 +30,7 @@ var PostForm = React.createClass({
             <div className='post-type-text'>
               Photo
             </div>
+            <input type='file'/>
           </div>
         </header>
         <form>
