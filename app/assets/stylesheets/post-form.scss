@@ -11,10 +11,15 @@
     border-bottom: 1px solid $mercury;
     border-radius: 3px;
     cursor: pointer;
-    height: 100%;
+    height: 24px;
     margin: 0 12px;
-    padding: 10px 0 8px 0;
+    padding: 6px 0 4px 0;
     .post-type {
+      align-items: center;
+      display: flex;
+      float: left;
+      height: 100%;
+      padding: 0 5px;
       .post-type-icon {
         color: $shuttleGray;
         float: left;
@@ -28,6 +33,9 @@
         line-height: 16px;
         pointer-events: none;
       }
+    }
+    .post-type:hover {
+      background-color: $athensGray3;
     }
   }
   .post-type-img {
