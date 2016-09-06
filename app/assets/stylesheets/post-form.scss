@@ -8,11 +8,11 @@
 .profile-post {
   width: 510px;
   .post-types {
-    background-color: $athensGray3;
     border-bottom: 1px solid $mercury;
     border-radius: 3px;
     height: 100%;
-    padding: 10px 0 10px 10px;
+    margin: 0 12px;
+    padding: 10px 0 8px 0;
     .post-type-text {
       @include typeChambray(12px);
       height: 16px;
