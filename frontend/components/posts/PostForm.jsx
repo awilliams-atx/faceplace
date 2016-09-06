@@ -139,7 +139,8 @@ var PostForm = React.createClass({
       ClientActions.updatePost(post);
       this.props.modalCallback();
     } else {
-      if (this.props.profileOwnerId) {
+      if (this.props.profileOwnerId &&
+        !SessionStore.isCurrentUser(this.props.profileOwnerId)) {
         post.profileOwnerId = this.props.profileOwnerId;
       }
       this.setState({ body: '' }, function () {
