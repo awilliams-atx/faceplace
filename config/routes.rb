@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
     # --------------------------------COMMENT-------------------------------- #
 
-    resources :comments, only: [:index, :update, :destroy] do
+    resources :comments, only: [:index] do
       resources :comments, only: [:create, :index]
     end
 

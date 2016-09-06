@@ -32,12 +32,6 @@ class Api::CommentsController < ApplicationController
     render 'api/comments/show'
   end
 
-  def update
-  end
-
-  def destroy
-  end
-
   private
 
   def comment_params
