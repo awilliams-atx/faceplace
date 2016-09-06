@@ -3,7 +3,6 @@ class Api::PostsController < ApplicationController
   after_action :push_notifications, only: :create
 
   def index
-    # offset = params[:offset] ? params[:offset] : 0
     if params[:user_id]
       user = User.find(params[:user_id])
       @posts = user.timeline_posts.includes(:author, :profile_owner,
@@ -23,18 +22,8 @@ class Api::PostsController < ApplicationController
 
   def update
     @post = Post.find(post_params[:id])
-
     @post.update(body: post_params[:body])
-
-    taggings = []
-
-    post_params[:tagged_ids] && post_params[:tagged_ids].each do |user_id|
-      tagging = Tagging.new(tagged_id: user_id)
-      taggings << tagging
-    end
-
-    @post.taggings = taggings
-
+    update_taggings
     render 'api/posts/show'
   end
 
@@ -69,5 +58,12 @@ class Api::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:id, :body, :profile_owner_id,
       :tagged_ids => [])
+  end
+
+  def update_taggings
+    # empty array comes up as nil
+    @post.taggings = post_params[:tagged_ids].to_a.map do |user_id|
+      Tagging.new(tagged_id: user_id)
+    end
   end
 end
