@@ -8,7 +8,8 @@ class Api::NotificationsController < ApplicationController
   def mark_checked
     ids = JSON.parse(params[:checked_ids])
     ids.each do |id|
-      Notification.find(id).update(checked: true)
+      notification = Notification.find_by(id: id)
+      notification.update(checked: true) if notification
     end
     render json: ids
   end
