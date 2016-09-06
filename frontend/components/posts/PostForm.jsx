@@ -12,7 +12,12 @@ var React = require('react'),
 
 var PostForm = React.createClass({
   getInitialState: function () {
-    return({ body: '', tagged: TagStore.taggedFriends(), tagging: false });
+    return({
+      body: '',
+      images: [],
+      tagged: TagStore.taggedFriends(),
+      tagging: false
+    });
   },
   render: function () {
     var tagUrl =
@@ -30,7 +35,7 @@ var PostForm = React.createClass({
             <div className='post-type-text'>
               Photo
             </div>
-            <input type='file'/>
+            <input onChange={this.onImageChange} type='file' />
           </div>
         </header>
         <form>
@@ -120,6 +125,16 @@ var PostForm = React.createClass({
   onCancel: function (e) {
     e.preventDefault();
     this.props.modalCallback();
+  },
+  onImageChange: function (e) {
+    var imageFile = e.target.files[0];
+    var fileReader = new FileReader();
+    fileReader.onloadend = function () {
+      var images = this.state.images.slice()
+      images.push(imageFile);
+      this.setState({ images: images });
+    }.bind(this);
+    if (imageFile) { fileReader.readAsDataURL(imageFile) }
   },
   onSubmit: function (e) {
     e.preventDefault();
