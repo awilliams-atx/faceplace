@@ -15,9 +15,7 @@ class Api::PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(author_id: current_user.id, body: post_params[:body])
-    @post.tagged_ids = params[:post][:tagged_ids]
-    @post.profile_owner_id = params[:post][:profile_owner_id]
+    @post = Post.new(post_params.merge(author_id: current_user.id))
     @post.global = true unless post_params[:profile_owner_id]
     @post.save!
     render 'api/posts/show'
