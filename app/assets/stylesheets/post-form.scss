@@ -66,6 +66,15 @@
       @include autoGrower(11px 0 13px 12px, 14px);
     }
   }
+  .upload-images {
+    margin-bottom: 10px;
+    .upload-image {
+      img {
+        @include squareObjectFit(100px);
+        margin-left: 5px;
+      }
+    }
+  }
   .post-footer-background {
     border-top: 1px solid $mercury;
     height: 40px;
