@@ -1,5 +1,6 @@
 class Api::CommentsController < ApplicationController
   before_action :require_login
+  after_action :make_notifications, only: :create
 
   def index
     if params[:post_id]
@@ -20,15 +21,7 @@ class Api::CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
-    @comment.author_id = current_user.id
-    @comment.save
-    @comment.notifications.each do |notification|
-      @notification = notification
-      rendered = render_to_string('api/notifications/show')
-      Pusher.trigger("notifications_#{notification.notified_id}", 'received',
-        rendered)
-    end
+    @comment = Comment.create!(comment_params.merge(author_id: current_user.id))
     render 'api/comments/show'
   end
 
@@ -36,5 +29,14 @@ class Api::CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body, :commentable_id, :commentable_type)
+  end
+
+  def make_notifications
+    @comment.notifications.each do |notification|
+      @notification = notification
+      rendered = render_to_string('api/notifications/show')
+      Pusher.trigger("notifications_#{notification.notified_id}", 'received',
+        rendered)
+    end
   end
 end
