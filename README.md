@@ -104,9 +104,26 @@ Right now, if a friend posts something you don't like on your timeline, you have
 
 Users make typing and spelling mistakes all the time. This shouldn't prevent them from finding their friends. Right now, I have my eye on the [pg_search][pgsearch] Ruby gem to help implement fuzzy search.
 
-Resources:
+###### Resources:
 
+* [Flux][flux] - Front end state manager and architecture
+* [Font Awesome][fa] - Icons
+* [jQuery][jquery] - Feature-rich JavaScript library
+* [MomentJS][moment] - Time formatting
+* [Paperclip][paperclip] - ActiveRecord file attachment library
+* [Pusher][pusher] - Websockets API
+* [ReactJS][react] - Front end view rendering library
+* [react-router][reactrouter] - React routing library
+
+
+[fa]: http://fontawesome.io/ "Font Awesome"
+[flux]: https://github.com/facebook/flux "Flux"
+[jquery]: https://jquery.com/ "jQuery"
 [live]: http://www.faceplace.io "Live"
-[profile_img]: ./app/assets/images/user_profile.png "Sample profile"
+[moment]: http://momentjs.com/ "Moment JS"
+[paperclip]: https://github.com/thoughtbot/paperclip "Paperclip"
 [pgsearch]: https://github.com/Casecommons/pg_search "PG Search"
+[profile_img]: ./app/assets/images/user_profile.png "Sample profile"
 [pusher]: https://pusher.com/ "Pusher Websockets API"
+[react]: https://facebook.github.io/react/ "ReactJS"
+[reactrouter]: https://github.com/reactjs/react-router "react-router"
