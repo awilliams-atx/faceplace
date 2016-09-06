@@ -1,6 +1,7 @@
 var React = require('react'),
     UI = require('../../util/ui'),
     Util = require('../../util/general'),
+    Images = require('./Images'),
     TaggedBoxes = require('./TaggedBoxes'),
     TagSearch = require('./TagSearch'),
     ClientActions = require('../../actions/client_actions'),
@@ -46,14 +47,18 @@ var PostForm = React.createClass({
               onChange={this.onBodyChange}
               value={this.state.body}
               placeholder={this.placeholder()}
-              ref='autoFocus' >
+              ref='autoFocus'>
             </textarea>
             <div className='autogrower'
-            ref='autogrower'
-            style={{width: this.textareaWidth()}}></div>
+              ref='autogrower'
+              style={{width: this.textareaWidth()}}>
+            </div>
           </div>
         </form>
         {TaggedBoxes(this.state.tagged, this.untag)}
+        <aside className='upload-images'>
+          {Images(this.state.images, this.removeImage)}
+        </aside>
         <TagSearch isEditingPost={this.props.isEditing} />
         <footer>
           <div className='post-footer-background'>
@@ -183,6 +188,9 @@ var PostForm = React.createClass({
     } else {
       return 'post-form-section';
     }
+  },
+  removeImage: function () {
+
   },
   style: function () {
     return {
