@@ -10,13 +10,24 @@
   .post-types {
     border-bottom: 1px solid $mercury;
     border-radius: 3px;
+    cursor: pointer;
     height: 100%;
     margin: 0 12px;
     padding: 10px 0 8px 0;
-    .post-type-text {
-      @include typeChambray(12px);
-      height: 16px;
-      line-height: 16px;
+    .post-type {
+      .post-type-icon {
+        color: $shuttleGray;
+        float: left;
+        margin-right: 5px;
+        pointer-events: none;
+      }
+      .post-type-text {
+        @include typeChambray(12px);
+        float: left;
+        height: 16px;
+        line-height: 16px;
+        pointer-events: none;
+      }
     }
   }
   .post-type-img {
