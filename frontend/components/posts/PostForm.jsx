@@ -188,7 +188,7 @@ var PostForm = React.createClass({
   },
   taggingClickout: function (e) {
     if (Util.hasOrDescendsFromClass(e.target, 3, 'search-index-item',
-      'tagged-friends-list-item', 'button-blue', 'button-blue-wide')) {
+      'tagged-friends-list-item', 'button-blue', 'button-blue-wide', 'tagging-field-container')) {
       return
     } else {
       this.toggleTag(e);
