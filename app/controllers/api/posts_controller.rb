@@ -3,13 +3,13 @@ class Api::PostsController < ApplicationController
   after_action :push_notifications, only: :create
 
   def index
-    offset = params[:offset] ? params[:offset] : 0
+    # offset = params[:offset] ? params[:offset] : 0
     if params[:user_id]
       user = User.find(params[:user_id])
       @posts = user.timeline_posts.includes(:author, :profile_owner,
-        :tagged_friends).limit(10).offset(offset)
+        :tagged_friends).limit(10).offset(params[:offset])
     else
-      @posts = Post.all.limit(10).order(created_at: :desc).offset(offset)
+      @posts = Post.all.limit(10).order(created_at: :desc).offset(params[:offset])
     end
     render 'api/posts/index'
   end
