@@ -54,9 +54,7 @@ var PostForm = React.createClass({
           </div>
         </div>
         {TaggedBoxes(this.state.tagged, this.untag)}
-        <aside className='upload-images'>
-          {Images(this.state.images, this.removeImage)}
-        </aside>
+        {this.renderImages()}
         <TagSearch isEditingPost={this.props.isEditing} />
         <footer>
           <div className='post-footer-background'>
@@ -94,6 +92,15 @@ var PostForm = React.createClass({
           <button className='button-blue-wide'
             onClick={this.onSubmit}>Post</button>
         </div>
+      );
+    }
+  },
+  renderImages: function () {
+    if (this.state.images.length > 0) {
+      return (
+        <aside className='upload-images'>
+          {Images(this.state.images, this.removeImage)}
+        </aside>
       );
     }
   },
