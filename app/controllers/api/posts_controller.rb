@@ -1,5 +1,6 @@
 class Api::PostsController < ApplicationController
   before_action :require_login
+  after_action :push_notifications, only: :create
 
   def index
     offset = params[:offset] ? params[:offset] : 0
@@ -15,35 +16,10 @@ class Api::PostsController < ApplicationController
 
   def create
     @post = Post.new(author_id: current_user.id, body: post_params[:body])
+    @post.tagged_ids = params[:post][:tagged_ids]
+    @post.profile_owner_id = params[:post][:profile_owner_id]
     @post.global = true unless post_params[:profile_owner_id]
     @post.save!
-
-    profile_owner_id = post_params[:profile_owner_id]
-    if profile_owner_id && profile_owner_id.to_i != current_user.id
-      timeline_posting =
-        TimelinePosting.new(profile_owner_id: profile_owner_id,
-          post_id: @post.id)
-      timeline_posting.save!
-      @notification = timeline_posting.notification
-      rendered = render_to_string('api/notifications/show')
-      Pusher.trigger("notifications_#{@notification.notified_id}", 'received',
-        rendered)
-    end
-
-    if post_params[:tagged_ids]
-      post_params[:tagged_ids].each do |user_id|
-        tagging = Tagging.new(tagged_id: user_id, post_id: @post.id)
-        tagging.save!
-        if tagging.notification
-          @notification = tagging.notification
-          rendered = render_to_string('api/notifications/show')
-          Pusher.trigger("notifications_#{@notification.notified_id}",
-            'received', rendered)
-        end
-      end
-    end
-
-    @time = @post.created_at.localtime
     render 'api/posts/show'
   end
 
@@ -75,6 +51,22 @@ class Api::PostsController < ApplicationController
   end
 
   private
+
+  def push_notifications
+    @post.taggings.each do |tagging|
+      next unless tagging.notification
+      @notification = tagging.notification
+      rendered = render_to_string('api/notifications/show')
+      Pusher.trigger("notifications_#{@notification.notified_id}", 'received',
+      rendered)
+    end
+    if @post.profile_owner_id
+      @notification = @post.timeline_posting.notification
+      rendered = render_to_string('api/notifications/show')
+      Pusher.trigger("notifications_#{@notification.notified_id}", 'received',
+        rendered)
+    end
+  end
 
   def post_params
     params.require(:post).permit(:id, :body, :profile_owner_id,

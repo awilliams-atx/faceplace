@@ -1,7 +1,9 @@
 class Post < ActiveRecord::Base
+  attr_accessor :tagged_ids, :profile_owner_id
+
   validates :author_id, presence: true
 
-  after_create :add_watching
+  after_create :add_watching, :create_taggings, :create_timeline_posting
   after_destroy :destroy_notifications
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
@@ -24,6 +26,18 @@ class Post < ActiveRecord::Base
   def add_watching
     Watching.create!(watchable_type: 'Post', watchable_id: id, watcher_id:
       author_id)
+  end
+
+  def create_taggings
+    return unless tagged_ids
+    tagged_ids.each do |uid|
+      Tagging.create!(tagged_id: uid, post_id: id)
+    end
+  end
+
+  def create_timeline_posting
+    return unless profile_owner_id
+    TimelinePosting.create!(profile_owner_id: profile_owner_id, post_id: id)
   end
 
   def destroy_notifications
