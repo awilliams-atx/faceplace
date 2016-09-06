@@ -27,7 +27,7 @@ var PostForm = React.createClass({
     return (
       // CSS is complicated because of header.
       <section id={this.postSectionId()}
-        className={this.formTypeClass() + ' profile-post'}
+        className={this.formTypeClass() + ' post-form'}
         style={this.style()}>
         <header className='post-types group'>
           <div className='post-type group'>
@@ -39,22 +39,20 @@ var PostForm = React.createClass({
             <input onChange={this.onImageChange} type='file' />
           </div>
         </header>
-        <form>
-          <div className='post-form'>
-            <img src={SessionStore.currentUser().postPicUrl}
-              className='post-pic'/>
-            <textarea className='post-textarea'
-              onChange={this.onBodyChange}
-              value={this.state.body}
-              placeholder={this.placeholder()}
-              ref='autoFocus'>
-            </textarea>
-            <div className='autogrower'
-              ref='autogrower'
-              style={{width: this.textareaWidth()}}>
-            </div>
+        <div className='post-text-body'>
+          <img src={SessionStore.currentUser().postPicUrl}
+            className='post-pic'/>
+          <textarea className='post-textarea'
+            onChange={this.onBodyChange}
+            value={this.state.body}
+            placeholder={this.placeholder()}
+            ref='autoFocus'>
+          </textarea>
+          <div className='autogrower'
+            ref='autogrower'
+            style={{width: this.textareaWidth()}}>
           </div>
-        </form>
+        </div>
         {TaggedBoxes(this.state.tagged, this.untag)}
         <aside className='upload-images'>
           {Images(this.state.images, this.removeImage)}
