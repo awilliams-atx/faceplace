@@ -166,7 +166,7 @@ var PostForm = React.createClass({
     var data = this.makeFormData();
     if (this.props.isEditing) {
       document.removeEventListener('click', this.taggingClickout);
-      data.set('id', this.props.post.postId);
+      data.set('post[id]', this.props.post.postId);
       document.body.className = '';
       ClientActions.cancelModal();
       ClientActions.updatePost(data);
@@ -174,7 +174,7 @@ var PostForm = React.createClass({
     } else {
       if (this.props.profileOwnerId &&
         !SessionStore.isCurrentUser(this.props.profileOwnerId)) {
-        data.set('profile_owner_id', this.props.profileOwnerId);
+        data.set('post[profile_owner_id]', this.props.profileOwnerId);
       }
       this.setState({ body: '', images: [] }, function () {
         if (this.state.tagging) { this.toggleTag() }
