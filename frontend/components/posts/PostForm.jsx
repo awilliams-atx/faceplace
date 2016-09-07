@@ -236,7 +236,6 @@ var PostForm = React.createClass({
     }
   },
   toggleTag: function (e) {
-    if (e) { e.preventDefault() }
     this.setState({ tagging: !this.state.tagging }, function () {
       UI.set('tagging', this.state.tagging, true);
       if (this.state.tagging) {
