@@ -136,12 +136,7 @@ var ClientActions = {
     FriendshipApiUtil.destroyFriendship(userId);
   },
   updatePost: function (post) {
-    var submissionPost = {
-      id: post.id,
-      body: post.body,
-      tagged_ids: post.taggedFriendIds
-    };
-    PostApiUtil.updatePost(submissionPost);
+    PostApiUtil.updatePost(post);
   }
 };
 

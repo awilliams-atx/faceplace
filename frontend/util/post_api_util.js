@@ -63,8 +63,10 @@ var PostApiUtil = {
     $.ajax({
       url: '/api/posts/' + post.id,
       method: 'PUT',
+      contentType: false,
       dataType: 'json',
-      data: {post: post},
+      data: post,
+      processData: false,
       success: function (post) {
         ServerActions.receiveUpdatedPost(post);
       }
