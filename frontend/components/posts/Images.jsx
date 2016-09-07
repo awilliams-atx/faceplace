@@ -8,8 +8,9 @@ function Images(images, remove) {
 
 function renderImage(image, remove, idx) {
   return (
-    <div className='upload-image' key={idx}>
+    <div className='upload-image-container' key={idx}>
       <img src={URL.createObjectURL(image)} />
+      <div className='tinter' />
     </div>
   );
 }

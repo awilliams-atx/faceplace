@@ -68,14 +68,19 @@
   }
   .upload-images {
     margin-bottom: 10px;
-    .upload-image {
+    .upload-image-container {
+      height: 100px;
       position: relative;
+      width: 100px;
       img {
         @include squareObjectFit(100px);
         margin-left: 5px;
       }
       .tinter {
-        left: 5px;
+        @include tinter(100px, 5px);
+      }
+      .tinter:hover {
+        animation: tint 0.2s ease forwards;
       }
     }
   }
