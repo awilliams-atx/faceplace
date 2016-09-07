@@ -20,7 +20,7 @@ Accepting a friend request gives immediate feeback. The request is moved from a 
 
 #### Posts
 
-Posting allows a user to upload content for public consumption. Right now, only text is supported, but images will be added soon.
+Posting allows a user to upload content for public consumption. Both text and images are supported for the post body.
 
 Submitting a post while visiting a friend's timeline causes the post to be available on the timeline of the author and the visited friend and displays the visited friend's name at the top of the post. A visited friend receives an instant notification of the post via websockets.
 
@@ -58,7 +58,7 @@ Clicking on a notification navigates to the timeline of either the timeline that
 
 In order to send out notifications via websockets, each post adds rows into a `watchings` join table connecting users to the post. By default, the post author, all tagged friends, and the owner of the timeline where the post was submitted are included. Commenting on a post makes the commenter a `watcher`.
 
-**In the future** I would like to implement *unwatching* a post in order to stop receiving notifications.
+**In the future** users will be able to *unwatch* a post in order to stop receiving notifications.
 
 #### Infinite Scroll
 
@@ -80,19 +80,23 @@ The Intro (visible from a user's timeline) stores basic personal information inp
 
 I am  excited to continue working on this project's development. Some craved features include...
 
-#### Photos / Photo albums
-
-In the future, users will be able to upload a photo instead of or along with a body of text in a post. Photo URLs will all be stored in a photos table and a join table `photo_albums` will store data relating photos to their owners and their containing albums. The photos themselves will be stored in AWS S3 buckets to ensure scalability.
-
 #### Reactions
 
-In the future, users will be able to record their reactions via simple icons including the classic "like" thumbs-up, "love", "anry", "sad", "wow", and "laugh".
+In the future, users will be able to record their reactions via simple icons including the classic "like" thumbs-up, "love", "angry", "sad", "wow", and "laugh".
 
 #### Private messages
 
 In the future, users will be able to share private messages. The messages table will allow for both text and image content.
 
 **Bonus**: Multi-user chatrooms.
+
+#### Photo albums
+
+In the future, a table `albums` will act as a join table between users and collections of uploaded images.
+
+#### Photo comments
+
+In the future, users will be able to record their comments on individual photos. Comments are already set up as polymorphic, so these comments will reside in the same `comments` table as post comments.
 
 #### Unwatching a post
 
