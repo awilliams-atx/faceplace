@@ -69,9 +69,13 @@
   .upload-images {
     margin-bottom: 10px;
     .upload-image {
+      position: relative;
       img {
         @include squareObjectFit(100px);
         margin-left: 5px;
+      }
+      .tinter {
+        left: 5px;
       }
     }
   }
