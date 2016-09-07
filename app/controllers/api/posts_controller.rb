@@ -70,7 +70,7 @@ class Api::PostsController < ApplicationController
 
   def update_taggings
     # empty array comes up as nil
-    @post.taggings = post_params[:tagged_ids].to_a.map do |user_id|
+    @post.taggings = post_params[:tagged_ids].split(',').to_a.map do |user_id|
       Tagging.new(tagged_id: user_id)
     end
   end
