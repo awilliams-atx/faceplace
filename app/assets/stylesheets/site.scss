@@ -23,3 +23,20 @@ html {
   margin: 0 0 20px 0;
   padding: 10px;
 }
+@mixin tinter {
+  background-color: rgba(#000000, 0.3);
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  transition: background-color .2s ease;
+  width: 100%
+}
+.tinter-before:hover::before {
+  @include tinter;
+}
+.tinter-after:hover::after {
+  @include tinter;
+}

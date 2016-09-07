@@ -9,9 +9,8 @@ var FriendIndexItem = React.createClass({
     return (
       <a href={'/users/' + this.props.friend.user_id}
         onClick={this.pushUserRoute}
-        className='friend-thumb'>
-        <img src={this.props.friend.profile_pic_url}/>
-        <div className='tinter' />
+        className='friend-thumb tinter-after'>
+        <img src={this.props.friend.profile_pic_url} />
         <div className='friend-thumb-name'>
           {this.props.friend.fullName}
         </div>

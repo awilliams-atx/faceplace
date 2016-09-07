@@ -21,15 +21,11 @@ section.profile-friends-container {
 .friend-thumb {
   display: block;
   float: left;
+  height: 100px;
+  margin-bottom: 5px;
   position: relative;
   img {
     @include squareObjectFit(100px);
-  }
-  .tinter {
-    @include tinter(100px);
-  }
-  .tinter:hover {
-    animation: tint 0.2s ease forwards;
   }
 }
 .friend-thumb:hover {
