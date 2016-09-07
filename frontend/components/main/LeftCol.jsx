@@ -39,7 +39,7 @@ var LeftCol = React.createClass({
     );
   },
   devPic: function () {
-    return 'http://s3.amazonaws.com/faceplace-dev/users/profile_pics/000/000/783/original/andrew_williams_profile_pic.jpg?1473038182';
+    return 'https://s3.amazonaws.com/faceplace-dev/headshot.jpg';
   },
   pushUserRoute: function (e) {
     e.preventDefault();
