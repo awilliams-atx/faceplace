@@ -159,10 +159,7 @@ var PostForm = React.createClass({
       post.set(('image' + idx), img);
     });
     post.set('post[body]', this.state.body);
-    post.set('post[tagged_ids]',
-      TagStore.taggedFriends().map(function (friend) {
-      return friend.userId;
-    }));
+    post.set('post[tagged_ids]', TagStore.uids());
     if (this.props.isEditing) {
       document.removeEventListener('click', this.taggingClickout);
       post.set('id', this.props.post.postId);

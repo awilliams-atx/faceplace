@@ -119,6 +119,10 @@ TagStore.taggedFriends = function () {
   return _taggedFriends.slice();
 };
 
+TagStore.uids = function () {
+  return _taggedFriends.map(function (user) { return user.userId } );
+};
+
 TagStore.unfreezeTags = function () {
   _taggedFriends = _extraTaggedFriends.slice();
   _extraTaggedFriends = [];
