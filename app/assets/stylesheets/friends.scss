@@ -19,12 +19,18 @@ section.profile-friends-container {
   width: 318px;
 }
 .friend-thumb {
+  display: block;
+  float: left;
+  position: relative;
   img {
     @include squareObjectFit(100px);
   }
-  display: block;
-  position: relative;
-  float: left;
+  .tinter {
+    @include tinter(100px);
+  }
+  .tinter:hover {
+    animation: tint 0.2s ease forwards;
+  }
 }
 .friend-thumb:hover {
   text-decoration: underline;
