@@ -69,7 +69,10 @@
   .upload-images {
     margin-bottom: 10px;
     .upload-image-container {
+      float: left;
       height: 100px;
+      margin-bottom: 5px;
+      margin-right: 5px;
       position: relative;
       width: 100px;
       img {
