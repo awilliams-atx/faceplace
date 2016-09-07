@@ -129,6 +129,15 @@ var PostForm = React.createClass({
   formTypeClass: function () {
     return this.props.isModalElement ? 'modal-element' : 'subcontent-container';
   },
+  makeFormData: function () {
+    var data = new FormData();
+    this.state.images.forEach(function (img, idx) {
+      data.set(('image' + idx), img);
+    });
+    data.set('post[body]', this.state.body);
+    data.set('post[tagged_ids]', TagStore.uids());
+    return data;
+  },
   onBodyChange: function (e) {
     this.setState({ body: e.target.value }, this.autogrow);
   },
@@ -154,27 +163,22 @@ var PostForm = React.createClass({
   onSubmit: function (e) {
     e.preventDefault();
     if (this.state.body.length < 1) { return; }
-    var post = new FormData();
-    this.state.images.forEach(function (img, idx) {
-      post.set(('image' + idx), img);
-    });
-    post.set('post[body]', this.state.body);
-    post.set('post[tagged_ids]', TagStore.uids());
+    var data = this.makeFormData();
     if (this.props.isEditing) {
       document.removeEventListener('click', this.taggingClickout);
-      post.set('id', this.props.post.postId);
+      data.set('id', this.props.post.postId);
       document.body.className = '';
       ClientActions.cancelModal();
-      ClientActions.updatePost(post);
+      ClientActions.updatePost(data);
       this.props.modalCallback();
     } else {
       if (this.props.profileOwnerId &&
         !SessionStore.isCurrentUser(this.props.profileOwnerId)) {
-        post.set('profile_owner_id', this.props.profileOwnerId);
+        data.set('profile_owner_id', this.props.profileOwnerId);
       }
       this.setState({ body: '', images: [] }, function () {
         if (this.state.tagging) { this.toggleTag() }
-        ClientActions.submitPost(post);
+        ClientActions.submitPost(data);
         this.autogrow();
       }.bind(this));
     }
