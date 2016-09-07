@@ -50,9 +50,10 @@ var PostApiUtil = {
     $.ajax({
       url: '/api/posts',
       method: 'POST',
-      contentType: 'application/json', // to preserve empty array
+      contentType: false,
       dataType: 'json',
-      data: JSON.stringify({post: post}), // actually converts to nil
+      data: post,
+      processData: false,
       success: function (post) {
         ServerActions.receiveOwnPost(post);
       }

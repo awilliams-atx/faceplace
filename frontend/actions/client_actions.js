@@ -116,12 +116,7 @@ var ClientActions = {
     CommentApiUtil.submitComment(comment);
   },
   submitPost: function (post) {
-    var submissionPost = {
-      body: post.body,
-      profile_owner_id: post.profileOwnerId,
-      tagged_ids: post.taggedFriendIds
-    };
-    PostApiUtil.submitPost(submissionPost);
+    PostApiUtil.submitPost(post);
   },
   submitProfile: function (changes) {
     UserApiUtil.submitProfile(changes);
