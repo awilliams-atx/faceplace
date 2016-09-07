@@ -10,6 +10,10 @@ json.taggedFriends do
   json.array! post.tagged_friends, partial: 'api/tags/tagged', as: :tagged
 end
 
+json.images do
+  json.array! post.images, partial: 'api/images/image', as: :image
+end
+
 if post.profile_owner
   json.profileOwner do
     json.userId post.profile_owner.id
