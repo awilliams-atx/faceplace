@@ -131,8 +131,8 @@ var PostForm = React.createClass({
   },
   makeFormData: function () {
     var data = new FormData();
-    this.state.images.forEach(function (img, idx) {
-      data.set(('image' + idx), img);
+    this.state.images.forEach(function (img) {
+      data.append(('post[uploaded_images][]'), img);
     });
     data.set('post[body]', this.state.body);
     data.set('post[tagged_ids]', TagStore.uids());

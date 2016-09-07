@@ -1,9 +1,9 @@
 class Post < ActiveRecord::Base
-  attr_accessor :tagged_ids, :profile_owner_id
+  attr_accessor :profile_owner_id, :tagged_ids, :uploaded_images
 
   validates :author_id, presence: true
 
-  after_create :add_watching, :create_taggings, :create_timeline_posting
+  after_create :add_watching, :create_images, :create_taggings, :create_timeline_posting
   after_destroy :destroy_notifications
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
@@ -27,6 +27,12 @@ class Post < ActiveRecord::Base
   def add_watching
     Watching.create!(watchable_type: 'Post', watchable_id: id, watcher_id:
       author_id)
+  end
+
+  def create_images
+    uploaded_images.each do |img|
+      Image.create!(image: img, imageable_id: id, imageable_type: 'Post')
+    end
   end
 
   def create_taggings

@@ -1,6 +1,6 @@
 class Api::PostsController < ApplicationController
   before_action :require_login
-  after_action :push_notifications, :save_images, only: :create
+  after_action :push_notifications, only: :create
 
   def index
     if params[:user_id]
@@ -56,16 +56,7 @@ class Api::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:id, :body, :profile_owner_id,
-      :tagged_ids)
-  end
-
-  def save_images
-    idx = 0
-    while params["image#{idx}".to_sym]
-      Image.create!(image: params["image#{idx}".to_sym], imageable_type: 'Post', imageable_id: @post.id)
-      idx += 1
-    end
+    params.require(:post).permit(:id, :body, :profile_owner_id, :tagged_ids, :uploaded_images => [])
   end
 
   def update_taggings
