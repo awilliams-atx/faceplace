@@ -30,6 +30,7 @@ class Post < ActiveRecord::Base
   end
 
   def create_images
+    return unless uploaded_images
     uploaded_images.each do |img|
       Image.create!(image: img, imageable_id: id, imageable_type: 'Post')
     end
