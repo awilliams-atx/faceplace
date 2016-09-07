@@ -1,7 +1,7 @@
 var React = require('react'),
     UI = require('../../util/ui'),
     Util = require('../../util/general'),
-    ImageList = require('./ImageList'),
+    ImageListShow = require('./ImageListShow'),
     Options = require('./Options'),
     ProfileOwner = require('./ProfileOwner'),
     TaggedFriends = require('./TaggedFriends'),
@@ -52,7 +52,7 @@ var PostIndexItem = React.createClass({
             {this.props.post.body}
           </section>
           <section className='post-images'>
-            {ImageList(this.props.post.images)}
+            {ImageListShow(this.props.post.images)}
           </section>
           {TaggedFriends(this.props.post.taggedFriends, this.pushUserRoute)}
         </div>

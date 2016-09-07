@@ -1,7 +1,7 @@
 var React = require('react'),
     UI = require('../../util/ui'),
     Util = require('../../util/general'),
-    Images = require('./Images'),
+    ImageListEdit = require('./ImageListEdit'),
     TaggedBoxes = require('./TaggedBoxes'),
     TagSearch = require('./TagSearch'),
     ClientActions = require('../../actions/client_actions'),
@@ -99,7 +99,7 @@ var PostForm = React.createClass({
     if (this.state.images.length > 0) {
       return (
         <aside className='upload-images'>
-          {Images(this.state.images, this.onRemoveImage)}
+          {ImageListEdit(this.state.images, this.onRemoveImage)}
         </aside>
       );
     }
