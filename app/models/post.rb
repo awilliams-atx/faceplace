@@ -31,7 +31,7 @@ class Post < ActiveRecord::Base
 
   def create_taggings
     return unless tagged_ids
-    tagged_ids.each do |uid|
+    tagged_ids.split(',').each do |uid|
       Tagging.create!(tagged_id: uid, post_id: id)
     end
   end
