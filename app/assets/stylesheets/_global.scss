@@ -4,6 +4,10 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+@keyframes tint {
+  from { opacity: 0; }
+  to { opacity: 0.3 }
+}
 
 // COLORS
 
@@ -58,14 +62,12 @@ $navDropItemInnerHeight: 48px;
   border-radius: 3px;
   margin-bottom: 20px;
 }
-
 .overlay {
   position: absolute;
   background-color: white;
   box-shadow: 0 4px 6px 2px rgba(0, 0, 0, .10);
   z-index: 1000;
 }
-
 .subcontent-container {
   background-color: white;
   display: block;
@@ -73,6 +75,17 @@ $navDropItemInnerHeight: 48px;
   border-radius: 3px;
   margin: 0 0 20px 0;
   padding: 10px;
+}
+.tinter {
+  background-color: black;
+  height: 100px;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100px;
+}
+.tinter:hover {
+  animation: tint 0.2s ease forwards;
 }
 
 // TYPE

@@ -48,20 +48,3 @@ section.profile-friends-container {
   position: absolute;
   z-index: 1000;
 }
-.friend-thumb-tinter {
-  background-color: black;
-  height: 100px;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  width: 100px;
-}
-
-.friend-thumb-tinter:hover {
-  animation: tint 0.2s ease forwards;
-}
-
-@keyframes tint {
-  from { opacity: 0; }
-  to { opacity: 0.3 }
-}
