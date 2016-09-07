@@ -99,7 +99,7 @@ var PostForm = React.createClass({
     if (this.state.images.length > 0) {
       return (
         <aside className='upload-images'>
-          {Images(this.state.images, this.removeImage)}
+          {Images(this.state.images, this.onRemoveImage)}
         </aside>
       );
     }
@@ -145,6 +145,11 @@ var PostForm = React.createClass({
       this.setState({ images: images });
     }.bind(this);
     if (imageFile) { fileReader.readAsDataURL(imageFile) }
+  },
+  onRemoveImage: function (e) {
+    var images = this.state.images.slice();
+    images.splice(e.target.dataset.idx, 1);
+    this.setState({ images: images });
   },
   onSubmit: function (e) {
     e.preventDefault();
@@ -193,9 +198,6 @@ var PostForm = React.createClass({
     } else {
       return 'post-form-section';
     }
-  },
-  removeImage: function () {
-
   },
   style: function () {
     return {
