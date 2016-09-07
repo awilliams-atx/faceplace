@@ -154,14 +154,18 @@ var PostForm = React.createClass({
   onSubmit: function (e) {
     e.preventDefault();
     if (this.state.body.length < 1) { return; }
-    var post = {
-      body: this.state.body,
-      taggedFriendIds: TagStore.taggedFriends().map(function (friend) {
-        return friend.userId })
-    };
+    var post = new FormData();
+    this.state.images.forEach(function (img, idx) {
+      post.set(('image' + idx), img);
+    });
+    post.set('post[body]', this.state.body);
+    post.set('post[tagged_ids]',
+      TagStore.taggedFriends().map(function (friend) {
+      return friend.userId;
+    }));
     if (this.props.isEditing) {
       document.removeEventListener('click', this.taggingClickout);
-      post.id = this.props.post.postId;
+      post.set('id', this.props.post.postId);
       document.body.className = '';
       ClientActions.cancelModal();
       ClientActions.updatePost(post);
@@ -169,9 +173,9 @@ var PostForm = React.createClass({
     } else {
       if (this.props.profileOwnerId &&
         !SessionStore.isCurrentUser(this.props.profileOwnerId)) {
-        post.profileOwnerId = this.props.profileOwnerId;
+        post.set('profile_owner_id', this.props.profileOwnerId);
       }
-      this.setState({ body: '' }, function () {
+      this.setState({ body: '', images: [] }, function () {
         if (this.state.tagging) { this.toggleTag() }
         ClientActions.submitPost(post);
         this.autogrow();
