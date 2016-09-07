@@ -58,7 +58,7 @@ Clicking on a notification navigates to the timeline of either the timeline that
 
 In order to send out notifications via websockets, each post adds rows into a `watchings` join table connecting users to the post. By default, the post author, all tagged friends, and the owner of the timeline where the post was submitted are included. Commenting on a post makes the commenter a `watcher`.
 
-**In the future** I would like to implement *unwatching* a post in order to stop receiving notifications.
+**In the future** users will be able to *unwatch* a post in order to stop receiving notifications.
 
 #### Infinite Scroll
 
@@ -86,7 +86,7 @@ In the future, users will be able to upload a photo instead of or along with a b
 
 #### Reactions
 
-In the future, users will be able to record their reactions via simple icons including the classic "like" thumbs-up, "love", "anry", "sad", "wow", and "laugh".
+In the future, users will be able to record their reactions via simple icons including the classic "like" thumbs-up, "love", "angry", "sad", "wow", and "laugh".
 
 #### Private messages
 
