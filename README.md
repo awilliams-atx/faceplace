@@ -4,7 +4,7 @@
 
 [Live][live]
 
-faceplace is a full-stack web application inspired by Facebook. Major technologies include Ruby on Rails, PostgreSQL, and React.js, and Flux.
+Faceplace is a full-stack web application inspired by Facebook. Major technologies include Ruby on Rails, PostgreSQL, React.js, and Flux.
 
 ## Features & Implementation
 
