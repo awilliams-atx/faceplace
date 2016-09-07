@@ -45,6 +45,14 @@
     padding: 14px 12px 3px;
     word-wrap: break-word;
   }
+  .post-images {
+    width: 100%;
+    img {
+      border: 1px solid rgba(#000, 0.1);
+      margin: 0 0 3px 12px;
+      max-width: calc(100% - 26px);
+    }
+  }
   .post-tagged-friends {
     color: #888888;
     padding: 5px 12px 3px;
