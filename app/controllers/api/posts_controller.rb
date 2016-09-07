@@ -22,8 +22,9 @@ class Api::PostsController < ApplicationController
 
   def update
     @post = Post.find(post_params[:id])
+    @post.add_tags = post_params[:add_tags]
+    @post.remove_tags = post_params[:remove_tags]
     @post.update(body: post_params[:body])
-    update_taggings
     render 'api/posts/show'
   end
 
@@ -56,13 +57,6 @@ class Api::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:id, :body, :profile_owner_id, :tagged_ids, :uploaded_images => [])
-  end
-
-  def update_taggings
-    # empty array comes up as nil
-    @post.taggings = post_params[:tagged_ids].split(',').to_a.map do |user_id|
-      Tagging.new(tagged_id: user_id)
-    end
+    params.require(:post).permit(:add_tags, :id, :body, :profile_owner_id, :remove_tags, :tagged_ids, :uploaded_images => [])
   end
 end

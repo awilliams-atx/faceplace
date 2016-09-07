@@ -1,9 +1,10 @@
 class Post < ActiveRecord::Base
-  attr_accessor :profile_owner_id, :tagged_ids, :uploaded_images
+  attr_accessor :profile_owner_id, :tagged_ids, :uploaded_images, :add_tags, :remove_tags
 
   validates :author_id, presence: true
 
   after_create :add_watching, :create_images, :create_taggings, :create_timeline_posting
+  after_update :update_tags
   after_destroy :destroy_notifications
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
@@ -50,5 +51,15 @@ class Post < ActiveRecord::Base
 
   def destroy_notifications
     Notification.where(post_id: id).destroy_all
+  end
+
+  def update_tags
+    add_tags.split(',').each do |tagged_id|
+      Tagging.create!(post_id: id, tagged_id: tagged_id)
+    end
+    remove_tags.split(',').each do |tagged_id|
+      tagging = Tagging.find_by(tagged_id: tagged_id, post_id: id)
+      tagging.destroy if tagging
+    end
   end
 end

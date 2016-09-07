@@ -3,12 +3,12 @@ var Store = require('flux/utils').Store,
     postConstants = require('../constants/post_constants'),
     tagConstants = require('../constants/tag_constants');
 
-var _friends = [],
-    _friendsFetched = false,
+var _friendsFetched = false,
     _isEditingPost = false,
     _taggedFriends = [],
     _untaggedFriends = [],
-    _extraTaggedFriends = [];
+    _extraTaggedFriends = [],
+    _originalTags = []; // for running tags diff on post update
 
 var TagStore = new Store(AppDispatcher);
 
@@ -73,6 +73,18 @@ TagStore.isEditingPost = function () {
   return !!_isEditingPost;
 };
 
+TagStore.filterForEdit = function () {
+  var update = { add: [], remove: [] };
+  var uids = TagStore.uids();
+  uids.forEach(function (uid) {
+    if (_originalTags.indexOf(uid) < 0) { update.add.push(uid) }
+  });
+  _originalTags.forEach(function (uid) {
+    if (uids.indexOf(uid) < 0) { update.remove.push(uid) }
+  });
+  return update;
+};
+
 TagStore.freezeTags = function () {
   _extraTaggedFriends = _taggedFriends.slice();
   _taggedFriends = [];
@@ -108,6 +120,9 @@ TagStore.setTaggedFriends = function (friends) {
   friends.forEach(function (friend) {
     _taggedFriends.push(friend);
   });
+  _originalTags = _taggedFriends.map(function (user) {
+    return user.userId
+  });
 };
 
 TagStore.tagFriend = function (userId) {
@@ -119,8 +134,13 @@ TagStore.taggedFriends = function () {
   return _taggedFriends.slice();
 };
 
-TagStore.uids = function () {
-  return _taggedFriends.map(function (user) { return user.userId } );
+// returns editingBool ? { add: [*], remove: [*] } : [*]
+TagStore.uids = function (editingBool) {
+  if (editingBool) {
+    return TagStore.filterForEdit();
+  } else {
+    return _taggedFriends.map(function (user) { return user.userId } );
+  }
 };
 
 TagStore.unfreezeTags = function () {

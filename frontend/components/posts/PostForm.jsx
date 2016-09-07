@@ -135,7 +135,13 @@ var PostForm = React.createClass({
       data.append(('post[uploaded_images][]'), img);
     });
     data.set('post[body]', this.state.body);
-    data.set('post[tagged_ids]', TagStore.uids());
+    var uids = TagStore.uids(this.props.isEditing);
+    if (this.props.isEditing) {
+      data.set('post[remove_tags]', uids.remove);
+      data.set('post[add_tags]', uids.add);
+    } else {
+      data.set('post[tagged_ids]', TagStore.uids(this.props.isEditing));
+    }
     return data;
   },
   onBodyChange: function (e) {
