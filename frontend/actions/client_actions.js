@@ -87,7 +87,7 @@ var ClientActions = {
   },
   finishEditingPost: function () {
     Dispatcher.dispatch({
-      actionType: postConstants.START_EDITING_POST
+      actionType: postConstants.FINISH_EDITING_POST
     });
   },
   makeFriendRequest: function (userId) {
@@ -112,9 +112,10 @@ var ClientActions = {
   rejectFriendRequest: function (rejection) {
     FriendRequestApiUtil.rejectFriendRequest(rejection);
   },
-  startEditingPost: function () {
+  startEditingPost: function (images) {
     Dispatcher.dispatch({
-      actionType: postConstants.FINISH_EDITING_POST
+      actionType: postConstants.START_EDITING_POST,
+      images: images
     });
   },
   submitComment: function (comment) {
