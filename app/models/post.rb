@@ -1,10 +1,10 @@
 class Post < ActiveRecord::Base
-  attr_accessor :profile_owner_id, :tagged_ids, :uploaded_images, :add_tags, :remove_tags
+  attr_accessor :profile_owner_id, :tagged_ids, :uploaded_images, :add_tags, :remove_tags, :add_images, :remove_images
 
   validates :author_id, presence: true
 
   after_create :add_watching, :create_images, :create_taggings, :create_timeline_posting
-  after_update :update_tags
+  after_update :update_tags, :update_images
   after_destroy :destroy_notifications
 
   belongs_to :author, class_name: 'User', foreign_key: :author_id
@@ -51,6 +51,16 @@ class Post < ActiveRecord::Base
 
   def destroy_notifications
     Notification.where(post_id: id).destroy_all
+  end
+
+  def update_images
+    add_images.to_a.each do |img|
+      Image.create!(image: img, imageable_id: id, imageable_type: 'Post')
+    end
+    remove_images.split(',').each do |id|
+      image = Image.find_by(id: id)
+      image.destroy if image
+    end
   end
 
   def update_tags

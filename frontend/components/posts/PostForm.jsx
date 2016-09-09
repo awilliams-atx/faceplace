@@ -137,16 +137,21 @@ var PostForm = React.createClass({
   },
   makeFormData: function () {
     var data = new FormData();
-    this.state.images.forEach(function (img) {
-      data.append(('post[uploaded_images][]'), img);
-    });
     data.set('post[body]', this.state.body);
     var uids = TagStore.uids(this.props.isEditing);
+    var images = ImageStore.filterForEdit(this.state.images);
     if (this.props.isEditing) {
       data.set('post[remove_tags]', uids.remove);
       data.set('post[add_tags]', uids.add);
+      images.add.forEach(function (image) {
+        data.append(('post[add_images][]'), image);
+      });
+      data.set('post[remove_images]', images.remove);
     } else {
       data.set('post[tagged_ids]', TagStore.uids(this.props.isEditing));
+      images.add.forEach(function (image) {
+        data.append(('post[uploaded_images][]'), image);
+      });
     }
     return data;
   },

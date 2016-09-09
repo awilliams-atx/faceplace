@@ -24,6 +24,8 @@ class Api::PostsController < ApplicationController
     @post = Post.find(post_params[:id])
     @post.add_tags = post_params[:add_tags]
     @post.remove_tags = post_params[:remove_tags]
+    @post.add_images = post_params[:add_images]
+    @post.remove_images = post_params[:remove_images]
     @post.update(body: post_params[:body])
     render 'api/posts/show'
   end
@@ -57,6 +59,6 @@ class Api::PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:add_tags, :id, :body, :profile_owner_id, :remove_tags, :tagged_ids, :uploaded_images => [])
+    params.require(:post).permit(:add_tags, :id, :body, :profile_owner_id, :remove_images, :remove_tags, :tagged_ids, :add_images => [], :uploaded_images => [])
   end
 end
