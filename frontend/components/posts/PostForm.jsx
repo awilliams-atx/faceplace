@@ -90,7 +90,9 @@ var PostForm = React.createClass({
       return (
         <div className='post-footer-right-buttons'>
           <button className='button-blue-wide'
-            onClick={this.onSubmit}>Post</button>
+            onClick={this.onSubmit}>
+            Post
+          </button>
         </div>
       );
     }
@@ -107,7 +109,10 @@ var PostForm = React.createClass({
   componentDidMount: function () {
     this.tagListener = TagStore.addListener(this.onTagStoreChange);
     if (this.props.post) {
-      this.setState({ body: this.props.post.body }, function () {
+      this.setState({
+        body: this.props.post.body,
+        images: this.props.post.images
+      }, function () {
         ClientActions.fetchTaggedFriends(this.props.post.postId);
         this.refs.autoFocus.focus();
         this.autogrow();
