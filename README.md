@@ -16,7 +16,7 @@ Faceplace is a single-page app. The effect of navigating to separate pages is ac
 
 Friendships are stored in a 'friendships' join table in a PostgreSQL database. Friend requests are persisted to a similar table called 'friend_requests'. Friend requests that have been accepted remain in the database, denoting the age of the friendship. Rejected friend requests are removed.
 
-Accepting a friend request gives immediate feeback. The request is moved from a 'Friend Requests' section to an 'Accepted Requests' section. Post and Comment forms appear on the new friend's timeline and below posts involving the new friend.
+Accepting a friend request gives immediate feedback. The request is moved from a 'Friend Requests' section to an 'Accepted Requests' section. Post and Comment forms appear on the new friend's timeline and below posts involving the new friend.
 
 #### Posts
 
