@@ -104,7 +104,7 @@ var Options = React.createClass({
   edit: function () {
     UI.set('editingPost', true);
     document.body.setAttribute('class', 'no-scroll-body');
-    ClientActions.startEditingPost();
+    ClientActions.startEditingPost(this.props.post.images);
     this.setState({ selectingOptions: false, editing: true }, function () {
       ClientActions.triggerModal(this.editModal);
       this.toggleOptions();

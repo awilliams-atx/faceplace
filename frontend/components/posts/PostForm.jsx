@@ -7,6 +7,7 @@ var React = require('react'),
     ClientActions = require('../../actions/client_actions'),
     FriendApiUtil = require('../../util/friend_api_util'),
     TagApiUtil = require('../../util/tag_api_util'),
+    ImageStore = require('../../stores/image'),
     SessionStore = require('../../stores/session'),
     TagStore = require('../../stores/tag'),
     UserStore = require('../../stores/user');
