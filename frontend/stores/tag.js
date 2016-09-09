@@ -14,9 +14,9 @@ var TagStore = new Store(AppDispatcher);
 
 TagStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case tagConstants.FREEZE_TAGS:
-      _isEditingPost = true;
-      this.freezeTags();
+    case postConstants.FINISH_EDITING_POST:
+      _isEditingPost = false;
+      this.unfreezeTags();
       break;
     case tagConstants.FRIENDS_RECEIVED_FOR_TAGGING:
       this.setFriends(payload.friends);
@@ -35,6 +35,10 @@ TagStore.__onDispatch = function (payload) {
       this.resetFriends();
       TagStore.__emitChange();
       break;
+    case postConstants.START_EDITING_POST:
+      _isEditingPost = true;
+      this.freezeTags();
+      break;
     case postConstants.TAGGED_FRIENDS_RECEIVED:
       this.setTaggedFriends(payload.friends);
       TagStore.__emitChange();
@@ -43,10 +47,6 @@ TagStore.__onDispatch = function (payload) {
       this.setFriends(payload.searchResults);
       _friendsFetched = true;
       TagStore.__emitChange();
-      break;
-    case tagConstants.UNFREEZE_TAGS:
-      _isEditingPost = false;
-      this.unfreezeTags();
       break;
   }
 };

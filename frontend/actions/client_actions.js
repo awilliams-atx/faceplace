@@ -85,9 +85,9 @@ var ClientActions = {
   fetchUser: function (id) {
     UserApiUtil.fetchUser(id);
   },
-  freezeTags: function () {
+  finishEditingPost: function () {
     Dispatcher.dispatch({
-      actionType: tagConstants.FREEZE_TAGS
+      actionType: postConstants.START_EDITING_POST
     });
   },
   makeFriendRequest: function (userId) {
@@ -112,6 +112,11 @@ var ClientActions = {
   rejectFriendRequest: function (rejection) {
     FriendRequestApiUtil.rejectFriendRequest(rejection);
   },
+  startEditingPost: function () {
+    Dispatcher.dispatch({
+      actionType: postConstants.FINISH_EDITING_POST
+    });
+  },
   submitComment: function (comment) {
     CommentApiUtil.submitComment(comment);
   },
@@ -125,11 +130,6 @@ var ClientActions = {
     Dispatcher.dispatch({
       actionType: modalConstants.MODAL_TRIGGERED,
       modalContent: modalContent
-    });
-  },
-  unfreezeTags: function () {
-    Dispatcher.dispatch({
-      actionType: tagConstants.UNFREEZE_TAGS
     });
   },
   unfriend: function (userId) {
