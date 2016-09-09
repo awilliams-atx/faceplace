@@ -14,6 +14,23 @@ ImageStore.__onDispatch = function (payload) {
   }
 };
 
+ImageStore.filterForEdit = function (images) {
+  var add = images.filter(function (image) {
+    return image instanceof File;
+  });
+  var remove = [];
+  _originalIds.forEach(function (id) {
+    var removed = true;
+    for (var i = 0; i < images.length; i++) {
+      if (!(images[i] instanceof File) && images[i].id === id) {
+        removed = false;
+      }
+    }
+    if (removed) { remove.push(id) }
+  });
+  return { add: add, remove: remove };
+};
+
 ImageStore.setOriginalIds = function (images) {
   _originalIds = images.map(function (image) {
     return image.id;
