@@ -2,8 +2,6 @@
 
 ![Sample profile][profile_img]
 
-[Live][live]
-
 Faceplace is a full-stack web application inspired by Facebook. Major technologies include Ruby on Rails, PostgreSQL, React.js, and Flux.
 
 ## Features & Implementation
@@ -133,7 +131,6 @@ Users make typing and spelling mistakes all the time. This shouldn't prevent the
 [fa]: http://fontawesome.io/ "Font Awesome"
 [flux]: https://github.com/facebook/flux "Flux"
 [jquery]: https://jquery.com/ "jQuery"
-[live]: http://www.faceplace.io "Live"
 [moment]: http://momentjs.com/ "Moment JS"
 [paperclip]: https://github.com/thoughtbot/paperclip "Paperclip"
 [pgsearch]: https://github.com/Casecommons/pg_search "PG Search"
