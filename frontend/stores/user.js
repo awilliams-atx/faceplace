@@ -5,6 +5,7 @@ var Store = require('flux/utils').Store,
     userConstants = require('../constants/user_constants');
 
 var _user = {};
+var _userFetched = false;
 
 var UserStore = new Store(AppDispatcher);
 

@@ -1,4 +1,4 @@
-var ServerActions = require('../actions/server_actions')
+var ServerActions = require('../actions/server_actions'),
     SocketActions = require('../actions/socket_actions');
 
 var CommentApiUtil = {

@@ -14,7 +14,7 @@ ErrorStore.__onDispatch = function (payload) {
       if (payload.errorType === 'login') {
         _lastAction = 'LOGIN_ERRORS_RECEIVED';
         container = _loginErrors;
-      } else if (payload.errorType = 'signUp') {
+      } else if (payload.errorType === 'signUp') {
         _lastAction = 'SIGN_UP_ERRORS_RECEIVED';
         container = _signUpErrors;
       }

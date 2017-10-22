@@ -7,8 +7,8 @@ var Store = require('flux/utils').Store,
 
 var FriendRequestStore = new Store(AppDispatcher);
 
-_accepted = [];
-_pending = [];
+var _accepted = [];
+var _pending = [];
 
 FriendRequestStore.__onDispatch = function (payload) {
   switch (payload.actionType) {

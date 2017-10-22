@@ -1,4 +1,4 @@
-var React = require('react')
+var React = require('react'),
     UserApiUtil = require('../../util/user_api_util');
 
 var EditPhotoButton = React.createClass({

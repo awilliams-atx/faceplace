@@ -6,9 +6,9 @@ var Store = require('flux/utils').Store,
 
 var NotificationStore = new Store(AppDispatcher);
 
-_justCheckedIds = [];
-_notifications = [];
-_nomore = false;
+var _justCheckedIds = [];
+var _notifications = [];
+var _nomore = false;
 
 NotificationStore.__onDispatch = function (payload) {
   switch (payload.actionType) {

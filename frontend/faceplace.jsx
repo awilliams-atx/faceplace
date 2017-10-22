@@ -6,7 +6,7 @@ var Router = ReactRouter.Router,
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
     browserHistory = ReactRouter.browserHistory,
-    Redirect = ReactRouter.Redirect
+    Redirect = ReactRouter.Redirect,
 
     LogInForm = require('./components/LogInForm'),
     Main = require('./components/Main'),

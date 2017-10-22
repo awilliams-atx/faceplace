@@ -1,6 +1,6 @@
 var React = require('react'),
     ClientActions = require('../../../../actions/client_actions'),
-    SessionStoe = require('../../../../stores/session'),
+    SessionStore = require('../../../../stores/session'),
     UserStore = require('../../../../stores/user');
 
 var PolyIntroItem = React.createClass({

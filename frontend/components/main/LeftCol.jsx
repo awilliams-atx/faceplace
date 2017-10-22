@@ -1,4 +1,5 @@
 var React = require('react'),
+    SessionStore = require('../../stores/session'),
     Util = require('../../util/general');
 
 var LeftCol = React.createClass({

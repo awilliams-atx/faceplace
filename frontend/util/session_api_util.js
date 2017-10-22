@@ -2,7 +2,7 @@ var ErrorActions = require('../actions/error_actions'),
     ErrorStore = require('../stores/error'),
     ServerActions = require('../actions/server_actions');
 
-SessionApiUtil = {
+var SessionApiUtil = {
   login: function (credentials, cb) {
     $.ajax({
       url: '/api/session',
