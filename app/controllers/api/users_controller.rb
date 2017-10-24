@@ -18,6 +18,7 @@ class Api::UsersController < ApplicationController
   end
 
   def create
+    @developer = User.find_by(first_name: 'Andrew', last_name: 'Williams')
     @user = User.new(user_params)
     if @user.save
       log_in(@user)

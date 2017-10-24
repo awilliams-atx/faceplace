@@ -47,6 +47,7 @@ ErrorStore.clearErrors = function (container) {
 };
 
 ErrorStore.clearSignUpError = function (errorType) {
+    debugger
   if (!_signUpErrors[errorType]) { return false; }
   delete _signUpErrors[errorType];
   ErrorStore.__emitChange();
@@ -77,7 +78,11 @@ ErrorStore.lastAction = function (lastAction) {
 };
 
 ErrorStore.setErrors = function (errors, container) {
-  this.clearErrors(container);
+    debugger
+  Object.keys(container).forEach(key => {
+    delete container[key]
+  })
+
   Object.keys(errors).forEach(function (key) {
     if (errors[key] instanceof Array) {
       container[key] = errors[key][0];

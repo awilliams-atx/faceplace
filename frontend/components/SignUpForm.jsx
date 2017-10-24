@@ -1,5 +1,6 @@
 var React = require('react'),
     ErrorStore = require('../stores/error'),
+    SessionStore = require('../stores/session'),
     ErrorActions = require('../actions/error_actions'),
     UserApiUtil = require('../util/user_api_util');
 
@@ -8,13 +9,13 @@ var SignUpForm = React.createClass({
     router: React.PropTypes.object.isRequired
   },
   getInitialState: function () {
-    return({
+    return {
       first_name: "",
       last_name: "",
       email: "",
       password: "",
-      errors: ErrorStore.errors('signUp')
-    });
+      errors: ErrorStore.errors('signUp'),
+    };
   },
   render: function () {
     return (
@@ -76,7 +77,6 @@ var SignUpForm = React.createClass({
     return (
       <div className='sign-up-input-container group'>
         <input id={inputName}
-          onBlur={this.onInputBlur}
           onChange={this.onInputChange}
           placeholder={placeholder}
           type={inputName === 'password' ? 'password' : ''}
@@ -91,13 +91,6 @@ var SignUpForm = React.createClass({
   componentWillUnmount: function () {
     this.errorListener.remove();
   },
-  blurListener: function (e) {
-    if (!['sign-up-input', 'error-container sign-up-error']
-      .includes(e.target.className)) {
-        ErrorActions.clearErrors('signUp');
-        document.removeEventListener('click', this.blurListener);
-    }
-  },
   focusErrorInputField: function () {
     var fields = ['first_name', 'last_name', 'email', 'password'];
     for (var i = 0; i < fields.length; i++) {
@@ -108,15 +101,11 @@ var SignUpForm = React.createClass({
     }
   },
   onErrorStoreChange: function () {
-    this.setState({errors: ErrorStore.errors('signUp')}, function () {
+    this.setState({ errors: ErrorStore.errors('signUp') }, function () {
       if (ErrorStore.lastAction('SIGN_UP_ERRORS_RECEIVED')) {
-        document.addEventListener('click', this.blurListener);
         this.focusErrorInputField();
       }
     }.bind(this));
-  },
-  onInputBlur: function (e) {
-    ErrorActions.clearSignUpError(e.target.id);
   },
   onInputChange: function (e) {
     var state = {}

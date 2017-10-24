@@ -35,7 +35,6 @@ var UserApiUtil = {
         redirectCB();
       },
       error: function (errors) {
-        ErrorActions.clearErrors('signUp');
         ErrorActions.setErrors(errors.responseJSON, 'signUp');
       }
     });
