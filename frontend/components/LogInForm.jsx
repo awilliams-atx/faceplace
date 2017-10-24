@@ -45,7 +45,7 @@ var LogInForm = React.createClass({
         <header className='welcome-header'>
           <nav className='welcome-header-nav group'>
             <a href="/"><img src={window.logoUrl} className='header-logo' /></a>
-            <form onSubmit={this.onSubmit}
+            <form onSubmit={e => this.onSubmit(e)}
                   className='log-in-form'>
               <table>
                 <thead>
