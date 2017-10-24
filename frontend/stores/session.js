@@ -6,6 +6,7 @@ var Store = require('flux/utils').Store,
 
 var _currentUser = {};
 var _currentUserHasBeenFetched = false;
+var _developerId;
 
 var SessionStore = new Store(AppDispatcher);
 
@@ -78,6 +79,10 @@ SessionStore.fullName = function () {
   }
 };
 
+SessionStore.getDeveloperId = function () {
+    return _developerId;
+};
+
 SessionStore.isCurrentUser = function (id) {
   return _currentUser.id === id;
 };
@@ -93,6 +98,7 @@ SessionStore.isUserLoggedIn = function () {
 SessionStore.login = function (currentUser) {
   _currentUser = currentUser;
   _currentUserHasBeenFetched = true;
+  _developerId = currentUser.developerId;
 };
 
 SessionStore.logout = function () {

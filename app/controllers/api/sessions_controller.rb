@@ -31,6 +31,7 @@ class Api::SessionsController < ApplicationController
 
   def show
     @user = current_user
+    @developer = User.find_by(first_name: 'Andrew', last_name: 'Williams')
     if current_user
       render 'api/users/current_user'
     else

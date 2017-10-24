@@ -27,7 +27,7 @@ var LeftCol = React.createClass({
               DEVELOPER
             </li>
             <li className='group'>
-              <a href='/users/44' onClick={this.pushUserRoute}>
+              <a href={'/users/' + SessionStore.getDeveloperId()} onClick={this.pushUserRoute}>
                 <img src={this.devPic()} />
                 <div className='left-col-text'>
                   Andrew Williams
