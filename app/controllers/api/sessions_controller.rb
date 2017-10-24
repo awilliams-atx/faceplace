@@ -5,6 +5,7 @@ class Api::SessionsController < ApplicationController
   end
 
   def create
+    @developer = User.find_by(first_name: 'Andrew', last_name: 'Williams')
     @user = User.find_by_credentials(user_params)
     if @user
       log_in(@user)
