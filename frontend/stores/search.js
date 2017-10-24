@@ -10,7 +10,6 @@ SearchStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case searchConstants.SEARCH_RESULTS_RECEIVED:
       this.setSearchResults(payload.searchResults);
-      _searchResultsFetched = true;
       SearchStore.__emitChange();
       break;
   }
