@@ -20,7 +20,7 @@ var SignUpForm = React.createClass({
     return (
       <div id='sign-up-content' className='group'>
         <section id='propaganda'>
-          <h1>Face it. You pretty much have to use this website.</h1>
+          <h1>A place for your face!</h1>
             <div className='propaganda-line group'>
               <div className='propaganda-image'>
                 <img src={window.feedUrl}/>
@@ -50,7 +50,7 @@ var SignUpForm = React.createClass({
         <section id='sign-up'>
           <div id='sign-up-header'>
             <h1>Sign Up</h1>
-            <div id="consolation">It's free and you pretty much have no choice.</div>
+            <div id="consolation">Everybody's doing it.</div>
           </div>
           <form id="sign-up-form" onSubmit={this.onSubmit}>
             {this.renderInput('first_name', 'First name')}
