@@ -2,6 +2,7 @@ var Store = require('flux/utils').Store,
     AppDispatcher = require('../dispatcher/dispatcher'),
     errorConstants = require('../constants/error_constants');
 
+var container;
 var _loginErrors = {};
 var _signUpErrors = {};
 var _lastAction = null;
@@ -37,7 +38,7 @@ ErrorStore.__onDispatch = function (payload) {
 };
 
 ErrorStore.clearErrors = function (container) {
-  areErrorsCleared = false;
+  var areErrorsCleared = false;
   Object.keys(container).forEach(function (key) {
     areErrorsCleared = true;
     delete container[key];

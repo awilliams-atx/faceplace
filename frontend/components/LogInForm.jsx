@@ -27,12 +27,6 @@ var LogInForm = React.createClass({
       );
     }
 
-    var omniauthButton = (
-      <a href='/auth/facebook' className='login-button'>
-        Log In with Facebook
-      </a>
-    );
-
     var errorsContent;
 
     if (this.state.errors) {
@@ -77,7 +71,6 @@ var LogInForm = React.createClass({
                       id="password"
                       className={this.state.loginInputClass} /></td>
                     <td>{logInButton}</td>
-                    <td>{omniauthButton}</td>
                   </tr>
                 </tbody>
               </table>
